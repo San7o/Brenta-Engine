@@ -6,21 +6,45 @@
  *
  */
 
-// Graphics Libraries
-#include <glad/glad.h>       // OpenGL driver
-#include <GLFW/glfw3.h>      // OpenGL windowing library
+/* Graphics Libraries */
+#include <glad/glad.h>       /* OpenGL driver */
+#include <GLFW/glfw3.h>      /* OpenGL windowing library */
 
-// libc
-#include <stdio.h>           // Standard I/O
+/* libc */
+#include <stdio.h>           /* Standard I/O */
 
-// Function prototypes
+
+/* Function prototypes */
 void framebuffer_size_callback(GLFWwindow* window, int width,
                                int height);  
 void processInput(GLFWwindow *window);
 
+/* Constants */
+const unsigned int SCR_WIDTH = 800;
+const unsigned int SCR_HEIGHT = 600;
+
+/* Vertex shaders */
+const char *vertexShaderSource = "#version 330 core\n"
+    "layout (location = 0) in vec3 aPos;\n"
+    "void main()\n"
+    "{\n"
+    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "}\0";
+
+
+/* Fragment shaders */
+const char *fragmentShaderSource = "#version 330 core\n"
+    "out vec4 FragColor;\n"
+    "void main()\n"
+    "{\n"
+    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\0";
+
+
+/* Main function */
 int main() {
 
-    // Setup window
+    /* Setup window */
 
     /* 
      *  glfwInit()
@@ -46,7 +70,7 @@ int main() {
      */
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  // OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    // Use core profile
+    /* Use core profile */
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #ifdef __APPLE__
@@ -70,7 +94,7 @@ int main() {
      *            with, or NULL to not share resources.
      *
      */
-    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
         fprintf(stderr, "Failed to create GLFW window on create windw\n");
@@ -97,7 +121,9 @@ int main() {
     glfwMakeContextCurrent(window);
 
 
-    // Load OpenGL
+    /* 
+     * Load OpenGL 
+     */
 
     /*
      * gladLoadGLLoader(GLADloadproc loader);
@@ -134,9 +160,175 @@ int main() {
      *
      */
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-  
+ 
 
-    // Render loop
+    /* 
+     * Compile vertex shader
+     */
+    unsigned int vertexShader;
+    vertexShader = glCreateShader(GL_VERTEX_SHADER);
+
+    /* 
+     * glShaderSource(GLuint shader, GLsizei count, const GLchar** string,
+     *                const GLint* length);
+     */
+    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
+    glCompileShader(vertexShader);
+
+    int success;
+    char infoLog[512];
+    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
+        fprintf(stderr, "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
+    }
+
+    /*
+     * Compile fragment shader
+     */
+    unsigned int fragmentShader;
+    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+
+    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+    glCompileShader(fragmentShader);
+
+    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
+    if (!success)
+    {
+        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
+        fprintf(stderr, "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
+    }
+
+    /*
+     * Link shaders
+     */
+    unsigned int shaderProgram;
+    shaderProgram = glCreateProgram();
+ 
+    glAttachShader(shaderProgram, vertexShader);
+    glAttachShader(shaderProgram, fragmentShader);
+    glLinkProgram(shaderProgram);
+
+    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+    if (!success)
+    {
+        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
+        fprintf(stderr, "ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
+    }
+    /* Delete shaders, once linked we don't need them anymore */
+    glDeleteShader(vertexShader);
+    glDeleteShader(fragmentShader);
+
+    /*
+     * Create vertices
+     *
+     * General steps:
+     * - Create vertex buffer object (VBO) to store vertices
+     * - Create element buffer object (EBO) to store indices
+     * - Create vertex array object (VAO) to store vertex attribute
+     * - Bind VAO, VBO, EBO
+     * - Copy vertices to VBO
+     * - Copy indices to EBO
+     * - Link vertex attributes to vertex shader
+     * - Render loop
+     */
+
+    /* Vertices in normalized device coordinates */
+    float vertices[] = {
+         0.5f,  0.5f, 0.0f,  // top right
+         0.5f, -0.5f, 0.0f,  // bottom right
+        -0.5f, -0.5f, 0.0f,  // bottom left
+        -0.5f,  0.5f, 0.0f   // top left
+    };
+    unsigned int indices[] = {
+        0, 1, 3,  // first triangle
+        1, 2, 3   // second triangle
+    };
+
+    /* 
+     * Vertex Buffer Object (VBO)
+     *
+     * Can store large number of vertices
+     * so avoid sending data to the GPU for each vertex.
+     *
+     * Vertex Array Object (VAO)
+     *
+     * A vertex array object stores the following:
+     * - Calls to glEnableVertexAttribArray or glDisableVertexAttribArray.
+     * - Vertex attribute configurations via glVertexAttribPointer.
+     * - VBOs associated with vertex attributes by calls to glVertexAttribPointer.
+     *
+     * EBO (Element Buffer Object)
+     *
+     * An element buffer object is a buffer that stores indices that OpenGL
+     * uses to decide what vertices to draw.
+     */
+    unsigned int VBO, VAO, EBO;
+    glGenVertexArrays(1, &VAO);
+    glGenBuffers(1, &VBO);
+    glGenBuffers(1, &EBO);
+
+    /* bind the Vertex Array Object first,
+     * then bind and set vertex buffer(s),
+     * and then configure vertex attributes(s). */
+    glBindVertexArray(VAO);
+
+    /*
+     * glBindBuffer(GLenum target, GLuint buffer);
+     *
+     * Binds a buffer object to a buffer target.
+     *
+     */
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    /*
+     * glBufferData(GLenum target, GLsizeiptr size, const void* data,
+     *             GLenum usage);
+     *
+     * Copy user defined data into the currently bound buffer.
+     *
+     * Usage can be:
+     * - GL_STATIC_DRAW: The data will be modified once and used many times.
+     * - GL_DYNAMIC_DRAW: The data will be modified repeatedly and used many times.
+     * - GL_STREAM_DRAW: The data will be modified once and used once.
+     *
+     */
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    
+    /* 
+     * Linking vertex attributes
+     */
+
+    /*
+     * glVertexAttribPointer(GLuint index, GLint size, GLenum type,
+     *                     GLboolean normalized, GLsizei stride,
+     *                     const void* pointer);
+     *
+     * Specifies the location and data format of the vertex attributes.
+     *
+     * Parameters:
+     * - index: Specifies the index of the vertex attribute.
+     * - size: Specifies the number of components per vertex attribute.
+     * - type: Specifies the data type of each component in the array.
+     * - normalized: Specifies whether fixed-point data values should be normalized.
+     * - stride: Specifies the byte offset between consecutive vertex attributes.
+     * - pointer: Specifies a offset of the first component in the array.
+     */
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+
+    /* uncomment this call to draw in wireframe polygons. */
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+    /* 
+     * Render loop
+     */
 
     /*
      * glfwWindowShouldClose(GLFWwindow* window);
@@ -147,11 +339,11 @@ int main() {
      */
     while(!glfwWindowShouldClose(window))
     {
-        // Input
+        /* Input */
         processInput(window);
 
 
-        // Rendering commands here
+        /* Rendering commands here */
 
         /*
          * glClearColor(float red, float green, float blue, float alpha);
@@ -173,8 +365,25 @@ int main() {
          */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        glUseProgram(shaderProgram);
+        glBindVertexArray(VAO);
+        /*
+         * glDrawArrays(GLenum mode, GLint first, GLsizei count);
+         *
+         * Renders primitives from array data.
+         */
+         /* glDrawArrays(GL_TRIANGLES, 0, 3);*/
 
-        // check and call events and swap the buffers
+        /*
+         * glDrawElements(GLenum mode, GLsizei count, GLenum type,
+         *               const void* indices);
+         *
+         * Renders primitives from array data.
+         */
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+
+        /* check and call events and swap the buffers */
 
         /*
          * glfwSwapBuffers(GLFWwindow* window);
@@ -208,6 +417,12 @@ int main() {
          */
         glfwPollEvents();
     }
+
+
+    /* de-allocate all resources */
+    glDeleteVertexArrays(1, &VAO);
+    glDeleteBuffers(1, &VBO);
+    glDeleteProgram(shaderProgram);
 
     /*
      * glfwTerminate();
