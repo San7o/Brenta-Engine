@@ -1,0 +1,250 @@
+/*
+ *
+ *   Created on: 2024-07-02
+ *   Author: Giovanni Santini
+ *   License: MIT
+ *
+ */
+
+// Graphics Libraries
+#include <glad/glad.h>       // OpenGL driver
+#include <GLFW/glfw3.h>      // OpenGL windowing library
+
+// libc
+#include <stdio.h>           // Standard I/O
+
+// Function prototypes
+void framebuffer_size_callback(GLFWwindow* window, int width,
+                               int height);  
+void processInput(GLFWwindow *window);
+
+int main() {
+
+    // Setup window
+
+    /* 
+     *  glfwInit()
+     *
+     *  Initializes the GLFW library.
+     *  Returns GL_TRUE if successful, GL_FALSE otherwise.
+     *
+     */
+    if (glfwInit() == GL_FALSE)
+    {
+        fprintf(stderr, "Failed to initialize GLFW on init\n");
+        return -1;
+    }
+
+    /*
+     *  glfwWindowHint(int target, int hint);
+     *
+     *  This function sets hints for the next call
+     *  to `glfwCreateWindow`.
+     *  Arguments:
+     *  - target: The target window hint to set.
+     *  - hint: The new value of the window hint.
+     */
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  // OpenGL 3.3
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    // Use core profile
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+#ifdef __APPLE__
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+#endif
+
+    /*
+     * glfwCreateWindow(int width, int height, const char* title,
+     *                  GLFWmonitor* monitor, GLFWwindow* share);
+     *
+     * This function creates a window and its associated OpenGL
+     * context.
+     *
+     * Parameters:
+     * - width:   The desired width, in screen coordinates.
+     * - height:  The desired height, in screen coordinates.
+     * - title:   The initial, UTF-8 encoded window title.
+     * - monitor: The monitor to use for full screen mode,
+     *            or NULL for windowed mode.
+     * - share:   The window whose context to share resources
+     *            with, or NULL to not share resources.
+     *
+     */
+    GLFWwindow* window = glfwCreateWindow(800, 600, "LearnOpenGL", NULL, NULL);
+    if (window == NULL)
+    {
+        fprintf(stderr, "Failed to create GLFW window on create windw\n");
+        /*
+         * glfwTerminate()
+         *
+         * This function destroys all remaining windows and
+         *
+         */
+        glfwTerminate();
+        return -1;
+    }
+
+    /*
+     * glfwMakeContextCurrent(GLFWwindow* window);
+     *
+     *  This function makes the OpenGL or OpenGL ES context
+     *  of the specified window current on the calling thread.
+     *
+     *  Parameters:
+     *  - window: The window whose context to make current.
+     *
+     */
+    glfwMakeContextCurrent(window);
+
+
+    // Load OpenGL
+
+    /*
+     * gladLoadGLLoader(GLADloadproc loader);
+     *
+     * This function loads the OpenGL functions.
+     *
+     * Parameters:
+     * - loader: The address of the OpenGL function loader.
+     *
+     * Returns:
+     * - GL_TRUE if successful, GL_FALSE otherwise.
+     */
+    // glfGetProcAddress() returns the address of the OpenGL function
+    // based on the platform.
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        fprintf(stderr, "Failed to initialize GLAD on GLLoader\n");
+        return -1;
+    }
+
+    /*
+     * glViewport(int x, int y, int width, int height);
+     *
+     * Sets the size of the rendering window for OpenGL.
+     *
+     */
+    glViewport(0, 0, 800, 600);
+    
+    /*
+     * glfwSetFramebufferSizeCallback(GLFWwindow* window,
+     *                               GLFWframebuffersizefun callback);
+     *
+     * Call the callback function when the window is resized.
+     *
+     */
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+  
+
+    // Render loop
+
+    /*
+     * glfwWindowShouldClose(GLFWwindow* window);
+     *
+     * This function returns the value of the close flag of the
+     * specified window.
+     *
+     */
+    while(!glfwWindowShouldClose(window))
+    {
+        // Input
+        processInput(window);
+
+
+        // Rendering commands here
+
+        /*
+         * glClearColor(float red, float green, float blue, float alpha);
+         *
+         * Sets the color used when clearing the color buffer.
+         *
+         */
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        /*
+         * glClear(GLbitfield mask);
+         *
+         * Clears the specified buffers. The entire buffer
+         * will be filled with the color set by `glClearColor`.
+         * Possible values for mask:
+         * - GL_COLOR_BUFFER_BIT: Color buffer
+         * - GL_DEPTH_BUFFER_BIT: Depth buffer
+         * - GL_STENCIL_BUFFER_BIT: Stencil buffer
+         *
+         */
+        glClear(GL_COLOR_BUFFER_BIT);
+
+
+        // check and call events and swap the buffers
+
+        /*
+         * glfwSwapBuffers(GLFWwindow* window);
+         *
+         * Swaps the front and back buffers of the specified window.
+         *
+         * Why do we need double buffering?
+         * When an application draws in a single buffer the resulting
+         * image may display flickering issues. This is because the
+         * resulting output image is not drawn in an instant, but drawn
+         * pixel by pixel and usually from left to right and top to
+         * bottom. Because this image is not displayed at an instant
+         * to the user while still being rendered to, the result may
+         * contain artifacts. To circumvent these issues, windowing
+         * applications apply a double buffer for rendering. The front
+         * buffer contains the final output image that is shown at
+         * the screen, while all the rendering commands draw to the
+         * back buffer. As soon as all the rendering commands are
+         * finished we swap the back buffer to the front buffer so
+         * the image can be displayed without still being rendered
+         * to, removing all the aforementioned artifacts. 
+         *
+         */
+        glfwSwapBuffers(window);
+
+        /*
+         * glfwPollEvents();
+         *
+         * Processes all pending events, updates the window state.
+         *
+         */
+        glfwPollEvents();
+    }
+
+    /*
+     * glfwTerminate();
+     *
+     * This function destroys all remaining windows and releases
+     * all resources allocated by GLFW.
+     *
+     */
+    glfwTerminate();
+
+    return 0;
+}
+
+/*
+ * framebuffer_size_callback(GLFWwindow* window, int width,
+ *                           int height);
+ *
+ * This function is called whenever the window is resized, and
+ * updates the viewport size so that OpenGL renders correctly.
+ *
+ */
+void framebuffer_size_callback(GLFWwindow* window, int width,
+                               int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void processInput(GLFWwindow *window)
+{
+    /*
+     * glfwGetKey(GLFWwindow* window, int key);
+     *
+     * This function returns whether the specified key is pressed.
+     *
+     */
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+    {
+        glfwSetWindowShouldClose(window, true);
+    }
+}
