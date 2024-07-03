@@ -27,19 +27,22 @@ const unsigned int SCR_HEIGHT = 600;
 /* Vertex shaders */
 const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
+    "layout (location = 1) in vec3 aColor;\n"
+    "out vec3 ourColor;\n"
     "void main()\n"
     "{\n"
     "   gl_Position = vec4(aPos, 1.0);\n"
+    "   ourColor = aColor;\n"
     "}\0";
 
 
 /* Fragment shaders */
 const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
-    "uniform vec4 ourColor;\n"
+    "in vec3 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = ourColor;\n"
+    "   FragColor = vec4(ourColor, 1.0);\n"
     "}\0";
 
 
@@ -238,15 +241,16 @@ int main() {
 
     /* Vertices in normalized device coordinates */
     float vertices[] = {
-         0.5f,  0.5f, 0.0f,  // top right
-         0.5f, -0.5f, 0.0f,  // bottom right
-        -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f,  // top left
-         0.0f,  0.5f, 0.0f   // top center
+         /* positions */     /* colors */
+         0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  /* top right    */
+         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  /* bottom right */
+        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  /* bottom left  */
+        -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f,  /* top left     */
+         0.0f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f   /* top center   */
     };
     unsigned int indices[] = {
-        1, 2, 4,  // first triangle
-        // 1, 2, 3   // second triangle
+        1, 2, 4,   /* first triangle */
+        // 1, 2, 3   /* second triangle */
     };
 
     /* 
@@ -320,8 +324,12 @@ int main() {
      * - stride: Specifies the byte offset between consecutive vertex attributes.
      * - pointer: Specifies a offset of the first component in the array.
      */
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    /* position attribute */
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+    /* color attribute */
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));
+    glEnableVertexAttribArray(1);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -371,14 +379,6 @@ int main() {
         /* Activate the shader */
         glUseProgram(shaderProgram);
    
-        float timeValue = glfwGetTime();
-        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
-        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
-        if (vertexColorLocation == -1)
-        {
-            fprintf(stderr, "Failed to get uniform location\n");
-        }
-        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
 
 
         glBindVertexArray(VAO);
