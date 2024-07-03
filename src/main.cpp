@@ -12,6 +12,7 @@
 
 /* libc */
 #include <stdio.h>           /* Standard I/O */
+#include <cmath>             /* Math functions */
 
 
 /* Function prototypes */
@@ -28,16 +29,17 @@ const char *vertexShaderSource = "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"
     "void main()\n"
     "{\n"
-    "   gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+    "   gl_Position = vec4(aPos, 1.0);\n"
     "}\0";
 
 
 /* Fragment shaders */
 const char *fragmentShaderSource = "#version 330 core\n"
     "out vec4 FragColor;\n"
+    "uniform vec4 ourColor;\n"
     "void main()\n"
     "{\n"
-    "   FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "   FragColor = ourColor;\n"
     "}\0";
 
 
@@ -239,11 +241,12 @@ int main() {
          0.5f,  0.5f, 0.0f,  // top right
          0.5f, -0.5f, 0.0f,  // bottom right
         -0.5f, -0.5f, 0.0f,  // bottom left
-        -0.5f,  0.5f, 0.0f   // top left
+        -0.5f,  0.5f, 0.0f,  // top left
+         0.0f,  0.5f, 0.0f   // top center
     };
     unsigned int indices[] = {
-        0, 1, 3,  // first triangle
-        1, 2, 3   // second triangle
+        1, 2, 4,  // first triangle
+        // 1, 2, 3   // second triangle
     };
 
     /* 
@@ -324,7 +327,7 @@ int main() {
     glBindVertexArray(0);
 
     /* uncomment this call to draw in wireframe polygons. */
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     /* 
      * Render loop
@@ -365,7 +368,19 @@ int main() {
          */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        /* Activate the shader */
         glUseProgram(shaderProgram);
+   
+        float timeValue = glfwGetTime();
+        float greenValue = (sin(timeValue) / 2.0f) + 0.5f;
+        int vertexColorLocation = glGetUniformLocation(shaderProgram, "ourColor");
+        if (vertexColorLocation == -1)
+        {
+            fprintf(stderr, "Failed to get uniform location\n");
+        }
+        glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
+
         glBindVertexArray(VAO);
         /*
          * glDrawArrays(GLenum mode, GLint first, GLsizei count);
