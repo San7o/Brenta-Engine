@@ -10,6 +10,9 @@
 #include <glad/glad.h>       /* OpenGL driver */
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
 
+/* User-defined headers */
+#include "shader.h"          /* Shader class */
+
 /* libc */
 #include <stdio.h>           /* Standard I/O */
 #include <cmath>             /* Math functions */
@@ -20,30 +23,10 @@ void framebuffer_size_callback(GLFWwindow* window, int width,
                                int height);  
 void processInput(GLFWwindow *window);
 
+
 /* Constants */
 const unsigned int SCR_WIDTH = 800;
 const unsigned int SCR_HEIGHT = 600;
-
-/* Vertex shaders */
-const char *vertexShaderSource = "#version 330 core\n"
-    "layout (location = 0) in vec3 aPos;\n"
-    "layout (location = 1) in vec3 aColor;\n"
-    "out vec3 ourColor;\n"
-    "void main()\n"
-    "{\n"
-    "   gl_Position = vec4(aPos, 1.0);\n"
-    "   ourColor = aColor;\n"
-    "}\0";
-
-
-/* Fragment shaders */
-const char *fragmentShaderSource = "#version 330 core\n"
-    "out vec4 FragColor;\n"
-    "in vec3 ourColor;\n"
-    "void main()\n"
-    "{\n"
-    "   FragColor = vec4(ourColor, 1.0);\n"
-    "}\0";
 
 
 /* Main function */
@@ -168,62 +151,9 @@ int main() {
  
 
     /* 
-     * Compile vertex shader
+     * Create Shaders
      */
-    unsigned int vertexShader;
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-    /* 
-     * glShaderSource(GLuint shader, GLsizei count, const GLchar** string,
-     *                const GLint* length);
-     */
-    glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-    glCompileShader(vertexShader);
-
-    int success;
-    char infoLog[512];
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        fprintf(stderr, "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n%s\n", infoLog);
-    }
-
-    /*
-     * Compile fragment shader
-     */
-    unsigned int fragmentShader;
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-    glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
-    glCompileShader(fragmentShader);
-
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
-    if (!success)
-    {
-        glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        fprintf(stderr, "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n%s\n", infoLog);
-    }
-
-    /*
-     * Link shaders
-     */
-    unsigned int shaderProgram;
-    shaderProgram = glCreateProgram();
- 
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glLinkProgram(shaderProgram);
-
-    glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-    if (!success)
-    {
-        glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        fprintf(stderr, "ERROR::SHADER::PROGRAM::LINKING_FAILED\n%s\n", infoLog);
-    }
-    /* Delete shaders, once linked we don't need them anymore */
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragmentShader);
+    Shader ourShader("src/shaders/shader.vs", "src/shaders/shader.fs");
 
     /*
      * Create vertices
@@ -242,14 +172,14 @@ int main() {
     /* Vertices in normalized device coordinates */
     float vertices[] = {
          /* positions */     /* colors */
-         0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  /* top right    */
          0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  /* bottom right */
         -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  /* bottom left  */
+         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   /* top center   */
         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f,  /* top left     */
-         0.0f,  0.5f, 0.0f,   0.0f, 0.0f, 1.0f   /* top center   */
+         0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  /* top right    */
     };
     unsigned int indices[] = {
-        1, 2, 4,   /* first triangle */
+        0, 1, 2,   /* first triangle */
         // 1, 2, 3   /* second triangle */
     };
 
@@ -376,10 +306,8 @@ int main() {
          */
         glClear(GL_COLOR_BUFFER_BIT);
 
-        /* Activate the shader */
-        glUseProgram(shaderProgram);
-   
-
+        /* Run the shader */
+        ourShader.use();
 
         glBindVertexArray(VAO);
         /*
@@ -387,7 +315,7 @@ int main() {
          *
          * Renders primitives from array data.
          */
-         /* glDrawArrays(GL_TRIANGLES, 0, 3);*/
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         /*
          * glDrawElements(GLenum mode, GLsizei count, GLenum type,
@@ -395,7 +323,7 @@ int main() {
          *
          * Renders primitives from array data.
          */
-        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
         /* check and call events and swap the buffers */
@@ -437,7 +365,6 @@ int main() {
     /* de-allocate all resources */
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
-    glDeleteProgram(shaderProgram);
 
     /*
      * glfwTerminate();
