@@ -32,30 +32,18 @@ const unsigned int SCR_HEIGHT = 600;
 /* Main function */
 int main() {
 
-    /* Setup window */
-
     /* 
-     *  glfwInit()
-     *
-     *  Initializes the GLFW library.
-     *  Returns GL_TRUE if successful, GL_FALSE otherwise.
-     *
+     * Setup window
      */
+
+    /* Initialize GLFW */
     if (glfwInit() == GL_FALSE)
     {
         fprintf(stderr, "Failed to initialize GLFW on init\n");
         return -1;
     }
 
-    /*
-     *  glfwWindowHint(int target, int hint);
-     *
-     *  This function sets hints for the next call
-     *  to `glfwCreateWindow`.
-     *  Arguments:
-     *  - target: The target window hint to set.
-     *  - hint: The new value of the window hint.
-     */
+    /* Setup GLFW window properties */
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  // OpenGL 3.3
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     /* Use core profile */
@@ -65,47 +53,16 @@ int main() {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    /*
-     * glfwCreateWindow(int width, int height, const char* title,
-     *                  GLFWmonitor* monitor, GLFWwindow* share);
-     *
-     * This function creates a window and its associated OpenGL
-     * context.
-     *
-     * Parameters:
-     * - width:   The desired width, in screen coordinates.
-     * - height:  The desired height, in screen coordinates.
-     * - title:   The initial, UTF-8 encoded window title.
-     * - monitor: The monitor to use for full screen mode,
-     *            or NULL for windowed mode.
-     * - share:   The window whose context to share resources
-     *            with, or NULL to not share resources.
-     *
-     */
+    /* Create a windowed mode window and its OpenGL context */
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
     {
         fprintf(stderr, "Failed to create GLFW window on create windw\n");
-        /*
-         * glfwTerminate()
-         *
-         * This function destroys all remaining windows and
-         *
-         */
         glfwTerminate();
         return -1;
     }
 
-    /*
-     * glfwMakeContextCurrent(GLFWwindow* window);
-     *
-     *  This function makes the OpenGL or OpenGL ES context
-     *  of the specified window current on the calling thread.
-     *
-     *  Parameters:
-     *  - window: The window whose context to make current.
-     *
-     */
+    /* Make the window's context the current thread */
     glfwMakeContextCurrent(window);
 
 
@@ -113,46 +70,24 @@ int main() {
      * Load OpenGL 
      */
 
-    /*
-     * gladLoadGLLoader(GLADloadproc loader);
-     *
-     * This function loads the OpenGL functions.
-     *
-     * Parameters:
-     * - loader: The address of the OpenGL function loader.
-     *
-     * Returns:
-     * - GL_TRUE if successful, GL_FALSE otherwise.
-     */
-    // glfGetProcAddress() returns the address of the OpenGL function
-    // based on the platform.
+    /* Load all OpenGL function pointers */
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         fprintf(stderr, "Failed to initialize GLAD on GLLoader\n");
         return -1;
     }
 
-    /*
-     * glViewport(int x, int y, int width, int height);
-     *
-     * Sets the size of the rendering window for OpenGL.
-     *
-     */
+    /* Set the viewport size */
     glViewport(0, 0, 800, 600);
     
-    /*
-     * glfwSetFramebufferSizeCallback(GLFWwindow* window,
-     *                               GLFWframebuffersizefun callback);
-     *
-     * Call the callback function when the window is resized.
-     *
-     */
+    /* Callback function for resizing the window, updates the viewport */
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
  
 
     /* 
      * Create Shaders
      */
+    
     Shader ourShader("src/shaders/shader.vs", "src/shaders/shader.fs");
 
     /*
@@ -178,6 +113,7 @@ int main() {
         -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f,  /* top left     */
          0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  /* top right    */
     };
+    /* Indices */
     unsigned int indices[] = {
         0, 1, 2,   /* first triangle */
         // 1, 2, 3   /* second triangle */
@@ -267,17 +203,60 @@ int main() {
     /* uncomment this call to draw in wireframe polygons. */
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+    /*
+     * Texure
+     */
+
+    /* Texture coordinates */
+    float texCoords[] = {
+        0.0f, 0.0f,  // lower-left corner
+        1.0f, 0.0f,  // lower-right corner
+        0.5f, 1.0f   // top-center corner
+    };
+
+    /* Texture Wrapping, options are:
+     * - GL_REPEAT: The default behavior for textures. Repeats the
+     *              texture image.
+     * - GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors the image
+     *              with each repeat.
+     * - GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
+     *              The result is that higher coordinates become clamped
+     *              to the edge, resulting in a stretched edge pattern.
+     * - GL_CLAMP_TO_BORDER: Coordinates outside the range are now given
+     *              a user-specified border color.
+     */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+    /* Texture Filtering, options are:
+     * - GL_NEAREST: Selects the pixel that center is closest to the texture coordinate.
+     * - GL_LINEAR: Selects the four pixels that are closest to the texture coordinate
+     *              and interpolates linearly creating a smoother result.
+     * Texture filtering can be set for magnifying and minifying filters (when scaling up
+     * and down, respectively).
+     */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    /* Mipmaps: Generate a set of textures with different resolutions, OpenGL selects
+     * the most appropriate based on the distance of the object. Options are:
+     * - GL_NEAREST_MIPMAP_NEAREST: Takes the nearest mipmap to match the pixel size
+     *                           and uses nearest neighbor interpolation.
+     * - GL_LINEAR_MIPMAP_NEAREST: Takes the nearest mipmap level and samples using
+     *                           linear interpolation.
+     * - GL_NEAREST_MIPMAP_LINEAR: Linearly interpolates between the two mipmaps that
+     *                           most closely match the size of a pixel and samplles
+     *                           the nearest neighbor.
+     * - GL_LINEAR_MIPMAP_LINEAR: Linearly interpolates between the two closest mipmaps
+     *                           and samples with linear interpolation.
+     */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
     /* 
      * Render loop
      */
 
-    /*
-     * glfwWindowShouldClose(GLFWwindow* window);
-     *
-     * This function returns the value of the close flag of the
-     * specified window.
-     *
-     */
     while(!glfwWindowShouldClose(window))
     {
         /* Input */
@@ -286,24 +265,9 @@ int main() {
 
         /* Rendering commands here */
 
-        /*
-         * glClearColor(float red, float green, float blue, float alpha);
-         *
-         * Sets the color used when clearing the color buffer.
-         *
-         */
+        /* Set the color of the window */
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        /*
-         * glClear(GLbitfield mask);
-         *
-         * Clears the specified buffers. The entire buffer
-         * will be filled with the color set by `glClearColor`.
-         * Possible values for mask:
-         * - GL_COLOR_BUFFER_BIT: Color buffer
-         * - GL_DEPTH_BUFFER_BIT: Depth buffer
-         * - GL_STENCIL_BUFFER_BIT: Stencil buffer
-         *
-         */
+        /* Clear the color buffer and updates it to the set color */
         glClear(GL_COLOR_BUFFER_BIT);
 
         /* Run the shader */
@@ -352,12 +316,7 @@ int main() {
          */
         glfwSwapBuffers(window);
 
-        /*
-         * glfwPollEvents();
-         *
-         * Processes all pending events, updates the window state.
-         *
-         */
+        /* Process all pending events */
         glfwPollEvents();
     }
 
@@ -366,13 +325,7 @@ int main() {
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
 
-    /*
-     * glfwTerminate();
-     *
-     * This function destroys all remaining windows and releases
-     * all resources allocated by GLFW.
-     *
-     */
+    /* Terminate GLFW */
     glfwTerminate();
 
     return 0;
