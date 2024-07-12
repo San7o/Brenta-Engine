@@ -9,6 +9,7 @@
 /* Graphics Libraries */
 #include <glad/glad.h>       /* OpenGL driver */
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
+#include <stb_image.h>       /* Image loading library */
 
 /* User-defined headers */
 #include "shader.h"          /* Shader class */
@@ -106,17 +107,16 @@ int main() {
 
     /* Vertices in normalized device coordinates */
     float vertices[] = {
-         /* positions */     /* colors */
-         0.5f, -0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  /* bottom right */
-        -0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  /* bottom left  */
-         0.0f,  0.5f, 0.0f,  0.0f, 0.0f, 1.0f   /* top center   */
-        -0.5f,  0.5f, 0.0f,  0.0f, 0.0f, 0.0f,  /* top left     */
-         0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 1.0f,  /* top right    */
+         /* positions */     /* colors */       /* Texture coords */
+         0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,  1.0f, 1.0f,  /* top right    */
+         0.5f, -0.5f, 0.0f,  0.0f, 1.0f, 0.0f,  1.0f, 0.0f,  /* bottom right */
+        -0.5f, -0.5f, 0.0f,  0.0f, 0.0f, 1.0f,  0.0f, 0.0f,  /* bottom left  */
+        -0.5f,  0.5f, 0.0f,  1.0f, 1.0f, 0.0f,  0.0f, 1.0f   /* top left     */
     };
     /* Indices */
     unsigned int indices[] = {
         0, 1, 2,   /* first triangle */
-        // 1, 2, 3   /* second triangle */
+        0, 3, 2   /* second triangle */
     };
 
     /* 
@@ -191,11 +191,14 @@ int main() {
      * - pointer: Specifies a offset of the first component in the array.
      */
     /* position attribute */
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     /* color attribute */
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)(3*sizeof(float)));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(3*sizeof(float)));
     glEnableVertexAttribArray(1);
+    /* texture coord attribute */
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)(6*sizeof(float)));
+    glEnableVertexAttribArray(2);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
@@ -206,13 +209,6 @@ int main() {
     /*
      * Texure
      */
-
-    /* Texture coordinates */
-    float texCoords[] = {
-        0.0f, 0.0f,  // lower-left corner
-        1.0f, 0.0f,  // lower-right corner
-        0.5f, 1.0f   // top-center corner
-    };
 
     /* Texture Wrapping, options are:
      * - GL_REPEAT: The default behavior for textures. Repeats the
@@ -253,6 +249,21 @@ int main() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
+    /* Read image */
+    int width, height, nrChannels;
+    unsigned char *data = stbi_load("assets/images/container.jpg",
+                                     &width, &height, &nrChannels, 0);
+
+    /* Generate texture */
+    unsigned int texture;
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+                 GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate all the mipmap levels */
+    stbi_image_free(data); /* Free the image data */
+
+
     /* 
      * Render loop
      */
@@ -273,13 +284,16 @@ int main() {
         /* Run the shader */
         ourShader.use();
 
+        /* Bind the texture */
+        glBindTexture(GL_TEXTURE_2D, texture);
+
         glBindVertexArray(VAO);
         /*
          * glDrawArrays(GLenum mode, GLint first, GLsizei count);
          *
          * Renders primitives from array data.
          */
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
 
         /*
          * glDrawElements(GLenum mode, GLsizei count, GLenum type,
@@ -287,7 +301,7 @@ int main() {
          *
          * Renders primitives from array data.
          */
-        //glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
         /* check and call events and swap the buffers */
