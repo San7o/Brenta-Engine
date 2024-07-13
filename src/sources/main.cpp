@@ -203,65 +203,78 @@ int main() {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    /* uncomment this call to draw in wireframe polygons. */
-    // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     /*
      * Texure
      */
 
-    /* Texture Wrapping, options are:
-     * - GL_REPEAT: The default behavior for textures. Repeats the
-     *              texture image.
-     * - GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors the image
-     *              with each repeat.
-     * - GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
-     *              The result is that higher coordinates become clamped
-     *              to the edge, resulting in a stretched edge pattern.
-     * - GL_CLAMP_TO_BORDER: Coordinates outside the range are now given
-     *              a user-specified border color.
-     */
+    unsigned int texture1, texture2;
+    /* First texture */
+    glGenTextures(1, &texture1);
+    glBindTexture(GL_TEXTURE_2D, texture1);
+    /* Texture Wrapping */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    /* Texture Filtering, options are:
-     * - GL_NEAREST: Selects the pixel that center is closest to the texture coordinate.
-     * - GL_LINEAR: Selects the four pixels that are closest to the texture coordinate
-     *              and interpolates linearly creating a smoother result.
-     * Texture filtering can be set for magnifying and minifying filters (when scaling up
-     * and down, respectively).
-     */
+    /* Texture Filtering */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
     /* Mipmaps: Generate a set of textures with different resolutions, OpenGL selects
-     * the most appropriate based on the distance of the object. Options are:
-     * - GL_NEAREST_MIPMAP_NEAREST: Takes the nearest mipmap to match the pixel size
-     *                           and uses nearest neighbor interpolation.
-     * - GL_LINEAR_MIPMAP_NEAREST: Takes the nearest mipmap level and samples using
-     *                           linear interpolation.
-     * - GL_NEAREST_MIPMAP_LINEAR: Linearly interpolates between the two mipmaps that
-     *                           most closely match the size of a pixel and samplles
-     *                           the nearest neighbor.
-     * - GL_LINEAR_MIPMAP_LINEAR: Linearly interpolates between the two closest mipmaps
-     *                           and samples with linear interpolation.
-     */
+     * the most appropriate based on the distance of the object. */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
     /* Read image */
-    int width, height, nrChannels;
-    unsigned char *data = stbi_load("assets/images/container.jpg",
-                                     &width, &height, &nrChannels, 0);
+    int width1, height1, nrChannels1;
+    stbi_set_flip_vertically_on_load(true); /* Flip the image */
+    unsigned char *data1 = stbi_load("assets/images/container.jpg",
+                                     &width1, &height1, &nrChannels1, 0);
+    if (data1)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width1, height1, 0, GL_RGB,
+                     GL_UNSIGNED_BYTE, data1);
+        glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate
+                                            all the mipmap levels */
+    }
+    else
+    {
+        fprintf(stderr, "Failed to load texture\n");
+    }
+    stbi_image_free(data1);
 
-    /* Generate texture */
-    unsigned int texture;
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
-                 GL_UNSIGNED_BYTE, data);
-    glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate all the mipmap levels */
-    stbi_image_free(data); /* Free the image data */
+    /* Second texture */
+    glGenTextures(1, &texture2);
+    glBindTexture(GL_TEXTURE_2D, texture2);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    int width2, height2, nrChannels2;
+    unsigned char *data2 = stbi_load("assets/images/awesomeface.png",
+                                     &width2, &height2, &nrChannels2, 0);
+    if (data2)
+    {
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width2, height2, 0, GL_RGBA,
+                     GL_UNSIGNED_BYTE, data2);
+        glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate
+                                            all the mipmap levels */
+    }
+    else
+    {
+        fprintf(stderr, "Failed to load texture\n");
+    }
+    stbi_image_free(data2);
+
+
+    /* Set the texture uniform in the shader */
+    ourShader.use();
+    glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+    ourShader.setInt("texture2", 1);
+
+    /* uncomment this call to draw in wireframe polygons. */
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 
     /* 
@@ -281,26 +294,17 @@ int main() {
         /* Clear the color buffer and updates it to the set color */
         glClear(GL_COLOR_BUFFER_BIT);
 
+        glActiveTexture(GL_TEXTURE0); /* Activate the texture unit */
+        glBindTexture(GL_TEXTURE_2D, texture1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, texture2);
+        
         /* Run the shader */
         ourShader.use();
 
-        /* Bind the texture */
-        glBindTexture(GL_TEXTURE_2D, texture);
-
         glBindVertexArray(VAO);
-        /*
-         * glDrawArrays(GLenum mode, GLint first, GLsizei count);
-         *
-         * Renders primitives from array data.
-         */
-        //glDrawArrays(GL_TRIANGLES, 0, 3);
 
-        /*
-         * glDrawElements(GLenum mode, GLsizei count, GLenum type,
-         *               const void* indices);
-         *
-         * Renders primitives from array data.
-         */
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 
@@ -338,6 +342,7 @@ int main() {
     /* de-allocate all resources */
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
+    glDeleteBuffers(1, &EBO);
 
     /* Terminate GLFW */
     glfwTerminate();
@@ -359,6 +364,7 @@ void framebuffer_size_callback(GLFWwindow* window, int width,
     glViewport(0, 0, width, height);
 }
 
+// TODO: Replace this with `glfwSetKeyCallback`
 void processInput(GLFWwindow *window)
 {
     /*
@@ -370,5 +376,13 @@ void processInput(GLFWwindow *window)
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
     {
         glfwSetWindowShouldClose(window, true);
+    }
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    }
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+    {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
 }
