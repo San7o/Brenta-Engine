@@ -11,6 +11,11 @@
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
 #include <stb_image.h>       /* Image loading library */
 
+/* Math Libraries */
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 /* User-defined headers */
 #include "shader.h"          /* Shader class */
 
@@ -270,8 +275,9 @@ int main() {
 
     /* Set the texture uniform in the shader */
     ourShader.use();
-    glUniform1i(glGetUniformLocation(ourShader.ID, "texture1"), 0);
+    ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
+
 
     /* uncomment this call to draw in wireframe polygons. */
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -298,9 +304,16 @@ int main() {
         glBindTexture(GL_TEXTURE_2D, texture1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, texture2);
-        
+       
+        /* Create transformations */
+        glm::mat4 trans = glm::mat4(1.0f);
+        trans = glm::translate(trans, glm::vec3(0.5f, -0.5f, 0.0f));
+        trans = glm::rotate(trans, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
         /* Run the shader */
         ourShader.use();
+        unsigned int transformLoc = glGetUniformLocation(ourShader.ID, "transform");
+        glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(trans));
 
         glBindVertexArray(VAO);
 
