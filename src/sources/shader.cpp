@@ -10,11 +10,14 @@
 
 #include "shader.h"
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
 #include <string>
 #include <fstream>
 #include <sstream>
 #include <iostream>
-
 
 /* Constructor reads and builds the shader */
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
@@ -115,6 +118,11 @@ void Shader::setInt(const std::string &name, int value) const
 void Shader::setFloat(const std::string &name, float value) const
 {
     glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+}
+void Shader::setMat4(const GLchar* name, glm::mat4 value) const
+{
+    unsigned int matLoc = glGetUniformLocation(this->ID, name);
+    glUniformMatrix4fv(matLoc, 1, GL_FALSE, glm::value_ptr(value));
 }
 
 /* utility function for checking shader
