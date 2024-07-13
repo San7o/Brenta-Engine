@@ -18,6 +18,7 @@
 
 /* User-defined headers */
 #include "shader.h"          /* Shader class */
+#include "camera.h"          /* Camera class */
 
 /* libc */
 #include <stdio.h>           /* Standard I/O */
@@ -27,13 +28,23 @@
 /* Function prototypes */
 void framebuffer_size_callback(GLFWwindow* window, int width,
                                int height);  
+void mouseCallback(GLFWwindow* window, double xpos, double ypos);
 void processInput(GLFWwindow *window);
 
 
 /* Constants */
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1280;
+const unsigned int SCR_HEIGHT = 720;
 
+/* Global variables */
+float deltaTime = 0.0f;          /* Time between current frame and last frame */
+float lastFrame = 0.0f;          /* Time of last frame */
+float lastX = SCR_WIDTH / 2.0f;  /* Last mouse X position */
+float lastY = SCR_HEIGHT / 2.0f; /* Last mouse Y position */
+bool firstMouse = true;          /* First mouse movement */
+float fov = 45.0f;               /* Field of view */
+
+Camera camera;
 
 /* Main function */
 int main() {
@@ -70,6 +81,13 @@ int main() {
 
     /* Make the window's context the current thread */
     glfwMakeContextCurrent(window);
+    /* Caputre Cursor */
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    
+    /* Callbacks */
+
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouseCallback);
 
 
     /* 
@@ -85,9 +103,6 @@ int main() {
 
     /* Set the viewport size */
     glViewport(0, 0, 800, 600);
-    
-    /* Callback function for resizing the window, updates the viewport */
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
  
     glEnable(GL_DEPTH_TEST);  /* Enable depth testing */
 
@@ -202,25 +217,9 @@ int main() {
      * and then configure vertex attributes(s). */
     glBindVertexArray(VAO);
 
-    /*
-     * glBindBuffer(GLenum target, GLuint buffer);
-     *
-     * Binds a buffer object to a buffer target.
-     *
-     */
+    /* Binds a buffer object to a buffer target. */
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    /*
-     * glBufferData(GLenum target, GLsizeiptr size, const void* data,
-     *             GLenum usage);
-     *
-     * Copy user defined data into the currently bound buffer.
-     *
-     * Usage can be:
-     * - GL_STATIC_DRAW: The data will be modified once and used many times.
-     * - GL_DYNAMIC_DRAW: The data will be modified repeatedly and used many times.
-     * - GL_STREAM_DRAW: The data will be modified once and used once.
-     *
-     */
+    /* Copy user defined data into the currently bound buffer. */
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
@@ -230,21 +229,7 @@ int main() {
      * Linking vertex attributes
      */
 
-    /*
-     * glVertexAttribPointer(GLuint index, GLint size, GLenum type,
-     *                     GLboolean normalized, GLsizei stride,
-     *                     const void* pointer);
-     *
-     * Specifies the location and data format of the vertex attributes.
-     *
-     * Parameters:
-     * - index: Specifies the index of the vertex attribute.
-     * - size: Specifies the number of components per vertex attribute.
-     * - type: Specifies the data type of each component in the array.
-     * - normalized: Specifies whether fixed-point data values should be normalized.
-     * - stride: Specifies the byte offset between consecutive vertex attributes.
-     * - pointer: Specifies a offset of the first component in the array.
-     */
+    /* Specifies the location and data format of the vertex attributes. */
     /* position attribute */
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -323,12 +308,18 @@ int main() {
     stbi_image_free(data2);
 
 
+    /*
+     * Camera
+     */
+    camera = Camera();
+
     /* Set the texture uniform in the shader */
     ourShader.use();
     ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
 
 
+    
     /* uncomment this call to draw in wireframe polygons. */
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -341,7 +332,10 @@ int main() {
     {
         /* Input */
         processInput(window);
-
+        
+        float currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
 
         /* Rendering commands here */
 
@@ -360,20 +354,14 @@ int main() {
         /* Run the shader */
         ourShader.use();
 
-
         /* Create transformations */
-        glm::mat4 view = glm::mat4(1.0f); /* Identity matrix */
+        ourShader.setMat4("view", camera.GetViewMatrix());
+
+        /* Set the projection matrix */
         glm::mat4 projection = glm::mat4(1.0f);
-
-        view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
-        projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
-
-        unsigned int viewLoc = glGetUniformLocation(ourShader.ID, "view");
-        unsigned int projectionLoc = glGetUniformLocation(ourShader.ID, "projection");
-
-        glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
-
+        projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
+        ourShader.setMat4("projection", projection);
+        
         /* Render */
         glBindVertexArray(VAO);
         for(unsigned int i = 0; i < 10; i++)
@@ -449,22 +437,54 @@ void framebuffer_size_callback(GLFWwindow* window, int width,
 // TODO: Replace this with `glfwSetKeyCallback`
 void processInput(GLFWwindow *window)
 {
-    /*
-     * glfwGetKey(GLFWwindow* window, int key);
-     *
-     * This function returns whether the specified key is pressed.
-     *
-     */
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-    {
         glfwSetWindowShouldClose(window, true);
-    }
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-    {
+    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    }
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-    {
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    /* sor cursor */ 
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    /* Camera zoom */
+    if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS)
+        camera.ProcessMouseScroll(30.0f * deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
+        camera.ProcessMouseScroll(-10.0f * deltaTime);
+   
+    /* Camera movement */
+    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
+
+}
+
+void mouseCallback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (firstMouse)
+    {
+        lastX = xpos;
+        lastY = ypos;
+        firstMouse = false;
     }
+  
+    float xoffset = xpos - lastX;
+    float yoffset = lastY - ypos; 
+    lastX = xpos;
+    lastY = ypos;
+
+    float sensitivity = 0.1f;
+    xoffset *= sensitivity;
+    yoffset *= sensitivity;
+
+    camera.ProcessMouseMovement(xoffset, yoffset, true);
 }

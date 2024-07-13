@@ -3,9 +3,9 @@
 This project aims to build a simple OpenGL application that
 includes:
 
-- [ ] triangles
+- [x] triangles
 
-- [ ] textures
+- [x] textures
 
 - [ ] camera
 
