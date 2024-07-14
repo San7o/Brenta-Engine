@@ -7,7 +7,7 @@ includes:
 
 - [x] textures
 
-- [ ] camera
+- [x] camera
 
 - [ ] lighting
 
