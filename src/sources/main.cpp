@@ -150,7 +150,6 @@ int main() {
         display.PollEvents();
     }
 
-
     /* de-allocate all resources */
     vao.Delete();
     vbo.Delete();
@@ -203,20 +202,5 @@ void framebuffer_size_callback(GLFWwindow* window, int width,
 
 void mouseCallback(GLFWwindow* window, double xpos, double ypos)
 {
-    if (camera.firstMouse)
-    {
-        camera.lastX = xpos;
-        camera.lastY = ypos;
-        camera.firstMouse = false;
-    }
-  
-    float xoffset = xpos - camera.lastX;
-    float yoffset = camera.lastY - ypos; 
-    camera.lastX = xpos;
-    camera.lastY = ypos;
-
-    xoffset *= camera.MouseSensitivity;
-    yoffset *= camera.MouseSensitivity;
-
-    camera.ProcessMouseMovement(xoffset, yoffset, true);
+    camera.ProcessMouseMovement(xpos, ypos, true);
 }
