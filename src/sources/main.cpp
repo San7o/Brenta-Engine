@@ -89,61 +89,73 @@ int main() {
     /* position attribute */
     vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
     /* texture coord attribute */
-    vao.SetVertexData(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float),
-                      (void*)(3*sizeof(float)));
+    //vao.SetVertexData(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float),
+    //                  (void*)(3*sizeof(float)));
 
     /* Load textures */
+    /*
     unsigned int texture1, texture2;
     texture1 = Texture::LoadTexture("assets/images/container.jpg", GL_RGB);
     texture2 = Texture::LoadTexture("assets/images/awesomeface.png", GL_RGBA);
-
+    */
+    
     /* Create Camera */
     camera = Camera();
 
-    /* Set the texture uniform in the shader */
-    ourShader.use();
-    ourShader.setInt("texture1", 0);
-    ourShader.setInt("texture2", 1);
-
+    /* Lighting */
+    Shader lightSourceShader("src/shaders/light_source.vs", "src/shaders/light_source.fs");
+    glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+    glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
+    glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
+    VAO light_vao;
+    vbo.Bind();
+    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+    
     /* Render Loop */
     while(!display.isWindowClosed())
     {
         gtime.Update(display.GetTime());
         processInput();
 
-        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::SetColor(0.1f, 0.1f, 0.1f, 1.0f);
         GL::Clear();
 
+        /*
         Texture::ActiveTexture(GL_TEXTURE0);
         Texture::BindTexture(GL_TEXTURE_2D, texture1);
         Texture::ActiveTexture(GL_TEXTURE1);
         Texture::BindTexture(GL_TEXTURE_2D, texture2);
+        */
 
         /* Run the shader */
         ourShader.use();
+        ourShader.setVec3("objectColor", objectColor.x, objectColor.y, objectColor.z);
+        ourShader.setVec3("lightColor", lightColor.x, lightColor.y, lightColor.z);
 
         /* Create transformations (view, projection, model) */
         Transformations trans;
-
         trans.view = camera.GetViewMatrix();
         trans.projection = glm::perspective(glm::radians(camera.Zoom),
                            (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
-
         ourShader.setMat4("view", trans.view);
         ourShader.setMat4("projection", trans.projection);
-        
-        /* Render */
+        trans.model = glm::mat4(1.0f);
+        ourShader.setMat4("model", trans.model);
+
+        /* render the cube */
         vao.Bind();
-        for(unsigned int i = 0; i < 10; i++)
-        {
-            trans.model = glm::mat4(1.0f);
-            trans.model = glm::translate(trans.model, cubePositions[i]);
-            float angle = 20.0 * i;
-            trans.model = glm::rotate(trans.model, glm::radians(angle),
-                            glm::vec3(1.0f, 0.3f, 0.5f));
-            ourShader.setMat4("model", trans.model);
-            GL::DrawArrays(GL_TRIANGLES, 0, 36);
-        }
+        GL::DrawArrays(GL_TRIANGLES, 0, 36);
+
+        /* light cube */
+        lightSourceShader.use();
+        lightSourceShader.setMat4("view", trans.view);
+        lightSourceShader.setMat4("projection", trans.projection);
+        trans.model = glm::mat4(1.0f);
+        trans.model = glm::translate(trans.model, lightPos);
+        trans.model = glm::scale(trans.model, glm::vec3(0.2f));
+        lightSourceShader.setMat4("model", trans.model);
+        light_vao.Bind();
+        GL::DrawArrays(GL_TRIANGLES, 0, 36);
 
         /* check and call events and swap the buffers */
         display.SwapBuffers();
@@ -153,6 +165,7 @@ int main() {
     /* de-allocate all resources */
     vao.Delete();
     vbo.Delete();
+    light_vao.Delete();
     display.Terminate();
     return 0;
 }

@@ -15,6 +15,7 @@ public:
     unsigned int vbo;
     VBO();
     void CopyVertices(GLsizeiptr size, const void* data, GLenum usage);
+    void Bind();
     void Delete();
 };
 #endif
