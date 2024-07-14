@@ -87,18 +87,11 @@ int main() {
     vbo.CopyVertices(sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     /* position attribute */
-    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
-    /* texture coord attribute */
-    //vao.SetVertexData(1, 2, GL_FLOAT, GL_FALSE, 5*sizeof(float),
-    //                  (void*)(3*sizeof(float)));
+    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+    /* normal data */
+    vao.SetVertexData(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float),
+                      (void*)(3*sizeof(float)));
 
-    /* Load textures */
-    /*
-    unsigned int texture1, texture2;
-    texture1 = Texture::LoadTexture("assets/images/container.jpg", GL_RGB);
-    texture2 = Texture::LoadTexture("assets/images/awesomeface.png", GL_RGBA);
-    */
-    
     /* Create Camera */
     camera = Camera();
 
@@ -109,7 +102,7 @@ int main() {
     glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
     VAO light_vao;
     vbo.Bind();
-    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 5*sizeof(float), (void*)0);
+    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
     
     /* Render Loop */
     while(!display.isWindowClosed())
@@ -120,17 +113,11 @@ int main() {
         GL::SetColor(0.1f, 0.1f, 0.1f, 1.0f);
         GL::Clear();
 
-        /*
-        Texture::ActiveTexture(GL_TEXTURE0);
-        Texture::BindTexture(GL_TEXTURE_2D, texture1);
-        Texture::ActiveTexture(GL_TEXTURE1);
-        Texture::BindTexture(GL_TEXTURE_2D, texture2);
-        */
-
         /* Run the shader */
         ourShader.use();
         ourShader.setVec3("objectColor", objectColor.x, objectColor.y, objectColor.z);
         ourShader.setVec3("lightColor", lightColor.x, lightColor.y, lightColor.z);
+        ourShader.setVec3("lightPos", lightPos.x, lightPos.y, lightPos.z);
 
         /* Create transformations (view, projection, model) */
         Transformations trans;
