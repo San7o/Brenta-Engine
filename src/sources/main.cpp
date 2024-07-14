@@ -10,17 +10,15 @@
 #include <glad/glad.h>       /* OpenGL driver */
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
 #include <stb_image.h>       /* Image loading library */
-
 /* Math Libraries */
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 /* User-defined headers */
 #include "shader.h"          /* Shader class */
 #include "camera.h"          /* Camera class */
 #include "display.h"         /* Display class */
-
+#include "texture.h"         /* Texture class */
 /* libc */
 #include <stdio.h>           /* Standard I/O */
 #include <cmath>             /* Math functions */
@@ -44,18 +42,15 @@ float lastX = SCR_WIDTH / 2.0f;  /* Last mouse X position */
 float lastY = SCR_HEIGHT / 2.0f; /* Last mouse Y position */
 bool firstMouse = true;          /* First mouse movement */
 float fov = 45.0f;               /* Field of view */
-
 Display display;
 Camera camera;
+
 
 /* Main function */
 int main() {
 
-    /* 
-     * Setup window
-     */
+    /* Window */
     display = Display(SCR_WIDTH, SCR_HEIGHT);
-
     display.SetSizeCallback(framebuffer_size_callback);
     display.SetMouseCallback(mouseCallback);
 
@@ -214,73 +209,12 @@ int main() {
     glBindVertexArray(0);
 
 
-    /*
-     * Texure
-     */
-
+    /* Load textures */
     unsigned int texture1, texture2;
-    /* First texture */
-    glGenTextures(1, &texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1);
-    /* Texture Wrapping */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    /* Texture Filtering */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    /* Mipmaps: Generate a set of textures with different resolutions, OpenGL selects
-     * the most appropriate based on the distance of the object. */
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    texture1 = Texture::LoadTexture("assets/images/container.jpg", GL_RGB);
+    texture2 = Texture::LoadTexture("assets/images/awesomeface.png", GL_RGBA);
 
-    /* Read image */
-    int width1, height1, nrChannels1;
-    stbi_set_flip_vertically_on_load(true); /* Flip the image */
-    unsigned char *data1 = stbi_load("assets/images/container.jpg",
-                                     &width1, &height1, &nrChannels1, 0);
-    if (data1)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width1, height1, 0, GL_RGB,
-                     GL_UNSIGNED_BYTE, data1);
-        glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate
-                                            all the mipmap levels */
-    }
-    else
-    {
-        fprintf(stderr, "Failed to load texture\n");
-    }
-    stbi_image_free(data1);
-
-    /* Second texture */
-    glGenTextures(1, &texture2);
-    glBindTexture(GL_TEXTURE_2D, texture2);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    int width2, height2, nrChannels2;
-    unsigned char *data2 = stbi_load("assets/images/awesomeface.png",
-                                     &width2, &height2, &nrChannels2, 0);
-    if (data2)
-    {
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width2, height2, 0, GL_RGBA,
-                     GL_UNSIGNED_BYTE, data2);
-        glGenerateMipmap(GL_TEXTURE_2D); /* Automatically generate
-                                            all the mipmap levels */
-    }
-    else
-    {
-        fprintf(stderr, "Failed to load texture\n");
-    }
-    stbi_image_free(data2);
-
-
-    /*
-     * Camera
-     */
+    /* Create Camera */
     camera = Camera();
 
     /* Set the texture uniform in the shader */
@@ -288,15 +222,7 @@ int main() {
     ourShader.setInt("texture1", 0);
     ourShader.setInt("texture2", 1);
 
-
-    /* uncomment this call to draw in wireframe polygons. */
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-
-
-    /* 
-     * Render loop
-     */
-
+    /* Render Loop */
     while(!display.isWindowClosed())
     {
         /* Input */
@@ -315,10 +241,10 @@ int main() {
         /* Clear the depth buffer */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glActiveTexture(GL_TEXTURE0); /* Activate the texture unit */
-        glBindTexture(GL_TEXTURE_2D, texture1);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture2);
+        Texture::ActiveTexture(GL_TEXTURE0);
+        Texture::BindTexture(GL_TEXTURE_2D, texture1);
+        Texture::ActiveTexture(GL_TEXTURE1);
+        Texture::BindTexture(GL_TEXTURE_2D, texture2);
 
         /* Run the shader */
         ourShader.use();
