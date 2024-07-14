@@ -5,7 +5,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
+        MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 {
     Position = position;
     WorldUp = up;
@@ -14,8 +15,10 @@ Camera::Camera(glm::vec3 position, glm::vec3 up, float yaw, float pitch)
     updateCameraVectors();
 }
 
-Camera::Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch)
-    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
+Camera::Camera(float posX, float posY, float posZ, float upX,
+                float upY, float upZ, float yaw, float pitch)
+    : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED),
+        MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
 {
     Position = glm::vec3(posX, posY, posZ);
     WorldUp = glm::vec3(upX, upY, upZ);
@@ -42,7 +45,8 @@ void Camera::ProcessKeyboard(Camera_Movement direction, float deltaTime)
         Position += Right * velocity;
 }
 
-void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
+void Camera::ProcessMouseMovement(float xoffset, float yoffset,
+                GLboolean constrainPitch = true)
 {
     xoffset *= MouseSensitivity;
     yoffset *= MouseSensitivity;
@@ -50,7 +54,8 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
     Yaw   += xoffset;
     Pitch += yoffset;
 
-    /* make sure that when pitch is out of bounds, screen doesn't get flipped */
+    /* make sure that when pitch is out of bounds,
+     * screen doesn't get flipped */
     if (constrainPitch)
     {
         if (Pitch > 89.0f)
@@ -59,7 +64,8 @@ void Camera::ProcessMouseMovement(float xoffset, float yoffset, GLboolean constr
             Pitch = -89.0f;
     }
 
-    /* update Front, Right and Up Vectors using the updated Euler angles */
+    /* update Front, Right and Up Vectors using
+     * the updated Euler angles */
     updateCameraVectors();
 }
 

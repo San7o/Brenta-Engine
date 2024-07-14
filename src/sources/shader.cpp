@@ -35,7 +35,7 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     /* Ensure ifstream objects can throw exceptions */
     vShaderFile.exceptions(std::ifstream::failbit |
                              std::ifstream::badbit);
-   fShaderFile.exceptions(std::ifstream::failbit |
+    fShaderFile.exceptions(std::ifstream::failbit |
                              std::ifstream::badbit);
 
     try 

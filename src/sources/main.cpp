@@ -19,6 +19,7 @@
 /* User-defined headers */
 #include "shader.h"          /* Shader class */
 #include "camera.h"          /* Camera class */
+#include "display.h"         /* Display class */
 
 /* libc */
 #include <stdio.h>           /* Standard I/O */
@@ -29,7 +30,7 @@
 void framebuffer_size_callback(GLFWwindow* window, int width,
                                int height);  
 void mouseCallback(GLFWwindow* window, double xpos, double ypos);
-void processInput(GLFWwindow *window);
+void processInput();
 
 
 /* Constants */
@@ -44,6 +45,7 @@ float lastY = SCR_HEIGHT / 2.0f; /* Last mouse Y position */
 bool firstMouse = true;          /* First mouse movement */
 float fov = 45.0f;               /* Field of view */
 
+Display display;
 Camera camera;
 
 /* Main function */
@@ -52,42 +54,10 @@ int main() {
     /* 
      * Setup window
      */
+    display = Display(SCR_WIDTH, SCR_HEIGHT);
 
-    /* Initialize GLFW */
-    if (glfwInit() == GL_FALSE)
-    {
-        fprintf(stderr, "Failed to initialize GLFW on init\n");
-        return -1;
-    }
-
-    /* Setup GLFW window properties */
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);  // OpenGL 3.3
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    /* Use core profile */
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-#ifdef __APPLE__
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
-
-    /* Create a windowed mode window and its OpenGL context */
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
-    if (window == NULL)
-    {
-        fprintf(stderr, "Failed to create GLFW window on create windw\n");
-        glfwTerminate();
-        return -1;
-    }
-
-    /* Make the window's context the current thread */
-    glfwMakeContextCurrent(window);
-    /* Caputre Cursor */
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    
-    /* Callbacks */
-
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-    glfwSetCursorPosCallback(window, mouseCallback);
+    display.SetSizeCallback(framebuffer_size_callback);
+    display.SetMouseCallback(mouseCallback);
 
 
     /* 
@@ -95,7 +65,7 @@ int main() {
      */
 
     /* Load all OpenGL function pointers */
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    if (!gladLoadGLLoader((GLADloadproc)display.GetProcAddress()))
     {
         fprintf(stderr, "Failed to initialize GLAD on GLLoader\n");
         return -1;
@@ -319,7 +289,6 @@ int main() {
     ourShader.setInt("texture2", 1);
 
 
-    
     /* uncomment this call to draw in wireframe polygons. */
     //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -328,12 +297,12 @@ int main() {
      * Render loop
      */
 
-    while(!glfwWindowShouldClose(window))
+    while(!display.isWindowClosed())
     {
         /* Input */
-        processInput(window);
+        processInput();
         
-        float currentFrame = glfwGetTime();
+        float currentFrame = display.GetTime();
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
@@ -379,33 +348,8 @@ int main() {
 
 
         /* check and call events and swap the buffers */
-
-        /*
-         * glfwSwapBuffers(GLFWwindow* window);
-         *
-         * Swaps the front and back buffers of the specified window.
-         *
-         * Why do we need double buffering?
-         * When an application draws in a single buffer the resulting
-         * image may display flickering issues. This is because the
-         * resulting output image is not drawn in an instant, but drawn
-         * pixel by pixel and usually from left to right and top to
-         * bottom. Because this image is not displayed at an instant
-         * to the user while still being rendered to, the result may
-         * contain artifacts. To circumvent these issues, windowing
-         * applications apply a double buffer for rendering. The front
-         * buffer contains the final output image that is shown at
-         * the screen, while all the rendering commands draw to the
-         * back buffer. As soon as all the rendering commands are
-         * finished we swap the back buffer to the front buffer so
-         * the image can be displayed without still being rendered
-         * to, removing all the aforementioned artifacts. 
-         *
-         */
-        glfwSwapBuffers(window);
-
-        /* Process all pending events */
-        glfwPollEvents();
+        display.SwapBuffers();
+        display.PollEvents();
     }
 
 
@@ -414,58 +358,48 @@ int main() {
     glDeleteBuffers(1, &VBO);
     //glDeleteBuffers(1, &EBO);
 
-    /* Terminate GLFW */
-    glfwTerminate();
-
+    display.Terminate();
     return 0;
 }
 
-/*
- * framebuffer_size_callback(GLFWwindow* window, int width,
- *                           int height);
- *
- * This function is called whenever the window is resized, and
- * updates the viewport size so that OpenGL renders correctly.
- *
- */
+
+void processInput()
+{
+    if (display.isKeyPressed(GLFW_KEY_ESCAPE))
+        display.SetClose();
+    if (display.isKeyPressed(GLFW_KEY_C))
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    if (display.isKeyPressed(GLFW_KEY_X))
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    /* show cursor */ 
+    if (display.isKeyPressed(GLFW_KEY_Q))
+        display.SetMouseCapture(false);
+    if (display.isKeyPressed(GLFW_KEY_E))
+        display.SetMouseCapture(true);
+
+    /* Camera zoom */
+    if (display.isKeyPressed(GLFW_KEY_KP_ADD))
+        camera.ProcessMouseScroll(30.0f * deltaTime);
+    if (display.isKeyPressed(GLFW_KEY_KP_SUBTRACT))
+        camera.ProcessMouseScroll(-10.0f * deltaTime);
+   
+    /* Camera movement */
+    if (display.isKeyPressed(GLFW_KEY_UP))
+        camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
+    if (display.isKeyPressed(GLFW_KEY_DOWN))
+        camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
+    if (display.isKeyPressed(GLFW_KEY_LEFT))
+        camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
+    if (display.isKeyPressed(GLFW_KEY_RIGHT))
+        camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
+
+}
+
 void framebuffer_size_callback(GLFWwindow* window, int width,
                                int height)
 {
     glViewport(0, 0, width, height);
-}
-
-// TODO: Replace this with `glfwSetKeyCallback`
-void processInput(GLFWwindow *window)
-{
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    if (glfwGetKey(window, GLFW_KEY_C) == GLFW_PRESS)
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    /* sor cursor */ 
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-        glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-    /* Camera zoom */
-    if (glfwGetKey(window, GLFW_KEY_KP_ADD) == GLFW_PRESS)
-        camera.ProcessMouseScroll(30.0f * deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_KP_SUBTRACT) == GLFW_PRESS)
-        camera.ProcessMouseScroll(-10.0f * deltaTime);
-   
-    /* Camera movement */
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::FORWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::BACKWARD, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::LEFT, deltaTime);
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        camera.ProcessKeyboard(Camera_Movement::RIGHT, deltaTime);
-
 }
 
 void mouseCallback(GLFWwindow* window, double xpos, double ypos)
