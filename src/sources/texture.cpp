@@ -1,17 +1,19 @@
 #include <glad/glad.h>
 #include <iostream>
+#include <string>
 #include <stb_image.h>       /* Image loading library */
 #include "texture.h"
 
-unsigned int Texture::LoadTexture(const char* path,
+unsigned int Texture::LoadTexture(const char* path, const char* directory,
                 GLint wrapping, GLint filtering_min, GLint filtering_mag,
                 GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag, bool flip)
 {
     unsigned int texture;
+    std::string fullPath = std::string(directory) + "/" + std::string(path);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
 
-    ReadImage(path, flip);
+    ReadImage(fullPath.c_str(), flip);
 
     SetTextureWrapping(wrapping);
     SetTextureFiltering(filtering_min, filtering_mag);
@@ -71,7 +73,7 @@ void Texture::ReadImage(const char* path, bool flip)
     }
     else
     {
-        std::cout << "Failed to load texture" << std::endl;
+        std::cout << "Failed to load texture at location: " << path << std::endl;
     }
     stbi_image_free(data);
 }

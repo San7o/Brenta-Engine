@@ -7,6 +7,7 @@ class Texture
 {
 public:
     static unsigned int LoadTexture(const char* path,
+                    const char* directory,
                     GLint wrapping = GL_REPEAT,
                     GLint filtering_min = GL_NEAREST,
                     GLint filtering_mag = GL_LINEAR,

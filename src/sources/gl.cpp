@@ -38,8 +38,18 @@ void GL::DrawArrays(GLenum mode, int first, int count)
     glDrawArrays(mode, first, count);
 }
 
+void GL::DrawElements(GLenum mode, int count, GLenum type, const void* indices)
+{
+    glDrawElements(mode, count, type, indices);
+}
+
 void GL::Clear()
 {
     /* Clear color and depth buffer */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void GL::BindVertexArray(unsigned int n)
+{
+    glBindVertexArray(n);
 }

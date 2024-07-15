@@ -14,7 +14,7 @@ class EBO
 public:
     unsigned int ebo;
     EBO();
-    void CopyVertices(GLsizeiptr size, const void* data, GLenum usage);
+    void CopyIndices(GLsizeiptr size, const void* data, GLenum usage);
     void Delete();
 };
 #endif
