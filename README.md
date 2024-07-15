@@ -17,7 +17,7 @@ includes:
 
 - [x] lighting
 
-- [ ] model loading
+- [x] model loading
 
 - [ ] Optional: advanced features
 
