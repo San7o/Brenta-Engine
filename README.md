@@ -3,6 +3,7 @@
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
+![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
 
 
 This project aims to build a simple OpenGL application that
