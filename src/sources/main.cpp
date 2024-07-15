@@ -10,6 +10,7 @@
 #include <glad/glad.h>       /* OpenGL driver */
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
 #include <stb_image.h>       /* Image loading library */
+#include <assimp/Importer.hpp>
 /* Math Libraries */
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

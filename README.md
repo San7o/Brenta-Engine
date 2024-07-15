@@ -38,6 +38,14 @@ by running:
 nix shell
 ```
 
+You need [Assimp](https://github.com/assimp/assimp) in order to import 3D models. It is
+advised to build the library for your platform following the instruction in the official
+repository. For linux, I build the library using the following flags:
+```bash
+cmake CMakeLists.txt -DBUILD_SHARED_LIBS=off -DASSIMP_WARNINGS_AS_ERRORS=off
+make -j4
+```
+
 ## Compile
 
 You can compile the source with `make`:
