@@ -87,22 +87,28 @@ int main() {
     vbo.CopyVertices(sizeof(vertices), vertices, GL_STATIC_DRAW);
     
     /* position attribute */
-    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
     /* normal data */
-    vao.SetVertexData(1, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float),
+    vao.SetVertexData(1, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float),
                       (void*)(3*sizeof(float)));
+    vao.SetVertexData(2, 2, GL_FLOAT, GL_FALSE, 8*sizeof(float),
+                      (void*)(6*sizeof(float)));
 
     /* Create Camera */
     camera = Camera();
 
     /* Lighting */
     Shader lightSourceShader("src/shaders/light_source.vs", "src/shaders/light_source.fs");
-    glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
     glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
     glm::vec3 objectColor(1.0f, 0.5f, 0.31f);
+    glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
     VAO light_vao;
     vbo.Bind();
-    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 6*sizeof(float), (void*)0);
+    vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);
+
+    /* Load texture */
+    unsigned int texture1 = Texture::LoadTexture("assets/textures/container2.png");
+    unsigned int texture2 = Texture::LoadTexture("assets/textures/container2_specular.png");
     
     /* Render Loop */
     while(!display.isWindowClosed())
@@ -113,19 +119,27 @@ int main() {
         GL::SetColor(0.1f, 0.1f, 0.1f, 1.0f);
         GL::Clear();
 
+        /* Texture */
+        Texture::ActiveTexture(GL_TEXTURE0);
+        Texture::BindTexture(GL_TEXTURE_2D, texture1);
+        Texture::ActiveTexture(GL_TEXTURE1);
+        Texture::BindTexture(GL_TEXTURE_2D, texture2);
+
         /* Run the shader */
         ourShader.use();
-        ourShader.setVec3("objectColor", objectColor.x, objectColor.y, objectColor.z);
-        ourShader.setVec3("lightColor", lightColor.x, lightColor.y, lightColor.z);
         ourShader.setVec3("light.position", lightPos.x, lightPos.y, lightPos.z);
         ourShader.setVec3("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
-        ourShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
-        ourShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-        ourShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
+
+        ourShader.setInt("material.diffuse", 0);
+        ourShader.setInt("material.specular", 1);
         ourShader.setFloat("material.shininess", 32.0f);
+        
         ourShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
         ourShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
         ourShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+        ourShader.setFloat("light.constant", 1.0f);
+        ourShader.setFloat("light.linear", 0.09f);
+        ourShader.setFloat("light.quadratic", 0.032f);
 
         /* Create transformations (view, projection, model) */
         Transformations trans;
@@ -134,12 +148,20 @@ int main() {
                            (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
         ourShader.setMat4("view", trans.view);
         ourShader.setMat4("projection", trans.projection);
-        trans.model = glm::mat4(1.0f);
-        ourShader.setMat4("model", trans.model);
 
-        /* render the cube */
+        /* render the cubes */
         vao.Bind();
-        GL::DrawArrays(GL_TRIANGLES, 0, 36);
+        for (unsigned int i = 0; i < 10; i++)
+        {
+            trans.model = glm::mat4(1.0f);
+            trans.model = glm::translate(trans.model, cubePositions[i]);
+            float angle = 20.0f * i;
+            trans.model = glm::rotate(trans.model, glm::radians(angle),
+                                      glm::vec3(1.0f, 0.3f, 0.5f));
+            lightSourceShader.setMat4("model", trans.model);
+
+            GL::DrawArrays(GL_TRIANGLES, 0, 36);
+        }
 
         /* light cube */
         lightSourceShader.use();
