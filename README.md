@@ -1,6 +1,8 @@
 # opengl-santo-engine
 
-https://github.com/user-attachments/assets/62d5f358-cedd-42da-ba1b-b859999ce688
+
+https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
+
 
 
 This project aims to build a simple OpenGL application that
