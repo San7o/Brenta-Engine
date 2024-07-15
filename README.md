@@ -12,11 +12,15 @@ includes:
 
 - [x] camera
 
-- [ ] lighting
+- [x] lighting
 
 - [ ] model loading
 
 - [ ] Optional: advanced features
+
+## Vision
+
+I want to build a functional ECS system for the engine, and run physics symulations.
 
 # Dependencies
 
