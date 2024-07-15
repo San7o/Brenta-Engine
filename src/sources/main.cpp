@@ -25,6 +25,8 @@
 #include "vao.h"             /* Vertex Array Object */
 #include "ebo.h"             /* Element Buffer Object */
 #include "vertices.h"        /* Vertices */
+#include "mesh.h"            /* Mesh class */
+#include "model.h"           /* Model class */
 /* libc */
 #include <stdio.h>           /* Standard I/O */
 #include <cmath>             /* Math functions */
@@ -110,10 +112,14 @@ int main() {
 	    glm::vec3( 0.0f,  0.0f, -3.0f)
     };
 
+    /* Load model */
+    Model ourModel("assets/models/backpack/backpack.obj");
+
     /* Load texture */
-    unsigned int texture1 = Texture::LoadTexture("assets/textures/container2.png");
-    unsigned int texture2 = Texture::LoadTexture("assets/textures/container2_specular.png");
-    
+    unsigned int texture1 = Texture::LoadTexture("container2.png", "assets/textures");
+    unsigned int texture2 = Texture::LoadTexture("container2_specular.png", "assets/textures");
+
+
     /* Render Loop */
     while(!display.isWindowClosed())
     {
@@ -133,8 +139,8 @@ int main() {
         ourShader.use();
         ourShader.setVec3("viewPos", camera.Position.x, camera.Position.y, camera.Position.z);
 
-        ourShader.setInt("material.diffuse", 0);
-        ourShader.setInt("material.specular", 1);
+        ourShader.setInt("material.texture_diffuse1", 0);
+        ourShader.setInt("material.texture_specular1", 1);
         ourShader.setFloat("material.shininess", 32.0f);
        
         /* Directional light */
@@ -188,7 +194,7 @@ int main() {
         ourShader.setMat4("view", trans.view);
         ourShader.setMat4("projection", trans.projection);
 
-        /* render the cubes */
+        /* Draw cubes */
         vao.Bind();
         for (unsigned int i = 0; i < 10; i++)
         {
@@ -201,6 +207,12 @@ int main() {
 
             GL::DrawArrays(GL_TRIANGLES, 0, 36);
         }
+
+        /* Draw model */
+        trans.model = glm::mat4(1.0f);
+        trans.model = glm::translate(trans.model, glm::vec3(0.0f, 0.0f, -10.0f));
+        lightSourceShader.setMat4("model", trans.model);
+        ourModel.Draw(ourShader);
 
         /* light cube */
         lightSourceShader.use();
@@ -222,9 +234,9 @@ int main() {
     }
 
     /* de-allocate all resources */
-    vao.Delete();
-    vbo.Delete();
-    light_vao.Delete();
+    //vao.Delete();
+    //vbo.Delete();
+    //light_vao.Delete();
     display.Terminate();
     return 0;
 }
