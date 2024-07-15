@@ -40,8 +40,10 @@ nix shell
 
 You need [Assimp](https://github.com/assimp/assimp) in order to import 3D models. It is
 advised to build the library for your platform following the instruction in the official
-repository. For linux, I build the library using the following flags:
+repository. For linux, I built the library using the following flags:
 ```bash
+git clone https://github.com/assimp/assimp.git
+cd assimp/
 cmake CMakeLists.txt -DBUILD_SHARED_LIBS=off -DASSIMP_WARNINGS_AS_ERRORS=off
 make -j4
 ```
