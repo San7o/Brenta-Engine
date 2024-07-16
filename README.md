@@ -90,4 +90,10 @@ Run with
 make run
 ```
 
+Test with
+```bash
+make build/test.out
+make test
+```
+
 The binaries will be generated in `build/` directory.
