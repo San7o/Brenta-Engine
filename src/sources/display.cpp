@@ -11,6 +11,7 @@ Display::Display(int SCR_WIDTH, int SCR_HEIGHT)
     init();
     SetContextVersion(3, 3); /* OpenGL 3.3 */
     UseCoreProfile();
+    glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
 #ifdef __APPLE__
     SetHintsApple();
 #endif

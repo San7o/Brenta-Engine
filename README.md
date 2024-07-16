@@ -28,6 +28,7 @@ Currently, I implemented the following features:
 - [x] Other OpenGL features
   - Texture transparency
   - Face culling
+  - MSAA
 
 Screenshots and videos:
 

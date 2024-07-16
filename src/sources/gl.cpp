@@ -21,6 +21,10 @@ void GL::LoadOpenGL(GLADloadproc loadproc, int SCR_WIDTH, int SCR_HEIGHT)
      * based on their orientation (defined clockwise or counterclockwise) */
     glEnable(GL_CULL_FACE);
 
+    /* Enable multisampling
+     * Only works for a multisample buffer. */
+    glEnable(GL_MULTISAMPLE);
+
 }
 
 void GL::SetPoligonMode(GLboolean enable)
