@@ -2,12 +2,15 @@
 This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
 Here is an high level view of the system:
 
-![image](https://github.com/user-attachments/assets/5eee4a1d-cce4-41df-a50a-fa115ed27e89)
+![image](https://github.com/user-attachments/assets/d3c86fae-5949-48ae-9e2b-a6fbfe2d2b51)
 
-
+The project is structured into the 3 folders `engine`, `game`, `engine-gui` containing the
+following classes.
 ![image](https://github.com/user-attachments/assets/f825bdc2-9345-49ef-a87d-90939ba47e07)
 
 ## Current State
+
+Currently, I implemented the following features:
 - [x] triangles
 
 - [x] textures
@@ -21,10 +24,15 @@ Here is an high level view of the system:
 
 - [x] model loading
 
-- [ ] Optional: advanced features
+## Todo
+
+- [ ] Advanced OpenGL features
 
 - [ ] ECS
 
+- [ ] Loggin system
+
+- [ ] Unit tests
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
