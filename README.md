@@ -45,6 +45,7 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 - [ ] Unit tests
 
+- [ ] Make all paths full
 
 
 # Dependencies
@@ -81,7 +82,14 @@ time and generate a bigger file.
 
 ## Compile
 
-You can compile the source with `make`:
+You can compile the source with `cmake`:
+```bash
+cmake -Bbuild
+cmake --build build
+./build/main
+```
+
+Or with `make`:
 ```bash
 make
 ```
