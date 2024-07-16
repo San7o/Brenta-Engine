@@ -40,7 +40,7 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 - [ ] ECS
 
-- [ ] Loggin system
+- [ ] Logging system
 
 - [ ] Unit tests
 
