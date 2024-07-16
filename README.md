@@ -5,7 +5,8 @@ Here is an high level view of the system:
 ![image](https://github.com/user-attachments/assets/d3c86fae-5949-48ae-9e2b-a6fbfe2d2b51)
 
 The project is structured into the 3 folders `engine`, `game`, `engine-gui` containing the
-following classes.
+following classes:
+
 ![image](https://github.com/user-attachments/assets/f825bdc2-9345-49ef-a87d-90939ba47e07)
 
 ## Current State
@@ -24,6 +25,12 @@ Currently, I implemented the following features:
 
 - [x] model loading
 
+Screenshots and videos:
+
+https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
+
+![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
+
 ## Todo
 
 - [ ] Advanced OpenGL features
@@ -34,9 +41,6 @@ Currently, I implemented the following features:
 
 - [ ] Unit tests
 
-https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
-
-![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
 
 
 # Dependencies
@@ -83,7 +87,3 @@ make run
 ```
 
 The binaries will be generated in `build/` directory.
-
-## TODO
-- [ ] Logging system
-- [ ] ECS style system
