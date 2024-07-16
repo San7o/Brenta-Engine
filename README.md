@@ -2,7 +2,8 @@
 This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
 Here is an high level view of the system:
 
-![image](https://github.com/user-attachments/assets/fee03d56-5add-4675-a05c-a0a8dcca7705)
+![image](https://github.com/user-attachments/assets/5eee4a1d-cce4-41df-a50a-fa115ed27e89)
+
 
 ![image](https://github.com/user-attachments/assets/f825bdc2-9345-49ef-a87d-90939ba47e07)
 
