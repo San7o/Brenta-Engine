@@ -25,6 +25,10 @@ Currently, I implemented the following features:
 
 - [x] model loading
 
+- [x] Other OpenGL features
+  - Texture transparency
+  - Face culling
+
 Screenshots and videos:
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
@@ -33,7 +37,6 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ## Todo
 
-- [ ] Advanced OpenGL features
 
 - [ ] ECS
 

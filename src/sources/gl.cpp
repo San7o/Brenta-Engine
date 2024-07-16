@@ -13,6 +13,14 @@ void GL::LoadOpenGL(GLADloadproc loadproc, int SCR_WIDTH, int SCR_HEIGHT)
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
     glEnable(GL_DEPTH_TEST);                 /* Enable depth testing */
 
+    /* Enable blending for transparency */
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+
+    /* Enable face culling, draw only visible triangles
+     * based on their orientation (defined clockwise or counterclockwise) */
+    glEnable(GL_CULL_FACE);
+
 }
 
 void GL::SetPoligonMode(GLboolean enable)

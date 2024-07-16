@@ -6,6 +6,7 @@ in
 pkgs.mkShell {
   packages = with pkgs; [
     stdenv.cc.cc.lib        # libc
+    cmake                   # build system
     glfw-wayland-minecraft  # OpenGL windowing library
   ];
 
