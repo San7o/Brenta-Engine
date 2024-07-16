@@ -36,7 +36,7 @@ You need
 
 - A `C/C++` compiler
 
-- `GLFW` isntalled on your machine
+- `GLFW` installed on your machine
 
 If you are on `NixOS`, you can access the developement environment
 by running:
