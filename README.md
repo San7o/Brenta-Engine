@@ -1,14 +1,12 @@
 # opengl-santo-engine
+This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
+Here is an high level view of the system:
 
+![image](https://github.com/user-attachments/assets/fee03d56-5add-4675-a05c-a0a8dcca7705)
 
-https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
+![image](https://github.com/user-attachments/assets/f825bdc2-9345-49ef-a87d-90939ba47e07)
 
-![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
-
-
-This project aims to build a simple OpenGL application that
-includes:
-
+## Current State
 - [x] triangles
 
 - [x] textures
@@ -16,14 +14,21 @@ includes:
 - [x] camera
 
 - [x] lighting
+  - Ambient
+  - Diffuse
+  - Specular   
 
 - [x] model loading
 
 - [ ] Optional: advanced features
 
-## Vision
+- [ ] ECS
 
-I want to build a functional ECS system for the engine, and run physics symulations.
+
+https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
+
+![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
+
 
 # Dependencies
 
