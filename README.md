@@ -39,7 +39,8 @@ return 0;
 
 And here is an high, simplified, level view of the system:
 
-![image](https://github.com/user-attachments/assets/d3c86fae-5949-48ae-9e2b-a6fbfe2d2b51)
+![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
+
 
 The project is structured into the 3 folders `engine`, `game`, `engine-gui` containing the
 following classes:
