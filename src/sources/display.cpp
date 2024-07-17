@@ -12,6 +12,8 @@ Display::Display(int SCR_WIDTH, int SCR_HEIGHT)
     SetContextVersion(3, 3); /* OpenGL 3.3 */
     UseCoreProfile();
     glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+    /* Debug context. REMOVE IN PRODUCTION */
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 #ifdef __APPLE__
     SetHintsApple();
 #endif

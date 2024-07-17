@@ -1,6 +1,43 @@
 # opengl-santo-engine
 This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
-Here is an high level view of the system:
+
+Here is an example of how to use the engine:
+```c++
+World::Init();
+std::cout << "Welcome to my Game!" << std::endl;
+
+/* New entity */
+Entity entity = World::NewEntity();
+
+/* Add a health component to the entity */
+struct Health : Component {
+    int value;
+    Health(Entity entity, int value)
+            : Component(entity, "Health"), value(value) {}
+};
+auto health = std::make_shared<Health>(entity, 100);
+World::AddComponent(health);
+
+/* System to decrease health each tick */
+auto poison = std::make_shared<System>("Poison", []() {
+    auto h = static_cast<Health*>
+                      (World::getComponents()->at("Health")
+                       .at(0).get());
+    h->value--;
+    std::cout << "Health: " << h->value << std::endl;
+});
+World::AddSystem(poison);
+
+/* Main loop */
+for(int i = 0; i < 10; i++) {
+    World::Tick();
+}
+
+World::Delete();
+return 0;
+```
+
+And here is an high, simplified, level view of the system:
 
 ![image](https://github.com/user-attachments/assets/d3c86fae-5949-48ae-9e2b-a6fbfe2d2b51)
 
@@ -30,6 +67,8 @@ Currently, I implemented the following features:
   - Face culling
   - MSAA
 
+- [x] ECS
+
 Screenshots and videos:
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
@@ -38,14 +77,17 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ## Todo
 
+- [ ] Query components
 
-- [ ] ECS
+- [ ] Game state
 
-- [ ] Logging system
+- [ ] Make all paths full
+
+- [ ] Error checks with `GLenum glGetError()`
 
 - [ ] Unit tests
 
-- [ ] Make all paths full
+- [ ] Logging system
 
 
 # Dependencies
@@ -91,16 +133,11 @@ cmake --build build
 
 Or with `make`:
 ```bash
-make
-```
-Run with
-```bash
-make run
+make game
 ```
 
-Test with
+Run tests with:
 ```bash
-make build/test.out
 make test
 ```
 
