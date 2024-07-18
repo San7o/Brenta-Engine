@@ -30,6 +30,7 @@ int main() {
 
     InitPlayer();
     InitRenderer();
+    // ...
 
     while(!Screen::isWindowClosed()) {
 

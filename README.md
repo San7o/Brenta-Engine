@@ -1,7 +1,7 @@
 # opengl-santo-engine
 This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
 
-Here is an example of how to use the engine:
+Here is an example of how to use the ECS engine:
 ```c++
 World::Init();
 std::cout << "Welcome to my Game!" << std::endl;
@@ -58,7 +58,49 @@ for(int i = 0; i < 10; i++) {
 
 World::Delete();
 ```
-There are many examples in the `examples` directory.
+
+Example `main.cpp`:
+
+```bash
+int main() {
+
+    /* Initialize the screen */
+    Screen::Init(SCR_WIDTH, SCR_HEIGHT);
+
+    /* Load OpenGL */
+    GL::LoadOpenGL((GLADloadproc)Screen::GetProcAddress(),
+                    SCR_WIDTH, SCR_HEIGHT);
+
+    /* Initialize the world */
+    World::Init();
+
+    InitPlayer();
+    InitRenderer();
+    // ...
+
+    while(!Screen::isWindowClosed()) {
+
+        /* Input */
+        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
+            Screen::SetClose();
+
+        /* Clear */
+        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::Clear();
+
+        World::Tick();
+
+        Screen::PollEvents();
+        Screen::SwapBuffers();
+    }
+    
+    World::Delete();
+    Screen::Terminate();
+    return 0;
+}
+```
+
+There are many other examples in the `examples` directory.
 
 Here is an high lievel simplified view of the system:
 
