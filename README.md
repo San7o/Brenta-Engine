@@ -78,6 +78,8 @@ Currently, I implemented the following features:
 
 - [x] Camera
 
+- [x] Shaders
+
 - [x] Lighting
   - Ambient
   - Diffuse
@@ -94,8 +96,7 @@ Currently, I implemented the following features:
   - Entities
   - Components
   - Systems
-  - Worls
-  - Getters and setters
+  - World
   - Query multiple components
 
 - [x] Unit tests
@@ -109,8 +110,6 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 ## Todo
 
 - [ ] Game state
-
-- [ ] Make all paths full
 
 - [ ] Error checks with `GLenum glGetError()`
 

@@ -1,6 +1,6 @@
 #include "vao.h"
 
-using namespace ECS;
+using namespace ECS::Types;
 
 VAO::VAO()
 {

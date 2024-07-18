@@ -20,16 +20,12 @@
 #include "shader.h"
 #endif
 
+#ifndef BUFFER_H
+#include "buffer.h"
+#endif
+
 #ifndef VAO_H
 #include "vao.h"
-#endif
-
-#ifndef VBO_H
-#include "vbo.h"
-#endif
-
-#ifndef EBO_H
-#include "ebo.h"
 #endif
 
 namespace ECS {
@@ -59,12 +55,12 @@ public:
 
     Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indices,
                     std::vector<Types::Texture> textures);
-    void Draw(Shader &shader);
+    void Draw(Types::ShaderName shader_name);
 private:
     // render data
-    VAO vao;
-    VBO vbo;
-    EBO ebo;
+    Types::VAO vao;
+    Types::Buffer vbo;
+    Types::Buffer ebo;
     void setupMesh();
 };
 

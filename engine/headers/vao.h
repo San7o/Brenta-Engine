@@ -14,18 +14,23 @@
 
 namespace ECS {
 
+namespace Types {
+
 class VAO {
 public:
     unsigned int vao;
     VAO();
     unsigned int GetVAO();
     void Bind();
+    void Delete();
+
     /* Specifies the location and data format of the vertex attributes. */
     void SetVertexData(unsigned int index, GLint size, GLenum type,
                     GLboolean normalized, GLsizei stride,
                     const void* pointer);
-    void Delete();
 };
+
+} // namespace Types
 
 } // namespace ECS
 

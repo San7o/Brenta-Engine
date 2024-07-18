@@ -14,8 +14,12 @@
 
 using namespace ECS;
 
+std::unordered_map<Types::ShaderName, unsigned int> Shader::shaders;
+
 /* Constructor reads and builds the shader */
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+void Shader::NewShader(Types::ShaderName shader_name,
+                std::string const& vertexPath,
+                std::string const& fragmentPath)
 {
     /* 
      * 1. retrieve the vertex/fragment source
@@ -71,20 +75,23 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     vertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertex, 1, &vShaderCode, NULL);
     glCompileShader(vertex);
-    checkCompileErrors(vertex, "VERTEX");
+    Shader::CheckCompileErrors(vertex, "VERTEX");
 
     /* fragment Shader */
     fragment = glCreateShader(GL_FRAGMENT_SHADER);
     glShaderSource(fragment, 1, &fShaderCode, NULL);
     glCompileShader(fragment);
-    checkCompileErrors(fragment, "FRAGMENT");
+    Shader::CheckCompileErrors(fragment, "FRAGMENT");
 
     /* shader Program */
-    ID = glCreateProgram();
+    unsigned int ID = glCreateProgram();
     glAttachShader(ID, vertex);
     glAttachShader(ID, fragment);
     glLinkProgram(ID);
-    checkCompileErrors(ID, "PROGRAM");
+    Shader::CheckCompileErrors(ID, "PROGRAM");
+
+    /* Save the shader */
+    Shader::shaders.insert({shader_name, ID});
 
     /* delete the shaders as they're linked into 
      * our program now and no longer necessary */
@@ -93,42 +100,48 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 
 }
 
-/* Use/activate the shader */
-void Shader::use()
+unsigned int Shader::GetId(Types::ShaderName shader_name)
 {
-    glUseProgram(ID);
+    return Shader::shaders.at(shader_name);
+}
+
+/* Use/activate the shader */
+void Shader::Use(Types::ShaderName shader_name)
+{
+    glUseProgram(Shader::GetId(shader_name));
 }
 
 /* Utility uniform functions */
-void Shader::setBool(const std::string &name, bool value) const
+void Shader::SetBool(Types::ShaderName shader_name, const std::string &name, bool value)
 {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), (int)value);
+    glUniform1i(glGetUniformLocation(Shader::GetId(shader_name),
+                            name.c_str()), (int)value);
 }
 
-void Shader::setInt(const std::string &name, int value) const
+void Shader::SetInt(Types::ShaderName shader_name, const std::string &name, int value)
 {
-    glUniform1i(glGetUniformLocation(ID, name.c_str()), value); 
+    glUniform1i(glGetUniformLocation(Shader::GetId(shader_name), name.c_str()), value); 
 }
 
-void Shader::setFloat(const std::string &name, float value) const
+void Shader::SetFloat(Types::ShaderName shader_name, const std::string &name, float value)
 {
-    glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+    glUniform1f(glGetUniformLocation(Shader::GetId(shader_name), name.c_str()), value);
 }
-void Shader::setMat4(const GLchar* name, glm::mat4 value) const
+void Shader::SetMat4(Types::ShaderName shader_name, const GLchar* name, glm::mat4 value)
 {
-    unsigned int matLoc = glGetUniformLocation(this->ID, name);
+    unsigned int matLoc = glGetUniformLocation(Shader::GetId(shader_name), name);
     glUniformMatrix4fv(matLoc, 1, GL_FALSE, glm::value_ptr(value));
 }
 
-void Shader::setVec3(const GLchar* name, float x, float y, float z) const
+void Shader::SetVec3(Types::ShaderName shader_name, const GLchar* name, float x, float y, float z)
 {
-    unsigned int vecLoc = glGetUniformLocation(this->ID, name);
+    unsigned int vecLoc = glGetUniformLocation(Shader::GetId(shader_name), name);
     glUniform3f(vecLoc, x, y, z);
 }
 
 /* utility function for checking shader
  * compilation/linking errors. */
-void Shader::checkCompileErrors(unsigned int shader, std::string type)
+void Shader::CheckCompileErrors(unsigned int shader, std::string type)
 {
     int success;
     char infoLog[1024];

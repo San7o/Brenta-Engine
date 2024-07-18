@@ -9,11 +9,11 @@ Model::Model(std::string const& path)
     loadModel(path);
 }
 
-void Model::Draw(Shader &shader)
+void Model::Draw(Types::ShaderName shader_name)
 {
     for (unsigned int i = 0; i < meshes.size(); i++)
     {
-        meshes[i].Draw(shader);
+        meshes[i].Draw(shader_name);
     }
 }
 

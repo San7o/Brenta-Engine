@@ -23,6 +23,6 @@ out vec4 FragColor;
 void main()
 {
     // Output result
-    FragColor = vec4(1.0);
+    FragColor = texture(material.texture_diffuse1, TexCoords);
 }
 

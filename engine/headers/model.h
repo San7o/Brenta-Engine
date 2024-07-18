@@ -21,7 +21,7 @@ class Model
 {
 public:
     Model(std::string const& path);
-    void Draw(Shader &shader);
+    void Draw(Types::ShaderName shader_name);
 private:
     // model data
     std::vector<Mesh> meshes;
