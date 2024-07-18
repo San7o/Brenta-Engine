@@ -8,27 +8,50 @@ int main() {
     World::Init();
     std::cout << "Welcome to my Game!" << std::endl;
 
-    /* New entity */
-    Entity entity = World::NewEntity();
+    /* New entity as the player */
+    Entity player_entity = World::NewEntity();
+
+    /* Add the Player component to the entity */
+    struct Player : Component {
+        Player(Entity entity)
+                : Component(entity, "Player") {}
+    };
+    auto playerComponent = std::make_shared<Player>(player_entity);
+    World::AddComponent(playerComponent);
 
     /* Add a health component to the entity */
-    struct Health : Component {
+    struct HealthComponent : Component {
         int value;
-        Health(Entity entity, int value)
+        HealthComponent(Entity entity, int value)
                 : Component(entity, "Health"), value(value) {}
     };
-    auto health = std::make_shared<Health>(entity, 100);
-    World::AddComponent(health);
+    auto health_component = std::make_shared<HealthComponent>(player_entity, 100);
+    World::AddComponent(health_component);
 
-    /* System to decrease health each tick */
+    /* System to decrease health to the player */
     auto poison = std::make_shared<System>("Poison", []() {
-        auto h = static_cast<Health*>
-                          (World::getComponents()->at("Health")
-                           .at(0).get());
-        h->value--;
-        std::cout << "Health: " << h->value << std::endl;
+        /* Query entities with both PlayerComponent and HealthComponent */
+        auto matches = World::QueryComponents({"Player", "Health"});
+        if (matches.empty()) {
+            return;
+        }
+
+        /* Get health component */
+        auto health = static_cast<HealthComponent*>
+                     (World::EntityToComponent(matches.at(0), "Health"));
+
+        health->value--;
+        std::cout << "Health: " << health->value << std::endl;
     });
     World::AddSystem(poison);
+
+    /* Create a global resource */
+    struct GlobalResource : Resource {
+        int value;
+        GlobalResource(int value) :
+                Resource("GlobalResource"), value(value) {}
+    };
+    World::AddResource(std::make_shared<GlobalResource>(10));
 
     /* Main loop */
     for(int i = 0; i < 10; i++) {

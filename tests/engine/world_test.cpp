@@ -270,3 +270,78 @@ TEST_CASE("Add and remove resources from the ECS world")
     
     ECS::World::Delete();
 }
+
+TEST_CASE("Query components from the ECS world")
+{
+    ECS::World::Init();
+    
+    SECTION("Add two components to the same entity and query")
+    {
+
+        Entity e = ECS::World::NewEntity();
+        auto component1 = std::make_shared<Component>(e, "Player");
+        auto component2 = std::make_shared<Component>(e, "Transform");
+
+        ECS::World::AddComponent(component1);
+        ECS::World::AddComponent(component2);
+
+        std::vector<Entity> match = ECS::World::QueryComponents(
+                                               {"Player", "Transform"});
+        REQUIRE(match.size() == 1);
+        REQUIRE(match[0] == e);
+    }
+
+    SECTION("Add three components to the same entity and others and query")
+    {
+        Entity e1 = ECS::World::NewEntity();
+        Entity e2 = ECS::World::NewEntity();
+        Entity e3 = ECS::World::NewEntity();
+        ECS::World::NewEntity();
+        auto component1 = std::make_shared<Component>(e1, "Player");
+        auto component2 = std::make_shared<Component>(e1, "Transform");
+        auto component3 = std::make_shared<Component>(e2, "Transform");
+        auto component4 = std::make_shared<Component>(e3, "Health");
+        auto component5 = std::make_shared<Component>(e1, "Health");
+        ECS::World::AddComponent(component1);
+        ECS::World::AddComponent(component2);
+        ECS::World::AddComponent(component3);
+        ECS::World::AddComponent(component4);
+        ECS::World::AddComponent(component5);
+
+        std::vector<Entity> match = ECS::World::QueryComponents(
+                                               {"Player", "Transform"});
+
+        REQUIRE(match.size() == 1);
+        REQUIRE(match[0] == e1);
+    }
+
+    ECS::World::Delete();
+}
+
+TEST_CASE("Entity to component from the ECS world")
+{
+    ECS::World::Init();
+    
+    SECTION("Add a component to an entity and get it")
+    {
+        Entity e = ECS::World::NewEntity();
+        auto component = std::make_shared<Component>(e, "Player");
+        ECS::World::AddComponent(component);
+
+        Component* c = ECS::World::EntityToComponent(e, "Player");
+        REQUIRE(c != nullptr);
+        REQUIRE(*c == *component);
+    }
+
+    SECTION("Add a component to an entity and get it with wrong name")
+    {
+        Entity e = ECS::World::NewEntity();
+        auto component = std::make_shared<Component>(e, "Player");
+        ECS::World::AddComponent(component);
+
+        Component* c = ECS::World::EntityToComponent(e, "Transform");
+        REQUIRE(c == nullptr);
+    }
+
+    ECS::World::Delete();
+}

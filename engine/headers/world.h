@@ -62,11 +62,13 @@ public:
     static void Delete();
     static void Tick();
     static std::vector<Entity> QueryComponents
-                      (std::vector<ComponentName>);
+                      (std::vector<ComponentName> components);
+    static Component* EntityToComponent(Entity entity,
+                                        ComponentName name);
 
-    static std::set<Entity>*                    getEntities();
-    static UMap<ResourceName, Resource>*        getResources();
-    static UMapVec<ComponentName, Component>*   getComponents();
+    static std::set<Entity>*                         getEntities();
+    static UMap<ResourceName, Resource>*             getResources();
+    static UMapVec<ComponentName, Component>*        getComponents();
     static std::set<SPtr<System>, CompareSharedPtr>* getSystems();
 
     static Entity NewEntity();
