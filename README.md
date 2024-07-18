@@ -193,7 +193,7 @@ time and generate a bigger file.
 
 ## Compile
 
-You can compile the source with `cmake`:
+You can compile the demo game with `cmake`:
 ```bash
 cmake -Bbuild
 cmake --build build
@@ -202,12 +202,12 @@ cmake --build build
 
 Or with `make`:
 ```bash
+# Demo game using the engine
 make game
-```
-
-Run tests with:
-```bash
+# Unit tests
 make test
+# Test rendering
+make render
 ```
 
 The binaries will be generated in `build/` directory.
