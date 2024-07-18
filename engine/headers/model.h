@@ -12,8 +12,13 @@
 #include <string>
 #include <vector>
 
+#ifndef SHADER_H
 #include "shader.h"
+#endif
+
+#ifndef MESH_H
 #include "mesh.h"
+#endif
 
 namespace ECS {
 
@@ -21,7 +26,7 @@ class Model
 {
 public:
     Model(std::string const& path);
-    void Draw(Types::ShaderName shader_name);
+    void Draw(Types::ShaderName shader);
 private:
     // model data
     std::vector<Mesh> meshes;
@@ -31,8 +36,8 @@ private:
     void loadModel(std::string path);
     void processNode(aiNode* node, const aiScene* scene);
     Mesh processMesh(aiMesh* mesh, const aiScene* scene);
-    std::vector<Types::Texture> loadMaterialTextures(aiMaterial* mat, aiTextureType type, 
-                                         std::string typeName);
+    std::vector<Types::Texture> loadMaterialTextures
+            (aiMaterial* mat, aiTextureType type, std::string typeName);
 };
 
 } // namespace ECS

@@ -58,8 +58,9 @@ for(int i = 0; i < 10; i++) {
 
 World::Delete();
 ```
+There are many examples in the `examples` directory.
 
-And here is an high, simplified, level view of the system:
+Here is an high lievel simplified view of the system:
 
 ![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
 
@@ -109,11 +110,11 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ## Todo
 
-- [ ] Game state
-
-- [ ] Error checks with `GLenum glGetError()`
+- [ ] change to `void World::AddComponent(Entiy e, ComponentName n, Component c)`
 
 - [ ] Logging system
+
+- [ ] Game state
 
 
 # Dependencies
