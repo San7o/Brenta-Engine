@@ -61,7 +61,7 @@ World::Delete();
 
 Example `main.cpp`:
 
-```bash
+```c++
 int main() {
 
     /* Initialize the screen */
