@@ -9,16 +9,18 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <iostream>
+#include <string>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
-#ifndef GLAD_H
-#include <glad/glad.h>
+#ifndef __glad_h_
+#include <glad/glad.h>       /* OpenGL driver */
 #endif
 
+namespace ECS {
 
-class Shader
-{
+class Shader {
 
 public:
     unsigned int ID; /* Program ID */
@@ -38,5 +40,7 @@ public:
 private:
     void checkCompileErrors(unsigned int shader, std::string type);
 };
+
+} // namespace ECS
 
 #endif

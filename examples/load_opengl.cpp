@@ -2,14 +2,6 @@
 #include "gl_helper.h"
 #include "screen.h"
 
-#include "vao.h"
-#include "vbo.h"
-#include "ebo.h"
-#include "texture.h"
-#include "shader.h"
-#include "model.h"
-#include "mesh.h"
-
 using namespace ECS;
 
 const int SCR_WIDTH = 800;
@@ -23,13 +15,6 @@ int main() {
     GL::LoadOpenGL((GLADloadproc)Screen::GetProcAddress(),
                     SCR_WIDTH, SCR_HEIGHT);
 
-    /* Load the model */
-    Model ourModel("assets/models/backpack/backpack.obj");
-
-    /* Load the shader */
-    Shader ourShader("game/shaders/shader.vs", "game/shaders/shader.fs");
-
-
     while(!Screen::isWindowClosed()) {
 
         /* Input */
@@ -39,11 +24,6 @@ int main() {
         /* Clear */
         GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
         GL::Clear();
-
-        /* Draw */
-        // TODO Actually show the object
-        // Apply transformations
-        ourModel.Draw(ourShader);
 
         Screen::PollEvents();
         Screen::SwapBuffers();

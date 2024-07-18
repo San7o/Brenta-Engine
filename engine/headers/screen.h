@@ -1,7 +1,9 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
+#ifndef __glfw3_h_
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
+#endif
 
 namespace ECS {
 
@@ -10,7 +12,9 @@ public:
     static GLFWwindow* window;
 
     Screen() = delete;
-    static void Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured);
+    static void Init(int SCR_WIDTH, int SCR_HEIGHT,
+                     bool isMouseCaptured = false,
+                     const char* title = "OpenGL");
 
     static bool isWindowClosed();
     static bool isKeyPressed(int key);
@@ -33,7 +37,7 @@ private:
     static void SetContextVersion(int major, int minor);
     static void UseCoreProfile();
     static void SetHintsApple();
-    static void CreateWindow(int SCR_WIDTH, int SCR_HEIGHT);
+    static void CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char* title);
     static void MakeContextCurrent();
 };
 

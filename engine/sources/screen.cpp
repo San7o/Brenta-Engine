@@ -1,7 +1,6 @@
-#include <GLFW/glfw3.h>      /* OpenGL windowing library */
-#include <cstdio>
-
 #include "screen.h"
+
+#include <cstdio>
 
 using namespace ECS;
 
@@ -70,7 +69,8 @@ void Screen::PollEvents()
     glfwPollEvents();
 }
 
-void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured)
+void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
+                  bool isMouseCaptured, const char* title)
 {
     if (glfwInit() == GLFW_FALSE)
     {
@@ -85,7 +85,7 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured)
 #ifdef __APPLE__
     SetHintsApple();
 #endif
-    CreateWindow(SCR_WIDTH, SCR_HEIGHT);
+    CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
     MakeContextCurrent();
     SetMouseCapture(isMouseCaptured);
 }
@@ -106,9 +106,9 @@ void Screen::SetHintsApple()
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
-void Screen::CreateWindow(int SCR_WIDTH, int SCR_HEIGHT)
+void Screen::CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char* title)
 {
-    Screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "OpenGL", NULL, NULL);
+    Screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
     if (Screen::window == NULL)
     {
         fprintf(stderr, "Failed to create GLFW window\n");
