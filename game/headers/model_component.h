@@ -11,10 +11,9 @@ using namespace ECS;
 struct ModelComponent : Types::Component {
     Model model;
     Types::ShaderName shader;
-    ModelComponent(Entity entity, Model model, Types::ShaderName shader) :
-            Types::Component(entity, "ModelComponent"),
-            model(model),
-            shader(shader) {}
+
+    ModelComponent(Model model, Types::ShaderName shader)
+            : model(model), shader(shader) {}
 };
 
 #endif

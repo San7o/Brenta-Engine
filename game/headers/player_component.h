@@ -12,10 +12,7 @@ using namespace ECS;
 using namespace ECS::Types;
 
 /* Player Component */
-struct PlayerComponent : Component {
-    PlayerComponent(Entity entity) :
-            Component(entity, "PlayerComponent") {}
-};
+struct PlayerComponent : Component {};
 
 void InitPlayer() {
 
@@ -24,8 +21,8 @@ void InitPlayer() {
 
 
     /* Add the player component */
-    auto player_component = std::make_shared<PlayerComponent>(player_entity);
-    World::AddComponent(player_component);
+    auto player_component = std::make_shared<PlayerComponent>();
+    World::AddComponent(player_entity, "PlayerComponent", player_component);
 
     /* Load the shader */
     Shader::NewShader("default_shader",
@@ -36,8 +33,8 @@ void InitPlayer() {
     Model model(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(player_entity, model, "default_shader");
-    World::AddComponent(model_component);
+    auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
+    World::AddComponent(player_entity, "ModelComponent", model_component);
 }
 
 #endif

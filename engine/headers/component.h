@@ -23,9 +23,6 @@ struct Component {
     Entity entity;
     ComponentName name;
 
-    Component(Entity e, ComponentName n)
-            : entity(e), name(n) {}
-
     bool operator==(const Component& other) const {
         return (entity == other.entity && name == other.name);
     }

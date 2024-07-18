@@ -1,62 +1,71 @@
 # opengl-santo-engine
-This project aims to build a simple ECS (Entity Component System) engine focused on physics simulations using OpenGL in C++.
 
-Here is an example of how to use the ECS engine:
+This project is a simple ECS (Entity Component System)
+engine focused on physics simulations using OpenGL in C++.
+
+## 🕵️‍♂️ How it works
+
+Create a `component`:
+
 ```c++
-World::Init();
-std::cout << "Welcome to my Game!" << std::endl;
+struct ModelComponent : Types::Component {
+    Model model;
+    Types::ShaderName shader;
 
-/* New entity as the player */
-Entity player_entity = World::NewEntity();
-
-/* Add the Player component to the entity */
-struct Player : Component {
-    Player(Entity entity)
-            : Component(entity, "Player") {}
+    /* I added a constructor for ease of use */
+    ModelComponent(Model model, Types::ShaderName shader)
+            : model(model), shader(shader) {}
 };
-auto playerComponent = std::make_shared<Player>(player_entity);
-World::AddComponent(playerComponent);
+```
 
-/* Add a health component to the entity */
-struct HealthComponent : Component {
-    int value;
-    HealthComponent(Entity entity, int value)
-            : Component(entity, "Health"), value(value) {}
-};
-auto health_component = std::make_shared<HealthComponent>(player_entity, 100);
-World::AddComponent(health_component);
+Create a `system`:
 
-/* System to decrease health to the player */
-auto poison = std::make_shared<System>("Poison", []() {
-    /* Query entities with both PlayerComponent and HealthComponent */
-    auto matches = World::QueryComponents({"Player", "Health"});
-    if (matches.empty()) {
-        return;
+```c++
+auto renderer = std::make_shared<System>("Renderer", []() {
+    /* Get the entities with the model component */
+    auto matches = World::QueryComponents({"ModelComponent"});
+    if (matches.empty()) return;
+
+    for (auto match : matches) {
+        /* Get the model component */
+        auto model_component = static_cast<ModelComponent*>
+             (World::EntityToComponent(match, "ModelComponent"));
+        
+        /* Translate the model */
+        // ...
+        
+        myModel.Draw(default_shader);
     }
-
-    /* Get health component */
-    auto health = static_cast<HealthComponent*>
-                 (World::EntityToComponent(matches.at(0), "Health"));
-
-    health->value--;
-    std::cout << "Health: " << health->value << std::endl;
 });
-World::AddSystem(poison);
+World::AddSystem(renderer);
+```
 
-/* Create a global resource */
-struct GlobalResource : Resource {
-    int value;
-    GlobalResource(int value) :
-            Resource("GlobalResource"), value(value) {}
-};
-World::AddResource(std::make_shared<GlobalResource>(10));
+Create an `entity`:
 
-/* Main loop */
-for(int i = 0; i < 10; i++) {
-    World::Tick();
-}
+```c++
+/* Create the player entity */
+auto player_entity = World::NewEntity();
 
-World::Delete();
+
+/* Add the player component */
+auto player_component = std::make_shared<PlayerComponent>();
+World::AddComponent(player_entity, "PlayerComponent", player_component);
+
+
+/* Load the shader */
+Shader::NewShader("default_shader",
+                  std::filesystem::absolute("game/shaders/shader.vs"),
+                  std::filesystem::absolute("game/shaders/shader.fs"));
+
+
+/* Load the model */
+Model model(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
+
+
+/* Add the model component */
+auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
+World::AddComponent(player_entity, "ModelComponent", model_component);
+
 ```
 
 Example `main.cpp`:
@@ -106,15 +115,13 @@ Here is an high lievel simplified view of the system:
 
 ![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
 
+## 🦞 Current State
 
-The project is structured into the 3 folders `engine`, `game`, `engine-gui` containing the
-following classes:
+The project is structured into the 3 folders `engine`, `game`, `src` 
+containing respectively the game engine, a game demo and a render demo.
 
-![image](https://github.com/user-attachments/assets/f825bdc2-9345-49ef-a87d-90939ba47e07)
+The following has been implemented on the engine:
 
-## Current State
-
-Currently, I implemented the following features:
 - [x] Triangles
 
 - [x] Textures
@@ -150,16 +157,14 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
 
-## Todo
-
-- [ ] change to `void World::AddComponent(Entiy e, ComponentName n, Component c)`
+## 🔨 Todo
 
 - [ ] Logging system
 
 - [ ] Game state
 
 
-# Dependencies
+# 💀 Dependencies
 
 You need
 
@@ -191,7 +196,7 @@ LD_LIBRARY_PATH=${PWD}/lib/:${LD_LIBRARY_PATH} ./build/main.out
 Or you could compile the library statically with `-static`, but It will take more compile
 time and generate a bigger file.
 
-## Compile
+# 🪖 Compile
 
 You can compile the demo game with `cmake`:
 ```bash
@@ -211,3 +216,7 @@ make render
 ```
 
 The binaries will be generated in `build/` directory.
+
+## 👴 Future
+
+An ui for the engine would be interesting to implement in the long future.

@@ -12,21 +12,18 @@ int main() {
     Entity player_entity = World::NewEntity();
 
     /* Add the Player component to the entity */
-    struct Player : Component {
-        Player(Entity entity)
-                : Component(entity, "Player") {}
-    };
+    struct Player : Component {};
     auto playerComponent = std::make_shared<Player>(player_entity);
-    World::AddComponent(playerComponent);
+    World::AddComponent(player_entity, "PlayerComponent", playerComponent);
 
     /* Add a health component to the entity */
     struct HealthComponent : Component {
         int value;
-        HealthComponent(Entity entity, int value)
-                : Component(entity, "Health"), value(value) {}
+        HealthComponent(int value)
+                : value(value) {}
     };
-    auto health_component = std::make_shared<HealthComponent>(player_entity, 100);
-    World::AddComponent(health_component);
+    auto health_component = std::make_shared<HealthComponent>(100);
+    World::AddComponent(plauer_entity, "HealthComponent", health_component);
 
     /* System to decrease health to the player */
     auto poison = std::make_shared<System>("Poison", []() {

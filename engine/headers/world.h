@@ -72,7 +72,8 @@ public:
     static std::set<SPtr<System>, CompareSharedPtr>* getSystems();
 
     static Entity NewEntity();
-    static void AddComponent(SPtr<Component> component);
+    static void AddComponent(Entity entity, ComponentName component_name,
+                             SPtr<Component> component);
     static void AddSystem(SPtr<System> system);
     static void AddResource(SPtr<Resource> resource);
 

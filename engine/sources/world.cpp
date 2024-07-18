@@ -150,11 +150,14 @@ void World::AddResource(SPtr<Resource> resource)
     World::resources->insert({resource->name, resource});
 }
 
-void World::AddComponent(SPtr<Component> component)
+void World::AddComponent(Entity e, ComponentName name, SPtr<Component> component)
 {
     if(!World::components) {
         return;
     }
+   
+    component->entity = e;
+    component->name = name;
 
     if(!World::components->count((*component).name)) {
         World::components->insert({(*component).name,{component}});
