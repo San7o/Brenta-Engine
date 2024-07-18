@@ -72,18 +72,18 @@ following classes:
 ## Current State
 
 Currently, I implemented the following features:
-- [x] triangles
+- [x] Triangles
 
-- [x] textures
+- [x] Textures
 
-- [x] camera
+- [x] Camera
 
-- [x] lighting
+- [x] Lighting
   - Ambient
   - Diffuse
   - Specular   
 
-- [x] model loading
+- [x] Model loading
 
 - [x] Other OpenGL features
   - Texture transparency
