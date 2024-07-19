@@ -18,13 +18,14 @@ Let's take a deeper look:
 
 ### Main loop
 
-The main loop calls World::Tick(). At each tick, all the 
-Systems will be called in the order they were added in 
-the World. 
-
 The engine provides functions to interact with the window in `ECS::Screen`, 
 some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
 input handling with `ECS::Input` and more!
+
+The main loop calls `World::Tick()`. At each tick, all the 
+Systems will be called in the order they were added in 
+the World. 
+
 
 ```c++
 #include "engine.h"
@@ -90,7 +91,7 @@ A System is a function that gets called at each
 Tick in the reder loop. It contains all the logic of 
 the World. You will interact with the Entities, 
 Components and Resources via 
-`World::QueryComponent({"component1", "component2", ...})`,
+`World::QueryComponents({"component1", "component2", ...})`,
 `World::EntityToComponent(Entity e)`
 and `World::GetResource("resourceName")`.
 
