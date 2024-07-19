@@ -18,5 +18,6 @@
 #include "world.h"
 #include "engine_logger.h"
 #include "engine_input.h"
+#include "translation.h"
 
 #endif

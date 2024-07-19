@@ -166,4 +166,9 @@ void Screen::Framebuffer_size_callback(GLFWwindow* window, int width,
                                int height)
 {
     glViewport(0, 0, width, height);
+    Screen::WIDTH = width;
+    Screen::HEIGHT = height;
+
+    Logger::Log(Types::LogLevel::INFO, "Set viewport: " +
+                std::to_string(width) + "x" + std::to_string(height));
 }

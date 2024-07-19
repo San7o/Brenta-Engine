@@ -26,22 +26,16 @@ void InitRendererSystem() {
             auto myModel = model_component->model;
             auto default_shader = model_component->shader;
 
-            /* Setup the shader */
-            Shader::Use(default_shader);
+            Types::Translation t = Types::Translation();
+            t.setProjection(45.0f, 0.1f, 100.0f);
+            t.setModel(glm::mat4(1.0f));
+            t.translate(glm::vec3(0.0f, 0.0f, -10.0f));
+            t.setShader(default_shader);
 
-            glm::mat4 view = glm::mat4(1.0f); /* Camera position */
-            glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-                           (float)800/(float)600, 0.1f, 100.0f);
-            glm::mat4 model = glm::mat4(1.0f);
-            model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
-
-            Shader::SetMat4(default_shader, "view", view);
-            Shader::SetMat4(default_shader, "projection", projection);
-            Shader::SetMat4(default_shader, "model", model);
-            
             myModel.Draw(default_shader);
         }
     });
+
     World::AddSystem(renderer);
     
 }

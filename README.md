@@ -165,7 +165,7 @@ World::AddResource("WireframeResource", wireframe_resource);
 
 ### Callbacks
 
-Callbacks are funciton that are called when the specified `key` is pressed,
+Callbacks are funcitons that are called when the specified `key` is pressed,
 the code responsible for this is in `ECS::Input`. Here is an example:
 ```c++
 auto toggle_wireframe_callback = []() {
