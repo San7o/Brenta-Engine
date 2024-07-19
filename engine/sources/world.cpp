@@ -1,6 +1,7 @@
 #include "world.h"
 
 #include <algorithm>
+#include "engine_logger.h"
 
 using namespace ECS;
 
@@ -17,6 +18,8 @@ void World::Init()
                                          CompareSharedPtr>>();
     World::resources  = std::make_unique<UMap<ResourceName, Resource>>();
     World::components = std::make_unique<UMapVec<ComponentName, Component>>();
+
+    Logger::Log(LogLevel::INFO, "World initialized");
 }
 
 void World::Delete()
@@ -25,6 +28,8 @@ void World::Delete()
     World::components.reset();
     World::systems.reset();
     World::resources.reset();
+
+    Logger::Log(LogLevel::INFO, "World deleted");
 }
 
 void World::Tick()
@@ -34,7 +39,6 @@ void World::Tick()
     }
 }
 
-// TODO test
 std::vector<Entity> World::QueryComponents(std::vector<ComponentName> components)
 {
     if (!World::components) {
@@ -125,11 +129,14 @@ Types::Entity World::NewEntity()
         return 1;
         
     }
-    else {
-        Entity new_entity = *(World::entities->rbegin()) + 1;
-        World::entities->insert(new_entity);
-        return new_entity;
-    }
+
+    Entity new_entity = *(World::entities->rbegin()) + 1;
+    World::entities->insert(new_entity);
+
+    Logger::Log(LogLevel::INFO,
+                    "New entity created: " + std::to_string(new_entity));
+
+    return new_entity;
 }
 
 void World::AddSystem(SPtr<System> system)
@@ -139,6 +146,8 @@ void World::AddSystem(SPtr<System> system)
     }
 
     World::systems->insert(system);
+
+    Logger::Log(LogLevel::INFO, "System added: " + system->name);
 }
 
 void World::AddResource(SPtr<Resource> resource)
@@ -148,6 +157,8 @@ void World::AddResource(SPtr<Resource> resource)
     }
 
     World::resources->insert({resource->name, resource});
+
+    Logger::Log(LogLevel::INFO, "Resource added: " + resource->name);
 }
 
 void World::AddComponent(Entity e, ComponentName name, SPtr<Component> component)
@@ -165,6 +176,8 @@ void World::AddComponent(Entity e, ComponentName name, SPtr<Component> component
     else {
         World::components->at((*component).name).push_back(component);
     }
+
+    Logger::Log(LogLevel::INFO, "Component added: " + component->name);
 }
 
 void World::RemoveEntity(Entity entity)
@@ -174,6 +187,8 @@ void World::RemoveEntity(Entity entity)
     }
 
     World::entities->erase(entity);
+
+    Logger::Log(LogLevel::INFO, "Entity removed: " + std::to_string(entity));
 }
 
 void World::RemoveSystem(SystemName name)
@@ -189,6 +204,8 @@ void World::RemoveSystem(SystemName name)
     if (it != World::systems->end()) {
         World::systems->erase(it);
     }
+
+    Logger::Log(LogLevel::INFO, "System removed: " + name);
 }
 
 void World::RemoveResource(Resource resource)
@@ -198,6 +215,8 @@ void World::RemoveResource(Resource resource)
     }
 
     World::resources->erase(resource.name);
+
+    Logger::Log(LogLevel::INFO, "Resource removed: " + resource.name);
 }
 
 void World::RemoveComponent(Component component)
@@ -216,4 +235,6 @@ void World::RemoveComponent(Component component)
             vec.erase(it);
         }
     }
+
+    Logger::Log(LogLevel::INFO, "Component removed: " + component.name);
 }

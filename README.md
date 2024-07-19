@@ -1,7 +1,8 @@
 # opengl-santo-engine
 
-This project is a simple ECS (Entity Component System)
-engine focused on physics simulations using OpenGL in C++.
+A straightforward and simple Entity Component System (ECS) engine, developed in C++
+and utilizing OpenGL for advanced graphics rendering. This engine is designed to
+provide a modular and flexible architecture for game development and simulations.
 
 ## 🕵️‍♂️ How it works
 
@@ -73,6 +74,9 @@ Example `main.cpp`:
 ```c++
 int main() {
 
+    /* Set Log level, default = WARNING */
+    Logger::SetLogLevel(Types::LogLevel::INFO);
+
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
@@ -82,7 +86,6 @@ int main() {
 
     /* Initialize the world */
     World::Init();
-
     InitPlayer();
     InitRenderer();
     // ...
@@ -151,6 +154,8 @@ The following has been implemented on the engine:
 
 - [x] Unit tests
 
+- [x] Logging module
+
 Screenshots and videos:
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
@@ -159,9 +164,15 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ## 🔨 Todo
 
-- [ ] Logging system
+- [ ] Load Opengl should take no arguments
 
-- [ ] Game state
+Default ECS:
+
+- [ ] Game state resource
+
+- [ ] Transform component
+
+- [ ] Model component
 
 
 # 💀 Dependencies
@@ -219,4 +230,4 @@ The binaries will be generated in `build/` directory.
 
 ## 👴 Future
 
-An ui for the engine would be interesting to implement in the long future.
+A GUI for the engine would be interesting to implement in the long future.

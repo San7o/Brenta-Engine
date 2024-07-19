@@ -5,6 +5,8 @@
  * It is saved in the World and can be accessed by any System.
  */
 
+#pragma once
+
 #ifndef RESOURCE_H
 #define RESOURCE_H
 

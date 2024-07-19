@@ -5,6 +5,8 @@
  * It is used to identify game objects in the game world.
  */
 
+#pragma once
+
 #ifndef ENTITY_H
 #define ENTITY_H
 

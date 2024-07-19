@@ -1,6 +1,9 @@
 /*
  * Helper functions to interact with OpenGL.
  */
+
+#pragma once
+
 #ifndef GL_HELPER_H
 #define GL_HELPER_H
 
@@ -21,6 +24,8 @@ public:
     static void DrawElements(GLenum mode, int count, GLenum type, const void* indices);
     static void Clear();
     static void BindVertexArray(unsigned int n);
+    static GLenum glCheckError_(const char *file, int line);
+#define glCheckError() glCheckError_(__FILE__, __LINE__)
 };
 
 } // namespace ECS

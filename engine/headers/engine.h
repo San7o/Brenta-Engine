@@ -16,5 +16,6 @@
 #include "texture.h"
 #include "vao.h"
 #include "world.h"
+#include "engine_logger.h"
 
 #endif

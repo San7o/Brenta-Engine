@@ -5,6 +5,8 @@
  * game world.
  */
 
+#pragma once
+
 #ifndef WORLD_H
 #define WORLD_H
 

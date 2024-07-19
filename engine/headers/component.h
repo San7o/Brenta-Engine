@@ -6,6 +6,8 @@
  * For example, a Position component could store the position of a game object.
  */
 
+#pragma once
+
 #ifndef COMPONENT_H
 #define COMPONENT_H
 

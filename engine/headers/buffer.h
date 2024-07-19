@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef BUFFER_H
 #define BUFFER_H
 

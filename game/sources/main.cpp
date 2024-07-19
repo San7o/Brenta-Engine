@@ -1,13 +1,9 @@
 #include <iostream>
 #include <filesystem>
 
-/* Engine */
-#include "gl_helper.h"
-#include "screen.h"
-#include "shader.h"
-#include "model.h"
+#include "engine.h"
 
-/* Game */
+#include "model_component.h"
 #include "player_component.h"
 #include "renderer_system.h"
 
@@ -17,6 +13,9 @@ const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 
 int main() {
+
+    /* Set Log level, default = WARNING */
+    Logger::SetLogLevel(Types::LogLevel::INFO);
 
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);

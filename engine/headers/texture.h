@@ -2,6 +2,8 @@
  * Helper functions to interact with textures
  */
 
+#pragma once
+
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
