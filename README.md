@@ -81,8 +81,7 @@ int main() {
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
     /* Load OpenGL */
-    GL::LoadOpenGL((GLADloadproc)Screen::GetProcAddress(),
-                    SCR_WIDTH, SCR_HEIGHT);
+    GL::LoadOpenGL();
 
     /* Initialize the world */
     World::Init();

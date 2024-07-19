@@ -12,8 +12,7 @@ int main() {
 
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
-    GL::LoadOpenGL((GLADloadproc)Screen::GetProcAddress(),
-                    SCR_WIDTH, SCR_HEIGHT);
+    GL::LoadOpenGL();
 
     while(!Screen::isWindowClosed()) {
 

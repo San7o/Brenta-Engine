@@ -14,12 +14,14 @@ const bool isMouseCaptured = false;
 
 int main() {
 
+    /* Set Log level, default = WARNING */
+    Logger::SetLogLevel(Types::LogLevel::INFO);
+
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
     /* Load OpenGL */
-    GL::LoadOpenGL((GLADloadproc)Screen::GetProcAddress(),
-                    SCR_WIDTH, SCR_HEIGHT);
+    GL::LoadOpenGL();
 
     /* Load the model */
     Model ourModel(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
