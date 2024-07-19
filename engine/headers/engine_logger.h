@@ -13,7 +13,8 @@ namespace Types {
 enum LogLevel {
     INFO,
     WARNING,
-    ERROR
+    ERROR,
+    DISABLED
 };
 
 } // namespace Types

@@ -82,7 +82,7 @@ int main() {
                     SCR_WIDTH, SCR_HEIGHT);
 
     /* Create shader */
-    Shader ourShader("src/shaders/shader.vs", "src/shaders/shader.fs");
+    Shader ourShader("render/shaders/shader.vs", "render/shaders/shader.fs");
 
     /* Copy Vertices (they are defined in vertices.h) */
     VAO vao;
@@ -101,7 +101,7 @@ int main() {
     camera = Camera();
 
     /* Lighting */
-    Shader lightSourceShader("src/shaders/light_source.vs", "src/shaders/light_source.fs");
+    Shader lightSourceShader("render/shaders/light_source.vs", "render/shaders/light_source.fs");
     VAO light_vao;
     vbo.Bind();
     vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, 8*sizeof(float), (void*)0);

@@ -125,8 +125,8 @@ TEST_CASE("Add and remove components from the ECS world")
     SECTION("Add and remove a component to ECS world")
     {
         Entity e = ECS::World::NewEntity();
-        auto component = std::make_shared<Component>(Component(e, "test"));
-        ECS::World::AddComponent(component);
+        auto component = std::make_shared<Component>();
+        ECS::World::AddComponent(e, "test", component);
 
         UMapVec<ComponentName, Component>* components = ECS::World::getComponents();
         REQUIRE(components != nullptr);
@@ -141,13 +141,13 @@ TEST_CASE("Add and remove components from the ECS world")
     SECTION("Add multiple components and remove them to ECS world")
     {
         Entity e = ECS::World::NewEntity();
-        auto component1 = std::make_shared<Component>(Component(e, "test1"));
-        auto component2 = std::make_shared<Component>(Component(e, "test1"));
-        auto component3 = std::make_shared<Component>(Component(e, "test3"));
+        auto component1 = std::make_shared<Component>();
+        auto component2 = std::make_shared<Component>();
+        auto component3 = std::make_shared<Component>();
 
-        ECS::World::AddComponent(component1);
-        ECS::World::AddComponent(component2);
-        ECS::World::AddComponent(component3);
+        ECS::World::AddComponent(e, "test1", component1);
+        ECS::World::AddComponent(e, "test1", component2);
+        ECS::World::AddComponent(e, "test3", component3);
 
         UMapVec<ComponentName, Component>* components = ECS::World::getComponents();
         REQUIRE(components != nullptr);
@@ -170,15 +170,14 @@ TEST_CASE("Add and remove components from the ECS world")
         /* Create custom component */
         struct CustomComponent : Component {
             int value;
-            CustomComponent(Entity e, ComponentName name, int value) :
-                    Component(e, name), value(value) {}
+            CustomComponent(int value) : value(value) {}
         };
 
         Entity e = ECS::World::NewEntity();
-        auto custom_component = std::make_shared<CustomComponent>(e, "CustomComponent", 10);
+        auto custom_component = std::make_shared<CustomComponent>(10);
 
         /* Add custom component to ECS world */
-        ECS::World::AddComponent(custom_component);
+        ECS::World::AddComponent(e, "CustomComponent", custom_component);
 
         UMapVec<ComponentName, Component>* components = ECS::World::getComponents();
         REQUIRE(components != nullptr);
@@ -279,11 +278,11 @@ TEST_CASE("Query components from the ECS world")
     {
 
         Entity e = ECS::World::NewEntity();
-        auto component1 = std::make_shared<Component>(e, "Player");
-        auto component2 = std::make_shared<Component>(e, "Transform");
+        auto component1 = std::make_shared<Component>();
+        auto component2 = std::make_shared<Component>();
 
-        ECS::World::AddComponent(component1);
-        ECS::World::AddComponent(component2);
+        ECS::World::AddComponent(e, "Player", component1);
+        ECS::World::AddComponent(e, "Transform", component2);
 
         std::vector<Entity> match = ECS::World::QueryComponents(
                                                {"Player", "Transform"});
@@ -297,16 +296,16 @@ TEST_CASE("Query components from the ECS world")
         Entity e2 = ECS::World::NewEntity();
         Entity e3 = ECS::World::NewEntity();
         ECS::World::NewEntity();
-        auto component1 = std::make_shared<Component>(e1, "Player");
-        auto component2 = std::make_shared<Component>(e1, "Transform");
-        auto component3 = std::make_shared<Component>(e2, "Transform");
-        auto component4 = std::make_shared<Component>(e3, "Health");
-        auto component5 = std::make_shared<Component>(e1, "Health");
-        ECS::World::AddComponent(component1);
-        ECS::World::AddComponent(component2);
-        ECS::World::AddComponent(component3);
-        ECS::World::AddComponent(component4);
-        ECS::World::AddComponent(component5);
+        auto component1 = std::make_shared<Component>();
+        auto component2 = std::make_shared<Component>();
+        auto component3 = std::make_shared<Component>();
+        auto component4 = std::make_shared<Component>();
+        auto component5 = std::make_shared<Component>();
+        ECS::World::AddComponent(e1, "Player", component1);
+        ECS::World::AddComponent(e1, "Transform", component2);
+        ECS::World::AddComponent(e2, "Transform", component3);
+        ECS::World::AddComponent(e3, "Health", component4);
+        ECS::World::AddComponent(e1, "Health", component5);
 
         std::vector<Entity> match = ECS::World::QueryComponents(
                                                {"Player", "Transform"});
@@ -325,8 +324,8 @@ TEST_CASE("Entity to component from the ECS world")
     SECTION("Add a component to an entity and get it")
     {
         Entity e = ECS::World::NewEntity();
-        auto component = std::make_shared<Component>(e, "Player");
-        ECS::World::AddComponent(component);
+        auto component = std::make_shared<Component>();
+        ECS::World::AddComponent(e, "Player", component);
 
         Component* c = ECS::World::EntityToComponent(e, "Player");
         REQUIRE(c != nullptr);
@@ -336,8 +335,8 @@ TEST_CASE("Entity to component from the ECS world")
     SECTION("Add a component to an entity and get it with wrong name")
     {
         Entity e = ECS::World::NewEntity();
-        auto component = std::make_shared<Component>(e, "Player");
-        ECS::World::AddComponent(component);
+        auto component = std::make_shared<Component>();
+        ECS::World::AddComponent(e, "Player", component);
 
         Component* c = ECS::World::EntityToComponent(e, "Transform");
         REQUIRE(c == nullptr);

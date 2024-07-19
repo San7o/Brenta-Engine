@@ -6,6 +6,50 @@ provide a modular and flexible architecture for game development and simulations
 
 ## 🕵️‍♂️ How it works
 
+Example `main.cpp`
+```c++
+#include "engine.h"
+using namespace ECS;
+
+int main() {
+
+    /* Set Log level, default = WARNING */
+    Logger::SetLogLevel(Types::LogLevel::INFO);
+
+    /* Initialize the screen */
+    Screen::Init(SCR_WIDTH, SCR_HEIGHT);
+
+    /* Load OpenGL */
+    GL::LoadOpenGL();
+
+    /* Initialize the world */
+    World::Init();
+    InitPlayer();
+    InitRenderer();
+    // ...
+
+    while(!Screen::isWindowClosed()) {
+
+        /* Input */
+        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
+            Screen::SetClose();
+
+        /* Clear */
+        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::Clear();
+
+        World::Tick();
+
+        Screen::PollEvents();
+        Screen::SwapBuffers();
+    }
+    
+    World::Delete();
+    Screen::Terminate();
+    return 0;
+}
+```
+
 Create a `component`:
 
 ```c++
@@ -48,67 +92,17 @@ Create an `entity`:
 auto player_entity = World::NewEntity();
 
 
-/* Add the player component */
+/* Add the player component to the player entity */
 auto player_component = std::make_shared<PlayerComponent>();
 World::AddComponent(player_entity, "PlayerComponent", player_component);
 
+/* Load model */
+// ...
 
-/* Load the shader */
-Shader::NewShader("default_shader",
-                  std::filesystem::absolute("game/shaders/shader.vs"),
-                  std::filesystem::absolute("game/shaders/shader.fs"));
-
-
-/* Load the model */
-Model model(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
-
-
-/* Add the model component */
+/* Add the model component to the player entity */
 auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
 World::AddComponent(player_entity, "ModelComponent", model_component);
 
-```
-
-Example `main.cpp`:
-
-```c++
-int main() {
-
-    /* Set Log level, default = WARNING */
-    Logger::SetLogLevel(Types::LogLevel::INFO);
-
-    /* Initialize the screen */
-    Screen::Init(SCR_WIDTH, SCR_HEIGHT);
-
-    /* Load OpenGL */
-    GL::LoadOpenGL();
-
-    /* Initialize the world */
-    World::Init();
-    InitPlayer();
-    InitRenderer();
-    // ...
-
-    while(!Screen::isWindowClosed()) {
-
-        /* Input */
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
-
-        /* Clear */
-        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
-        GL::Clear();
-
-        World::Tick();
-
-        Screen::PollEvents();
-        Screen::SwapBuffers();
-    }
-    
-    World::Delete();
-    Screen::Terminate();
-    return 0;
-}
 ```
 
 There are many other examples in the `examples` directory.
@@ -148,6 +142,7 @@ The following has been implemented on the engine:
   - Entities
   - Components
   - Systems
+  - Resources
   - World
   - Query multiple components
 
@@ -160,17 +155,6 @@ Screenshots and videos:
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
-
-## 🔨 Todo
-
-Add templated for the ECS:
-
-- [ ] Game state resource
-
-- [ ] Transform component
-
-- [ ] Model component
-
 
 # 💀 Dependencies
 
@@ -224,6 +208,16 @@ make render
 ```
 
 The binaries will be generated in `build/` directory.
+
+## 🔨 Todo
+
+Add templated for the ECS:
+
+- [ ] Game state resource
+
+- [ ] Transform component
+
+- [ ] Model component
 
 ## 👴 Future
 

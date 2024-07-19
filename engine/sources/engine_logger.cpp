@@ -20,6 +20,8 @@ void Logger::Log(Types::LogLevel level, const std::string& message) {
             case Types::LogLevel::ERROR:
                 std::cout << "ERROR: " << message << std::endl;
                 break;
+            default:
+                break;
         }
     }
 }
