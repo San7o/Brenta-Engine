@@ -211,13 +211,9 @@ The binaries will be generated in `build/` directory.
 
 ## 🔨 Todo
 
-Add templated for the ECS:
+- [ ] Physics
 
-- [ ] Game state resource
-
-- [ ] Transform component
-
-- [ ] Model component
+- [ ] Collisions
 
 ## 👴 Future
 

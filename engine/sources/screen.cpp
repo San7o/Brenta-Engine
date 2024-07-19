@@ -52,14 +52,20 @@ void Screen::SetMouseCallback(GLFWcursorposfun callback)
 void Screen::SetSizeCallback(GLFWframebuffersizefun callback)
 {
     glfwSetFramebufferSizeCallback(Screen::window, callback);
+
+    Logger::Log(Types::LogLevel::INFO, "Set framebuffer size callback");
 }
 
 void Screen::SetMouseCapture(bool isCaptured)
 {
-    if (isCaptured)
+    if (isCaptured) {
         glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    else
+        
+        Logger::Log(Types::LogLevel::INFO, "Mouse captured");
+    } else {
         glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        Logger::Log(Types::LogLevel::INFO, "Mouse not captured");
+    }
 }
 
 void Screen::SetClose()
@@ -98,17 +104,20 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     SetContextVersion(3, 3); /* OpenGL 3.3 */
     UseCoreProfile();
+
     glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
     Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
 
 #ifdef __APPLE__
     SetHintsApple();
-
 #endif
 
     CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
     MakeContextCurrent();
     SetMouseCapture(isMouseCaptured);
+
+    /* Set the callback for resizing the window */
+    Screen::SetSizeCallback(Framebuffer_size_callback);
 }
 
 void Screen::SetContextVersion(int major, int minor)
@@ -147,3 +156,9 @@ void Screen::MakeContextCurrent()
     glfwMakeContextCurrent(Screen::window);
 }
 
+
+void Screen::Framebuffer_size_callback(GLFWwindow* window, int width,
+                               int height)
+{
+    glViewport(0, 0, width, height);
+}

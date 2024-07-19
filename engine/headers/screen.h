@@ -45,6 +45,8 @@ private:
     static void SetHintsApple();
     static void CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char* title);
     static void MakeContextCurrent();
+    static void Framebuffer_size_callback(GLFWwindow* window,
+                                          int width, int height);
 };
 
 } // namespace ECS
