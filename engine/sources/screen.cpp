@@ -99,6 +99,7 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
     SetContextVersion(3, 3); /* OpenGL 3.3 */
     UseCoreProfile();
     glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+    Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
 
 #ifdef __APPLE__
     SetHintsApple();
