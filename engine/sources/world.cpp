@@ -98,6 +98,19 @@ Component* World::EntityToComponent(Entity entity, ComponentName name)
     return nullptr;
 }
 
+Resource* World::GetResource(ResourceName name)
+{
+    if(!World::resources) {
+        return nullptr;
+    }
+
+    if(World::resources->count(name)) {
+        return World::resources->at(name).get();
+    }
+
+    return nullptr;
+}
+
 std::set<Entity>* World::getEntities()
 {
     return World::entities.get();
@@ -150,11 +163,13 @@ void World::AddSystem(SPtr<System> system)
     Logger::Log(LogLevel::INFO, "System added: " + system->name);
 }
 
-void World::AddResource(SPtr<Resource> resource)
+void World::AddResource(ResourceName name, SPtr<Resource> resource)
 {
     if(!World::resources) {
         return;
     }
+
+    resource->name = name;
 
     World::resources->insert({resource->name, resource});
 
@@ -208,15 +223,15 @@ void World::RemoveSystem(SystemName name)
     Logger::Log(LogLevel::INFO, "System removed: " + name);
 }
 
-void World::RemoveResource(Resource resource)
+void World::RemoveResource(ResourceName name)
 {
     if(!World::resources) {
         return;
     }
 
-    World::resources->erase(resource.name);
+    World::resources->erase(name);
 
-    Logger::Log(LogLevel::INFO, "Resource removed: " + resource.name);
+    Logger::Log(LogLevel::INFO, "Resource removed: " + name);
 }
 
 void World::RemoveComponent(Component component)

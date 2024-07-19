@@ -1,11 +1,10 @@
-#include <iostream>
-#include <filesystem>
-
 #include "engine.h"
 
-#include "model_component.h"
-#include "player_component.h"
-#include "renderer_system.h"
+#include "entities/player_entity.h"
+#include "systems/renderer_system.h"
+#include "callbacks/toggle_wireframe_callback.h"
+#include "callbacks/close_window_callback.h"
+#include "resources/wireframe_resource.h"
 
 using namespace ECS;
 
@@ -20,21 +19,22 @@ int main() {
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
+    /* Initialize custom Input callbacks */
+    Input::Init();
+
     /* Load OpenGL */
     GL::LoadOpenGL();
 
     /* Initialize the world */
     World::Init();
 
-    InitPlayer();
-    InitRenderer();
-    // ...
+    InitPlayerEntity();
+    InitRendererSystem();
+    InitToggleWireframeCallback();
+    InitCloseWindowCallback();
+    InitWireframeResource();
 
     while(!Screen::isWindowClosed()) {
-
-        /* Input */
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
 
         /* Clear */
         GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -50,3 +50,5 @@ int main() {
     Screen::Terminate();
     return 0;
 }
+
+

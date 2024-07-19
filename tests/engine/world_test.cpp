@@ -252,10 +252,10 @@ TEST_CASE("Add and remove resources from the ECS world")
     {
         struct MyResource : Resource {
             int value;
-            MyResource(ResourceName name, int value) : Resource(name), value(value) {}
+            MyResource(int v) : value(v) {}
         };
-        auto resource = std::make_shared<MyResource>("myResource", 10);
-        ECS::World::AddResource(resource);
+        auto resource = std::make_shared<MyResource>(10);
+        ECS::World::AddResource("myResource", resource);
 
         auto resources = ECS::World::getResources();
         REQUIRE(resources != nullptr);
@@ -263,7 +263,7 @@ TEST_CASE("Add and remove resources from the ECS world")
         REQUIRE(resources->find("myResource") != resources->end());
         REQUIRE(resources->at("myResource") == resource);
 
-        ECS::World::RemoveResource(resource->name);
+        ECS::World::RemoveResource("myResource");
         REQUIRE(resources->size() == 0);
     }
     

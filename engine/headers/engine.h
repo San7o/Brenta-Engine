@@ -17,5 +17,6 @@
 #include "vao.h"
 #include "world.h"
 #include "engine_logger.h"
+#include "engine_input.h"
 
 #endif

@@ -67,6 +67,7 @@ public:
                       (std::vector<ComponentName> components);
     static Component* EntityToComponent(Entity entity,
                                         ComponentName name);
+    static Resource* GetResource(ResourceName name);
 
     static std::set<Entity>*                         getEntities();
     static UMap<ResourceName, Resource>*             getResources();
@@ -77,12 +78,12 @@ public:
     static void AddComponent(Entity entity, ComponentName component_name,
                              SPtr<Component> component);
     static void AddSystem(SPtr<System> system);
-    static void AddResource(SPtr<Resource> resource);
+    static void AddResource(ResourceName name, SPtr<Resource> resource);
 
     static void RemoveEntity(Entity entity);
     static void RemoveComponent(Component component);
     static void RemoveSystem(SystemName name);
-    static void RemoveResource(Resource resource);
+    static void RemoveResource(ResourceName name);
 
 private:
     static SetPtr<Entity>                       entities;

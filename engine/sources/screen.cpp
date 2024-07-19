@@ -129,6 +129,11 @@ void Screen::SetContextVersion(int major, int minor)
                 std::to_string(major) + "." + std::to_string(minor));
 }
 
+void Screen::SetKeyCallback(GLFWkeyfun callback)
+{
+    glfwSetKeyCallback(Screen::window, callback);
+}
+
 void Screen::UseCoreProfile()
 {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);

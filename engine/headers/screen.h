@@ -31,6 +31,7 @@ public:
     static void SetMouseCallback(GLFWcursorposfun callback);
     static void SetSizeCallback(GLFWframebuffersizefun callback);
     static void SetMouseCapture(bool isCaptured);
+    static void SetKeyCallback(GLFWkeyfun callback);
     static void SetClose();
 
     /* Swap the front and back buffers to avoid flickering */

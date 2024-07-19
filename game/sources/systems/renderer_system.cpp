@@ -1,12 +1,8 @@
-#pragma once
-
-#ifndef RENDERER_H
-#define RENDERER_H
+#include "systems/renderer_system.h"
 
 #include "engine.h"
-#include "player_component.h"
-#include "model_component.h"
-
+#include "components/player_component.h"
+#include "components/model_component.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,7 +11,7 @@
 using namespace ECS;
 using namespace ECS::Types;
 
-void InitRenderer() {
+void InitRendererSystem() {
 
     auto renderer = std::make_shared<System>("Renderer", []() {
         /* Get the entities with the model component */
@@ -49,5 +45,3 @@ void InitRenderer() {
     World::AddSystem(renderer);
     
 }
-
-#endif

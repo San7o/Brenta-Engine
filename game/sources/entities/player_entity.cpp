@@ -1,20 +1,15 @@
-#pragma once
-
-#ifndef PLAYER_COMPONENT_H
-#define PLAYER_COMPONENT_H
+#include "entities/player_entity.h"
 
 #include "engine.h"
-#include "model_component.h"
+#include "components/model_component.h"
+#include "components/player_component.h"
 
-#include <iostream>
+#include <filesystem>
 
 using namespace ECS;
 using namespace ECS::Types;
 
-/* Player Component */
-struct PlayerComponent : Component {};
-
-void InitPlayer() {
+void InitPlayerEntity() {
 
     /* Create the player entity */
     auto player_entity = World::NewEntity();
@@ -36,5 +31,3 @@ void InitPlayer() {
     auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
     World::AddComponent(player_entity, "ModelComponent", model_component);
 }
-
-#endif

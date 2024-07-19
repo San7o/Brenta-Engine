@@ -21,7 +21,6 @@ typedef std::string ResourceName;
 struct Resource
 {
     ResourceName name;
-    Resource(ResourceName n) : name(n) {}
 };
 
 } // namespace Types
