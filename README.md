@@ -113,7 +113,7 @@ Here is an high lievel simplified view of the system:
 
 ## 🦞 Current State
 
-The project is structured into the 3 folders `engine`, `game`, `src` 
+The project is structured into the 3 folders `engine`, `game`, `render` 
 containing respectively the game engine, a game demo and a render demo.
 
 The following has been implemented on the engine:
