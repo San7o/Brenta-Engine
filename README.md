@@ -164,9 +164,7 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 ## 🔨 Todo
 
-- [ ] Load Opengl should take no arguments
-
-Default ECS:
+Add templated for the ECS:
 
 - [ ] Game state resource
 

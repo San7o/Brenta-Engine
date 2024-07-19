@@ -11,6 +11,8 @@ namespace ECS {
 
 class Screen {
 public:
+    static int WIDTH;
+    static int HEIGHT;
     static GLFWwindow* window;
 
     Screen() = delete;
@@ -23,6 +25,8 @@ public:
     static float GetTime();
     static GLFWwindow* GetWindow();
     static GLFWglproc GetProcAddress();
+    static int GetWidth();
+    static int GetHeight();
 
     static void SetMouseCallback(GLFWcursorposfun callback);
     static void SetSizeCallback(GLFWframebuffersizefun callback);

@@ -6,6 +6,8 @@
 using namespace ECS;
 
 GLFWwindow* Screen::window;
+int Screen::WIDTH;
+int Screen::HEIGHT;
 
 bool Screen::isWindowClosed()
 {
@@ -30,6 +32,16 @@ GLFWwindow* Screen::GetWindow()
 GLFWglproc Screen::GetProcAddress()
 {
     return reinterpret_cast<void (*)()>(glfwGetProcAddress);
+}
+
+int Screen::GetWidth()
+{
+    return Screen::WIDTH;
+}
+
+int Screen::GetHeight()
+{
+    return Screen::HEIGHT;
 }
 
 void Screen::SetMouseCallback(GLFWcursorposfun callback)
@@ -75,6 +87,9 @@ void Screen::PollEvents()
 void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
                   bool isMouseCaptured, const char* title)
 {
+    Screen::WIDTH = SCR_WIDTH;
+    Screen::HEIGHT = SCR_HEIGHT;
+
     if (glfwInit() == GLFW_FALSE)
     {
         Logger::Log(Types::LogLevel::ERROR,

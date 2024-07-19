@@ -1,11 +1,17 @@
 #include <iostream>
 #include "gl_helper.h"
 #include "engine_logger.h"
+#include "screen.h"
 
 using namespace ECS;
 
-void GL::LoadOpenGL(GLADloadproc loadproc, int SCR_WIDTH, int SCR_HEIGHT)
+void GL::LoadOpenGL()
 {
+
+    GLADloadproc loadproc = (GLADloadproc)Screen::GetProcAddress();
+    int SCR_WIDTH = Screen::GetWidth();
+    int SCR_HEIGHT = Screen::GetHeight();
+
     if (!gladLoadGLLoader(loadproc))
     {
         Logger::Log(Types::LogLevel::ERROR, "Failed to initialize GLAD");
