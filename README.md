@@ -10,17 +10,17 @@ for game development and simulations.
 The `World` contains `Entities`. You can add `Components` to entities,
 which are their "properties" (like Health, Position, Mesh). You interact 
 with those components through `Systems` by making `Queries`. There are
-also `Resources` that store global data. `Components`, `Systems` and 
-`Resources` are identified by a `name`, while entities are defined with 
-an `ID`.
+also `Resources` that store global data. Components, Systems and 
+Resources are identified by a name, while entities are defined with 
+an ID.
 
 Let's take a deeper look:
 
 ### Main loop
 
-The main loop calls `ECS::World::Tick()`. At each tick, all the 
-`ECS::Types::Systems` will be called in the order they were added in 
-the `ECS::World`. 
+The main loop calls World::Tick(). At each tick, all the 
+Systems will be called in the order they were added in 
+the World. 
 
 The engine provides functions to interact with the window in `ECS::Screen`, 
 some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
@@ -68,7 +68,7 @@ int main() {
 
 ### Component
 
-A `ECS::Types::Component` is a piece of data (more precisely, a `struct`) that gets assigned to an `ECS::Types::Entity`. 
+A Component is a piece of data (more precisely, a struct) that gets assigned to an Entity. 
 
 You can define your own component like so:
 
@@ -86,13 +86,13 @@ struct ModelComponent : Types::Component {
 
 ### System
 
-A `ECS::Types::System` is a function that gets called at each 
-`ECS::World::Tick()` in the reder loop. It contains all the logic of 
-the World. You will interact with the `ECS::Types::Entities`, 
-`ECS::Types::Components` and `ECS::Types::Resources` via 
-`ECS::World::QueryComponent({"component1", "component2", ...})`,
-`ECS::World::EntityToComponent(Entity e)`
-and `ECS::World::GetResource("resourceName")`.
+A System is a function that gets called at each 
+Tick in the reder loop. It contains all the logic of 
+the World. You will interact with the Entities, 
+Components and Resources via 
+`World::QueryComponent({"component1", "component2", ...})`,
+`World::EntityToComponent(Entity e)`
+and `World::GetResource("resourceName")`.
 
 Here is an example:
 
@@ -124,7 +124,7 @@ World::AddSystem(renderer);
 
 ### Entity
 
-You can create `Enyities` and assign `Components` to them like so:
+You can create Entities and assign Components to them like so:
 
 ```c++
 /* Create the player entity */
@@ -148,7 +148,7 @@ World::AddComponent(player_entity, "ModelComponent", model_component);
 
 ### Resources
 
-Resources hold global data accessible via `ECS::World::GetResource("name")`. You can define a `Type::Resource` like so:
+Resources hold global data accessible via `World::GetResource("name")`. You can define a Resource like so:
 
 ```c++
 /* This is a resource */
