@@ -37,7 +37,7 @@ int main() {
     while(!Screen::isWindowClosed()) {
 
         /* Clear */
-        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::SetColor(0.1f, 0.1f, 0.1f, 1.0f);
         GL::Clear();
 
         World::Tick();

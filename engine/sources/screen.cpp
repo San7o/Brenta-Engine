@@ -108,6 +108,9 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
     glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
     Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
 
+    glfwSwapInterval(0); /* Disable VSync */
+    Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
+
 #ifdef __APPLE__
     SetHintsApple();
 #endif

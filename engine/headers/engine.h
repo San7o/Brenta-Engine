@@ -19,5 +19,6 @@
 #include "engine_logger.h"
 #include "engine_input.h"
 #include "translation.h"
+#include "engine_time.h"
 
 #endif

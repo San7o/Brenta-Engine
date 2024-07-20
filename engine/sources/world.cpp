@@ -2,6 +2,8 @@
 
 #include <algorithm>
 #include "engine_logger.h"
+#include "engine_time.h"
+#include "screen.h"
 
 using namespace ECS;
 
@@ -34,6 +36,7 @@ void World::Delete()
 
 void World::Tick()
 {
+    Time::Update(Screen::GetTime());
     for (auto& system : *World::systems) {
         system->function();
     }
