@@ -6,6 +6,7 @@ using namespace ECS;
 
 Mesh::Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Types::Texture> textures)
 {
+    this->vao.Init();
     this->vertices = vertices;
     this->indices  = indices;
     this->textures = textures;
@@ -36,7 +37,7 @@ void Mesh::Draw(Types::ShaderName shader_name)
     // draw mesh
     this->vao.Bind();
     GL::DrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
-    GL::BindVertexArray(0);
+    this->vao.Unbind();
 
     Texture::ActiveTexture(GL_TEXTURE0);
     
@@ -48,11 +49,11 @@ void Mesh::setupMesh()
                     &this->vertices[0], GL_STATIC_DRAW);
     this->ebo.CopyIndices(this->indices.size() * sizeof(unsigned int),
                     &this->indices[0], GL_STATIC_DRAW);
-    this->vao.SetVertexData(0, 3, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
+    this->vao.SetVertexData(this->vbo, 0, 3, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
                     (void*)0);
-    this->vao.SetVertexData(1, 3, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
+    this->vao.SetVertexData(this->vbo, 1, 3, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
                     (void*)offsetof(Types::Vertex, Normal));
-    this->vao.SetVertexData(2, 2, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
+    this->vao.SetVertexData(this->vbo, 2, 2, GL_FLOAT, GL_FALSE, sizeof(Types::Vertex),
                     (void*)offsetof(Types::Vertex, TexCoords));
 
     GL::BindVertexArray(0);

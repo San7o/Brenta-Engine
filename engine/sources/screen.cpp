@@ -1,4 +1,5 @@
 #include "screen.h"
+#include "engine_input.h"
 
 #include <cstdio>
 #include "engine_logger.h"
@@ -121,6 +122,8 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     /* Set the callback for resizing the window */
     Screen::SetSizeCallback(Framebuffer_size_callback);
+
+    Input::Init();
 }
 
 void Screen::SetContextVersion(int major, int minor)

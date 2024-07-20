@@ -5,6 +5,7 @@
 #include "callbacks/toggle_wireframe_callback.h"
 #include "callbacks/close_window_callback.h"
 #include "resources/wireframe_resource.h"
+#include "systems/fps_system.h"
 
 using namespace ECS;
 
@@ -19,9 +20,6 @@ int main() {
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
 
-    /* Initialize custom Input callbacks */
-    Input::Init();
-
     /* Load OpenGL */
     GL::LoadOpenGL();
 
@@ -33,10 +31,10 @@ int main() {
     InitToggleWireframeCallback();
     InitCloseWindowCallback();
     InitWireframeResource();
+    InitFpsSystem();
 
     while(!Screen::isWindowClosed()) {
 
-        /* Clear */
         GL::SetColor(0.1f, 0.1f, 0.1f, 1.0f);
         GL::Clear();
 

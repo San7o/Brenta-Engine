@@ -7,6 +7,8 @@
 #include <glad/glad.h>       /* OpenGL driver */
 #endif
 
+#include "buffer.h"
+
 /*
  * Vertex Array Object (VAO)
  *
@@ -21,13 +23,17 @@ namespace Types {
 class VAO {
 public:
     unsigned int vao;
-    VAO();
+
+    VAO() {}
+    void Init();
+    
     unsigned int GetVAO();
     void Bind();
+    void Unbind();
     void Delete();
 
     /* Specifies the location and data format of the vertex attributes. */
-    void SetVertexData(unsigned int index, GLint size, GLenum type,
+    void SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
                     GLboolean normalized, GLsizei stride,
                     const void* pointer);
 };

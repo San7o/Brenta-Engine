@@ -16,10 +16,11 @@ public:
     unsigned int id;
     GLenum target;
 
-    Buffer() {};
+    Buffer() {}
     Buffer(GLenum input_target);
 
     void Bind();
+    void Unbind();
     void Delete();
 
     /* Only for target = GL_ARRAY_BUFFER */

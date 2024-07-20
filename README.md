@@ -20,7 +20,7 @@ Let's take a deeper look:
 
 The engine provides functions to interact with the window in `ECS::Screen`, 
 some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
-input handling with `ECS::Input` and more!
+input handling with `ECS::Input`, manage time with `ECS::Time`, display text with `ECS::Text` and more!
 
 The main loop calls `World::Tick()`. At each tick, all the 
 Systems will be called in the order they were added in 
@@ -51,7 +51,6 @@ int main() {
 
     while(!Screen::isWindowClosed()) {
 
-        /* Clear */
         GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
         GL::Clear();
 
@@ -201,29 +200,19 @@ The following has been implemented on the engine:
 
 - [x] Shaders
 
-- [x] Lighting
-  - Ambient
-  - Diffuse
-  - Specular   
+- [x] Lighting: Ambient, Diffuse, Specular
 
 - [x] Model loading
 
-- [x] Other OpenGL features
-  - Texture transparency
-  - Face culling
-  - MSAA
+- [x] Other OpenGL features: Texture transparency. Face culling, MSAA
 
-- [x] ECS
-  - Entities
-  - Components
-  - Systems
-  - Resources
-  - World
-  - Query multiple components
+- [x] ECS: Entities, Components, Systems, Resources, World, Query multiple components
 
 - [x] Unit tests
 
-- [x] Logging module
+- [x] Logging
+
+- [x] Text
 
 Screenshots and videos:
 
@@ -237,7 +226,13 @@ You need
 
 - A `C++17` compiler
 
-- `GLFW` installed on your machine
+- `GLFW`
+
+- `libfreetype`
+
+- `libassimp`
+
+- `harfbuzz` (make sure It has `freetype` support)
 
 If you are on `NixOS`, you can access the developement environment
 by running:
@@ -262,6 +257,8 @@ LD_LIBRARY_PATH=${PWD}/lib/:${LD_LIBRARY_PATH} ./build/main.out
 ```
 Or you could compile the library statically with `-static`, but It will take more compile
 time and generate a bigger file.
+
+Similarly, you need [FreeType](https://freetype.org/).
 
 # 🪖 Compile
 

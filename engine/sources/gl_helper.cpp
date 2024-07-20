@@ -2,6 +2,7 @@
 #include "gl_helper.h"
 #include "engine_logger.h"
 #include "screen.h"
+#include "text.h"
 
 using namespace ECS;
 
@@ -40,6 +41,10 @@ void GL::LoadOpenGL()
      * Only works for a multisample buffer. */
     glEnable(GL_MULTISAMPLE);
     Logger::Log(Types::LogLevel::INFO, "Enabled GL_MULTISAMPLE");
+
+    /* Init text class */
+    Text::Init();
+    Text::Load("arial.ttf", 48);
 
     GLenum errcode = GL::glCheckError();
     if (!errcode) Logger::Log(Types::LogLevel::INFO, "OpenGl loaded");

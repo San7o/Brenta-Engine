@@ -8,6 +8,8 @@ pkgs.mkShell {
     stdenv.cc.cc.lib        # libc
     cmake                   # build system
     glfw-wayland-minecraft  # OpenGL windowing library
+    freetype                # font rendering
+    harfbuzzFull            # text shaping
   ];
 
   LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:";

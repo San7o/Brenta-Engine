@@ -7,6 +7,7 @@
  */
 
 #include "shader.h"
+#include "engine_logger.h"
 
 #include <fstream>
 #include <sstream>
@@ -102,6 +103,11 @@ void Shader::NewShader(Types::ShaderName shader_name,
 
 unsigned int Shader::GetId(Types::ShaderName shader_name)
 {
+    if (Shader::shaders.find(shader_name) == Shader::shaders.end())
+    {
+        Logger::Log(Types::LogLevel::ERROR, "Shader not found");
+        return 0;
+    }
     return Shader::shaders.at(shader_name);
 }
 

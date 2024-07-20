@@ -7,6 +7,8 @@ std::unordered_map<int, std::function<void()>> Input::callbacks;
 
 void Input::Init() {
     Screen::SetKeyCallback(Input::KeyCallback);
+
+    Logger::Log(LogLevel::INFO, "Input initialized");
 }
 
 void Input::AddCallback(int key, std::function<void()> callback) {

@@ -6,6 +6,9 @@ project("ECS Engine")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+# Harfbuzz causes problems when linking
+set (CMAKE_DISABLE_FIND_PACKAGE_HarfBuzz TRUE)
+
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED True)
 
@@ -19,6 +22,6 @@ file(GLOB SOURCES  "game/sources/*.cpp" "engine/sources/*.c" "engine/sources/*.c
 
 add_executable(main ${SOURCES})
 
-target_link_libraries(main pthread glfw GL dl m stdc++fs assimp)
+target_link_libraries(main pthread glfw GL dl m stdc++fs assimp freetype)
 
 target_compile_options(main PRIVATE -Wall)

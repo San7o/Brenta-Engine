@@ -2,7 +2,7 @@ build/render.out: render/sources/*.cpp
 	g++ render/sources/* -o build/render.out -lpthread -I include/ -I render/headers/ -L lib/ -Wall -lglfw -lGL -ldl -lm -lstdc++fs -lassimp
 
 build/game.out: game/sources/*.cpp
-	g++ $(shell find game -name '*.cpp') engine/**/*.cpp engine/sources/glad.c -o build/game.out -lpthread -I include/ -I game/headers/ -I engine/headers/ -L lib/ -Wall -lglfw -lGL -ldl -lm -lstdc++fs -lassimp
+	g++ $(shell find game -name '*.cpp') engine/**/*.cpp engine/sources/glad.c -o build/game.out -lpthread -I include/ -I game/headers/ -I engine/headers/ -L lib/ -Wall -lglfw -lGL -ldl -lm -lstdc++fs -lassimp -lharfbuzz -lfreetype
 
 build/unit.out: tests/**/*.cpp
 	g++ tests/**/*.cpp tests/*.cpp engine/**/*.cpp engine/sources/glad.c -o build/unit.out -lpthread -I include/ -I tests/headers/ -I engine/headers/ -L lib/ -Wall -lglfw -lGL -ldl -lm -lstdc++fs -lassimp

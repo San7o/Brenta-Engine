@@ -20,5 +20,6 @@
 #include "engine_input.h"
 #include "translation.h"
 #include "engine_time.h"
+#include "text.h"
 
 #endif

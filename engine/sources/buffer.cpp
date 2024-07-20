@@ -6,7 +6,7 @@ Buffer::Buffer(GLenum input_target)
 {
     this->target = input_target;
     glGenBuffers(1, &id);
-    glBindBuffer(target, id);
+    Bind();
 }
 
 void Buffer::CopyIndices(GLsizeiptr size, const void* data, GLenum usage)
@@ -26,6 +26,11 @@ void Buffer::CopyVertices(GLsizeiptr size, const void* data, GLenum usage)
 void Buffer::Bind()
 {
     glBindBuffer(this->target, this->id);
+}
+
+void Buffer::Unbind()
+{
+    glBindBuffer(this->target, 0);
 }
 
 void Buffer::Delete()
