@@ -12,6 +12,9 @@ void InitToggleWireframeCallback() {
 
         GL::SetPoligonMode(!wireframe->enabled);
         wireframe->enabled = !wireframe->enabled;
+
+        /* Play a guitar riff */
+        Audio::PlayAudio("guitar");
     };
     Input::AddCallback(GLFW_KEY_F, toggle_wireframe_callback);
 }

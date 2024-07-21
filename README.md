@@ -212,7 +212,9 @@ The following has been implemented on the engine:
 
 - [x] Logging
 
-- [x] Text
+- [x] Text engine
+
+- [x] Audio engine
 
 Screenshots and videos:
 
@@ -222,7 +224,7 @@ https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
 
 # 💀 Dependencies
 
-You need
+You need:
 
 - A `C++17` compiler
 
@@ -232,12 +234,12 @@ You need
 
 - `libassimp`
 
-- `harfbuzz` (make sure It has `freetype` support)
+- `SDL3` for audio, make sure you compile for your audio driver
 
-If you are on `NixOS`, you can access the developement environment
+If you are on `Nix`, you can access the developement environment
 by running:
 ```bash
-nix shell
+nix-shell
 ```
 
 You need [Assimp](https://github.com/assimp/assimp) in order to import 3D models. It is
@@ -258,7 +260,7 @@ LD_LIBRARY_PATH=${PWD}/lib/:${LD_LIBRARY_PATH} ./build/main.out
 Or you could compile the library statically with `-static`, but It will take more compile
 time and generate a bigger file.
 
-Similarly, you need [FreeType](https://freetype.org/).
+Likewise, you should compile your libraries for [FreeType](https://freetype.org/) and [SDL3](https://wiki.libsdl.org/SDL3/FrontPage).
 
 # 🪖 Compile
 
@@ -286,8 +288,6 @@ The binaries will be generated in `build/` directory.
 - [ ] Physics
 
 - [ ] Collisions
-
-- [ ] Audio
 
 ## 👴 Future
 

@@ -1,8 +1,9 @@
+#include <cstdio>
+
 #include "screen.h"
 #include "engine_input.h"
-
-#include <cstdio>
 #include "engine_logger.h"
+#include "engine_audio.h"
 
 using namespace ECS;
 
@@ -78,6 +79,8 @@ void Screen::Terminate()
 {
     glfwTerminate();
 
+    Audio::Destroy();
+
     Logger::Log(Types::LogLevel::INFO, "Screen terminated");
 }
 
@@ -124,6 +127,7 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
     Screen::SetSizeCallback(Framebuffer_size_callback);
 
     Input::Init();
+    Audio::Init();
 }
 
 void Screen::SetContextVersion(int major, int minor)

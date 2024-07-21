@@ -6,6 +6,7 @@
 #include "callbacks/close_window_callback.h"
 #include "resources/wireframe_resource.h"
 #include "systems/fps_system.h"
+#include <filesystem>
 
 using namespace ECS;
 
@@ -32,6 +33,9 @@ int main() {
     InitCloseWindowCallback();
     InitWireframeResource();
     InitFpsSystem();
+
+    Audio::LoadAudio("guitar",
+             std::filesystem::absolute("assets/audio/guitar.wav"));
 
     while(!Screen::isWindowClosed()) {
 

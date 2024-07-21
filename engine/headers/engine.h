@@ -21,5 +21,6 @@
 #include "translation.h"
 #include "engine_time.h"
 #include "text.h"
+#include "engine_audio.h"
 
 #endif

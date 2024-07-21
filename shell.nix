@@ -10,6 +10,7 @@ pkgs.mkShell {
     glfw-wayland-minecraft  # OpenGL windowing library
     freetype                # font rendering
     harfbuzzFull            # text shaping
+    alsa-lib                # audio
   ];
 
   LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:";
