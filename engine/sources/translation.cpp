@@ -18,6 +18,10 @@ void Translation::setProjection(float fov, float near, float far) {
         near, far);
 }
 
+void Translation::setProjection(glm::mat4 projection) {
+    this->projection = projection;
+}
+
 void Translation::setModel(glm::mat4 new_model) {
     this->model = new_model;
 }

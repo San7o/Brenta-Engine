@@ -16,5 +16,5 @@ void InitToggleWireframeCallback() {
         /* Play a guitar riff */
         Audio::PlayAudio("guitar");
     };
-    Input::AddCallback(GLFW_KEY_F, toggle_wireframe_callback);
+    Input::AddKeyboardCallback(GLFW_KEY_F, toggle_wireframe_callback);
 }

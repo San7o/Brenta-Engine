@@ -11,6 +11,7 @@ namespace ECS {
 namespace Types {
 
 enum LogLevel {
+    DEBUG,
     INFO,
     WARNING,
     ERROR,

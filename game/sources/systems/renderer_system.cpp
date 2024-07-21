@@ -18,6 +18,8 @@ void InitRendererSystem() {
         auto matches = World::QueryComponents({"ModelComponent"});
         if (matches.empty()) return;
 
+        Logger::Log(LogLevel::DEBUG, "Rendering models");
+
         for (auto match : matches) {
             /* Get the model component */
             auto model_component = static_cast<ModelComponent*>
@@ -27,9 +29,10 @@ void InitRendererSystem() {
             auto default_shader = model_component->shader;
 
             Types::Translation t = Types::Translation();
-            t.setProjection(45.0f, 0.1f, 100.0f);
+            t.setView(Camera::GetViewMatrix());
+            t.setProjection(Camera::GetProjectionMatrix());
             t.setModel(glm::mat4(1.0f));
-            t.translate(glm::vec3(0.0f, 0.0f, -10.0f));
+            t.translate(glm::vec3(0.0f, 0.0f, 0.0f));
             t.setShader(default_shader);
 
             myModel.Draw(default_shader);

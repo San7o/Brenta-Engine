@@ -22,6 +22,7 @@ public:
     Translation();
 
     void setView(glm::mat4 view);
+    void setProjection(glm::mat4 projection);
     void setProjection(float fov, float near, float far);
     void setModel(glm::mat4 model);
     void translate(glm::vec3 translation);

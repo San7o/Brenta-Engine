@@ -8,5 +8,5 @@ void InitCloseWindowCallback() {
     auto close_window_callback = []() {
         Screen::SetClose();
     };
-    Input::AddCallback(GLFW_KEY_ESCAPE, close_window_callback);
+    Input::AddKeyboardCallback(GLFW_KEY_ESCAPE, close_window_callback);
 }

@@ -20,9 +20,11 @@ void InitPlayerEntity() {
     World::AddComponent(player_entity, "PlayerComponent", player_component);
 
     /* Load the shader */
-    Shader::NewShader("default_shader",
-                      std::filesystem::absolute("game/shaders/shader.vs"),
-                      std::filesystem::absolute("game/shaders/shader.fs"));
+    if (Shader::GetId("default_shader") == (unsigned int) -1) {
+        Shader::NewShader("default_shader",
+                          std::filesystem::absolute("game/shaders/shader.vs"),
+                          std::filesystem::absolute("game/shaders/shader.fs"));
+    }
 
     /* Load the model */
     Model model(std::filesystem::absolute("assets/models/backpack/backpack.obj"));

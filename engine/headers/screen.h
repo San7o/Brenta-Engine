@@ -3,9 +3,8 @@
 #ifndef SCREEN_H
 #define SCREEN_H
 
-#ifndef __glfw3_h_
+#include <glad/glad.h>       
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
-#endif
 
 namespace ECS {
 
@@ -20,18 +19,19 @@ public:
                      bool isMouseCaptured = false,
                      const char* title = "OpenGL");
 
-    static bool isWindowClosed();
-    static bool isKeyPressed(int key);
+    static int   GetWidth();
+    static int   GetHeight();
+    static bool  isWindowClosed();
+    static bool  isKeyPressed(int key);
     static float GetTime();
     static GLFWwindow* GetWindow();
     static GLFWglproc GetProcAddress();
-    static int GetWidth();
-    static int GetHeight();
 
     static void SetMouseCallback(GLFWcursorposfun callback);
     static void SetSizeCallback(GLFWframebuffersizefun callback);
-    static void SetMouseCapture(bool isCaptured);
+    static void SetMousePosCallback(GLFWcursorposfun callback);
     static void SetKeyCallback(GLFWkeyfun callback);
+    static void SetMouseCapture(bool isCaptured);
     static void SetClose();
 
     /* Swap the front and back buffers to avoid flickering */

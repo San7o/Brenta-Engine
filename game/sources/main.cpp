@@ -1,17 +1,13 @@
 #include "engine.h"
+#include "game_ecs.h"
 
-#include "entities/player_entity.h"
-#include "systems/renderer_system.h"
-#include "callbacks/toggle_wireframe_callback.h"
-#include "callbacks/close_window_callback.h"
-#include "resources/wireframe_resource.h"
-#include "systems/fps_system.h"
 #include <filesystem>
 
 using namespace ECS;
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
+// Default resolution
+const int SCR_WIDTH = 1280; 
+const int SCR_HEIGHT = 720;
 
 int main() {
 
@@ -28,11 +24,18 @@ int main() {
     World::Init();
 
     InitPlayerEntity();
+    //InitCubeEntity();
+    InitFloorEntity();
+
     InitRendererSystem();
+    //InitFpsSystem();
+    InitDebugTextSystem();
+
     InitToggleWireframeCallback();
     InitCloseWindowCallback();
+    InitCameraMouseCallback();
+    
     InitWireframeResource();
-    InitFpsSystem();
 
     Audio::LoadAudio("guitar",
              std::filesystem::absolute("assets/audio/guitar.wav"));

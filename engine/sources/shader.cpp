@@ -22,6 +22,12 @@ void Shader::NewShader(Types::ShaderName shader_name,
                 std::string const& vertexPath,
                 std::string const& fragmentPath)
 {
+    if (Shader::shaders.find(shader_name) != Shader::shaders.end())
+    {
+        Logger::Log(Types::LogLevel::INFO, "Tried to create a shader that already exists with name: " + shader_name + ", the shader was not created");
+        return;
+    }
+
     /* 
      * 1. retrieve the vertex/fragment source
      *    code from filePath 
@@ -105,8 +111,7 @@ unsigned int Shader::GetId(Types::ShaderName shader_name)
 {
     if (Shader::shaders.find(shader_name) == Shader::shaders.end())
     {
-        Logger::Log(Types::LogLevel::ERROR, "Shader not found with name: " + shader_name);
-        return 0;
+        return -1;
     }
     return Shader::shaders.at(shader_name);
 }

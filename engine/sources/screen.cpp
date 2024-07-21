@@ -4,6 +4,7 @@
 #include "engine_input.h"
 #include "engine_logger.h"
 #include "engine_audio.h"
+#include "camera.h"
 
 using namespace ECS;
 
@@ -126,6 +127,7 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     Input::Init();
     Audio::Init();
+    Camera::Init();
 }
 
 void Screen::SetContextVersion(int major, int minor)
@@ -140,6 +142,11 @@ void Screen::SetContextVersion(int major, int minor)
 void Screen::SetKeyCallback(GLFWkeyfun callback)
 {
     glfwSetKeyCallback(Screen::window, callback);
+}
+
+void Screen::SetMousePosCallback(GLFWcursorposfun callback)
+{
+    glfwSetCursorPosCallback(Screen::GetWindow(), callback);
 }
 
 void Screen::UseCoreProfile()
