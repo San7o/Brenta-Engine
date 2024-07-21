@@ -5,11 +5,13 @@ developed in C++ with OpenGL. This engine is designed to
 provide a modular and flexible architecture for game development
 and simulations: you can run simultations without the graphical
 interface through the custom made - from the ground up - ECS framework.
-Or you cound build and graphical application with OpenGL: the engine is
+Or you could build any graphical application with OpenGL: the engine is
 packed with easy to use and highly modular and customizable classes 
-to handle most necessities, like Input, 3D Model Loading, Audio, Time...
+to handle most necessities like Input, 3D Model Loading, Audio, Time...
 
 Check out `GUIDE.md` for an introduction on how the system works!
+
+![Pasted image 20240721185901](https://github.com/user-attachments/assets/657426b5-6417-4e42-85da-abb5abeb6451)
 
 # ⭐ Current State
 
