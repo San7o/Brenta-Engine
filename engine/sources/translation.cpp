@@ -30,6 +30,16 @@ void Translation::translate(glm::vec3 translation) {
     this->model = glm::translate(this->model, translation);
 }
 
+void Translation::rotate(glm::vec3 rotation) {
+    this->model = glm::rotate(this->model, glm::radians(rotation.x), glm::vec3(1.0f, 0.0f, 0.0f));
+    this->model = glm::rotate(this->model, glm::radians(rotation.y), glm::vec3(0.0f, 1.0f, 0.0f));
+    this->model = glm::rotate(this->model, glm::radians(rotation.z), glm::vec3(0.0f, 0.0f, 1.0f));
+}
+
+void Translation::scale(float scale) {
+    this->model = glm::scale(this->model, glm::vec3(scale));
+}
+
 void Translation::setShader(Types::ShaderName shader_name) {
 
     Shader::Use(shader_name);

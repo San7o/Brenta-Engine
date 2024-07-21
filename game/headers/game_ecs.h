@@ -10,6 +10,7 @@
 
 /* Components */
 #include "components/model_component.h"
+#include "components/transform_component.h"
 
 /* Systems */
 #include "systems/renderer_system.h"
@@ -23,5 +24,6 @@
 #include "callbacks/toggle_wireframe_callback.h"
 #include "callbacks/close_window_callback.h"
 #include "callbacks/camera_mouse_callback.h"
+#include "callbacks/play_guitar_callback.h"
 
 #endif

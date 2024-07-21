@@ -2,6 +2,7 @@
 
 #include "engine.h"
 #include "components/model_component.h"
+#include "components/transform_component.h"
 
 #include <filesystem>
 
@@ -10,8 +11,18 @@ using namespace ECS::Types;
 
 void InitCubeEntity() {
 
-    /* Create the player entity */
+    /* Create the cube entity */
     auto cube_entity = World::NewEntity();
+
+
+    /* Add the transform component */
+    auto transform_component = std::make_shared<TransformComponent>(
+            glm::vec3(0.0f),
+            glm::vec3(0.0f),
+            1.0f
+    );
+    World::AddComponent(cube_entity, "TransformComponent", transform_component);
+
 
     /* Load the shader */
     if (Shader::GetId("cube_shader") == (unsigned int) -1) {

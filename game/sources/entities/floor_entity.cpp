@@ -2,6 +2,7 @@
 
 #include "engine.h"
 #include "components/model_component.h"
+#include "components/transform_component.h"
 
 #include <filesystem>
 
@@ -10,8 +11,18 @@ using namespace ECS::Types;
 
 void InitFloorEntity() {
 
-    /* Create the player entity */
+    /* Create the floor entity */
     auto floor_entity = World::NewEntity();
+
+
+    /* Add the transform component */
+    auto transform_component = std::make_shared<TransformComponent>(
+            glm::vec3(0.0f, 0.0f, 0.0f),
+            glm::vec3(0.0f),
+            1.0f
+    );
+    World::AddComponent(floor_entity, "TransformComponent", transform_component);
+
 
     if (Shader::GetId("default_shader") == (unsigned int) -1) {
         /* Load the shader */

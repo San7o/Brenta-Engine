@@ -5,14 +5,14 @@
 using namespace ECS;
 
 /* camera Attributes */
-glm::vec3 Camera::Position = glm::vec3(0.0f, 0.0f, 15.0f);
+glm::vec3 Camera::Position = glm::vec3(0.0f, 7.0f, 14.0f);
 glm::vec3 Camera::Front = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 Camera::Up;
 glm::vec3 Camera::Right;
 glm::vec3 Camera::WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
 /* euler Angles */
 float Camera::Yaw = -90.0f;
-float Camera::Pitch = 0.0f;
+float Camera::Pitch = -21.0f;
 /* camera options */
 float Camera::MovementSpeed = 2.5f;
 float Camera::MouseSensitivity = 0.1f;

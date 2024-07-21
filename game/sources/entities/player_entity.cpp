@@ -3,6 +3,7 @@
 #include "engine.h"
 #include "components/model_component.h"
 #include "components/player_component.h"
+#include "components/transform_component.h"
 
 #include <filesystem>
 
@@ -18,6 +19,16 @@ void InitPlayerEntity() {
     /* Add the player component */
     auto player_component = std::make_shared<PlayerComponent>();
     World::AddComponent(player_entity, "PlayerComponent", player_component);
+
+
+    /* Add the transform component */
+    auto transform_component = std::make_shared<TransformComponent>(
+            glm::vec3(0.0f, 2.0f, 0.0f),
+            glm::vec3(0.0f),
+            1.0f
+    );
+    World::AddComponent(player_entity, "TransformComponent", transform_component);
+
 
     /* Load the shader */
     if (Shader::GetId("default_shader") == (unsigned int) -1) {

@@ -34,6 +34,7 @@ int main() {
     InitToggleWireframeCallback();
     InitCloseWindowCallback();
     InitCameraMouseCallback();
+    InitPlayGuitarCallback();
     
     InitWireframeResource();
 

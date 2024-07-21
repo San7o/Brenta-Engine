@@ -26,6 +26,8 @@ public:
     void setProjection(float fov, float near, float far);
     void setModel(glm::mat4 model);
     void translate(glm::vec3 translation);
+    void rotate(glm::vec3 rotation);
+    void scale(float scale);
     void setShader(Types::ShaderName shader_name);
 };
 
