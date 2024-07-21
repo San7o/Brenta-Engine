@@ -78,9 +78,7 @@ void Screen::SetClose()
 void Screen::Terminate()
 {
     glfwTerminate();
-
     Audio::Destroy();
-
     Logger::Log(Types::LogLevel::INFO, "Screen terminated");
 }
 

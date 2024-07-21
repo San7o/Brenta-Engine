@@ -1,4 +1,5 @@
 #include "model.h"
+#include "engine_logger.h"
 
 #include <iostream>
 
@@ -25,7 +26,7 @@ void Model::loadModel(std::string path)
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
-        std::cerr << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
+        Logger::Log(Types::LogLevel::ERROR, "Could not load model with assimp: " + std::string(importer.GetErrorString()));
         return;
     }
     directory = path.substr(0, path.find_last_of('/'));

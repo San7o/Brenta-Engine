@@ -1,4 +1,5 @@
 #include "mesh.h"
+#include "engine_logger.h"
 
 #include <iostream>
 
@@ -18,6 +19,11 @@ Mesh::Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indice
 
 void Mesh::Draw(Types::ShaderName shader_name)
 {
+    if (this->vao.GetVAO() == 0) {
+        Logger::Log(Types::LogLevel::ERROR, "Mesh not initialized");
+        return;
+    }
+
     unsigned int diffuseNr  = 1;
     unsigned int specularNr = 1;
     for (unsigned int i = 0; i < this->textures.size(); i++)

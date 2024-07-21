@@ -36,6 +36,11 @@ void World::Delete()
 
 void World::Tick()
 {
+    if (!World::systems) {
+        Logger::Log(LogLevel::ERROR, "Cannot tick: world not initialized");
+        return;
+    }
+
     Time::Update(Screen::GetTime());
     for (auto& system : *World::systems) {
         system->function();
@@ -45,6 +50,7 @@ void World::Tick()
 std::vector<Entity> World::QueryComponents(std::vector<ComponentName> components)
 {
     if (!World::components) {
+        Logger::Log(LogLevel::ERROR, "Cannot query: world not initialized");
         return {};
     }
 
@@ -84,6 +90,7 @@ std::vector<Entity> World::QueryComponents(std::vector<ComponentName> components
 Component* World::EntityToComponent(Entity entity, ComponentName name)
 {
     if(!World::components) {
+        Logger::Log(LogLevel::ERROR, "Cannot get component: world not initialized");
         return nullptr;
     }
 
@@ -104,6 +111,7 @@ Component* World::EntityToComponent(Entity entity, ComponentName name)
 Resource* World::GetResource(ResourceName name)
 {
     if(!World::resources) {
+        Logger::Log(LogLevel::ERROR, "Cannot get resource: world not initialized");
         return nullptr;
     }
 
@@ -111,32 +119,50 @@ Resource* World::GetResource(ResourceName name)
         return World::resources->at(name).get();
     }
 
+    Logger::Log(LogLevel::WARNING, "Resource not found: " + name);
     return nullptr;
 }
 
 std::set<Entity>* World::getEntities()
 {
+    if (!World::entities) {
+        Logger::Log(LogLevel::ERROR, "Cannot get entities: world not initialized");
+        return nullptr;
+    }
     return World::entities.get();
 }
 
 std::set<SPtr<System>, CompareSharedPtr>* World::getSystems()
 {
+    if (!World::systems) {
+        Logger::Log(LogLevel::ERROR, "Cannot get systems: world not initialized");
+        return nullptr;
+    }
     return World::systems.get();
 }
 
 UMap<ResourceName, Resource>* World::getResources()
 {
+    if (!World::resources) {
+        Logger::Log(LogLevel::ERROR, "Cannot get resources: world not initialized");
+        return nullptr;
+    }
     return World::resources.get();
 }
 
 UMapVec<ComponentName, Component>* World::getComponents()
 {
+    if (!World::components) {
+        Logger::Log(LogLevel::ERROR, "Cannot get components: world not initialized");
+        return nullptr;
+    }
     return World::components.get();
 }
 
 Types::Entity World::NewEntity()
 {
     if(!World::entities) {
+        Logger::Log(LogLevel::ERROR, "Cannot create entity: world not initialized");
         return -1;
     }
 
@@ -158,17 +184,18 @@ Types::Entity World::NewEntity()
 void World::AddSystem(SPtr<System> system)
 {
     if(!World::systems) {
+        Logger::Log(LogLevel::ERROR, "Cannot add system: world not initialized");
         return;
     }
 
     World::systems->insert(system);
-
     Logger::Log(LogLevel::INFO, "System added: " + system->name);
 }
 
 void World::AddResource(ResourceName name, SPtr<Resource> resource)
 {
     if(!World::resources) {
+        Logger::Log(LogLevel::ERROR, "Cannot add resource: world not initialized");
         return;
     }
 
@@ -182,6 +209,7 @@ void World::AddResource(ResourceName name, SPtr<Resource> resource)
 void World::AddComponent(Entity e, ComponentName name, SPtr<Component> component)
 {
     if(!World::components) {
+        Logger::Log(LogLevel::ERROR, "Cannot add component: world not initialized");
         return;
     }
    
@@ -201,6 +229,7 @@ void World::AddComponent(Entity e, ComponentName name, SPtr<Component> component
 void World::RemoveEntity(Entity entity)
 {
     if(!World::entities) {
+        Logger::Log(LogLevel::ERROR, "Cannot remove entity: world not initialized");
         return;
     }
 
@@ -212,6 +241,7 @@ void World::RemoveEntity(Entity entity)
 void World::RemoveSystem(SystemName name)
 {
     if(!World::systems) {
+        Logger::Log(LogLevel::ERROR, "Cannot remove system: world not initialized");
         return;
     }
 
@@ -229,6 +259,7 @@ void World::RemoveSystem(SystemName name)
 void World::RemoveResource(ResourceName name)
 {
     if(!World::resources) {
+        Logger::Log(LogLevel::ERROR, "Cannot remove resource: world not initialized");
         return;
     }
 
@@ -240,6 +271,7 @@ void World::RemoveResource(ResourceName name)
 void World::RemoveComponent(Component component)
 {
     if(!World::components) {
+        Logger::Log(LogLevel::ERROR, "Cannot remove component: world not initialized");
         return;
     }
 

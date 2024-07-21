@@ -1,4 +1,5 @@
 #include "buffer.h"
+#include "engine_logger.h"
 
 using namespace ECS::Types;
 
@@ -25,6 +26,10 @@ void Buffer::CopyVertices(GLsizeiptr size, const void* data, GLenum usage)
 
 void Buffer::Bind()
 {
+    if (this->id == 0) {
+        ECS::Logger::Log(LogLevel::ERROR, "Buffer not initialized");
+        return;
+    }
     glBindBuffer(this->target, this->id);
 }
 
@@ -35,5 +40,9 @@ void Buffer::Unbind()
 
 void Buffer::Delete()
 {
+    if (this->id == 0) {
+        ECS::Logger::Log(LogLevel::ERROR, "Buffer not initialized");
+        return;
+    }
     glDeleteBuffers(1, &this->id);
 }

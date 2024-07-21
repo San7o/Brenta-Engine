@@ -8,7 +8,7 @@
 using namespace ECS;
 
 std::unordered_map<Types::AudioName, Types::AudioFile> Audio::audiofiles;
-std::vector<SDL_AudioStream*> Audio::streams;
+std::unordered_map<Types::StreamName, SDL_AudioStream*> Audio::streams;
 
 void Audio::Init()
 {
@@ -19,7 +19,7 @@ void Audio::Init()
         return;
     } 
 
-    Audio::CreateStream();
+    Audio::CreateStream("default");
     Logger::Log(Types::LogLevel::INFO,
                     "SDL Audio initialized");
 }
@@ -27,7 +27,7 @@ void Audio::Init()
 void Audio::Destroy() 
 {
     for (auto& stream : Audio::streams)
-        SDL_DestroyAudioStream(stream);
+        SDL_DestroyAudioStream(stream.second);
 
     for (auto& audiofile : Audio::audiofiles) {
         SDL_free(audiofile.second.audio_buf);
@@ -52,25 +52,26 @@ void Audio::LoadAudio(Types::AudioName name, std::string path)
     }
 
     Audio::audiofiles.insert({name, audiofile});
-
     Logger::Log(Types::LogLevel::INFO,
                     "Loaded audio at " + path);
 }
 
-void Audio::PlayAudio(SDL_AudioStream* stream, Types::AudioName name) 
+void Audio::PlayAudio(Types::AudioName audio_name, Types::StreamName stream_name) 
 {
-    auto audiofile = Audio::GetAudioFile(name);
-    SDL_PutAudioStreamData(stream, audiofile.audio_buf, audiofile.audio_len);
+    auto stream = Audio::GetStream(stream_name);
+    if (stream == nullptr) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Could not play audio: Audio stream not found");
+        return;
+    }
+
+    ClearStream(stream_name);
+    auto audiofile = Audio::GetAudioFile(audio_name);
+    if (SDL_PutAudioStreamData(stream, audiofile.audio_buf, audiofile.audio_len))
+        CheckError();
 }
 
-void Audio::PlayAudio(Types::AudioName name) 
-{
-    auto audiofile = Audio::GetAudioFile(name);
-    SDL_AudioStream* stream = Audio::streams.at(0);
-    SDL_PutAudioStreamData(stream, audiofile.audio_buf, audiofile.audio_len);
-}
-
-void Audio::CreateStream() 
+void Audio::CreateStream(Types::StreamName name) 
 {
     SDL_AudioStream* stream = SDL_OpenAudioDeviceStream(
                     SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL, NULL, NULL);
@@ -81,8 +82,8 @@ void Audio::CreateStream()
         return;
     }
 
-    SDL_ResumeAudioStreamDevice(stream);
-    Audio::streams.push_back(stream);
+    Audio::streams.insert({name, stream});
+    ResumeStream(name);
     Logger::Log(Types::LogLevel::INFO,
                     "SDL Audio stream created");
 }
@@ -91,8 +92,81 @@ Types::AudioFile Audio::GetAudioFile(Types::AudioName name)
 {
     if (Audio::audiofiles.find(name) == Audio::audiofiles.end()) {
         Logger::Log(Types::LogLevel::ERROR,
-                        "Audio file not found");
+                        "Audio file not found with name: " + name);
         return Types::AudioFile();
     }
     return Audio::audiofiles.at(name);
+}
+
+SDL_AudioStream* Audio::GetStream(Types::StreamName name) 
+{
+    if (Audio::streams.find(name) == Audio::streams.end()) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Audio stream not found with name: " + name);
+        return nullptr;
+    }
+    return Audio::streams.at(name);
+}
+
+void Audio::SetVolume(Types::StreamName name, int volume) 
+{
+    auto stream = Audio::GetStream(name);
+    if (stream == nullptr) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Could not set volume: Audio stream not found");
+        return;
+    }
+
+    if (SDL_SetAudioStreamGain(stream, volume)) CheckError();
+    Logger::Log(Types::LogLevel::INFO,
+                    "Volume set to " + std::to_string(volume));
+}
+
+void Audio::CheckError() 
+{
+    auto error = SDL_GetError();
+    Logger::Log(Types::LogLevel::ERROR,
+                    "SDL Audio error: " + std::string(error));
+}
+
+void Audio::ClearStream(Types::StreamName name) 
+{
+    auto stream = Audio::GetStream(name);
+    if (stream == nullptr) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Could not clear stream: Audio stream not found");
+        return;
+    }
+
+    if (SDL_ClearAudioStream(stream)) CheckError();
+    Logger::Log(Types::LogLevel::INFO,
+                    "Stream cleared");
+}
+
+void Audio::PauseStream(Types::StreamName name) 
+{
+    auto stream = Audio::GetStream(name);
+    if (stream == nullptr) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Could not pause stream: Audio stream not found");
+        return;
+    }
+
+    if(SDL_PauseAudioStreamDevice(stream)) CheckError();
+    Logger::Log(Types::LogLevel::INFO,
+                    "Stream paused");
+}
+
+void Audio::ResumeStream(Types::StreamName name) 
+{
+    auto stream = Audio::GetStream(name);
+    if (stream == nullptr) {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Could not resume stream: Audio stream not found");
+        return;
+    }
+
+    if (SDL_ResumeAudioStreamDevice(stream)) CheckError();
+    Logger::Log(Types::LogLevel::INFO,
+                    "Stream resumed");
 }

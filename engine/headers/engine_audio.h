@@ -1,3 +1,5 @@
+#pragma once
+
 #ifndef ENGINE_AUDIO_H
 #define ENGINE_AUDIO_H
 
@@ -10,9 +12,12 @@ namespace ECS {
 
 namespace Types {
 
+typedef std::string StreamName;
+
 typedef std::string AudioName;
 
-struct AudioFile {
+struct AudioFile
+{
     std::string path;        // Path to audio file
     Uint8* audio_buf;       // Pointer to audio buffer
     Uint32 audio_len;       // Length of audio buffer
@@ -31,19 +36,29 @@ struct AudioFile {
 
 } // namespace Types
 
-class Audio {
+class Audio
+{
 public:
     static std::unordered_map<Types::AudioName, Types::AudioFile> audiofiles;
-    static std::vector<SDL_AudioStream*> streams;
-
-    static void LoadAudio(Types::AudioName name, std::string path);
-    static void CreateStream();
-    static void PlayAudio(Types::AudioName); /* Default to first stream */
-    static void PlayAudio(SDL_AudioStream *stream, Types::AudioName);
-    static Types::AudioFile GetAudioFile(Types::AudioName name);
-
+    static std::unordered_map<Types::StreamName, SDL_AudioStream*> streams;
+    
+    Audio() = delete;
     static void Init();
     static void Destroy();
+
+    static Types::AudioFile GetAudioFile(Types::AudioName name);
+    static SDL_AudioStream* GetStream(Types::StreamName name);
+
+    static void LoadAudio(Types::AudioName name, std::string path);
+    static void CreateStream(Types::StreamName);
+    static void PlayAudio(Types::AudioName, Types::StreamName = "default");
+    static void SetVolume(Types::StreamName name, int volume);
+    static void PauseStream(Types::StreamName name);
+    static void ResumeStream(Types::StreamName name);
+    static void ClearStream(Types::StreamName name);
+
+private:
+    static void CheckError();
 };
 
 } // namespace ECS

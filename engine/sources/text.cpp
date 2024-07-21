@@ -11,16 +11,18 @@ std::map<char, Types::Character> Text::characters;
 
 void Text::Init()
 {
-    //Text::textVao.Init();
     Text::textVbo = Types::Buffer(GL_ARRAY_BUFFER);
     Text::textVao.Init();;
 
     Logger::Log(LogLevel::INFO, "Text initialized");
-
 }
 
 void Text::Load(std::string font, unsigned int fontSize)
 {
+    if (textVao.GetVAO() == 0) {
+        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        return;
+    }
     FT_Library ft;
     if (FT_Init_FreeType(&ft)) {
         Logger::Log(LogLevel::ERROR, "Could not init FreeType library");
@@ -108,6 +110,11 @@ void Text::Load(std::string font, unsigned int fontSize)
 
 void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
+    if (textVao.GetVAO() == 0) {
+        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        return;
+    }
+
     Shader::Use(textShader);
     unsigned int textShaderId = Shader::GetId(textShader);
 

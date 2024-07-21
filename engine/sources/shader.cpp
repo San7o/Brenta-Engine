@@ -105,7 +105,7 @@ unsigned int Shader::GetId(Types::ShaderName shader_name)
 {
     if (Shader::shaders.find(shader_name) == Shader::shaders.end())
     {
-        Logger::Log(Types::LogLevel::ERROR, "Shader not found");
+        Logger::Log(Types::LogLevel::ERROR, "Shader not found with name: " + shader_name);
         return 0;
     }
     return Shader::shaders.at(shader_name);
