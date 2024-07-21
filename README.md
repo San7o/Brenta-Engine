@@ -285,8 +285,6 @@ The binaries will be generated in `build/` directory.
 
 ## 🔨 Todo
 
-- [ ] Camera
-
 - [ ] Physics
 
 - [ ] Collisions
