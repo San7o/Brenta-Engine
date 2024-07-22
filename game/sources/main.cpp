@@ -12,7 +12,7 @@ const int SCR_HEIGHT = 720;
 int main() {
 
     /* Set Log level, default = WARNING */
-    Logger::SetLogLevel(Types::LogLevel::INFO);
+    Logger::SetLogLevel(Types::LogLevel::DEBUG);
 
     /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);

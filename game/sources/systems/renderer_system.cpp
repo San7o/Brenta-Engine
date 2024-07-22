@@ -19,8 +19,6 @@ void InitRendererSystem() {
         auto matches = World::QueryComponents({"ModelComponent", "TransformComponent"});
         if (matches.empty()) return;
 
-        Logger::Log(LogLevel::DEBUG, "Rendering models");
-
         for (auto match : matches) {
             /* Get the model component */
             auto model_component = static_cast<ModelComponent*>

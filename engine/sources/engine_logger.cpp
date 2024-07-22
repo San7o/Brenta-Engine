@@ -11,6 +11,9 @@ void Logger::SetLogLevel(Types::LogLevel level) {
 void Logger::Log(Types::LogLevel level, const std::string& message) {
     if (Logger::level <= level) {
         switch (level) {
+            case Types::LogLevel::DEBUG:
+                std::cout << "DEBUG: " << message << std::endl;
+                break;
             case Types::LogLevel::INFO:
                 std::cout << "INFO: " << message << std::endl;
                 break;

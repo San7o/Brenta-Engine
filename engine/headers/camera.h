@@ -25,6 +25,7 @@ struct SphericalCoordinates {
 struct EulerAngles {
     float yaw;
     float pitch;
+    float roll;
 };
 
 } // namespace Types

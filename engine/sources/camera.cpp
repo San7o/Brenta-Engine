@@ -87,7 +87,7 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         SphericalToCartesian();
 
     }
-    /* move the camera */
+    /* translate the camera center */
     else if (Screen::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
     {
         if (firstMouse)
@@ -102,11 +102,17 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         lastX = xpos;
         lastY = ypos;
 
-        xoffset *= MouseSensitivity * 0.1f;
-        yoffset *= MouseSensitivity * 0.1f;
+        xoffset *= MouseSensitivity * 0.3f;
+        yoffset *= MouseSensitivity * 0.3f;
 
-        Position += glm::vec3(-xoffset, -yoffset, 0.0f);
-        center += glm::vec3(-xoffset, -yoffset, 0.0f);
+        // Local coordinate system
+        glm::vec3 fixed_center = glm::vec3(center.x, Position.y, center.z);
+        glm::vec3 front = glm::normalize(Position - fixed_center);    // Versor
+        glm::vec3 right = glm::normalize(glm::cross(front, WorldUp)); // Versor
+
+        center += right * glm::vec3(xoffset);
+        center += WorldUp * glm::vec3(yoffset);
+        SphericalToCartesian();
     }
     /* zoom the camera */
     else if (Screen::isKeyPressed(GLFW_KEY_LEFT_ALT))
