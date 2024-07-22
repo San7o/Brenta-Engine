@@ -133,6 +133,8 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         yoffset *= MouseSensitivity;
         
         sphericalCoordinates.radius -= yoffset;
+        if (sphericalCoordinates.radius <= 0.1f)
+            sphericalCoordinates.radius = 0.1f;
         SphericalToCartesian();
     }
     else {

@@ -41,6 +41,6 @@ void InitPlayerEntity() {
     Model model(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
+    auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
     World::AddComponent(player_entity, "ModelComponent", model_component);
 }

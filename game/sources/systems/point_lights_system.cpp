@@ -43,10 +43,8 @@ void InitPointLightsSystem() {
                 Shader::SetFloat(shader, (lightn+".quadratic").c_str(), light->quadratic);
                 Shader::SetFloat(shader, (lightn+".strength").c_str(), light->strength);
                 Shader::SetVec3(shader, (lightn+".position").c_str(), transform->position);
+                Shader::SetFloat(shader, (lightn+".point_strength").c_str(), light->strength);
                 Shader::SetInt(shader, "nPointLights", entities.size());
-                Shader::SetInt(shader, "material.texture_diffuse1", 0);
-                Shader::SetInt(shader, "material.texture_specular1", 1);
-                Shader::SetFloat(shader, "material.shininess", 32.0f);
             }
             counter++;
         }

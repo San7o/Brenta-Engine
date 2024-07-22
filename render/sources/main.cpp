@@ -113,8 +113,8 @@ int main() {
     };
 
     /* Load model */
-    //Model ourModel("assets/models/backpack/backpack.obj");
-    Model ourModel("assets/models/simple_cube/simple_cube.obj");
+    Model ourModel("assets/models/backpack/backpack.obj");
+    //Model ourModel("assets/models/simple_cube/simple_cube.obj");
 
     /* Load texture */
     unsigned int texture1 = Texture::LoadTexture("container2.png", "assets/textures");

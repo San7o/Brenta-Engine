@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef LIGHT_ENTITY_H
-#define LIGHT_ENTITY_H
+#ifndef POINT_LIGHT_ENTITY_H
+#define POINT_LIGHT_ENTITY_H
 
 void InitPointLightEntity();
 

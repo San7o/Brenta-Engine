@@ -35,6 +35,6 @@ void InitCubeEntity() {
     Model model(std::filesystem::absolute("assets/models/simple_cube/simple_cube.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(model, "cube_shader");
+    auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "cube_shader");
     World::AddComponent(cube_entity, "ModelComponent", model_component);
 }

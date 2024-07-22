@@ -35,6 +35,6 @@ void InitFloorEntity() {
     Model model(std::filesystem::absolute("assets/models/pane/pane.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(model, "default_shader");
+    auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
     World::AddComponent(floor_entity, "ModelComponent", model_component);
 }

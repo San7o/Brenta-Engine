@@ -41,6 +41,9 @@ void InitRendererSystem() {
             
             t.setShader(default_shader);
 
+            Shader::SetVec3(default_shader, "viewPos", Camera::GetPosition());
+            Shader::SetFloat(default_shader, "material.shininess", model_component->shininess);
+
             myModel.Draw(default_shader);
         }
     });

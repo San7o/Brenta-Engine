@@ -10,10 +10,11 @@ using namespace ECS;
 /* Model Component */
 struct ModelComponent : Types::Component {
     Model model;
+    float shininess;
     Types::ShaderName shader;
 
-    ModelComponent(Model model, Types::ShaderName shader)
-            : model(model), shader(shader) {}
+    ModelComponent(Model model, float shininess, Types::ShaderName shader)
+            : model(model), shininess(shininess), shader(shader) {}
 };
 
 #endif

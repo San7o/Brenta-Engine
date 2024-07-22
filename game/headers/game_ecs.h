@@ -8,17 +8,20 @@
 #include "entities/cube_entity.h"
 #include "entities/floor_entity.h"
 #include "entities/point_light_entity.h"
+#include "entities/directional_light_entity.h"
 
 /* Components */
 #include "components/model_component.h"
 #include "components/transform_component.h"
 #include "components/point_light_component.h"
+#include "components/directional_light_component.h"
 
 /* Systems */
 #include "systems/renderer_system.h"
 #include "systems/fps_system.h"
 #include "systems/debug_text_system.h"
 #include "systems/point_lights_system.h"
+#include "systems/directional_light_system.h"
 
 /* Resources */
 #include "resources/wireframe_resource.h"

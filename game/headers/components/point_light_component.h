@@ -1,7 +1,7 @@
 #pragma once
 
-#ifndef LIGHT_COMPONENT_H
-#define LIGHT_COMPONENT_H
+#ifndef POINT_LIGHT_COMPONENT_H
+#define POINT_LIGHT_COMPONENT_H
 
 #include "engine.h"
 

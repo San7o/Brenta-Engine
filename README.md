@@ -29,7 +29,7 @@ implemented:
 
 - [x] Shaders 
 
-- [ ] Lighting: Ambient, Diffuse, Specular
+- [x] Lighting: Ambient, Diffuse, Specular
 
 - [x] Model loading
 

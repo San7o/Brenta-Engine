@@ -26,8 +26,10 @@ int main() {
     InitPlayerEntity();
     //InitCubeEntity();
     InitFloorEntity();
+    InitDirectionalLightEntity();
     InitPointLightEntity();
 
+    InitDirectionalLightSystem();
     InitPointLightsSystem();
     InitRendererSystem();
     //InitFpsSystem();
