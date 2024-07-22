@@ -31,7 +31,7 @@ void InitPlayerEntity() {
 
 
     /* Load the shader */
-    if (Shader::GetId("default_shader") == (unsigned int) -1) {
+    if (Shader::GetId("default_shader") == 0) {
         Shader::NewShader("default_shader",
                           std::filesystem::absolute("game/shaders/shader.vs"),
                           std::filesystem::absolute("game/shaders/shader.fs"));

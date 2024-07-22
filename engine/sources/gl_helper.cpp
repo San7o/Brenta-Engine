@@ -10,14 +10,14 @@ void GL::LoadOpenGL()
 {
 
     GLADloadproc loadproc = (GLADloadproc)Screen::GetProcAddress();
-    int SCR_WIDTH = Screen::GetWidth();
-    int SCR_HEIGHT = Screen::GetHeight();
-
     if (!gladLoadGLLoader(loadproc))
     {
         Logger::Log(Types::LogLevel::ERROR, "Failed to initialize GLAD");
         exit(-1);
     }
+
+    int SCR_WIDTH = Screen::GetWidth();
+    int SCR_HEIGHT = Screen::GetHeight();
 
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
     glEnable(GL_DEPTH_TEST);                 /* Enable depth testing */

@@ -111,7 +111,7 @@ unsigned int Shader::GetId(Types::ShaderName shader_name)
 {
     if (Shader::shaders.find(shader_name) == Shader::shaders.end())
     {
-        return -1;
+        return 0;
     }
     return Shader::shaders.at(shader_name);
 }
@@ -148,6 +148,12 @@ void Shader::SetVec3(Types::ShaderName shader_name, const GLchar* name, float x,
 {
     unsigned int vecLoc = glGetUniformLocation(Shader::GetId(shader_name), name);
     glUniform3f(vecLoc, x, y, z);
+}
+
+void Shader::SetVec3(Types::ShaderName shader_name, const GLchar* name, glm::vec3 value)
+{
+    unsigned int vecLoc = glGetUniformLocation(Shader::GetId(shader_name), name);
+    glUniform3f(vecLoc, value.x, value.y, value.z);
 }
 
 /* utility function for checking shader

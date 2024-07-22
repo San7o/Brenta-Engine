@@ -25,7 +25,7 @@ void InitCubeEntity() {
 
 
     /* Load the shader */
-    if (Shader::GetId("cube_shader") == (unsigned int) -1) {
+    if (Shader::GetId("cube_shader") == 0) {
         Shader::NewShader("cube_shader",
                       std::filesystem::absolute("game/shaders/shader.vs"),
                       std::filesystem::absolute("game/shaders/shader.fs"));

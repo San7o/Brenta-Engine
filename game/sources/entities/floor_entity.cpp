@@ -24,7 +24,7 @@ void InitFloorEntity() {
     World::AddComponent(floor_entity, "TransformComponent", transform_component);
 
 
-    if (Shader::GetId("default_shader") == (unsigned int) -1) {
+    if (Shader::GetId("default_shader") == 0) {
         /* Load the shader */
         Shader::NewShader("default_shader",
                           std::filesystem::absolute("game/shaders/shader.vs"),

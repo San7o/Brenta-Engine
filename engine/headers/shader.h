@@ -55,6 +55,8 @@ public:
                         const GLchar* name, glm::mat4 value);
     static void SetVec3(Types::ShaderName shader_name,
                         const GLchar* name, float x, float y, float z);
+    static void SetVec3(Types::ShaderName shader_name,
+                        const GLchar* name, glm::vec3 value);
 private:
     static void CheckCompileErrors(unsigned int shader, std::string type);
 };

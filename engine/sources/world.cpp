@@ -67,7 +67,7 @@ std::vector<Entity> World::QueryComponents(std::vector<ComponentName> components
 
     components.erase(components.begin());
 
-    for (long unsigned int i = 1; i < components.size(); i++) {
+    for (long unsigned int i = 0; i < components.size(); i++) {
         ComponentName name = components.at(i);
         std::vector<Entity> matchedNow = {};
 

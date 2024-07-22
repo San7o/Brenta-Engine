@@ -11,7 +11,6 @@
 
 using namespace ECS;
 
-/* Model Component */
 struct TransformComponent : Types::Component {
     glm::vec3 position;
     glm::vec3 rotation;
