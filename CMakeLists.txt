@@ -18,10 +18,10 @@ include_directories(include game/headers engine/headers)
 
 link_directories(lib)
 
-file(GLOB SOURCES  "game/sources/*.cpp" "engine/sources/*.c" "engine/sources/*.cpp")
+file(GLOB SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" "engine/sources/*.c" "engine/sources/*.cpp")
 
 add_executable(main ${SOURCES})
 
-target_link_libraries(main pthread glfw GL dl m stdc++fs assimp freetype)
+target_link_libraries(main pthread glfw GL dl m stdc++fs assimp freetype harfbuzz freetype SDL3 asound)
 
 target_compile_options(main PRIVATE -Wall)

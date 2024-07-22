@@ -95,7 +95,7 @@ Likewise, you should compile your libraries for [FreeType](https://freetype.org/
 
 # 🪖 Compile
 
-You can compile the demo game with `cmake`:
+You can compile the demo game with `cmake` (recommended):
 ```bash
 cmake -Bbuild
 cmake --build build
@@ -114,6 +114,9 @@ make render
 
 The binaries will be generated in `build/` directory.
 
+
 ## 👴 Future
 
-A GUI for the engine would be interesting to implement in the long future.
+- [ ] Rotations with quaternions
+
+- [ ] A GUI fot the engine

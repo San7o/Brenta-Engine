@@ -16,6 +16,17 @@ enum CameraMovement {
     RIGHT
 };
 
+struct SphericalCoordinates {
+    float theta;
+    float phi;
+    float radius;
+};
+
+struct EulerAngles {
+    float yaw;
+    float pitch;
+};
+
 } // namespace Types
 
 class Camera
@@ -23,21 +34,26 @@ class Camera
 public:
     /* camera Attributes */
     static glm::vec3 Position;
-    static glm::vec3 Front;
-    static glm::vec3 Up;
-    static glm::vec3 Right;
     static glm::vec3 WorldUp;
     static glm::vec3 center;
-    /* euler Angles */
-    static float Yaw;
-    static float Pitch;
+
     /* camera options */
     static float MovementSpeed;
     static float MouseSensitivity;
-    static float Zoom;
-    static float lastX;
-    static float lastY;
-    static bool firstMouse;
+    static float Zoom;        // Field of view
+    static float lastX;       // Last mouse position x
+    static float lastY;       // Last mouse position y
+    static bool  firstMouse;  // is first mouse movement
+
+    /* Spherical coordinates for the camera */
+    static Types::SphericalCoordinates sphericalCoordinates;
+ 
+    /* euler Angles */
+    // Only for aircraft camera
+    static Types::EulerAngles eulerAngles;
+    static glm::vec3 Front;
+    static glm::vec3 Up;
+    static glm::vec3 Right;
 
     /* constructor with vectors */
     Camera() = delete;
@@ -56,7 +72,8 @@ public:
     static void ProcessMouseScroll(float yoffset);
 
 private:
-    static void updateCameraVectors();
+    static void updateCameraEuler();   // euclids angles
+    static void SphericalToCartesian(); // sperical coordinates
 };
 
 } // namespace ECS

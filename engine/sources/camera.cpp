@@ -7,27 +7,35 @@
 using namespace ECS;
 
 /* camera Attributes */
-glm::vec3 Camera::Position = glm::vec3(0.0f, 5.0f, 14.0f);
+
+/* camera options */
+float Camera::MovementSpeed    = 2.5f;
+float Camera::MouseSensitivity = 0.05f;
+float Camera::Zoom             = 45.0f;
+float Camera::lastX;
+float Camera::lastY;
+bool  Camera::firstMouse       = true;
+
+// Cartesian coordinates
+glm::vec3 Camera::Position = glm::vec3(9.0f, 17.0f, 30.0f);
+glm::vec3 Camera::WorldUp  = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 Camera::center   = glm::vec3(0.0f, 2.0f, 0.0f);
+
+/* Spherical coordinates for the camera */
+Types::SphericalCoordinates Camera::sphericalCoordinates =
+                  {1.25f, 1.25f,  glm::length(Position - center)};
+
+/* euler Angles */
+// Only needed for aircraft camera
+Types::EulerAngles Camera::eulerAngles = {-90.0f, -45.0f};
 glm::vec3 Camera::Front = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 Camera::Up;
 glm::vec3 Camera::Right;
-glm::vec3 Camera::WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
-glm::vec3 Camera::center = glm::vec3(0.0f, 5.0f, 0.0f);
-/* euler Angles */
-float Camera::Yaw = -90.0f;
-float Camera::Pitch = -45.0f;
-/* camera options */
-float Camera::MovementSpeed = 2.5f;
-float Camera::MouseSensitivity = 0.05f;
-float Camera::Zoom = 45.0f;
-float Camera::lastX;
-float Camera::lastY;
-bool  Camera::firstMouse = true;
-float rotX = 0.0f;
 
 void Camera::Init()
 {
-    Camera::updateCameraVectors();
+    //Camera::updateCameraEuler();
+    Camera::SphericalToCartesian();
     Logger::Log(Types::LogLevel::INFO, "Camera initialized");
 }
 
@@ -44,20 +52,7 @@ glm::mat4 Camera::GetProjectionMatrix()
         0.1f, 100.0f);
 }
 
-void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime)
-{
-    /*
-    float velocity = MovementSpeed * deltaTime;
-    if (direction == Types::CameraMovement::FORWARD)
-        Position += Front * velocity;
-    if (direction == Types::CameraMovement::BACKWARD)
-        Position -= Front * velocity;
-    if (direction == Types::CameraMovement::LEFT)
-        Position -= Right * velocity;
-    if (direction == Types::CameraMovement::RIGHT)
-        Position += Right * velocity;
-    */
-}
+void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime) {}
 
 void Camera::ProcessMouseMovement(double xpos, double ypos,
                 GLboolean constrainPitch)
@@ -80,29 +75,17 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
 
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
+ 
+        sphericalCoordinates.theta += yoffset * MouseSensitivity;
+        sphericalCoordinates.phi += xoffset * MouseSensitivity;
 
+        if (sphericalCoordinates.theta <= 0.01f)
+                sphericalCoordinates.theta = 0.01f;
+        if (sphericalCoordinates.theta >= 3.13f)
+                sphericalCoordinates.theta = 3.13f;
 
-        /*
-        Yaw   += xoffset;
-        Pitch += yoffset;
+        SphericalToCartesian();
 
-        if (constrainPitch)
-        {
-            if (Pitch > 89.0f)
-                Pitch = 89.0f;
-            if (Pitch < -89.0f)
-                Pitch = -89.0f;
-        }
-        */
-
-        // Current angle in radians
-        const float radius = glm::length(Position - center);
-        rotX += xoffset * MouseSensitivity;
-
-        float camX = sin(rotX) * radius + center.x;
-        float camZ = cos(rotX) * radius + center.z;
-
-        Position = glm::vec3(camX, Position.y, camZ);
     }
     /* move the camera */
     else if (Screen::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
@@ -125,6 +108,27 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         Position += glm::vec3(-xoffset, -yoffset, 0.0f);
         center += glm::vec3(-xoffset, -yoffset, 0.0f);
     }
+    /* zoom the camera */
+    else if (Screen::isKeyPressed(GLFW_KEY_LEFT_ALT))
+    {
+        if (firstMouse)
+        {
+            lastX = xpos;
+            lastY = ypos;
+            firstMouse = false;
+        }
+  
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos; 
+        lastX = xpos;
+        lastY = ypos;
+
+        xoffset *= MouseSensitivity;
+        yoffset *= MouseSensitivity;
+        
+        sphericalCoordinates.radius -= yoffset;
+        SphericalToCartesian();
+    }
     else {
         firstMouse = true;
     }
@@ -140,14 +144,26 @@ void Camera::ProcessMouseScroll(float yoffset)
         Camera::Zoom = 45.0f;
 }
 
+void Camera::SphericalToCartesian()
+{
+    Position.x = sin(sphericalCoordinates.theta) *
+                 cos(sphericalCoordinates.phi) * sphericalCoordinates.radius + 
+                 center.x;
+    Position.y = cos(sphericalCoordinates.theta) * 
+                 sphericalCoordinates.radius + center.y;
+    Position.z = sin(sphericalCoordinates.theta) *
+                 sin(sphericalCoordinates.phi) * sphericalCoordinates.radius + 
+                 center.z;
+}
+
 /* For aircraft camera */
-void Camera::updateCameraVectors()
+void Camera::updateCameraEuler()
 {
     /* calculate the new Front vector */
     glm::vec3 front;
-    front.x = cos(glm::radians(Yaw)) * cos(glm::radians(Pitch));
-    front.y = sin(glm::radians(Pitch));
-    front.z = sin(glm::radians(Yaw)) * cos(glm::radians(Pitch));
+    front.x = cos(glm::radians(eulerAngles.yaw)) * cos(glm::radians(eulerAngles.pitch));
+    front.y = sin(glm::radians(eulerAngles.pitch));
+    front.z = sin(glm::radians(eulerAngles.yaw)) * cos(glm::radians(eulerAngles.pitch));
     Front = glm::normalize(front);
     /* also re-calculate the Right and Up vector */
     Right = glm::normalize(glm::cross(Front, WorldUp));  
@@ -161,10 +177,10 @@ glm::vec3 Camera::GetPosition()
 
 float Camera::GetYaw()
 {
-    return Yaw;
+    return eulerAngles.yaw;
 }
 
 float Camera::GetPitch()
 {
-    return Pitch;
+    return eulerAngles.pitch;
 }
