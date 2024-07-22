@@ -43,7 +43,6 @@ int main() {
 
     while(!Screen::isWindowClosed()) {
 
-
         GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
         GL::Clear();
 

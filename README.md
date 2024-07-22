@@ -18,7 +18,7 @@ Check out `GUIDE.md` for an introduction on how the system works!
 The project is structured into the 3 folders `engine`, `game`, `render` 
 containing respectively the game engine, a game demo and a render demo.
 
-The project is under heavy developement, the following feature have been
+The project is under heavy developement, the following features have been
 implemented:
 
 - [x] Triangles

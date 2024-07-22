@@ -2,24 +2,28 @@
 #include "screen.h"
 #include "engine_logger.h"
 
+#include <cmath>
+
 using namespace ECS;
 
 /* camera Attributes */
-glm::vec3 Camera::Position = glm::vec3(0.0f, 7.0f, 14.0f);
+glm::vec3 Camera::Position = glm::vec3(0.0f, 5.0f, 14.0f);
 glm::vec3 Camera::Front = glm::vec3(0.0f, 0.0f, -1.0f);
 glm::vec3 Camera::Up;
 glm::vec3 Camera::Right;
 glm::vec3 Camera::WorldUp = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 Camera::center = glm::vec3(0.0f, 5.0f, 0.0f);
 /* euler Angles */
 float Camera::Yaw = -90.0f;
-float Camera::Pitch = -21.0f;
+float Camera::Pitch = -45.0f;
 /* camera options */
 float Camera::MovementSpeed = 2.5f;
-float Camera::MouseSensitivity = 0.1f;
+float Camera::MouseSensitivity = 0.05f;
 float Camera::Zoom = 45.0f;
 float Camera::lastX;
 float Camera::lastY;
 bool  Camera::firstMouse = true;
+float rotX = 0.0f;
 
 void Camera::Init()
 {
@@ -29,7 +33,8 @@ void Camera::Init()
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    return glm::lookAt(Position, Position + Front, Up);
+    //return glm::lookAt(Position, Position + Front, Up);
+    return glm::lookAt(Position, center, WorldUp);
 }
 
 glm::mat4 Camera::GetProjectionMatrix()
@@ -41,6 +46,7 @@ glm::mat4 Camera::GetProjectionMatrix()
 
 void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime)
 {
+    /*
     float velocity = MovementSpeed * deltaTime;
     if (direction == Types::CameraMovement::FORWARD)
         Position += Front * velocity;
@@ -50,6 +56,7 @@ void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime)
         Position -= Right * velocity;
     if (direction == Types::CameraMovement::RIGHT)
         Position += Right * velocity;
+    */
 }
 
 void Camera::ProcessMouseMovement(double xpos, double ypos,
@@ -74,6 +81,8 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
 
+
+        /*
         Yaw   += xoffset;
         Pitch += yoffset;
 
@@ -84,8 +93,16 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
             if (Pitch < -89.0f)
                 Pitch = -89.0f;
         }
-        
-        updateCameraVectors();
+        */
+
+        // Current angle in radians
+        const float radius = glm::length(Position - center);
+        rotX += xoffset * MouseSensitivity;
+
+        float camX = sin(rotX) * radius + center.x;
+        float camZ = cos(rotX) * radius + center.z;
+
+        Position = glm::vec3(camX, Position.y, camZ);
     }
     /* move the camera */
     else if (Screen::isKeyPressed(GLFW_KEY_LEFT_CONTROL))
@@ -105,8 +122,8 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         xoffset *= MouseSensitivity * 0.1f;
         yoffset *= MouseSensitivity * 0.1f;
 
-        Position += Right * (-xoffset);
-        Position += Up * (-yoffset);
+        Position += glm::vec3(-xoffset, -yoffset, 0.0f);
+        center += glm::vec3(-xoffset, -yoffset, 0.0f);
     }
     else {
         firstMouse = true;
@@ -123,6 +140,7 @@ void Camera::ProcessMouseScroll(float yoffset)
         Camera::Zoom = 45.0f;
 }
 
+/* For aircraft camera */
 void Camera::updateCameraVectors()
 {
     /* calculate the new Front vector */

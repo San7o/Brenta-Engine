@@ -27,6 +27,7 @@ public:
     static glm::vec3 Up;
     static glm::vec3 Right;
     static glm::vec3 WorldUp;
+    static glm::vec3 center;
     /* euler Angles */
     static float Yaw;
     static float Pitch;
