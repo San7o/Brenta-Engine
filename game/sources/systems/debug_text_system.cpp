@@ -12,7 +12,7 @@ void InitDebugTextSystem() {
 
         const float offset = 20.0f;
 
-        auto color = glm::vec3(0.1f, 0.1f, 0.1f);
+        auto color = glm::vec3(1.0f, 0.9f, 0.0f);
 
         Text::RenderText(
                 "FPS: " + std::to_string(Time::GetFPS()),

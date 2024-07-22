@@ -167,6 +167,7 @@ void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3
     glBindTexture(GL_TEXTURE_2D, 0);
 
 /*
+    // Render a test triangle
     Shader::Use(textShader);
 
     float vertices[6][4] = {

@@ -111,7 +111,7 @@ void Camera::ProcessMouseMovement(double xpos, double ypos,
         glm::vec3 right = glm::normalize(glm::cross(front, WorldUp)); // Versor
 
         center += right * glm::vec3(xoffset);
-        center += WorldUp * glm::vec3(yoffset);
+        center -= WorldUp * glm::vec3(yoffset);
         SphericalToCartesian();
     }
     /* zoom the camera */

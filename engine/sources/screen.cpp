@@ -12,6 +12,43 @@ GLFWwindow* Screen::window;
 int Screen::WIDTH;
 int Screen::HEIGHT;
 
+void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
+                  bool isMouseCaptured, const char* title)
+{
+    Screen::WIDTH = SCR_WIDTH;
+    Screen::HEIGHT = SCR_HEIGHT;
+
+    if (glfwInit() == GLFW_FALSE)
+    {
+        Logger::Log(Types::LogLevel::ERROR,
+                        "Failed to initialize GLFW on init");
+    }
+
+    SetContextVersion(3, 3); /* OpenGL 3.3 */
+    UseCoreProfile();
+
+    glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+    Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
+
+    glfwSwapInterval(0); /* Disable VSync */
+    Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
+
+#ifdef __APPLE__
+    SetHintsApple();
+#endif
+
+    CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
+    MakeContextCurrent();
+    SetMouseCapture(isMouseCaptured);
+
+    /* Set the callback for resizing the window */
+    Screen::SetSizeCallback(Framebuffer_size_callback);
+
+    Input::Init();
+    Audio::Init();
+    Camera::Init();
+}
+
 bool Screen::isWindowClosed()
 {
     return glfwWindowShouldClose(Screen::window);
@@ -91,43 +128,6 @@ void Screen::SwapBuffers()
 void Screen::PollEvents()
 {
     glfwPollEvents();
-}
-
-void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
-                  bool isMouseCaptured, const char* title)
-{
-    Screen::WIDTH = SCR_WIDTH;
-    Screen::HEIGHT = SCR_HEIGHT;
-
-    if (glfwInit() == GLFW_FALSE)
-    {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Failed to initialize GLFW on init");
-    }
-
-    SetContextVersion(3, 3); /* OpenGL 3.3 */
-    UseCoreProfile();
-
-    glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
-    Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
-
-    glfwSwapInterval(0); /* Disable VSync */
-    Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
-
-#ifdef __APPLE__
-    SetHintsApple();
-#endif
-
-    CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
-    MakeContextCurrent();
-    SetMouseCapture(isMouseCaptured);
-
-    /* Set the callback for resizing the window */
-    Screen::SetSizeCallback(Framebuffer_size_callback);
-
-    Input::Init();
-    Audio::Init();
-    Camera::Init();
 }
 
 void Screen::SetContextVersion(int major, int minor)
