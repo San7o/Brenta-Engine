@@ -47,7 +47,7 @@ implemented:
 
 - [x] Simple Physics
 
-- [ ] Collisions: Spheres
+- [x] Collisions: Spheres
 
 - [ ] Shadows
 

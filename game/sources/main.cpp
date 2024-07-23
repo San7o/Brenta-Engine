@@ -18,7 +18,7 @@ int main() {
     GL::LoadOpenGL();
     World::Init();
 
-    //InitPlayerEntity();
+    InitPlayerEntity();
     //InitCubeEntity();
     InitFloorEntity();
     InitDirectionalLightEntity();

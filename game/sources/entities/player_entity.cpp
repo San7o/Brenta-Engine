@@ -23,7 +23,7 @@ void InitPlayerEntity() {
 
     /* Add the transform component */
     auto transform_component = std::make_shared<TransformComponent>(
-            glm::vec3(0.0f, 2.0f, 0.0f),
+            glm::vec3(0.0f, 1.8f, -5.0f),
             glm::vec3(0.0f),
             1.0f
     );
