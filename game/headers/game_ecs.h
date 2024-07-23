@@ -17,6 +17,7 @@
 #include "components/point_light_component.h"
 #include "components/directional_light_component.h"
 #include "components/physics_component.h"
+#include "components/sphere_collider_component.h"
 
 /* Systems */
 #include "systems/renderer_system.h"
@@ -25,6 +26,7 @@
 #include "systems/point_lights_system.h"
 #include "systems/directional_light_system.h"
 #include "systems/physics_system.h"
+#include "systems/collisions_system.h"
 
 /* Resources */
 #include "resources/wireframe_resource.h"

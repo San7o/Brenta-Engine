@@ -61,6 +61,9 @@ std::vector<Entity> World::QueryComponents(std::vector<ComponentName> components
     std::vector<Entity> matched = {};
     /* All the entities that have the first component are a match */
     auto first_components = World::components->at(components.at(0));
+    if (first_components.empty()) {
+        return matched;
+    }
     for (auto& component : first_components) {
         matched.push_back(component->entity);
     }

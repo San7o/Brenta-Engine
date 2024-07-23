@@ -31,6 +31,7 @@ int main() {
     //InitFpsSystem();
     InitDebugTextSystem();
     InitPhysicsSystem();
+    InitCollisionsSystem();
 
     InitToggleWireframeCallback();
     InitCloseWindowCallback();
