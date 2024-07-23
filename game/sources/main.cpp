@@ -11,23 +11,19 @@ const int SCR_HEIGHT = 720;
 
 int main() {
 
-    /* Set Log level, default = WARNING */
-    Logger::SetLogLevel(Types::LogLevel::DEBUG);
+    Logger::Init();                              /* defauls to ./logs/log.txt */
+    Logger::SetLogLevel(Types::LogLevel::DEBUG); /* default = WARNING */
 
-    /* Initialize the screen */
     Screen::Init(SCR_WIDTH, SCR_HEIGHT);
-
-    /* Load OpenGL */
     GL::LoadOpenGL();
-
-    /* Initialize the world */
     World::Init();
 
-    InitPlayerEntity();
+    //InitPlayerEntity();
     //InitCubeEntity();
     InitFloorEntity();
     InitDirectionalLightEntity();
     InitPointLightEntity();
+    InitSphereEntity();
 
     InitDirectionalLightSystem();
     InitPointLightsSystem();
@@ -58,6 +54,7 @@ int main() {
     
     World::Delete();
     Screen::Terminate();
+    Logger::Close();
     return 0;
 }
 

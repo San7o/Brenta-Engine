@@ -11,6 +11,7 @@ pkgs.mkShell {
     freetype                # font rendering
     harfbuzzFull            # text shaping
     alsa-lib                # audio
+    doxygen                 # documentation
   ];
 
   LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:";

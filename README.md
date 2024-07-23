@@ -47,6 +47,10 @@ implemented:
 
 - [ ] Physics
 
+- [ ] Collisions: Spheres
+
+- [ ] Shadows
+
 Screenshots and videos:
 
 https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
