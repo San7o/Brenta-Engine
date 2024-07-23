@@ -11,7 +11,11 @@ to handle most necessities like Input, 3D Model Loading, Audio, Time...
 
 Check out `GUIDE.md` for an introduction on how the system works!
 
-![Pasted image 20240721185901](https://github.com/user-attachments/assets/657426b5-6417-4e42-85da-abb5abeb6451)
+
+
+https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
+> Model loading, physics and lighting!
+
 
 # ⭐ Current State
 
@@ -50,12 +54,6 @@ implemented:
 - [x] Collisions: Spheres
 
 - [ ] Shadows
-
-Screenshots and videos:
-
-https://github.com/user-attachments/assets/8430fb69-66bb-4457-bdce-a87506b78235
-
-![image](https://github.com/user-attachments/assets/955611fb-3eeb-45a2-adc0-2a0b55680de1)
 
 # 💀 Dependencies
 
