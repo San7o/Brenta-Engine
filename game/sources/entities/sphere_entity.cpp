@@ -26,11 +26,11 @@ void InitSphereEntity() {
 
     /* Add the physics component */
     auto physics_component = std::make_shared<PhysicsComponent>(
-            1.0f,
-            1.0f,
-            glm::vec3(0.0f),
-            glm::vec3(0.0f),
-            true
+            1.0f,                         // mass
+            1.0f,                         // density
+            glm::vec3(0.0f, 0.0f, 0.0f),  // velocity
+            glm::vec3(0.0f, 0.0f, 0.0f),  // acceleration
+            true                          // isElastic
     );
     World::AddComponent(sphere_entity, "PhysicsComponent", physics_component);
 

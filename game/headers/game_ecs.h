@@ -24,6 +24,7 @@
 #include "systems/debug_text_system.h"
 #include "systems/point_lights_system.h"
 #include "systems/directional_light_system.h"
+#include "systems/physics_system.h"
 
 /* Resources */
 #include "resources/wireframe_resource.h"

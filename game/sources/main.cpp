@@ -30,6 +30,7 @@ int main() {
     InitRendererSystem();
     //InitFpsSystem();
     InitDebugTextSystem();
+    InitPhysicsSystem();
 
     InitToggleWireframeCallback();
     InitCloseWindowCallback();

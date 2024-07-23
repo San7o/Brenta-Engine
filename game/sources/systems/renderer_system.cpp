@@ -14,7 +14,7 @@ using namespace ECS::Types;
 
 void InitRendererSystem() {
 
-    auto renderer = std::make_shared<System>("Renderer", []() {
+    auto renderer = std::make_shared<System>("RendererSystem", []() {
         /* Get the entities with the model component */
         auto matches = World::QueryComponents({"ModelComponent", "TransformComponent"});
         if (matches.empty()) return;

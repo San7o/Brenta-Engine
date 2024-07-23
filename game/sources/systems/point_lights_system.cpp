@@ -6,7 +6,7 @@ using namespace ECS;
 
 /* Load the lights on the shaders */
 void InitPointLightsSystem() {
-    auto light_system = std::make_shared<System>("PointLights", []() {
+    auto light_system = std::make_shared<System>("PointLightSystem", []() {
         auto entities = World::QueryComponents(
                         {"TransformComponent", "PointLightComponent"});
         if (entities.empty()) return;

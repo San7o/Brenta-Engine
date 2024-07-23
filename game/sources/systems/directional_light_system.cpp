@@ -5,7 +5,7 @@ using namespace ECS;
 
 /* Load the lights on the shaders */
 void InitDirectionalLightSystem() {
-    auto light_system = std::make_shared<System>("DirectionalLight", []() {
+    auto light_system = std::make_shared<System>("DirectionalLightSystem", []() {
         auto entities = World::QueryComponents({"DirectionalLightComponent"});
         if (entities.empty()) return;
 

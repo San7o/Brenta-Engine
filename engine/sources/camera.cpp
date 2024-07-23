@@ -49,7 +49,7 @@ glm::mat4 Camera::GetProjectionMatrix()
 {
     return glm::perspective(glm::radians(Zoom),
         (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
-        0.1f, 100.0f);
+        0.1f, 1000.0f);
 }
 
 void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime) {}
