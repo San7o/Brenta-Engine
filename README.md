@@ -45,7 +45,7 @@ implemented:
 
 - [x] Audio engine
 
-- [ ] Physics
+- [x] Simple Physics
 
 - [ ] Collisions: Spheres
 

@@ -1,5 +1,6 @@
 #include "catch_amalgamated.hpp"
 #include "world.h"
+#include "engine_logger.h"
 
 #include <algorithm>
 #include <unordered_map>
@@ -7,8 +8,11 @@
 
 using namespace ECS::Types;
 
+
 TEST_CASE("Get ECS without inizialization")
 {
+    ECS::Logger::SetLogFile("logs/test_log.txt");
+    
     SECTION("Get ECS world entities without inizialization")
     {
         std::set<Entity>* entities = ECS::World::getEntities();
