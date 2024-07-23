@@ -320,3 +320,271 @@ INFO: Set viewport: 935x1016
 INFO: World deleted
 INFO: SDL Audio destroyed
 INFO: Screen terminated
+----------2024-07-23 12:41:01----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: PlayerComponent
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 3
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 4
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: System added: PhysicsSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+----------2024-07-23 12:42:12----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: PlayerComponent
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 3
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 4
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+INFO: Set viewport: 935x1016
+INFO: World deleted
+INFO: SDL Audio destroyed
+INFO: Screen terminated
+----------2024-07-23 12:51:26----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: PlayerComponent
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 3
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 4
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+INFO: Set viewport: 935x1016
+INFO: Set viewport: 1280x720
+INFO: Enabled GL_POLYGON_MODE (wireframe)
+INFO: Disabled GL_POLYGON_MODE (fill)
+INFO: World deleted
+INFO: SDL Audio destroyed
+INFO: Screen terminated
+----------2024-07-23 12:54:25----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 3
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: New entity created: 4
+INFO: Component added: TransformComponent
+INFO: Component added: PhysicsComponent
+INFO: Component added: ModelComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: System added: PhysicsSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+INFO: Set viewport: 935x1016
+INFO: World deleted
+INFO: SDL Audio destroyed
+INFO: Screen terminated
+----------2024-07-23 12:55:23----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 3
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: New entity created: 4
+INFO: Component added: TransformComponent
+INFO: Component added: PhysicsComponent
+INFO: Component added: ModelComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: System added: PhysicsSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+INFO: Set viewport: 935x1016
+INFO: World deleted
+INFO: SDL Audio destroyed
+INFO: Screen terminated
+----------2024-07-23 12:56:11----------
+INFO: Set context to OpenGL version: 3.3
+INFO: Set OpenGL profile to core
+INFO: Enabled MSAA
+INFO: Disabled VSync
+INFO: Mouse not captured
+INFO: Set framebuffer size callback
+INFO: Input initialized
+INFO: Stream resumed
+INFO: SDL Audio stream created
+INFO: SDL Audio initialized
+INFO: Camera initialized
+INFO: Enabled GL_DEPTH_TEST
+INFO: Enabled GL_BLEND (transparency)
+INFO: Enabled GL_CULL_FACE (draw only visible triangles)
+INFO: Enabled GL_MULTISAMPLE
+INFO: Text initialized
+INFO: OpenGl loaded
+INFO: World initialized
+INFO: Component added: TransformComponent
+INFO: Component added: ModelComponent
+INFO: New entity created: 2
+INFO: Component added: DirectionalLightComponent
+INFO: New entity created: 3
+INFO: Component added: PointLightComponent
+INFO: Component added: TransformComponent
+INFO: New entity created: 4
+INFO: Component added: TransformComponent
+INFO: Component added: PhysicsComponent
+INFO: Component added: ModelComponent
+INFO: System added: DirectionalLightSystem
+INFO: System added: PointLightSystem
+INFO: System added: RendererSystem
+INFO: System added: DebugTextSystem
+INFO: System added: PhysicsSystem
+INFO: Added callback for key: 70
+INFO: Added callback for key: 256
+INFO: Added callback for mouse: CameraCallback
+INFO: Added callback for key: 80
+INFO: Resource added: WireframeResource
+INFO: Loaded audio at /home/lanto/Documents/opengl-santo-engine/assets/audio/guitar.wav
+INFO: Set viewport: 935x1016
+INFO: Set viewport: 1280x720
+INFO: World deleted
+INFO: SDL Audio destroyed
+INFO: Screen terminated

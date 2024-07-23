@@ -71,6 +71,8 @@ You need:
 
 - `SDL3` for audio, make sure you compile for your audio driver
 
+- `doxygen` for building documentation
+
 If you are on `Nix`, you can access the developement environment
 by running:
 ```bash
@@ -115,6 +117,12 @@ make test
 # Test rendering
 make render
 ```
+
+Generate documentation with `doxygen` (you need to have doxygen installed in your system):
+```bash
+doxygen doxygen.conf
+```
+The index will be located in `docs/html/index.html`.
 
 The binaries will be generated in `build/` directory.
 
