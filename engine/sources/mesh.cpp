@@ -5,7 +5,11 @@
 
 using namespace ECS;
 
-Mesh::Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indices, std::vector<Types::Texture> textures)
+Mesh::Mesh(std::vector<Types::Vertex> vertices,
+                std::vector<unsigned int> indices,
+                std::vector<Types::Texture> textures,
+                GLint wrapping, GLint filtering_min, GLint filtering_mag,
+                GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_max)
 {
     this->vao.Init();
     this->vertices = vertices;
@@ -13,6 +17,12 @@ Mesh::Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indice
     this->textures = textures;
     this->vbo = Types::Buffer(GL_ARRAY_BUFFER);
     this->ebo = Types::Buffer(GL_ELEMENT_ARRAY_BUFFER);
+    this->wrapping = wrapping;
+    this->filtering_min = filtering_min;
+    this->filtering_mag = filtering_mag;
+    this->hasMipmap = hasMipmap;
+    this->mipmap_min = mipmap_min;
+    this->mipmap_mag = mipmap_max;
 
     setupMesh();
 }
@@ -36,7 +46,9 @@ void Mesh::Draw(Types::ShaderName shader_name)
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
         Shader::SetInt(shader_name, ("material." + name + number).c_str(), i);
-        Texture::BindTexture(GL_TEXTURE_2D, textures[i].id);
+        Texture::BindTexture(GL_TEXTURE_2D, textures[i].id, this->wrapping,
+                        this->filtering_min, this->filtering_mag,
+                        this->hasMipmap, this->mipmap_min, this->mipmap_mag);
     }
     Texture::ActiveTexture(GL_TEXTURE0);
 

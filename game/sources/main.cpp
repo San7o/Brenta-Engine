@@ -24,6 +24,7 @@ int main() {
     InitDirectionalLightEntity();
     InitPointLightEntity();
     InitSphereEntity();
+    InitRobotEntity();
 
     InitDirectionalLightSystem();
     InitPointLightsSystem();

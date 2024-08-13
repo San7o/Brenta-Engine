@@ -7,27 +7,35 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#ifndef __glad_h_
 #include <glad/glad.h>
-#endif
 
 #include <string>
 #include <vector>
 
-#ifndef SHADER_H
 #include "shader.h"
-#endif
-
-#ifndef MESH_H
 #include "mesh.h"
-#endif
 
 namespace ECS {
 
 class Model
 {
 public:
-    Model(std::string const& path);
+    GLint wrapping;
+    GLint filtering_min;
+    GLint filtering_mag;
+    GLboolean hasMipmap;
+    GLint mipmap_min;
+    GLint mipmap_mag;
+    bool flip;
+
+    Model(std::string const& path, GLint wrapping = GL_REPEAT,
+                    GLint filtering_min = GL_NEAREST,
+                    GLint filtering_mag = GL_LINEAR,
+                    GLboolean hasMipmap = GL_TRUE,
+                    GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                    GLint mipmap_mag = GL_LINEAR,
+                    bool flip = true);
+
     void Draw(Types::ShaderName shader);
 private:
     // model data

@@ -9,6 +9,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#define ANIMATION_SPEED 24
+
 using namespace ECS;
 using namespace ECS::Types;
 
@@ -43,6 +45,26 @@ void InitRendererSystem() {
 
             Shader::SetVec3(default_shader, "viewPos", Camera::GetPosition());
             Shader::SetFloat(default_shader, "material.shininess", model_component->shininess);
+
+            /* Animation control */
+            if (model_component->hasAtlas) {
+                if (model_component->elapsedFrames > ANIMATION_SPEED) {
+                    model_component->elapsedFrames = 0;
+                    model_component->atlasIndex++;
+                    if (model_component->atlasIndex >= model_component->atlasSize) {
+                        model_component->atlasIndex = 0;
+                    }
+                }
+                else {
+                    model_component->elapsedFrames++;
+                }
+                Shader::SetInt(default_shader, "atlasSize", model_component->atlasSize);
+                Shader::SetInt(default_shader, "atlasIndex", model_component->atlasIndex);
+            }
+            else
+            {
+                Shader::SetInt(default_shader, "atlasIndex", 0);
+            }
 
             myModel.Draw(default_shader);
         }

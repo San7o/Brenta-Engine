@@ -55,6 +55,9 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir);
 
 void main()
 {
+    vec4 textColor = texture(material.texture_diffuse1, TexCoords);
+    if (textColor.a < 0.1) discard;
+
     vec3 norm = normalize(Normal);
     vec3 viewDir = normalize(viewPos - FragPos);
 
@@ -66,7 +69,7 @@ void main()
     }
     else {
         // If we don't have a directional light, just use the texture
-        result = vec3(texture(material.texture_diffuse1, TexCoords));
+        result = vec3(textColor);
     }
 
     // Point lights

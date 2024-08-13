@@ -53,6 +53,8 @@ implemented:
 
 - [x] Collisions: Spheres
 
+- [x] Texture Atlas
+
 - [ ] Shadows
 
 # 💀 Dependencies
@@ -115,6 +117,7 @@ make test
 # Test rendering
 make render
 ```
+The binaries will be generated in `build/` directory.
 
 Generate documentation with `doxygen` (you need to have doxygen installed in your system):
 ```bash
@@ -122,11 +125,12 @@ doxygen doxygen.conf
 ```
 The index will be located in `docs/html/index.html`.
 
-The binaries will be generated in `build/` directory.
 
 
 ## 👴 Future
 
+- [ ] Animations
+
 - [ ] Rotations with quaternions
 
-- [ ] A GUI fot the engine
+- [ ] A GUI for the engine

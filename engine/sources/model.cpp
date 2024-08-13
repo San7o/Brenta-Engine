@@ -5,8 +5,17 @@
 
 using namespace ECS;
 
-Model::Model(std::string const& path)
+Model::Model(std::string const& path, GLint wrapping, GLint filtering_min,
+                GLint filtering_mag, GLboolean hasMipmap, GLint mipmap_min,
+                GLint mipmap_mag, bool flip)
 {
+    this->wrapping = wrapping;
+    this->filtering_min = filtering_min;
+    this->filtering_mag = filtering_mag;
+    this->hasMipmap = hasMipmap;
+    this->mipmap_min = mipmap_min;
+    this->mipmap_mag = mipmap_mag;
+    this->flip = flip;
     loadModel(path);
 }
 
@@ -98,7 +107,9 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene)
         textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
     }
 
-    return Mesh(vertices, indices, textures);
+    return Mesh(vertices, indices, textures, this->wrapping,
+                this->filtering_min, this->filtering_mag, this->hasMipmap,
+                this->mipmap_min, this->mipmap_mag );
 }
 
 std::vector<Types::Texture> Model::loadMaterialTextures(aiMaterial* mat,
@@ -122,7 +133,15 @@ std::vector<Types::Texture> Model::loadMaterialTextures(aiMaterial* mat,
         if (!skip)
         {
             Types::Texture texture;
-            texture.id = Texture::LoadTexture(str.C_Str(), directory.c_str());
+            texture.id = Texture::LoadTexture(str.C_Str(),
+                            directory.c_str(),
+                            this->wrapping,
+                            this->filtering_min,
+                            this->filtering_mag,
+                            this->hasMipmap,
+                            this->mipmap_min,
+                            this->mipmap_mag,
+                            this->flip);
             texture.type = typeName;
             texture.path = str.C_Str();
             textures.push_back(texture);

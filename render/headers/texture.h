@@ -16,7 +16,13 @@ public:
                     GLint mipmap_mag = GL_LINEAR,
                     bool flip = true);
     static void ActiveTexture(GLenum texture);
-    static void BindTexture(GLenum target, unsigned int texture);
+    static void BindTexture(GLenum target, unsigned int texture, 
+                    GLint wrapping = GL_REPEAT,
+                    GLint filtering_min = GL_NEAREST,
+                    GLint filtering_mag = GL_LINEAR,
+                    GLboolean hasMipmap = GL_TRUE,
+                    GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                    GLint mipmap_mag = GL_LINEAR);
 private:
     static void SetTextureWrapping(GLint wrapping);
     static void SetTextureFiltering(GLint filtering_min, GLint filtering_mag);

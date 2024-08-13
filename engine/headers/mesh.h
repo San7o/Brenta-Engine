@@ -10,25 +10,11 @@
 #include <string>
 #include <vector>
 
-#ifndef GL_HELPER_h
 #include "gl_helper.h"
-#endif
-
-#ifndef TEXTURE_H
 #include "texture.h"
-#endif
-
-#ifndef SHADER_H
 #include "shader.h"
-#endif
-
-#ifndef BUFFER_H
 #include "buffer.h"
-#endif
-
-#ifndef VAO_H
 #include "vao.h"
-#endif
 
 namespace ECS {
 
@@ -54,9 +40,21 @@ public:
     std::vector<Types::Vertex>  vertices;
     std::vector<unsigned int>   indices;
     std::vector<Types::Texture> textures;
+    GLint wrapping;
+    GLint filtering_min;
+    GLint filtering_mag;
+    GLboolean hasMipmap;
+    GLint mipmap_min;
+    GLint mipmap_mag;
 
     Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indices,
-                    std::vector<Types::Texture> textures);
+                    std::vector<Types::Texture> textures,
+                    GLint wrapping = GL_REPEAT,
+                    GLint filtering_min = GL_NEAREST,
+                    GLint filtering_mag = GL_LINEAR,
+                    GLboolean hasMipmap = GL_TRUE,
+                    GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                    GLint mipmap_max = GL_LINEAR);
     void Draw(Types::ShaderName shader_name);
 private:
     // render data

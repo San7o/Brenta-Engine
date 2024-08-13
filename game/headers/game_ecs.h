@@ -10,6 +10,7 @@
 #include "entities/point_light_entity.h"
 #include "entities/directional_light_entity.h"
 #include "entities/sphere_entity.h"
+#include "entities/robot_entity.h"
 
 /* Components */
 #include "components/model_component.h"

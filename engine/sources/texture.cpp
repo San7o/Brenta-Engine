@@ -8,19 +8,16 @@ using namespace ECS;
 
 unsigned int Texture::LoadTexture(const char* path, const char* directory,
                 GLint wrapping, GLint filtering_min, GLint filtering_mag,
-                GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag, bool flip)
+                GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag,
+                bool flip)
 {
     unsigned int texture;
     std::string fullPath = std::string(directory) + "/" + std::string(path);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
+    //Texture::BindTexture(GL_TEXTURE_2D, texture, wrapping, filtering_min, filtering_mag, hasMipmap, mipmap_min, mipmap_mag);
 
     ReadImage(fullPath.c_str(), flip);
-
-    SetTextureWrapping(wrapping);
-    SetTextureFiltering(filtering_min, filtering_mag);
-    SetMipmap(hasMipmap, mipmap_min, mipmap_mag);
-
     return texture;
 }
 
@@ -29,9 +26,14 @@ void Texture::ActiveTexture(GLenum texture)
     glActiveTexture(texture);
 }
 
-void Texture::BindTexture(GLenum target, unsigned int texture)
+void Texture::BindTexture(GLenum target, unsigned int texture,
+                GLint wrapping, GLint filtering_min, GLint filtering_mag,
+                GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag)
 {
     glBindTexture(target, texture);
+    SetTextureWrapping(wrapping);
+    SetTextureFiltering(filtering_min, filtering_mag);
+    SetMipmap(hasMipmap, mipmap_min, mipmap_mag);
 }
 
 void Texture::SetTextureWrapping(GLint wrapping)

@@ -1,0 +1,12 @@
+# Blender 4.0.1 MTL File: 'robot_sprite.blend'
+# www.blender.org
+
+newmtl robot_sprite
+Ns 250.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+illum 2
+map_Kd texture_diffuse.png
+map_d texture_diffuse.png
