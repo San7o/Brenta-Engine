@@ -18,10 +18,11 @@ const int SCR_HEIGHT = 720;
 // BEGIN TESTING ---------------------------------------------------
 
 // Initialize particles
-std::vector<glm::vec3> initialPositions(1000);  // 1000 particles
+std::vector<glm::vec3> initialPositions(1000, glm::vec3(7.0f));  // 1000 particles
 std::vector<glm::vec3> initialVelocities(1000);  // 1000 velocities
 GLuint vao, vbo[2], fbo[2];
 bool first = true;
+int current = 0;
 
 void checkOpenGLError(const std::string& functionName) {
     GLenum error;
@@ -60,16 +61,10 @@ void setupParticles() {
 
     // Create fbos
     glGenBuffers(2, fbo);
-    glBindBuffer(GL_ARRAY_BUFFER, fbo[0]);
-    glBufferData(GL_ARRAY_BUFFER, initialPositions.size() * sizeof(glm::vec3), nullptr, GL_DYNAMIC_COPY);
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[0]);
-    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, initialPositions.size() * sizeof(glm::vec3), nullptr, GL_DYNAMIC_COPY);
-    checkOpenGLError("glBindBufferBase");
-
-    glBindBuffer(GL_ARRAY_BUFFER, fbo[1]);
-    glBufferData(GL_ARRAY_BUFFER, initialVelocities.size() * sizeof(glm::vec3), nullptr, GL_DYNAMIC_COPY);
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 1, fbo[1]);
-    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, initialVelocities.size() * sizeof(glm::vec3), nullptr, GL_DYNAMIC_COPY);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[0]);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 1000 * 2 * sizeof(glm::vec3), NULL, GL_DYNAMIC_COPY);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[1]);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, 1000 * 2 * sizeof(glm::vec3), NULL, GL_DYNAMIC_COPY);
     checkOpenGLError("glBindBufferBase");
 
     // Unbind buffers
@@ -87,13 +82,15 @@ void updateParticles(float deltaTime) {
 
     glBindVertexArray(vao);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[0]);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo[1]);
     checkOpenGLError("glVertexAttribPointer");
 
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[0]);
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 1, fbo[1]);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current]);
     checkOpenGLError("glBindBufferBase");
+
+    glBindBuffer(GL_ARRAY_BUFFER, fbo[!current]);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)0);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3), (void*)sizeof(glm::vec3));
+    glEnableVertexAttribArray(0);
 
     // Start transform feedback
     glEnable(GL_RASTERIZER_DISCARD);  // Disable rasterization
@@ -109,6 +106,7 @@ void updateParticles(float deltaTime) {
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
+    current = !current; // Swap buffers
 }
 
 // Render particles
@@ -191,10 +189,18 @@ int main() {
 
         // Get feedback
         glFlush();
-        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[0]);
+        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[current]);
         glm::vec3 feedback[3];
-        glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 1, sizeof(feedback), feedback);
-        std::cout << feedback[0].x << " " << feedback[0].y << " " << feedback[0].z << std::endl;
+        glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
+        std::cout << feedback[0].x << " "
+                  << feedback[0].y << " "
+                  << feedback[0].z << ", "
+                  << feedback[1].x << " "
+                  << feedback[1].y << " "
+                  << feedback[1].z << ", "
+                  << feedback[2].x << " "
+                  << feedback[2].y << " "
+                  << feedback[2].z << std::endl;
         glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, 0);
         // ----- TESTING -----
         
