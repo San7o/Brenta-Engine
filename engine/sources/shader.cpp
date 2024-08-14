@@ -17,10 +17,13 @@ using namespace ECS;
 
 std::unordered_map<Types::ShaderName, unsigned int> Shader::shaders;
 
-/* Constructor reads and builds the shader */
+/* Constructor reads and builds the shader
+ * NOTE: if you set doLink to false, you need to link
+ * the shader manually with glLinkProgram */
 void Shader::NewShader(Types::ShaderName shader_name,
                 std::string const& vertexPath,
-                std::string const& fragmentPath)
+                std::string const& fragmentPath,
+                const GLchar** feedbackVaryings, int numVaryings)
 {
     if (Shader::shaders.find(shader_name) != Shader::shaders.end())
     {
@@ -94,6 +97,12 @@ void Shader::NewShader(Types::ShaderName shader_name,
     unsigned int ID = glCreateProgram();
     glAttachShader(ID, vertex);
     glAttachShader(ID, fragment);
+    
+    if (feedbackVaryings != nullptr)
+    {
+        glTransformFeedbackVaryings(ID, numVaryings, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
+    }
+
     glLinkProgram(ID);
     Shader::CheckCompileErrors(ID, "PROGRAM");
 
@@ -104,7 +113,88 @@ void Shader::NewShader(Types::ShaderName shader_name,
      * our program now and no longer necessary */
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+}
 
+/**
+ * @brief Create a new vertex shader from a single file
+ *
+ * @param shader_name The name of the shader
+ * @param vertexPath The path to the vertex shader
+ */
+void Shader::NewVertexShader(Types::ShaderName shader_name,
+                                std::string const& vertexPath,
+                                const GLchar** feedbackVaryings, int numVaryings)
+{
+    if (Shader::shaders.find(shader_name) != Shader::shaders.end())
+    {
+        Logger::Log(Types::LogLevel::INFO, "Tried to create a shader that already exists with name: " + shader_name + ", the shader was not created");
+        return;
+    }
+
+    /* 
+     * 1. retrieve the vertex source
+     *    code from filePath 
+     */
+
+    std::string vertexCode;
+    std::ifstream vShaderFile;
+
+    /* Ensure ifstream objects can throw exceptions */
+    vShaderFile.exceptions(std::ifstream::failbit |
+                             std::ifstream::badbit);
+    try 
+    {
+        /* open files */
+        vShaderFile.open(vertexPath);
+        std::stringstream vShaderStream;
+
+        /* read file's buffer contents into streams */
+        vShaderStream << vShaderFile.rdbuf();
+
+        /* close file handlers */
+        vShaderFile.close();
+
+        /* convert stream into string */
+        vertexCode   = vShaderStream.str();
+    }
+    catch (std::ifstream::failure& e)
+    {
+        std::cout << "ERROR::SHADER::FILE_NOT_SUCCESSFULLY_READ: "
+                  << e.what() << std::endl;
+    }
+
+    const char* vShaderCode = vertexCode.c_str();
+
+    /* 
+     * 2. compile shaders
+     */
+
+    unsigned int vertex;
+
+    /* vertex shader */
+    vertex = glCreateShader(GL_VERTEX_SHADER);
+    glShaderSource(vertex, 1, &vShaderCode, NULL);
+    glCompileShader(vertex);
+    Shader::CheckCompileErrors(vertex, "VERTEX");
+
+    /* shader Program */
+    unsigned int ID = glCreateProgram();
+    glAttachShader(ID, vertex);
+    
+    if (feedbackVaryings != nullptr)
+    {
+        glTransformFeedbackVaryings(ID, numVaryings, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
+    }
+    
+    glLinkProgram(ID);
+    Shader::CheckCompileErrors(ID, "PROGRAM");
+
+    /* Save the shader */
+    Shader::shaders.insert({shader_name, ID});
+
+    /* delete the shaders as they're linked into 
+     * our program now and no longer necessary */
+    glDeleteShader(vertex);
 }
 
 unsigned int Shader::GetId(Types::ShaderName shader_name)
@@ -120,9 +210,11 @@ unsigned int Shader::GetId(Types::ShaderName shader_name)
 void Shader::Use(Types::ShaderName shader_name)
 {
     glUseProgram(Shader::GetId(shader_name));
-    if (glGetError() != GL_NO_ERROR)
+    GLenum err;
+    if ((err = glGetError()) != GL_NO_ERROR)
     {
         Logger::Log(Types::LogLevel::ERROR, "Error using shader: " + shader_name);
+        std::cout << err << std::endl;
     }
 }
 

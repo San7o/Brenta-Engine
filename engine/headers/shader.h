@@ -38,7 +38,13 @@ public:
     /* Constructor reads and builds the shader */
     static void NewShader(Types::ShaderName shader_name,
                           std::string const& vertexPath,
-                          std::string const& fragmentPath);
+                          std::string const& fragmentPath,
+                          const GLchar** feedbackVaryings = nullptr,
+                          int numVaryings = 0);
+    static void NewVertexShader(Types::ShaderName shader_name,
+                          std::string const& vertexPath,
+                          const GLchar** feedbackVaryings = nullptr,
+                          int numVaryings = 0);
     static unsigned int GetId(Types::ShaderName shader_name);
 
     /* Use/activate the shader */
