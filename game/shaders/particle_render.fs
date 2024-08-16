@@ -1,15 +1,21 @@
 #version 330 core
 
 in float drawOrDieFrag;
+in vec2 TexCoordFrag;
+
 out vec4 FragColor;
+uniform sampler2D sprite;
 
 void main() {
 
     if (drawOrDieFrag < 0.0) {
-        //FragColor = vec4(1.0, 0.0, 0.0, 1.0); // Red for dead
         discard;
     }
     else {
-        FragColor = vec4(0.0, 1.0, 0.0, 1.0); // White
+        FragColor = texture(sprite, TexCoordFrag);
+        if (FragColor.a < 0.1) {
+            discard;
+        }
+        //FragColor = vec4(0.0, 1.0, 0.0, 1.0); // White
     }
 }

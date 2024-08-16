@@ -7,9 +7,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#ifndef __glad_h_
 #include <glad/glad.h>       /* OpenGL driver */
-#endif
 
 namespace ECS {
 

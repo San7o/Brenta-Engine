@@ -31,6 +31,7 @@ GLuint vao, vbo[3], fbo[2];
 bool first = true;
 int current = 0;
 GLuint written = 0;
+int particle_texture_atlas;
 
 void checkOpenGLError(const std::string& functionName) {
     GLenum error;
@@ -83,6 +84,12 @@ void setupParticles() {
     glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[1]);
     glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, MAX_PARTICLES * 2 * sizeof(glm::vec3) + MAX_PARTICLES * sizeof(float), NULL, GL_DYNAMIC_COPY);
     checkOpenGLError("glBindBufferBase");
+
+    // Load Texture Atlas
+    particle_texture_atlas = ECS::Texture::LoadTexture(
+        "particle_atlas.png",
+        std::filesystem::absolute("assets/textures").string().c_str()
+    );
 
     // Unbind buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -178,6 +185,13 @@ void renderParticles() {
     t.setProjection(Camera::GetProjectionMatrix());
     t.setModel(glm::mat4(1.0f));
     t.setShader("particle_render");
+    Shader::SetInt("particle_render", "atlas_width", 8);
+    Shader::SetInt("particle_render", "atlas_height", 8);
+    Shader::SetInt("particle_render", "atlas_index", 52);
+
+    // Set Textures
+    ECS::Texture::ActiveTexture(GL_TEXTURE0);
+    ECS::Texture::BindTexture(GL_TEXTURE_2D, particle_texture_atlas);
 
     glDrawArrays(GL_POINTS, 0, 1000);
     checkOpenGLError("glDrawArrays");
