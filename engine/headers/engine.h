@@ -23,5 +23,6 @@
 #include "text.h"
 #include "engine_audio.h"
 #include "camera.h"
+#include "particles.h"
 
 #endif

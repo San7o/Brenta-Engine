@@ -13,8 +13,7 @@ namespace ECS {
 
 class Texture {
 public:
-    static unsigned int LoadTexture(const char* path,
-                    const char* directory,
+    static unsigned int LoadTexture(std::string path,
                     GLint wrapping = GL_REPEAT,
                     GLint filtering_min = GL_NEAREST,
                     GLint filtering_mag = GL_NEAREST,

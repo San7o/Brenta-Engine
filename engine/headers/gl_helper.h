@@ -7,9 +7,7 @@
 #ifndef GL_HELPER_H
 #define GL_HELPER_H
 
-#ifndef __glad_h_
 #include <glad/glad.h>       /* OpenGL driver */
-#endif
 
 namespace ECS {
 

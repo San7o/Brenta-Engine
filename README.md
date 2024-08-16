@@ -55,6 +55,8 @@ implemented:
 
 - [x] Texture Atlas
 
+- [x] Particles
+
 - [ ] Shadows
 
 # 💀 Dependencies

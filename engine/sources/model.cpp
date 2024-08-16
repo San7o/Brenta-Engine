@@ -133,8 +133,9 @@ std::vector<Types::Texture> Model::loadMaterialTextures(aiMaterial* mat,
         if (!skip)
         {
             Types::Texture texture;
-            texture.id = Texture::LoadTexture(str.C_Str(),
-                            directory.c_str(),
+            std::string path = directory + "/" + std::string(str.C_Str());
+            texture.id = Texture::LoadTexture(
+                            path,
                             this->wrapping,
                             this->filtering_min,
                             this->filtering_mag,

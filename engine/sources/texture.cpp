@@ -6,18 +6,17 @@
 
 using namespace ECS;
 
-unsigned int Texture::LoadTexture(const char* path, const char* directory,
+unsigned int Texture::LoadTexture(std::string path,
                 GLint wrapping, GLint filtering_min, GLint filtering_mag,
                 GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag,
                 bool flip)
 {
     unsigned int texture;
-    std::string fullPath = std::string(directory) + "/" + std::string(path);
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
     //Texture::BindTexture(GL_TEXTURE_2D, texture, wrapping, filtering_min, filtering_mag, hasMipmap, mipmap_min, mipmap_mag);
 
-    ReadImage(fullPath.c_str(), flip);
+    ReadImage(path.c_str(), flip);
     return texture;
 }
 

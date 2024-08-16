@@ -3,9 +3,7 @@
 #ifndef VAO_H
 #define VAO_H
 
-#ifndef _glad_h_
 #include <glad/glad.h>       /* OpenGL driver */
-#endif
 
 #include "buffer.h"
 
