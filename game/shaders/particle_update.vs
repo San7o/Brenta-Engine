@@ -19,7 +19,7 @@ void main() {
     if (inTTL <= 0.0) {
         outPosition = inPosition;
         outVelocity = vec3(0.0);
-        outTTL = 0.0;
+        outTTL = -1.0;
         return;
     }
 

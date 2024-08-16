@@ -26,9 +26,13 @@ void InitCubeEntity() {
 
     /* Load the shader */
     if (Shader::GetId("cube_shader") == 0) {
-        Shader::NewShader("cube_shader",
-                      std::filesystem::absolute("game/shaders/shader.vs"),
-                      std::filesystem::absolute("game/shaders/shader.fs"));
+        Shader::New(
+            "cube_shader",
+            GL_VERTEX_SHADER,
+            std::filesystem::absolute("game/shaders/shader.vs"),
+            GL_FRAGMENT_SHADER,
+            std::filesystem::absolute("game/shaders/shader.fs")
+        );
     }
 
     /* Load the model */

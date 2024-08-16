@@ -29,9 +29,13 @@ void Text::Load(std::string font, unsigned int fontSize)
         return;
     }
 
-    Shader::NewShader("TextShader",
-                    std::filesystem::absolute("engine/shaders/text.vs"), 
-                    std::filesystem::absolute("engine/shaders/text.fs"));
+    Shader::New(
+        "TextShader",
+        GL_VERTEX_SHADER,
+        std::filesystem::absolute("engine/shaders/text.vs"), 
+        GL_FRAGMENT_SHADER,
+        std::filesystem::absolute("engine/shaders/text.fs")
+    );
     textShader = "TextShader";
     Shader::Use(textShader);
 

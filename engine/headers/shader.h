@@ -11,16 +11,22 @@
 #ifndef SHADER_H
 #define SHADER_H
 
-#include <string>
+#include "engine_logger.h"
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#ifndef __glad_h_
 #include <glad/glad.h>       /* OpenGL driver */
-#endif
 
 #include <unordered_map>
+#include <string>
+#include <vector>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <vector>
 
 namespace ECS {
 
@@ -33,45 +39,110 @@ typedef std::string ShaderName;
 class Shader {
 
 public:
-    static std::unordered_map<Types::ShaderName, unsigned int> shaders;
+static std::unordered_map<Types::ShaderName, unsigned int> shaders;
 
-    /* Constructor reads and builds the shader */
-    static void NewShader(Types::ShaderName shader_name,
-                          std::string const& vertexPath,
-                          std::string const& fragmentPath,
-                          const GLchar** feedbackVaryings = nullptr,
-                          int numVaryings = 0);
-    static void NewVertexShader(Types::ShaderName shader_name,
-                          std::string const& vertexPath,
-                          const GLchar** feedbackVaryings = nullptr,
-                          int numVaryings = 0);
+template<typename... Args>
+static void New(std::string shader_name, GLenum type, std::string path, Args... args)
+{
+    std::vector<unsigned int> compiled_shaders = {};
+    compile_shaders(compiled_shaders, type, path, args...);
 
-    static void NewShader3(Types::ShaderName shader_name,
-                          std::string const& vertexPath,
-                          std::string const& geometryPath,
-                          std::string const& fragmentPath,
-                          const GLchar** feedbackVaryings = nullptr,
-                          int numVaryings = 0);
-    static unsigned int GetId(Types::ShaderName shader_name);
+    /* shader Program */
+    unsigned int ID = glCreateProgram();
+    std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                    [&ID](auto shader){ glAttachShader(ID, shader); });
+    
+    glLinkProgram(ID);
+    Shader::CheckCompileErrors(ID, "PROGRAM");
 
-    /* Use/activate the shader */
-    static void Use(Types::ShaderName shader_name);
+    Shader::shaders.insert({shader_name, ID});
+    std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                    [](auto shader){ glDeleteShader(shader); });
+}
 
-    /* Utility uniform functions */
-    static void SetBool(Types::ShaderName shader_name,
-                        const std::string &name, bool value);
-    static void SetInt(Types::ShaderName shader_name,
-                        const std::string &name, int value);
-    static void SetFloat(Types::ShaderName shader_name,
-                        const std::string &name, float value);
-    static void SetMat4(Types::ShaderName shader_name,
-                        const GLchar* name, glm::mat4 value);
-    static void SetVec3(Types::ShaderName shader_name,
-                        const GLchar* name, float x, float y, float z);
-    static void SetVec3(Types::ShaderName shader_name,
-                        const GLchar* name, glm::vec3 value);
+template<typename... Args>
+static void New(const GLchar** feedbackVaryings, int numVaryings,
+                std::string shader_name, GLenum type, std::string path, Args... args)
+{
+    std::vector<unsigned int> compiled_shaders = {};
+    compile_shaders(compiled_shaders, type, path, args...);
+
+    /* shader Program */
+    unsigned int ID = glCreateProgram();
+    std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                    [&ID](auto shader){ glAttachShader(ID, shader); });
+    
+    if (feedbackVaryings != nullptr)
+    {
+        glTransformFeedbackVaryings(ID, numVaryings, feedbackVaryings, GL_INTERLEAVED_ATTRIBS);
+    }
+
+    glLinkProgram(ID);
+    Shader::CheckCompileErrors(ID, "PROGRAM");
+
+    Shader::shaders.insert({shader_name, ID});
+    std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                    [](auto shader){ glDeleteShader(shader); });
+}
+
+static void compile_shaders(std::vector<unsigned int>& compiled)
+{
+    return;
+}
+
+template<typename... Args>
+static void compile_shaders(std::vector<unsigned int>& compiled,
+                GLenum type, std::string path, Args... args)
+{
+    std::string code;
+    std::ifstream file;
+    file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try
+    {
+        file.open(path);
+        std::stringstream stream;
+        stream << file.rdbuf();
+        file.close();
+        code = stream.str();
+    }
+    catch (std::ifstream::failure& e)
+    {
+        Logger::Log(Types::LogLevel::ERROR, "Error reading shader file: " + path);
+        return;
+    }
+
+    const char* shader_code = code.c_str();
+    unsigned int shader = glCreateShader(type);
+    glShaderSource(shader, 1, &shader_code, NULL);
+    glCompileShader(shader);
+    Shader::CheckCompileErrors(shader, "SHADER");
+
+    compiled.push_back(shader);
+    compile_shaders(compiled, args...);
+}
+
+static unsigned int GetId(Types::ShaderName shader_name);
+
+/* Use/activate the shader */
+static void Use(Types::ShaderName shader_name);
+
+/* Utility uniform functions */
+static void SetBool(Types::ShaderName shader_name,
+                    const std::string &name, bool value);
+static void SetInt(Types::ShaderName shader_name,
+                    const std::string &name, int value);
+static void SetFloat(Types::ShaderName shader_name,
+                    const std::string &name, float value);
+static void SetMat4(Types::ShaderName shader_name,
+                    const GLchar* name, glm::mat4 value);
+static void SetVec3(Types::ShaderName shader_name,
+                    const GLchar* name, float x, float y, float z);
+static void SetVec3(Types::ShaderName shader_name,
+                    const GLchar* name, glm::vec3 value);
 private:
-    static void CheckCompileErrors(unsigned int shader, std::string type);
+static void CheckCompileErrors(unsigned int shader, std::string type);
+
 };
 
 } // namespace ECS

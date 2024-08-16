@@ -26,9 +26,13 @@ void InitFloorEntity() {
 
     if (Shader::GetId("default_shader") == 0) {
         /* Load the shader */
-        Shader::NewShader("default_shader",
-                          std::filesystem::absolute("game/shaders/shader.vs"),
-                          std::filesystem::absolute("game/shaders/shader.fs"));
+        Shader::New(
+            "default_shader",
+            GL_VERTEX_SHADER,
+            std::filesystem::absolute("game/shaders/shader.vs"),
+            GL_FRAGMENT_SHADER,
+            std::filesystem::absolute("game/shaders/shader.fs")
+        );
     }
 
     /* Load the model */

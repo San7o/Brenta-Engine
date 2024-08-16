@@ -30,6 +30,7 @@ std::vector<float> initialTimeToLive(MAX_PARTICLES, 3.0);  // Time to live in se
 GLuint vao, vbo[3], fbo[2];
 bool first = true;
 int current = 0;
+GLuint written = 0;
 
 void checkOpenGLError(const std::string& functionName) {
     GLenum error;
@@ -102,6 +103,12 @@ void updateParticles(float deltaTime) {
 
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current]);
     checkOpenGLError("glBindBufferBase");
+    
+    /*
+    GLuint query;
+    glGenQueries(1, &query);
+    glBeginQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN, query);
+    */
 
     if (!first) { // MUST BE HERE
         glBindBuffer(GL_ARRAY_BUFFER, fbo[!current]);
@@ -133,6 +140,14 @@ void updateParticles(float deltaTime) {
 
     glDrawArrays(GL_POINTS, 0, 1000);
     checkOpenGLError("glDrawTransformFeedback");
+
+    // End the query
+    /*
+    glEndQuery(GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN);
+    glGetQueryObjectuiv(query, GL_QUERY_RESULT, &written);
+    glDeleteQueries(1, &query);
+    std::cout << "Written: " << written << std::endl;
+    */
 
     glEndTransformFeedback(); // Exit transform feedback mode
     glDisable(GL_RASTERIZER_DISCARD);  // Enable rasterization
@@ -214,18 +229,24 @@ int main() {
 
     // ----- TESTING -----
     const GLchar* varyings[] = { "outPosition", "outVelocity", "outTTL" };
-    Shader::NewVertexShader(
-                    "particle_update",
-                    std::filesystem::absolute("game/shaders/particle_update.vs"),
-                    varyings,
-                    3
-                    );
-    Shader::NewShader3(
-                    "particle_render",
-                    std::filesystem::absolute("game/shaders/particle_render.vs"),
-                    std::filesystem::absolute("game/shaders/particle_render.gs"),
-                    std::filesystem::absolute("game/shaders/particle_render.fs")
-                    );
+    Shader::New(
+       varyings,
+       3,
+       "particle_update",
+       GL_VERTEX_SHADER,
+       std::filesystem::absolute("game/shaders/particle_update.vs")
+       //GL_GEOMETRY_SHADER,
+       //std::filesystem::absolute("game/shaders/particle_update.gs")
+    );
+    Shader::New(
+        "particle_render",
+        GL_VERTEX_SHADER,
+        std::filesystem::absolute("game/shaders/particle_render.vs").string(),
+        GL_GEOMETRY_SHADER,
+        std::filesystem::absolute("game/shaders/particle_render.gs").string(),
+        GL_FRAGMENT_SHADER,
+        std::filesystem::absolute("game/shaders/particle_render.fs").string()
+    );
     setupParticles();
     // ----- TESTING -----
 
