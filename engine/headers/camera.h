@@ -72,7 +72,6 @@ public:
                     GLboolean constrainPitch = true);
     static void ProcessMouseScroll(float yoffset);
 
-private:
     static void updateCameraEuler();   // euclids angles
     static void SphericalToCartesian(); // sperical coordinates
 };

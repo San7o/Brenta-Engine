@@ -8,7 +8,6 @@ in float drawOrDie[];
 uniform int atlas_width;
 uniform int atlas_height;
 uniform int atlas_index;
-uniform float scale = 1.0;
 
 out vec2 TexCoordFrag;
 out float drawOrDieFrag;
@@ -21,19 +20,19 @@ void main() {
     int row_index = atlas_index / atlas_width;
     int col_index = atlas_index % atlas_width;
 
-    gl_Position = gl_in[0].gl_Position + vec4(-1.0*scale, -1.0*scale, 0.0, 0.0);
+    gl_Position = gl_in[0].gl_Position + vec4(-1.0, -1.0, 0.0, 0.0);
     TexCoordFrag = vec2(square_x * col_index,
                         square_y * (atlas_height - row_index - 1));
     EmitVertex();
-    gl_Position = gl_in[0].gl_Position + vec4(1.0*scale, -1.0*scale, 0.0, 0.0);
+    gl_Position = gl_in[0].gl_Position + vec4(1.0, -1.0, 0.0, 0.0);
     TexCoordFrag = vec2(square_x * (col_index + 1),
                         square_y * (atlas_height - row_index - 1));
     EmitVertex();
-    gl_Position = gl_in[0].gl_Position + vec4(-1.0*scale, 1.0*scale, 0.0, 0.0);
+    gl_Position = gl_in[0].gl_Position + vec4(-1.0, 1.0, 0.0, 0.0);
     TexCoordFrag = vec2(square_x * col_index,
                         square_y * (atlas_height - row_index));
     EmitVertex();
-    gl_Position = gl_in[0].gl_Position + vec4(1.0*scale, 1.0*scale, 0.0, 0.0);
+    gl_Position = gl_in[0].gl_Position + vec4(1.0, 1.0, 0.0, 0.0);
     TexCoordFrag = vec2(square_x * (col_index + 1),
                         square_y * (atlas_height - row_index));
     EmitVertex();

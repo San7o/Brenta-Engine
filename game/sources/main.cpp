@@ -49,7 +49,7 @@ int main() {
         glm::vec3(0.0f, 0.0f, 5.0f), /* starting position */
         glm::vec3(0.0f, 5.0f, 0.0f), /* starting velocity */
         glm::vec3(10.0f, 10.0f, 10.0f), /* starting spread */
-        6.0f,                       /* starting time to live */
+        0.5f,                       /* starting time to live */
         1000,                        /* number of particles */
         0.01f,                       /* spawn rate */
         std::filesystem::absolute(
@@ -57,7 +57,7 @@ int main() {
         ).string(),                  /* atlas texture */ 
         8,                           /* atlas width */
         8,                           /* atlas height */
-        58                           /* atlas index */
+        45                           /* atlas index */
     );
 
     while(!Screen::isWindowClosed()) {

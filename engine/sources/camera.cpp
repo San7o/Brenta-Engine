@@ -34,22 +34,35 @@ glm::vec3 Camera::Right;
 
 void Camera::Init()
 {
-    //Camera::updateCameraEuler();
-    Camera::SphericalToCartesian();
+    Camera::updateCameraEuler();
+    //Camera::SphericalToCartesian();
     Logger::Log(Types::LogLevel::INFO, "Camera initialized");
 }
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    //return glm::lookAt(Position, Position + Front, Up);
-    return glm::lookAt(Position, center, WorldUp);
+    return glm::lookAt(Position, Position + Front, Up);
+
+    /* For spherical coordinates */
+    //return glm::lookAt(Position, center, WorldUp);
 }
 
 glm::mat4 Camera::GetProjectionMatrix()
 {
+    /* Perspective projection */    
+    /*
     return glm::perspective(glm::radians(Zoom),
         (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
         0.1f, 1000.0f);
+    */
+
+    /* Orthographic projection */
+    const float scale = 0.018f;
+    return glm::ortho((float) -ECS::Screen::GetWidth() / 2.0f * scale,
+                      (float) ECS::Screen::GetWidth() / 2.0f * scale,
+                      (float) -ECS::Screen::GetHeight() / 2.0f * scale,
+                      (float) ECS::Screen::GetHeight() / 2.0f * scale,
+                      0.1f, 100.0f);
 }
 
 void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime) {}

@@ -29,6 +29,8 @@ public:
     int num_particles;
     /* The rate at which particles are spawned */
     float spawn_rate;
+    /* The scale in size of the particles */
+    float scale;
     /* Framebuffer objects, used to save the state
      * after the update phase */
     GLuint fbo[2];
@@ -48,6 +50,7 @@ public:
                     float starting_timeToLive,
                     int num_particles,
                     float spawn_rate,
+                    float scale,
                     std::string atlas_path,
                     int atlas_width,
                     int atlas_height,

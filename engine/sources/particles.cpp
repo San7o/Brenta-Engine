@@ -17,6 +17,7 @@ ParticleEmitter::ParticleEmitter() {
     starting_timeToLive = 1.0f;
     num_particles = MAX_PARTICLES;
     spawn_rate = 0.01f;
+    scale = 1.0f;
     atlas = 0;
     atlas_width = 8;
     atlas_height = 8;
@@ -30,6 +31,7 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
                                  float starting_timeToLive,
                                  int num_particles,
                                  float spawn_rate,
+                                 float scale,
                                  std::string atlas_path,
                                  int atlas_width,
                                  int atlas_height,
@@ -40,6 +42,7 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     this->starting_timeToLive = starting_timeToLive;
     this->num_particles = num_particles;
     this->spawn_rate = spawn_rate;
+    this->scale = scale;
     this->atlas = atlas;
     this->atlas_width = atlas_width;
     this->atlas_height = atlas_height;
@@ -47,7 +50,14 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     this->current = 0;
 
     // Load Texture Atlas
-    this->atlas = ECS::Texture::LoadTexture(atlas_path);
+    this->atlas = ECS::Texture::LoadTexture(atlas_path,
+                    GL_REPEAT,
+                    GL_NEAREST,
+                    GL_NEAREST,
+                    GL_TRUE,
+                    GL_NEAREST_MIPMAP_NEAREST,
+                    GL_NEAREST,
+                    false);
 
     // Create shaders
     const GLchar* varyings[] = { "outPosition", "outVelocity", "outTTL" };
@@ -78,9 +88,13 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     // Create fbos
     glGenBuffers(2, this->fbo);
     glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0]);
-    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, MAX_PARTICLES * 2 * sizeof(glm::vec3) + MAX_PARTICLES * sizeof(float), NULL, GL_DYNAMIC_COPY);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
+                    this->num_particles * 2 * sizeof(glm::vec3) + this->num_particles * sizeof(float),
+                    NULL, GL_DYNAMIC_COPY);
     glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[1]);
-    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER, MAX_PARTICLES * 2 * sizeof(glm::vec3) + MAX_PARTICLES * sizeof(float), NULL, GL_DYNAMIC_COPY);
+    glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
+                    this->num_particles * 2 * sizeof(glm::vec3) + this->num_particles * sizeof(float),
+                    NULL, GL_DYNAMIC_COPY);
     checkOpenGLError("glBindBufferBase A");
 
     // Unbind buffers
@@ -91,6 +105,7 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
 
 ParticleEmitter::~ParticleEmitter() {
     glDeleteBuffers(2, fbo);
+    Logger::Log(Types::LogLevel::INFO, "Deleted ParticleEmitter");
 }
 
 // Update particles using Transform Feedback
@@ -112,11 +127,14 @@ void ParticleEmitter::updateParticles(float deltaTime) {
     checkOpenGLError("glBindBufferBase B");
 
     glBindBuffer(GL_ARRAY_BUFFER, fbo[!current]);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3) + sizeof(float), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+                    2 * sizeof(glm::vec3) + sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3) + sizeof(float), (void*)sizeof(glm::vec3));
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+                    2 * sizeof(glm::vec3) + sizeof(float), (void*)sizeof(glm::vec3));
     glEnableVertexAttribArray(1);
-    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3) + sizeof(float), (void*)(2 * sizeof(glm::vec3)));
+    glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE,
+                    2 * sizeof(glm::vec3) + sizeof(float), (void*)(2 * sizeof(glm::vec3)));
     glEnableVertexAttribArray(2);
 
     // Start transform feedback
@@ -124,7 +142,7 @@ void ParticleEmitter::updateParticles(float deltaTime) {
     glBeginTransformFeedback(GL_POINTS); // Enter transform feedback mode
     checkOpenGLError("glBeginTransformFeedback");
 
-    glDrawArrays(GL_POINTS, 0, 1000);
+    glDrawArrays(GL_POINTS, 0, num_particles);
     checkOpenGLError("glDrawTransformFeedback");
 
     glEndTransformFeedback(); // Exit transform feedback mode
@@ -159,12 +177,19 @@ void ParticleEmitter::renderParticles() {
     Shader::SetInt("particle_render", "atlas_width", this->atlas_width);
     Shader::SetInt("particle_render", "atlas_height", this->atlas_height);
     Shader::SetInt("particle_render", "atlas_index", this->atlas_index);
+    Shader::SetFloat("particle_render", "scale", this->scale);
 
     // Set Textures
     ECS::Texture::ActiveTexture(GL_TEXTURE0);
-    ECS::Texture::BindTexture(GL_TEXTURE_2D, this->atlas);
+    ECS::Texture::BindTexture(GL_TEXTURE_2D, this->atlas,
+                    GL_REPEAT,
+                    GL_NEAREST,
+                    GL_NEAREST,
+                    GL_TRUE,
+                    GL_NEAREST_MIPMAP_NEAREST,
+                    GL_NEAREST);
 
-    glDrawArrays(GL_POINTS, 0, 1000);
+    glDrawArrays(GL_POINTS, 0, num_particles);
     checkOpenGLError("glDrawArrays");
     
     glBindBuffer(GL_ARRAY_BUFFER, 0);
