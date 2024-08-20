@@ -5,6 +5,7 @@ in
 
 pkgs.mkShell {
   packages = with pkgs; [
+    libz
     stdenv.cc.cc.lib        # libc
     cmake                   # build system
     glfw-wayland-minecraft  # OpenGL windowing library
@@ -14,5 +15,5 @@ pkgs.mkShell {
     doxygen                 # documentation
   ];
 
-  LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:";
+  LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libz}/lib";
 }

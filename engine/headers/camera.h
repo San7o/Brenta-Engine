@@ -30,9 +30,26 @@ struct EulerAngles {
 
 } // namespace Types
 
+namespace Enums {
+
+enum CameraType {
+    AIRCRAFT,
+    SPHERICAL
+};
+
+enum ProjectionType {
+    PERSPECTIVE,
+    ORTHOGRAPHIC
+};
+
+} // namespace Enums
+
 class Camera
 {
 public:
+    /* select which coordinate system to use */
+    static Enums::CameraType CameraType;
+    static Enums::ProjectionType ProjectionType;
     /* camera Attributes */
     static glm::vec3 Position;
     static glm::vec3 WorldUp;

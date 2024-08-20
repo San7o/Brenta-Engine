@@ -15,6 +15,8 @@ float Camera::Zoom             = 45.0f;
 float Camera::lastX;
 float Camera::lastY;
 bool  Camera::firstMouse       = true;
+Enums::CameraType Camera::CameraType = Enums::CameraType::SPHERICAL;
+Enums::ProjectionType Camera::ProjectionType = Enums::ProjectionType::PERSPECTIVE;
 
 // Cartesian coordinates
 glm::vec3 Camera::Position = glm::vec3(9.0f, 17.0f, 30.0f);
@@ -34,35 +36,50 @@ glm::vec3 Camera::Right;
 
 void Camera::Init()
 {
-    Camera::updateCameraEuler();
-    //Camera::SphericalToCartesian();
+    switch (CameraType)
+    {
+        case Enums::CameraType::SPHERICAL:
+            Camera::SphericalToCartesian();
+            break;
+        case Enums::CameraType::AIRCRAFT:
+            Camera::updateCameraEuler();
+            break;
+        default:
+            break;
+    }
     Logger::Log(Types::LogLevel::INFO, "Camera initialized");
 }
 
 glm::mat4 Camera::GetViewMatrix()
 {
-    return glm::lookAt(Position, Position + Front, Up);
-
-    /* For spherical coordinates */
-    //return glm::lookAt(Position, center, WorldUp);
+    switch (CameraType)
+    {
+        case Enums::CameraType::SPHERICAL:
+            return glm::lookAt(Position, center, WorldUp);
+        case Enums::CameraType::AIRCRAFT:
+            return glm::lookAt(Position, Position + Front, Up);
+        default:
+            return glm::mat4(1.0f);
+    }
 }
 
 glm::mat4 Camera::GetProjectionMatrix()
 {
-    /* Perspective projection */    
-    /*
-    return glm::perspective(glm::radians(Zoom),
-        (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
-        0.1f, 1000.0f);
-    */
-
-    /* Orthographic projection */
-    const float scale = 0.018f;
-    return glm::ortho((float) -ECS::Screen::GetWidth() / 2.0f * scale,
-                      (float) ECS::Screen::GetWidth() / 2.0f * scale,
-                      (float) -ECS::Screen::GetHeight() / 2.0f * scale,
-                      (float) ECS::Screen::GetHeight() / 2.0f * scale,
-                      0.1f, 100.0f);
+    switch (ProjectionType)
+    {
+        case Enums::ProjectionType::PERSPECTIVE:
+            return glm::perspective(glm::radians(Zoom),
+                (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
+                0.1f, 1000.0f);
+        case Enums::ProjectionType::ORTHOGRAPHIC:
+            return glm::ortho((float) -ECS::Screen::GetWidth() / 2.0f,
+                              (float) ECS::Screen::GetWidth() / 2.0f,
+                              (float) -ECS::Screen::GetHeight() / 2.0f,
+                              (float) ECS::Screen::GetHeight() / 2.0f,
+                              0.1f, 100.0f);
+        default:
+            return glm::mat4(1.0f);
+    }
 }
 
 void Camera::ProcessKeyboard(Types::CameraMovement direction, float deltaTime) {}

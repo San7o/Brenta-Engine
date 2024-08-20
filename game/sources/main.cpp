@@ -46,12 +46,13 @@ int main() {
              std::filesystem::absolute("assets/audio/guitar.wav"));
 
     ParticleEmitter emitter(
-        glm::vec3(0.0f, 0.0f, 5.0f), /* starting position */
-        glm::vec3(0.0f, 5.0f, 0.0f), /* starting velocity */
+        glm::vec3(0.0f, 0.0f, 5.0f),    /* starting position */
+        glm::vec3(0.0f, 5.0f, 0.0f),    /* starting velocity */
         glm::vec3(10.0f, 10.0f, 10.0f), /* starting spread */
-        0.5f,                       /* starting time to live */
-        1000,                        /* number of particles */
-        0.01f,                       /* spawn rate */
+        0.5f,                           /* starting time to live */
+        1000,                           /* number of particles */
+        0.01f,                          /* spawn rate */
+        1.0f,                           /* particle scale */
         std::filesystem::absolute(
             "assets/textures/particle_atlas.png"
         ).string(),                  /* atlas texture */ 
