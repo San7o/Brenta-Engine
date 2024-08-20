@@ -7,9 +7,6 @@
 
 #pragma once
 
-#ifndef ENTITY_H
-#define ENTITY_H
-
 namespace ECS {
 
 namespace Types {
@@ -19,5 +16,3 @@ typedef int Entity;
 } // namespace Types
 
 } // namespace ECS
-
-#endif

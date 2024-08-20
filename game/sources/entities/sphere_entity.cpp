@@ -31,7 +31,7 @@ void InitSphereEntity() {
             glm::vec3(0.0f),
             1.0f
     );
-    World::AddComponent(sphere_entity1, "TransformComponent", transform_component1);
+    World::AddComponent<TransformComponent>(sphere_entity1, transform_component1);
 
     /* Add the physics component */
     auto physics_component1 = std::make_shared<PhysicsComponent>(
@@ -41,11 +41,11 @@ void InitSphereEntity() {
             glm::vec3(-1.f, 0.0f, 0.0f),  // acceleration
             true                          // isElastic
     );
-    World::AddComponent(sphere_entity1, "PhysicsComponent", physics_component1);
+    World::AddComponent<PhysicsComponent>(sphere_entity1, physics_component1);
 
     /* Add the sphere collider component */
     auto sphere_collider_component1 = std::make_shared<SphereColliderComponent>(1.0f);
-    World::AddComponent(sphere_entity1, "SphereColliderComponent", sphere_collider_component1);
+    World::AddComponent<SphereColliderComponent>(sphere_entity1, sphere_collider_component1);
 
     /* Load the shader */
     if (Shader::GetId("default_shader") == 0) {
@@ -63,7 +63,7 @@ void InitSphereEntity() {
 
     /* Add the model component */
     auto model_component1 = std::make_shared<ModelComponent>(model1, 32.0f, "default_shader");
-    World::AddComponent(sphere_entity1, "ModelComponent", model_component1);
+    World::AddComponent<ModelComponent>(sphere_entity1, model_component1);
 
 
 
@@ -83,7 +83,7 @@ void InitSphereEntity() {
             glm::vec3(0.0f),
             1.0f
     );
-    World::AddComponent(sphere_entity2, "TransformComponent", transform_component2);
+    World::AddComponent<TransformComponent>(sphere_entity2, transform_component2);
 
     /* Add the physics component */
     auto physics_component2 = std::make_shared<PhysicsComponent>(
@@ -93,11 +93,11 @@ void InitSphereEntity() {
             glm::vec3(1.0f, 0.0f, 0.0f),  // acceleration
             true                          // isElastic
     );
-    World::AddComponent(sphere_entity2, "PhysicsComponent", physics_component2);
+    World::AddComponent<PhysicsComponent>(sphere_entity2, physics_component2);
 
     /* Add the sphere collider component */
     auto sphere_collider_component2 = std::make_shared<SphereColliderComponent>(1.0f);
-    World::AddComponent(sphere_entity2, "SphereColliderComponent", sphere_collider_component2);
+    World::AddComponent<SphereColliderComponent>(sphere_entity2, sphere_collider_component2);
 
     /* Load the shader */
     if (Shader::GetId("default_shader") == 0) {
@@ -115,5 +115,5 @@ void InitSphereEntity() {
 
     /* Add the model component */
     auto model_component2 = std::make_shared<ModelComponent>(model2, 32.0f, "default_shader");
-    World::AddComponent(sphere_entity2, "ModelComponent", model_component2);
+    World::AddComponent<ModelComponent>(sphere_entity2, model_component2);
 }

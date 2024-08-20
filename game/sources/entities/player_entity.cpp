@@ -19,7 +19,7 @@ void InitPlayerEntity() {
 
     /* Add the player component */
     auto player_component = std::make_shared<PlayerComponent>();
-    World::AddComponent(player_entity, "PlayerComponent", player_component);
+    World::AddComponent<PlayerComponent>(player_entity, player_component);
 
 
     /* Add the transform component */
@@ -28,7 +28,7 @@ void InitPlayerEntity() {
             glm::vec3(0.0f),
             1.0f
     );
-    World::AddComponent(player_entity, "TransformComponent", transform_component);
+    World::AddComponent<TransformComponent>(player_entity, transform_component);
 
 
     /* Load the shader */
@@ -47,5 +47,5 @@ void InitPlayerEntity() {
 
     /* Add the model component */
     auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
-    World::AddComponent(player_entity, "ModelComponent", model_component);
+    World::AddComponent<ModelComponent>(player_entity, model_component);
 }

@@ -17,18 +17,18 @@ using namespace ECS::Types;
 
 void InitRendererSystem() {
 
-    auto renderer = std::make_shared<System>("RendererSystem", []() {
+    auto renderer = std::make_shared<System>([]() {
         /* Get the entities with the model component */
-        auto matches = World::QueryComponents({"ModelComponent", "TransformComponent"});
+        auto matches = World::QueryComponents<ModelComponent, TransformComponent>();
         if (matches.empty()) return;
 
         for (auto match : matches) {
             /* Get the model component */
             auto model_component = static_cast<ModelComponent*>
-                 (World::EntityToComponent(match, "ModelComponent"));
+                 (World::EntityToComponent<ModelComponent>(match));
 
             auto transform_component = static_cast<TransformComponent*>
-                 (World::EntityToComponent(match, "TransformComponent"));
+                 (World::EntityToComponent<TransformComponent>(match));
             
             auto myModel = model_component->model;
             auto default_shader = model_component->shader;

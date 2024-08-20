@@ -22,7 +22,7 @@ void InitFloorEntity() {
             glm::vec3(0.0f),
             1.0f
     );
-    World::AddComponent(floor_entity, "TransformComponent", transform_component);
+    World::AddComponent<TransformComponent>(floor_entity, transform_component);
 
 
     if (Shader::GetId("default_shader") == 0) {
@@ -41,5 +41,5 @@ void InitFloorEntity() {
 
     /* Add the model component */
     auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
-    World::AddComponent(floor_entity, "ModelComponent", model_component);
+    World::AddComponent<ModelComponent>(floor_entity, model_component);
 }

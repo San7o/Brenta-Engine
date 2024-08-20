@@ -7,9 +7,8 @@ using namespace ECS;
 
 /* Load the lights on the shaders */
 void InitPointLightsSystem() {
-    auto light_system = std::make_shared<System>("PointLightSystem", []() {
-        auto entities = World::QueryComponents(
-                        {"TransformComponent", "PointLightComponent"});
+    auto light_system = std::make_shared<System>([]() {
+        auto entities = World::QueryComponents<TransformComponent, PointLightComponent>();
         if (entities.empty()) return;
 
         int counter = 0;
@@ -20,10 +19,10 @@ void InitPointLightsSystem() {
                 break;
             }
             auto transform = static_cast<TransformComponent*>
-                    (World::EntityToComponent(entity, "TransformComponent"));
+                    (World::EntityToComponent<TransformComponent>(entity));
 
             auto light = static_cast<PointLightComponent*>
-                    (World::EntityToComponent(entity, "PointLightComponent"));
+                    (World::EntityToComponent<PointLightComponent>(entity));
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {

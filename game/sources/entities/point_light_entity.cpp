@@ -31,7 +31,7 @@ void InitPointLightEntity() {
             1.0f,
             std::vector<Types::ShaderName>{"default_shader"}
     );
-    World::AddComponent(light_entity, "PointLightComponent", light_component);
+    World::AddComponent<PointLightComponent>(light_entity, light_component);
 
 
     
@@ -44,7 +44,7 @@ void InitPointLightEntity() {
     }
     Model model(std::filesystem::absolute("assets/models/simple_cube/simple_cube.obj"));
     auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
-    World::AddComponent(light_entity, "ModelComponent", model_component);
+    World::AddComponent<ModelComponent>(light_entity, model_component);
     */
 
 
@@ -54,6 +54,6 @@ void InitPointLightEntity() {
             glm::vec3(0.0f),
             0.5f
     );
-    World::AddComponent(light_entity, "TransformComponent", transform_component);
+    World::AddComponent<TransformComponent>(light_entity, transform_component);
 
 }

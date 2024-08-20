@@ -22,7 +22,7 @@ void InitRobotEntity() {
             glm::vec3(0.0f, -90.0f, 0.0f),
             5.0f
     );
-    World::AddComponent(cube_entity, "TransformComponent", transform_component);
+    World::AddComponent<TransformComponent>(cube_entity, transform_component);
 
 
     /* Load the shader */
@@ -49,5 +49,5 @@ void InitRobotEntity() {
                     0
     );
 
-    World::AddComponent(cube_entity, "ModelComponent", model_component);
+    World::AddComponent<ModelComponent>(cube_entity, model_component);
 }

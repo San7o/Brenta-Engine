@@ -9,9 +9,6 @@
 
 #pragma once
 
-#ifndef SYSTEM_H
-#define SYSTEM_H
-
 #include <string>
 #include <functional>
 
@@ -19,18 +16,11 @@ namespace ECS {
 
 namespace Types {
 
-typedef std::string SystemName;
-
 struct System {
-    SystemName name;
     std::function<void()> function;
-
-    System(SystemName n, std::function<void()> f)
-            : name(n), function(f) {}
+    System(std::function<void()> f) : function(f) {}
 };
 
 } // namespace Types
 
 } // namespace ECS
-
-#endif

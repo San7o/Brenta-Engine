@@ -6,13 +6,13 @@ using namespace ECS;
 
 /* Load the lights on the shaders */
 void InitDirectionalLightSystem() {
-    auto light_system = std::make_shared<System>("DirectionalLightSystem", []() {
-        auto entities = World::QueryComponents({"DirectionalLightComponent"});
+    auto light_system = std::make_shared<System>([]() {
+        auto entities = World::QueryComponents<DirectionalLightComponent>();
         if (entities.empty()) return;
 
         for (auto entity : entities) {
             auto light = static_cast<DirectionalLightComponent*>
-                    (World::EntityToComponent(entity, "DirectionalLightComponent"));
+                    (World::EntityToComponent<DirectionalLightComponent>(entity));
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {

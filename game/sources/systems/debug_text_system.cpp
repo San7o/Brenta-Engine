@@ -8,7 +8,7 @@ using namespace ECS::Types;
 
 void InitDebugTextSystem() {
 
-    auto debug_text = std::make_shared<System>("DebugTextSystem", []() {
+    auto debug_text = std::make_shared<System>([]() {
         auto camera_pos = Camera::GetPosition();
 
         const float offset = 20.0f;

@@ -8,7 +8,7 @@ using namespace ECS::Types;
 
 void InitToggleWireframeCallback() {
     auto toggle_wireframe_callback = []() {
-        auto wireframe = static_cast<WireframeResource*>(World::GetResource("WireframeResource"));
+        auto wireframe = static_cast<WireframeResource*>(World::GetResource<WireframeResource>());
         if (wireframe == nullptr) return;
 
         GL::SetPoligonMode(!wireframe->enabled);

@@ -14,19 +14,18 @@ using namespace ECS::Types;
 
 void InitPhysicsSystem() {
 
-    auto physics_system = std::make_shared<System>("PhysicsSystem", []() {
+    auto physics_system = std::make_shared<System>([]() {
 
-        auto matches = World::QueryComponents(
-                        {"PhysicsComponent", "TransformComponent"});
+        auto matches = World::QueryComponents<PhysicsComponent, TransformComponent>();
         if (matches.empty()) return;
 
         for (auto match : matches) {
 
             auto physics_component = static_cast<PhysicsComponent*>
-                 (World::EntityToComponent(match, "PhysicsComponent"));
+                 (World::EntityToComponent<PhysicsComponent>(match));
 
             auto transform_component = static_cast<TransformComponent*>
-                 (World::EntityToComponent(match, "TransformComponent"));
+                 (World::EntityToComponent<TransformComponent>(match));
             
             if (physics_component->acceleration != glm::vec3(0.0f)) {
                 physics_component->velocity += physics_component->acceleration * Time::GetDeltaTime();

@@ -7,24 +7,14 @@
 
 #pragma once
 
-#ifndef RESOURCE_H
-#define RESOURCE_H
-
 #include <string>
 
 namespace ECS {
 
 namespace Types {
 
-typedef std::string ResourceName;
-
-struct Resource
-{
-    ResourceName name;
-};
+struct Resource {};
 
 } // namespace Types
 
 } // namespace ECS
-
-#endif

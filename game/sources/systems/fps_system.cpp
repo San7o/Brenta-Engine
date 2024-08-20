@@ -8,7 +8,7 @@ using namespace ECS::Types;
 
 void InitFpsSystem() {
 
-    auto show_fps = std::make_shared<System>("ShowFPSSystem", []() {
+    auto show_fps = std::make_shared<System>([]() {
         Text::RenderText(
                 "FPS: " + std::to_string(Time::GetFPS()),
                 25.0f, 25.0f, 0.35f,
