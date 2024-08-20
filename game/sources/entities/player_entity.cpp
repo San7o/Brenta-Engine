@@ -1,6 +1,7 @@
 #include "entities/player_entity.h"
 
 #include "engine.h"
+#include "ecs.h"
 #include "components/model_component.h"
 #include "components/player_component.h"
 #include "components/transform_component.h"

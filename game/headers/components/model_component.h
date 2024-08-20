@@ -4,6 +4,7 @@
 #define MODEL_COMPONENT_H
 
 #include "engine.h"
+#include "ecs.h"
 
 using namespace ECS;
 

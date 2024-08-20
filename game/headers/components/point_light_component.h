@@ -4,6 +4,7 @@
 #define POINT_LIGHT_COMPONENT_H
 
 #include "engine.h"
+#include "ecs.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

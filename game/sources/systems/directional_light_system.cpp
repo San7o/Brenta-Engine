@@ -1,3 +1,4 @@
+#include "ecs.h"
 #include "systems/directional_light_system.h"
 #include "components/directional_light_component.h"
 

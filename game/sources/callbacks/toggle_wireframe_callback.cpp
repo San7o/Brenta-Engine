@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "ecs.h"
 #include "callbacks/toggle_wireframe_callback.h"
 #include "resources/wireframe_resource.h"
 

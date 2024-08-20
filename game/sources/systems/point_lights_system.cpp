@@ -1,3 +1,4 @@
+#include "ecs.h"
 #include "systems/point_lights_system.h"
 #include "components/transform_component.h"
 #include "components/point_light_component.h"

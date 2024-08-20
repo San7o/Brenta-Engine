@@ -4,6 +4,7 @@
 #define PLAYER_COMPONENT_H
 
 #include "engine.h"
+#include "ecs.h"
 #include "components/model_component.h"
 
 #include <iostream>

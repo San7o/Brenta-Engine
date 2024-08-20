@@ -1,8 +1,10 @@
 #include "text.h"
+#include "engine_logger.h"
 
 #include <filesystem>
 
 using namespace ECS;
+using namespace ECS::Types;
 
 Types::ShaderName Text::textShader;
 Types::VAO        Text::textVao;

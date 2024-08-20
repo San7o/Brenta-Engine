@@ -1,6 +1,7 @@
 #include "systems/fps_system.h"
 
 #include "engine.h"
+#include "ecs.h"
 
 using namespace ECS;
 using namespace ECS::Types;

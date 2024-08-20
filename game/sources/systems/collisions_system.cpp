@@ -1,6 +1,7 @@
 #include "systems/collisions_system.h"
 
 #include "engine.h"
+#include "ecs.h"
 #include "components/transform_component.h"
 #include "components/physics_component.h"
 #include "components/sphere_collider_component.h"

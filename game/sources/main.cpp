@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "ecs.h"
 #include "game_ecs.h"
 
 #include <filesystem>

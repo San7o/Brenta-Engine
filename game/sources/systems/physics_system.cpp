@@ -1,6 +1,7 @@
 #include "systems/physics_system.h"
 
 #include "engine.h"
+#include "ecs.h"
 #include "components/transform_component.h"
 #include "components/physics_component.h"
 
