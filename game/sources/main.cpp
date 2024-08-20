@@ -61,6 +61,7 @@ int main() {
         45                           /* atlas index */
     );
 
+    Time::Update(Screen::GetTime());
     while(!Screen::isWindowClosed()) {
 
         GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
@@ -68,24 +69,6 @@ int main() {
 
         emitter.updateParticles(Time::GetDeltaTime());
         emitter.renderParticles();
-
-        // Get feedback
-        /*
-        glFlush();
-        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, fbo[current]);
-        glm::vec3 feedback[2];
-        glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 0, sizeof(feedback), feedback);
-        std::cout << feedback[0].x << " "
-                  << feedback[0].y << " "
-                  << feedback[0].z << ", "
-                  << feedback[1].x << " "
-                  << feedback[1].y << " "
-                  << feedback[1].z << ", ";
-        float ttl;
-        glGetBufferSubData(GL_TRANSFORM_FEEDBACK_BUFFER, 2 * sizeof(glm::vec3), sizeof(float), &ttl);
-        std::cout << "TTL: " << ttl << std::endl;
-        glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, 0);
-        */
 
         World::Tick();
 

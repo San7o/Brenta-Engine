@@ -35,31 +35,29 @@ void Logger::SetLogFile(const std::string& file) {
     
 }
 
-void Logger::Log(Types::LogLevel level, const std::string& message) {
-    if (!log_file.is_open()) {
-        std::cout << "Error: Log file is not open" << std::endl;
-        return;
+namespace ECS::Types {
+std::ostream& operator<<(std::ostream& os, const LogLevel level) {
+    switch (level) {
+        case LogLevel::DEBUG:
+            os << "DEBUG";
+            break;
+        case LogLevel::INFO:
+            os << "INFO";
+            break;
+        case LogLevel::WARNING:
+            os << "WARNING";
+            break;
+        case LogLevel::ERROR:
+            os << "ERROR";
+            break;
+        case LogLevel::DISABLED:
+            os << "DISABLED";
+            break;
+        default:
+            break;
     }
-    if (Logger::level <= level) {
-        switch (level) {
-            case Types::LogLevel::DEBUG:
-                std::cout << "DEBUG: " << message << std::endl;
-                log_file << "DEBUG: " << message << std::endl;
-                break;
-            case Types::LogLevel::INFO:
-                std::cout << "INFO: " << message << std::endl;
-                log_file << "INFO: " << message << std::endl;
-                break;
-            case Types::LogLevel::WARNING:
-                std::cout << "WARNING: " << message << std::endl;
-                log_file << "WARNING: " << message << std::endl;
-                break;
-            case Types::LogLevel::ERROR:
-                std::cout << "ERROR: " << message << std::endl;
-                log_file << "ERROR: " << message << std::endl;
-                break;
-            default:
-                break;
-        }
-    }
+
+    return os;
 }
+
+} // namespace Types
