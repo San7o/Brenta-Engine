@@ -9,10 +9,6 @@
 
 namespace ECS {
 
-namespace Types {
-
 typedef int Entity;
-
-} // namespace Types
 
 } // namespace ECS

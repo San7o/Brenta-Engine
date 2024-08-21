@@ -9,6 +9,7 @@
 
 #include "ecs.h"
 #include "engine_logger.h"
+#include "ecs_types.h"
 
 #include <vector>
 #include <memory>
@@ -19,33 +20,6 @@
 #include <algorithm>
 
 namespace ECS {
-
-namespace Types {
-
-typedef void None;
-
-template <typename T>
-using SPtr      = std::shared_ptr<T>;
-
-template <typename T>
-using SetPtr     = std::unique_ptr<std::set<T>>;
-
-template <typename T, typename G>
-using UMap       = std::unordered_map<T, SPtr<G>>;
-
-template <typename T, typename G>
-using UMapVec    = std::unordered_map<T, std::vector<SPtr<G>>>;
-
-template <typename T, typename G>
-using UMapPtr    = std::unique_ptr<UMap<T, G>>;
-
-template <typename T, typename G>
-using UMapVecPtr = std::unique_ptr<UMapVec<T, G>>;
-
-template <typename T>
-using VecSPtr    = std::shared_ptr<std::vector<SPtr<T>>>;
-
-} // namespace Types
 
 using namespace Types;
 
@@ -61,7 +35,6 @@ static void Tick();
 static std::set<Entity>*                    getEntities();
 static UMap<std::type_index, Resource>*     getResources();
 static UMapVec<std::type_index, Component>* getComponents();
-static std::vector<SPtr<System>>*           getSystems();
 
 static Entity NewEntity();
 
@@ -103,8 +76,6 @@ static Resource* GetResource()
     if (ret) return ret.get();
     return nullptr;
 }
-
-static void AddSystem(SPtr<System> system);
 
 template <typename C>
 static void AddComponent(Entity entity, SPtr<Component> component)
@@ -163,9 +134,28 @@ static Component* EntityToComponent(Entity entity)
     return nullptr;
 }
 
+/* Iterate over all systems and run them */
+template<typename Tuple, std::size_t... Is>
+static void for_each_impl(Tuple&& tuple, std::index_sequence<Is...>) {
+    (..., process(std::get<Is>(std::forward<Tuple>(tuple))));
+}
+template<typename Tuple>
+static void for_each(Tuple&& tuple) {
+    for_each_impl(std::forward<Tuple>(tuple),
+        std::make_index_sequence<std::tuple_size_v<std::remove_reference_t<Tuple>>>{});
+}
+template<typename System>
+static void process(const System& system) {
+    using Dependencies = typename System::dependencies;
+    std::vector<ECS::Entity> entities = QueryComponents<Dependencies>();
+    // TODO: pass query result to run
+    system.run();
+}
+
+static void RunSystems();
+
 private:
-static SetPtr<Entity>     entities;
-static VecSPtr<System>    systems;
+static SetPtr<Entity>                         entities;
 static UMapPtr<std::type_index, Resource>     resources;
 static UMapVecPtr<std::type_index, Component> components;
 

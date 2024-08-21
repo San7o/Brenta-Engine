@@ -1,8 +1,19 @@
 #pragma once
 
-#ifndef FPS_SYSTEM_H
-#define FPS_SYSTEM_H
+#include "systems/fps_system.h"
 
-void InitFpsSystem();
+#include "engine.h"
+#include "ecs.h"
 
-#endif
+using namespace ECS;
+using namespace ECS::Types;
+
+struct FPSSystem : System<> {
+
+    void run() const override {
+        Text::RenderText(
+                "FPS: " + std::to_string(Time::GetFPS()),
+                25.0f, 25.0f, 0.35f,
+                glm::vec3(1.0f, 0.9f, 0.0f));
+    }
+};

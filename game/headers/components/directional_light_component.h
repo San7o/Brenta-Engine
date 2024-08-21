@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef DIRECTIONAL_LIGHT_COMPONENT_H
-#define DIRECTIONAL_LIGHT_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
@@ -13,7 +10,7 @@
 
 using namespace ECS;
 
-struct DirectionalLightComponent : Types::Component {
+struct DirectionalLightComponent : Component {
     glm::vec3 direction;
     glm::vec3 ambient;
     glm::vec3 diffuse;
@@ -22,9 +19,7 @@ struct DirectionalLightComponent : Types::Component {
     std::vector<Types::ShaderName> shaders;
     DirectionalLightComponent(glm::vec3 direction, glm::vec3 ambient, glm::vec3 diffuse,
                               glm::vec3 specular, float strength,
-                              std::vector<Types::ShaderName> shaders)
+                              std::vector<ShaderName> shaders)
             : direction(direction), ambient(ambient), diffuse(diffuse), specular(specular),
             strength(strength), shaders(shaders) {}
 };
-
-#endif

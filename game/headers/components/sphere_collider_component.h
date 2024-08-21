@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef SPHERE_COLLIDER_COMPONENT_H
-#define SPHERE_COLLIDER_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
@@ -12,9 +9,7 @@
 
 using namespace ECS;
 
-struct SphereColliderComponent : Types::Component {
+struct SphereColliderComponent : Component {
     float radius;
     SphereColliderComponent(float radius) : radius(radius) {}
 };
-
-#endif

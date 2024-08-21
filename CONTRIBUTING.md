@@ -6,7 +6,7 @@ First off, thank you for considering contributing to this project! Your help is 
 
 ### Reporting Bugs
 
-If you find a bug in the game engine, please report it by opening an issue [here](./issues). Include as much detail as possible:
+If you find a bug in the game engine, please report it by opening an issue. Include as much detail as possible:
 - A clear and descriptive title.
 - Steps to reproduce the problem.
 - Expected and actual behavior.
@@ -16,7 +16,7 @@ If you find a bug in the game engine, please report it by opening an issue [here
 ### Suggesting Features
 
 Suggestions for new features or improvements are welcome! To suggest a feature:
-- Open an issue [here](./issues) with the tag `enhancement`.
+- Open an issue with the tag `enhancement`.
 - Provide a clear and concise description of the feature.
 - Explain why this feature would be beneficial to the engine.
 

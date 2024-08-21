@@ -7,14 +7,8 @@
 
 #pragma once
 
-#include <string>
-
 namespace ECS {
 
-namespace Types {
-
 struct Resource {};
-
-} // namespace Types
 
 } // namespace ECS

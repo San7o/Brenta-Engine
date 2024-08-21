@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef POINT_LIGHT_COMPONENT_H
-#define POINT_LIGHT_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
@@ -13,7 +10,7 @@
 
 using namespace ECS;
 
-struct PointLightComponent : Types::Component {
+struct PointLightComponent : Component {
     glm::vec3 ambient;
     glm::vec3 diffuse;
     glm::vec3 specular;
@@ -33,5 +30,3 @@ struct PointLightComponent : Types::Component {
             strength(strength), shaders(shaders) {}
 
 };
-
-#endif

@@ -19,8 +19,8 @@ https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 # ⭐ Current State
 
-The project is structured into the 3 folders `engine`, `game`, `render` 
-containing respectively the game engine, a game demo and a render demo.
+The project is structured into the folders `engine`, `ecs`, `game`, `render` 
+containing respectively the game engine, the ecs, a game demo and a render demo.
 
 The project is under heavy developement, the following features have been
 implemented:
@@ -57,8 +57,6 @@ implemented:
 
 - [x] Particles
 
-- [ ] Shadows
-
 Checkout [CONTRIBUTING](./CONTRIBUTING.md) if you are considering contributing to the project.
 
 # 💀 Dependencies
@@ -80,7 +78,7 @@ You need:
 If you are on `Nix`, you can access the developement environment
 by running:
 ```bash
-nix-shell
+nix develop
 ```
 
 You need [Assimp](https://github.com/assimp/assimp) in order to import 3D models. It is
@@ -128,13 +126,3 @@ Generate documentation with `doxygen` (you need to have doxygen installed in you
 doxygen doxygen.conf
 ```
 The index will be located in `docs/html/index.html`.
-
-
-
-## 👴 Future
-
-- [ ] Animations
-
-- [ ] Rotations with quaternions
-
-- [ ] A GUI for the engine
