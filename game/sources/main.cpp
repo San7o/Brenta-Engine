@@ -11,6 +11,15 @@ using namespace ECS;
 const int SCR_WIDTH = 1280; 
 const int SCR_HEIGHT = 720;
 
+REGISTER_SYSTEMS(
+    RendererSystem,
+    DebugTextSystem,
+    PointLightsSystem,
+    DirectionalLightSystem,
+    PhysicsSystem,
+    CollisionsSystem
+);
+
 int main() {
 
     Logger::Init();                              /* defauls to ./logs/log.txt */
@@ -28,19 +37,11 @@ int main() {
     InitSphereEntity();
     InitRobotEntity();
 
-    InitDirectionalLightSystem();
-    InitPointLightsSystem();
-    InitRendererSystem();
-    //InitFpsSystem();
-    InitDebugTextSystem();
-    InitPhysicsSystem();
-    InitCollisionsSystem();
-
     InitToggleWireframeCallback();
     InitCloseWindowCallback();
     InitCameraMouseCallback();
     InitPlayGuitarCallback();
-    
+
     InitWireframeResource();
 
     Audio::LoadAudio("guitar",

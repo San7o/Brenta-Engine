@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef TRANSFORM_COMPONENT_H
-#define TRANSFORM_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
@@ -12,7 +9,7 @@
 
 using namespace ECS;
 
-struct TransformComponent : Types::Component {
+struct TransformComponent : Component {
     glm::vec3 position;
     glm::vec3 rotation;
     float scale;
@@ -20,5 +17,3 @@ struct TransformComponent : Types::Component {
     TransformComponent(glm::vec3 position, glm::vec3 rotation, float scale)
             : position(position), rotation(rotation), scale(scale) {}
 };
-
-#endif

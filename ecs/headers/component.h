@@ -12,8 +12,6 @@
 
 namespace ECS {
 
-namespace Types {
-
 struct Component {
     Entity entity;
     Component() {};
@@ -21,7 +19,5 @@ struct Component {
         return (entity == other.entity);
     }
 };
-
-} // namespace Types
 
 } // namespace ECS

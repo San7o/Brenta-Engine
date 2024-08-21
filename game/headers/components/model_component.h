@@ -1,15 +1,12 @@
 #pragma once
 
-#ifndef MODEL_COMPONENT_H
-#define MODEL_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
 using namespace ECS;
 
 /* Model Component */
-struct ModelComponent : Types::Component {
+struct ModelComponent : Component {
     Model model;
     float shininess;
     Types::ShaderName shader;
@@ -25,5 +22,3 @@ struct ModelComponent : Types::Component {
               hasAtlas(hasAtlas), atlasSize(atlasSize),
               atlasIndex(atlasIndex) {}
 };
-
-#endif

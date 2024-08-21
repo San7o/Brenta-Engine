@@ -8,18 +8,16 @@
 using namespace ECS;
 
 SetPtr<Entity>    World::entities;
-VecSPtr<System>   World::systems;
 UMapPtr<std::type_index, Resource>     World::resources;
 UMapVecPtr<std::type_index, Component> World::components;
 
 template <>
-void World::QueryComponentsRec<Types::None>(std::vector<Entity>* entities) {}
+void World::QueryComponentsRec<None>(std::vector<Entity>* entities) {}
 
 void World::Init()
 {
     using namespace Types;
     World::entities   = std::make_unique<std::set<Entity>>();
-    World::systems    = std::make_unique<std::vector<SPtr<System>>>();
     World::resources  = std::make_unique<UMap<std::type_index, Resource>>();
     World::components = std::make_unique<UMapVec<std::type_index, Component>>();
 
@@ -30,7 +28,6 @@ void World::Delete()
 {
     World::entities.reset();
     World::components.reset();
-    World::systems.reset();
     World::resources.reset();
 
     Logger::Log(LogLevel::INFO, "World deleted");
@@ -38,18 +35,11 @@ void World::Delete()
 
 void World::Tick()
 {
-    if (!World::systems) {
-        Logger::Log(LogLevel::ERROR, "Cannot tick: world not initialized");
-        return;
-    }
-
     Time::Update(Screen::GetTime());
-    for (auto& system : *World::systems) {
-        system->function();
-    }
+    World::RunSystems();
 }
 
-Types::Entity World::NewEntity()
+Entity World::NewEntity()
 {
     if(!World::entities) {
         Logger::Log(LogLevel::ERROR, "Cannot create entity: world not initialized");
@@ -80,15 +70,6 @@ std::set<Entity>* World::getEntities()
     return World::entities.get();
 }
 
-std::vector<SPtr<System>>* World::getSystems()
-{
-    if (!World::systems) {
-        Logger::Log(LogLevel::ERROR, "Cannot get systems: world not initialized");
-        return nullptr;
-    }
-    return World::systems.get();
-}
-
 UMap<std::type_index, Resource>* World::getResources()
 {
     if (!World::resources) {
@@ -105,17 +86,6 @@ UMapVec<std::type_index, Component>* World::getComponents()
         return nullptr;
     }
     return World::components.get();
-}
-
-void World::AddSystem(SPtr<System> system)
-{
-    if (!World::systems) {
-        Logger::Log(LogLevel::ERROR, "Cannot add system: world not initialized");
-        return;
-    }
-
-    World::systems->push_back(system);
-    Logger::Log(LogLevel::INFO, "Added System");
 }
 
 void World::RemoveEntity(Entity entity)

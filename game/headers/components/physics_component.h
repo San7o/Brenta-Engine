@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PHYSICS_COMPONENT_H
-#define PHYSICS_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 
@@ -13,7 +10,7 @@
 
 using namespace ECS;
 
-struct PhysicsComponent : Types::Component {
+struct PhysicsComponent : Component {
     float mass;
     float density;
     glm::vec3 velocity;
@@ -25,5 +22,3 @@ struct PhysicsComponent : Types::Component {
             mass(mass), density(density), velocity(velocity),
             acceleration(acceleration), isElastic(isElastic) {}
 };
-
-#endif

@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef PLAYER_COMPONENT_H
-#define PLAYER_COMPONENT_H
-
 #include "engine.h"
 #include "ecs.h"
 #include "components/model_component.h"
@@ -14,5 +11,3 @@ using namespace ECS::Types;
 
 /* Player Component */
 struct PlayerComponent : Component {};
-
-#endif

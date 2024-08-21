@@ -1,8 +1,5 @@
 #pragma once
 
-#ifndef GAME_ECS_H
-#define GAME_ECS_H
-
 /* Entities */
 #include "entities/player_entity.h"
 #include "entities/cube_entity.h"
@@ -37,5 +34,3 @@
 #include "callbacks/close_window_callback.h"
 #include "callbacks/camera_mouse_callback.h"
 #include "callbacks/play_guitar_callback.h"
-
-#endif
