@@ -17,7 +17,7 @@ void InitCubeEntity() {
 
 
     /* Add the transform component */
-    auto transform_component = std::make_shared<TransformComponent>(
+    auto transform_component = TransformComponent(
             glm::vec3(0.0f),
             glm::vec3(0.0f),
             1.0f
@@ -40,6 +40,6 @@ void InitCubeEntity() {
     Model model(std::filesystem::absolute("assets/models/simple_cube/simple_cube.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "cube_shader");
+    auto model_component = ModelComponent(model, 32.0f, "cube_shader");
     World::AddComponent<ModelComponent>(cube_entity, model_component);
 }

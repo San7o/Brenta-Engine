@@ -4,17 +4,18 @@
 #include "systems/directional_light_system.h"
 #include "components/directional_light_component.h"
 
+#include <vector>
+
 using namespace ECS;
 
 struct DirectionalLightSystem : System<DirectionalLightComponent> {
 
-    void run() const override {
-        auto entities = World::QueryComponents<DirectionalLightComponent>();
+    void run(std::vector<Entity> entities) const override {
+
         if (entities.empty()) return;
 
         for (auto entity : entities) {
-            auto light = static_cast<DirectionalLightComponent*>
-                    (World::EntityToComponent<DirectionalLightComponent>(entity));
+            auto light = World::EntityToComponent<DirectionalLightComponent>(entity);
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {

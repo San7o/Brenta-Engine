@@ -26,20 +26,15 @@ void InitPlayerMovementSystem() {
 
         for (auto match : matches) {
             /* Get the model component */
-            auto physics_component = static_cast<PhysicsComponent*>
-                 (World::EntityToComponent(match, "PhysicsComponent"));
+            auto physics_component = World::EntityToComponent(match, "PhysicsComponent");
           
-            auto model_component = static_cast<ModelComponent*>
-                 (World::EntityToComponent(match, "ModelComponent"));
+            auto model_component = World::EntityToComponent(match, "ModelComponent");
 
-            auto player_component = static_cast<PlayerComponent*>
-                 (World::EntityToComponent(match, "PlayerComponent"));
+            auto player_component = World::EntityToComponent(match, "PlayerComponent");
 
-            auto transform_component = static_cast<TransformComponent*>
-                 (World::EntityToComponent(match, "TransformComponent"));
+            auto transform_component = World::EntityToComponent(match, "TransformComponent");
 
-            auto particle_component = static_cast<ParticleComponent*>
-                 (World::EntityToComponent(match, "ParticleComponent"));
+            auto particle_component = World::EntityToComponent(match, "ParticleComponent");
 
             if (Screen::isKeyPressed(GLFW_KEY_RIGHT)) {
                  physics_component->acceleration += glm::vec3(ACCELERATION, 0.0f, 0.0f);

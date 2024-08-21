@@ -15,6 +15,8 @@ struct ModelComponent : Component {
     int atlasIndex;
     int elapsedFrames = 0;
 
+    ModelComponent() : model(Model()), shininess(0.0f), shader("default_shader"),
+                       hasAtlas(false), atlasSize(0), atlasIndex(0) {}
     ModelComponent(Model model, float shininess, Types::ShaderName shader,
                     bool hasAtlas = false, int atlasSize = 0,
                     int atlasIndex = 0)

@@ -21,6 +21,9 @@ struct PointLightComponent : Component {
     float strength;
     std::vector<Types::ShaderName> shaders;
 
+    PointLightComponent() : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
+            specular(glm::vec3(0.0f)), constant(1.0f), linear(0.0f),
+            quadratic(0.0f), strength(0.0f) {}
     PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse,
                     glm::vec3 specular, float constant,
                     float linear, float quadratic, float strength,

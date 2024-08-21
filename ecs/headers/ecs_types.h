@@ -9,7 +9,7 @@ namespace ECS {
 
 namespace Types {
 
-typedef void None;
+struct None {};
 
 template <typename T>
 using SPtr      = std::shared_ptr<T>;

@@ -5,12 +5,13 @@
 #include "components/transform_component.h"
 #include "components/point_light_component.h"
 
+#include <vector>
+
 using namespace ECS;
 
 /* Load the lights on the shaders */
 struct PointLightsSystem : System<TransformComponent, PointLightComponent> {
-    void run() const override {
-        auto entities = World::QueryComponents<TransformComponent, PointLightComponent>();
+    void run(std::vector<Entity> entities) const override {
         if (entities.empty()) return;
 
         int counter = 0;
@@ -20,11 +21,9 @@ struct PointLightsSystem : System<TransformComponent, PointLightComponent> {
                             "Only 4 lights are supported");
                 break;
             }
-            auto transform = static_cast<TransformComponent*>
-                    (World::EntityToComponent<TransformComponent>(entity));
+            auto transform = World::EntityToComponent<TransformComponent>(entity);
 
-            auto light = static_cast<PointLightComponent*>
-                    (World::EntityToComponent<PointLightComponent>(entity));
+            auto light = World::EntityToComponent<PointLightComponent>(entity);
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {

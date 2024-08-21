@@ -17,7 +17,7 @@ void InitRobotEntity() {
 
 
     /* Add the transform component */
-    auto transform_component = std::make_shared<TransformComponent>(
+    auto transform_component = TransformComponent(
             glm::vec3(0.0f, 5.0f, 0.0f),
             glm::vec3(0.0f, -90.0f, 0.0f),
             5.0f
@@ -40,7 +40,7 @@ void InitRobotEntity() {
     Model model(std::filesystem::absolute("assets/models/robot_sprite/robot_sprite.obj"), GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST, GL_NEAREST, false);
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(
+    auto model_component = ModelComponent(
                     model,
                     32.0f,
                     "default_shader",

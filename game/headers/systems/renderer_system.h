@@ -11,6 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <vector>
 
 #define ANIMATION_SPEED 24
 
@@ -18,18 +19,14 @@ using namespace ECS;
 using namespace ECS::Types;
 
 struct RendererSystem : System<ModelComponent, TransformComponent> {
-    void run() const override {
-        /* Get the entities with the model component */
-        auto matches = World::QueryComponents<ModelComponent, TransformComponent>();
+    void run(std::vector<Entity> matches) const override {
         if (matches.empty()) return;
 
         for (auto match : matches) {
             /* Get the model component */
-            auto model_component = static_cast<ModelComponent*>
-                 (World::EntityToComponent<ModelComponent>(match));
+            auto model_component = World::EntityToComponent<ModelComponent>(match);
 
-            auto transform_component = static_cast<TransformComponent*>
-                 (World::EntityToComponent<TransformComponent>(match));
+            auto transform_component = World::EntityToComponent<TransformComponent>(match);
             
             auto myModel = model_component->model;
             auto default_shader = model_component->shader;

@@ -11,5 +11,6 @@ using namespace ECS;
 
 struct SphereColliderComponent : Component {
     float radius;
+    SphereColliderComponent() : radius(1.0f) {}
     SphereColliderComponent(float radius) : radius(radius) {}
 };

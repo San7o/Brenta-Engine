@@ -42,7 +42,7 @@ int main() {
     InitCameraMouseCallback();
     InitPlayGuitarCallback();
 
-    InitWireframeResource();
+    World::AddResource<WireframeResource>(WireframeResource(false));
 
     Audio::LoadAudio("guitar",
              std::filesystem::absolute("assets/audio/guitar.wav"));

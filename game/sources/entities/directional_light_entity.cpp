@@ -20,7 +20,7 @@ void InitDirectionalLightEntity() {
     auto light_entity = World::NewEntity();
 
     /* Add the light component */
-    auto light_component = std::make_shared<DirectionalLightComponent>(
+    auto light_component = DirectionalLightComponent(
         glm::vec3(0.2f, -1.0f, -0.3f), // direction
         glm::vec3(0.7f, 0.7f, 0.7f),    // ambient
         glm::vec3(0.5f, 0.5f, 0.5f),    // diffuse

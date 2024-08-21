@@ -17,7 +17,7 @@ void InitFloorEntity() {
 
 
     /* Add the transform component */
-    auto transform_component = std::make_shared<TransformComponent>(
+    auto transform_component = TransformComponent(
             glm::vec3(0.0f, 0.0f, 0.0f),
             glm::vec3(0.0f),
             1.0f
@@ -40,6 +40,6 @@ void InitFloorEntity() {
     Model model(std::filesystem::absolute("assets/models/pane/pane.obj"));
 
     /* Add the model component */
-    auto model_component = std::make_shared<ModelComponent>(model, 32.0f, "default_shader");
+    auto model_component = ModelComponent(model, 32.0f, "default_shader");
     World::AddComponent<ModelComponent>(floor_entity, model_component);
 }
