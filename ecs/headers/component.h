@@ -12,9 +12,25 @@
 
 namespace ECS {
 
+/**
+ * Example Usage:
+ * 
+ * struct TransformComponent : Component {
+ *   glm::vec3 position;
+ *   glm::vec3 rotation;
+ *   float scale;
+ *
+ *   TransformComponent() : ... 
+ *   TransformComponent(glm::vec3 position, ...
+ * };
+ *
+ * You need to provide a default constructor,
+ * any other constructor is optional.
+ */
 struct Component {
     Entity entity;
     Component() {};
+
     bool operator==(const Component& other) const {
         return (entity == other.entity);
     }

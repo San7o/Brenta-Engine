@@ -1,16 +1,17 @@
 #pragma once
 
 #include "systems/debug_text_system.h"
-
 #include "engine.h"
 #include "ecs.h"
+
+#include <vector>
 
 using namespace ECS;
 using namespace ECS::Types;
 
-struct DebugTextSystem : System<> {
+struct DebugTextSystem : System<None> {
 
-    void run() const override {
+    void run(std::vector<Entity> _) const override {
         auto camera_pos = Camera::GetPosition();
 
         const float offset = 20.0f;

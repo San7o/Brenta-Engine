@@ -14,8 +14,7 @@ void InitRenderParticleSystem() {
 
         for (auto match : matches) {
 
-            auto particle_component = static_cast<ParticleComponent*>
-                 (World::EntityToComponent(match, "ParticleComponent"));
+            auto particle_component =World::EntityToComponent(match, "ParticleComponent");
             
             particle_component->emitter->updateParticles(Time::GetDeltaTime());
             particle_component->emitter->renderParticles();

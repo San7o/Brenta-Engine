@@ -10,4 +10,6 @@ using namespace ECS;
 using namespace ECS::Types;
 
 /* Player Component */
-struct PlayerComponent : Component {};
+struct PlayerComponent : Component {
+    PlayerComponent() {}
+};

@@ -20,6 +20,11 @@ std::ostream& operator<<(std::ostream& os, const LogLevel level);
 
 } // namespace Types
 
+#define DEBUG(...) Logger::Log(Types::LogLevel::DEBUG, __VA_ARGS__)
+#define INFO(...) Logger::Log(Types::LogLevel::INFO, __VA_ARGS__)
+#define WARNING(...) Logger::Log(Types::LogLevel::WARNING, __VA_ARGS__)
+#define ERROR(...) Logger::Log(Types::LogLevel::ERROR, __VA_ARGS__)
+
 class Logger {
 public:
 

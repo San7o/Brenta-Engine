@@ -21,11 +21,9 @@ void InitRendererSystem() {
 
         for (auto match : matches) {
             /* Get the model component */
-            auto model_component = static_cast<ModelComponent*>
-                 (World::EntityToComponent(match, "ModelComponent"));
+            auto model_component = World::EntityToComponent(match, "ModelComponent");
 
-            auto transform_component = static_cast<TransformComponent*>
-                 (World::EntityToComponent(match, "TransformComponent"));
+            auto transform_component = World::EntityToComponent(match, "TransformComponent");
             
             auto myModel = model_component->model;
             auto default_shader = model_component->shader;

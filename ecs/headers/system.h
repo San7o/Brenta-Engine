@@ -9,6 +9,7 @@
 
 #include <typeindex>
 #include <vector>
+#include <tuple>
 
 namespace ECS {
 
@@ -16,14 +17,15 @@ namespace ECS {
  * Example System usage:
  *
  *   struct SystemA : System<ComponentA, ComponentB> {
- *     void run () const override { std::cout << "A\n"; }
+ *     void run (std::vector<Entity> e) const override { std::cout << "A\n"; }
  *   };
  *
+ * If no components are needed, use System<None>.
  */
 template <typename... T>
 struct System {
     using dependencies = std::tuple<T...>;
-    virtual void run() const {};
+    virtual void run(std::vector<Entity> e) const {};
 };
 
 template<typename... T>

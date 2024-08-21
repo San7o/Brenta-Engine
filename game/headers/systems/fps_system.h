@@ -1,16 +1,17 @@
 #pragma once
 
 #include "systems/fps_system.h"
-
 #include "engine.h"
 #include "ecs.h"
+
+#include <vector>
 
 using namespace ECS;
 using namespace ECS::Types;
 
-struct FPSSystem : System<> {
+struct FPSSystem : System<None> {
 
-    void run() const override {
+    void run(std::vector<Entity> _) const override {
         Text::RenderText(
                 "FPS: " + std::to_string(Time::GetFPS()),
                 25.0f, 25.0f, 0.35f,
