@@ -59,6 +59,8 @@ implemented:
 
 - [ ] Shadows
 
+Checkout [CONTRIBUTING](./CONTRIBUTING.md) if you are considering contributing to the project.
+
 # 💀 Dependencies
 
 You need:
