@@ -1,6 +1,15 @@
 # Contributing to the Engine
 
-First off, thank you for considering contributing to this project! Your help is greatly appreciated. This guide will help you understand how to contribute effectively.
+First off, thank you for considering contributing to this project!
+Even if this is not an advanced graphics engine, It provides
+many opportunities to practice and improve your programmin skills. Building
+an engine will test your **math skills** (linear algebra and calculus), 
+**physics** knowledge through physics simulations, **algorithms and data
+structures** (expecially for the ECS) and your knowledge of **modern
+programming paradigms**. Overall, this is engiene is an easy place to improve
+your skills.
+
+This guide will help you understand how to contribute effectively.
 
 ## How to Contribute
 
@@ -30,6 +39,10 @@ If you're ready to contribute code:
 - Push the branch to your forked repo.
 - Open a pull request against the `main` branch with a detailed description of your changes.
 
+### Discord
+
+Once the project gets officially released, a discord server will be created for anyone
+interested in the project.
 
 ### License
 
