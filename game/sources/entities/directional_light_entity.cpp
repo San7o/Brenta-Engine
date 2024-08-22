@@ -28,5 +28,5 @@ void InitDirectionalLightEntity() {
         1.0f,                           // intensity
         std::vector<Types::ShaderName>{"default_shader"}
     );
-    World::AddComponent<DirectionalLightComponent>(light_entity, light_component);
+    World::AddComponent<DirectionalLightComponent>(light_entity, std::move(light_component));
 }

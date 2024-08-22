@@ -49,6 +49,7 @@ ParticleEmitter::ParticleEmitter()
     atlas_height = 8;
     atlas_index = 0;
     current = 0;
+    camera = nullptr;
 }
 
 ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
@@ -61,7 +62,8 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
                                  std::string atlas_path,
                                  int atlas_width,
                                  int atlas_height,
-                                 int atlas_index)
+                                 int atlas_index,
+                                 Camera* camera)
 {
     this->starting_position = starting_position;
     this->starting_velocity = starting_velocity;
@@ -75,6 +77,7 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     this->atlas_height = atlas_height;
     this->atlas_index = atlas_index;
     this->current = 0;
+    this->camera = camera;
 
     // Load Texture Atlas
     this->atlas = ECS::Texture::LoadTexture(atlas_path,
@@ -113,12 +116,14 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     checkOpenGLError("vao bind");
 
     // Create fbos
-    glGenBuffers(2, this->fbo);
-    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0]);
+    this->fbo[0] = Types::Buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+    this->fbo[1] = Types::Buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0].id);
     glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
                     this->num_particles * 2 * sizeof(glm::vec3) + this->num_particles * sizeof(float),
                     NULL, GL_DYNAMIC_COPY);
-    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[1]);
+    glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[1].id);
     glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
                     this->num_particles * 2 * sizeof(glm::vec3) + this->num_particles * sizeof(float),
                     NULL, GL_DYNAMIC_COPY);
@@ -132,7 +137,8 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
 
 ParticleEmitter::~ParticleEmitter()
 {
-    glDeleteBuffers(2, fbo);
+    fbo[0].Delete();
+    fbo[1].Delete();
     Logger::Log(Types::LogLevel::INFO, "Deleted ParticleEmitter");
 }
 
@@ -152,10 +158,10 @@ void ParticleEmitter::updateParticles(float deltaTime)
 
     this->vao.Bind();
 
-    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current]);
+    glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current].id);
     checkOpenGLError("glBindBufferBase B");
 
-    glBindBuffer(GL_ARRAY_BUFFER, fbo[!current]);
+    glBindBuffer(GL_ARRAY_BUFFER, fbo[!current].id);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
                     2 * sizeof(glm::vec3) + sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
@@ -187,11 +193,17 @@ void ParticleEmitter::updateParticles(float deltaTime)
 // Render particles
 void ParticleEmitter::renderParticles()
 {
+    if (camera == nullptr)
+    {
+        Logger::Log(Types::LogLevel::ERROR, "Camera not set or null for ParticleEmitter");
+        return;
+    }
+
     Shader::Use("particle_render");
 
     this->vao.Bind();
 
-    glBindBuffer(GL_ARRAY_BUFFER, fbo[current]);
+    glBindBuffer(GL_ARRAY_BUFFER, fbo[current].id);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 2 * sizeof(glm::vec3) + sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE, 2*sizeof(glm::vec3)+sizeof(float), (void*)(2 * sizeof(glm::vec3)));
@@ -200,8 +212,8 @@ void ParticleEmitter::renderParticles()
 
     // Set uniforms
     Types::Translation t = Types::Translation();
-    t.setView(Camera::GetViewMatrix());
-    t.setProjection(Camera::GetProjectionMatrix());
+    t.setView(camera->GetViewMatrix());
+    t.setProjection(camera->GetProjectionMatrix());
     t.setModel(glm::mat4(1.0f));
     t.setShader("particle_render");
     Shader::SetInt("particle_render", "atlas_width", this->atlas_width);
@@ -242,56 +254,73 @@ ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_position(glm::v
     this->starting_position = starting_position;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_velocity(glm::vec3 starting_velocity)
 {
     this->starting_velocity = starting_velocity;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_spread(glm::vec3 starting_spread)
 {
     this->starting_spread = starting_spread;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_timeToLive(float starting_timeToLive)
 {
     this->starting_timeToLive = starting_timeToLive;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_num_particles(int num_particles)
 {
     this->num_particles = num_particles;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_spawn_rate(float spawn_rate)
 {
     this->spawn_rate = spawn_rate;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_scale(float scale)
 {
     this->scale = scale;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_path(std::string atlas_path)
 {
     this->atlas_path = atlas_path;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_width(int atlas_width)
 {
     this->atlas_width = atlas_width;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_height(int atlas_height)
 {
     this->atlas_height = atlas_height;
     return *this;
 }
+
 ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_index(int atlas_index)
 {
     this->atlas_index = atlas_index;
     return *this;
 }
+
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_camera(Camera* camera)
+{
+    this->camera = camera;
+    return *this;
+}
+
 ParticleEmitter ParticleEmitter::Builder::build()
 {
     /* C++17 has RVO (Return Value Optimization) so move is implicit */
@@ -305,5 +334,6 @@ ParticleEmitter ParticleEmitter::Builder::build()
                            this->atlas_path,
                            this->atlas_width,
                            this->atlas_height,
-                           this->atlas_index);
+                           this->atlas_index,
+                           this->camera);
 }

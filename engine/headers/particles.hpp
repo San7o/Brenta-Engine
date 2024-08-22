@@ -35,6 +35,7 @@
 #include <vector>
 
 #include "vao.hpp"
+#include "camera.hpp"
 
 namespace ECS
 {
@@ -58,7 +59,8 @@ public:
     float scale;
     /* Framebuffer objects, used to save the state
      * after the update phase */
-    GLuint fbo[2];
+    //GLuint fbo[2];
+    Types::Buffer fbo[2];
     /* Used to mark the current fbo for reading */
     int current;
     int atlas;
@@ -79,7 +81,8 @@ public:
                     std::string atlas_path,
                     int atlas_width,
                     int atlas_height,
-                    int atlas_index);
+                    int atlas_index,
+                    Camera* camera);
     ~ParticleEmitter();
     
     class Builder;
@@ -94,6 +97,7 @@ public:
     void renderParticles();
 
 private:
+    Camera* camera;
     void checkOpenGLError(const std::string& functionName);
 };
 
@@ -114,6 +118,7 @@ private:
     int atlas_width = 8;
     int atlas_height = 8;
     int atlas_index = 0;
+    Camera* camera = nullptr;
 
 public:
     Builder& set_starting_position(glm::vec3 starting_position);
@@ -127,6 +132,7 @@ public:
     Builder& set_atlas_width(int atlas_width);
     Builder& set_atlas_height(int atlas_height);
     Builder& set_atlas_index(int atlas_index);
+    Builder& set_camera(Camera* camera);
 
     ParticleEmitter build();
 };

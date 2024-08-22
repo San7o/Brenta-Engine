@@ -71,7 +71,6 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     Input::Init();
     Audio::Init();
-    Camera::Init();
 }
 
 bool Screen::isWindowClosed()

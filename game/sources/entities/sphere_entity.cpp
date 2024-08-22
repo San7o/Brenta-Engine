@@ -63,7 +63,7 @@ void InitSphereEntity() {
 
     /* Add the model component */
     auto model_component1 = ModelComponent(model1, 32.0f, "default_shader");
-    World::AddComponent<ModelComponent>(sphere_entity1, model_component1);
+    World::AddComponent<ModelComponent>(sphere_entity1, std::move(model_component1));
 
 
 
@@ -115,5 +115,5 @@ void InitSphereEntity() {
 
     /* Add the model component */
     auto model_component2 = ModelComponent(model2, 32.0f, "default_shader");
-    World::AddComponent<ModelComponent>(sphere_entity2, model_component2);
+    World::AddComponent<ModelComponent>(sphere_entity2, std::move(model_component2));
 }

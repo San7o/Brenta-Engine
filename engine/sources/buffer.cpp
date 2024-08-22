@@ -35,10 +35,16 @@ Buffer::Buffer(GLenum input_target)
     Bind();
 }
 
+void Buffer::CopyData(GLsizeiptr size, const void* data, GLenum usage)
+{
+    glBufferData(this->target, size, data, usage);
+}
+
 void Buffer::CopyIndices(GLsizeiptr size, const void* data, GLenum usage)
 {
     if (this->target != GL_ELEMENT_ARRAY_BUFFER)
         return;
+    Bind();
     glBufferData(this->target, size, data, usage);
 }
 
@@ -46,6 +52,7 @@ void Buffer::CopyVertices(GLsizeiptr size, const void* data, GLenum usage)
 {
     if (this->target == GL_ELEMENT_ARRAY_BUFFER)
         return;
+    Bind();
     glBufferData(this->target, size, data, usage);
 }
 
@@ -70,4 +77,24 @@ void Buffer::Delete()
         return;
     }
     glDeleteBuffers(1, &this->id);
+}
+
+int Buffer::GetId()
+{
+    return this->id;
+}
+
+GLenum Buffer::GetTarget()
+{
+    return this->target;
+}
+
+void Buffer::SetId(unsigned int id)
+{
+    this->id = id;
+}
+
+void Buffer::SetTarget(GLenum target)
+{
+    this->target = target;
 }

@@ -41,5 +41,5 @@ void InitFloorEntity() {
 
     /* Add the model component */
     auto model_component = ModelComponent(model, 32.0f, "default_shader");
-    World::AddComponent<ModelComponent>(floor_entity, model_component);
+    World::AddComponent<ModelComponent>(floor_entity, std::move(model_component));
 }

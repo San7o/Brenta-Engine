@@ -32,8 +32,8 @@ struct RendererSystem : System<ModelComponent, TransformComponent> {
             auto default_shader = model_component->shader;
 
             Types::Translation t = Types::Translation();
-            t.setView(Camera::GetViewMatrix());
-            t.setProjection(Camera::GetProjectionMatrix());
+            t.setView(camera.GetViewMatrix());
+            t.setProjection(camera.GetProjectionMatrix());
             
             t.setModel(glm::mat4(1.0f));
             t.translate(transform_component->position);
@@ -42,7 +42,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent> {
             
             t.setShader(default_shader);
 
-            Shader::SetVec3(default_shader, "viewPos", Camera::GetPosition());
+            Shader::SetVec3(default_shader, "viewPos", camera.GetPosition());
             Shader::SetFloat(default_shader, "material.shininess", model_component->shininess);
 
             /* Animation control */

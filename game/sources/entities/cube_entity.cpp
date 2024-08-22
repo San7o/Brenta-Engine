@@ -41,5 +41,5 @@ void InitCubeEntity() {
 
     /* Add the model component */
     auto model_component = ModelComponent(model, 32.0f, "cube_shader");
-    World::AddComponent<ModelComponent>(cube_entity, model_component);
+    World::AddComponent<ModelComponent>(cube_entity, std::move(model_component));
 }

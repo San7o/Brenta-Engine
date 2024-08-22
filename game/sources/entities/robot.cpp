@@ -49,5 +49,5 @@ void InitRobotEntity() {
                     0
     );
 
-    World::AddComponent<ModelComponent>(cube_entity, model_component);
+    World::AddComponent<ModelComponent>(cube_entity, std::move(model_component));
 }
