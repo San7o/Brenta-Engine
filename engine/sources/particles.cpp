@@ -1,3 +1,28 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2024 Giovanni Santini
+
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ */ 
+
 #include "particles.h"
 
 #include <iostream>
@@ -202,4 +227,76 @@ void ParticleEmitter::checkOpenGLError(const std::string& functionName) {
     while ((error = glGetError()) != GL_NO_ERROR) {
         std::cerr << "OpenGL Error after " << functionName << ": " << error << std::endl;
     }
+}
+
+
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_position(glm::vec3 starting_position)
+{
+    this->starting_position = starting_position;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_velocity(glm::vec3 starting_velocity)
+{
+    this->starting_velocity = starting_velocity;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_spread(glm::vec3 starting_spread)
+{
+    this->starting_spread = starting_spread;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_starting_timeToLive(float starting_timeToLive)
+{
+    this->starting_timeToLive = starting_timeToLive;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_num_particles(int num_particles)
+{
+    this->num_particles = num_particles;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_spawn_rate(float spawn_rate)
+{
+    this->spawn_rate = spawn_rate;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_scale(float scale)
+{
+    this->scale = scale;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_path(std::string atlas_path)
+{
+    this->atlas_path = atlas_path;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_width(int atlas_width)
+{
+    this->atlas_width = atlas_width;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_height(int atlas_height)
+{
+    this->atlas_height = atlas_height;
+    return *this;
+}
+ParticleEmitter::Builder& ParticleEmitter::Builder::set_atlas_index(int atlas_index)
+{
+    this->atlas_index = atlas_index;
+    return *this;
+}
+ParticleEmitter ParticleEmitter::Builder::build()
+{
+    /* C++17 has RVO (Return Value Optimization) so move is implicit */
+    return ParticleEmitter(this->starting_position,
+                           this->starting_velocity,
+                           this->starting_spread,
+                           this->starting_timeToLive,
+                           this->num_particles,
+                           this->spawn_rate,
+                           this->scale,
+                           this->atlas_path,
+                           this->atlas_width,
+                           this->atlas_height,
+                           this->atlas_index);
 }

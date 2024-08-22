@@ -1,3 +1,5 @@
+/* Node: This us outdated. Refer to game/ for the latest version */
+
 #include <iostream>
 #include "world.h"
 

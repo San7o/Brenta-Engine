@@ -47,21 +47,22 @@ int main() {
     Audio::LoadAudio("guitar",
              std::filesystem::absolute("assets/audio/guitar.wav"));
 
-    ParticleEmitter emitter(
-        glm::vec3(0.0f, 0.0f, 5.0f),    /* starting position */
-        glm::vec3(0.0f, 5.0f, 0.0f),    /* starting velocity */
-        glm::vec3(10.0f, 10.0f, 10.0f), /* starting spread */
-        0.5f,                           /* starting time to live */
-        1000,                           /* number of particles */
-        0.01f,                          /* spawn rate */
-        1.0f,                           /* particle scale */
-        std::filesystem::absolute(
-            "assets/textures/particle_atlas.png"
-        ).string(),                  /* atlas texture */ 
-        8,                           /* atlas width */
-        8,                           /* atlas height */
-        45                           /* atlas index */
-    );
+    /* Nice builder patterns */
+    ParticleEmitter emitter = ParticleEmitter::Builder()
+            .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+            .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+            .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
+            .set_starting_timeToLive(0.5f)
+            .set_num_particles(1000)
+            .set_spawn_rate(0.01f)
+            .set_scale(1.0f)
+            .set_atlas_path(std::filesystem::absolute(
+                "assets/textures/particle_atlas.png"
+            ).string())
+            .set_atlas_width(8)
+            .set_atlas_height(8)
+            .set_atlas_index(45)
+            .build();
 
     Time::Update(Screen::GetTime());
     while(!Screen::isWindowClosed()) {

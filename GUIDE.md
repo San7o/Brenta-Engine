@@ -127,16 +127,20 @@ struct RendererSystem : System<ModelComponent, TransformComponent> {
           /* Get the model component */
           auto model_component = World::EntityToComponent<ModelComponent>(match);
           
-
           /* Translate the model */
           // ...
-          
 
           myModel.Draw(default_shader);
+      }
     }
-});
+};
 
-World::AddSystem(renderer);
+/* 
+ * Somewhere in your code you need to
+ * have one (and only one) call on this macro
+ */
+REGISTER_SYSTEMS(RenderSystem);
+
 ```
 
 ### Entity
@@ -151,10 +155,8 @@ auto player_entity = World::NewEntity();
 /* Add the player component to the player entity */
 World::AddComponent<PlayerComponent>(player_entity, PlayerComponent());
 
-
 /* Load model and shader */
 // ...
-
 
 /* Add the model component to the player entity */
 auto model_component = ModelComponent(model, "default_shader");
@@ -174,8 +176,7 @@ struct WireframeResource : Resource {
     WireframeResource(bool e) : enabled(e) {}
 };
 
-
-World::AddResource("WireframeResource", WireframeResource(false));
+World::AddResource<WireframeResource>(WireframeResource(false));
 ```
 
 ### Callbacks
@@ -202,26 +203,24 @@ the computation is done in the GPU so the engine can handle lots and lots
 of particles. Here's a quick look on the API:
 
 ```C++
-/* Create a Particle emitter */
-
-ParticleEmitter emitter(
-    glm::vec3(0.0f, 0.0f, 5.0f),    /* starting position */
-    glm::vec3(0.0f, 5.0f, 0.0f),    /* starting velocity */
-    glm::vec3(10.0f, 10.0f, 10.0f), /* starting spread */
-    0.5f,                           /* starting time to live */
-    1000,                           /* number of particles */
-    0.01f,                          /* spawn rate */
-    1.0f,                           /* particle scale */
-    std::filesystem::absolute(
-        "assets/textures/particle_atlas.png"
-    ).string(),                  /* atlas texture */ 
-    8,                           /* atlas width */
-    8,                           /* atlas height */
-    45                           /* atlas index */
-);
+/* Nice builder patterns */
+ParticleEmitter emitter = ParticleEmitter::Builder()
+        .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+        .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+        .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
+        .set_starting_timeToLive(0.5f)
+        .set_num_particles(1000)
+        .set_spawn_rate(0.01f)
+        .set_scale(1.0f)
+        .set_atlas_path(std::filesystem::absolute(
+            "assets/textures/particle_atlas.png"
+        ).string())
+        .set_atlas_width(8)
+        .set_atlas_height(8)
+        .set_atlas_index(45)
+        .build();
 
 // Inside the game loop:
-
 emitter.updateParticles(Time::GetDeltaTime());
 emitter.renderParticles();
 ```
@@ -238,7 +237,6 @@ so some channel management from the developer is needed:
 Audio::LoadAudio("guitar", std::filesystem::absolute("assets/audio/guitar.wav"));
 Audio::PlayAudio("guitar"); /* This will use the "default_stream", or you can specify
                                a particular stream */
-
 Audio::CreateStream("background_music");
 Audio::PlayAudio("guitar", "background_music");
 ```

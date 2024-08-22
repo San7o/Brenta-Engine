@@ -10,7 +10,7 @@ packed with easy to use and highly modular and customizable classes
 to handle most necessities like Input, 3D Model Loading, Audio, Time...
 
 Check out `GUIDE.md` for an introduction on how the system works!
-
+The engine is licensed with [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
 
 
 https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
@@ -24,8 +24,6 @@ containing respectively the game engine, the ecs, a game demo and a render demo.
 
 The project is under heavy developement, the following features have been
 implemented:
-
-- [x] Triangles
 
 - [x] Textures
 
