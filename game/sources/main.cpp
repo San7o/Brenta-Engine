@@ -1,6 +1,6 @@
-#include "engine.h"
-#include "ecs.h"
-#include "game_ecs.h"
+#include "engine.hpp"
+#include "ecs.hpp"
+#include "game_ecs.hpp"
 
 #include <filesystem>
 #include <bitset>

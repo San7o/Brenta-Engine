@@ -27,7 +27,7 @@
 #include <iostream>
 #include <string>
 #include <stb_image.h>       /* Image loading library */
-#include "texture.h"
+#include "texture.hpp"
 
 using namespace ECS;
 

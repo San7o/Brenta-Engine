@@ -25,11 +25,11 @@
 
 #include <cstdio>
 
-#include "screen.h"
-#include "engine_input.h"
-#include "engine_logger.h"
-#include "engine_audio.h"
-#include "camera.h"
+#include "screen.hpp"
+#include "engine_input.hpp"
+#include "engine_logger.hpp"
+#include "engine_audio.hpp"
+#include "camera.hpp"
 
 using namespace ECS;
 

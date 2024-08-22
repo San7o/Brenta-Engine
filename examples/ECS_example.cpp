@@ -1,9 +1,9 @@
-/* Node: This us outdated. Refer to game/ for the latest version */
-
 #include <iostream>
-#include "world.h"
+#include "world.hpp"
 
 using namespace ECS;
+
+REGISTER_SYSTEMS(PoisonSystem);
 
 int main() {
 
@@ -14,35 +14,33 @@ int main() {
     Entity player_entity = World::NewEntity();
 
     /* Add the Player component to the entity */
-    struct Player : Component {};
-    auto playerComponent = std::make_shared<Player>(player_entity);
-    World::AddComponent(player_entity, "PlayerComponent", playerComponent);
+    struct PlayerComponent : Component {
+        PlayerComponent() {}
+    };
+    World::AddComponent<PlayerComponent>(player_entity, PlayerComponent);
 
     /* Add a health component to the entity */
     struct HealthComponent : Component {
         int value;
+        HealthComponent() {}
         HealthComponent(int value)
                 : value(value) {}
     };
-    auto health_component = std::make_shared<HealthComponent>(100);
-    World::AddComponent(plauer_entity, "HealthComponent", health_component);
+    auto health_component = HealthComponent(100);
+    World::AddComponent<HealthComponent>(plauer_entity, health_component);
 
     /* System to decrease health to the player */
-    auto poison = std::make_shared<System>("Poison", []() {
-        /* Query entities with both PlayerComponent and HealthComponent */
-        auto matches = World::QueryComponents({"Player", "Health"});
-        if (matches.empty()) {
-            return;
+    struct PoisonSystem : System<PlayerComponent, HealthComponent> {
+        void run(std::vector<Entity> entities) const override {
+            if (entities.empty()) {
+                return;
+            }
+
+            auto health = World::EntityToComponent<HealthComponent>(entities.at(0));
+            health->value--;
+            std::cout << "Health: " << health->value << std::endl;
         }
-
-        /* Get health component */
-        auto health = static_cast<HealthComponent*>
-                     (World::EntityToComponent(matches.at(0), "Health"));
-
-        health->value--;
-        std::cout << "Health: " << health->value << std::endl;
-    });
-    World::AddSystem(poison);
+    }
 
     /* Create a global resource */
     struct GlobalResource : Resource {
@@ -50,7 +48,7 @@ int main() {
         GlobalResource(int value) :
                 Resource("GlobalResource"), value(value) {}
     };
-    World::AddResource(std::make_shared<GlobalResource>(10));
+    World::AddResource<GlobalResource>(GlobalResource(10));
 
     /* Main loop */
     for(int i = 0; i < 10; i++) {

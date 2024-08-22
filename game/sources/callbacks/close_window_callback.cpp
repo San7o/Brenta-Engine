@@ -1,5 +1,5 @@
-#include "engine.h"
-#include "callbacks/close_window_callback.h"
+#include "engine.hpp"
+#include "callbacks/close_window_callback.hpp"
 
 using namespace ECS;
 using namespace ECS::Types;

@@ -23,8 +23,8 @@
  *
  */ 
 
-#include "buffer.h"
-#include "engine_logger.h"
+#include "buffer.hpp"
+#include "engine_logger.hpp"
 
 using namespace ECS::Types;
 

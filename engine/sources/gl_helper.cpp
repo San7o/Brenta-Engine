@@ -24,10 +24,10 @@
  */ 
 
 #include <iostream>
-#include "gl_helper.h"
-#include "engine_logger.h"
-#include "screen.h"
-#include "text.h"
+#include "gl_helper.hpp"
+#include "engine_logger.hpp"
+#include "screen.hpp"
+#include "text.hpp"
 
 using namespace ECS;
 

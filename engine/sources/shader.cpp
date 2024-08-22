@@ -23,7 +23,7 @@
  *
  */ 
 
-#include "shader.h"
+#include "shader.hpp"
 
 using namespace ECS;
 

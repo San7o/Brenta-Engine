@@ -1,11 +1,11 @@
-#include "entities/sphere_entity.h"
+#include "entities/sphere_entity.hpp"
 
-#include "engine.h"
-#include "ecs.h"
-#include "components/model_component.h"
-#include "components/transform_component.h"
-#include "components/physics_component.h"
-#include "components/sphere_collider_component.h"
+#include "engine.hpp"
+#include "ecs.hpp"
+#include "components/model_component.hpp"
+#include "components/transform_component.hpp"
+#include "components/physics_component.hpp"
+#include "components/sphere_collider_component.hpp"
 
 #include <filesystem>
 

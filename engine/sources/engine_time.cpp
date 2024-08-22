@@ -23,8 +23,8 @@
  *
  */ 
 
-#include "engine_time.h"
-#include "screen.h"
+#include "engine_time.hpp"
+#include "screen.hpp"
 
 using namespace ECS;
 
