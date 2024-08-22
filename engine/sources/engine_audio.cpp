@@ -1,3 +1,27 @@
+/*
+ * MIT License
+ * 
+ * Copyright (c) 2024 Giovanni Santini
+
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ * 
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ *
+ */ 
 
 #include "engine_audio.h"
 #include "engine_logger.h"
@@ -12,7 +36,8 @@ std::unordered_map<Types::StreamName, SDL_AudioStream*> Audio::streams;
 
 void Audio::Init()
 {
-    if (SDL_Init(SDL_INIT_AUDIO) ) {
+    if (SDL_Init(SDL_INIT_AUDIO) )
+    {
         auto error = SDL_GetError();
         Logger::Log(Types::LogLevel::ERROR,
                         "SDL Audio failed to initialize: " + std::string(error));
@@ -29,7 +54,8 @@ void Audio::Destroy()
     for (auto& stream : Audio::streams)
         SDL_DestroyAudioStream(stream.second);
 
-    for (auto& audiofile : Audio::audiofiles) {
+    for (auto& audiofile : Audio::audiofiles)
+    {
         SDL_free(audiofile.second.audio_buf);
     }
 
@@ -44,7 +70,8 @@ void Audio::LoadAudio(Types::AudioName name, std::string path)
     audiofile.path = path;
 
     if (SDL_LoadWAV(path.c_str(), &audiofile.spec,
-                            &audiofile.audio_buf, &audiofile.audio_len)) {
+                            &audiofile.audio_buf, &audiofile.audio_len))
+    {
             auto error = SDL_GetError();
             Logger::Log(Types::LogLevel::ERROR,
                         "SDL Audio failed to load WAV file: " + std::string(error));
@@ -59,7 +86,8 @@ void Audio::LoadAudio(Types::AudioName name, std::string path)
 void Audio::PlayAudio(Types::AudioName audio_name, Types::StreamName stream_name) 
 {
     auto stream = Audio::GetStream(stream_name);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Could not play audio: Audio stream not found");
         return;
@@ -75,7 +103,8 @@ void Audio::CreateStream(Types::StreamName name)
 {
     SDL_AudioStream* stream = SDL_OpenAudioDeviceStream(
                     SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL, NULL, NULL);
-    if (stream == NULL) {
+    if (stream == NULL)
+    {
         const char* error = SDL_GetError();
         Logger::Log(Types::LogLevel::ERROR,
                         "SDL Audio failed to create stream: " + std::string(error));
@@ -90,7 +119,8 @@ void Audio::CreateStream(Types::StreamName name)
 
 Types::AudioFile Audio::GetAudioFile(Types::AudioName name) 
 {
-    if (Audio::audiofiles.find(name) == Audio::audiofiles.end()) {
+    if (Audio::audiofiles.find(name) == Audio::audiofiles.end())
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Audio file not found with name: " + name);
         return Types::AudioFile();
@@ -100,7 +130,8 @@ Types::AudioFile Audio::GetAudioFile(Types::AudioName name)
 
 SDL_AudioStream* Audio::GetStream(Types::StreamName name) 
 {
-    if (Audio::streams.find(name) == Audio::streams.end()) {
+    if (Audio::streams.find(name) == Audio::streams.end())
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Audio stream not found with name: " + name);
         return nullptr;
@@ -111,7 +142,8 @@ SDL_AudioStream* Audio::GetStream(Types::StreamName name)
 void Audio::SetVolume(Types::StreamName name, int volume) 
 {
     auto stream = Audio::GetStream(name);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Could not set volume: Audio stream not found");
         return;
@@ -132,7 +164,8 @@ void Audio::CheckError()
 void Audio::ClearStream(Types::StreamName name) 
 {
     auto stream = Audio::GetStream(name);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Could not clear stream: Audio stream not found");
         return;
@@ -146,7 +179,8 @@ void Audio::ClearStream(Types::StreamName name)
 void Audio::PauseStream(Types::StreamName name) 
 {
     auto stream = Audio::GetStream(name);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Could not pause stream: Audio stream not found");
         return;
@@ -160,7 +194,8 @@ void Audio::PauseStream(Types::StreamName name)
 void Audio::ResumeStream(Types::StreamName name) 
 {
     auto stream = Audio::GetStream(name);
-    if (stream == nullptr) {
+    if (stream == nullptr)
+    {
         Logger::Log(Types::LogLevel::ERROR,
                         "Could not resume stream: Audio stream not found");
         return;
