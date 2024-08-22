@@ -107,16 +107,6 @@ cmake -Bbuild
 cmake --build build
 ./build/main
 ```
-
-Or with `make`:
-```bash
-# Demo game using the engine
-make game
-# Unit tests
-make test
-# Test rendering
-make render
-```
 The binaries will be generated in `build/` directory.
 
 Generate documentation with `doxygen` (you need to have doxygen installed in your system):

@@ -23,7 +23,7 @@
  *
  */ 
 
-#include "translation.h"
+#include "translation.hpp"
 
 using namespace ECS::Types;
 

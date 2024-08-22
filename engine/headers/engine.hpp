@@ -23,57 +23,37 @@
  *
  */ 
 
+#pragma once
+
+#include "buffer.hpp"
+#include "gl_helper.hpp"
+#include "mesh.hpp"
+#include "model.hpp"
+#include "screen.hpp"
+#include "shader.hpp"
+#include "texture.hpp"
 #include "vao.hpp"
+#include "engine_input.hpp"
+#include "translation.hpp"
+#include "engine_time.hpp"
+#include "text.hpp"
+#include "engine_audio.hpp"
+#include "camera.hpp"
+#include "particles.hpp"
 #include "engine_logger.hpp"
 
-using namespace ECS::Types;
+// Documnetation Main Page:
 
-void VAO::Init()
-{
-    glGenVertexArrays(1, &vao);
-    Bind();
-}
-
-unsigned int VAO::GetVAO()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return 0;
-    }
-    return vao;
-}
-
-void VAO::Bind()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glBindVertexArray(vao);
-}
-
-void VAO::Unbind()
-{
-    glBindVertexArray(0);
-}
-
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
-                    GLboolean normalized, GLsizei stride,
-                    const void* pointer)
-{
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
-}
-
-void VAO::Delete()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glDeleteVertexArrays(1, &vao);
-}
+/*! \mainpage Home
+ *
+ * \section intro_sec Introduction
+ *
+ * Hi and welcome to the engine documentation. This is a simple 3D game engine
+ * using the Entity Component System architecture. The engine is composed of
+ * several modules, which you can browse here or look at the code.
+ *
+ * \section install_sec Installation
+ *
+ * TODO
+ *
+ */

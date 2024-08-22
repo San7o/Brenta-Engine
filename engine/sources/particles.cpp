@@ -23,19 +23,20 @@
  *
  */ 
 
-#include "particles.h"
+#include "particles.hpp"
 
 #include <iostream>
 #include <filesystem>
-#include "camera.h"
-#include "shader.h"
-#include "texture.h"
-#include "time.h"
-#include "translation.h"
+#include <time.h>
+#include "camera.hpp"
+#include "shader.hpp"
+#include "texture.hpp"
+#include "translation.hpp"
 
 using namespace ECS;
 
-ParticleEmitter::ParticleEmitter() {
+ParticleEmitter::ParticleEmitter()
+{
     starting_position = glm::vec3(0.0f, 0.0f, 0.0f);
     starting_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     starting_spread   = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -60,7 +61,8 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
                                  std::string atlas_path,
                                  int atlas_width,
                                  int atlas_height,
-                                 int atlas_index) {
+                                 int atlas_index)
+{
     this->starting_position = starting_position;
     this->starting_velocity = starting_velocity;
     this->starting_spread = starting_spread;
@@ -128,14 +130,16 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     this->vao.Unbind();
 }
 
-ParticleEmitter::~ParticleEmitter() {
+ParticleEmitter::~ParticleEmitter()
+{
     glDeleteBuffers(2, fbo);
     Logger::Log(Types::LogLevel::INFO, "Deleted ParticleEmitter");
 }
 
 // Update particles using Transform Feedback
 // directly from the wiki
-void ParticleEmitter::updateParticles(float deltaTime) {
+void ParticleEmitter::updateParticles(float deltaTime)
+{
 
     Shader::Use("particle_update");
     Shader::SetFloat("particle_update", "deltaTime", deltaTime);
@@ -181,7 +185,8 @@ void ParticleEmitter::updateParticles(float deltaTime) {
 }
 
 // Render particles
-void ParticleEmitter::renderParticles() {
+void ParticleEmitter::renderParticles()
+{
     Shader::Use("particle_render");
 
     this->vao.Bind();
@@ -222,9 +227,11 @@ void ParticleEmitter::renderParticles() {
     vao.Unbind();
 }
 
-void ParticleEmitter::checkOpenGLError(const std::string& functionName) {
+void ParticleEmitter::checkOpenGLError(const std::string& functionName)
+{
     GLenum error;
-    while ((error = glGetError()) != GL_NO_ERROR) {
+    while ((error = glGetError()) != GL_NO_ERROR)
+    {
         std::cerr << "OpenGL Error after " << functionName << ": " << error << std::endl;
     }
 }

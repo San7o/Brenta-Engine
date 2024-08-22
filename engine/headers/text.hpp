@@ -23,57 +23,51 @@
  *
  */ 
 
-#include "vao.hpp"
-#include "engine_logger.hpp"
+#pragma once
 
-using namespace ECS::Types;
+#include <string>
+#include <map>
 
-void VAO::Init()
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
+#include "engine.hpp"
+
+namespace ECS
 {
-    glGenVertexArrays(1, &vao);
-    Bind();
-}
 
-unsigned int VAO::GetVAO()
+namespace Types
 {
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return 0;
-    }
-    return vao;
-}
 
-void VAO::Bind()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glBindVertexArray(vao);
-}
+struct Character {
+    unsigned int TextureID;  // ID handle of the glyph texture
+    glm::ivec2   Size;       // Size of glyph
+    glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+    unsigned int Advance;    // Offset to advance to next glyph
+};
 
-void VAO::Unbind()
-{
-    glBindVertexArray(0);
-}
+} // namespace Types
 
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
-                    GLboolean normalized, GLsizei stride,
-                    const void* pointer)
+class Text
 {
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
-}
+public:
+    static std::map<char, Types::Character> characters;
 
-void VAO::Delete()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glDeleteVertexArrays(1, &vao);
-}
+    Text() = delete;
+    /* Initialize only after OpenGL context is created */
+    static void Init();
+
+    static void Load(std::string font_name, unsigned int fontSize);
+    static void RenderText(std::string text, float x,
+                    float y, float scale, glm::vec3 color);
+private:
+    static Types::ShaderName textShader;
+    static Types::VAO        textVao;
+    static Types::Buffer     textVbo;
+};
+
+} // namespace ECS

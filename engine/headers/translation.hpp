@@ -23,57 +23,39 @@
  *
  */ 
 
-#include "vao.hpp"
-#include "engine_logger.hpp"
+#pragma once
 
-using namespace ECS::Types;
+#include "engine.hpp"
 
-void VAO::Init()
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+namespace ECS
 {
-    glGenVertexArrays(1, &vao);
-    Bind();
-}
 
-unsigned int VAO::GetVAO()
+namespace Types
 {
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return 0;
-    }
-    return vao;
-}
 
-void VAO::Bind()
+class Translation
 {
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glBindVertexArray(vao);
-}
+public:
+    glm::mat4 view;       /* Camera */
+    glm::mat4 projection; /* Based on perspective */
+    glm::mat4 model;      /* Object position */
 
-void VAO::Unbind()
-{
-    glBindVertexArray(0);
-}
+    Translation();
 
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
-                    GLboolean normalized, GLsizei stride,
-                    const void* pointer)
-{
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
-}
+    void setView(glm::mat4 view);
+    void setProjection(glm::mat4 projection);
+    void setProjection(float fov, float near, float far);
+    void setModel(glm::mat4 model);
+    void translate(glm::vec3 translation);
+    void rotate(glm::vec3 rotation);
+    void scale(float scale);
+    void setShader(Types::ShaderName shader_name);
+};
 
-void VAO::Delete()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glDeleteVertexArrays(1, &vao);
-}
+} // namespace Types
+
+} // namespace ECS

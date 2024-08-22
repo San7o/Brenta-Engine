@@ -23,8 +23,8 @@
  *
  */ 
 
-#include "mesh.h"
-#include "engine_logger.h"
+#include "mesh.hpp"
+#include "engine_logger.hpp"
 
 #include <iostream>
 

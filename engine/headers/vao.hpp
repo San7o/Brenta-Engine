@@ -23,57 +23,44 @@
  *
  */ 
 
-#include "vao.hpp"
-#include "engine_logger.hpp"
+#pragma once
 
-using namespace ECS::Types;
+#include <glad/glad.h>       /* OpenGL driver */
 
-void VAO::Init()
+#include "buffer.hpp"
+
+/*
+ * Vertex Array Object (VAO)
+ *
+ * It stores the format of the vertex data as well as
+ * the Buffer Objects (see below) providing the vertex data arrays
+ */
+
+namespace ECS
 {
-    glGenVertexArrays(1, &vao);
-    Bind();
-}
 
-unsigned int VAO::GetVAO()
+namespace Types
 {
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return 0;
-    }
-    return vao;
-}
 
-void VAO::Bind()
+class VAO
 {
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glBindVertexArray(vao);
-}
+public:
+    unsigned int vao;
 
-void VAO::Unbind()
-{
-    glBindVertexArray(0);
-}
+    VAO() {}
+    void Init();
+    
+    unsigned int GetVAO();
+    void Bind();
+    void Unbind();
+    void Delete();
 
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
+    /* Specifies the location and data format of the vertex attributes. */
+    void SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
                     GLboolean normalized, GLsizei stride,
-                    const void* pointer)
-{
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
-}
+                    const void* pointer);
+};
 
-void VAO::Delete()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glDeleteVertexArrays(1, &vao);
-}
+} // namespace Types
+
+} // namespace ECS

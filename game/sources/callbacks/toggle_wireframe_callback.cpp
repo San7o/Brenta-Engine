@@ -1,7 +1,7 @@
-#include "engine.h"
-#include "ecs.h"
-#include "callbacks/toggle_wireframe_callback.h"
-#include "resources/wireframe_resource.h"
+#include "engine.hpp"
+#include "ecs.hpp"
+#include "callbacks/toggle_wireframe_callback.hpp"
+#include "resources/wireframe_resource.hpp"
 
 using namespace ECS;
 using namespace ECS::Types;

@@ -23,12 +23,12 @@
  *
  */ 
 
-#include "world.h"
+#include "world.hpp"
 
 #include <algorithm>
-#include "engine_logger.h"
-#include "engine_time.h"
-#include "screen.h"
+#include "engine_logger.hpp"
+#include "engine_time.hpp"
+#include "screen.hpp"
 
 using namespace ECS;
 
@@ -66,12 +66,14 @@ void World::Tick()
 
 Entity World::NewEntity()
 {
-    if(!World::entities) {
+    if(!World::entities)
+    {
         Logger::Log(LogLevel::ERROR, "Cannot create entity: world not initialized");
         return -1;
     }
 
-    if(World::entities->empty()) {
+    if(World::entities->empty())
+    {
         World::entities->insert(1);
         return 1;
         
@@ -88,7 +90,8 @@ Entity World::NewEntity()
 
 std::set<Entity>* World::getEntities()
 {
-    if (!World::entities) {
+    if (!World::entities)
+    {
         Logger::Log(LogLevel::ERROR, "Cannot get entities: world not initialized");
         return nullptr;
     }
@@ -115,19 +118,22 @@ UMapVec<std::type_index, Component>* World::getComponents()
 
 void World::RemoveEntity(Entity entity)
 {
-    if(!World::entities) {
+    if(!World::entities)
+    {
         Logger::Log(LogLevel::ERROR, "Cannot remove entity: world not initialized");
         return;
     }
 
     World::entities->erase(entity);
 
-    for(auto iter = World::components->begin(); iter != World::components->end(); iter++) {
+    for(auto iter = World::components->begin(); iter != World::components->end(); iter++)
+    {
         iter->second.erase(
                 std::remove_if(
                         iter->second.begin(),
                         iter->second.end(),
-                        [&entity](const std::shared_ptr<Component>& elem) {
+                        [&entity](const std::shared_ptr<Component>& elem)
+                        {
                             return elem->entity == entity;
                         }),
                 iter->second.end()

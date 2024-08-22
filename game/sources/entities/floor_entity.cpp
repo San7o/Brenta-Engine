@@ -1,9 +1,9 @@
-#include "entities/floor_entity.h"
+#include "entities/floor_entity.hpp"
 
-#include "engine.h"
-#include "ecs.h"
-#include "components/model_component.h"
-#include "components/transform_component.h"
+#include "engine.hpp"
+#include "ecs.hpp"
+#include "components/model_component.hpp"
+#include "components/transform_component.hpp"
 
 #include <filesystem>
 

@@ -23,9 +23,9 @@
  *
  */ 
 
-#include "camera.h"
-#include "screen.h"
-#include "engine_logger.h"
+#include "camera.hpp"
+#include "screen.hpp"
+#include "engine_logger.hpp"
 
 #include <cmath>
 

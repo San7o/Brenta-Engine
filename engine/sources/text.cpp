@@ -23,8 +23,8 @@
  *
  */ 
 
-#include "text.h"
-#include "engine_logger.h"
+#include "text.hpp"
+#include "engine_logger.hpp"
 
 #include <filesystem>
 

@@ -1,6 +1,6 @@
-#include "callbacks/play_guitar_callback.h"
+#include "callbacks/play_guitar_callback.hpp"
 
-#include "engine.h"
+#include "engine.hpp"
 
 using namespace ECS;
 using namespace ECS::Types;

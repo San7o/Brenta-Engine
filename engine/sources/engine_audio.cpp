@@ -23,8 +23,8 @@
  *
  */ 
 
-#include "engine_audio.h"
-#include "engine_logger.h"
+#include "engine_audio.hpp"
+#include "engine_logger.hpp"
 #include "SDL3/SDL_init.h"
 
 #include <string>

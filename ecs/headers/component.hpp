@@ -23,57 +23,41 @@
  *
  */ 
 
-#include "vao.hpp"
-#include "engine_logger.hpp"
+/*
+ * This file contains the definition of the Component type.
+ *
+ * A Component is a piece of data that is attached to an Entity.
+ * Components are used to store data that is associated with a game object.
+ * For example, a Position component could store the position of a game object.
+ */
 
-using namespace ECS::Types;
+#pragma once
 
-void VAO::Init()
-{
-    glGenVertexArrays(1, &vao);
-    Bind();
-}
+#include "entity.hpp"
 
-unsigned int VAO::GetVAO()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return 0;
+namespace ECS {
+
+/**
+ * Example Usage:
+ * 
+ * struct TransformComponent : Component {
+ *   glm::vec3 position;
+ *   glm::vec3 rotation;
+ *   float scale;
+ *
+ *   TransformComponent() : ... 
+ *   TransformComponent(glm::vec3 position, ...
+ * };
+ *
+ * You need to provide a default constructor,
+ * any other constructor is optional.
+ */
+struct Component {
+    Entity entity;
+
+    bool operator==(const Component& other) const {
+        return (entity == other.entity);
     }
-    return vao;
-}
+};
 
-void VAO::Bind()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glBindVertexArray(vao);
-}
-
-void VAO::Unbind()
-{
-    glBindVertexArray(0);
-}
-
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
-                    GLboolean normalized, GLsizei stride,
-                    const void* pointer)
-{
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
-}
-
-void VAO::Delete()
-{
-    if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
-        return;
-    }
-    glDeleteVertexArrays(1, &vao);
-}
+} // namespace ECS
