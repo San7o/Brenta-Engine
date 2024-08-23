@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,59 +22,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #include "vao.hpp"
+
 #include "engine_logger.hpp"
 
 using namespace Brenta::Types;
 
-void VAO::Init()
+void VAO::Init ()
 {
-    glGenVertexArrays(1, &vao);
-    Bind();
+    glGenVertexArrays (1, &vao);
+    Bind ();
 }
 
-unsigned int VAO::GetVAO()
+unsigned int VAO::GetVAO ()
 {
-    if (vao == 0) {
-        ERROR("VAO not initialized");
+    if (vao == 0)
+    {
+        ERROR ("VAO not initialized");
         return 0;
     }
     return vao;
 }
 
-void VAO::Bind()
+void VAO::Bind ()
 {
-    if (vao == 0) {
-        ERROR("VAO not initialized");
+    if (vao == 0)
+    {
+        ERROR ("VAO not initialized");
         return;
     }
-    glBindVertexArray(vao);
+    glBindVertexArray (vao);
 }
 
-void VAO::Unbind()
+void VAO::Unbind ()
 {
-    glBindVertexArray(0);
+    glBindVertexArray (0);
 }
 
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
-                    GLboolean normalized, GLsizei stride,
-                    const void* pointer)
+void VAO::SetVertexData (Buffer buffer, unsigned int index, GLint size,
+                         GLenum type, GLboolean normalized, GLsizei stride,
+                         const void *pointer)
 {
-    Bind();
-    buffer.Bind();
-    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
+    Bind ();
+    buffer.Bind ();
+    glVertexAttribPointer (index, size, type, normalized, stride, pointer);
+    glEnableVertexAttribArray (index);
+    buffer.Unbind ();
+    Unbind ();
 }
 
-void VAO::Delete()
+void VAO::Delete ()
 {
-    if (vao == 0) {
-        ERROR("VAO not initialized");
+    if (vao == 0)
+    {
+        ERROR ("VAO not initialized");
         return;
     }
-    glDeleteVertexArrays(1, &vao);
+    glDeleteVertexArrays (1, &vao);
 }

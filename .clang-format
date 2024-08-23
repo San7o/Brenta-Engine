@@ -1,12 +1,7 @@
-# clang-format configuration for Greenbone C code
-#
 # Minimum required clang-format version: 6.0
 
 ---
 AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: 'false'
-AlignConsecutiveDeclarations: 'false'
-AlignEscapedNewlines: Left
 AlignOperands: 'true'
 AlignTrailingComments: 'true'
 AllowAllParametersOfDeclarationOnNextLine: 'false'
@@ -15,20 +10,19 @@ AllowShortCaseLabelsOnASingleLine: 'false'
 AllowShortFunctionsOnASingleLine: None
 AllowShortIfStatementsOnASingleLine: 'false'
 AllowShortLoopsOnASingleLine: 'false'
-AlwaysBreakAfterReturnType: All
 AlwaysBreakBeforeMultilineStrings: 'false'
 BinPackArguments: 'true'
 BinPackParameters: 'true'
 BreakBeforeBinaryOperators: NonAssignment
-BreakBeforeBraces: GNU
+BreakBeforeBraces: Allman
 BreakBeforeTernaryOperators: 'true'
 BreakStringLiterals: 'true'
 ColumnLimit: '80'
-ContinuationIndentWidth: '2'
+ContinuationIndentWidth: '4'
 DerivePointerAlignment: 'false'
 IncludeBlocks: Regroup
 IndentCaseLabels: 'false'
-IndentWidth: '2'
+IndentWidth: '4'
 IndentWrappedFunctionNames: 'false'
 KeepEmptyLinesAtTheStartOfBlocks: 'false'
 Language: Cpp

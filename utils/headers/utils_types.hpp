@@ -25,7 +25,7 @@ enum LogLevel
     DISABLED
 };
 
-std::ostream& operator<<(std::ostream& os, const LogLevel level);
+std::ostream &operator<< (std::ostream &os, const LogLevel level);
 
 } // namespace Types
 

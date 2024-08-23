@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
@@ -117,7 +118,7 @@ enum ProjectionType
  */
 class Camera
 {
-public:
+  public:
     /**
      * @brief Projection type
      */
@@ -213,25 +214,19 @@ public:
      *
      * This constructor initializes the camera with default values.
      */
-    Camera() = default;
+    Camera () = default;
     /**
      * @brief Constructor
      *
      * Full constructor that initializes the camera with the specified values.
      */
-    Camera(Enums::CameraType camera_type,
-           Enums::ProjectionType projection_type,
-           glm::vec3 position,
-           glm::vec3 worldUp,
-           glm::vec3 center,
-           float movementSpeed,
-           float mouseSensitivity,
-           float zoom,
-           Types::SphericalCoordinates sphericalCoordinates,
-           Types::EulerAngles eulerAngles,
-           glm::vec3 front,
-           glm::vec3 up,
-           glm::vec3 right);
+    Camera (Enums::CameraType camera_type,
+            Enums::ProjectionType projection_type, glm::vec3 position,
+            glm::vec3 worldUp, glm::vec3 center, float movementSpeed,
+            float mouseSensitivity, float zoom,
+            Types::SphericalCoordinates sphericalCoordinates,
+            Types::EulerAngles eulerAngles, glm::vec3 front, glm::vec3 up,
+            glm::vec3 right);
 
     /**
      * @brief Builder pattern
@@ -247,92 +242,92 @@ public:
      * @brief Get the camera type
      * @return The camera type
      */
-    Enums::CameraType GetCameraType();
+    Enums::CameraType GetCameraType ();
     /**
      * @brief Get the projection type
      * @return The projection type
      */
-    Enums::ProjectionType GetProjectionType();
+    Enums::ProjectionType GetProjectionType ();
     /**
      * @brief Get the position of the camera
      * @return The position of the camera
      */
-    glm::vec3 GetPosition();
+    glm::vec3 GetPosition ();
     /**
      * @brief Get the world up vector
      * @return The world up vector
      */
-    glm::vec3 GetWorldUp();
+    glm::vec3 GetWorldUp ();
     /**
      * @brief Get the center of the sphere
      * @return The center of the sphere
      */
-    glm::vec3 GetCenter();
+    glm::vec3 GetCenter ();
     /**
      * @brief Get the movement speed
      * @return The movement speed
      */
-    float GetMovementSpeed();
+    float GetMovementSpeed ();
     /**
      * @brief Get the mouse sensitivity
      * @return The mouse sensitivity
      */
-    float GetMouseSensitivity();
+    float GetMouseSensitivity ();
     /**
      * @brief Get the zoom level
      * @return The zoom level
      */
-    float GetZoom();
+    float GetZoom ();
     /**
      * @brief Get the spherical coordinates of the camera
      * @return The spherical coordinates of the camera
      */
-    Types::SphericalCoordinates GetSphericalCoordinates();
+    Types::SphericalCoordinates GetSphericalCoordinates ();
     /**
      * @brief Get the euler angles of the camera
      * @return The euler angles of the camera
      */
-    Types::EulerAngles GetEulerAngles();
+    Types::EulerAngles GetEulerAngles ();
     /**
      * @brief Get the view matrix
      * @return The view matrix
      */
-    glm::mat4 GetViewMatrix();
+    glm::mat4 GetViewMatrix ();
     /**
      * @brief Get the projection matrix
      * @return The projection matrix
      */
-    glm::mat4 GetProjectionMatrix();
+    glm::mat4 GetProjectionMatrix ();
     /**
      * @brief Get the front vector
      * @return The front vector
      */
-    glm::vec3 GetFront();
+    glm::vec3 GetFront ();
     /**
      * @brief Get the up vector
      * @return The up vector
      */
-    glm::vec3 GetUp();
+    glm::vec3 GetUp ();
     /**
      * @brief Get the right vector
      * @return The right vector
      */
-    glm::vec3 GetRight();
+    glm::vec3 GetRight ();
     /**
      * @brief Get the first mouse flag
      * @return boolean flag
      */
-    bool GetFirstMouse();
+    bool GetFirstMouse ();
     /**
      * @brief Get the last x position of the mouse
      * @return The last x position of the mouse
      */
-    float GetLastX();
+    float GetLastX ();
     /**
      * @brief Get the last y position of the mouse
      * @return The last y position of the mouse
      */
-    float GetLastY();
+    float GetLastY ();
 
     /* Setters */
 
@@ -340,82 +335,83 @@ public:
      * @brief Set the camera type
      * @param camera_type The camera type
      */
-    void SetCameraType(Enums::CameraType camera_type);
+    void SetCameraType (Enums::CameraType camera_type);
     /**
      * @brief Set the projection type
      * @param projection_type The projection type
      */
-    void SetProjectionType(Enums::ProjectionType projection_type);
+    void SetProjectionType (Enums::ProjectionType projection_type);
     /**
      * @brief Set the world up vector
      * @param worldUp The world up vector
      */
-    void SetWorldUp(glm::vec3 worldUp);
+    void SetWorldUp (glm::vec3 worldUp);
     /**
      * @brief Set the center of the sphere
      * @param center The center of the sphere
      */
-    void SetCenter(glm::vec3 center);
+    void SetCenter (glm::vec3 center);
     /**
      * @brief Set the movement speed
      * @param movementSpeed The movement speed
      */
-    void SetMovementSpeed(float movementSpeed);
+    void SetMovementSpeed (float movementSpeed);
     /**
      * @brief Set the mouse sensitivity
      * @param mouseSensitivity The mouse sensitivity
      */
-    void SetMouseSensitivity(float mouseSensitivity);
+    void SetMouseSensitivity (float mouseSensitivity);
     /**
      * @brief Set the zoom level
      * @param zoom The zoom level
      */
-    void SetZoom(float zoom);
+    void SetZoom (float zoom);
     /**
      * @brief Set the spherical coordinates of the camera
      * @param sphericalCoordinates The spherical coordinates of the camera
      */
-    void SetSphericalCoordinates(Types::SphericalCoordinates sphericalCoordinates);
+    void
+    SetSphericalCoordinates (Types::SphericalCoordinates sphericalCoordinates);
     /**
      * @brief Set the euler angles of the camera
      * @param eulerAngles The euler angles of the camera
      */
-    void SetEulerAngles(Types::EulerAngles eulerAngles);
+    void SetEulerAngles (Types::EulerAngles eulerAngles);
     /**
      * @brief Set the front vector
      * @param front The front vector
      */
-    void SetFront(glm::vec3 front);
+    void SetFront (glm::vec3 front);
     /**
      * @brief Set the up vector
      * @param up The up vector
      */
-    void SetUp(glm::vec3 up);
+    void SetUp (glm::vec3 up);
     /**
      * @brief Set the right vector
      * @param right The right vector
      */
-    void SetRight(glm::vec3 right);
+    void SetRight (glm::vec3 right);
     /**
      * @brief Set the position of the camera
      * @param position The position of the camera
      */
-    void SetPosition(glm::vec3 position);
+    void SetPosition (glm::vec3 position);
     /**
      * @brief Set the first mouse flag
      * @param firstMouse The first mouse flag
      */
-    void SetFirstMouse(bool firstMouse);
+    void SetFirstMouse (bool firstMouse);
     /**
      * @brief Set the last x position of the mouse
      * @param lastX The last x position of the mouse
      */
-    void SetLastX(float lastX);
+    void SetLastX (float lastX);
     /**
      * @brief Set the last y position of the mouse
      * @param lastY The last y position of the mouse
      */
-    void SetLastY(float lastY);
+    void SetLastY (float lastY);
 
     /* Utilities */
 
@@ -427,7 +423,7 @@ public:
      * the correct front, up and right vectors from
      * the euler angles.
      */
-    void updateCameraEuler();
+    void updateCameraEuler ();
     /**
      * @brief Update the camera spherical coordinates
      *
@@ -436,7 +432,7 @@ public:
      * correct position of the camera from the spherical
      * coordinates.
      */
-    void SphericalToCartesian();
+    void SphericalToCartesian ();
 };
 
 /**
@@ -444,37 +440,38 @@ public:
  */
 class Camera::Builder
 {
-private:
+  private:
     Enums::CameraType camera_type = Enums::CameraType::AIRCRAFT;
     Enums::ProjectionType projection_type = Enums::ProjectionType::PERSPECTIVE;
-    glm::vec3 position     = glm::vec3(0.0f, 0.0f, 0.0f);
-    glm::vec3 worldUp      = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 center       = glm::vec3(0.0f, 0.0f, 0.0f);
-    float movementSpeed    = 2.5f;
+    glm::vec3 position = glm::vec3 (0.0f, 0.0f, 0.0f);
+    glm::vec3 worldUp = glm::vec3 (0.0f, 1.0f, 0.0f);
+    glm::vec3 center = glm::vec3 (0.0f, 0.0f, 0.0f);
+    float movementSpeed = 2.5f;
     float mouseSensitivity = 0.1f;
-    float zoom             = 45.0f;
-    glm::vec3 front        = glm::vec3(0.0f, 0.0f, -1.0f);
-    glm::vec3 up           = glm::vec3(0.0f, 1.0f, 0.0f);
-    glm::vec3 right        = glm::vec3(1.0f, 0.0f, 0.0f);
+    float zoom = 45.0f;
+    glm::vec3 front = glm::vec3 (0.0f, 0.0f, -1.0f);
+    glm::vec3 up = glm::vec3 (0.0f, 1.0f, 0.0f);
+    glm::vec3 right = glm::vec3 (1.0f, 0.0f, 0.0f);
     Types::SphericalCoordinates sphericalCoordinates = {0.0f, 0.0f, 10.0f};
     Types::EulerAngles eulerAngles = {0.0f, 0.0f, 0.0f};
 
-public:
-    Builder& set_camera_type(Enums::CameraType camera_type);
-    Builder& set_projection_type(Enums::ProjectionType projection_type);
-    Builder& set_position(glm::vec3 position);
-    Builder& set_world_up(glm::vec3 worldUp);
-    Builder& set_center(glm::vec3 center);
-    Builder& set_movement_speed(float movementSpeed);
-    Builder& set_mouse_sensitivity(float mouseSensitivity);
-    Builder& set_zoom(float zoom);
-    Builder& set_spherical_coordinates(Types::SphericalCoordinates sphericalCoordinates);
-    Builder& set_eulerAngles(Types::EulerAngles eulerAngles);
-    Builder& set_front(glm::vec3 front);
-    Builder& set_up(glm::vec3 up);
-    Builder& set_right(glm::vec3 right);
+  public:
+    Builder &set_camera_type (Enums::CameraType camera_type);
+    Builder &set_projection_type (Enums::ProjectionType projection_type);
+    Builder &set_position (glm::vec3 position);
+    Builder &set_world_up (glm::vec3 worldUp);
+    Builder &set_center (glm::vec3 center);
+    Builder &set_movement_speed (float movementSpeed);
+    Builder &set_mouse_sensitivity (float mouseSensitivity);
+    Builder &set_zoom (float zoom);
+    Builder &set_spherical_coordinates (
+        Types::SphericalCoordinates sphericalCoordinates);
+    Builder &set_eulerAngles (Types::EulerAngles eulerAngles);
+    Builder &set_front (glm::vec3 front);
+    Builder &set_up (glm::vec3 up);
+    Builder &set_right (glm::vec3 right);
 
-    Camera build();
+    Camera build ();
 };
 
 /**

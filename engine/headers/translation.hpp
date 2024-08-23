@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
@@ -46,7 +47,7 @@ namespace Types
  */
 class Translation
 {
-public:
+  public:
     /**
      * @brief Camera view matrix
      */
@@ -66,48 +67,48 @@ public:
      * This constructor initializes the view, projection, and model
      * matrices to the identity matrix.
      */
-    Translation();
+    Translation ();
 
     /**
      * @brief Set the view matrix
      * @param view The view matrix
      */
-    void setView(glm::mat4 view);
+    void setView (glm::mat4 view);
     /**
      * @brief Set the projection matrix
      * @param projection The projection matrix
      */
-    void setProjection(glm::mat4 projection);
+    void setProjection (glm::mat4 projection);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setProjection(float fov, float near, float far);
+    void setProjection (float fov, float near, float far);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setModel(glm::mat4 model);
+    void setModel (glm::mat4 model);
     /**
      * @brief Translate the object
      * @param translation The translation vector
      */
-    void translate(glm::vec3 translation);
+    void translate (glm::vec3 translation);
     /**
      * @brief Rotate the object
      * @param rotation The rotation vector
      */
-    void rotate(glm::vec3 rotation);
+    void rotate (glm::vec3 rotation);
     /**
      * @brief Scale the object
      * @param scale The scale factor
      */
-    void scale(float scale);
+    void scale (float scale);
     /**
      * @brief Set the shader
      * @param shader_name The shader name
      */
-    void setShader(Types::ShaderName shader_name);
+    void setShader (Types::ShaderName shader_name);
 };
 
 } // namespace Types

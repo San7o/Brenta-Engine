@@ -1,3 +1,3 @@
 #pragma once
 
-void InitCloseWindowCallback();
+void InitCloseWindowCallback ();

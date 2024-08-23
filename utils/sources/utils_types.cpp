@@ -1,4 +1,5 @@
 #include "utils_types.hpp"
+
 #include <ostream>
 
 namespace Brenta
@@ -7,26 +8,27 @@ namespace Brenta
 namespace Types
 {
 
-std::ostream& operator<<(std::ostream& os, const LogLevel level)
+std::ostream &operator<< (std::ostream &os, const LogLevel level)
 {
-    switch (level) {
-        case LogLevel::DEBUG:
-            os << "DEBUG";
-            break;
-        case LogLevel::INFO:
-            os << "INFO";
-            break;
-        case LogLevel::WARNING:
-            os << "WARNING";
-            break;
-        case LogLevel::ERROR:
-            os << "ERROR";
-            break;
-        case LogLevel::DISABLED:
-            os << "DISABLED";
-            break;
-        default:
-            break;
+    switch (level)
+    {
+    case LogLevel::DEBUG:
+        os << "DEBUG";
+        break;
+    case LogLevel::INFO:
+        os << "INFO";
+        break;
+    case LogLevel::WARNING:
+        os << "WARNING";
+        break;
+    case LogLevel::ERROR:
+        os << "ERROR";
+        break;
+    case LogLevel::DISABLED:
+        os << "DISABLED";
+        break;
+    default:
+        break;
     }
 
     return os;

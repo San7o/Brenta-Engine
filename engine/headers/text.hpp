@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,18 +22,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
-#include <string>
-#include <map>
-
+#include <ft2build.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#include <ft2build.h>
+#include <map>
+#include <string>
 #include FT_FREETYPE_H
 
 #include "engine.hpp"
@@ -51,11 +50,12 @@ namespace Types
  * the texture ID, the size of the glyph, the bearing, and the
  * advance of the glyph.
  */
-struct Character {
-    unsigned int TextureID;  // ID handle of the glyph texture
-    glm::ivec2   Size;       // Size of glyph
-    glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
-    unsigned int Advance;    // Offset to advance to next glyph
+struct Character
+{
+    unsigned int TextureID; // ID handle of the glyph texture
+    glm::ivec2 Size;        // Size of glyph
+    glm::ivec2 Bearing;     // Offset from baseline to left/top of glyph
+    unsigned int Advance;   // Offset to advance to next glyph
 };
 
 } // namespace Types
@@ -69,7 +69,7 @@ struct Character {
  */
 class Text
 {
-public:
+  public:
     /**
      * @brief Map of characters
      *
@@ -77,7 +77,7 @@ public:
      */
     static std::map<char, Types::Character> characters;
 
-    Text() = delete;
+    Text () = delete;
     /**
      * @brief Initialize the text subsystem
      *
@@ -85,11 +85,11 @@ public:
      * the shader, the VAO, and the VBO. The shader is loaded
      * from the file text.vs and text.fs, and the VAO and VBO
      * are created using the data from the characters map.
-     * 
+     *
      * Note: opengl context must be created before calling this
      * method.
      */
-    static void Init();
+    static void Init ();
 
     /**
      * @brief Load a font
@@ -101,7 +101,7 @@ public:
      * @param font_name Name of the font file
      * @param fontSize Size of the font
      */
-    static void Load(std::string font_name, unsigned int fontSize);
+    static void Load (std::string font_name, unsigned int fontSize);
     /**
      * @brief Render text
      *
@@ -116,12 +116,13 @@ public:
      * @param scale Scale of the text
      * @param color Color of the text
      */
-    static void RenderText(std::string text, float x,
-                    float y, float scale, glm::vec3 color);
-private:
+    static void RenderText (std::string text, float x, float y, float scale,
+                            glm::vec3 color);
+
+  private:
     static Types::ShaderName textShader;
-    static Types::VAO        textVao;
-    static Types::Buffer     textVbo;
+    static Types::VAO textVao;
+    static Types::Buffer textVbo;
 };
 
 } // namespace Brenta

@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,24 +22,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
+
+#include "buffer.hpp"
+#include "gl_helper.hpp"
+#include "shader.hpp"
+#include "texture.hpp"
+#include "vao.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
 #include <string>
 #include <vector>
 
-#include "gl_helper.hpp"
-#include "texture.hpp"
-#include "shader.hpp"
-#include "buffer.hpp"
-#include "vao.hpp"
-
-namespace Brenta 
+namespace Brenta
 {
 
 namespace Types
@@ -82,11 +82,11 @@ struct Texture
  */
 class Mesh
 {
-public:
+  public:
     /**
      * @brief vertices of the mesh
      */
-    std::vector<Types::Vertex>  vertices;
+    std::vector<Types::Vertex> vertices;
     /**
      * @brief indices of the mesh
      *
@@ -95,7 +95,7 @@ public:
      * in the vertex array and there can be multiple indices
      * for a vertex.
      */
-    std::vector<unsigned int>   indices;
+    std::vector<unsigned int> indices;
     /**
      * @brief textures of the mesh
      */
@@ -218,14 +218,13 @@ public:
      * @param mipmap_min Type of mipmap minifying texture filtering
      * @param mipmap_mag Type of mipmap magnifying texture filtering
      */
-    Mesh(std::vector<Types::Vertex> vertices, std::vector<unsigned int> indices,
-                    std::vector<Types::Texture> textures,
-                    GLint wrapping = GL_REPEAT,
-                    GLint filtering_min = GL_NEAREST,
-                    GLint filtering_mag = GL_LINEAR,
-                    GLboolean hasMipmap = GL_TRUE,
-                    GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                    GLint mipmap_max = GL_LINEAR);
+    Mesh (std::vector<Types::Vertex> vertices,
+          std::vector<unsigned int> indices,
+          std::vector<Types::Texture> textures, GLint wrapping = GL_REPEAT,
+          GLint filtering_min = GL_NEAREST, GLint filtering_mag = GL_LINEAR,
+          GLboolean hasMipmap = GL_TRUE,
+          GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+          GLint mipmap_max = GL_LINEAR);
     /**
      * @brief The Builder class is used to build a Mesh object
      */
@@ -236,13 +235,14 @@ public:
      *
      * @param shader_name Shader to use to draw the mesh
      */
-    void Draw(Types::ShaderName shader_name);
-private:
+    void Draw (Types::ShaderName shader_name);
+
+  private:
     // render data
     Types::VAO vao;
     Types::Buffer vbo;
     Types::Buffer ebo;
-    void setupMesh();
+    void setupMesh ();
 };
 
 /**
@@ -250,9 +250,9 @@ private:
  */
 class Mesh::Builder
 {
-private:
-    std::vector<Types::Vertex>  vertices = {};
-    std::vector<unsigned int>   indices  = {};
+  private:
+    std::vector<Types::Vertex> vertices = {};
+    std::vector<unsigned int> indices = {};
     std::vector<Types::Texture> textures = {};
     GLint wrapping = GL_REPEAT;
     GLint filtering_min = GL_NEAREST;
@@ -261,18 +261,18 @@ private:
     GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR;
     GLint mipmap_mag = GL_LINEAR;
 
-public:
-    Builder& set_vertices(std::vector<Types::Vertex> vertices);
-    Builder& set_indices(std::vector<unsigned int> indices);
-    Builder& set_textures(std::vector<Types::Texture> textures);
-    Builder& set_wrapping(GLint wrapping);
-    Builder& set_filtering_min(GLint filtering_min);
-    Builder& set_filtering_mag(GLint filtering_mag);
-    Builder& set_hasMipmap(GLboolean hasMipmap);
-    Builder& set_mipmap_min(GLint mipmap_min);
-    Builder& set_mipmap_mag(GLint mipmap_mag);
+  public:
+    Builder &set_vertices (std::vector<Types::Vertex> vertices);
+    Builder &set_indices (std::vector<unsigned int> indices);
+    Builder &set_textures (std::vector<Types::Texture> textures);
+    Builder &set_wrapping (GLint wrapping);
+    Builder &set_filtering_min (GLint filtering_min);
+    Builder &set_filtering_mag (GLint filtering_mag);
+    Builder &set_hasMipmap (GLboolean hasMipmap);
+    Builder &set_mipmap_min (GLint mipmap_min);
+    Builder &set_mipmap_mag (GLint mipmap_mag);
 
-    Mesh build();
+    Mesh build ();
 };
 
 } // namespace Brenta

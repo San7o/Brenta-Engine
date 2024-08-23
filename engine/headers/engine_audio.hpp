@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,13 +22,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
 #include <SDL3/SDL_audio.h>
-#include <unordered_map>
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 namespace Brenta
@@ -45,8 +46,8 @@ typedef std::string AudioName;
  *
  * This struct contains information about an audio file loaded by the engine.
  * It contains the path to the audio file, the audio buffer, the length of the
- * audio buffer and the audio format. It is autocamatically created by the engine
- * when an audio file is loaded with the LoadAudio function.
+ * audio buffer and the audio format. It is autocamatically created by the
+ * engine when an audio file is loaded with the LoadAudio function.
  */
 struct AudioFile
 {
@@ -57,7 +58,7 @@ struct AudioFile
     /**
      * @brief Pointer to audio buffer
      */
-    Uint8* audio_buf;
+    Uint8 *audio_buf;
     /**
      * @brief Length of audio buffer
      */
@@ -75,8 +76,8 @@ struct AudioFile
  *   int channels;           // Number of channels: 1 mono, 2 stereo, etc
  *   int freq;               // sample rate: sample frames per second
  * } SDL_AudioSpec;
-*
-*/
+ *
+ */
 
 } // namespace Types
 
@@ -85,13 +86,13 @@ struct AudioFile
  *
  * This class contains the audio subsystem of the engine. It is used to load
  * audio files, create audio streams, play audio files on streams, set the
- * volume of streams, pause, resume and stop streams. The audio system 
+ * volume of streams, pause, resume and stop streams. The audio system
  * needs to be initialized and destroyed by the engine. Audio files and
  * streamd are stored in maps and are identified by this name.
  */
 class Audio
 {
-public:
+  public:
     /**
      * @brief Map of audio files
      *
@@ -113,9 +114,9 @@ public:
      * stream called "default", the handling of the streams is left to the
      * programmer.
      */
-    static std::unordered_map<Types::StreamName, SDL_AudioStream*> streams;
+    static std::unordered_map<Types::StreamName, SDL_AudioStream *> streams;
 
-    Audio() = delete;
+    Audio () = delete;
     /**
      * @brief Initialize the audio system
      *
@@ -123,14 +124,14 @@ public:
      * It is called automatically by the engine when the game is
      * started. It creates a default stream called "default".
      */
-    static void Init();
+    static void Init ();
     /**
      * @brief Destroy the audio system
      *
-     * This function frees all audio streams and audio files, 
+     * This function frees all audio streams and audio files,
      * and closes the audio system.
      */
-    static void Destroy();
+    static void Destroy ();
 
     /**
      * @brief Get an audio file
@@ -141,7 +142,7 @@ public:
      * @param name The name of the audio file
      * @return The audio file
      */
-    static Types::AudioFile GetAudioFile(Types::AudioName name);
+    static Types::AudioFile GetAudioFile (Types::AudioName name);
     /**
      * @brief Get an audio stream
      *
@@ -151,7 +152,7 @@ public:
      * @param name The name of the audio stream
      * @return The audio stream
      */
-    static SDL_AudioStream* GetStream(Types::StreamName name);
+    static SDL_AudioStream *GetStream (Types::StreamName name);
 
     /**
      * @brief Load an audio file
@@ -162,7 +163,7 @@ public:
      * @param name The name of the audio file
      * @param path The path to the audio file
      */
-    static void LoadAudio(Types::AudioName name, std::string path);
+    static void LoadAudio (Types::AudioName name, std::string path);
     /**
      * @brief Create an audio stream
      *
@@ -171,7 +172,7 @@ public:
      *
      * @param name The name of the stream
      */
-    static void CreateStream(Types::StreamName);
+    static void CreateStream (Types::StreamName);
     /**
      * @brief Play an audio file
      *
@@ -183,7 +184,7 @@ public:
      * @param audio_name The name of the audio file
      * @param stream_name The name of the stream
      */
-    static void PlayAudio(Types::AudioName, Types::StreamName = "default");
+    static void PlayAudio (Types::AudioName, Types::StreamName = "default");
     /**
      * @brief Set the volume of a stream
      *
@@ -193,7 +194,7 @@ public:
      * @param name The name of the stream
      * @param volume The volume of the stream
      */
-    static void SetVolume(Types::StreamName name, int volume);
+    static void SetVolume (Types::StreamName name, int volume);
     /**
      * @brief Pause a stream
      *
@@ -202,7 +203,7 @@ public:
      *
      * @param name The name of the stream
      */
-    static void PauseStream(Types::StreamName name);
+    static void PauseStream (Types::StreamName name);
     /**
      * @brief Resume a stream
      *
@@ -211,7 +212,7 @@ public:
      *
      * @param name The name of the stream
      */
-    static void ResumeStream(Types::StreamName name);
+    static void ResumeStream (Types::StreamName name);
     /**
      * @brief Stop a stream
      *
@@ -220,10 +221,10 @@ public:
      *
      * @param name The name of the stream
      */
-    static void ClearStream(Types::StreamName name);
+    static void ClearStream (Types::StreamName name);
 
-private:
-    static void CheckError();
+  private:
+    static void CheckError ();
 };
 
 } // namespace Brenta

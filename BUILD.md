@@ -78,3 +78,9 @@ You can build the documentation with `doxygen` (you need to have doxygen install
 doxygen doxygen.conf
 ```
 The index will be located in `docs/html/index.html`.
+
+## Format code
+To run the formatter, run:
+```bash
+make format
+```

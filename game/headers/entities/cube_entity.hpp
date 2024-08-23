@@ -1,3 +1,3 @@
 #pragma once
 
-void InitCubeEntity();
+void InitCubeEntity ();

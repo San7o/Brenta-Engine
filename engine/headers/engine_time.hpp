@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +22,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
@@ -37,8 +38,8 @@ namespace Brenta
  */
 class Time
 {
-public:
-    Time() = delete;
+  public:
+    Time () = delete;
 
     /**
      * @brief Get the current time
@@ -48,7 +49,7 @@ public:
      *
      * @return The current time in seconds
      */
-    static float GetCurrentTime();
+    static float GetCurrentTime ();
     /**
      * @brief Get the time since the last frame
      *
@@ -56,7 +57,7 @@ public:
      *
      * @return The time since the last frame in seconds
      */
-    static float GetDeltaTime();
+    static float GetDeltaTime ();
     /**
      * @brief Get the frames per second
      *
@@ -64,7 +65,7 @@ public:
      *
      * @return The frames per second
      */
-    static float GetFPS();
+    static float GetFPS ();
     /**
      * @brief Update the time
      *
@@ -73,9 +74,9 @@ public:
      *
      * @param newTime The new time of the program
      */
-    static void  Update(float newTime);
+    static void Update (float newTime);
 
-private:
+  private:
     static float currentTime;
     static float deltaTime;
     static float lastFrame;
