@@ -1,3 +1,3 @@
 #pragma once
 
-void InitRobotEntity();
+void InitRobotEntity ();

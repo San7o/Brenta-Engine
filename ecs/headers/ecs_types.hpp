@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,42 +22,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #pragma once
 
-#include <vector>
 #include <memory>
 #include <set>
 #include <unordered_map>
+#include <vector>
 
-namespace ECS {
+namespace Brenta
+{
 
-namespace Types {
+namespace ECS
+{
 
-struct None {};
+namespace Types
+{
 
-template <typename T>
-using SPtr      = std::shared_ptr<T>;
+/**
+ * @brief None type
+ *
+ * This type is used to represent a null value.
+ */
+struct None
+{
+};
 
-template <typename T>
-using SetPtr     = std::unique_ptr<std::set<T>>;
+template <typename T> using SPtr = std::shared_ptr<T>;
+
+template <typename T> using SetPtr = std::unique_ptr<std::set<T>>;
+
+template <typename T, typename G> using UMap = std::unordered_map<T, SPtr<G>>;
 
 template <typename T, typename G>
-using UMap       = std::unordered_map<T, SPtr<G>>;
+using UMapVec = std::unordered_map<T, std::vector<SPtr<G>>>;
 
-template <typename T, typename G>
-using UMapVec    = std::unordered_map<T, std::vector<SPtr<G>>>;
-
-template <typename T, typename G>
-using UMapPtr    = std::unique_ptr<UMap<T, G>>;
+template <typename T, typename G> using UMapPtr = std::unique_ptr<UMap<T, G>>;
 
 template <typename T, typename G>
 using UMapVecPtr = std::unique_ptr<UMapVec<T, G>>;
 
-template <typename T>
-using VecSPtr    = std::shared_ptr<std::vector<SPtr<T>>>;
+template <typename T> using VecSPtr = std::shared_ptr<std::vector<SPtr<T>>>;
 
 } // namespace Types
 
 } // namespace ECS
+
+} // namespace Brenta

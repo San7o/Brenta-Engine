@@ -1,6 +1,6 @@
-# opengl-santo-engine
+# Brenta Engine
 
-A friendly Entity Component System (ECS) engine, 
+Brenta Engine is a friendly Entity Component System (ECS) engine, 
 developed in C++ with OpenGL. This engine is designed to 
 provide a modular and flexible architecture for game development
 and simulations: you can run simultations without the graphical
@@ -19,8 +19,10 @@ https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 # ⭐ Current State
 
-The project is structured into the folders `engine`, `ecs`, `game`, `render` 
-containing respectively the game engine, the ecs, a game demo and a render demo.
+The project is structured into the folders `engine`, `ecs`, `game`, `utils` and `tests`
+containing respectively the game engine, the ecs, a game demo, utilities functions (like
+the logger) and tests. In addition, `include` contains third party headers and `lib`
+contains static libraries for linking.
 
 The project is under heavy developement, the following features have been
 implemented:
@@ -57,60 +59,3 @@ implemented:
 
 Checkout [CONTRIBUTING](./CONTRIBUTING.md) if you are considering contributing to the project.
 
-# 💀 Dependencies
-
-You need:
-
-- A `C++17` compiler
-
-- `GLFW`
-
-- `libfreetype`
-
-- `libassimp`
-
-- `SDL3` for audio, make sure you compile for your audio driver
-
-- `doxygen` for building documentation
-
-If you are on `Nix`, you can access the developement environment
-by running:
-```bash
-nix develop
-```
-
-You need [Assimp](https://github.com/assimp/assimp) in order to import 3D models. It is
-advised to build the library for your platform following the instruction in the official
-repository, but many linux distributions have it available in their packet manager. 
-For linux, I built the library from source using the following flags:
-```bash
-git clone https://github.com/assimp/assimp.git
-cd assimp/
-cmake CMakeLists.txt -DASSIMP_WARNINGS_AS_ERRORS=off -DASSIMP_INSTALL=off
-make -j4
-```
-The library will be generated in `lib/`. If you don't install the library system-wide,
-you need to specify the path in an environment variable to run the application, like so:
-```bash
-LD_LIBRARY_PATH=${PWD}/lib/:${LD_LIBRARY_PATH} ./build/main.out
-```
-Or you could compile the library statically with `-static`, but It will take more compile
-time and generate a bigger file.
-
-Likewise, you should compile your libraries for [FreeType](https://freetype.org/) and [SDL3](https://wiki.libsdl.org/SDL3/FrontPage).
-
-# 🪖 Compile
-
-You can compile the demo game with `cmake` (recommended):
-```bash
-cmake -Bbuild
-cmake --build build
-./build/main
-```
-The binaries will be generated in `build/` directory.
-
-Generate documentation with `doxygen` (you need to have doxygen installed in your system):
-```bash
-doxygen doxygen.conf
-```
-The index will be located in `docs/html/index.html`.

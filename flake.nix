@@ -33,6 +33,7 @@
             harfbuzzFull            # text shaping
             alsa-lib                # audio
             doxygen                 # documentation
+            clang-tools             # code formatting
           ];
           shellHook = ''
               zsh

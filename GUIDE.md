@@ -5,26 +5,25 @@ feature, an example with context will be shown. Enjoy the read :)
 
 ## 🕵️‍♂️ How it works
 
-The `World` contains `Entities`. You can add `Components` to entities,
-which are their "properties" (like Health, Position, Mesh). You interact 
-with those components through `Systems` by making `Queries`. There are
-also `Resources` that store global data. Components, Systems and 
-Resources are identified by a name, while entities are defined with 
-an ID.
+In brief (takes a deep breath): everything in the ECS exists in the `World`,
+you can think of it as a global state of everything that's happening.
+The World contains `Entities`, those are the most elemental thing to exist.
+You can add `Components` to entities, which are their "properties"
+(like Health, Position, Mesh). You interact  with those components
+through `Systems` by making `Queries` on their components. There are also `Resources`
+that store global data. Uh that was quick, read it again if you need it to.
+Now we will go a bit deeper on how this works, let's take a look:
 
-Let's take a deeper look:
-
-### Main loop
-
-The engine provides functions to interact with the window in `ECS::Screen`, 
-some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
-input handling with `ECS::Input`, manage time with `ECS::Time`,
-display text with `ECS::Text` and more!
+### The Main loop
 
 The main loop calls `World::Tick()`. At each tick, all the 
 Systems will be called in the order they were added in 
 the World. 
 
+The engine provides functions to interact with the window in `ECS::Screen`, 
+some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
+input handling with `ECS::Input`, manage time with `ECS::Time`,
+display text with `ECS::Text` and more!
 
 ```c++
 #include "engine.h"

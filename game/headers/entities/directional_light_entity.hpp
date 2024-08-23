@@ -1,3 +1,3 @@
 #pragma once
 
-void InitDirectionalLightEntity();
+void InitDirectionalLightEntity ();

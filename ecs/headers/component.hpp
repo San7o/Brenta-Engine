@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,43 +22,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
-
-/*
- * This file contains the definition of the Component type.
- *
- * A Component is a piece of data that is attached to an Entity.
- * Components are used to store data that is associated with a game object.
- * For example, a Position component could store the position of a game object.
  */
 
 #pragma once
 
 #include "entity.hpp"
 
-namespace ECS {
+namespace Brenta
+{
+
+namespace ECS
+{
 
 /**
- * Example Usage:
- * 
+ * @brief Component class
+ *
+ * This class is used to create components. Components are used to store
+ * data that is associated with an entity. For example, a Position
+ * component could store the position of the entity.
+ *
+ * Example creating a component:
+ *
+ * ```
  * struct TransformComponent : Component {
  *   glm::vec3 position;
  *   glm::vec3 rotation;
  *   float scale;
  *
- *   TransformComponent() : ... 
+ *   TransformComponent() : ...
  *   TransformComponent(glm::vec3 position, ...
  * };
+ * ```
  *
  * You need to provide a default constructor,
  * any other constructor is optional.
  */
-struct Component {
+struct Component
+{
     Entity entity;
 
-    bool operator==(const Component& other) const {
+    bool operator== (const Component &other) const
+    {
         return (entity == other.entity);
     }
 };
 
 } // namespace ECS
+
+} // namespace Brenta

@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,150 +22,150 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
+ */
 
 #include "text.hpp"
+
 #include "engine_logger.hpp"
 
 #include <filesystem>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
+using namespace Brenta::Types;
 
 Types::ShaderName Text::textShader;
-Types::VAO        Text::textVao;
-Types::Buffer     Text::textVbo;
+Types::VAO Text::textVao;
+Types::Buffer Text::textVbo;
 std::map<char, Types::Character> Text::characters;
 
-void Text::Init()
+void Text::Init ()
 {
-    Text::textVbo = Types::Buffer(GL_ARRAY_BUFFER);
-    Text::textVao.Init();;
+    Text::textVbo = Types::Buffer (GL_ARRAY_BUFFER);
+    Text::textVao.Init ();
+    ;
 
-    Logger::Log(LogLevel::INFO, "Text initialized");
+    INFO ("Text initialized");
 }
 
-void Text::Load(std::string font, unsigned int fontSize)
+void Text::Load (std::string font, unsigned int fontSize)
 {
-    if (textVao.GetVAO() == 0)
+    if (textVao.GetVAO () == 0)
     {
-        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        ERROR ("Text not initialized");
         return;
     }
     FT_Library ft;
-    if (FT_Init_FreeType(&ft))
+    if (FT_Init_FreeType (&ft))
     {
-        Logger::Log(LogLevel::ERROR, "Could not init FreeType library");
+        ERROR ("Could not init FreeType library");
         return;
     }
 
-    Shader::New(
-        "TextShader",
-        GL_VERTEX_SHADER,
-        std::filesystem::absolute("engine/shaders/text.vs"), 
-        GL_FRAGMENT_SHADER,
-        std::filesystem::absolute("engine/shaders/text.fs")
-    );
+    Shader::New ("TextShader", GL_VERTEX_SHADER,
+                 std::filesystem::absolute ("engine/shaders/text.vs"),
+                 GL_FRAGMENT_SHADER,
+                 std::filesystem::absolute ("engine/shaders/text.fs"));
     textShader = "TextShader";
-    Shader::Use(textShader);
+    Shader::Use (textShader);
 
     // find path to font
-    std::string font_name = std::filesystem::absolute("assets/fonts/" + font);
-    if (font_name.empty())
+    std::string font_name = std::filesystem::absolute ("assets/fonts/" + font);
+    if (font_name.empty ())
     {
-        Logger::Log(LogLevel::ERROR, "Could not find font");
+        ERROR ("Could not find font");
         return;
     }
 
     FT_Face face;
-    if (FT_New_Face(ft, font_name.c_str(), 0, &face))
+    if (FT_New_Face (ft, font_name.c_str (), 0, &face))
     {
-        Logger::Log(LogLevel::ERROR, "Could not load font");
+        ERROR ("Could not load font");
         return;
     }
-    else {
+    else
+    {
         // set size to load glyphs as
-        FT_Set_Pixel_Sizes(face, 0, 48);
+        FT_Set_Pixel_Sizes (face, 0, 48);
 
         // disable byte-alignment restriction
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glPixelStorei (GL_UNPACK_ALIGNMENT, 1);
 
         // load first 128 characters of ASCII set
         for (unsigned char c = 0; c < 128; c++)
         {
-            // Load character glyph 
-            if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+            // Load character glyph
+            if (FT_Load_Char (face, c, FT_LOAD_RENDER))
             {
-                Logger::Log(LogLevel::ERROR, "Could not load glyph");
+                ERROR ("Could not load glyph");
                 continue;
             }
             // generate texture
             unsigned int texture;
-            glGenTextures(1, &texture);
-            ECS::Texture::BindTexture(GL_TEXTURE_2D, texture);
-            glTexImage2D(
-                GL_TEXTURE_2D,
-                0,
-                GL_RED,
-                face->glyph->bitmap.width,
-                face->glyph->bitmap.rows,
-                0,
-                GL_RED,
-                GL_UNSIGNED_BYTE,
-                face->glyph->bitmap.buffer
-            );
+            glGenTextures (1, &texture);
+            Texture::BindTexture (GL_TEXTURE_2D, texture);
+            glTexImage2D (GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width,
+                          face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
+                          face->glyph->bitmap.buffer);
             // set texture options
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S,
+                             GL_CLAMP_TO_EDGE);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,
+                             GL_CLAMP_TO_EDGE);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             // now store character for later use
             Character character = {
                 texture,
-                glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
-                glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
-                static_cast<unsigned int>(face->glyph->advance.x)
-            };
-            characters.insert(std::pair<char, Character>(c, character));
+                glm::ivec2 (face->glyph->bitmap.width,
+                            face->glyph->bitmap.rows),
+                glm::ivec2 (face->glyph->bitmap_left, face->glyph->bitmap_top),
+                static_cast<unsigned int> (face->glyph->advance.x)};
+            characters.insert (std::pair<char, Character> (c, character));
         }
-        ECS::Texture::BindTexture(GL_TEXTURE_2D, 0);
+        Texture::BindTexture (GL_TEXTURE_2D, 0);
     }
     // destroy FreeType once we're finished
-    FT_Done_Face(face);
-    FT_Done_FreeType(ft);
+    FT_Done_Face (face);
+    FT_Done_FreeType (ft);
 
     // configure VAO/VBO for texture quads
-    textVao.Bind();
-    textVbo.Bind();
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-    textVbo.Unbind();
-    textVao.Unbind();
+    textVao.Bind ();
+    textVbo.Bind ();
+    glBufferData (GL_ARRAY_BUFFER, sizeof (float) * 6 * 4, NULL,
+                  GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray (0);
+    glVertexAttribPointer (0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof (float), 0);
+    textVbo.Unbind ();
+    textVao.Unbind ();
 }
 
-void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
+void Text::RenderText (std::string text, float x, float y, float scale,
+                       glm::vec3 color)
 {
-    if (textVao.GetVAO() == 0)
+    if (textVao.GetVAO () == 0)
     {
-        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        ERROR ("Text not initialized");
         return;
     }
 
-    Shader::Use(textShader);
-    unsigned int textShaderId = Shader::GetId(textShader);
+    Shader::Use (textShader);
+    unsigned int textShaderId = Shader::GetId (textShader);
 
-    glUniform3f(glGetUniformLocation(textShaderId, "textColor"), color.x, color.y, color.z);
+    glUniform3f (glGetUniformLocation (textShaderId, "textColor"), color.x,
+                 color.y, color.z);
 
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(Screen::GetWidth()), 0.0f, static_cast<float>(Screen::GetHeight()));
-    glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glm::mat4 projection =
+        glm::ortho (0.0f, static_cast<float> (Screen::GetWidth ()), 0.0f,
+                    static_cast<float> (Screen::GetHeight ()));
+    glUniformMatrix4fv (glGetUniformLocation (textShaderId, "projection"), 1,
+                        GL_FALSE, glm::value_ptr (projection));
 
-    glActiveTexture(GL_TEXTURE0);
-    textVao.Bind();
+    glActiveTexture (GL_TEXTURE0);
+    textVao.Bind ();
 
     // iterate through all characters
     std::string::const_iterator c;
-    for (c = text.begin(); c != text.end(); c++)
+    for (c = text.begin (); c != text.end (); c++)
     {
         Character ch = characters[*c];
 
@@ -175,32 +176,31 @@ void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3
         float h = ch.Size.y * scale;
 
         // update VBO for each character
-        
-        float vertices[6][4] = {
-            { xpos,     ypos + h,   0.0, 0.0 },
-            { xpos,     ypos,       0.0, 1.0 },
-            { xpos + w, ypos,       1.0, 1.0 },
 
-            { xpos,     ypos + h,   0.0, 0.0 },
-            { xpos + w, ypos,       1.0, 1.0 },
-            { xpos + w, ypos + h,   1.0, 0.0 }
-        };
-        
+        float vertices[6][4] = {
+            {xpos, ypos + h, 0.0, 0.0},    {xpos, ypos, 0.0, 1.0},
+            {xpos + w, ypos, 1.0, 1.0},
+
+            {xpos, ypos + h, 0.0, 0.0},    {xpos + w, ypos, 1.0, 1.0},
+            {xpos + w, ypos + h, 1.0, 0.0}};
+
         // render glyph texture over quad
-        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+        glBindTexture (GL_TEXTURE_2D, ch.TextureID);
 
         // update content of VBO memory
-        glBindBuffer(GL_ARRAY_BUFFER, textVbo.id);
-        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+        glBindBuffer (GL_ARRAY_BUFFER, textVbo.id);
+        glBufferSubData (GL_ARRAY_BUFFER, 0, sizeof (vertices), vertices);
 
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindBuffer (GL_ARRAY_BUFFER, 0);
         // render quad
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        // now advance cursors for next glyph (note that advance is number of 1/64 pixels)
-        x += (ch.Advance >> 6) * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
+        glDrawArrays (GL_TRIANGLES, 0, 6);
+        // now advance cursors for next glyph (note that advance is number
+        // of 1/64 pixels)
+        x += (ch.Advance >> 6)
+             * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
     }
-    glBindVertexArray(0);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindVertexArray (0);
+    glBindTexture (GL_TEXTURE_2D, 0);
 
     /*
     // Render a test triangle
@@ -214,7 +214,7 @@ void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3
             -0.5f, -0.5f, 0.0f, 0.0f,
              0.5f, -0.5f, 0.0f, 0.0f,
              0.0f,  0.5f, 0.0f, 0.0f
-    };  
+    };
     textVao.Bind();
     textVbo.Bind();
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);

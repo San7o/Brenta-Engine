@@ -1,6 +1,6 @@
 /*
  * MIT License
- * 
+ *
  * Copyright (c) 2024 Giovanni Santini
 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -9,10 +9,11 @@
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
- * The above copyright notice and this permission notice shall be included in all
+ *
+ * The above copyright notice and this permission notice shall be included in
+ all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,19 +22,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
- */ 
-
-/*
- * This file contains the definition of the Resource type.
- *
- * A Resource is a piece of global data that is used by the game.
- * It is saved in the World and can be accessed by any System.
  */
 
 #pragma once
 
-namespace ECS {
+namespace Brenta
+{
 
-struct Resource {};
+namespace ECS
+{
+
+/**
+ * @brief Resource type
+ *
+ * This type is used to identify resources in the game world.
+ * Resources are pieces of global data that can be accessed by any System.
+ *
+ * Example creating a resource:
+ *
+ * ```
+ * struct WireframeResource : Resource {
+ *     bool enabled;
+ *     WireframeResource(bool e) : enabled(e) {}
+ * };
+ * ```
+ *
+ * Example registering a resource:
+ * ```
+ * World::AddResource<WireframeResource>(WireframeResource(false));
+ * ```
+ *
+ */
+struct Resource
+{
+};
 
 } // namespace ECS
+
+} // namespace Brenta
