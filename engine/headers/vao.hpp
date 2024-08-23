@@ -54,7 +54,7 @@ class VAO
      *
      * Does nothing
      */
-    VAO ()
+    VAO()
     {
     }
     /**
@@ -62,25 +62,25 @@ class VAO
      *
      * Creates a new VAO
      */
-    void Init ();
+    void Init();
 
     /**
      * @brief Get the VAO
      * @return The VAO
      */
-    unsigned int GetVAO ();
+    unsigned int GetVAO();
     /**
      * @brief Bind the VAO
      */
-    void Bind ();
+    void Bind();
     /**
      * @brief Unbind the VAO
      */
-    void Unbind ();
+    void Unbind();
     /**
      * @brief Delete the VAO
      */
-    void Delete ();
+    void Delete();
     /**
      * @brief Set the vertex data
      *
@@ -94,9 +94,9 @@ class VAO
      * @param pointer The offset of the first component of the first generic
      * vertex attribute in the array
      */
-    void SetVertexData (Buffer buffer, unsigned int index, GLint size,
-                        GLenum type, GLboolean normalized, GLsizei stride,
-                        const void *pointer);
+    void SetVertexData(Buffer buffer, unsigned int index, GLint size,
+                       GLenum type, GLboolean normalized, GLsizei stride,
+                       const void *pointer);
 };
 
 } // namespace Types

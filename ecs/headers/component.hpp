@@ -61,7 +61,7 @@ struct Component
 {
     Entity entity;
 
-    bool operator== (const Component &other) const
+    bool operator==(const Component &other) const
     {
         return (entity == other.entity);
     }

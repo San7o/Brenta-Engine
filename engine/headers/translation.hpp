@@ -67,7 +67,7 @@ class Translation
      * This constructor initializes the view, projection, and model
      * matrices to the identity matrix.
      */
-    Translation ();
+    Translation();
     /**
      * @brief Translation constructor
      *
@@ -77,50 +77,48 @@ class Translation
      * @param projection The projection matrix
      * @param model The model matrix
      */
-    Translation (glm::mat4 view,
-                 glm::mat4 projection,
-                 glm::mat4 model);
+    Translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model);
 
     /**
      * @brief Set the view matrix
      * @param view The view matrix
      */
-    void setView (glm::mat4 view);
+    void setView(glm::mat4 view);
     /**
      * @brief Set the projection matrix
      * @param projection The projection matrix
      */
-    void setProjection (glm::mat4 projection);
+    void setProjection(glm::mat4 projection);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setProjection (float fov, float near, float far);
+    void setProjection(float fov, float near, float far);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setModel (glm::mat4 model);
+    void setModel(glm::mat4 model);
     /**
      * @brief Translate the object
      * @param translation The translation vector
      */
-    void translate (glm::vec3 translation);
+    void translate(glm::vec3 translation);
     /**
      * @brief Rotate the object
      * @param rotation The rotation vector
      */
-    void rotate (glm::vec3 rotation);
+    void rotate(glm::vec3 rotation);
     /**
      * @brief Scale the object
      * @param scale The scale factor
      */
-    void scale (float scale);
+    void scale(float scale);
     /**
      * @brief Set the shader
      * @param shader_name The shader name
      */
-    void setShader (Types::ShaderName shader_name);
+    void setShader(Types::ShaderName shader_name);
 };
 
 } // namespace Types

@@ -77,7 +77,7 @@ class Text
      */
     static std::map<char, Types::Character> characters;
 
-    Text () = delete;
+    Text() = delete;
     /**
      * @brief Initialize the text subsystem
      *
@@ -89,7 +89,7 @@ class Text
      * Note: opengl context must be created before calling this
      * method.
      */
-    static void Init ();
+    static void Init();
 
     /**
      * @brief Load a font
@@ -101,7 +101,7 @@ class Text
      * @param font_name Name of the font file
      * @param fontSize Size of the font
      */
-    static void Load (std::string font_name, unsigned int fontSize);
+    static void Load(std::string font_name, unsigned int fontSize);
     /**
      * @brief Render text
      *
@@ -116,8 +116,8 @@ class Text
      * @param scale Scale of the text
      * @param color Color of the text
      */
-    static void RenderText (std::string text, float x, float y, float scale,
-                            glm::vec3 color);
+    static void RenderText(std::string text, float x, float y, float scale,
+                           glm::vec3 color);
 
   private:
     static Types::ShaderName textShader;

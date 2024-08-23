@@ -58,20 +58,18 @@ class Texture
      * @param flip If the texture should be flipped
      * @return The texture ID
      */
-    static unsigned int LoadTexture (std::string path,
-                                     GLint wrapping = GL_REPEAT,
-                                     GLint filtering_min = GL_NEAREST,
-                                     GLint filtering_mag = GL_NEAREST,
-                                     GLboolean hasMipmap = GL_TRUE,
-                                     GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                                     GLint mipmap_mag = GL_LINEAR,
-                                     bool flip = true);
+    static unsigned int
+    LoadTexture(std::string path, GLint wrapping = GL_REPEAT,
+                GLint filtering_min = GL_NEAREST,
+                GLint filtering_mag = GL_NEAREST, GLboolean hasMipmap = GL_TRUE,
+                GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                GLint mipmap_mag = GL_LINEAR, bool flip = true);
     /**
      * @brief Activate a texture unit
      *
      * This method activates a texture unit.
      */
-    static void ActiveTexture (GLenum texture);
+    static void ActiveTexture(GLenum texture);
     /**
      * @brief Bind a texture
      *
@@ -80,20 +78,20 @@ class Texture
      *
      * You need to bind the texture before using it in the shader.
      */
-    static void BindTexture (GLenum target, unsigned int texture,
-                             GLint wrapping = GL_REPEAT,
-                             GLint filtering_min = GL_NEAREST,
-                             GLint filtering_mag = GL_NEAREST,
-                             GLboolean hasMipmap = GL_TRUE,
-                             GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                             GLint mipmap_mag = GL_LINEAR);
+    static void BindTexture(GLenum target, unsigned int texture,
+                            GLint wrapping = GL_REPEAT,
+                            GLint filtering_min = GL_NEAREST,
+                            GLint filtering_mag = GL_NEAREST,
+                            GLboolean hasMipmap = GL_TRUE,
+                            GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                            GLint mipmap_mag = GL_LINEAR);
 
   private:
-    static void SetTextureWrapping (GLint wrapping);
-    static void SetTextureFiltering (GLint filtering_min, GLint filtering_mag);
-    static void SetMipmap (GLboolean hasMipmap, GLint mipmap_min,
-                           GLint mipmap_mag);
-    static void ReadImage (const char *path, bool flip);
+    static void SetTextureWrapping(GLint wrapping);
+    static void SetTextureFiltering(GLint filtering_min, GLint filtering_mag);
+    static void SetMipmap(GLboolean hasMipmap, GLint mipmap_min,
+                          GLint mipmap_mag);
+    static void ReadImage(const char *path, bool flip);
 };
 
 } // namespace Brenta

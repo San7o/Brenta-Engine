@@ -31,75 +31,75 @@
 using namespace Brenta::Types;
 using namespace Brenta::Utils;
 
-Buffer::Buffer (GLenum input_target)
+Buffer::Buffer(GLenum input_target)
 {
     this->target = input_target;
-    glGenBuffers (1, &id);
-    Bind ();
+    glGenBuffers(1, &id);
+    Bind();
 }
 
-void Buffer::CopyData (GLsizeiptr size, const void *data, GLenum usage)
+void Buffer::CopyData(GLsizeiptr size, const void *data, GLenum usage)
 {
-    glBufferData (this->target, size, data, usage);
+    glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::CopyIndices (GLsizeiptr size, const void *data, GLenum usage)
+void Buffer::CopyIndices(GLsizeiptr size, const void *data, GLenum usage)
 {
     if (this->target != GL_ELEMENT_ARRAY_BUFFER)
         return;
-    Bind ();
-    glBufferData (this->target, size, data, usage);
+    Bind();
+    glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::CopyVertices (GLsizeiptr size, const void *data, GLenum usage)
+void Buffer::CopyVertices(GLsizeiptr size, const void *data, GLenum usage)
 {
     if (this->target == GL_ELEMENT_ARRAY_BUFFER)
         return;
-    Bind ();
-    glBufferData (this->target, size, data, usage);
+    Bind();
+    glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::Bind ()
+void Buffer::Bind()
 {
     if (this->id == 0)
     {
-        ERROR ("Buffer not initialized");
+        ERROR("Buffer not initialized");
         return;
     }
-    glBindBuffer (this->target, this->id);
+    glBindBuffer(this->target, this->id);
 }
 
-void Buffer::Unbind ()
+void Buffer::Unbind()
 {
-    glBindBuffer (this->target, 0);
+    glBindBuffer(this->target, 0);
 }
 
-void Buffer::Delete ()
+void Buffer::Delete()
 {
     if (this->id == 0)
     {
-        ERROR ("Buffer not initialized");
+        ERROR("Buffer not initialized");
         return;
     }
-    glDeleteBuffers (1, &this->id);
+    glDeleteBuffers(1, &this->id);
 }
 
-int Buffer::GetId ()
+int Buffer::GetId()
 {
     return this->id;
 }
 
-GLenum Buffer::GetTarget ()
+GLenum Buffer::GetTarget()
 {
     return this->target;
 }
 
-void Buffer::SetId (unsigned int id)
+void Buffer::SetId(unsigned int id)
 {
     this->id = id;
 }
 
-void Buffer::SetTarget (GLenum target)
+void Buffer::SetTarget(GLenum target)
 {
     this->target = target;
 }

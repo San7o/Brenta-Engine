@@ -79,14 +79,14 @@ class Engine
     bool gl_multisample;
     bool gl_depth_test;
 
-    Engine (bool uses_screen, bool uses_audio, bool uses_input,
-            bool uses_logger, bool uses_text, bool uses_ecs, int screen_width,
-            int screen_height, bool screen_is_mouse_captured, bool screen_msaa,
-            bool screen_vsync, const char *screen_title,
-            Types::LogLevel log_level, std::string log_file,
-            std::string text_font, int text_size, bool gl_blending,
-            bool gl_cull_face, bool gl_multisample, bool gl_depth_test);
-    ~Engine ();
+    Engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
+           bool uses_text, bool uses_ecs, int screen_width, int screen_height,
+           bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
+           const char *screen_title, Types::LogLevel log_level,
+           std::string log_file, std::string text_font, int text_size,
+           bool gl_blending, bool gl_cull_face, bool gl_multisample,
+           bool gl_depth_test);
+    ~Engine();
 
     class Builder;
 };
@@ -122,28 +122,28 @@ class Engine::Builder
     bool gl_multisample = true;
     bool gl_depth_test = true;
 
-    Builder &use_screen (bool uses_screen);
-    Builder &use_audio (bool uses_audio);
-    Builder &use_input (bool uses_input);
-    Builder &use_logger (bool uses_logger);
-    Builder &use_text (bool uses_text);
-    Builder &use_ecs (bool uses_ecs);
-    Builder &set_screen_width (int screen_width);
-    Builder &set_screen_height (int screen_height);
-    Builder &set_screen_is_mouse_captured (bool screen_is_mouse_captured);
-    Builder &set_screen_title (const char *screen_title);
-    Builder &set_screen_msaa (bool screen_msaa);
-    Builder &set_screen_vsync (bool screen_vsync);
-    Builder &set_log_level (Types::LogLevel log_level);
-    Builder &set_log_file (std::string log_file);
-    Builder &set_text_font (std::string text_font);
-    Builder &set_text_size (int text_size);
-    Builder &set_gl_blending (bool gl_blending);
-    Builder &set_gl_cull_face (bool gl_cull_face);
-    Builder &set_gl_multisample (bool gl_multisample);
-    Builder &set_gl_depth_test (bool gl_depth_test);
+    Builder &use_screen(bool uses_screen);
+    Builder &use_audio(bool uses_audio);
+    Builder &use_input(bool uses_input);
+    Builder &use_logger(bool uses_logger);
+    Builder &use_text(bool uses_text);
+    Builder &use_ecs(bool uses_ecs);
+    Builder &set_screen_width(int screen_width);
+    Builder &set_screen_height(int screen_height);
+    Builder &set_screen_is_mouse_captured(bool screen_is_mouse_captured);
+    Builder &set_screen_title(const char *screen_title);
+    Builder &set_screen_msaa(bool screen_msaa);
+    Builder &set_screen_vsync(bool screen_vsync);
+    Builder &set_log_level(Types::LogLevel log_level);
+    Builder &set_log_file(std::string log_file);
+    Builder &set_text_font(std::string text_font);
+    Builder &set_text_size(int text_size);
+    Builder &set_gl_blending(bool gl_blending);
+    Builder &set_gl_cull_face(bool gl_cull_face);
+    Builder &set_gl_multisample(bool gl_multisample);
+    Builder &set_gl_depth_test(bool gl_depth_test);
 
-    Engine build ();
+    Engine build();
 };
 
 } // namespace Brenta

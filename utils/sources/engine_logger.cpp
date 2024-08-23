@@ -35,32 +35,32 @@ using namespace Brenta::Utils;
 Brenta::Types::LogLevel Logger::level = Brenta::Types::LogLevel::WARNING;
 std::ofstream Logger::log_file;
 
-void Logger::SetLogLevel (Brenta::Types::LogLevel level)
+void Logger::SetLogLevel(Brenta::Types::LogLevel level)
 {
     Logger::level = level;
 }
 
-void Logger::Init ()
+void Logger::Init()
 {
-    SetLogFile ("logs/log.txt");
+    SetLogFile("logs/log.txt");
 }
 
-void Logger::Close ()
+void Logger::Close()
 {
-    Logger::log_file.close ();
+    Logger::log_file.close();
 }
 
-void Logger::SetLogFile (const std::string &file)
+void Logger::SetLogFile(const std::string &file)
 {
-    Logger::log_file.open (file, std::ios::app);
-    if (!Logger::log_file.is_open ())
+    Logger::log_file.open(file, std::ios::app);
+    if (!Logger::log_file.is_open())
     {
         std::cout << "Error: Could not open log file" << std::endl;
     }
 
-    auto now = std::chrono::system_clock::now ();
-    auto now_time_t = std::chrono::system_clock::to_time_t (now);
-    std::tm now_tm = *std::localtime (&now_time_t);
-    log_file << "----------" << std::put_time (&now_tm, "%Y-%m-%d %H:%M:%S")
+    auto now = std::chrono::system_clock::now();
+    auto now_time_t = std::chrono::system_clock::to_time_t(now);
+    std::tm now_tm = *std::localtime(&now_time_t);
+    log_file << "----------" << std::put_time(&now_tm, "%Y-%m-%d %H:%M:%S")
              << "----------" << std::endl;
 }

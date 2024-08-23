@@ -8,7 +8,7 @@ namespace Brenta
 namespace Types
 {
 
-std::ostream &operator<< (std::ostream &os, const LogLevel level)
+std::ostream &operator<<(std::ostream &os, const LogLevel level)
 {
     switch (level)
     {

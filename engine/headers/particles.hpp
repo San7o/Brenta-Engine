@@ -118,7 +118,7 @@ class ParticleEmitter
      *
      * Sets default values
      */
-    ParticleEmitter ();
+    ParticleEmitter();
     /**
      * @brief Construct a new ParticleEmitter object
      *
@@ -135,15 +135,15 @@ class ParticleEmitter
      * @param atlas_index Atlas index
      * @param camera Camera
      */
-    ParticleEmitter (glm::vec3 starting_position, glm::vec3 starting_velocity,
-                     glm::vec3 starting_spread, float starting_timeToLive,
-                     int num_particles, float spawn_rate, float scale,
-                     std::string atlas_path, int atlas_width, int atlas_height,
-                     int atlas_index, Camera *camera);
+    ParticleEmitter(glm::vec3 starting_position, glm::vec3 starting_velocity,
+                    glm::vec3 starting_spread, float starting_timeToLive,
+                    int num_particles, float spawn_rate, float scale,
+                    std::string atlas_path, int atlas_width, int atlas_height,
+                    int atlas_index, Camera *camera);
     /**
      * @brief Destroy the ParticleEmitter object
      */
-    ~ParticleEmitter ();
+    ~ParticleEmitter();
 
     /**
      * @brief The builder pattern for ParticleEmitter
@@ -155,15 +155,15 @@ class ParticleEmitter
      *
      * @param deltaTime Time passed since last frame
      */
-    void updateParticles (float deltaTime);
+    void updateParticles(float deltaTime);
     /**
      * @brief Render the particles
      */
-    void renderParticles ();
+    void renderParticles();
 
   private:
     Camera *camera;
-    void checkOpenGLError (const std::string &functionName);
+    void checkOpenGLError(const std::string &functionName);
 };
 
 /**
@@ -172,9 +172,9 @@ class ParticleEmitter
 class ParticleEmitter::Builder
 {
   private:
-    glm::vec3 starting_position = glm::vec3 (0.0f, 0.0f, 0.0f);
-    glm::vec3 starting_velocity = glm::vec3 (0.0f, 0.0f, 0.0f);
-    glm::vec3 starting_spread = glm::vec3 (0.0f, 0.0f, 0.0f);
+    glm::vec3 starting_position = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 starting_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 starting_spread = glm::vec3(0.0f, 0.0f, 0.0f);
     float starting_timeToLive = 1.0f;
     int num_particles = MAX_PARTICLES;
     float spawn_rate = 0.01f;
@@ -186,20 +186,20 @@ class ParticleEmitter::Builder
     Camera *camera = nullptr;
 
   public:
-    Builder &set_starting_position (glm::vec3 starting_position);
-    Builder &set_starting_velocity (glm::vec3 starting_velocity);
-    Builder &set_starting_spread (glm::vec3 starting_spread);
-    Builder &set_starting_timeToLive (float starting_timeToLive);
-    Builder &set_num_particles (int num_particles);
-    Builder &set_spawn_rate (float spawn_rate);
-    Builder &set_scale (float scale);
-    Builder &set_atlas_path (std::string atlas_path);
-    Builder &set_atlas_width (int atlas_width);
-    Builder &set_atlas_height (int atlas_height);
-    Builder &set_atlas_index (int atlas_index);
-    Builder &set_camera (Camera *camera);
+    Builder &set_starting_position(glm::vec3 starting_position);
+    Builder &set_starting_velocity(glm::vec3 starting_velocity);
+    Builder &set_starting_spread(glm::vec3 starting_spread);
+    Builder &set_starting_timeToLive(float starting_timeToLive);
+    Builder &set_num_particles(int num_particles);
+    Builder &set_spawn_rate(float spawn_rate);
+    Builder &set_scale(float scale);
+    Builder &set_atlas_path(std::string atlas_path);
+    Builder &set_atlas_width(int atlas_width);
+    Builder &set_atlas_height(int atlas_height);
+    Builder &set_atlas_index(int atlas_index);
+    Builder &set_camera(Camera *camera);
 
-    ParticleEmitter build ();
+    ParticleEmitter build();
 };
 
 } // namespace Brenta

@@ -33,13 +33,13 @@
 #include <string>
 
 #define DEBUG(...)                                                             \
-    Brenta::Utils::Logger::Log (Brenta::Types::LogLevel::DEBUG, __VA_ARGS__)
+    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::DEBUG, __VA_ARGS__)
 #define INFO(...)                                                              \
-    Brenta::Utils::Logger::Log (Brenta::Types::LogLevel::INFO, __VA_ARGS__)
+    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::INFO, __VA_ARGS__)
 #define WARNING(...)                                                           \
-    Brenta::Utils::Logger::Log (Brenta::Types::LogLevel::WARNING, __VA_ARGS__)
+    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::WARNING, __VA_ARGS__)
 #define ERROR(...)                                                             \
-    Brenta::Utils::Logger::Log (Brenta::Types::LogLevel::ERROR, __VA_ARGS__)
+    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::ERROR, __VA_ARGS__)
 
 namespace Brenta
 {
@@ -79,7 +79,7 @@ class Logger
      * This method initializes the logger. It should be called before any other
      * method of the logger is called.
      */
-    static void Init ();
+    static void Init();
     /**
      * @brief Set the log level
      *
@@ -89,7 +89,7 @@ class Logger
      *
      * @param level The log level
      */
-    static void SetLogLevel (Brenta::Types::LogLevel level);
+    static void SetLogLevel(Brenta::Types::LogLevel level);
     /**
      * @brief Set the log file
      *
@@ -98,14 +98,14 @@ class Logger
      *
      * @param file The log file
      */
-    static void SetLogFile (const std::string &file);
+    static void SetLogFile(const std::string &file);
     /**
      * @brief Close the logger
      *
      * This method closes the logger. It should be called before the program
      * exits.
      */
-    static void Close ();
+    static void Close();
 
     /**
      * @brief Log a message to stdout
@@ -117,10 +117,10 @@ class Logger
      * @param args The message
      */
     template <typename T, typename... Args>
-    static void LogToStdout (T message, Args... args)
+    static void LogToStdout(T message, Args... args)
     {
         std::cout << message;
-        LogToStdout (args...);
+        LogToStdout(args...);
     }
 
     /**
@@ -134,10 +134,10 @@ class Logger
      * @param args The message
      */
     template <typename T, typename... Args>
-    static void LogToFile (T message, Args... args)
+    static void LogToFile(T message, Args... args)
     {
         log_file << message;
-        LogToFile (args...);
+        LogToFile(args...);
     }
     /**
      * @brief Log a message
@@ -150,22 +150,22 @@ class Logger
      * @param args The message
      */
     template <typename... Args>
-    static void Log (Brenta::Types::LogLevel level, Args... args)
+    static void Log(Brenta::Types::LogLevel level, Args... args)
     {
         if (Logger::level > level)
             return;
-        LogToStdout (level, ": ", args...);
-        if (Logger::log_file.is_open ())
-            LogToFile (level, ": ", args...);
+        LogToStdout(level, ": ", args...);
+        if (Logger::log_file.is_open())
+            LogToFile(level, ": ", args...);
     }
 
   private:
     /* Base cases */
-    template <typename T> static void LogToStdout (T message)
+    template <typename T> static void LogToStdout(T message)
     {
         std::cout << message << std::endl;
     }
-    template <typename T> static void LogToFile (T message)
+    template <typename T> static void LogToFile(T message)
     {
         log_file << message << std::endl;
     }

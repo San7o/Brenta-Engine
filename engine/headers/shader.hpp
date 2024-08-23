@@ -90,23 +90,23 @@ class Shader
      * all compiled and linked in the same program.
      */
     template <typename... Args>
-    static void New (std::string shader_name, GLenum type, std::string path,
-                     Args... args)
+    static void New(std::string shader_name, GLenum type, std::string path,
+                    Args... args)
     {
         std::vector<unsigned int> compiled_shaders = {};
-        compile_shaders (compiled_shaders, type, path, args...);
+        compile_shaders(compiled_shaders, type, path, args...);
 
         /* shader Program */
-        unsigned int ID = glCreateProgram ();
-        std::for_each (compiled_shaders.begin (), compiled_shaders.end (),
-                       [&ID] (auto shader) { glAttachShader (ID, shader); });
+        unsigned int ID = glCreateProgram();
+        std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                      [&ID](auto shader) { glAttachShader(ID, shader); });
 
-        glLinkProgram (ID);
-        Shader::CheckCompileErrors (ID, "PROGRAM");
+        glLinkProgram(ID);
+        Shader::CheckCompileErrors(ID, "PROGRAM");
 
-        Shader::shaders.insert ({shader_name, ID});
-        std::for_each (compiled_shaders.begin (), compiled_shaders.end (),
-                       [] (auto shader) { glDeleteShader (shader); });
+        Shader::shaders.insert({shader_name, ID});
+        std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                      [](auto shader) { glDeleteShader(shader); });
     }
 
     /**
@@ -125,67 +125,67 @@ class Shader
      * const GLchar* feedbackVaryings[] = {"outValue"};
      */
     template <typename... Args>
-    static void New (const GLchar **feedbackVaryings, int numVaryings,
-                     std::string shader_name, GLenum type, std::string path,
-                     Args... args)
+    static void New(const GLchar **feedbackVaryings, int numVaryings,
+                    std::string shader_name, GLenum type, std::string path,
+                    Args... args)
     {
         std::vector<unsigned int> compiled_shaders = {};
-        compile_shaders (compiled_shaders, type, path, args...);
+        compile_shaders(compiled_shaders, type, path, args...);
 
         /* shader Program */
-        unsigned int ID = glCreateProgram ();
-        std::for_each (compiled_shaders.begin (), compiled_shaders.end (),
-                       [&ID] (auto shader) { glAttachShader (ID, shader); });
+        unsigned int ID = glCreateProgram();
+        std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                      [&ID](auto shader) { glAttachShader(ID, shader); });
 
         if (feedbackVaryings != nullptr)
         {
-            glTransformFeedbackVaryings (ID, numVaryings, feedbackVaryings,
-                                         GL_INTERLEAVED_ATTRIBS);
+            glTransformFeedbackVaryings(ID, numVaryings, feedbackVaryings,
+                                        GL_INTERLEAVED_ATTRIBS);
         }
 
-        glLinkProgram (ID);
-        Shader::CheckCompileErrors (ID, "PROGRAM");
+        glLinkProgram(ID);
+        Shader::CheckCompileErrors(ID, "PROGRAM");
 
-        Shader::shaders.insert ({shader_name, ID});
-        std::for_each (compiled_shaders.begin (), compiled_shaders.end (),
-                       [] (auto shader) { glDeleteShader (shader); });
+        Shader::shaders.insert({shader_name, ID});
+        std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                      [](auto shader) { glDeleteShader(shader); });
     }
 
-    static void compile_shaders (std::vector<unsigned int> &compiled)
+    static void compile_shaders(std::vector<unsigned int> &compiled)
     {
         return;
     }
 
     template <typename... Args>
-    static void compile_shaders (std::vector<unsigned int> &compiled,
-                                 GLenum type, std::string path, Args... args)
+    static void compile_shaders(std::vector<unsigned int> &compiled,
+                                GLenum type, std::string path, Args... args)
     {
         std::string code;
         std::ifstream file;
-        file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
+        file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
 
         try
         {
-            file.open (path);
+            file.open(path);
             std::stringstream stream;
-            stream << file.rdbuf ();
-            file.close ();
-            code = stream.str ();
+            stream << file.rdbuf();
+            file.close();
+            code = stream.str();
         }
         catch (std::ifstream::failure &e)
         {
-            ERROR ("Error reading shader file: ", path);
+            ERROR("Error reading shader file: ", path);
             return;
         }
 
-        const char *shader_code = code.c_str ();
-        unsigned int shader = glCreateShader (type);
-        glShaderSource (shader, 1, &shader_code, NULL);
-        glCompileShader (shader);
-        Shader::CheckCompileErrors (shader, "SHADER");
+        const char *shader_code = code.c_str();
+        unsigned int shader = glCreateShader(type);
+        glShaderSource(shader, 1, &shader_code, NULL);
+        glCompileShader(shader);
+        Shader::CheckCompileErrors(shader, "SHADER");
 
-        compiled.push_back (shader);
-        compile_shaders (compiled, args...);
+        compiled.push_back(shader);
+        compile_shaders(compiled, args...);
     }
 
     /**
@@ -194,7 +194,7 @@ class Shader
      * @param shader_name Name of the shader
      * @return ID of the shader
      */
-    static unsigned int GetId (Types::ShaderName shader_name);
+    static unsigned int GetId(Types::ShaderName shader_name);
 
     /**
      * @brief Use the shader
@@ -203,7 +203,7 @@ class Shader
      * You need to call this method before rendering anything
      * with the shader.
      */
-    static void Use (Types::ShaderName shader_name);
+    static void Use(Types::ShaderName shader_name);
 
     /* Utility uniform functions */
 
@@ -214,8 +214,8 @@ class Shader
      * @param name Name of the uniform boolean
      * @param value Value of the boolean
      */
-    static void SetBool (Types::ShaderName shader_name, const std::string &name,
-                         bool value);
+    static void SetBool(Types::ShaderName shader_name, const std::string &name,
+                        bool value);
     /**
      * @brief Set an integer in the shader
      *
@@ -223,8 +223,8 @@ class Shader
      * @param name Name of the uniform integer
      * @param value Value of the integer
      */
-    static void SetInt (Types::ShaderName shader_name, const std::string &name,
-                        int value);
+    static void SetInt(Types::ShaderName shader_name, const std::string &name,
+                       int value);
     /**
      * @brief Set a float in the shader
      *
@@ -232,8 +232,8 @@ class Shader
      * @param name Name of the uniform float
      * @param value Value of the float
      */
-    static void SetFloat (Types::ShaderName shader_name,
-                          const std::string &name, float value);
+    static void SetFloat(Types::ShaderName shader_name, const std::string &name,
+                         float value);
     /**
      * @brief Set a 4x4 matrix in the shader
      *
@@ -241,8 +241,8 @@ class Shader
      * @param name Name of the uniform matrix
      * @param value Value of the matrix
      */
-    static void SetMat4 (Types::ShaderName shader_name, const GLchar *name,
-                         glm::mat4 value);
+    static void SetMat4(Types::ShaderName shader_name, const GLchar *name,
+                        glm::mat4 value);
     /**
      * @brief Set a 3D vector in the shader
      *
@@ -252,8 +252,8 @@ class Shader
      * @param y Y value of the vector
      * @param z Z value of the vector
      */
-    static void SetVec3 (Types::ShaderName shader_name, const GLchar *name,
-                         float x, float y, float z);
+    static void SetVec3(Types::ShaderName shader_name, const GLchar *name,
+                        float x, float y, float z);
     /**
      * @brief Set a 3D vector in the shader
      *
@@ -261,11 +261,11 @@ class Shader
      * @param name Name of the uniform vector
      * @param value Value of the vector
      */
-    static void SetVec3 (Types::ShaderName shader_name, const GLchar *name,
-                         glm::vec3 value);
+    static void SetVec3(Types::ShaderName shader_name, const GLchar *name,
+                        glm::vec3 value);
 
   private:
-    static void CheckCompileErrors (unsigned int shader, std::string type);
+    static void CheckCompileErrors(unsigned int shader, std::string type);
 };
 
 } // namespace Brenta

@@ -24,20 +24,50 @@
  *
  */
 
-#pragma once
-
-#include "components/model_component.hpp"
-#include "ecs.hpp"
-#include "engine.hpp"
+/**
+ * Just a simple window
+ */
 
 #include <iostream>
+#include <filesystem>
+#include "engine.hpp"
 
-using namespace Brenta::ECS;
+using namespace Brenta;
 
-/* Player Component */
-struct PlayerComponent : Component
-{
-    PlayerComponent()
-    {
+const int SCR_WIDTH = 800;
+const int SCR_HEIGHT = 600;
+const bool isMouseCaptured = false;
+
+#define ABS(...) std::filesystem::absolute(__VA_ARGS__)
+
+int main() {
+
+    Engine engine = Engine::Builder()
+            .use_screen(true)
+            .use_audio(true)              /* Enable audio */
+            .set_screen_width(SCR_WIDTH)
+            .set_screen_height(SCR_HEIGHT)
+            .set_screen_is_mouse_captured(isMouseCaptured)
+            .build();
+    
+    /* Load an audio file, assign it the name "guitar" */
+    Audio::LoadAudio("guitar", ABS("assets/audio/guitar.wav"));
+
+    while(!Screen::isWindowClosed()) {
+
+        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
+            Screen::SetClose();
+
+        /* 
+         * Press space to play the audio "guitar" in the 
+         * default audio stream
+         */
+        if (Screen::isKeyPressed(GLFW_KEY_SPACE))
+                Audio::PlayAudio("guitar");
+
+        Screen::PollEvents();
+        Screen::SwapBuffers();
     }
-};
+
+    return 0;
+}

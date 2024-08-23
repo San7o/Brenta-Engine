@@ -33,7 +33,6 @@ guide will cover how to compile the libraries for any linux distribution.
 
 If you are on the nix packet manager, a developement shell is provided for you
 in [flake.nix](./flake.nix). To enter the environment, please run:
-by running:
 ```bash
 nix develop
 ```
@@ -80,7 +79,7 @@ doxygen doxygen.conf
 The index will be located in `docs/html/index.html`.
 
 ## Format code
-To run the formatter, run:
+To execute the formatter, run:
 ```bash
 make format
 ```
@@ -93,3 +92,13 @@ cmake -Bbuild -DBUILD_TESTS=ON
 cmake --build build -j 4
 ./buid/unit
 ```
+
+## Examples
+
+There is an `examples` directory, you can run an exmple with the following command:
+```bash
+cmake -Bbuild -DBUILD_EXAMPLES=ON
+cmake --build build -j 4 --target load_model
+./build/load_model
+```
+Change target to the example you want to compile
