@@ -37,7 +37,7 @@
 #include "shader.hpp"
 #include "mesh.hpp"
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -167,4 +167,4 @@ public:
     Model build();
 };
 
-} // namespace ECS
+} // namespace Brenta

@@ -6,8 +6,7 @@
 
 #include <iostream>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
 
 /* Player Component */
 struct PlayerComponent : Component {

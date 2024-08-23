@@ -29,7 +29,8 @@
 #include "screen.hpp"
 #include "text.hpp"
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::Utils;
 
 void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
                     bool gl_depth_test)
@@ -37,7 +38,7 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
     GLADloadproc loadproc = (GLADloadproc)Screen::GetProcAddress();
     if (!gladLoadGLLoader(loadproc))
     {
-        Logger::Log(Types::LogLevel::ERROR, "Failed to initialize GLAD");
+        ERROR("Failed to initialize GLAD");
         exit(-1);
     }
 
@@ -46,7 +47,7 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
 
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
     glEnable(GL_DEPTH_TEST);                 /* Enable depth testing */
-    Logger::Log(Types::LogLevel::INFO, "Enabled GL_DEPTH_TEST");
+    INFO("Enabled GL_DEPTH_TEST");
 
 
     /* Enable blending for transparency */
@@ -54,7 +55,7 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
     {
         glEnable(GL_BLEND);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
-        Logger::Log(Types::LogLevel::INFO, "Enabled GL_BLEND (transparency)");
+        INFO("Enabled GL_BLEND (transparency)");
     }
 
     /* Enable face culling, draw only visible triangles
@@ -62,8 +63,7 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
     if (gl_cull_face)
     {
         glEnable(GL_CULL_FACE);
-        Logger::Log(Types::LogLevel::INFO,
-                        "Enabled GL_CULL_FACE (draw only visible triangles)");
+        INFO("Enabled GL_CULL_FACE (draw only visible triangles)");
     }
 
     /* Enable multisampling
@@ -71,31 +71,28 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
     if (gl_multisample)
     {
         glEnable(GL_MULTISAMPLE);
-        Logger::Log(Types::LogLevel::INFO, "Enabled GL_MULTISAMPLE");
+        INFO("Enabled GL_MULTISAMPLE");
     }
 
     GLenum errcode = GL::glCheckError();
-    if (!errcode) Logger::Log(Types::LogLevel::INFO, "OpenGl loaded");
+    if (!errcode) INFO("OpenGl loaded");
 }
 
 void GL::SetPoligonMode(GLboolean enable)
 {
     if (enable) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        Logger::Log(Types::LogLevel::INFO,
-                        "Enabled GL_POLYGON_MODE (wireframe)");
+        INFO("Enabled GL_POLYGON_MODE (wireframe)");
     } else {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        Logger::Log(Types::LogLevel::INFO,
-                        "Disabled GL_POLYGON_MODE (fill)");
+        INFO("Disabled GL_POLYGON_MODE (fill)");
     }
 }
 
 void GL::SetViewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
 {
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
-    Logger::Log(Types::LogLevel::INFO, "Set viewport: y = " +
-                std::to_string(SCR_WIDTH) + "x = " + std::to_string(SCR_HEIGHT));
+    INFO("Set viewport: y = ", SCR_WIDTH, "x = ", SCR_HEIGHT);
 }
 
 void GL::SetColor(float r, float g, float b, float a)
@@ -144,7 +141,7 @@ GLenum GL::glCheckError_(const char *file, int line)
 
         error += " | " + std::string(file) +
                 " (" + std::to_string(line) + ")";
-        Logger::Log(Types::LogLevel::ERROR, error);
+        ERROR(error);
     }
     return errorCode;
 }

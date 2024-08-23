@@ -12,7 +12,8 @@
 #include <vector>
 #include <filesystem>
 
-using namespace ECS;
+using namespace Brenta::ECS;
+using namespace Brenta;
 
 void InitPointLightEntity() {
 
@@ -29,7 +30,7 @@ void InitPointLightEntity() {
             0.09f,
             0.0032f,
             1.0f,
-            std::vector<Types::ShaderName>{"default_shader"}
+            std::vector<Brenta::Types::ShaderName>{"default_shader"}
     );
     World::AddComponent<PointLightComponent>(light_entity, light_component);
 

@@ -29,7 +29,7 @@
 #include <stb_image.h>       /* Image loading library */
 #include "texture.hpp"
 
-using namespace ECS;
+using namespace Brenta;
 
 unsigned int Texture::LoadTexture(std::string path,
                 GLint wrapping, GLint filtering_min, GLint filtering_mag,

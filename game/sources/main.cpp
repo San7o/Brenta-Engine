@@ -5,7 +5,8 @@
 #include <filesystem>
 #include <bitset>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 // Default resolution
 const int SCR_WIDTH = 1280; 
@@ -21,7 +22,7 @@ REGISTER_SYSTEMS(
 );
 
 /* default camera */
-namespace ECS {
+namespace Brenta {
     Camera camera = Camera();
 }
 
@@ -40,7 +41,7 @@ int main() {
         .set_screen_msaa(true)
         .set_screen_vsync(true)
         .set_screen_title("Game")
-        .set_log_level(Types::LogLevel::INFO)
+        .set_log_level(Brenta::Types::LogLevel::INFO)
         .set_log_file("./logs/log.txt")
         .set_text_font("arial.ttf")
         .set_text_size(24)

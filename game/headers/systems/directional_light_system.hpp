@@ -6,12 +6,11 @@
 
 #include <vector>
 
-using namespace ECS;
+using namespace Brenta::ECS;
 
 struct DirectionalLightSystem : System<DirectionalLightComponent> {
 
     void run(std::vector<Entity> entities) const override {
-
         if (entities.empty()) return;
 
         for (auto entity : entities) {
@@ -19,8 +18,7 @@ struct DirectionalLightSystem : System<DirectionalLightComponent> {
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {
-                    Logger::Log(Types::LogLevel::ERROR,
-                                "Light shader not found with name: " + shader);
+                    ERROR("Light shader not found with name: ", shader);
                     continue;
                 }
                 Shader::Use(shader);

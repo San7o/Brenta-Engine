@@ -28,7 +28,7 @@
 
 #include <iostream>
 
-using namespace ECS;
+using namespace Brenta;
 
 Model::Model(std::string const& path, GLint wrapping, GLint filtering_min,
                 GLint filtering_mag, GLboolean hasMipmap, GLint mipmap_min,
@@ -60,7 +60,7 @@ void Model::loadModel(std::string path)
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
     {
-        Logger::Log(Types::LogLevel::ERROR, "Could not load model with assimp: " + std::string(importer.GetErrorString()));
+        ERROR("Could not load model with assimp: ", importer.GetErrorString());
         return;
     }
     directory = path.substr(0, path.find_last_of('/'));

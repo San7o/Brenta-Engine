@@ -29,14 +29,7 @@
 
 #include "buffer.hpp"
 
-/*
- * Vertex Array Object (VAO)
- *
- * It stores the format of the vertex data as well as
- * the Buffer Objects (see below) providing the vertex data arrays
- */
-
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -103,4 +96,4 @@ public:
 
 } // namespace Types
 
-} // namespace ECS
+} // namespace Brenta

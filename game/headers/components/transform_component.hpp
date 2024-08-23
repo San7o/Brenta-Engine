@@ -7,7 +7,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 struct TransformComponent : Component {
     glm::vec3 position;

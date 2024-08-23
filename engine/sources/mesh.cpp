@@ -28,7 +28,8 @@
 
 #include <iostream>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::Utils;
 
 Mesh::Mesh(std::vector<Types::Vertex> vertices,
                 std::vector<unsigned int> indices,
@@ -55,7 +56,7 @@ Mesh::Mesh(std::vector<Types::Vertex> vertices,
 void Mesh::Draw(Types::ShaderName shader_name)
 {
     if (this->vao.GetVAO() == 0) {
-        Logger::Log(Types::LogLevel::ERROR, "Mesh not initialized");
+        ERROR("Mesh not initialized");
         return;
     }
 

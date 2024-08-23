@@ -3,8 +3,9 @@
 #include "callbacks/toggle_wireframe_callback.hpp"
 #include "resources/wireframe_resource.hpp"
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
+using namespace Brenta::ECS;
+using namespace Brenta::ECS::Types;
 
 void InitToggleWireframeCallback() {
     auto toggle_wireframe_callback = []() {

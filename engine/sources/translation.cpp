@@ -25,7 +25,7 @@
 
 #include "translation.hpp"
 
-using namespace ECS::Types;
+using namespace Brenta::Types;
 
 Translation::Translation()
 {
@@ -42,7 +42,7 @@ void Translation::setView(glm::mat4 view)
 void Translation::setProjection(float fov, float near, float far)
 {
     this->projection = glm::perspective(glm::radians(fov), 
-        (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
+        (float) Screen::GetWidth() / (float) Screen::GetHeight(),
         near, far);
 }
 

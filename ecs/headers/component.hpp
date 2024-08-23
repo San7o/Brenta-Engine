@@ -27,7 +27,11 @@
 
 #include "entity.hpp"
 
-namespace ECS {
+namespace Brenta
+{
+
+namespace ECS
+{
 
 /**
  * @brief Component class
@@ -61,3 +65,5 @@ struct Component {
 };
 
 } // namespace ECS
+
+} // namespace Brenta

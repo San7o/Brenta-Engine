@@ -31,7 +31,7 @@
 #include <GLFW/glfw3.h>
 #include <string>
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -129,4 +129,4 @@ private:
     static std::unordered_map<std::string, std::function<void(double, double)>> mouseCallbacks;
 };
 
-} // namespace ECS
+} // namespace Brenta

@@ -37,7 +37,7 @@
 #include "vao.hpp"
 #include "camera.hpp"
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -208,4 +208,4 @@ public:
     ParticleEmitter build();
 };
 
-} // namespace ECS
+} // namespace Brenta

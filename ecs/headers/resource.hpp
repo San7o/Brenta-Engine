@@ -25,7 +25,11 @@
 
 #pragma once
 
-namespace ECS {
+namespace Brenta
+{
+
+namespace ECS
+{
 
 /**
  * @brief Resource type
@@ -51,3 +55,5 @@ namespace ECS {
 struct Resource {};
 
 } // namespace ECS
+
+} // namespace Brenta

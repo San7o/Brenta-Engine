@@ -7,8 +7,8 @@
 
 #include <filesystem>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 void InitRobotEntity() {
 
@@ -37,7 +37,9 @@ void InitRobotEntity() {
     }
 
     /* Load the model */
-    Model model(std::filesystem::absolute("assets/models/robot_sprite/robot_sprite.obj"), GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST, GL_NEAREST, false);
+    Model model(std::filesystem::absolute("assets/models/robot_sprite/robot_sprite.obj"),
+                    GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST,
+                    GL_NEAREST, false);
 
     /* Add the model component */
     auto model_component = ModelComponent(

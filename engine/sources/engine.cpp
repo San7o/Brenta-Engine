@@ -1,7 +1,9 @@
 #include "engine.hpp"
 #include "ecs.hpp"
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::Utils;
+using namespace Brenta::ECS;
 
 Engine::Engine(bool uses_screen, bool uses_audio, bool uses_input,
                bool uses_logger, bool uses_text, bool uses_ecs,
@@ -46,7 +48,7 @@ Engine::Engine(bool uses_screen, bool uses_audio, bool uses_input,
 
     if (uses_ecs)
     {
-        ECS::World::Init();
+        World::Init();
     }
 }
 

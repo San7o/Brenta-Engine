@@ -29,7 +29,8 @@
 
 #include <cmath>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::Utils;
 
 Camera::Camera(Enums::CameraType camera_type,
                Enums::ProjectionType projection_type,
@@ -72,7 +73,7 @@ Camera::Camera(Enums::CameraType camera_type,
             break;
     }
 
-    Logger::Log(Types::LogLevel::INFO, "Camera created");
+    INFO("Camera created");
 }
 
 glm::mat4 Camera::GetViewMatrix()
@@ -94,13 +95,13 @@ glm::mat4 Camera::GetProjectionMatrix()
     {
         case Enums::ProjectionType::PERSPECTIVE:
             return glm::perspective(glm::radians(Zoom),
-                (float) ECS::Screen::GetWidth() / (float) ECS::Screen::GetHeight(),
+                (float) Screen::GetWidth() / (float) Screen::GetHeight(),
                 0.1f, 1000.0f);
         case Enums::ProjectionType::ORTHOGRAPHIC:
-            return glm::ortho((float) -ECS::Screen::GetWidth() / 2.0f,
-                              (float)  ECS::Screen::GetWidth() / 2.0f,
-                              (float) -ECS::Screen::GetHeight() / 2.0f,
-                              (float)  ECS::Screen::GetHeight() / 2.0f,
+            return glm::ortho((float) -Screen::GetWidth() / 2.0f,
+                              (float)  Screen::GetWidth() / 2.0f,
+                              (float) -Screen::GetHeight() / 2.0f,
+                              (float)  Screen::GetHeight() / 2.0f,
                               0.1f, 100.0f);
         default:
             return glm::mat4(1.0f);

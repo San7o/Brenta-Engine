@@ -1,6 +1,6 @@
-# opengl-santo-engine
+# Brenta Engine
 
-A friendly Entity Component System (ECS) engine, 
+Brenta Engine is a friendly Entity Component System (ECS) engine, 
 developed in C++ with OpenGL. This engine is designed to 
 provide a modular and flexible architecture for game development
 and simulations: you can run simultations without the graphical

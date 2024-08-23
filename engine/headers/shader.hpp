@@ -42,7 +42,7 @@
 #include <algorithm>
 #include <vector>
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -175,7 +175,7 @@ static void compile_shaders(std::vector<unsigned int>& compiled,
     }
     catch (std::ifstream::failure& e)
     {
-        Logger::Log(Types::LogLevel::ERROR, "Error reading shader file: " + path);
+        ERROR("Error reading shader file: ", path);
         return;
     }
 
@@ -269,4 +269,4 @@ static void CheckCompileErrors(unsigned int shader, std::string type);
 
 };
 
-} // namespace ECS
+} // namespace Brenta

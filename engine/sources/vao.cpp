@@ -26,7 +26,7 @@
 #include "vao.hpp"
 #include "engine_logger.hpp"
 
-using namespace ECS::Types;
+using namespace Brenta::Types;
 
 void VAO::Init()
 {
@@ -37,7 +37,7 @@ void VAO::Init()
 unsigned int VAO::GetVAO()
 {
     if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
+        ERROR("VAO not initialized");
         return 0;
     }
     return vao;
@@ -46,7 +46,7 @@ unsigned int VAO::GetVAO()
 void VAO::Bind()
 {
     if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
+        ERROR("VAO not initialized");
         return;
     }
     glBindVertexArray(vao);
@@ -72,7 +72,7 @@ void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum ty
 void VAO::Delete()
 {
     if (vao == 0) {
-        ECS::Logger::Log(Types::LogLevel::ERROR, "VAO not initialized");
+        ERROR("VAO not initialized");
         return;
     }
     glDeleteVertexArrays(1, &vao);

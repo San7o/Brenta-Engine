@@ -15,8 +15,7 @@
 
 #define ANIMATION_SPEED 24
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
 
 struct RendererSystem : System<ModelComponent, TransformComponent> {
     void run(std::vector<Entity> matches) const override {
@@ -31,7 +30,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent> {
             auto myModel = model_component->model;
             auto default_shader = model_component->shader;
 
-            Types::Translation t = Types::Translation();
+            Brenta::Types::Translation t = Brenta::Types::Translation();
             t.setView(camera.GetViewMatrix());
             t.setProjection(camera.GetProjectionMatrix());
             

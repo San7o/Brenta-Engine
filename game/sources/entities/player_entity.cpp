@@ -8,8 +8,9 @@
 
 #include <filesystem>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
+using namespace Brenta::ECS::Types;
+using namespace Brenta;
 
 void InitPlayerEntity() {
 

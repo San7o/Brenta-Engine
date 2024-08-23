@@ -30,9 +30,14 @@
 #include <set>
 #include <unordered_map>
 
-namespace ECS {
+namespace Brenta
+{
 
-namespace Types {
+namespace ECS
+{
+
+namespace Types
+{
 
 /**
  * @brief None type
@@ -65,3 +70,5 @@ using VecSPtr    = std::shared_ptr<std::vector<SPtr<T>>>;
 } // namespace Types
 
 } // namespace ECS
+
+} // namespace Brenta

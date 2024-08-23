@@ -12,8 +12,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
+using namespace Brenta::ECS::Types;
 
 struct PhysicsSystem : System<PhysicsComponent, TransformComponent> {
 

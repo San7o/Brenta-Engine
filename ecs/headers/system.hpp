@@ -23,20 +23,17 @@
  *
  */ 
 
-/*
- * This file contains the definition of the System type.
- *
- * A System is a function that processes game objects and are
- * called at any tick by the World.
- */
-
 #pragma once
 
 #include <typeindex>
 #include <vector>
 #include <tuple>
 
-namespace ECS {
+namespace Brenta
+{
+
+namespace ECS
+{
 
 /**
  * @brief System type
@@ -94,3 +91,5 @@ struct RegisteredSystems {
     }
 
 } // namespace ECS
+
+} // namespace Brenta

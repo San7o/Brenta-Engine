@@ -31,7 +31,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -112,4 +112,4 @@ public:
 
 } // namespace Types
 
-} // namespace ECS
+} // namespace Brenta

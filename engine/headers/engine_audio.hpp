@@ -30,7 +30,7 @@
 #include <string>
 #include <vector>
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -226,4 +226,4 @@ private:
     static void CheckError();
 };
 
-} // namespace ECS
+} // namespace Brenta

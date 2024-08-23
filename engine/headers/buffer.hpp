@@ -27,7 +27,7 @@
 
 #include <glad/glad.h>       /* OpenGL driver */
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -151,4 +151,4 @@ public:
 
 } // namespace Types
 
-} // namespace ECS
+} // namespace Brenta

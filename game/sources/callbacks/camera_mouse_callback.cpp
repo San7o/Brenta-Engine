@@ -1,8 +1,7 @@
 #include "engine.hpp"
 #include "callbacks/camera_mouse_callback.hpp"
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
 
 void InitCameraMouseCallback() {
 

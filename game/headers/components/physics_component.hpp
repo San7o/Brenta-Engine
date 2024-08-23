@@ -8,7 +8,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 struct PhysicsComponent : Component {
     float mass;

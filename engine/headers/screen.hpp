@@ -28,7 +28,7 @@
 #include <glad/glad.h>       
 #include <GLFW/glfw3.h>      /* OpenGL windowing library */
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -173,4 +173,4 @@ private:
                                           int width, int height);
 };
 
-} // namespace ECS
+} // namespace Brenta

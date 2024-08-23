@@ -31,7 +31,7 @@
 #include "engine_audio.hpp"
 #include "camera.hpp"
 
-using namespace ECS;
+using namespace Brenta;
 
 GLFWwindow* Screen::window;
 int Screen::WIDTH;
@@ -46,8 +46,7 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     if (glfwInit() == GLFW_FALSE)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Failed to initialize GLFW on init");
+         ERROR("Failed to initialize GLFW on init");
     }
 
     SetContextVersion(3, 3); /* OpenGL 3.3 */
@@ -56,13 +55,13 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
     if (msaa)
     {
         glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
-        Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
+        INFO("Enabled MSAA");
     }
 
     if (!vsync)
     {
         glfwSwapInterval(0); /* Disable VSync */
-        Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
+        INFO("Disabled VSync");
     }
 
 #ifdef __APPLE__
@@ -121,7 +120,7 @@ void Screen::SetSizeCallback(GLFWframebuffersizefun callback)
 {
     glfwSetFramebufferSizeCallback(Screen::window, callback);
 
-    Logger::Log(Types::LogLevel::INFO, "Set framebuffer size callback");
+    INFO("Set framebuffer size callback");
 }
 
 void Screen::SetMouseCapture(bool isCaptured)
@@ -129,10 +128,10 @@ void Screen::SetMouseCapture(bool isCaptured)
     if (isCaptured) {
         glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         
-        Logger::Log(Types::LogLevel::INFO, "Mouse captured");
+        INFO("Mouse captured");
     } else {
         glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        Logger::Log(Types::LogLevel::INFO, "Mouse not captured");
+        INFO("Mouse not captured");
     }
 }
 
@@ -144,7 +143,7 @@ void Screen::SetClose()
 void Screen::Terminate()
 {
     glfwTerminate();
-    Logger::Log(Types::LogLevel::INFO, "Screen terminated");
+    INFO("Screen terminated");
 }
 
 void Screen::SwapBuffers()
@@ -162,8 +161,7 @@ void Screen::SetContextVersion(int major, int minor)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-    Logger::Log(Types::LogLevel::INFO, "Set context to OpenGL version: " +
-                std::to_string(major) + "." + std::to_string(minor));
+    INFO("Set context to OpenGL version: ", major, ".", minor);
 }
 
 void Screen::SetKeyCallback(GLFWkeyfun callback)
@@ -180,7 +178,7 @@ void Screen::UseCoreProfile()
 {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    Logger::Log(Types::LogLevel::INFO, "Set OpenGL profile to core");
+    INFO("Set OpenGL profile to core");
 }
 
 void Screen::SetHintsApple()
@@ -193,7 +191,7 @@ void Screen::CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char* title)
     Screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
     if (Screen::window == NULL)
     {
-        Logger::Log(Types::LogLevel::ERROR, "Failed to create GLFW window");
+        ERROR("Failed to create GLFW window");
         Terminate();
     }
 }
@@ -211,6 +209,5 @@ void Screen::Framebuffer_size_callback(GLFWwindow* window, int width,
     Screen::WIDTH = width;
     Screen::HEIGHT = height;
 
-    Logger::Log(Types::LogLevel::INFO, "Set viewport: " +
-                std::to_string(width) + "x" + std::to_string(height));
+    INFO("Set viewport: ", width, "x", height);
 }

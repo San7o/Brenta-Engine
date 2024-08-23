@@ -1,9 +1,7 @@
 #include "callbacks/play_guitar_callback.hpp"
-
 #include "engine.hpp"
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
 
 void InitPlayGuitarCallback() {
     auto play_guitar = []() {

@@ -23,13 +23,6 @@
  *
  */ 
 
-/* 
- * This file contains the definition of the World class, which is a singleton
- * that contains all the entities, components and systems in the game world,
- * provides acces to them through queries and is responsible for updating the
- * game world.
- */
-
 #pragma once
 
 #include "ecs.hpp"
@@ -44,10 +37,14 @@
 #include <typeinfo>
 #include <algorithm>
 
+namespace Brenta
+{
+
 namespace ECS
 {
 
 using namespace Types;
+using namespace Brenta::Utils;
 
 /**
  * @brief World class
@@ -124,7 +121,7 @@ static R* GetResource()
 {
     if (!resources)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot get resource: world not initialized");
+        ERROR("Cannot get resource: world not initialized");
         return nullptr;
     }
 
@@ -153,7 +150,7 @@ static void AddComponent(Entity entity, C new_component)
 {
     if (!components)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot add component: world not initialized");
+        ERROR("Cannot add component: world not initialized");
         return;
     }
 
@@ -170,7 +167,7 @@ static void AddComponent(Entity entity, C new_component)
         components->at(std::type_index(typeid(C))).push_back(component);
     }
 
-    Logger::Log(LogLevel::INFO, "Added component: ", std::type_index(typeid(C)).name());
+    INFO("Added component: ", std::type_index(typeid(C)).name());
 }
 
 /**
@@ -188,12 +185,12 @@ static void AddResource(R resource)
 {
     if (!resources)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot add resource: world not initialized");
+        ERROR("Cannot add resource: world not initialized");
         return;
     }
 
     resources->insert({std::type_index(typeid(R)), std::make_shared<R>(resource)});
-    Logger::Log(LogLevel::INFO, "Added Resource: ", std::type_index(typeid(R)).name());
+    INFO("Added Resource: ", std::type_index(typeid(R)).name());
 }
 
 /**
@@ -230,13 +227,13 @@ static C* EntityToComponent(Entity entity)
 {
     if (!components)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot get component: world not initialized");
+        ERROR("Cannot get component: world not initialized");
         return nullptr;
     }
 
     if (!components->count(std::type_index(typeid(C))))
     {
-        Logger::Log(LogLevel::ERROR, "Component not found: ", std::type_index(typeid(C)).name());
+        ERROR("Component not found: ", std::type_index(typeid(C)).name());
         return nullptr;
     }
 
@@ -292,7 +289,7 @@ static std::vector<Entity> QueryComponents()
 {
     if (!World::components)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot query: world not initialized");
+        ERROR("Cannot query: world not initialized");
         return {};
     }
 
@@ -345,3 +342,4 @@ static void QueryComponentsRec(std::vector<Entity>* entities)
 
 } // namespace ECS
 
+} // namespace Brenta

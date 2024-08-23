@@ -12,7 +12,8 @@
 #include <vector>
 #include <filesystem>
 
-using namespace ECS;
+using namespace Brenta::ECS;
+using namespace Brenta;
 
 void InitDirectionalLightEntity() {
 
@@ -26,7 +27,7 @@ void InitDirectionalLightEntity() {
         glm::vec3(0.5f, 0.5f, 0.5f),    // diffuse
         glm::vec3(1.0f, 1.0f, 1.0f),    // specular
         1.0f,                           // intensity
-        std::vector<Types::ShaderName>{"default_shader"}
+        std::vector<Brenta::Types::ShaderName>{"default_shader"}
     );
     World::AddComponent<DirectionalLightComponent>(light_entity, std::move(light_component));
 }

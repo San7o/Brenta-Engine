@@ -25,7 +25,7 @@
 
 #pragma once
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -81,4 +81,4 @@ private:
     static float lastFrame;
 };
 
-} // namespace ECS
+} // namespace Brenta

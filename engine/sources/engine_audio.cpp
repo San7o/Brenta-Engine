@@ -29,7 +29,8 @@
 
 #include <string>
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::Utils;
 
 std::unordered_map<Types::AudioName, Types::AudioFile> Audio::audiofiles;
 std::unordered_map<Types::StreamName, SDL_AudioStream*> Audio::streams;
@@ -39,14 +40,12 @@ void Audio::Init()
     if (SDL_Init(SDL_INIT_AUDIO) )
     {
         auto error = SDL_GetError();
-        Logger::Log(Types::LogLevel::ERROR,
-                        "SDL Audio failed to initialize: " + std::string(error));
+        ERROR("SDL Audio failed to initialize: ", error);
         return;
     } 
 
     Audio::CreateStream("default");
-    Logger::Log(Types::LogLevel::INFO,
-                    "SDL Audio initialized");
+    INFO("SDL Audio initialized");
 }
 
 void Audio::Destroy() 
@@ -60,8 +59,7 @@ void Audio::Destroy()
     }
 
     SDL_Quit();
-    Logger::Log(Types::LogLevel::INFO,
-                    "SDL Audio destroyed");
+    INFO("SDL Audio destroyed");
 }
 
 void Audio::LoadAudio(Types::AudioName name, std::string path)
@@ -73,14 +71,12 @@ void Audio::LoadAudio(Types::AudioName name, std::string path)
                             &audiofile.audio_buf, &audiofile.audio_len))
     {
             auto error = SDL_GetError();
-            Logger::Log(Types::LogLevel::ERROR,
-                        "SDL Audio failed to load WAV file: " + std::string(error));
+            ERROR("SDL Audio failed to load WAV file: ", error);
         return;
     }
 
     Audio::audiofiles.insert({name, audiofile});
-    Logger::Log(Types::LogLevel::INFO,
-                    "Loaded audio at " + path);
+    INFO("Loaded audio at ", path);
 }
 
 void Audio::PlayAudio(Types::AudioName audio_name, Types::StreamName stream_name) 
@@ -88,8 +84,7 @@ void Audio::PlayAudio(Types::AudioName audio_name, Types::StreamName stream_name
     auto stream = Audio::GetStream(stream_name);
     if (stream == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Could not play audio: Audio stream not found");
+        ERROR("Could not play audio: Audio stream not found");
         return;
     }
 
@@ -106,23 +101,20 @@ void Audio::CreateStream(Types::StreamName name)
     if (stream == NULL)
     {
         const char* error = SDL_GetError();
-        Logger::Log(Types::LogLevel::ERROR,
-                        "SDL Audio failed to create stream: " + std::string(error));
+        ERROR("SDL Audio failed to create stream: ", error);
         return;
     }
 
     Audio::streams.insert({name, stream});
     ResumeStream(name);
-    Logger::Log(Types::LogLevel::INFO,
-                    "SDL Audio stream created");
+    INFO("SDL Audio stream created");
 }
 
 Types::AudioFile Audio::GetAudioFile(Types::AudioName name) 
 {
     if (Audio::audiofiles.find(name) == Audio::audiofiles.end())
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Audio file not found with name: " + name);
+        ERROR("Audio file not found with name: ", name);
         return Types::AudioFile();
     }
     return Audio::audiofiles.at(name);
@@ -132,8 +124,7 @@ SDL_AudioStream* Audio::GetStream(Types::StreamName name)
 {
     if (Audio::streams.find(name) == Audio::streams.end())
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Audio stream not found with name: " + name);
+        ERROR("Audio stream not found with name: " + name);
         return nullptr;
     }
     return Audio::streams.at(name);
@@ -144,21 +135,18 @@ void Audio::SetVolume(Types::StreamName name, int volume)
     auto stream = Audio::GetStream(name);
     if (stream == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Could not set volume: Audio stream not found");
+        ERROR("Could not set volume: Audio stream not found");
         return;
     }
 
     if (SDL_SetAudioStreamGain(stream, volume)) CheckError();
-    Logger::Log(Types::LogLevel::INFO,
-                    "Volume set to " + std::to_string(volume));
+    INFO("Volume set to ", volume);
 }
 
 void Audio::CheckError() 
 {
     auto error = SDL_GetError();
-    Logger::Log(Types::LogLevel::ERROR,
-                    "SDL Audio error: " + std::string(error));
+    ERROR("SDL Audio error: ", error);
 }
 
 void Audio::ClearStream(Types::StreamName name) 
@@ -166,14 +154,12 @@ void Audio::ClearStream(Types::StreamName name)
     auto stream = Audio::GetStream(name);
     if (stream == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Could not clear stream: Audio stream not found");
+        ERROR("Could not clear stream: Audio stream not found");
         return;
     }
 
     if (SDL_ClearAudioStream(stream)) CheckError();
-    Logger::Log(Types::LogLevel::INFO,
-                    "Stream cleared");
+    INFO("Stream cleared");
 }
 
 void Audio::PauseStream(Types::StreamName name) 
@@ -181,14 +167,12 @@ void Audio::PauseStream(Types::StreamName name)
     auto stream = Audio::GetStream(name);
     if (stream == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Could not pause stream: Audio stream not found");
+        ERROR("Could not pause stream: Audio stream not found");
         return;
     }
 
     if(SDL_PauseAudioStreamDevice(stream)) CheckError();
-    Logger::Log(Types::LogLevel::INFO,
-                    "Stream paused");
+    INFO("Stream paused");
 }
 
 void Audio::ResumeStream(Types::StreamName name) 
@@ -196,12 +180,10 @@ void Audio::ResumeStream(Types::StreamName name)
     auto stream = Audio::GetStream(name);
     if (stream == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR,
-                        "Could not resume stream: Audio stream not found");
+        ERROR("Could not resume stream: Audio stream not found");
         return;
     }
 
     if (SDL_ResumeAudioStreamDevice(stream)) CheckError();
-    Logger::Log(Types::LogLevel::INFO,
-                    "Stream resumed");
+    INFO("Stream resumed");
 }

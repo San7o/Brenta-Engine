@@ -3,13 +3,14 @@
 #include "engine.hpp"
 #include "ecs.hpp"
 
-using namespace ECS;
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 /* Model Component */
 struct ModelComponent : Component {
     Model model;
     float shininess;
-    Types::ShaderName shader;
+    Brenta::Types::ShaderName shader;
     bool hasAtlas;
     int atlasSize;
     int atlasIndex;
@@ -17,7 +18,7 @@ struct ModelComponent : Component {
 
     ModelComponent() : model(Model()), shininess(0.0f), shader("default_shader"),
                        hasAtlas(false), atlasSize(0), atlasIndex(0) {}
-    ModelComponent(Model model, float shininess, Types::ShaderName shader,
+    ModelComponent(Model model, float shininess, Brenta::Types::ShaderName shader,
                     bool hasAtlas = false, int atlasSize = 0,
                     int atlasIndex = 0)
             : model(model), shininess(shininess), shader(shader),

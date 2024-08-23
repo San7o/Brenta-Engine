@@ -26,7 +26,7 @@
 #include "engine_time.hpp"
 #include "screen.hpp"
 
-using namespace ECS;
+using namespace Brenta;
 
 float Time::currentTime = 0.0f;
 float Time::deltaTime = 0.0f;

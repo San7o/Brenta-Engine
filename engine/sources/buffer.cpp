@@ -26,7 +26,8 @@
 #include "buffer.hpp"
 #include "engine_logger.hpp"
 
-using namespace ECS::Types;
+using namespace Brenta::Types;
+using namespace Brenta::Utils;
 
 Buffer::Buffer(GLenum input_target)
 {
@@ -59,7 +60,7 @@ void Buffer::CopyVertices(GLsizeiptr size, const void* data, GLenum usage)
 void Buffer::Bind()
 {
     if (this->id == 0) {
-        ECS::Logger::Log(LogLevel::ERROR, "Buffer not initialized");
+        ERROR("Buffer not initialized");
         return;
     }
     glBindBuffer(this->target, this->id);
@@ -73,7 +74,7 @@ void Buffer::Unbind()
 void Buffer::Delete()
 {
     if (this->id == 0) {
-        ECS::Logger::Log(LogLevel::ERROR, "Buffer not initialized");
+        ERROR("Buffer not initialized");
         return;
     }
     glDeleteBuffers(1, &this->id);

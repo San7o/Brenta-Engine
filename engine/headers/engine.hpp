@@ -42,7 +42,8 @@
 #include "particles.hpp"
 #include "engine_logger.hpp"
 
-namespace ECS {
+namespace Brenta
+{
 
 /**
  * @brief Engine setup
@@ -145,7 +146,7 @@ public:
     Engine build();
 };
 
-} // namespace ECS
+} // namespace Brenta
 
 // Documnetation Main Page:
 

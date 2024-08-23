@@ -14,11 +14,11 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-include_directories(include game/headers engine/headers ecs/headers common/headers)
+include_directories(include game/headers engine/headers ecs/headers utils/headers)
 
 link_directories(lib)
 
-file(GLOB SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" "engine/sources/*.c" "engine/sources/*.cpp" "common/sources/*.cpp" "ecs/sources/*.cpp")
+file(GLOB SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" "engine/sources/*.c" "engine/sources/*.cpp" "utils/sources/*.cpp" "ecs/sources/*.cpp")
 
 add_executable(main ${SOURCES})
 

@@ -25,7 +25,11 @@
 
 #pragma once
 
-namespace ECS {
+namespace Brenta
+{
+
+namespace ECS
+{
 
 /**
  * @brief Entity type
@@ -35,3 +39,5 @@ namespace ECS {
 typedef int Entity;
 
 } // namespace ECS
+
+} // namespace Brenta

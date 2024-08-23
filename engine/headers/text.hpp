@@ -37,7 +37,7 @@
 
 #include "engine.hpp"
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -124,4 +124,4 @@ private:
     static Types::Buffer     textVbo;
 };
 
-} // namespace ECS
+} // namespace Brenta

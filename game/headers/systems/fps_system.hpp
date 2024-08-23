@@ -6,8 +6,8 @@
 
 #include <vector>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
+using namespace Brenta::ECS::Types;
 
 struct FPSSystem : System<None> {
 

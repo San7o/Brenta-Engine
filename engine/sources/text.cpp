@@ -28,8 +28,8 @@
 
 #include <filesystem>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta;
+using namespace Brenta::Types;
 
 Types::ShaderName Text::textShader;
 Types::VAO        Text::textVao;
@@ -41,20 +41,20 @@ void Text::Init()
     Text::textVbo = Types::Buffer(GL_ARRAY_BUFFER);
     Text::textVao.Init();;
 
-    Logger::Log(LogLevel::INFO, "Text initialized");
+    INFO("Text initialized");
 }
 
 void Text::Load(std::string font, unsigned int fontSize)
 {
     if (textVao.GetVAO() == 0)
     {
-        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        ERROR("Text not initialized");
         return;
     }
     FT_Library ft;
     if (FT_Init_FreeType(&ft))
     {
-        Logger::Log(LogLevel::ERROR, "Could not init FreeType library");
+        ERROR("Could not init FreeType library");
         return;
     }
 
@@ -72,14 +72,14 @@ void Text::Load(std::string font, unsigned int fontSize)
     std::string font_name = std::filesystem::absolute("assets/fonts/" + font);
     if (font_name.empty())
     {
-        Logger::Log(LogLevel::ERROR, "Could not find font");
+        ERROR("Could not find font");
         return;
     }
 
     FT_Face face;
     if (FT_New_Face(ft, font_name.c_str(), 0, &face))
     {
-        Logger::Log(LogLevel::ERROR, "Could not load font");
+        ERROR("Could not load font");
         return;
     }
     else {
@@ -95,13 +95,13 @@ void Text::Load(std::string font, unsigned int fontSize)
             // Load character glyph 
             if (FT_Load_Char(face, c, FT_LOAD_RENDER))
             {
-                Logger::Log(LogLevel::ERROR, "Could not load glyph");
+                ERROR("Could not load glyph");
                 continue;
             }
             // generate texture
             unsigned int texture;
             glGenTextures(1, &texture);
-            ECS::Texture::BindTexture(GL_TEXTURE_2D, texture);
+            Texture::BindTexture(GL_TEXTURE_2D, texture);
             glTexImage2D(
                 GL_TEXTURE_2D,
                 0,
@@ -127,7 +127,7 @@ void Text::Load(std::string font, unsigned int fontSize)
             };
             characters.insert(std::pair<char, Character>(c, character));
         }
-        ECS::Texture::BindTexture(GL_TEXTURE_2D, 0);
+        Texture::BindTexture(GL_TEXTURE_2D, 0);
     }
     // destroy FreeType once we're finished
     FT_Done_Face(face);
@@ -147,7 +147,7 @@ void Text::RenderText(std::string text, float x, float y, float scale, glm::vec3
 {
     if (textVao.GetVAO() == 0)
     {
-        Logger::Log(LogLevel::ERROR, "Text not initialized");
+        ERROR("Text not initialized");
         return;
     }
 

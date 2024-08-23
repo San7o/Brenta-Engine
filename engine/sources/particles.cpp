@@ -33,7 +33,7 @@
 #include "texture.hpp"
 #include "translation.hpp"
 
-using namespace ECS;
+using namespace Brenta;
 
 ParticleEmitter::ParticleEmitter()
 {
@@ -80,7 +80,7 @@ ParticleEmitter::ParticleEmitter(glm::vec3 starting_position,
     this->camera = camera;
 
     // Load Texture Atlas
-    this->atlas = ECS::Texture::LoadTexture(atlas_path,
+    this->atlas = Texture::LoadTexture(atlas_path,
                     GL_REPEAT,
                     GL_NEAREST,
                     GL_NEAREST,
@@ -139,7 +139,7 @@ ParticleEmitter::~ParticleEmitter()
 {
     fbo[0].Delete();
     fbo[1].Delete();
-    Logger::Log(Types::LogLevel::INFO, "Deleted ParticleEmitter");
+    INFO("Deleted ParticleEmitter");
 }
 
 // Update particles using Transform Feedback
@@ -195,7 +195,7 @@ void ParticleEmitter::renderParticles()
 {
     if (camera == nullptr)
     {
-        Logger::Log(Types::LogLevel::ERROR, "Camera not set or null for ParticleEmitter");
+        ERROR("Camera not set or null for ParticleEmitter");
         return;
     }
 
@@ -222,8 +222,8 @@ void ParticleEmitter::renderParticles()
     Shader::SetFloat("particle_render", "scale", this->scale);
 
     // Set Textures
-    ECS::Texture::ActiveTexture(GL_TEXTURE0);
-    ECS::Texture::BindTexture(GL_TEXTURE_2D, this->atlas,
+    Texture::ActiveTexture(GL_TEXTURE0);
+    Texture::BindTexture(GL_TEXTURE_2D, this->atlas,
                     GL_REPEAT,
                     GL_NEAREST,
                     GL_NEAREST,

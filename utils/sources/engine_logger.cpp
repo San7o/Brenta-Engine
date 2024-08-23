@@ -28,12 +28,12 @@
 #include <iomanip>
 #include <ctime>
 
-using namespace ECS;
+using namespace Brenta::Utils;
 
-Types::LogLevel Logger::level = Types::LogLevel::WARNING;
+Brenta::Types::LogLevel Logger::level = Brenta::Types::LogLevel::WARNING;
 std::ofstream Logger::log_file;
 
-void Logger::SetLogLevel(Types::LogLevel level) {
+void Logger::SetLogLevel(Brenta::Types::LogLevel level) {
     Logger::level = level;
 }
 
@@ -59,30 +59,3 @@ void Logger::SetLogFile(const std::string& file) {
              << "----------" << std::endl;
     
 }
-
-namespace ECS::Types {
-std::ostream& operator<<(std::ostream& os, const LogLevel level) {
-    switch (level) {
-        case LogLevel::DEBUG:
-            os << "DEBUG";
-            break;
-        case LogLevel::INFO:
-            os << "INFO";
-            break;
-        case LogLevel::WARNING:
-            os << "WARNING";
-            break;
-        case LogLevel::ERROR:
-            os << "ERROR";
-            break;
-        case LogLevel::DISABLED:
-            os << "DISABLED";
-            break;
-        default:
-            break;
-    }
-
-    return os;
-}
-
-} // namespace Types

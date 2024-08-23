@@ -7,7 +7,7 @@
 
 #include <vector>
 
-using namespace ECS;
+using namespace Brenta::ECS;
 
 /* Load the lights on the shaders */
 struct PointLightsSystem : System<TransformComponent, PointLightComponent> {
@@ -17,8 +17,7 @@ struct PointLightsSystem : System<TransformComponent, PointLightComponent> {
         int counter = 0;
         for (auto entity : entities) {
             if (counter >= 4) {
-                Logger::Log(Types::LogLevel::ERROR,
-                            "Only 4 lights are supported");
+                ERROR("Only 4 lights are supported");
                 break;
             }
             auto transform = World::EntityToComponent<TransformComponent>(entity);
@@ -27,8 +26,7 @@ struct PointLightsSystem : System<TransformComponent, PointLightComponent> {
 
             for (auto shader : light->shaders) {
                 if (Shader::GetId(shader) == (unsigned int) 0 ) {
-                    Logger::Log(Types::LogLevel::ERROR,
-                                "Light shader not found with name: " + shader);
+                    ERROR("Light shader not found with name: ", shader);
                     continue;
                 }
                 Shader::Use(shader);

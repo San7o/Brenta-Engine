@@ -38,7 +38,7 @@
 #include "buffer.hpp"
 #include "vao.hpp"
 
-namespace ECS
+namespace Brenta 
 {
 
 namespace Types
@@ -275,4 +275,4 @@ public:
     Mesh build();
 };
 
-} // namespace ECS
+} // namespace Brenta

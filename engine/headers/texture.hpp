@@ -23,15 +23,11 @@
  *
  */ 
 
-/*
- * Helper functions to interact with textures
- */
-
 #pragma once
 
 #include <glad/glad.h>       /* OpenGL driver */
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -96,4 +92,4 @@ private:
     static void ReadImage(const char* path, bool flip);
 };
 
-} // namespace ECS
+} // namespace Brenta

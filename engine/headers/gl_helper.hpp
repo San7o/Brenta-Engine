@@ -33,7 +33,7 @@
 
 #define glCheckError() glCheckError_(__FILE__, __LINE__)
 
-namespace ECS
+namespace Brenta
 {
 
 /**
@@ -128,4 +128,4 @@ public:
     static GLenum glCheckError_(const char *file, int line);
 };
 
-} // namespace ECS
+} // namespace Brenta

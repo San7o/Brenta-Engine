@@ -29,7 +29,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-namespace ECS
+namespace Brenta
 {
 
 namespace Types
@@ -101,7 +101,7 @@ enum ProjectionType
  * define the position, orientation and projection of the camera.
  * The class provides a Builder pattern to create a camera object,
  * and it export a default global camera called "camera" that
- * needs to be defined somewhere in the ECS namespace.
+ * needs to be defined somewhere in the Brenta namespace.
  *
  * ## Camera type
  * The camera can be of two types: AIRCRAFT or SPHERICAL. The
@@ -219,8 +219,8 @@ public:
      *
      * Full constructor that initializes the camera with the specified values.
      */
-    Camera(ECS::Enums::CameraType camera_type,
-           ECS::Enums::ProjectionType projection_type,
+    Camera(Enums::CameraType camera_type,
+           Enums::ProjectionType projection_type,
            glm::vec3 position,
            glm::vec3 worldUp,
            glm::vec3 center,
@@ -247,12 +247,12 @@ public:
      * @brief Get the camera type
      * @return The camera type
      */
-    ECS::Enums::CameraType GetCameraType();
+    Enums::CameraType GetCameraType();
     /**
      * @brief Get the projection type
      * @return The projection type
      */
-    ECS::Enums::ProjectionType GetProjectionType();
+    Enums::ProjectionType GetProjectionType();
     /**
      * @brief Get the position of the camera
      * @return The position of the camera
@@ -340,12 +340,12 @@ public:
      * @brief Set the camera type
      * @param camera_type The camera type
      */
-    void SetCameraType(ECS::Enums::CameraType camera_type);
+    void SetCameraType(Enums::CameraType camera_type);
     /**
      * @brief Set the projection type
      * @param projection_type The projection type
      */
-    void SetProjectionType(ECS::Enums::ProjectionType projection_type);
+    void SetProjectionType(Enums::ProjectionType projection_type);
     /**
      * @brief Set the world up vector
      * @param worldUp The world up vector
@@ -445,8 +445,8 @@ public:
 class Camera::Builder
 {
 private:
-    ECS::Enums::CameraType camera_type = ECS::Enums::CameraType::AIRCRAFT;
-    ECS::Enums::ProjectionType projection_type = ECS::Enums::ProjectionType::PERSPECTIVE;
+    Enums::CameraType camera_type = Enums::CameraType::AIRCRAFT;
+    Enums::ProjectionType projection_type = Enums::ProjectionType::PERSPECTIVE;
     glm::vec3 position     = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 worldUp      = glm::vec3(0.0f, 1.0f, 0.0f);
     glm::vec3 center       = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -460,8 +460,8 @@ private:
     Types::EulerAngles eulerAngles = {0.0f, 0.0f, 0.0f};
 
 public:
-    Builder& set_camera_type(ECS::Enums::CameraType camera_type);
-    Builder& set_projection_type(ECS::Enums::ProjectionType projection_type);
+    Builder& set_camera_type(Enums::CameraType camera_type);
+    Builder& set_projection_type(Enums::ProjectionType projection_type);
     Builder& set_position(glm::vec3 position);
     Builder& set_world_up(glm::vec3 worldUp);
     Builder& set_center(glm::vec3 center);
@@ -484,4 +484,4 @@ public:
  */
 extern Camera camera;
 
-} // namespace ECS
+} // namespace Brenta

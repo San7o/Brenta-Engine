@@ -13,8 +13,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace ECS;
-using namespace ECS::Types;
+using namespace Brenta::ECS;
+using namespace Brenta::ECS::Types;
 
 glm::vec3 ResolveCollision(glm::vec3 position1, glm::vec3 position2,
                            float radius1, float radius2, float distance);

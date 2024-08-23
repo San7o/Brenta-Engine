@@ -30,7 +30,8 @@
 #include "engine_time.hpp"
 #include "screen.hpp"
 
-using namespace ECS;
+using namespace Brenta::ECS;
+using namespace Brenta::Utils;
 
 SetPtr<Entity>    World::entities;
 UMapPtr<std::type_index, Resource>     World::resources;
@@ -46,7 +47,7 @@ void World::Init()
     World::resources  = std::make_unique<UMap<std::type_index, Resource>>();
     World::components = std::make_unique<UMapVec<std::type_index, Component>>();
 
-    Logger::Log(LogLevel::INFO, "World initialized");
+    INFO("World initialized");
 }
 
 void World::Delete()
@@ -55,7 +56,7 @@ void World::Delete()
     World::components.reset();
     World::resources.reset();
 
-    Logger::Log(LogLevel::INFO, "World deleted");
+    INFO("World deleted");
 }
 
 void World::Tick()
@@ -67,7 +68,7 @@ Entity World::NewEntity()
 {
     if(!World::entities)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot create entity: world not initialized");
+        ERROR("Cannot create entity: world not initialized");
         return -1;
     }
 
@@ -81,8 +82,7 @@ Entity World::NewEntity()
     Entity new_entity = *(World::entities->rbegin()) + 1;
     World::entities->insert(new_entity);
 
-    Logger::Log(LogLevel::INFO,
-                    "New entity created: " + std::to_string(new_entity));
+    INFO("New entity created: ", new_entity);
 
     return new_entity;
 }
@@ -91,7 +91,7 @@ std::set<Entity>* World::getEntities()
 {
     if (!World::entities)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot get entities: world not initialized");
+        ERROR("Cannot get entities: world not initialized");
         return nullptr;
     }
     return World::entities.get();
@@ -100,7 +100,7 @@ std::set<Entity>* World::getEntities()
 UMap<std::type_index, Resource>* World::getResources()
 {
     if (!World::resources) {
-        Logger::Log(LogLevel::ERROR, "Cannot get resources: world not initialized");
+        ERROR("Cannot get resources: world not initialized");
         return nullptr;
     }
     return World::resources.get();
@@ -109,7 +109,7 @@ UMap<std::type_index, Resource>* World::getResources()
 UMapVec<std::type_index, Component>* World::getComponents()
 {
     if (!World::components) {
-        Logger::Log(LogLevel::ERROR, "Cannot get components: world not initialized");
+        ERROR("Cannot get components: world not initialized");
         return nullptr;
     }
     return World::components.get();
@@ -119,7 +119,7 @@ void World::RemoveEntity(Entity entity)
 {
     if(!World::entities)
     {
-        Logger::Log(LogLevel::ERROR, "Cannot remove entity: world not initialized");
+        ERROR("Cannot remove entity: world not initialized");
         return;
     }
 
@@ -139,5 +139,5 @@ void World::RemoveEntity(Entity entity)
         );
     }
 
-    Logger::Log(LogLevel::INFO, "Entity removed: " + std::to_string(entity));
+    INFO("Entity removed: ", entity);
 }
