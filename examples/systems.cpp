@@ -24,43 +24,55 @@
  *
  */
 
-#include "entities/floor_entity.hpp"
+/**
+ * Examples of various systems that can be used in an ECS system.
+ */
 
-#include "components/model_component.hpp"
-#include "components/transform_component.hpp"
+#pragma once
+
 #include "ecs.hpp"
 #include "engine.hpp"
+#include "systems/fps_system.hpp"
 
-#include <filesystem>
+#include <vector>
 
 using namespace Brenta::ECS;
 using namespace Brenta::ECS::Types;
-using namespace Brenta;
 
-void InitFloorEntity()
+struct FPSSystem : System<None>
 {
-    /* Create the floor entity */
-    auto floor_entity = World::NewEntity();
-
-    /* Add the transform component */
-    auto transform_component =
-        TransformComponent(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f), 1.0f);
-    World::AddComponent<TransformComponent>(floor_entity, transform_component);
-
-    if (Shader::GetId("default_shader") == 0)
+    void run(std::vector<Entity> _) const override
     {
-        /* Load the shader */
-        Shader::New("default_shader", GL_VERTEX_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.vs"),
-                    GL_FRAGMENT_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.fs"));
+        Text::RenderText("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
+                         0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
+};
 
-    /* Load the model */
-    Model model(std::filesystem::absolute("assets/models/pane/pane.obj"));
+struct physicssystem : system<physicscomponent, transformcomponent>
+{
+    void run(std::vector<entity> matches) const override
+    {
+        if (matches.empty())
+            return;
 
-    /* Add the model component */
-    auto model_component = ModelComponent(model, 32.0f, "default_shader");
-    World::AddComponent<ModelComponent>(floor_entity,
-                                        std::move(model_component));
-}
+        for (auto match : matches)
+        {
+            auto physics_component =
+                world::entitytocomponent<physicscomponent>(match);
+
+            auto transform_component =
+                world::entitytocomponent<transformcomponent>(match);
+
+            if (physics_component->acceleration != glm::vec3(0.0f))
+            {
+                physics_component->velocity +=
+                    physics_component->acceleration * time::getdeltatime();
+            }
+            if (physics_component->velocity != glm::vec3(0.0f))
+            {
+                transform_component->position +=
+                    physics_component->velocity * time::getdeltatime();
+            }
+        }
+    }
+};

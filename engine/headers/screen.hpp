@@ -60,7 +60,7 @@ class Screen
      */
     static GLFWwindow *window;
 
-    Screen () = delete;
+    Screen() = delete;
     /**
      * @brief Initialize the window
      *
@@ -75,10 +75,9 @@ class Screen
      * @param msaa If multisampling is enabled
      * @param vsync If vertical synchronization is enabled
      */
-    static void Init (int SCR_WIDTH, int SCR_HEIGHT,
-                      bool isMouseCaptured = false,
-                      const char *title = "OpenGL", bool msaa = false,
-                      bool vsync = false);
+    static void Init(int SCR_WIDTH, int SCR_HEIGHT,
+                     bool isMouseCaptured = false, const char *title = "OpenGL",
+                     bool msaa = false, bool vsync = false);
 
     /* Getters */
 
@@ -86,37 +85,37 @@ class Screen
      * @brief Get the width of the window
      * @return Width of the window
      */
-    static int GetWidth ();
+    static int GetWidth();
     /**
      * @brief Get the height of the window
      */
-    static int GetHeight ();
+    static int GetHeight();
     /**
      * @brief Check if the window is closed
      * @return If the window is closed
      */
-    static bool isWindowClosed ();
+    static bool isWindowClosed();
     /**
      * @brief Check if a key is pressed
      * @param key Key to check
      * @return If the key is pressed
      */
-    static bool isKeyPressed (int key);
+    static bool isKeyPressed(int key);
     /**
      * @brief Get the time
      * @return Time since the start of the program
      */
-    static float GetTime ();
+    static float GetTime();
     /**
      * @brief Get the window
      * @return Window
      */
-    static GLFWwindow *GetWindow ();
+    static GLFWwindow *GetWindow();
     /**
      * @brief Get the OpenGL function pointer
      * @return OpenGL function pointer
      */
-    static GLFWglproc GetProcAddress ();
+    static GLFWglproc GetProcAddress();
 
     /* Setters */
 
@@ -124,31 +123,31 @@ class Screen
      * @brief Set the mouse callback
      * @param callback Callback to set
      */
-    static void SetMouseCallback (GLFWcursorposfun callback);
+    static void SetMouseCallback(GLFWcursorposfun callback);
     /**
      * @brief Set the key callback
      * @param callback Callback to set
      */
-    static void SetSizeCallback (GLFWframebuffersizefun callback);
+    static void SetSizeCallback(GLFWframebuffersizefun callback);
     /**
      * @brief Set the mouse position callback
      * @param callback Callback to set
      */
-    static void SetMousePosCallback (GLFWcursorposfun callback);
+    static void SetMousePosCallback(GLFWcursorposfun callback);
     /**
      * @brief Set the key callback
      * @param callback Callback to set
      */
-    static void SetKeyCallback (GLFWkeyfun callback);
+    static void SetKeyCallback(GLFWkeyfun callback);
     /**
      * @brief Set the mouse capture
      * @param isCaptured If the mouse is captured
      */
-    static void SetMouseCapture (bool isCaptured);
+    static void SetMouseCapture(bool isCaptured);
     /**
      * @brief Set the window close flag
      */
-    static void SetClose ();
+    static void SetClose();
 
     /* Utils */
 
@@ -157,24 +156,24 @@ class Screen
      *
      * Having to buffers is done to avoid flickering.
      */
-    static void SwapBuffers ();
+    static void SwapBuffers();
     /**
      * @brief Poll all pending events
      */
-    static void PollEvents ();
+    static void PollEvents();
     /**
      * @brief Terminate the window
      */
-    static void Terminate ();
+    static void Terminate();
 
   private:
-    static void SetContextVersion (int major, int minor);
-    static void UseCoreProfile ();
-    static void SetHintsApple ();
-    static void CreateWindow (int SCR_WIDTH, int SCR_HEIGHT, const char *title);
-    static void MakeContextCurrent ();
-    static void Framebuffer_size_callback (GLFWwindow *window, int width,
-                                           int height);
+    static void SetContextVersion(int major, int minor);
+    static void UseCoreProfile();
+    static void SetHintsApple();
+    static void CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char *title);
+    static void MakeContextCurrent();
+    static void Framebuffer_size_callback(GLFWwindow *window, int width,
+                                          int height);
 };
 
 } // namespace Brenta

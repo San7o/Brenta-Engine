@@ -30,55 +30,55 @@
 
 using namespace Brenta::Types;
 
-void VAO::Init ()
+void VAO::Init()
 {
-    glGenVertexArrays (1, &vao);
-    Bind ();
+    glGenVertexArrays(1, &vao);
+    Bind();
 }
 
-unsigned int VAO::GetVAO ()
+unsigned int VAO::GetVAO()
 {
     if (vao == 0)
     {
-        ERROR ("VAO not initialized");
+        ERROR("VAO not initialized");
         return 0;
     }
     return vao;
 }
 
-void VAO::Bind ()
+void VAO::Bind()
 {
     if (vao == 0)
     {
-        ERROR ("VAO not initialized");
+        ERROR("VAO not initialized");
         return;
     }
-    glBindVertexArray (vao);
+    glBindVertexArray(vao);
 }
 
-void VAO::Unbind ()
+void VAO::Unbind()
 {
-    glBindVertexArray (0);
+    glBindVertexArray(0);
 }
 
-void VAO::SetVertexData (Buffer buffer, unsigned int index, GLint size,
-                         GLenum type, GLboolean normalized, GLsizei stride,
-                         const void *pointer)
+void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size,
+                        GLenum type, GLboolean normalized, GLsizei stride,
+                        const void *pointer)
 {
-    Bind ();
-    buffer.Bind ();
-    glVertexAttribPointer (index, size, type, normalized, stride, pointer);
-    glEnableVertexAttribArray (index);
-    buffer.Unbind ();
-    Unbind ();
+    Bind();
+    buffer.Bind();
+    glVertexAttribPointer(index, size, type, normalized, stride, pointer);
+    glEnableVertexAttribArray(index);
+    buffer.Unbind();
+    Unbind();
 }
 
-void VAO::Delete ()
+void VAO::Delete()
 {
     if (vao == 0)
     {
-        ERROR ("VAO not initialized");
+        ERROR("VAO not initialized");
         return;
     }
-    glDeleteVertexArrays (1, &vao);
+    glDeleteVertexArrays(1, &vao);
 }

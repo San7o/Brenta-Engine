@@ -34,22 +34,22 @@ float Time::currentTime = 0.0f;
 float Time::deltaTime = 0.0f;
 float Time::lastFrame = 0.0f;
 
-float Time::GetCurrentTime ()
+float Time::GetCurrentTime()
 {
-    return Screen::GetTime ();
+    return Screen::GetTime();
 }
 
-float Time::GetDeltaTime ()
+float Time::GetDeltaTime()
 {
     return deltaTime;
 }
 
-float Time::GetFPS ()
+float Time::GetFPS()
 {
     return 1.0f / deltaTime;
 }
 
-void Time::Update (float newTime)
+void Time::Update(float newTime)
 {
     currentTime = newTime;
     deltaTime = currentTime - lastFrame;

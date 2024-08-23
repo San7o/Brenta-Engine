@@ -52,14 +52,14 @@ typedef std::string MouseCallbackName;
 class Input
 {
   public:
-    Input () = delete;
+    Input() = delete;
     /**
      * @brief Initialize the input system
      *
      * This function initializes the input system. It should be called before
      * any other input function is called.
      */
-    static void Init ();
+    static void Init();
 
     /**
      * @brief Add a keyboard callback
@@ -71,7 +71,7 @@ class Input
      * @param key The key to add the callback to
      * @param callback The callback function
      */
-    static void AddKeyboardCallback (int key, std::function<void ()> callback);
+    static void AddKeyboardCallback(int key, std::function<void()> callback);
     /**
      * @brief Remove a keyboard callback
      *
@@ -80,7 +80,7 @@ class Input
      *
      * @param key The key to remove the callback from
      */
-    static void RemoveKeyboardCallback (int key);
+    static void RemoveKeyboardCallback(int key);
     /**
      * @brief Keyboard callback
      *
@@ -93,8 +93,8 @@ class Input
      * @param action The key action
      * @param mods Bit field describing which modifier keys were held down
      */
-    static void KeyCallback (GLFWwindow *window, int key, int scancode,
-                             int action, int mods);
+    static void KeyCallback(GLFWwindow *window, int key, int scancode,
+                            int action, int mods);
     /**
      * @brief Add a mouse position callback
      *
@@ -107,8 +107,8 @@ class Input
      * @param callback The callback function
      */
     static void
-    AddMousePosCallback (Types::MouseCallbackName name,
-                         std::function<void (double, double)> callback);
+    AddMousePosCallback(Types::MouseCallbackName name,
+                        std::function<void(double, double)> callback);
     /**
      * @brief Remove a mouse position callback
      *
@@ -117,7 +117,7 @@ class Input
      *
      * @param callback_name The name of the callback
      */
-    static void RemoveMousePosCallback (Types::MouseCallbackName callback_name);
+    static void RemoveMousePosCallback(Types::MouseCallbackName callback_name);
     /**
      * @brief Mouse position callback
      *
@@ -128,11 +128,11 @@ class Input
      * @param xpos The new x-coordinate, in screen coordinates, of the cursor
      * @param ypos The new y-coordinate, in screen coordinates, of the cursor
      */
-    static void MousePosCallback (GLFWwindow *window, double xpos, double ypos);
+    static void MousePosCallback(GLFWwindow *window, double xpos, double ypos);
 
   private:
-    static std::unordered_map<int, std::function<void ()>> keyboardCallbacks;
-    static std::unordered_map<std::string, std::function<void (double, double)>>
+    static std::unordered_map<int, std::function<void()>> keyboardCallbacks;
+    static std::unordered_map<std::string, std::function<void(double, double)>>
         mouseCallbacks;
 };
 

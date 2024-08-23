@@ -1,5 +1,5 @@
 # Minimum required clang-format version: 6.0
-
+# run "make format" to apply the formatting
 ---
 AlignAfterOpenBracket: Align
 AlignOperands: 'true'
@@ -32,7 +32,6 @@ ReflowComments: 'true'
 SortIncludes: 'true'
 SpaceAfterCStyleCast: 'true'
 SpaceBeforeAssignmentOperators: 'true'
-SpaceBeforeParens: Always
 SpaceInEmptyParentheses: 'false'
 SpacesInCStyleCastParentheses: 'false'
 SpacesInParentheses: 'false'

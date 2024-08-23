@@ -39,7 +39,7 @@ namespace Brenta
 class Time
 {
   public:
-    Time () = delete;
+    Time() = delete;
 
     /**
      * @brief Get the current time
@@ -49,7 +49,7 @@ class Time
      *
      * @return The current time in seconds
      */
-    static float GetCurrentTime ();
+    static float GetCurrentTime();
     /**
      * @brief Get the time since the last frame
      *
@@ -57,7 +57,7 @@ class Time
      *
      * @return The time since the last frame in seconds
      */
-    static float GetDeltaTime ();
+    static float GetDeltaTime();
     /**
      * @brief Get the frames per second
      *
@@ -65,7 +65,7 @@ class Time
      *
      * @return The frames per second
      */
-    static float GetFPS ();
+    static float GetFPS();
     /**
      * @brief Update the time
      *
@@ -74,7 +74,7 @@ class Time
      *
      * @param newTime The new time of the program
      */
-    static void Update (float newTime);
+    static void Update(float newTime);
 
   private:
     static float currentTime;

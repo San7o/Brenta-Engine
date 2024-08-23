@@ -59,7 +59,7 @@ namespace ECS
 template <typename... T> struct System
 {
     using dependencies = std::tuple<T...>;
-    virtual void run (std::vector<Entity> e) const {};
+    virtual void run(std::vector<Entity> e) const {};
 };
 
 /**
@@ -85,11 +85,11 @@ template <typename... T> struct RegisteredSystems
  * Use it only once.
  */
 #define REGISTER_SYSTEMS(...)                                                  \
-    void World::RunSystems ()                                                  \
+    void World::RunSystems()                                                   \
     {                                                                          \
         typedef RegisteredSystems<__VA_ARGS__>::systems registered_systems;    \
         const registered_systems systems;                                      \
-        for_each (systems);                                                    \
+        for_each(systems);                                                     \
     }
 
 } // namespace ECS

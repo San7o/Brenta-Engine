@@ -62,7 +62,7 @@ class Buffer
     /**
      * @brief Default constructor, does nothing
      */
-    Buffer ()
+    Buffer()
     {
     }
     /**
@@ -75,22 +75,22 @@ class Buffer
      * The buffer has a default destructor that deletes the buffer object
      * when it goes out of scope.
      */
-    Buffer (GLenum input_target);
+    Buffer(GLenum input_target);
 
     /**
      * @brief Bind the buffer object
      *
      * Buffers must be bound before they can be used!
      */
-    void Bind ();
+    void Bind();
     /**
      * @brief Unbind the buffer object
      */
-    void Unbind ();
+    void Unbind();
     /**
      * @brief Delete the buffer object
      */
-    void Delete ();
+    void Delete();
 
     /* Getters */
 
@@ -98,12 +98,12 @@ class Buffer
      * @brief Get the buffer object id
      * @return Buffer object id
      */
-    int GetId ();
+    int GetId();
     /**
      * @brief Get the buffer object target
      * @return Buffer object target
      */
-    GLenum GetTarget ();
+    GLenum GetTarget();
 
     /* Setters */
 
@@ -111,12 +111,12 @@ class Buffer
      * @brief Set the buffer object id
      * @param id Buffer object id
      */
-    void SetId (unsigned int id);
+    void SetId(unsigned int id);
     /**
      * @brief Set the buffer object target
      * @param target Buffer object target
      */
-    void SetTarget (GLenum target);
+    void SetTarget(GLenum target);
 
     /* Utilities */
 
@@ -130,7 +130,7 @@ class Buffer
      * is specified in bytes, the data is a pointer to the data and the usage
      * is an OpenGL usage hint.
      */
-    void CopyData (GLsizeiptr size, const void *data, GLenum usage);
+    void CopyData(GLsizeiptr size, const void *data, GLenum usage);
     /**
      * @brief Copy data to the buffer object
      * @param size Size of the data in bytes
@@ -140,7 +140,7 @@ class Buffer
      * Same as Copydata but for target GL_ARRAY_BUFFER. The naming is
      * more specific to the use case.
      */
-    void CopyVertices (GLsizeiptr size, const void *data, GLenum usage);
+    void CopyVertices(GLsizeiptr size, const void *data, GLenum usage);
     /**
      * @brief Copy data to the buffer object
      * @param size Size of the data in bytes
@@ -149,7 +149,7 @@ class Buffer
      *
      * Same as CopyVertices but for target GL_ELEMENT_ARRAY_BUFFER.
      */
-    void CopyIndices (GLsizeiptr size, const void *data, GLenum usage);
+    void CopyIndices(GLsizeiptr size, const void *data, GLenum usage);
 };
 
 } // namespace Types

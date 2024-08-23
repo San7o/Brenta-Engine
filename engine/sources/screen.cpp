@@ -39,179 +39,178 @@ GLFWwindow *Screen::window;
 int Screen::WIDTH;
 int Screen::HEIGHT;
 
-void Screen::Init (int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured,
-                   const char *title, bool msaa, bool vsync)
+void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured,
+                  const char *title, bool msaa, bool vsync)
 {
     Screen::WIDTH = SCR_WIDTH;
     Screen::HEIGHT = SCR_HEIGHT;
 
-    if (glfwInit () == GLFW_FALSE)
+    if (glfwInit() == GLFW_FALSE)
     {
-        ERROR ("Failed to initialize GLFW on init");
+        ERROR("Failed to initialize GLFW on init");
     }
 
-    SetContextVersion (3, 3); /* OpenGL 3.3 */
-    UseCoreProfile ();
+    SetContextVersion(3, 3); /* OpenGL 3.3 */
+    UseCoreProfile();
 
     if (msaa)
     {
-        glfwWindowHint (GLFW_SAMPLES, 4); /* MSAA */
-        INFO ("Enabled MSAA");
+        glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+        INFO("Enabled MSAA");
     }
 
     if (!vsync)
     {
-        glfwSwapInterval (0); /* Disable VSync */
-        INFO ("Disabled VSync");
+        glfwSwapInterval(0); /* Disable VSync */
+        INFO("Disabled VSync");
     }
 
 #ifdef __APPLE__
-    SetHintsApple ();
+    SetHintsApple();
 #endif
 
-    CreateWindow (SCR_WIDTH, SCR_HEIGHT, title);
-    MakeContextCurrent ();
-    SetMouseCapture (isMouseCaptured);
+    CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
+    MakeContextCurrent();
+    SetMouseCapture(isMouseCaptured);
 
     /* Set the callback for resizing the window */
-    Screen::SetSizeCallback (Framebuffer_size_callback);
+    Screen::SetSizeCallback(Framebuffer_size_callback);
 }
 
-bool Screen::isWindowClosed ()
+bool Screen::isWindowClosed()
 {
-    return glfwWindowShouldClose (Screen::window);
+    return glfwWindowShouldClose(Screen::window);
 }
 
-bool Screen::isKeyPressed (int key)
+bool Screen::isKeyPressed(int key)
 {
-    return glfwGetKey (Screen::window, key) == GLFW_PRESS;
+    return glfwGetKey(Screen::window, key) == GLFW_PRESS;
 }
 
-float Screen::GetTime ()
+float Screen::GetTime()
 {
-    return glfwGetTime ();
+    return glfwGetTime();
 }
 
-GLFWwindow *Screen::GetWindow ()
+GLFWwindow *Screen::GetWindow()
 {
     return Screen::window;
 }
 
-GLFWglproc Screen::GetProcAddress ()
+GLFWglproc Screen::GetProcAddress()
 {
-    return reinterpret_cast<void (*) ()> (glfwGetProcAddress);
+    return reinterpret_cast<void (*)()>(glfwGetProcAddress);
 }
 
-int Screen::GetWidth ()
+int Screen::GetWidth()
 {
     return Screen::WIDTH;
 }
 
-int Screen::GetHeight ()
+int Screen::GetHeight()
 {
     return Screen::HEIGHT;
 }
 
-void Screen::SetMouseCallback (GLFWcursorposfun callback)
+void Screen::SetMouseCallback(GLFWcursorposfun callback)
 {
-    glfwSetCursorPosCallback (Screen::window, callback);
+    glfwSetCursorPosCallback(Screen::window, callback);
 }
 
-void Screen::SetSizeCallback (GLFWframebuffersizefun callback)
+void Screen::SetSizeCallback(GLFWframebuffersizefun callback)
 {
-    glfwSetFramebufferSizeCallback (Screen::window, callback);
+    glfwSetFramebufferSizeCallback(Screen::window, callback);
 
-    INFO ("Set framebuffer size callback");
+    INFO("Set framebuffer size callback");
 }
 
-void Screen::SetMouseCapture (bool isCaptured)
+void Screen::SetMouseCapture(bool isCaptured)
 {
     if (isCaptured)
     {
-        glfwSetInputMode (Screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+        glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
-        INFO ("Mouse captured");
+        INFO("Mouse captured");
     }
     else
     {
-        glfwSetInputMode (Screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-        INFO ("Mouse not captured");
+        glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        INFO("Mouse not captured");
     }
 }
 
-void Screen::SetClose ()
+void Screen::SetClose()
 {
-    glfwSetWindowShouldClose (Screen::window, GLFW_TRUE);
+    glfwSetWindowShouldClose(Screen::window, GLFW_TRUE);
 }
 
-void Screen::Terminate ()
+void Screen::Terminate()
 {
-    glfwTerminate ();
-    INFO ("Screen terminated");
+    glfwTerminate();
+    INFO("Screen terminated");
 }
 
-void Screen::SwapBuffers ()
+void Screen::SwapBuffers()
 {
-    glfwSwapBuffers (Screen::window);
+    glfwSwapBuffers(Screen::window);
 }
 
-void Screen::PollEvents ()
+void Screen::PollEvents()
 {
-    glfwPollEvents ();
+    glfwPollEvents();
 }
 
-void Screen::SetContextVersion (int major, int minor)
+void Screen::SetContextVersion(int major, int minor)
 {
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MAJOR, major);
-    glfwWindowHint (GLFW_CONTEXT_VERSION_MINOR, minor);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-    INFO ("Set context to OpenGL version: ", major, ".", minor);
+    INFO("Set context to OpenGL version: ", major, ".", minor);
 }
 
-void Screen::SetKeyCallback (GLFWkeyfun callback)
+void Screen::SetKeyCallback(GLFWkeyfun callback)
 {
-    glfwSetKeyCallback (Screen::window, callback);
+    glfwSetKeyCallback(Screen::window, callback);
 }
 
-void Screen::SetMousePosCallback (GLFWcursorposfun callback)
+void Screen::SetMousePosCallback(GLFWcursorposfun callback)
 {
-    glfwSetCursorPosCallback (Screen::GetWindow (), callback);
+    glfwSetCursorPosCallback(Screen::GetWindow(), callback);
 }
 
-void Screen::UseCoreProfile ()
+void Screen::UseCoreProfile()
 {
-    glfwWindowHint (GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    INFO ("Set OpenGL profile to core");
+    INFO("Set OpenGL profile to core");
 }
 
-void Screen::SetHintsApple ()
+void Screen::SetHintsApple()
 {
-    glfwWindowHint (GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
-void Screen::CreateWindow (int SCR_WIDTH, int SCR_HEIGHT, const char *title)
+void Screen::CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char *title)
 {
-    Screen::window =
-        glfwCreateWindow (SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
+    Screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
     if (Screen::window == NULL)
     {
-        ERROR ("Failed to create GLFW window");
-        Terminate ();
+        ERROR("Failed to create GLFW window");
+        Terminate();
     }
 }
 
-void Screen::MakeContextCurrent ()
+void Screen::MakeContextCurrent()
 {
-    glfwMakeContextCurrent (Screen::window);
+    glfwMakeContextCurrent(Screen::window);
 }
 
-void Screen::Framebuffer_size_callback (GLFWwindow *window, int width,
-                                        int height)
+void Screen::Framebuffer_size_callback(GLFWwindow *window, int width,
+                                       int height)
 {
-    glViewport (0, 0, width, height);
+    glViewport(0, 0, width, height);
     Screen::WIDTH = width;
     Screen::HEIGHT = height;
 
-    INFO ("Set viewport: ", width, "x", height);
+    INFO("Set viewport: ", width, "x", height);
 }

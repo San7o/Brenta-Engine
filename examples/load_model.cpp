@@ -25,10 +25,12 @@
  */
 
 /**
- * Just a simple window
+ * Load a model and render it on the screen.
  */
 
 #include <iostream>
+#include <filesystem>
+
 #include "engine.hpp"
 
 using namespace Brenta;
@@ -37,6 +39,8 @@ const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 const bool isMouseCaptured = false;
 
+#define ABS(...) std::filesystem::absolute(__VA_ARGS__)
+
 int main() {
 
     Engine engine = Engine::Builder()
@@ -44,12 +48,49 @@ int main() {
             .set_screen_width(SCR_WIDTH)
             .set_screen_height(SCR_HEIGHT)
             .set_screen_is_mouse_captured(isMouseCaptured)
+            .set_gl_blending(true)
+            .set_gl_cull_face(true)
+            .set_gl_multisample(true)
+            .set_gl_depth_test(true)
+            .set_log_level(Brenta::Types::LogLevel::DEBUG)
             .build();
+
+    /* Load the model */
+    Model ourModel(ABS("assets/models/backpack/backpack.obj"));
+
+    /* Load the shader */
+    Shader::New("default_shader",
+                GL_VERTEX_SHADER,
+                ABS("examples/default_shader.vs"),
+                GL_FRAGMENT_SHADER,
+                ABS("examples/default_shader.fs"));
 
     while(!Screen::isWindowClosed()) {
 
+        /* Input */
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
+
+        /* Clear */
+        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::Clear();
+
+        /* Draw */
+        Shader::Use("default_shader");
+
+        /* Make transformations */
+        glm::mat4 view = glm::mat4(1.0f); /* Camera position */
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f),
+                           (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
+
+        Shader::SetMat4("default_shader", "view", view);
+        Shader::SetMat4("default_shader", "projection", projection);
+        Shader::SetMat4("default_shader", "model", model);
+
+        /* Draw the model */
+        ourModel.Draw("default_shader");
 
         Screen::PollEvents();
         Screen::SwapBuffers();

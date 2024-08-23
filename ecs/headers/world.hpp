@@ -57,7 +57,7 @@ using namespace Brenta::Utils;
 class World
 {
   public:
-    World () = delete;
+    World() = delete;
 
     /**
      * @brief Initialize the world
@@ -65,42 +65,42 @@ class World
      * This method initializes the world, creating the entities, components,
      * and resources containers.
      */
-    static void Init ();
+    static void Init();
     /**
      * @brief Delete the world
      *
      * This method deletes the world, freeing the entities, components,
      * and resources containers, freeing the memory.
      */
-    static void Delete ();
+    static void Delete();
     /**
      * @brief Tick the world
      *
      * This method ticks the world, calling each system in the world.
      */
-    static void Tick ();
+    static void Tick();
 
     /**
      * @brief Get the entities container
      * @return The entities container
      */
-    static std::set<Entity> *getEntities ();
+    static std::set<Entity> *getEntities();
     /**
      * @brief Get the resources container
      * @return The resources container
      */
-    static UMap<std::type_index, Resource> *getResources ();
+    static UMap<std::type_index, Resource> *getResources();
     /**
      * @brief Get the components container
      * @return The components container
      */
-    static UMapVec<std::type_index, Component> *getComponents ();
+    static UMapVec<std::type_index, Component> *getComponents();
 
     /**
      * @brief Create a new entity
      * @return The new entity
      */
-    static Entity NewEntity ();
+    static Entity NewEntity();
 
     /**
      * @brief Get a pointer to a resource
@@ -116,23 +116,23 @@ class World
      * auto resource = World::GetResource<Shader>();
      * ```
      */
-    template <typename R> static R *GetResource ()
+    template <typename R> static R *GetResource()
     {
         if (!resources)
         {
-            ERROR ("Cannot get resource: world not initialized");
+            ERROR("Cannot get resource: world not initialized");
             return nullptr;
         }
 
-        if (!resources->count (std::type_index (typeid (R))))
+        if (!resources->count(std::type_index(typeid(R))))
         {
-            ERROR ("Resource not found: ", std::type_index (typeid (R)).name ());
+            ERROR("Resource not found: ", std::type_index(typeid(R)).name());
             return nullptr;
         }
 
-        auto ret = resources->at (std::type_index (typeid (R)));
+        auto ret = resources->at(std::type_index(typeid(R)));
         if (ret)
-            return static_cast<R *> (ret.get ());
+            return static_cast<R *>(ret.get());
         return nullptr;
     }
 
@@ -152,28 +152,28 @@ class World
      * ```
      */
     template <typename C>
-    static void AddComponent (Entity entity, C new_component)
+    static void AddComponent(Entity entity, C new_component)
     {
         if (!components)
         {
-            ERROR ("Cannot add component: world not initialized");
+            ERROR("Cannot add component: world not initialized");
             return;
         }
 
-        auto component = std::make_shared<C> (new_component);
+        auto component = std::make_shared<C>(new_component);
 
         component->entity = entity;
 
-        if (!components->count (std::type_index (typeid (C))))
+        if (!components->count(std::type_index(typeid(C))))
         {
-            components->insert ({std::type_index (typeid (C)), {component}});
+            components->insert({std::type_index(typeid(C)), {component}});
         }
         else
         {
-            components->at (std::type_index (typeid (C))).push_back (component);
+            components->at(std::type_index(typeid(C))).push_back(component);
         }
 
-        INFO ("Added component: ", std::type_index (typeid (C)).name ());
+        INFO("Added component: ", std::type_index(typeid(C)).name());
     }
 
     /**
@@ -186,17 +186,17 @@ class World
      * World::AddResource<Shader>({shader});
      * ```
      */
-    template <typename R> static void AddResource (R resource)
+    template <typename R> static void AddResource(R resource)
     {
         if (!resources)
         {
-            ERROR ("Cannot add resource: world not initialized");
+            ERROR("Cannot add resource: world not initialized");
             return;
         }
 
-        resources->insert (
-            {std::type_index (typeid (R)), std::make_shared<R> (resource)});
-        INFO ("Added Resource: ", std::type_index (typeid (R)).name ());
+        resources->insert(
+            {std::type_index(typeid(R)), std::make_shared<R>(resource)});
+        INFO("Added Resource: ", std::type_index(typeid(R)).name());
     }
 
     /**
@@ -212,7 +212,7 @@ class World
      * World::RemoveEntity(entity);
      * ```
      */
-    static void RemoveEntity (Entity entity);
+    static void RemoveEntity(Entity entity);
 
     /**
      * @brief Remove a resource
@@ -226,21 +226,21 @@ class World
      * World::RemoveResource<Shader>();
      * ```
      */
-    template<typename R> static void RemoveResource()
+    template <typename R> static void RemoveResource()
     {
         if (!resources)
         {
-            ERROR ("Cannot remove resource: world not initialized");
+            ERROR("Cannot remove resource: world not initialized");
             return;
         }
 
-        if (!resources->count (std::type_index (typeid (R))))
+        if (!resources->count(std::type_index(typeid(R))))
         {
-            ERROR ("Resource not found: ", std::type_index (typeid (R)).name ());
+            ERROR("Resource not found: ", std::type_index(typeid(R)).name());
             return;
         }
 
-        resources->erase(std::type_index (typeid (R)));
+        resources->erase(std::type_index(typeid(R)));
     }
 
     /**
@@ -259,26 +259,25 @@ class World
      * auto component = World::EntityToComponent<Position>(entity);
      * ```
      */
-    template <typename C> static C *EntityToComponent (Entity entity)
+    template <typename C> static C *EntityToComponent(Entity entity)
     {
         if (!components)
         {
-            ERROR ("Cannot get component: world not initialized");
+            ERROR("Cannot get component: world not initialized");
             return nullptr;
         }
 
-        if (!components->count (std::type_index (typeid (C))))
+        if (!components->count(std::type_index(typeid(C))))
         {
-            ERROR ("Component not found: ",
-                   std::type_index (typeid (C)).name ());
+            ERROR("Component not found: ", std::type_index(typeid(C)).name());
             return nullptr;
         }
 
-        for (auto component : components->at (std::type_index (typeid (C))))
+        for (auto component : components->at(std::type_index(typeid(C))))
         {
             if (component->entity == entity)
             {
-                return static_cast<C *> (component.get ());
+                return static_cast<C *>(component.get());
             }
         }
 
@@ -290,89 +289,87 @@ class World
      *
      * This method runs all the systems in the world.
      */
-    static void RunSystems ();
+    static void RunSystems();
 
   private:
     static SetPtr<Entity> entities;
-    static UMapPtr<std::type_index, Resource>     resources;
+    static UMapPtr<std::type_index, Resource> resources;
     static UMapVecPtr<std::type_index, Component> components;
 
     /* Iterate over all systems and run them */
     template <typename Tuple, std::size_t... Is>
-    static void for_each_impl (Tuple &&tuple, std::index_sequence<Is...>)
+    static void for_each_impl(Tuple &&tuple, std::index_sequence<Is...>)
     {
-        (..., process (std::get<Is> (std::forward<Tuple> (tuple))));
+        (..., process(std::get<Is>(std::forward<Tuple>(tuple))));
     }
-    template <typename Tuple> static void for_each (Tuple &&tuple)
+    template <typename Tuple> static void for_each(Tuple &&tuple)
     {
-        for_each_impl (
-            std::forward<Tuple> (tuple),
-            std::make_index_sequence<
-                std::tuple_size_v<std::remove_reference_t<Tuple>>>{});
+        for_each_impl(std::forward<Tuple>(tuple),
+                      std::make_index_sequence<
+                          std::tuple_size_v<std::remove_reference_t<Tuple>>>{});
     }
     template <typename... T>
-    static std::vector<ECS::Entity> QueryComponentsTuple (std::tuple<T...>)
+    static std::vector<ECS::Entity> QueryComponentsTuple(std::tuple<T...>)
     {
-        return QueryComponents<T...> ();
+        return QueryComponents<T...>();
     }
-    template <typename System> static void process (const System &system)
+    template <typename System> static void process(const System &system)
     {
         using Dependencies = typename System::dependencies;
-        std::vector<ECS::Entity> matches =
-            QueryComponentsTuple (Dependencies{});
-        system.run (matches);
+        std::vector<ECS::Entity> matches = QueryComponentsTuple(Dependencies{});
+        system.run(matches);
     }
 
     template <typename C, typename... Components, typename N = None>
-    static std::vector<Entity> QueryComponents ()
+    static std::vector<Entity> QueryComponents()
     {
         if (!World::components)
         {
-            ERROR ("Cannot query: world not initialized");
+            ERROR("Cannot query: world not initialized");
             return {};
         }
 
         std::vector<Entity> matched;
 
-        if (!components->count (std::type_index (typeid (C))))
+        if (!components->count(std::type_index(typeid(C))))
         {
             return matched;
         }
 
-        for (auto component : components->at (std::type_index (typeid (C))))
+        for (auto component : components->at(std::type_index(typeid(C))))
         {
-            matched.push_back (component->entity);
+            matched.push_back(component->entity);
         }
 
-        if (matched.empty ())
+        if (matched.empty())
             return matched;
         if (sizeof...(Components) == 0)
             return matched;
 
-        QueryComponentsRec<Components..., None> (&matched);
+        QueryComponentsRec<Components..., None>(&matched);
 
         return matched;
     }
 
     template <typename C, typename... Components>
-    static void QueryComponentsRec (std::vector<Entity> *entities)
+    static void QueryComponentsRec(std::vector<Entity> *entities)
     {
-        if (entities->empty ())
+        if (entities->empty())
             return;
         std::vector<Entity> matched;
 
-        if (!components->count (std::type_index (typeid (C))))
+        if (!components->count(std::type_index(typeid(C))))
         {
             *entities = matched;
             return;
         }
-        for (auto component : components->at (std::type_index (typeid (C))))
+        for (auto component : components->at(std::type_index(typeid(C))))
         {
-            if (std::find (entities->begin (), entities->end (),
-                           (int &) component->entity)
-                != entities->end ())
+            if (std::find(entities->begin(), entities->end(),
+                          (int &) component->entity)
+                != entities->end())
             {
-                matched.push_back (component->entity);
+                matched.push_back(component->entity);
             }
         }
         *entities = matched;
@@ -380,7 +377,7 @@ class World
         if (sizeof...(Components) == 0)
             return;
 
-        (QueryComponentsRec<Components> (entities), ...);
+        (QueryComponentsRec<Components>(entities), ...);
     }
 };
 

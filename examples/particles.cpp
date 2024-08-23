@@ -24,22 +24,16 @@
  *
  */
 
-#include "ecs.hpp"
 #include "engine.hpp"
-#include "game_ecs.hpp"
 
 #include <bitset>
 #include <filesystem>
 
 using namespace Brenta;
-using namespace Brenta::ECS;
 
 // Default resolution
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
-
-REGISTER_SYSTEMS(RendererSystem, DebugTextSystem, PointLightsSystem,
-                 DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 
 /* default camera */
 namespace Brenta
@@ -51,11 +45,7 @@ int main()
 {
     Engine engine = Engine::Builder()
                         .use_screen(true)
-                        .use_audio(true)
-                        .use_input(true)
                         .use_logger(true)
-                        .use_text(true)
-                        .use_ecs(true)
                         .set_screen_width(SCR_WIDTH)
                         .set_screen_height(SCR_HEIGHT)
                         .set_screen_is_mouse_captured(false)
@@ -64,8 +54,6 @@ int main()
                         .set_screen_title("Game")
                         .set_log_level(Brenta::Types::LogLevel::INFO)
                         .set_log_file("./logs/log.txt")
-                        .set_text_font("arial.ttf")
-                        .set_text_size(24)
                         .set_gl_blending(true)
                         .set_gl_cull_face(true)
                         .set_gl_multisample(true)
@@ -82,28 +70,10 @@ int main()
                  .set_zoom(45.0f)
                  .build();
 
-    InitPlayerEntity();
-    // InitCubeEntity();
-    InitFloorEntity();
-    InitDirectionalLightEntity();
-    InitPointLightEntity();
-    InitSphereEntity();
-    InitRobotEntity();
-
-    InitToggleWireframeCallback();
-    InitCloseWindowCallback();
-    InitCameraMouseCallback();
-    InitPlayGuitarCallback();
-
-    World::AddResource<WireframeResource>(WireframeResource(false));
-
-    Audio::LoadAudio("guitar",
-                     std::filesystem::absolute("assets/audio/guitar.wav"));
-
     ParticleEmitter emitter =
         ParticleEmitter::Builder()
             .set_camera(&camera)
-            .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+            .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
             .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
             .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
             .set_starting_timeToLive(0.5f)
@@ -128,7 +98,6 @@ int main()
         emitter.renderParticles();
 
         Time::Update(Screen::GetTime());
-        World::Tick();
 
         Screen::PollEvents();
         Screen::SwapBuffers();

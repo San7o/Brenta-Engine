@@ -35,102 +35,102 @@
 using namespace Brenta;
 using namespace Brenta::Utils;
 
-void GL::LoadOpenGL (bool gl_blending, bool gl_cull_face, bool gl_multisample,
-                     bool gl_depth_test)
+void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
+                    bool gl_depth_test)
 {
-    GLADloadproc loadproc = (GLADloadproc) Screen::GetProcAddress ();
-    if (!gladLoadGLLoader (loadproc))
+    GLADloadproc loadproc = (GLADloadproc) Screen::GetProcAddress();
+    if (!gladLoadGLLoader(loadproc))
     {
-        ERROR ("Failed to initialize GLAD");
-        exit (-1);
+        ERROR("Failed to initialize GLAD");
+        exit(-1);
     }
 
-    int SCR_WIDTH = Screen::GetWidth ();
-    int SCR_HEIGHT = Screen::GetHeight ();
+    int SCR_WIDTH = Screen::GetWidth();
+    int SCR_HEIGHT = Screen::GetHeight();
 
-    glViewport (0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
-    glEnable (GL_DEPTH_TEST);                 /* Enable depth testing */
-    INFO ("Enabled GL_DEPTH_TEST");
+    glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
+    glEnable(GL_DEPTH_TEST);                 /* Enable depth testing */
+    INFO("Enabled GL_DEPTH_TEST");
 
     /* Enable blending for transparency */
     if (gl_blending)
     {
-        glEnable (GL_BLEND);
-        glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        INFO ("Enabled GL_BLEND (transparency)");
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        INFO("Enabled GL_BLEND (transparency)");
     }
 
     /* Enable face culling, draw only visible triangles
      * based on their orientation (defined clockwise or counterclockwise) */
     if (gl_cull_face)
     {
-        glEnable (GL_CULL_FACE);
-        INFO ("Enabled GL_CULL_FACE (draw only visible triangles)");
+        glEnable(GL_CULL_FACE);
+        INFO("Enabled GL_CULL_FACE (draw only visible triangles)");
     }
 
     /* Enable multisampling
      * Only works for a multisample buffer. */
     if (gl_multisample)
     {
-        glEnable (GL_MULTISAMPLE);
-        INFO ("Enabled GL_MULTISAMPLE");
+        glEnable(GL_MULTISAMPLE);
+        INFO("Enabled GL_MULTISAMPLE");
     }
 
-    GLenum errcode = GL::glCheckError ();
+    GLenum errcode = GL::glCheckError();
     if (!errcode)
-        INFO ("OpenGl loaded");
+        INFO("OpenGl loaded");
 }
 
-void GL::SetPoligonMode (GLboolean enable)
+void GL::SetPoligonMode(GLboolean enable)
 {
     if (enable)
     {
-        glPolygonMode (GL_FRONT_AND_BACK, GL_LINE);
-        INFO ("Enabled GL_POLYGON_MODE (wireframe)");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        INFO("Enabled GL_POLYGON_MODE (wireframe)");
     }
     else
     {
-        glPolygonMode (GL_FRONT_AND_BACK, GL_FILL);
-        INFO ("Disabled GL_POLYGON_MODE (fill)");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        INFO("Disabled GL_POLYGON_MODE (fill)");
     }
 }
 
-void GL::SetViewport (int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
+void GL::SetViewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
 {
-    glViewport (0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
-    INFO ("Set viewport: y = ", SCR_WIDTH, "x = ", SCR_HEIGHT);
+    glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
+    INFO("Set viewport: y = ", SCR_WIDTH, "x = ", SCR_HEIGHT);
 }
 
-void GL::SetColor (float r, float g, float b, float a)
+void GL::SetColor(float r, float g, float b, float a)
 {
-    glClearColor (r, g, b, a); /* Set clear color */
+    glClearColor(r, g, b, a); /* Set clear color */
 }
 
-void GL::DrawArrays (GLenum mode, int first, int count)
+void GL::DrawArrays(GLenum mode, int first, int count)
 {
-    glDrawArrays (mode, first, count);
+    glDrawArrays(mode, first, count);
 }
 
-void GL::DrawElements (GLenum mode, int count, GLenum type, const void *indices)
+void GL::DrawElements(GLenum mode, int count, GLenum type, const void *indices)
 {
-    glDrawElements (mode, count, type, indices);
+    glDrawElements(mode, count, type, indices);
 }
 
-void GL::Clear ()
+void GL::Clear()
 {
     /* Clear color and depth buffer */
-    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void GL::BindVertexArray (unsigned int n)
+void GL::BindVertexArray(unsigned int n)
 {
-    glBindVertexArray (n);
+    glBindVertexArray(n);
 }
 
-GLenum GL::glCheckError_ (const char *file, int line)
+GLenum GL::glCheckError_(const char *file, int line)
 {
     GLenum errorCode;
-    while ((errorCode = glGetError ()) != GL_NO_ERROR)
+    while ((errorCode = glGetError()) != GL_NO_ERROR)
     {
         std::string error;
         switch (errorCode)
@@ -158,9 +158,8 @@ GLenum GL::glCheckError_ (const char *file, int line)
             break;
         }
 
-        error +=
-            " | " + std::string (file) + " (" + std::to_string (line) + ")";
-        ERROR (error);
+        error += " | " + std::string(file) + " (" + std::to_string(line) + ")";
+        ERROR(error);
     }
     return errorCode;
 }
