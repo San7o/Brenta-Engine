@@ -28,14 +28,51 @@
 namespace ECS
 {
 
+/**
+ * @brief Time subsystem
+ *
+ * This subsystem is used to manage the time of the engine. It is used to
+ * get the current time, the time since the last frame and the frames per
+ * second of the program.
+ */
 class Time
 {
 public:
     Time() = delete;
 
+    /**
+     * @brief Get the current time
+     *
+     * This function returns the current time in seconds since the start of the
+     * program.
+     *
+     * @return The current time in seconds
+     */
     static float GetCurrentTime();
+    /**
+     * @brief Get the time since the last frame
+     *
+     * This function returns the time since the last update in seconds.
+     *
+     * @return The time since the last frame in seconds
+     */
     static float GetDeltaTime();
+    /**
+     * @brief Get the frames per second
+     *
+     * This function returns the frames per second of the program.
+     *
+     * @return The frames per second
+     */
     static float GetFPS();
+    /**
+     * @brief Update the time
+     *
+     * This function updates the time of the program. It's intended
+     * use is to be called at each tick of the game loop.
+     *
+     * @param newTime The new time of the program
+     */
     static void  Update(float newTime);
 
 private:

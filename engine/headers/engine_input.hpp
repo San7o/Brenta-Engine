@@ -41,20 +41,88 @@ typedef std::string MouseCallbackName;
 
 } // namespace Types
 
+/**
+ * @brief Input subsystem
+ *
+ * This subsystem is used to manage the input system of the engine. It is used to
+ * add and remove callbacks for keyboard and mouse events. You can define
+ * your own callbacks and register them with the input subsystem.
+ */
 class Input
 {
 public:
     Input() = delete;
+    /**
+     * @brief Initialize the input system
+     *
+     * This function initializes the input system. It should be called before
+     * any other input function is called.
+     */
     static void Init();
 
-    /* Keys are defined in GLFW */
-    /* https://www.glfw.org/docs/3.0/group__keys.html */
+    /**
+     * @brief Add a keyboard callback
+     *
+     * This function adds a callback to a key press event. The callback is a
+     * function that takes no arguments and returns void. The key enum is defined
+     * in GLFW. When the key is pressed, the callback is called.
+     *
+     * @param key The key to add the callback to
+     * @param callback The callback function
+     */
     static void AddKeyboardCallback(int key, std::function<void()> callback);
+    /**
+     * @brief Remove a keyboard callback
+     *
+     * This function removes a callback from a key press event. The key enum is
+     * defined in GLFW. When the key is pressed, the callback is removed.
+     *
+     * @param key The key to remove the callback from
+     */
     static void RemoveKeyboardCallback(int key);
+    /**
+     * @brief Keyboard callback
+     *
+     * This function is called when a key is pressed. It calls the callback
+     * function associated with the key.
+     *
+     * @param window The window that received the event
+     * @param key The key that was pressed or released
+     * @param scancode The system-specific scancode of the key
+     * @param action The key action
+     * @param mods Bit field describing which modifier keys were held down
+     */
     static void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
+    /**
+     * @brief Add a mouse position callback
+     *
+     * This function adds a callback to a mouse position event. The callback is a
+     * function that takes two doubles and returns void. The two doubles are the
+     * x and y position of the mouse. When the mouse is moved, the callback is called.
+     *
+     * @param name The name of the callback
+     * @param callback The callback function
+     */
     static void AddMousePosCallback(Types::MouseCallbackName name, std::function<void(double, double)> callback);
+    /**
+     * @brief Remove a mouse position callback
+     *
+     * This function removes a callback from a mouse position event. When the mouse
+     * is moved, the callback is removed.
+     *
+     * @param callback_name The name of the callback
+     */
     static void RemoveMousePosCallback(Types::MouseCallbackName callback_name);
+    /**
+     * @brief Mouse position callback
+     *
+     * This function is called when the mouse is moved. It calls the callback
+     * function associated with the mouse position.
+     *
+     * @param window The window that received the event
+     * @param xpos The new x-coordinate, in screen coordinates, of the cursor
+     * @param ypos The new y-coordinate, in screen coordinates, of the cursor
+     */
     static void MousePosCallback(GLFWwindow* window, double xpos, double ypos);
 private:
     static std::unordered_map<int, std::function<void()>> keyboardCallbacks;

@@ -31,9 +31,9 @@
 
 using namespace ECS;
 
-void GL::LoadOpenGL()
+void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
+                    bool gl_depth_test)
 {
-
     GLADloadproc loadproc = (GLADloadproc)Screen::GetProcAddress();
     if (!gladLoadGLLoader(loadproc))
     {
@@ -50,26 +50,29 @@ void GL::LoadOpenGL()
 
 
     /* Enable blending for transparency */
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
-    Logger::Log(Types::LogLevel::INFO, "Enabled GL_BLEND (transparency)");
-
+    if (gl_blending)
+    {
+        glEnable(GL_BLEND);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); 
+        Logger::Log(Types::LogLevel::INFO, "Enabled GL_BLEND (transparency)");
+    }
 
     /* Enable face culling, draw only visible triangles
      * based on their orientation (defined clockwise or counterclockwise) */
-    glEnable(GL_CULL_FACE);
-    Logger::Log(Types::LogLevel::INFO,
-                    "Enabled GL_CULL_FACE (draw only visible triangles)");
-
+    if (gl_cull_face)
+    {
+        glEnable(GL_CULL_FACE);
+        Logger::Log(Types::LogLevel::INFO,
+                        "Enabled GL_CULL_FACE (draw only visible triangles)");
+    }
 
     /* Enable multisampling
      * Only works for a multisample buffer. */
-    glEnable(GL_MULTISAMPLE);
-    Logger::Log(Types::LogLevel::INFO, "Enabled GL_MULTISAMPLE");
-
-    /* Init text class */
-    Text::Init();
-    Text::Load("arial.ttf", 48);
+    if (gl_multisample)
+    {
+        glEnable(GL_MULTISAMPLE);
+        Logger::Log(Types::LogLevel::INFO, "Enabled GL_MULTISAMPLE");
+    }
 
     GLenum errcode = GL::glCheckError();
     if (!errcode) Logger::Log(Types::LogLevel::INFO, "OpenGl loaded");

@@ -42,20 +42,60 @@ namespace ECS
 namespace Types
 {
 
+/**
+ * @brief Vertex Array Object (VAO)
+ *
+ * Wrapper for OpenGL Vertex Array Objects
+ */
 class VAO
 {
 public:
+    /**
+     * @brief Vertex Array Object (VAO)
+     */
     unsigned int vao;
 
+    /**
+     * @brief Empty Constructor
+     *
+     * Does nothing
+     */
     VAO() {}
+    /**
+     * @brief Init Constructor
+     *
+     * Creates a new VAO
+     */
     void Init();
     
+    /**
+     * @brief Get the VAO
+     * @return The VAO
+     */
     unsigned int GetVAO();
+    /**
+     * @brief Bind the VAO
+     */
     void Bind();
+    /**
+     * @brief Unbind the VAO
+     */
     void Unbind();
+    /**
+     * @brief Delete the VAO
+     */
     void Delete();
-
-    /* Specifies the location and data format of the vertex attributes. */
+    /**
+     * @brief Set the vertex data
+     *
+     * @param buffer The buffer object
+     * @param index The index of the vertex attribute
+     * @param size The number of components per attribute
+     * @param type The data type of each component
+     * @param normalized Whether the data should be normalized
+     * @param stride The byte offset between consecutive generic vertex attributes
+     * @param pointer The offset of the first component of the first generic vertex attribute in the array
+     */
     void SetVertexData(Buffer buffer, unsigned int index, GLint size, GLenum type,
                     GLboolean normalized, GLsizei stride,
                     const void* pointer);

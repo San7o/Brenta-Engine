@@ -31,11 +31,6 @@
 
 using namespace ECS;
 
-/* default camera */
-namespace ECS {
-    Camera camera = Camera();
-}
-
 Camera::Camera(Enums::CameraType camera_type,
                Enums::ProjectionType projection_type,
                glm::vec3 position,

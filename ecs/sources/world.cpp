@@ -60,7 +60,6 @@ void World::Delete()
 
 void World::Tick()
 {
-    Time::Update(Screen::GetTime());
     World::RunSystems();
 }
 

@@ -23,14 +23,6 @@
  *
  */ 
 
-/*
- * This file contains the definition of the Component type.
- *
- * A Component is a piece of data that is attached to an Entity.
- * Components are used to store data that is associated with a game object.
- * For example, a Position component could store the position of a game object.
- */
-
 #pragma once
 
 #include "entity.hpp"
@@ -38,8 +30,15 @@
 namespace ECS {
 
 /**
- * Example Usage:
- * 
+ * @brief Component class
+ *
+ * This class is used to create components. Components are used to store
+ * data that is associated with an entity. For example, a Position
+ * component could store the position of the entity.
+ *
+ * Example creating a component:
+ *
+ * ```
  * struct TransformComponent : Component {
  *   glm::vec3 position;
  *   glm::vec3 rotation;
@@ -48,6 +47,7 @@ namespace ECS {
  *   TransformComponent() : ... 
  *   TransformComponent(glm::vec3 position, ...
  * };
+ * ```
  *
  * You need to provide a default constructor,
  * any other constructor is optional.

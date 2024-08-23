@@ -23,17 +23,31 @@
  *
  */ 
 
-/*
- * This file contains the definition of the Resource type.
- *
- * A Resource is a piece of global data that is used by the game.
- * It is saved in the World and can be accessed by any System.
- */
-
 #pragma once
 
 namespace ECS {
 
+/**
+ * @brief Resource type
+ *
+ * This type is used to identify resources in the game world.
+ * Resources are pieces of global data that can be accessed by any System.
+ *
+ * Example creating a resource:
+ *
+ * ```
+ * struct WireframeResource : Resource {
+ *     bool enabled;
+ *     WireframeResource(bool e) : enabled(e) {}
+ * };
+ * ```
+ *
+ * Example registering a resource:
+ * ```
+ * World::AddResource<WireframeResource>(WireframeResource(false));
+ * ```
+ *
+ */
 struct Resource {};
 
 } // namespace ECS

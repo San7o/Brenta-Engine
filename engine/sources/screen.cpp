@@ -38,7 +38,8 @@ int Screen::WIDTH;
 int Screen::HEIGHT;
 
 void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
-                  bool isMouseCaptured, const char* title)
+                  bool isMouseCaptured, const char* title,
+                  bool msaa, bool vsync)
 {
     Screen::WIDTH = SCR_WIDTH;
     Screen::HEIGHT = SCR_HEIGHT;
@@ -52,11 +53,17 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
     SetContextVersion(3, 3); /* OpenGL 3.3 */
     UseCoreProfile();
 
-    glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
-    Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
+    if (msaa)
+    {
+        glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+        Logger::Log(Types::LogLevel::INFO, "Enabled MSAA");
+    }
 
-    glfwSwapInterval(0); /* Disable VSync */
-    Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
+    if (!vsync)
+    {
+        glfwSwapInterval(0); /* Disable VSync */
+        Logger::Log(Types::LogLevel::INFO, "Disabled VSync");
+    }
 
 #ifdef __APPLE__
     SetHintsApple();
@@ -68,9 +75,6 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT,
 
     /* Set the callback for resizing the window */
     Screen::SetSizeCallback(Framebuffer_size_callback);
-
-    Input::Init();
-    Audio::Init();
 }
 
 bool Screen::isWindowClosed()
@@ -140,7 +144,6 @@ void Screen::SetClose()
 void Screen::Terminate()
 {
     glfwTerminate();
-    Audio::Destroy();
     Logger::Log(Types::LogLevel::INFO, "Screen terminated");
 }
 

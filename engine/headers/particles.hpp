@@ -40,37 +40,100 @@
 namespace ECS
 {
 
+/**
+ * @brief ParticleEmitter class
+ *
+ * This class is used to define a particle emitter,
+ * update and render its particles. This class provides
+ * a builder pattern to create a ParticleEmitter object.
+ * The particles ban be updated and rendered using the
+ * updateParticles and renderParticles methods.
+ */
 class ParticleEmitter
 {
 public:
-    /* Starting position, velocity and time to live
-     * of a new particle */
+    /**
+     * @brief Starting position of a new particle
+     */
     glm::vec3 starting_position;
+    /**
+     * @brief Starting velocity of a new particle
+     */
     glm::vec3 starting_velocity;
-    /* Determines how spread apart are the particles */
+    /**
+     * @brief Starting spread of a new particle
+     */
     glm::vec3 starting_spread;
-    /* Time to live of a new particle mesured in seconds */
+    /**
+     * @brief Time to live of a new particle
+     */
     float starting_timeToLive;
-    /* This number must be less then MAX_PARTICLES */
+    /**
+     * @brief Number of particles
+     */
     int num_particles;
-    /* The rate at which particles are spawned */
+    /**
+     * @brief Spawn rate of particles
+     */
     float spawn_rate;
-    /* The scale in size of the particles */
+    /**
+     * @brief Scale of particles
+     */
     float scale;
-    /* Framebuffer objects, used to save the state
-     * after the update phase */
-    //GLuint fbo[2];
+    /**
+     * @brief Feddback buffer objects
+     *
+     * These are used to save the new state of updated
+     * particles in the updateParticles method.
+     */
     Types::Buffer fbo[2];
-    /* Used to mark the current fbo for reading */
+    /**
+     * @brief Current fbo index
+     */
     int current;
+    /**
+     * @brief Atlas texture
+     */
     int atlas;
+    /**
+     * @brief Atlas width
+     */
     int atlas_width;
+    /**
+     * @brief Atlas height
+     */
     int atlas_height;
-    /* Index of the texture atlas to draw */
+    /**
+     * @brief Atlas index
+     */
     int atlas_index;
+    /**
+     * @brief Vertex array object
+     */
     Types::VAO vao;
 
+    /**
+     * @brief Empty constructor
+     *
+     * Sets default values
+     */
     ParticleEmitter();
+    /**
+     * @brief Construct a new ParticleEmitter object
+     *
+     * @param starting_position Starting position of a new particle
+     * @param starting_velocity Starting velocity of a new particle
+     * @param starting_spread Starting spread of a new particle
+     * @param starting_timeToLive Time to live of a new particle
+     * @param num_particles Number of particles
+     * @param spawn_rate Spawn rate of particles
+     * @param scale Scale of particles
+     * @param atlas_path Atlas texture path
+     * @param atlas_width Atlas width
+     * @param atlas_height Atlas height
+     * @param atlas_index Atlas index
+     * @param camera Camera
+     */
     ParticleEmitter(glm::vec3 starting_position,
                     glm::vec3 starting_velocity,
                     glm::vec3 starting_spread,
@@ -83,17 +146,25 @@ public:
                     int atlas_height,
                     int atlas_index,
                     Camera* camera);
+    /**
+     * @brief Destroy the ParticleEmitter object
+     */
     ~ParticleEmitter();
     
+    /**
+     * @brief The builder pattern for ParticleEmitter
+     */
     class Builder;
 
-    /* Builder pattern */
-
     /**
-     * Update particles using Transform Feedback
+     * @brief Update the particles
+     *
+     * @param deltaTime Time passed since last frame
      */
     void updateParticles(float deltaTime);
-
+    /**
+     * @brief Render the particles
+     */
     void renderParticles();
 
 private:
@@ -102,7 +173,7 @@ private:
 };
 
 /**
- * Builder pattern for ParticleEmitter
+ * @brief Builder pattern for ParticleEmitter
  */
 class ParticleEmitter::Builder
 {

@@ -40,18 +40,73 @@
 namespace ECS
 {
 
+/**
+ * @brief Model class
+ *
+ * This class is used to load a model from a file and draw it
+ */
 class Model
 {
 public:
+    /**
+     * @brief Texture wrapping mode
+     *
+     * Check Mesh for more information
+     */
     GLint wrapping;
+    /**
+     * @brief Texture filtering mode
+     *
+     * Check Mesh for more information
+     */
     GLint filtering_min;
+    /**
+     * @brief Texture filtering mode
+     *
+     * Check Mesh for more information
+     */
     GLint filtering_mag;
+    /**
+     * @brief If the texture has a mipmap
+     *
+     * Check Mesh for more information
+     */
     GLboolean hasMipmap;
+    /**
+     * @brief Mipmap filtering mode
+     *
+     * Check Mesh for more information
+     */
     GLint mipmap_min;
+    /**
+     * @brief Mipmap filtering mode
+     *
+     * Check Mesh for more information
+     */
     GLint mipmap_mag;
+    /**
+     * @brief If the texture should be flipped
+     */
     bool flip;
 
+    /**
+     * @brief Empty constructor
+     *
+     * Does nothing
+     */
     Model() {}
+    /**
+     * @brief Construct a new Model object
+     *
+     * @param path Path to the model
+     * @param wrapping Texture wrapping mode
+     * @param filtering_min Texture filtering mode
+     * @param filtering_mag Texture filtering mode
+     * @param hasMipmap If the texture has a mipmap
+     * @param mipmap_min Mipmap filtering mode
+     * @param mipmap_mag Mipmap filtering mode
+     * @param flip If the texture should be flipped
+     */
     Model(std::string const& path, GLint wrapping = GL_REPEAT,
                     GLint filtering_min = GL_NEAREST,
                     GLint filtering_mag = GL_LINEAR,
@@ -60,8 +115,16 @@ public:
                     GLint mipmap_mag = GL_LINEAR,
                     bool flip = true);
 
+    /**
+     * @brief Builder class for Model
+     */
     class Builder;
 
+    /**
+     * @brief Draw the model
+     *
+     * @param shader Shader to use
+     */
     void Draw(Types::ShaderName shader);
 private:
     // model data
@@ -76,6 +139,9 @@ private:
             (aiMaterial* mat, aiTextureType type, std::string typeName);
 };
 
+/**
+ * @brief Builder class for Model
+ */
 class Model::Builder
 {
 private:

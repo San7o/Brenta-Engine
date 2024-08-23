@@ -20,14 +20,35 @@ REGISTER_SYSTEMS(
     CollisionsSystem
 );
 
+/* default camera */
+namespace ECS {
+    Camera camera = Camera();
+}
+
 int main() {
 
-    Logger::Init();                              /* defauls to ./logs/log.txt */
-    Logger::SetLogLevel(Types::LogLevel::DEBUG); /* default = WARNING */
-
-    Screen::Init(SCR_WIDTH, SCR_HEIGHT);
-    GL::LoadOpenGL();
-    World::Init();
+    Engine engine = Engine::Builder()
+        .use_screen(true)
+        .use_audio(true)
+        .use_input(true)
+        .use_logger(true)
+        .use_text(true)
+        .use_ecs(true)
+        .set_screen_width(SCR_WIDTH)
+        .set_screen_height(SCR_HEIGHT)
+        .set_screen_is_mouse_captured(false)
+        .set_screen_msaa(true)
+        .set_screen_vsync(true)
+        .set_screen_title("Game")
+        .set_log_level(Types::LogLevel::INFO)
+        .set_log_file("./logs/log.txt")
+        .set_text_font("arial.ttf")
+        .set_text_size(24)
+        .set_gl_blending(true)
+        .set_gl_cull_face(true)
+        .set_gl_multisample(true)
+        .set_gl_depth_test(true)
+        .build();
 
     camera = Camera::Builder()
         .set_camera_type(Enums::CameraType::SPHERICAL)
@@ -57,7 +78,6 @@ int main() {
     Audio::LoadAudio("guitar",
              std::filesystem::absolute("assets/audio/guitar.wav"));
 
-    /* Nice builder patterns */
     ParticleEmitter emitter = ParticleEmitter::Builder()
         .set_camera(&camera)
         .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
@@ -84,15 +104,13 @@ int main() {
         emitter.updateParticles(Time::GetDeltaTime());
         emitter.renderParticles();
 
+        Time::Update(Screen::GetTime());
         World::Tick();
 
         Screen::PollEvents();
         Screen::SwapBuffers();
     }
     
-    World::Delete();
-    Screen::Terminate();
-    Logger::Close();
     return 0;
 }
 

@@ -37,22 +37,76 @@ namespace ECS
 namespace Types
 {
 
+/**
+ * @brief Translation util class
+ *
+ * This class is used to store the view, projection, and model matrices
+ * of an object. The matrices can be set using the setView, setProjection,
+ * and setModel methods.
+ */
 class Translation
 {
 public:
-    glm::mat4 view;       /* Camera */
-    glm::mat4 projection; /* Based on perspective */
-    glm::mat4 model;      /* Object position */
+    /**
+     * @brief Camera view matrix
+     */
+    glm::mat4 view;
+    /**
+     * @brief Camera projection matrix
+     */
+    glm::mat4 projection;
+    /**
+     * @brief Object position matrix
+     */
+    glm::mat4 model;
 
+    /**
+     * @brief Translation constructor
+     *
+     * This constructor initializes the view, projection, and model
+     * matrices to the identity matrix.
+     */
     Translation();
 
+    /**
+     * @brief Set the view matrix
+     * @param view The view matrix
+     */
     void setView(glm::mat4 view);
+    /**
+     * @brief Set the projection matrix
+     * @param projection The projection matrix
+     */
     void setProjection(glm::mat4 projection);
+    /**
+     * @brief Set the model matrix
+     * @param model The model matrix
+     */
     void setProjection(float fov, float near, float far);
+    /**
+     * @brief Set the model matrix
+     * @param model The model matrix
+     */
     void setModel(glm::mat4 model);
+    /**
+     * @brief Translate the object
+     * @param translation The translation vector
+     */
     void translate(glm::vec3 translation);
+    /**
+     * @brief Rotate the object
+     * @param rotation The rotation vector
+     */
     void rotate(glm::vec3 rotation);
+    /**
+     * @brief Scale the object
+     * @param scale The scale factor
+     */
     void scale(float scale);
+    /**
+     * @brief Set the shader
+     * @param shader_name The shader name
+     */
     void setShader(Types::ShaderName shader_name);
 };
 

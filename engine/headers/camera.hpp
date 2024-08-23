@@ -100,7 +100,8 @@ enum ProjectionType
  * This class represents a camera in the 3D world. It is used to
  * define the position, orientation and projection of the camera.
  * The class provides a Builder pattern to create a camera object,
- * and a default global camera called "camera".
+ * and it export a default global camera called "camera" that
+ * needs to be defined somewhere in the ECS namespace.
  *
  * ## Camera type
  * The camera can be of two types: AIRCRAFT or SPHERICAL. The
@@ -113,11 +114,6 @@ enum ProjectionType
  * ## Projection
  * The camera can have two types of projection: PERSPECTIVE or
  * ORTHOGRAPHIC.
- *
- * Each time the euler angles or the spherical coordinates are
- * updated, the camera needs to update the front, up and right
- * vectors by calling the updateCameraEuler() or SphericalToCartesian()
- * functions.
  */
 class Camera
 {

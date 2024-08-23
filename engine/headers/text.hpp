@@ -43,6 +43,14 @@ namespace ECS
 namespace Types
 {
 
+/**
+ * @brief Character struct
+ *
+ * This struct is used to store the information of a character
+ * that is used to render text on the screen. The struct contains
+ * the texture ID, the size of the glyph, the bearing, and the
+ * advance of the glyph.
+ */
 struct Character {
     unsigned int TextureID;  // ID handle of the glyph texture
     glm::ivec2   Size;       // Size of glyph
@@ -52,16 +60,62 @@ struct Character {
 
 } // namespace Types
 
+/**
+ * @brief Text subsystem
+ *
+ * This class is used to render text on the screen. The text
+ * is rendered using the FreeType library to load the font and
+ * the characters, and OpenGL to render the text on the screen.
+ */
 class Text
 {
 public:
+    /**
+     * @brief Map of characters
+     *
+     * Map an ascii character to a Character struct
+     */
     static std::map<char, Types::Character> characters;
 
     Text() = delete;
-    /* Initialize only after OpenGL context is created */
+    /**
+     * @brief Initialize the text subsystem
+     *
+     * This method initializes the text subsystem by loading
+     * the shader, the VAO, and the VBO. The shader is loaded
+     * from the file text.vs and text.fs, and the VAO and VBO
+     * are created using the data from the characters map.
+     * 
+     * Note: opengl context must be created before calling this
+     * method.
+     */
     static void Init();
 
+    /**
+     * @brief Load a font
+     *
+     * This method loads a font from the given file and size.
+     * The font is loaded using the FreeType library, and the
+     * characters are stored in the characters map.
+     *
+     * @param font_name Name of the font file
+     * @param fontSize Size of the font
+     */
     static void Load(std::string font_name, unsigned int fontSize);
+    /**
+     * @brief Render text
+     *
+     * This method renders the given text on the screen at the
+     * given position, with the given scale and color. The text
+     * is rendered using the shader, VAO, and VBO that are
+     * initialized in the Init method.
+     *
+     * @param text Text to render
+     * @param x X position of the text
+     * @param y Y position of the text
+     * @param scale Scale of the text
+     * @param color Color of the text
+     */
     static void RenderText(std::string text, float x,
                     float y, float scale, glm::vec3 color);
 private:

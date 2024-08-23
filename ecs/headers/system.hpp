@@ -39,11 +39,22 @@
 namespace ECS {
 
 /**
- * Example System usage:
+ * @brief System type
  *
- *   struct SystemA : System<ComponentA, ComponentB> {
- *     void run (std::vector<Entity> e) const override { std::cout << "A\n"; }
- *   };
+ * This type is used to identify systems in the game world. Systems are
+ * functions that process game objects and are called at any tick by the World.
+ *
+ * Systems can query an entity via It's components specified in the template
+ * arguments. The system will be called each tick with a list of entities
+ * that have all the components specified.
+ *
+ * Example of creating a system:
+ * 
+ * ```
+ * struct SystemA : System<ComponentA, ComponentB> {
+ *   void run (std::vector<Entity> e) const override { std::cout << "A\n"; }
+ * };
+ * ```
  *
  * If no components are needed, use System<None>.
  */
@@ -53,6 +64,19 @@ struct System {
     virtual void run(std::vector<Entity> e) const {};
 };
 
+/**
+ * @brief Registered Systems Type
+ *
+ * This struct is used as a type to register systems in the World.
+ * Use the REGISTER_SYSTEMS(...) macro to register systems, this
+ * will create an instance of Registeres Systems with the systems
+ * specified. This is used to call the systems in the World.
+ *
+ * Example:
+ * ```
+ * REGISTERED_SYSTEMS(SystemA, SystemB);
+ * ```
+ */
 template<typename... T>
 struct RegisteredSystems {
     using systems = std::tuple<T...>;

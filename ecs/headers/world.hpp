@@ -49,22 +49,76 @@ namespace ECS
 
 using namespace Types;
 
+/**
+ * @brief World class
+ *
+ * This class is a singleton that contains all the entities, components and
+ * systems in the game world, provides acces to them through queries and is
+ * responsible for updating the game world.
+ */
 class World
 {
 public:
 
 World() = delete;
 
+/**
+ * @brief Initialize the world
+ *
+ * This method initializes the world, creating the entities, components,
+ * and resources containers.
+ */
 static void Init();
+/**
+ * @brief Delete the world
+ *
+ * This method deletes the world, freeing the entities, components,
+ * and resources containers, freeing the memory.
+ */
 static void Delete();
+/**
+ * @brief Tick the world
+ *
+ * This method ticks the world, calling each system in the world.
+ */
 static void Tick();
 
+/**
+ * @brief Get the entities container
+ * @return The entities container
+ */
 static std::set<Entity>*                    getEntities();
+/**
+ * @brief Get the resources container
+ * @return The resources container
+ */
 static UMap<std::type_index, Resource>*     getResources();
+/**
+ * @brief Get the components container
+ * @return The components container
+ */
 static UMapVec<std::type_index, Component>* getComponents();
 
+/**
+ * @brief Create a new entity
+ * @return The new entity
+ */
 static Entity NewEntity();
 
+/**
+ * @brief Get a pointer to a resource
+ *
+ * This method returns a pointer to a resource of the specified type.
+ * If the resource is not found, it returns nullptr.
+ *
+ * @tparam R The type of the resource
+ * @return A pointer to the resource
+ *
+ * Example:
+ * ```
+ * auto resource = World::GetResource<Shader>();
+ * ```
+ */
 template <typename R>
 static R* GetResource()
 {
@@ -79,6 +133,21 @@ static R* GetResource()
     return nullptr;
 }
 
+/**
+ * @brief Add a component to an entity
+ *
+ * This method adds a component to an entity. The component is copied
+ * and stored in the world.
+ *
+ * @tparam C The type of the component
+ * @param entity The entity to add the component to
+ * @param new_component The component to add
+ *
+ * Example:
+ * ```
+ * World::AddComponent<Position>(entity, {0, 0, 0});
+ * ```
+ */
 template <typename C>
 static void AddComponent(Entity entity, C new_component)
 {
@@ -104,7 +173,16 @@ static void AddComponent(Entity entity, C new_component)
     Logger::Log(LogLevel::INFO, "Added component: ", std::type_index(typeid(C)).name());
 }
 
-
+/**
+ * @brief Add a resource to the world
+ *
+ * This method adds a resource to the world.
+ *
+ * Example:
+ * ```
+ * World::AddResource<Shader>({shader});
+ * ```
+ */
 template <typename R>
 static void AddResource(R resource)
 {
@@ -118,8 +196,35 @@ static void AddResource(R resource)
     Logger::Log(LogLevel::INFO, "Added Resource: ", std::type_index(typeid(R)).name());
 }
 
+/**
+ * @brief Remove an entity
+ *
+ * This method removes an entity from the world, deleting all its components.
+ *
+ * @param entity The entity to remove
+ *
+ * Example:
+ * ```
+ * World::RemoveEntity(entity);
+ * ```
+ */
 static void RemoveEntity(Entity entity);
 
+/**
+ * @brief Get the component of an entity
+ *
+ * This method returns a pointer to the component of the specified type
+ * of the specified entity. If the component is not found, it returns nullptr.
+ *
+ * @tparam C The type of the component
+ * @param entity The entity to get the component from
+ * @return A pointer to the component
+ *
+ * Example:
+ * ```
+ * auto component = World::EntityToComponent<Position>(entity);
+ * ```
+ */
 template <typename C>
 static C* EntityToComponent(Entity entity)
 {
@@ -146,6 +251,18 @@ static C* EntityToComponent(Entity entity)
     return nullptr;
 }
 
+/**
+ * @brief Run all systems
+ *
+ * This method runs all the systems in the world.
+ */
+static void RunSystems();
+
+private:
+static SetPtr<Entity>                         entities;
+static UMapPtr<std::type_index, Resource>     resources;
+static UMapVecPtr<std::type_index, Component> components;
+
 /* Iterate over all systems and run them */
 template<typename Tuple, std::size_t... Is>
 static void for_each_impl(Tuple&& tuple, std::index_sequence<Is...>)
@@ -169,13 +286,6 @@ static void process(const System& system)
     std::vector<ECS::Entity> matches = QueryComponentsTuple(Dependencies{});
     system.run(matches);
 }
-
-static void RunSystems();
-
-private:
-static SetPtr<Entity>                         entities;
-static UMapPtr<std::type_index, Resource>     resources;
-static UMapVecPtr<std::type_index, Component> components;
 
 template <typename C, typename... Components, typename N = None>
 static std::vector<Entity> QueryComponents()

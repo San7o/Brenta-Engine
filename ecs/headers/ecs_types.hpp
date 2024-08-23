@@ -34,6 +34,11 @@ namespace ECS {
 
 namespace Types {
 
+/**
+ * @brief None type
+ *
+ * This type is used to represent a null value.
+ */
 struct None {};
 
 template <typename T>
