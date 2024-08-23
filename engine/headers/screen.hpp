@@ -26,8 +26,11 @@
 
 #pragma once
 
-#include <GLFW/glfw3.h> /* OpenGL windowing library */
+// clang-format off
+// The order of these includes is important
 #include <glad/glad.h>
+#include <GLFW/glfw3.h> /* OpenGL windowing library */
+// clang-format on
 
 namespace Brenta
 {

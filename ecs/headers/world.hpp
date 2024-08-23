@@ -124,6 +124,12 @@ class World
             return nullptr;
         }
 
+        if (!resources->count (std::type_index (typeid (R))))
+        {
+            ERROR ("Resource not found: ", std::type_index (typeid (R)).name ());
+            return nullptr;
+        }
+
         auto ret = resources->at (std::type_index (typeid (R)));
         if (ret)
             return static_cast<R *> (ret.get ());
@@ -209,6 +215,35 @@ class World
     static void RemoveEntity (Entity entity);
 
     /**
+     * @brief Remove a resource
+     *
+     * This method removes a resource of the specified type from the world.
+     *
+     * @tparam R The type of the resource
+     *
+     * Example:
+     * ```
+     * World::RemoveResource<Shader>();
+     * ```
+     */
+    template<typename R> static void RemoveResource()
+    {
+        if (!resources)
+        {
+            ERROR ("Cannot remove resource: world not initialized");
+            return;
+        }
+
+        if (!resources->count (std::type_index (typeid (R))))
+        {
+            ERROR ("Resource not found: ", std::type_index (typeid (R)).name ());
+            return;
+        }
+
+        resources->erase(std::type_index (typeid (R)));
+    }
+
+    /**
      * @brief Get the component of an entity
      *
      * This method returns a pointer to the component of the specified type
@@ -259,7 +294,7 @@ class World
 
   private:
     static SetPtr<Entity> entities;
-    static UMapPtr<std::type_index, Resource> resources;
+    static UMapPtr<std::type_index, Resource>     resources;
     static UMapVecPtr<std::type_index, Component> components;
 
     /* Iterate over all systems and run them */

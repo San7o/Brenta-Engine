@@ -35,6 +35,14 @@ Translation::Translation ()
     this->model = glm::mat4 (1.0f);
 }
 
+Translation::Translation(glm::mat4 view, glm::mat4 projection,
+                glm::mat4 model)
+{
+    this->view = view;
+    this->projection = projection;
+    this->model = model;
+}
+
 void Translation::setView (glm::mat4 view)
 {
     this->view = view;
@@ -62,6 +70,7 @@ void Translation::translate (glm::vec3 translation)
     this->model = glm::translate (this->model, translation);
 }
 
+/* Note: the order of rotations is important */
 void Translation::rotate (glm::vec3 rotation)
 {
     this->model = glm::rotate (this->model, glm::radians (rotation.x),

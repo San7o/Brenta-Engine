@@ -68,6 +68,18 @@ class Translation
      * matrices to the identity matrix.
      */
     Translation ();
+    /**
+     * @brief Translation constructor
+     *
+     * This constructor initializes the view, projection, and model
+     * matrices to the given matrices.
+     * @param view The view matrix
+     * @param projection The projection matrix
+     * @param model The model matrix
+     */
+    Translation (glm::mat4 view,
+                 glm::mat4 projection,
+                 glm::mat4 model);
 
     /**
      * @brief Set the view matrix

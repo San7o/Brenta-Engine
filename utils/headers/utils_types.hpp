@@ -22,6 +22,7 @@ enum LogLevel
     INFO,
     WARNING,
     ERROR,
+    OUTPUT,
     DISABLED
 };
 

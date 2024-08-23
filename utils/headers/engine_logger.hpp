@@ -152,6 +152,8 @@ class Logger
     template <typename... Args>
     static void Log (Brenta::Types::LogLevel level, Args... args)
     {
+        if (Logger::level > level)
+            return;
         LogToStdout (level, ": ", args...);
         if (Logger::log_file.is_open ())
             LogToFile (level, ": ", args...);

@@ -84,3 +84,12 @@ To run the formatter, run:
 ```bash
 make format
 ```
+
+# Tests
+
+To build tests, run:
+```bash
+cmake -Bbuild -DBUILD_TESTS=ON
+cmake --build build -j 4
+./buid/unit
+```

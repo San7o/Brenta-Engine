@@ -27,6 +27,7 @@
 #pragma once
 
 #include <glad/glad.h> /* OpenGL driver */
+#include <string>
 
 namespace Brenta
 {

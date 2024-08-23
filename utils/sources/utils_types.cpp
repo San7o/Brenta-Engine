@@ -24,6 +24,9 @@ std::ostream &operator<< (std::ostream &os, const LogLevel level)
     case LogLevel::ERROR:
         os << "ERROR";
         break;
+    case LogLevel::OUTPUT:
+        os << "OUTPUT";
+        break;
     case LogLevel::DISABLED:
         os << "DISABLED";
         break;

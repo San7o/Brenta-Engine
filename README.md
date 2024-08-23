@@ -19,8 +19,10 @@ https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 # ⭐ Current State
 
-The project is structured into the folders `engine`, `ecs`, `game`, `render` 
-containing respectively the game engine, the ecs, a game demo and a render demo.
+The project is structured into the folders `engine`, `ecs`, `game`, `utils` and `tests`
+containing respectively the game engine, the ecs, a game demo, utilities functions (like
+the logger) and tests. In addition, `include` contains third party headers and `lib`
+contains static libraries for linking.
 
 The project is under heavy developement, the following features have been
 implemented:
