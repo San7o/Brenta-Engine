@@ -28,8 +28,9 @@
  * Just a simple window
  */
 
-#include <iostream>
 #include "engine.hpp"
+
+#include <iostream>
 
 using namespace Brenta;
 
@@ -37,17 +38,17 @@ const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 const bool isMouseCaptured = false;
 
-int main() {
-
+int main()
+{
     Engine engine = Engine::Builder()
-            .use_screen(true)
-            .set_screen_width(SCR_WIDTH)
-            .set_screen_height(SCR_HEIGHT)
-            .set_screen_is_mouse_captured(isMouseCaptured)
-            .build();
+                        .use_screen(true)
+                        .set_screen_width(SCR_WIDTH)
+                        .set_screen_height(SCR_HEIGHT)
+                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        .build();
 
-    while(!Screen::isWindowClosed()) {
-
+    while (!Screen::isWindowClosed())
+    {
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
 

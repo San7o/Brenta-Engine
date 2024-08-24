@@ -28,8 +28,9 @@
  * Just a simple window
  */
 
-#include <iostream>
 #include "engine.hpp"
+
+#include <iostream>
 
 using namespace Brenta;
 
@@ -37,31 +38,32 @@ const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 const bool isMouseCaptured = false;
 
-int main() {
-
+int main()
+{
     Engine engine = Engine::Builder()
-            .use_screen(true)
-            .use_text(true)               /* Enable text rendering */
-            .set_text_font("arial.ttf")   /* Set the font */
-            .set_text_size(48)            /* Set the font size */
-            .set_gl_blending(true)
-            .set_gl_cull_face(true)
-            .set_gl_multisample(true)
-            .set_gl_depth_test(true)
-            .set_screen_width(SCR_WIDTH)
-            .set_screen_height(SCR_HEIGHT)
-            .set_screen_is_mouse_captured(isMouseCaptured)
-            .build();
+                        .use_screen(true)
+                        .use_text(true)             /* Enable text rendering */
+                        .set_text_font("arial.ttf") /* Set the font */
+                        .set_text_size(48)          /* Set the font size */
+                        .set_gl_blending(true)
+                        .set_gl_cull_face(true)
+                        .set_gl_multisample(true)
+                        .set_gl_depth_test(true)
+                        .set_screen_width(SCR_WIDTH)
+                        .set_screen_height(SCR_HEIGHT)
+                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        .build();
 
-    while(!Screen::isWindowClosed()) {
-
+    while (!Screen::isWindowClosed())
+    {
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
 
         GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
         GL::Clear();
 
-        Text::RenderText("Hello OpenGL!", 25.0f, 25.0f, 1.0f, glm::vec3(0.5f, 0.8f, 0.2));
+        Text::RenderText("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
+                         glm::vec3(0.5f, 0.8f, 0.2));
 
         Screen::PollEvents();
         Screen::SwapBuffers();

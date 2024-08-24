@@ -28,10 +28,10 @@
  * Load a model and render it on the screen.
  */
 
-#include <iostream>
-#include <filesystem>
-
 #include "engine.hpp"
+
+#include <filesystem>
+#include <iostream>
 
 using namespace Brenta;
 
@@ -41,32 +41,30 @@ const bool isMouseCaptured = false;
 
 #define ABS(...) std::filesystem::absolute(__VA_ARGS__)
 
-int main() {
-
+int main()
+{
     Engine engine = Engine::Builder()
-            .use_screen(true)
-            .set_screen_width(SCR_WIDTH)
-            .set_screen_height(SCR_HEIGHT)
-            .set_screen_is_mouse_captured(isMouseCaptured)
-            .set_gl_blending(true)
-            .set_gl_cull_face(true)
-            .set_gl_multisample(true)
-            .set_gl_depth_test(true)
-            .set_log_level(Brenta::Types::LogLevel::DEBUG)
-            .build();
+                        .use_screen(true)
+                        .set_screen_width(SCR_WIDTH)
+                        .set_screen_height(SCR_HEIGHT)
+                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        .set_gl_blending(true)
+                        .set_gl_cull_face(true)
+                        .set_gl_multisample(true)
+                        .set_gl_depth_test(true)
+                        .set_log_level(Brenta::Types::LogLevel::DEBUG)
+                        .build();
 
     /* Load the model */
     Model ourModel(ABS("assets/models/backpack/backpack.obj"));
 
     /* Load the shader */
-    Shader::New("default_shader",
-                GL_VERTEX_SHADER,
-                ABS("examples/default_shader.vs"),
-                GL_FRAGMENT_SHADER,
+    Shader::New("default_shader", GL_VERTEX_SHADER,
+                ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
                 ABS("examples/default_shader.fs"));
 
-    while(!Screen::isWindowClosed()) {
-
+    while (!Screen::isWindowClosed())
+    {
         /* Input */
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
@@ -80,8 +78,9 @@ int main() {
 
         /* Make transformations */
         glm::mat4 view = glm::mat4(1.0f); /* Camera position */
-        glm::mat4 projection = glm::perspective(glm::radians(45.0f),
-                           (float)SCR_WIDTH/(float)SCR_HEIGHT, 0.1f, 100.0f);
+        glm::mat4 projection = glm::perspective(
+            glm::radians(45.0f), (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f,
+            100.0f);
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 

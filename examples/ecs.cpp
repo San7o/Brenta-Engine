@@ -24,26 +24,37 @@
  *
  */
 
-#include <iostream>
 #include "world.hpp"
+
+#include <iostream>
 
 using namespace Brenta;
 using namespace Brenta::ECS;
 
-struct PlayerComponent : Component {
-    PlayerComponent() {}
+struct PlayerComponent : Component
+{
+    PlayerComponent()
+    {
+    }
 };
 
-struct HealthComponent : Component {
+struct HealthComponent : Component
+{
     int value;
-    HealthComponent() {}
-    HealthComponent(int value)
-            : value(value) {}
+    HealthComponent()
+    {
+    }
+    HealthComponent(int value) : value(value)
+    {
+    }
 };
 
-struct PoisonSystem : System<PlayerComponent, HealthComponent> {
-    void run(std::vector<Entity> entities) const override {
-        if (entities.empty()) {
+struct PoisonSystem : System<PlayerComponent, HealthComponent>
+{
+    void run(std::vector<Entity> entities) const override
+    {
+        if (entities.empty())
+        {
             return;
         }
 
@@ -53,16 +64,21 @@ struct PoisonSystem : System<PlayerComponent, HealthComponent> {
     }
 };
 
-struct GlobalResource : Resource {
+struct GlobalResource : Resource
+{
     int value;
-    GlobalResource() {}
-    GlobalResource(int value) : value(value) {}
+    GlobalResource()
+    {
+    }
+    GlobalResource(int value) : value(value)
+    {
+    }
 };
 
 REGISTER_SYSTEMS(PoisonSystem);
 
-int main() {
-
+int main()
+{
     World::Init();
     std::cout << "Welcome to my Test Game!" << std::endl;
 
@@ -79,7 +95,8 @@ int main() {
     World::AddResource<GlobalResource>(GlobalResource(10));
 
     /* Main loop */
-    for(int i = 0; i < 10; i++) {
+    for (int i = 0; i < 10; i++)
+    {
         World::Tick();
     }
 
