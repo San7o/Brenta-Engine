@@ -3,6 +3,8 @@
 Welcome to this quick guide on most of the features of the engine. For each
 feature, an example with context will be shown. Enjoy the read :)
 
+For updated examples, see [examples](./examples/README.md).
+
 ## 🕵️‍♂️ How it works
 
 In brief (takes a deep breath): everything in the ECS exists in the `World`,
@@ -20,15 +22,16 @@ The main loop calls `World::Tick()`. At each tick, all the
 Systems will be called in the order they were added in 
 the World. 
 
-The engine provides functions to interact with the window in `ECS::Screen`, 
-some OpenGL helper functions in `ECS::GL`, a nice `ECS::Logger`,
-input handling with `ECS::Input`, manage time with `ECS::Time`,
-display text with `ECS::Text` and more!
+The engine provides functions to interact with the window in `Brenta::Screen`, 
+some OpenGL helper functions in `Brenta::GL`, a nice `Brenta::Logger`,
+input handling with `Brenta::Input`, manage time with `Brenta::Time`,
+display text with `Brenta::Text` and more!
 
 ```c++
-#include "engine.h"
-#include "ecs.h"
-using namespace ECS;
+#include "engine.hpp"
+#include "ecs.hpp"
+using namespace Brenta;
+using namespace Brenta::ECS;
 
 int main() {
 
@@ -197,7 +200,7 @@ Input::AddCallback(GLFW_KEY_F, toggle_wireframe_callback);
 
 ### Particles
 
-You can create and customize particles via the `ECS::ParticleEmitter` class. All
+You can create and customize particles via the `Brenta::ParticleEmitter` class. All
 the computation is done in the GPU so the engine can handle lots and lots
 of particles. Here's a quick look on the API:
 
@@ -227,7 +230,7 @@ emitter.renderParticles();
 
 ### Audio
 
-There is a simple-to-use audio API in `ECS::Audio`. You can load sound files,
+There is a simple-to-use audio API in `Brenta::Audio`. You can load sound files,
 create channels and play a sound on a channel. There can be only one sound
 playing per channel, but of course there can be multiple channels playing
 so some channel management from the developer is needed:
