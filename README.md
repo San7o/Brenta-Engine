@@ -111,6 +111,7 @@ struct FPSSystem : System<None> {
 REGISTER_SYSTEMS(FPSSystem);
 ```
 <h1 align=center> Building </h1>
+
 All instuctions to build the demo game are in [BUILD](./BUILD.md), there are also instructions on
 how to [build unit tests](./tests/README.md) and how to [build examples](./examples/README.md).
 
