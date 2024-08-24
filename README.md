@@ -1,14 +1,14 @@
 <h1 align=center> Brenta Engine </h1>
 
-Brenta Engine is a simple 3D engine written in modern C++/OpenGL
+**Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
 using the Entity Component System architecture. The engine was
 created by Giovanni Santini in the summer of 2024, the name is
 inspired by the Brenta Dolimites in the Italian Alps.
 
 Check out `GUIDE.md` for a quick introduction on how the engine works!
-The engine is licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
 
-# Features
+<h1 align=center>  Features </h1>
+
 The engine is composed of many submodules independent from each other, those are:
 - `Screen`: manages the window and the OpenGL context.
 - `Audio`: everything audio.
@@ -19,7 +19,7 @@ The engine is composed of many submodules independent from each other, those are
 - `Engine`: manages the setup of the engine.
 
 In addition to those, the Brenta comes with many utility functions and classes, to get
-a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.0/), every class and function is highly documented.
+a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.0/), **every class and function is highly documented.**
 
 ### Ergonomic APIs
 ```c++
@@ -74,7 +74,7 @@ https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 Also collisions, lighting, text and audio!
 
-# ECS
+<h1 align=center> ECS </h1>
 Brenta Engine features an Entity Component System architecture. The ECS is a design pattern that allows you to structure your code in a way that is more modular and scalable.
 
 ### Entities
@@ -110,11 +110,13 @@ struct FPSSystem : System<None> {
 // Somewhere
 REGISTER_SYSTEMS(FPSSystem);
 ```
-# Building
+<h1 align=center> Building </h1>
 All instuctions to build the demo game are in [BUILD](./BUILD.md), there are also instructions on
 how to [build unit tests](./tests/README.md) and how to [build examples](./examples/README.md).
 
-# Contributing
+<h1 align=center> Contributing </h1>
 Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programmin skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
 
 Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
+
+The engine is licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
