@@ -105,7 +105,7 @@ int main()
             .set_camera(&camera)
             .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
             .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-            .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
+            .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
             .set_starting_timeToLive(0.5f)
             .set_num_particles(1000)
             .set_spawn_rate(0.01f)
@@ -115,7 +115,7 @@ int main()
                     .string())
             .set_atlas_width(8)
             .set_atlas_height(8)
-            .set_atlas_index(45)
+            .set_atlas_index(5)
             .build();
 
     Time::Update(Screen::GetTime());

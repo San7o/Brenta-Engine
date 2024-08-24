@@ -156,7 +156,7 @@ class Engine::Builder
  * \section intro_sec Introduction
  *
  * Hi and welcome to the **Brenta Engine documentation**! Brenta Engine is a
- * simple 3D engine writter in modern  C++/OpenGL using the Entity Component
+ * simple 3D engine written in modern  C++/OpenGL using the Entity Component
  * System architecture. The engine was created by Giovanni Santini in the summer
  * of 2024, the name is inspired by the Brenta Dolimites in the Italian Alps.
  *
@@ -172,7 +172,7 @@ class Engine::Builder
  *
  * The main submodules are:
  * - **Brenta::Screen**: manages the window and the OpenGL context.
- * - **Brenta::Audio**: everytging audio.
+ * - **Brenta::Audio**: everything audio.
  * - **Brenta::Input**: manages the screen input using callbacks.
  * - **Brenta::Utils::Logger**: logging manager.
  * - **Brenta::Text**: text rendering.

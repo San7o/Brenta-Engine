@@ -11,7 +11,7 @@ The engine is licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License) li
 # Features
 The engine is composed of many submodules independent from each other, those are:
 - `Screen`: manages the window and the OpenGL context.
-- `Audio`: everytging audio.
+- `Audio`: everything audio.
 - `Input`: manages the screen input using callbacks.
 - `Logger`: logging manager.
 - `Text`: text rendering.
@@ -117,4 +117,4 @@ how to [build unit tests](./tests/README.md) and how to [build examples](./examp
 # Contributing
 Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programmin skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
 
-Check out [CONTIBUTING](./CONTRIBUTING.md) for information on how to contribute.
+Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
