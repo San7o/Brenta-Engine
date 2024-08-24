@@ -115,6 +115,7 @@ All instuctions to build the demo game are in [BUILD](./BUILD.md), there are als
 how to [build unit tests](./tests/README.md) and how to [build examples](./examples/README.md).
 
 <h1 align=center> Contributing </h1>
+
 Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programmin skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
 
 Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
