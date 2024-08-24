@@ -2,7 +2,7 @@
 
 First off, thank you for considering contributing to this project!
 Even if this is not an advanced graphics engine, It provides
-many opportunities to practice and improve your programmin skills. Building
+many opportunities for you to practice and improve your programmin skills. Building
 an engine will test your **math skills** (linear algebra and calculus), 
 **physics** knowledge through physics simulations, **algorithms and data
 structures** (expecially for the ECS) and your knowledge of **modern
@@ -37,7 +37,7 @@ If you're ready to contribute code:
 - Write clear, concise code, and commit your changes.
 - Make sure to add tests if applicable.
 - Push the branch to your forked repo.
-- Open a pull request against the `main` branch with a detailed description of your changes.
+- Open a pull request against the `dev` branch with a detailed description of your changes.
 
 ### Discord
 
