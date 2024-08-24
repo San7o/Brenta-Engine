@@ -70,7 +70,7 @@ int main()
             Screen::SetClose();
 
         /* Clear */
-        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
+        GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
         GL::Clear();
 
         /* Draw */
