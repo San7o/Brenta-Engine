@@ -210,6 +210,8 @@ void ParticleEmitter::renderParticles()
     Shader::SetInt("particle_render", "atlas_height", this->atlas_height);
     Shader::SetInt("particle_render", "atlas_index", this->atlas_index);
     Shader::SetFloat("particle_render", "scale", this->scale);
+    Shader::SetFloat("particle_render", "aspect_ratio",
+                     (float) Screen::GetWidth() / (float) Screen::GetHeight());
 
     // Set Textures
     Texture::ActiveTexture(GL_TEXTURE0);

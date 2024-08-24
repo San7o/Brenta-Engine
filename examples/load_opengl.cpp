@@ -28,8 +28,9 @@
  * Create a screen with OpenGL options.
  */
 
-#include <iostream>
 #include "engine.hpp"
+
+#include <iostream>
 
 using namespace Brenta;
 
@@ -37,23 +38,23 @@ const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
 const bool isMouseCaptured = false;
 
-int main() {
-
+int main()
+{
     Engine engine = Engine::Builder()
-            /* Screen options */
-            .use_screen(true)
-            .set_screen_width(SCR_WIDTH)
-            .set_screen_height(SCR_HEIGHT)
-            .set_screen_is_mouse_captured(isMouseCaptured)
-            /* OpenGL options */
-            .set_gl_blending(true)
-            .set_gl_cull_face(true)
-            .set_gl_multisample(true)
-            .set_gl_depth_test(true)
-            .build();
+                        /* Screen options */
+                        .use_screen(true)
+                        .set_screen_width(SCR_WIDTH)
+                        .set_screen_height(SCR_HEIGHT)
+                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        /* OpenGL options */
+                        .set_gl_blending(true)
+                        .set_gl_cull_face(true)
+                        .set_gl_multisample(true)
+                        .set_gl_depth_test(true)
+                        .build();
 
-    while(!Screen::isWindowClosed()) {
-
+    while (!Screen::isWindowClosed())
+    {
         /* Input */
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
