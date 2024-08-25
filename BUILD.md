@@ -70,7 +70,7 @@ cmake --build build
 ```
 The binaries will be generated in `build/` directory.
 
-## Building documentation
+# Building documentation
 
 You can build the documentation with `doxygen` (you need to have doxygen installed in your system):
 ```bash
@@ -78,7 +78,7 @@ doxygen doxygen.conf
 ```
 The index will be located in `docs/html/index.html`.
 
-## Format code
+# Format code
 To execute the formatter, run:
 ```bash
 make format
@@ -93,7 +93,7 @@ cmake --build build -j 4
 ./buid/unit
 ```
 
-## Examples
+# Examples
 
 There is an `examples` directory, you can run an exmple with the following command:
 ```bash

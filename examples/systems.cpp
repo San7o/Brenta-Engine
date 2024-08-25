@@ -48,9 +48,9 @@ struct FPSSystem : System<None>
     }
 };
 
-struct physicssystem : system<physicscomponent, transformcomponent>
+struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
 {
-    void run(std::vector<entity> matches) const override
+    void run(std::vector<Entity> matches) const override
     {
         if (matches.empty())
             return;
@@ -58,20 +58,20 @@ struct physicssystem : system<physicscomponent, transformcomponent>
         for (auto match : matches)
         {
             auto physics_component =
-                world::entitytocomponent<physicscomponent>(match);
+                World::EntityToComponent<PhysicsComponent>(match);
 
             auto transform_component =
-                world::entitytocomponent<transformcomponent>(match);
+                World::EntityToComponent<TransformComponent>(match);
 
             if (physics_component->acceleration != glm::vec3(0.0f))
             {
                 physics_component->velocity +=
-                    physics_component->acceleration * time::getdeltatime();
+                    physics_component->acceleration * Time::GetDeltaTime();
             }
             if (physics_component->velocity != glm::vec3(0.0f))
             {
                 transform_component->position +=
-                    physics_component->velocity * time::getdeltatime();
+                    physics_component->velocity * Time::GetDeltaTime();
             }
         }
     }
