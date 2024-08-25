@@ -1,7 +1,5 @@
 ![Brenta-Engine-Banner](./assets/brenta-engine-banner.png)
 
-<h1 align=center> Brenta Engine </h1>
-
 **Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
 using the Entity Component System architecture. The engine was
 created by Giovanni Santini in the summer of 2024, the name is
