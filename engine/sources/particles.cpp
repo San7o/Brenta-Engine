@@ -82,14 +82,14 @@ ParticleEmitter::ParticleEmitter(
     // Create shaders
     const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
     Shader::New(varyings, 3, "particle_update", GL_VERTEX_SHADER,
-                std::filesystem::absolute("game/shaders/particle_update.vs"));
+                std::filesystem::absolute("engine/shaders/particle_update.vs"));
     Shader::New(
         "particle_render", GL_VERTEX_SHADER,
-        std::filesystem::absolute("game/shaders/particle_render.vs").string(),
+        std::filesystem::absolute("engine/shaders/particle_render.vs").string(),
         GL_GEOMETRY_SHADER,
-        std::filesystem::absolute("game/shaders/particle_render.gs").string(),
+        std::filesystem::absolute("engine/shaders/particle_render.gs").string(),
         GL_FRAGMENT_SHADER,
-        std::filesystem::absolute("game/shaders/particle_render.fs").string());
+        std::filesystem::absolute("engine/shaders/particle_render.fs").string());
 
     // This is needed to render points
     glEnable(GL_PROGRAM_POINT_SIZE);

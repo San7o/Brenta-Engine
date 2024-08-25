@@ -649,7 +649,7 @@ class Engine::Builder
  * \page Contributing
  * First off, thank you for considering contributing to this project!
  * Even if this is not an advanced graphics engine, It provides
- * many opportunities for you to practice and improve your programmin skills.
+ * many opportunities for you to practice and improve your programming skills.
  *
  * Building
  * an engine will test your **math skills** (linear algebra and calculus),

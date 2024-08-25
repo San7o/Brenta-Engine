@@ -1,4 +1,4 @@
-<h1 align=center> Brenta Engine </h1>
+![Brenta-Engine-Banner](./assets/brenta-engine-banner.png)
 
 **Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
 using the Entity Component System architecture. The engine was
@@ -18,7 +18,7 @@ The engine is composed of many submodules independent from each other, those are
 - `World`: the Entity Component System submodule.
 - `Engine`: manages the setup of the engine.
 
-In addition to those, the Brenta comes with many utility functions and classes, to get
+In addition to those, Brenta comes with many utility functions and classes, to get
 a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.0/), **every class and function is highly documented.**
 
 ### Ergonomic APIs
@@ -117,7 +117,7 @@ how to [build unit tests](./tests/README.md) and how to [build examples](./examp
 
 <h1 align=center> Contributing </h1>
 
-Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programmin skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
+Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programming skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
 
 Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
 
