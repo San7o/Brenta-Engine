@@ -11,6 +11,9 @@ fi
 rm -rf release
 mkdir -p release
 
+# generate docs
+doxygen doxygen.conf
+
 # Copy the files to the release directory
 tar -czf release/brenta-engine-docs-v$1.tar.gz docs/html
 tar -czf release/brenta-engine-src-v$1.tar.gz engine utils ecs tests examples CMakeLists.txt README.md LICENSE flake.nix flake.lock lib Makefile include
