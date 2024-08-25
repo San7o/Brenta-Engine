@@ -153,6 +153,8 @@ class Engine::Builder
 // cmake-format: off
 /*! \mainpage Home
  *
+ * \image html brenta-engine-banner.png
+ *
  * \section intro_sec Introduction
  *
  * Hi and welcome to the **Brenta Engine documentation**! Brenta Engine is a
