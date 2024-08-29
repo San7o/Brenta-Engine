@@ -24,22 +24,28 @@
  *
  */
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#ifdef USE_ECS
+#include "ecs.hpp"
 #include "game_ecs.hpp"
+#endif
 
 #include <bitset>
 #include <filesystem>
 
 using namespace Brenta;
+#ifdef USE_ECS
 using namespace Brenta::ECS;
+#endif
 
 // Default resolution
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
 
-REGISTER_SYSTEMS(RendererSystem, DebugTextSystem, PointLightsSystem,
+#ifdef USE_ECS
+REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, // DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
+#endif
 
 /* default camera */
 namespace Brenta
@@ -55,7 +61,6 @@ int main()
                         .use_input(true)
                         .use_logger(true)
                         .use_text(true)
-                        .use_ecs(true)
                         .set_screen_width(SCR_WIDTH)
                         .set_screen_height(SCR_HEIGHT)
                         .set_screen_is_mouse_captured(false)
@@ -82,6 +87,7 @@ int main()
                  .set_zoom(45.0f)
                  .build();
 
+#ifdef USE_ECS
     InitPlayerEntity();
     // InitCubeEntity();
     InitFloorEntity();
@@ -96,6 +102,7 @@ int main()
     InitPlayGuitarCallback();
 
     World::AddResource<WireframeResource>(WireframeResource(false));
+#endif
 
     Audio::LoadAudio("guitar",
                      std::filesystem::absolute("assets/audio/guitar.wav"));
@@ -118,19 +125,35 @@ int main()
             .set_atlas_index(5)
             .build();
 
+#ifdef USE_IMGUI
+    Brenta::Types::FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
+#endif
+
     Time::Update(Screen::GetTime());
     while (!Screen::isWindowClosed())
     {
+        Screen::PollEvents();
+
+#ifdef USE_IMGUI
+        GUI::new_frame(&fb);
+        fb.Bind();
+#endif
+
         GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
         GL::Clear();
 
         emitter.updateParticles(Time::GetDeltaTime());
         emitter.renderParticles();
 
+#ifdef USE_ECS
         Time::Update(Screen::GetTime());
         World::Tick();
+#endif
 
-        Screen::PollEvents();
+#ifdef USE_IMGUI
+        fb.Unbind();
+        GUI::render();
+#endif
         Screen::SwapBuffers();
     }
 
