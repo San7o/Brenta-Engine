@@ -89,7 +89,8 @@ ParticleEmitter::ParticleEmitter(
         GL_GEOMETRY_SHADER,
         std::filesystem::absolute("engine/shaders/particle_render.gs").string(),
         GL_FRAGMENT_SHADER,
-        std::filesystem::absolute("engine/shaders/particle_render.fs").string());
+        std::filesystem::absolute("engine/shaders/particle_render.fs")
+            .string());
 
     // This is needed to render points
     glEnable(GL_PROGRAM_POINT_SIZE);

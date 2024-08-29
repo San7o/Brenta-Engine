@@ -98,7 +98,6 @@ void GL::SetPoligonMode(GLboolean enable)
 void GL::SetViewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
 {
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
-    INFO("Set viewport: y = ", SCR_WIDTH, "x = ", SCR_HEIGHT);
 }
 
 void GL::SetColor(float r, float g, float b, float a)
@@ -155,6 +154,9 @@ GLenum GL::glCheckError_(const char *file, int line)
             break;
         case GL_INVALID_FRAMEBUFFER_OPERATION:
             error = "INVALID_FRAMEBUFFER_OPERATION";
+            break;
+        default:
+            error = "UNKNOWN";
             break;
         }
 

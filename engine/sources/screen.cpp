@@ -208,9 +208,9 @@ void Screen::MakeContextCurrent()
 void Screen::Framebuffer_size_callback(GLFWwindow *window, int width,
                                        int height)
 {
+#ifndef USE_IMGUI
     glViewport(0, 0, width, height);
     Screen::WIDTH = width;
     Screen::HEIGHT = height;
-
-    INFO("Set viewport: ", width, "x", height);
+#endif
 }

@@ -32,8 +32,6 @@
 
 #include <glad/glad.h> /* OpenGL driver */
 
-#define glCheckError() glCheckError_(__FILE__, __LINE__)
-
 namespace Brenta
 {
 
@@ -129,5 +127,7 @@ class GL
      */
     static GLenum glCheckError_(const char *file, int line);
 };
+
+#define glCheckError() GL::glCheckError_(__FILE__, __LINE__)
 
 } // namespace Brenta

@@ -32,7 +32,9 @@
 #include "engine_input.hpp"
 #include "engine_logger.hpp"
 #include "engine_time.hpp"
+#include "frame_buffer.hpp"
 #include "gl_helper.hpp"
+#include "gui.hpp"
 #include "mesh.hpp"
 #include "model.hpp"
 #include "particles.hpp"
@@ -63,7 +65,6 @@ class Engine
     bool uses_input;
     bool uses_logger;
     bool uses_text;
-    bool uses_ecs;
     int screen_width;
     int screen_height;
     bool screen_is_mouse_captured;
@@ -80,7 +81,7 @@ class Engine
     bool gl_depth_test;
 
     Engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
-           bool uses_text, bool uses_ecs, int screen_width, int screen_height,
+           bool uses_text, int screen_width, int screen_height,
            bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
            const char *screen_title, Types::LogLevel log_level,
            std::string log_file, std::string text_font, int text_size,
@@ -106,7 +107,6 @@ class Engine::Builder
     bool uses_input = false;
     bool uses_logger = false;
     bool uses_text = false;
-    bool uses_ecs = false;
     int screen_width = 1280;
     int screen_height = 720;
     bool screen_is_mouse_captured = false;
@@ -127,7 +127,6 @@ class Engine::Builder
     Builder &use_input(bool uses_input);
     Builder &use_logger(bool uses_logger);
     Builder &use_text(bool uses_text);
-    Builder &use_ecs(bool uses_ecs);
     Builder &set_screen_width(int screen_width);
     Builder &set_screen_height(int screen_height);
     Builder &set_screen_is_mouse_captured(bool screen_is_mouse_captured);

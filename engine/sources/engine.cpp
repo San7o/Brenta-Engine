@@ -12,10 +12,9 @@ using namespace Brenta::ECS;
 #endif
 
 Engine::Engine(bool uses_screen, bool uses_audio, bool uses_input,
-               bool uses_logger, bool uses_text, bool uses_ecs,
-               int screen_width, int screen_height,
-               bool screen_is_mouse_captured, bool screen_msaa,
-               bool screen_vsync, const char *screen_title,
+               bool uses_logger, bool uses_text, int screen_width,
+               int screen_height, bool screen_is_mouse_captured,
+               bool screen_msaa, bool screen_vsync, const char *screen_title,
                Types::LogLevel log_level, std::string log_file,
                std::string text_font, int text_size, bool gl_blending,
                bool gl_cull_face, bool gl_multisample, bool gl_depth_test)
@@ -51,18 +50,25 @@ Engine::Engine(bool uses_screen, bool uses_audio, bool uses_input,
         Text::Load(text_font, text_size);
     }
 #ifdef USE_ECS
-    if (uses_ecs)
-    {
-        World::Init();
-    }
+    World::Init();
+#endif
+#ifdef USE_IMGUI
+    GUI::Init();
 #endif
 }
 
 Engine::~Engine()
 {
-    if (uses_screen)
+#ifdef USE_IMGUI
+    GUI::Delete();
+#endif
+#ifdef USE_ECS
+    World::Delete();
+#endif
+
+    if (uses_logger)
     {
-        Screen::Terminate();
+        Logger::Close();
     }
 
     if (uses_audio)
@@ -70,17 +76,10 @@ Engine::~Engine()
         Audio::Destroy();
     }
 
-    if (uses_logger)
+    if (uses_screen)
     {
-        Logger::Close();
+        Screen::Terminate();
     }
-
-#ifdef USE_ECS
-    if (uses_ecs)
-    {
-        World::Delete();
-    }
-#endif
 }
 
 Engine::Builder &Engine::Builder::use_screen(bool uses_screen)
@@ -110,12 +109,6 @@ Engine::Builder &Engine::Builder::use_logger(bool uses_logger)
 Engine::Builder &Engine::Builder::use_text(bool uses_text)
 {
     this->uses_text = uses_text;
-    return *this;
-}
-
-Engine::Builder &Engine::Builder::use_ecs(bool uses_ecs)
-{
-    this->uses_ecs = uses_ecs;
     return *this;
 }
 
@@ -207,8 +200,8 @@ Engine::Builder &Engine::Builder::set_gl_depth_test(bool gl_depth_test)
 Engine Engine::Builder::build()
 {
     return Engine(uses_screen, uses_audio, uses_input, uses_logger, uses_text,
-                  uses_ecs, screen_width, screen_height,
-                  screen_is_mouse_captured, screen_msaa, screen_vsync,
-                  screen_title, log_level, log_file, text_font, text_size,
-                  gl_blending, gl_cull_face, gl_multisample, gl_depth_test);
+                  screen_width, screen_height, screen_is_mouse_captured,
+                  screen_msaa, screen_vsync, screen_title, log_level, log_file,
+                  text_font, text_size, gl_blending, gl_cull_face,
+                  gl_multisample, gl_depth_test);
 }
