@@ -22,7 +22,7 @@
           stdenv = pkgsFor.${system}.gcc14Stdenv;
         } {
 
-          name = "ecs-dev-shell";
+          name = "engine-dev-shell";
           hardeningDisable = ["all"];
           packages = with pkgsFor.${system}; [
             libz                    # needed for assimp
@@ -31,7 +31,7 @@
             glfw-wayland-minecraft  # OpenGL windowing library
             freetype                # font rendering
             harfbuzzFull            # text shaping
-            alsa-lib                # audio
+            alsa-lib.dev            # audio
             doxygen                 # documentation
             clang-tools             # code formatting
           ];
@@ -39,7 +39,7 @@
               zsh
           '';
 
-          LD_LIBRARY_PATH="${pkgsFor.${system}.libz}/lib";
+          LD_LIBRARY_PATH="${pkgsFor.${system}.libz}/lib:${pkgsFor.${system}.alsa-lib.dev}";
         };
     });
   };

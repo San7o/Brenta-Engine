@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.29.2)
 project("Brenta Engine")
 
+set(LIBS_DIR ${CMAKE_SOURCE_DIR}/lib)
+link_directories(${LIBS_DIR})
 find_library(asound asound REQUIRED)
 find_library(freetype freetype REQUIRED)
 find_library(harfbuzz harfbuzz REQUIRED)
@@ -22,20 +24,24 @@ set(CMAKE_C_STANDARD_REQUIRED True)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
 
-link_directories(lib)
-link_libraries(asound glfw GL dl m stdc++fs assimp freetype harfbuzz SDL3 asound)
-
 option(BUILD_IMGUI "Build with ImGui" ON)
 option(BUILD_MAIN "Build main" ON)
 option(BUILD_TESTS "Build unit tests" OFF)
 option(BUILD_EXAMPLES "Build examples" OFF)
 option(BUILD_ECS "Build with ECS" ON)
+option(BUILD_STATIC "Build static library" OFF)
 
 file(GLOB IMGUI_SOURCES "imgui/*.cpp" "imgui/backends/imgui_impl_glfw.cpp" "imgui/misc/cpp/imgui_stdlib.cpp" "imgui/backends/imgui_impl_opengl3.cpp" )
 file(GLOB ENGINE_SOURCES "engine/sources/*.c" "engine/sources/*.cpp" "utils/sources/*.cpp")
 file(GLOB ECS_SOURCES "ecs/sources/*.cpp")
 file(GLOB TEST_SOURCES "tests/**/*.cpp" "tests/*.cpp")
 file(GLOB MAIN_SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" )
+
+if (BUILD_STATIC)
+    link_libraries(GL dl z m stdc++fs glfw asound ${LIBS_DIR}/libassimp.a ${LIBS_DIR}/libfreetype.a ${LIBS_DIR}/libharfbuzz.a ${LIBS_DIR}/libSDL3.a)
+else()
+    link_libraries(GL dl z m stdc++fs glfw asound assimp freetype harfbuzz SDL3)
+endif()
 
 if (BUILD_MAIN AND NOT BUILD_TESTS AND NOT BUILD_EXAMPLES)
     include_directories(include game/headers engine/headers ecs/headers utils/headers imgui imgui/backends imgui/misc/cpp )

@@ -1,0 +1,3 @@
+/home/lanto/Documents/opengl-santo-engine/buil/CMakeFiles/main.dir
+/home/lanto/Documents/opengl-santo-engine/buil/CMakeFiles/edit_cache.dir
+/home/lanto/Documents/opengl-santo-engine/buil/CMakeFiles/rebuild_cache.dir
