@@ -75,8 +75,15 @@ int main()
 #ifdef USE_IMGUI
     Brenta::Types::FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
+
     float zoom = 1.0f;
-    glm::vec3 offset = glm::vec3(0.0f, 0.0f, 0.0f);
+    glm::vec3 offset = glm::vec3(-0.11f, -0.11f, 0.0f);
+    glm::vec3 constant = glm::vec3(0.350f, 0.467f, 0.0f);
+    bool animate = false;
+    bool julia = false;
+    float animation_speed = 0.5;
+    int max_iterations = 100;
+
 
     while (!Screen::isWindowClosed())
     {
@@ -84,21 +91,40 @@ int main()
         if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
             Screen::SetClose();
         // Use arrows to move the fractal
-        if (Screen::isKeyPressed(GLFW_KEY_UP))
+        if (Screen::isKeyPressed(GLFW_KEY_Z))
             zoom += 0.01f;
-        if (Screen::isKeyPressed(GLFW_KEY_DOWN))
+        if (Screen::isKeyPressed(GLFW_KEY_X))
             zoom -= 0.01f;
         if (Screen::isKeyPressed(GLFW_KEY_LEFT))
-            offset.x -= 0.005f;
+            offset.x -= 0.005f / pow(zoom, 4.0);
         if (Screen::isKeyPressed(GLFW_KEY_RIGHT))
-            offset.x += 0.005f;
-        if (Screen::isKeyPressed(GLFW_KEY_W))
-            offset.y += 0.005f;
-        if (Screen::isKeyPressed(GLFW_KEY_S))
-            offset.y -= 0.005f;
+            offset.x += 0.005f / pow(zoom, 4.0);
+        if (Screen::isKeyPressed(GLFW_KEY_UP))
+            offset.y += 0.005f / pow(zoom, 4.0);
+        if (Screen::isKeyPressed(GLFW_KEY_DOWN))
+            offset.y -= 0.005f / pow(zoom, 4.0);
+
+        // Vary constant over time
+        if (animate)
+        {
+            constant.x = sin(Screen::GetTime() * animation_speed);
+            constant.y = cos(Screen::GetTime() * animation_speed);
+        }
 
 #ifdef USE_IMGUI
         GUI::new_frame(&fb);
+        ImGui::Begin("Fractal");
+        ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);
+        ImGui::SliderInt("Max iterations", &max_iterations, 1, 1000);
+        ImGui::SliderFloat("Offset X", &offset.x, -2.0f, 2.0f);
+        ImGui::SliderFloat("Offset Y", &offset.y, -2.0f, 2.0f);
+        ImGui::Text("Only for julia set:");
+        ImGui::Checkbox("Use Julia set", &julia);
+        ImGui::SliderFloat("Constant X", &constant.x, -2.0f, 2.0f);
+        ImGui::SliderFloat("Constant Y", &constant.y, -2.0f, 2.0f);
+        ImGui::Checkbox("Animate", &animate);
+        ImGui::SliderFloat("Animation speed", &animation_speed, 0.0f, 2.0f);
+        ImGui::End();
 #endif
         fb.Bind();
         GL::Clear();
@@ -110,6 +136,9 @@ int main()
         Shader::SetVec3("fractal", "resolution", glm::vec3(float(SCR_WIDTH), float(SCR_HEIGHT), 0.0f));
         Shader::SetVec3("fractal", "offset", offset);
         Shader::SetFloat("fractal", "zoom", zoom);
+        Shader::SetVec3("fractal", "constant", constant);
+        Shader::SetBool("fractal", "juliaSet", julia);
+        Shader::SetInt("fractal", "maxIterations", max_iterations);
         glDrawArrays(GL_TRIANGLES, 0, 6);
         glCheckError();
 
