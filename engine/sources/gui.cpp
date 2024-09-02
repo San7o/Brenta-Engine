@@ -65,12 +65,6 @@ void GUI::new_frame(FrameBuffer *fb)
 
     ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
 
-    // Demo window ------------------------------------------
-
-    ImGui::Begin("Debug");
-    ImGui::Text("This is a debug window");
-    ImGui::End();
-
     // Game window ------------------------------------------
 
     ImGui::Begin("Game");

@@ -34,8 +34,10 @@ using namespace Brenta;
 using namespace Brenta::Types;
 using namespace Brenta::Utils;
 
-FrameBuffer::FrameBuffer(int width, int height)
+FrameBuffer::FrameBuffer(int width, int height, GLenum format)
 {
+    this->format = format;
+
     glGenFramebuffers(1, &this->id);
     if (this->id == 0)
     {
@@ -54,7 +56,7 @@ FrameBuffer::FrameBuffer(int width, int height)
     glBindTexture(GL_TEXTURE_2D, this->texture_id);
     glCheckError();
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGB,
                  GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -115,7 +117,7 @@ void FrameBuffer::Rescale(int width, int height)
     glBindTexture(GL_TEXTURE_2D, this->texture_id);
     glCheckError();
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -131,4 +133,9 @@ void FrameBuffer::Rescale(int width, int height)
 
     Screen::WIDTH = width;
     Screen::HEIGHT = height;
+}
+
+void FrameBuffer::SetFormat(GLenum format)
+{
+    this->format = format;
 }

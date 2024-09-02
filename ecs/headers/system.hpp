@@ -85,7 +85,7 @@ template <typename... T> struct RegisteredSystems
  * Use it only once.
  */
 #define REGISTER_SYSTEMS(...)                                                  \
-    void World::RunSystems()                                                   \
+    void Brenta::ECS::World::RunSystems()                                      \
     {                                                                          \
         typedef RegisteredSystems<__VA_ARGS__>::systems registered_systems;    \
         const registered_systems systems;                                      \

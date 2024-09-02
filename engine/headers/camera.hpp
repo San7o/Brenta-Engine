@@ -61,6 +61,20 @@ struct SphericalCoordinates
     float theta;
     float phi;
     float radius;
+    /**
+     * @brief Default constructor
+     */
+    SphericalCoordinates() = default;
+    /**
+     * @brief Constructor
+     *
+     * Full constructor that initializes the spherical coordinates
+     * with the specified values.
+     */
+    SphericalCoordinates(float theta, float phi, float radius)
+        : theta(theta), phi(phi), radius(radius)
+    {
+    }
 };
 
 /**
@@ -74,6 +88,20 @@ struct EulerAngles
     float yaw;
     float pitch;
     float roll;
+    /**
+     * @brief Default constructor
+     */
+    EulerAngles() = default;
+    /**
+     * @brief Constructor
+     *
+     * Full constructor that initializes the euler angles
+     * with the specified values.
+     */
+    EulerAngles(float yaw, float pitch, float roll)
+        : yaw(yaw), pitch(pitch), roll(roll)
+    {
+    }
 };
 
 } // namespace Types

@@ -53,7 +53,11 @@ class FrameBuffer : public Buffer
      * @brief Render Buffer ID
      */
     GLuint render_buffer_id;
-    
+    /**
+     * @brief Format of the framebuffer
+     * Default is GL_RGBA
+     */
+    GLenum format; 
     /**
      * @brief Empty constructor
      * Does nothing
@@ -67,7 +71,7 @@ class FrameBuffer : public Buffer
      * @param width Width of the framebuffer
      * @param height Height of the framebuffer
      */
-    FrameBuffer(int width, int height);
+    FrameBuffer(int width, int height, GLenum format = GL_RGBA);
     /**
      * @brief Destructor
      * Deletes the framebuffer and its texture
@@ -101,6 +105,11 @@ class FrameBuffer : public Buffer
      * @param height New height of the framebuffer
      */
     void Rescale(int width, int height);
+    /**
+     * @brief Set the format of the framebuffer
+     * @param format New format of the framebuffer
+     */
+    void SetFormat(GLenum format);
 };
 
 } // namespace Types
