@@ -33,35 +33,35 @@
 
 #include <filesystem>
 
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
-using namespace Brenta;
+using namespace brenta::ecs;
+using namespace brenta::ecs::types;
+using namespace brenta;
 
-void InitCubeEntity()
+void init_cube_entity()
 {
     /* Create the cube entity */
-    auto cube_entity = World::NewEntity();
+    auto cube_entity = world::new_entity();
 
     /* Add the transform component */
     auto transform_component =
         TransformComponent(glm::vec3(0.0f), glm::vec3(0.0f), 1.0f);
-    World::AddComponent<TransformComponent>(cube_entity, transform_component);
+    world::add_component<TransformComponent>(cube_entity, transform_component);
 
     /* Load the shader */
-    if (Shader::GetId("cube_shader") == 0)
+    if (shader::get_id("cube_shader") == 0)
     {
-        Shader::New("cube_shader", GL_VERTEX_SHADER,
+        shader::create("cube_shader", GL_VERTEX_SHADER,
                     std::filesystem::absolute("game/shaders/shader.vs"),
                     GL_FRAGMENT_SHADER,
                     std::filesystem::absolute("game/shaders/shader.fs"));
     }
 
     /* Load the model */
-    Model model(
+    model m(
         std::filesystem::absolute("assets/models/simple_cube/simple_cube.obj"));
 
     /* Add the model component */
-    auto model_component = ModelComponent(model, 32.0f, "cube_shader");
-    World::AddComponent<ModelComponent>(cube_entity,
+    auto model_component = ModelComponent(m, 32.0f, "cube_shader");
+    world::add_component<ModelComponent>(cube_entity,
                                         std::move(model_component));
 }

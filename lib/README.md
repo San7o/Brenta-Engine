@@ -73,3 +73,11 @@ The first time you install, you need to remove the first command in `configure`
 # libharfbuzz
 
 Use cmake
+
+# dawn
+
+```bash
+nix-shell -p cmake xorg.xrandr xorg.libXinerama.dev xorg.libXcursor.dev mesa.dev pkg-config nodejs_22 wayland-scanner.dev libxkbcommon.dev wayland-utils libffi.dev glfw-wayland-minecraft libGL.dev --run zsh
+
+cmake -Bbuild -DDAWN_USE_WAYLAND=ON -DDAWN_USE_X11=OFF -DDAWN_FETCH_DEPENDENCIES=ON -DDAWN_ENABLE_INSTALL=ON -DCMAKE_BUILD_TYPE=Release
+```

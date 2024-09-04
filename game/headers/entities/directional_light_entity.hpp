@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitDirectionalLightEntity();
+void init_directional_light_entity();

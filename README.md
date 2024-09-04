@@ -23,7 +23,7 @@ a detailed look at the engine, please visit the [documentation](https://san7o.gi
 
 ### Ergonomic APIs
 ```c++
-Engine engine = Engine::Builder()
+engine game = engine::builder()
     .use_screen(true)
     .use_audio(true)
     .use_input(true)
@@ -39,7 +39,7 @@ Engine engine = Engine::Builder()
 
 ### Model Loading
 ```c++
-Model my_model("assets/models/backpack/backpack.obj");
+model my_model("assets/models/backpack/backpack.obj");
 ```
 ![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)
 
@@ -47,13 +47,13 @@ Model my_model("assets/models/backpack/backpack.obj");
 ### Particles
 
 ```c++
-ParticleEmitter emitter =
-    ParticleEmitter::Builder()
+particle_emitter emitter =
+    particle_emitter::builder()
         .set_camera(&camera)
         .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
         .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
         .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-        .set_starting_timeToLive(0.5f)
+        .set_starting_time_to_live(0.5f)
         .set_num_particles(1000)
         .set_spawn_rate(0.01f)
         .set_scale(1.0f)
@@ -85,30 +85,30 @@ Entity entity = World::NewEntity();
 ### Components
 Components are pieces of data that are attached to an entity:
 ```c++
-struct PhysicsComponent : Component {
+struct physics_component : component {
     float mass;
     float density;
     glm::vec3 velocity;
     glm::vec3 acceleration;
-    PhysicsComponent() {}
+    physics_component() {}
 };
 
 // Somehwere
-World::AddComponent<PhysicsComponent>(entity, physics_component);
+world::add_component<physics_component>(entity, physics_component);
 ```
 ### Systems
 Systems are functions that operate on entities with specific components. They
 are called at each game tick by the `World`:
 ```c++
-struct FPSSystem : System<None> {
-    void run(std::vector<Entity> _) const override {
-        Text::RenderText("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
+struct fps_system : system<none> {
+    void run(std::vector<entity_t> _) const override {
+        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
                          0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };
 
 // Somewhere
-REGISTER_SYSTEMS(FPSSystem);
+REGISTER_SYSTEMS(fps_system);
 ```
 <h1 align=center> Building </h1>
 

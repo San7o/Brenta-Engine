@@ -38,13 +38,13 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta;
+using namespace brenta::ecs;
+using namespace brenta;
 
-void InitDirectionalLightEntity()
+void init_directional_light_entity()
 {
     /* Create the light entity */
-    auto light_entity = World::NewEntity();
+    auto light_entity = world::new_entity();
 
     /* Add the light component */
     auto light_component = DirectionalLightComponent(
@@ -53,7 +53,7 @@ void InitDirectionalLightEntity()
         glm::vec3(0.5f, 0.5f, 0.5f),   // diffuse
         glm::vec3(1.0f, 1.0f, 1.0f),   // specular
         1.0f,                          // intensity
-        std::vector<Brenta::Types::ShaderName>{"default_shader"});
-    World::AddComponent<DirectionalLightComponent>(light_entity,
+        std::vector<brenta::types::shader_name_t>{"default_shader"});
+    world::add_component<DirectionalLightComponent>(light_entity,
                                                    std::move(light_component));
 }

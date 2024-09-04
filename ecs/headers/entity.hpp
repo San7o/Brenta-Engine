@@ -26,10 +26,10 @@
 
 #pragma once
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
 /**
@@ -37,8 +37,8 @@ namespace ECS
  *
  * This type is used to identify game objects in the game world.
  */
-typedef int Entity;
+typedef int entity_t;
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

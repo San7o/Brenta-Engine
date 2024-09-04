@@ -30,10 +30,10 @@
 #include <typeindex>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
 /**
@@ -49,17 +49,17 @@ namespace ECS
  * Example of creating a system:
  *
  * ```
- * struct SystemA : System<ComponentA, ComponentB> {
- *   void run (std::vector<Entity> e) const override { std::cout << "A\n"; }
+ * struct system_a : system<component_a, component_b> {
+ *   void run (std::vector<entity> e) const override { std::cout << "A\n"; }
  * };
  * ```
  *
- * If no components are needed, use System<None>.
+ * If no components are needed, use system<none>.
  */
-template <typename... T> struct System
+template <typename... T> struct system
 {
     using dependencies = std::tuple<T...>;
-    virtual void run(std::vector<Entity> e) const {};
+    virtual void run(std::vector<entity_t> e) const {};
 };
 
 /**
@@ -72,10 +72,10 @@ template <typename... T> struct System
  *
  * Example:
  * ```
- * REGISTERED_SYSTEMS(SystemA, SystemB);
+ * REGISTERED_SYSTEMS(system_a, system_b);
  * ```
  */
-template <typename... T> struct RegisteredSystems
+template <typename... T> struct registered_systems
 {
     using systems = std::tuple<T...>;
 };
@@ -85,9 +85,9 @@ template <typename... T> struct RegisteredSystems
  * Use it only once.
  */
 #define REGISTER_SYSTEMS(...)                                                  \
-    void World::RunSystems()                                                   \
+    void brenta::ecs::world::run_systems()                                     \
     {                                                                          \
-        typedef RegisteredSystems<__VA_ARGS__>::systems registered_systems;    \
+        typedef registered_systems<__VA_ARGS__>::systems registered_systems;   \
         const registered_systems systems;                                      \
         for_each(systems);                                                     \
     }

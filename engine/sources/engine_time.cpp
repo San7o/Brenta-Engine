@@ -28,30 +28,30 @@
 
 #include "screen.hpp"
 
-using namespace Brenta;
+using namespace brenta;
 
-float Time::currentTime = 0.0f;
-float Time::deltaTime = 0.0f;
-float Time::lastFrame = 0.0f;
+float time::current_time = 0.0f;
+float time::delta_time = 0.0f;
+float time::last_frame = 0.0f;
 
-float Time::GetCurrentTime()
+float time::get_current_time()
 {
-    return Screen::GetTime();
+    return screen::get_time();
 }
 
-float Time::GetDeltaTime()
+float time::get_delta_time()
 {
-    return deltaTime;
+    return delta_time;
 }
 
-float Time::GetFPS()
+float time::get_fps()
 {
-    return 1.0f / deltaTime;
+    return 1.0f / delta_time;
 }
 
-void Time::Update(float newTime)
+void time::update(float new_time)
 {
-    currentTime = newTime;
-    deltaTime = currentTime - lastFrame;
-    lastFrame = currentTime;
+    current_time = new_time;
+    delta_time = current_time - last_frame;
+    last_frame = current_time;
 }

@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitPlayGuitarCallback();
+void init_play_guitar_callback();

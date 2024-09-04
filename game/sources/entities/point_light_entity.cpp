@@ -38,20 +38,20 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta;
+using namespace brenta::ecs;
+using namespace brenta;
 
-void InitPointLightEntity()
+void init_point_light_entity()
 {
     /* Create the light entity */
-    auto light_entity = World::NewEntity();
+    auto light_entity = world::new_entity();
 
     /* Add the light component */
     auto light_component = PointLightComponent(
         glm::vec3(0.1f, 0.1f, 0.1f), glm::vec3(0.5f, 0.5f, 0.5f),
         glm::vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.09f, 0.0032f, 1.0f,
-        std::vector<Brenta::Types::ShaderName>{"default_shader"});
-    World::AddComponent<PointLightComponent>(light_entity, light_component);
+        std::vector<brenta::types::shader_name_t>{"default_shader"});
+    world::add_component<PointLightComponent>(light_entity, light_component);
 
     /* Add a mesh */
     /*
@@ -69,5 +69,5 @@ void InitPointLightEntity()
     /* Add the transform component */
     auto transform_component =
         TransformComponent(glm::vec3(0.0f, 10.0f, 0.0f), glm::vec3(0.0f), 0.5f);
-    World::AddComponent<TransformComponent>(light_entity, transform_component);
+    world::add_component<TransformComponent>(light_entity, transform_component);
 }

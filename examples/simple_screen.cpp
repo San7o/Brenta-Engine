@@ -32,28 +32,27 @@
 
 #include <iostream>
 
-using namespace Brenta;
+using namespace brenta;
 
 const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
-const bool isMouseCaptured = false;
 
 int main()
 {
-    Engine engine = Engine::Builder()
+    engine eng = engine::builder()
                         .use_screen(true)
                         .set_screen_width(SCR_WIDTH)
                         .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        .set_screen_is_mouse_captured(false)
                         .build();
 
-    while (!Screen::isWindowClosed())
+    while (!screen::is_window_closed())
     {
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
 
-        Screen::PollEvents();
-        Screen::SwapBuffers();
+        screen::poll_events();
+        screen::swap_buffers();
     }
 
     return 0;

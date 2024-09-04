@@ -2,32 +2,32 @@
 
 #include <ostream>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
-std::ostream &operator<<(std::ostream &os, const LogLevel level)
+std::ostream &operator<<(std::ostream &os, const log_level level)
 {
     switch (level)
     {
-    case LogLevel::DEBUG:
+    case log_level::DEBUG:
         os << "DEBUG";
         break;
-    case LogLevel::INFO:
+    case log_level::INFO:
         os << "INFO";
         break;
-    case LogLevel::WARNING:
+    case log_level::WARNING:
         os << "WARNING";
         break;
-    case LogLevel::ERROR:
+    case log_level::ERROR:
         os << "ERROR";
         break;
-    case LogLevel::OUTPUT:
+    case log_level::OUTPUT:
         os << "OUTPUT";
         break;
-    case LogLevel::DISABLED:
+    case log_level::DISABLED:
         os << "DISABLED";
         break;
     default:
@@ -37,6 +37,6 @@ std::ostream &operator<<(std::ostream &os, const LogLevel level)
     return os;
 }
 
-} // namespace Types
+} // namespace types
 
-} // namespace Brenta
+} // namespace brenta

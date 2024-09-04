@@ -30,20 +30,20 @@
 #include "engine.hpp"
 #include "resources/wireframe_resource.hpp"
 
-using namespace Brenta;
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
+using namespace brenta;
+using namespace brenta::ecs;
+using namespace brenta::ecs::types;
 
-void InitToggleWireframeCallback()
+void init_toggle_wireframe_callback()
 {
     auto toggle_wireframe_callback = []()
     {
-        auto wireframe = World::GetResource<WireframeResource>();
+        auto wireframe = world::get_resource<WireframeResource>();
         if (wireframe == nullptr)
             return;
 
-        GL::SetPoligonMode(!wireframe->enabled);
+        gl::set_poligon_mode(!wireframe->enabled);
         wireframe->enabled = !wireframe->enabled;
     };
-    Input::AddKeyboardCallback(GLFW_KEY_F, toggle_wireframe_callback);
+    input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
 }

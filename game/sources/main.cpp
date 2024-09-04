@@ -33,9 +33,9 @@
 #include <bitset>
 #include <filesystem>
 
-using namespace Brenta;
+using namespace brenta;
 #ifdef USE_ECS
-using namespace Brenta::ECS;
+using namespace brenta::ecs;
 #endif
 
 // Default resolution
@@ -48,14 +48,14 @@ REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, // DebugTextSystem,
 #endif
 
 /* default camera */
-namespace Brenta
+namespace brenta
 {
-Camera camera = Camera();
+camera default_camera = camera();
 }
 
 int main()
 {
-    Engine engine = Engine::Builder()
+    engine eng = engine::builder()
                         .use_screen(true)
                         .use_audio(true)
                         .use_input(true)
@@ -67,7 +67,7 @@ int main()
                         .set_screen_msaa(true)
                         .set_screen_vsync(true)
                         .set_screen_title("Game")
-                        .set_log_level(Brenta::Types::LogLevel::INFO)
+                        .set_log_level(brenta::types::log_level::INFO)
                         .set_log_file("./logs/log.txt")
                         .set_text_font("arial.ttf")
                         .set_text_size(24)
@@ -77,9 +77,9 @@ int main()
                         .set_gl_depth_test(true)
                         .build();
 
-    camera = Camera::Builder()
-                 .set_camera_type(Enums::CameraType::SPHERICAL)
-                 .set_projection_type(Enums::ProjectionType::PERSPECTIVE)
+    default_camera = camera::builder()
+                 .set_camera_type(enums::camera_type::SPHERICAL)
+                 .set_projection_type(enums::projection_type::PERSPECTIVE)
                  .set_spherical_coordinates({1.25f, 1.25f, 30.0f})
                  .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
                  .set_movement_speed(2.5f)
@@ -88,32 +88,32 @@ int main()
                  .build();
 
 #ifdef USE_ECS
-    InitPlayerEntity();
-    // InitCubeEntity();
-    InitFloorEntity();
-    InitDirectionalLightEntity();
-    InitPointLightEntity();
-    InitSphereEntity();
-    InitRobotEntity();
+    init_player_entity();
+    // init_cube_entity();
+    init_floor_entity();
+    init_directional_light_entity();
+    init_point_light_entity();
+    init_sphere_entity();
+    init_robot_entity();
 
-    InitToggleWireframeCallback();
-    InitCloseWindowCallback();
-    InitCameraMouseCallback();
-    InitPlayGuitarCallback();
+    init_toggle_wireframe_callback();
+    init_close_window_callback();
+    init_camera_mouse_callback();
+    init_play_guitar_callback();
 
-    World::AddResource<WireframeResource>(WireframeResource(false));
+    world::add_resource<WireframeResource>(WireframeResource(false));
 #endif
 
-    Audio::LoadAudio("guitar",
+    audio::load_audio("guitar",
                      std::filesystem::absolute("assets/audio/guitar.wav"));
 
-    ParticleEmitter emitter =
-        ParticleEmitter::Builder()
-            .set_camera(&camera)
+    particle_emitter emitter =
+        particle_emitter::builder()
+            .set_camera(&default_camera)
             .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
             .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
             .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-            .set_starting_timeToLive(0.5f)
+            .set_starting_time_to_live(0.5f)
             .set_num_particles(1000)
             .set_spawn_rate(0.01f)
             .set_scale(1.0f)
@@ -126,35 +126,35 @@ int main()
             .build();
 
 #ifdef USE_IMGUI
-    Brenta::Types::FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
+    brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
-    Time::Update(Screen::GetTime());
-    while (!Screen::isWindowClosed())
+    time::update(screen::get_time());
+    while (!screen::is_window_closed())
     {
-        Screen::PollEvents();
+        screen::poll_events();
 
 #ifdef USE_IMGUI
-        GUI::new_frame(&fb);
-        fb.Bind();
+        gui::new_frame(&fb);
+        fb.bind();
 #endif
 
-        GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
-        GL::Clear();
+        gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+        gl::clear();
 
-        emitter.updateParticles(Time::GetDeltaTime());
-        emitter.renderParticles();
+        emitter.update_particles(time::get_delta_time());
+        emitter.render_particles();
 
 #ifdef USE_ECS
-        Time::Update(Screen::GetTime());
-        World::Tick();
+        time::update(screen::get_time());
+        world::tick();
 #endif
 
 #ifdef USE_IMGUI
-        fb.Unbind();
-        GUI::render();
+        fb.unbind();
+        gui::render();
 #endif
-        Screen::SwapBuffers();
+        screen::swap_buffers();
     }
 
     return 0;

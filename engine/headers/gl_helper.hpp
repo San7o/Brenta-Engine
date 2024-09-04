@@ -32,7 +32,7 @@
 
 #include <glad/glad.h> /* OpenGL driver */
 
-namespace Brenta
+namespace brenta
 {
 
 /**
@@ -40,7 +40,7 @@ namespace Brenta
  *
  * This class contains helper functions to interact with OpenGL.
  */
-class GL
+class gl
 {
   public:
     /**
@@ -53,14 +53,14 @@ class GL
      * @param gl_multisample Enable multisampling
      * @param gl_depth_test  Enable depth testing
      */
-    static void LoadOpenGL(bool gl_blending = true, bool gl_cull_face = true,
+    static void load_opengl(bool gl_blending = true, bool gl_cull_face = true,
                            bool gl_multisample = true,
                            bool gl_depth_test = true);
     /**
      * @brief Set Poligon Mode
      * @param enable Enable or disable poligon mode
      */
-    static void SetPoligonMode(GLboolean enable);
+    static void set_poligon_mode(GLboolean enable);
     /**
      * @brief Set Viewport
      *
@@ -71,7 +71,7 @@ class GL
      * @param SCR_WIDTH  Width of the viewport
      * @param SCR_HEIGHT Height of the viewport
      */
-    static void SetViewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT);
+    static void set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT);
     /**
      * @brief Set Clear Color
      *
@@ -82,7 +82,7 @@ class GL
      * @param b Blue component of the clear color
      * @param a Alpha component of the clear color
      */
-    static void SetColor(float r, float g, float b, float a);
+    static void set_color(float r, float g, float b, float a);
     /**
      * @brief Draw Arrays
      *
@@ -92,7 +92,7 @@ class GL
      * @param first Specifies the starting index in the enabled arrays
      * @param count Specifies the number of indices to be rendered
      */
-    static void DrawArrays(GLenum mode, int first, int count);
+    static void draw_arrays(GLenum mode, int first, int count);
     /**
      * @brief Draw Elements
      *
@@ -104,20 +104,20 @@ class GL
      * @param indices Specifies a pointer to the location where the indices are
      * stored
      */
-    static void DrawElements(GLenum mode, int count, GLenum type,
+    static void draw_elements(GLenum mode, int count, GLenum type,
                              const void *indices);
     /**
      * @brief Clear
      *
      * This function clears the color and depth buffer.
      */
-    static void Clear();
+    static void clear();
     /**
      * @brief Enable Depth Test
      *
      * This function enables the depth test.
      */
-    static void BindVertexArray(unsigned int n);
+    static void bind_vertex_array(unsigned int n);
     /**
      * @brief Check OpenGL error
      *
@@ -125,9 +125,9 @@ class GL
      *
      * @return The error code
      */
-    static GLenum glCheckError_(const char *file, int line);
+    static GLenum check_error_(const char *file, int line);
+#define check_error() gl::check_error_(__FILE__, __LINE__)
 };
 
-#define glCheckError() GL::glCheckError_(__FILE__, __LINE__)
 
 } // namespace Brenta

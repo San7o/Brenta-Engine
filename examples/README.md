@@ -5,7 +5,7 @@ api as a reference other then the documentation.
 
 You can run examples with the following commands:
 ```bash
-cmake -Bbuild -DBUILD_EXAMPLES=ON
+cmake -Bbuild -DBRENTA_BUILD_EXAMPLES=ON
 cmake --build build -j 4 --target load_model
 ./build/load_model
 ```

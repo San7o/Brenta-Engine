@@ -33,18 +33,15 @@
 #include <string>
 
 #define DEBUG(...)                                                             \
-    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::DEBUG, __VA_ARGS__)
+    brenta::logger::log(brenta::types::log_level::DEBUG, __VA_ARGS__)
 #define INFO(...)                                                              \
-    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::INFO, __VA_ARGS__)
+    brenta::logger::log(brenta::types::log_level::INFO, __VA_ARGS__)
 #define WARNING(...)                                                           \
-    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::WARNING, __VA_ARGS__)
+    brenta::logger::log(brenta::types::log_level::WARNING, __VA_ARGS__)
 #define ERROR(...)                                                             \
-    Brenta::Utils::Logger::Log(Brenta::Types::LogLevel::ERROR, __VA_ARGS__)
+    brenta::logger::log(brenta::types::log_level::ERROR, __VA_ARGS__)
 
-namespace Brenta
-{
-
-namespace Utils
+namespace brenta
 {
 
 /**
@@ -53,7 +50,7 @@ namespace Utils
  * This class is used to log messages to the console and to a log file. The log
  * messages can be filtered by log level.
  */
-class Logger
+class logger
 {
   public:
     /**
@@ -64,7 +61,7 @@ class Logger
      * SetLogLevel method. Onlt the messages with a Loglevel greater or equal to
      * the set log level are printed.
      */
-    static Brenta::Types::LogLevel level;
+    static brenta::types::log_level level;
     /**
      * @brief Log file
      *
@@ -79,7 +76,7 @@ class Logger
      * This method initializes the logger. It should be called before any other
      * method of the logger is called.
      */
-    static void Init();
+    static void init();
     /**
      * @brief Set the log level
      *
@@ -89,7 +86,7 @@ class Logger
      *
      * @param level The log level
      */
-    static void SetLogLevel(Brenta::Types::LogLevel level);
+    static void set_log_level(brenta::types::log_level level);
     /**
      * @brief Set the log file
      *
@@ -98,14 +95,14 @@ class Logger
      *
      * @param file The log file
      */
-    static void SetLogFile(const std::string &file);
+    static void set_log_file(const std::string &file);
     /**
      * @brief Close the logger
      *
      * This method closes the logger. It should be called before the program
      * exits.
      */
-    static void Close();
+    static void close();
 
     /**
      * @brief Log a message to stdout
@@ -117,10 +114,10 @@ class Logger
      * @param args The message
      */
     template <typename T, typename... Args>
-    static void LogToStdout(T message, Args... args)
+    static void log_to_stdout(T message, Args... args)
     {
         std::cout << message;
-        LogToStdout(args...);
+        log_to_stdout(args...);
     }
 
     /**
@@ -134,10 +131,10 @@ class Logger
      * @param args The message
      */
     template <typename T, typename... Args>
-    static void LogToFile(T message, Args... args)
+    static void log_to_file(T message, Args... args)
     {
         log_file << message;
-        LogToFile(args...);
+        log_to_file(args...);
     }
     /**
      * @brief Log a message
@@ -150,27 +147,25 @@ class Logger
      * @param args The message
      */
     template <typename... Args>
-    static void Log(Brenta::Types::LogLevel level, Args... args)
+    static void log(brenta::types::log_level level, Args... args)
     {
-        if (Logger::level > level)
+        if (logger::level > level)
             return;
-        LogToStdout(level, ": ", args...);
-        if (Logger::log_file.is_open())
-            LogToFile(level, ": ", args...);
+        log_to_stdout(level, ": ", args...);
+        if (logger::log_file.is_open())
+            log_to_file(level, ": ", args...);
     }
 
   private:
     /* Base cases */
-    template <typename T> static void LogToStdout(T message)
+    template <typename T> static void log_to_stdout(T message)
     {
         std::cout << message << std::endl;
     }
-    template <typename T> static void LogToFile(T message)
+    template <typename T> static void log_to_file(T message)
     {
         log_file << message << std::endl;
     }
 };
-
-} // namespace Utils
 
 } // namespace Brenta
