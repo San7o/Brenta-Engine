@@ -33,25 +33,25 @@
 
 #include <cstdio>
 
-using namespace Brenta;
+using namespace brenta;
 
-GLFWwindow *Screen::window;
-int Screen::WIDTH;
-int Screen::HEIGHT;
+GLFWwindow *screen::window;
+int screen::WIDTH;
+int screen::HEIGHT;
 
-void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured,
+void screen::init(int SCR_WIDTH, int SCR_HEIGHT, bool is_mouse_captured,
                   const char *title, bool msaa, bool vsync)
 {
-    Screen::WIDTH = SCR_WIDTH;
-    Screen::HEIGHT = SCR_HEIGHT;
+    screen::WIDTH = SCR_WIDTH;
+    screen::HEIGHT = SCR_HEIGHT;
 
     if (glfwInit() == GLFW_FALSE)
     {
         ERROR("Failed to initialize GLFW on init");
     }
 
-    SetContextVersion(3, 3); /* OpenGL 3.3 */
-    UseCoreProfile();
+    set_context_version(3, 3); /* OpenGL 3.3 */
+    use_core_profile();
 
     if (msaa)
     {
@@ -66,101 +66,100 @@ void Screen::Init(int SCR_WIDTH, int SCR_HEIGHT, bool isMouseCaptured,
     }
 
 #ifdef __APPLE__
-    SetHintsApple();
+    set_hints_apple();
 #endif
 
-    CreateWindow(SCR_WIDTH, SCR_HEIGHT, title);
-    MakeContextCurrent();
-    SetMouseCapture(isMouseCaptured);
+    create_window(SCR_WIDTH, SCR_HEIGHT, title);
+    make_context_current();
+    set_mouse_capture(is_mouse_captured);
 
     /* Set the callback for resizing the window */
-    Screen::SetSizeCallback(Framebuffer_size_callback);
+    screen::set_size_callback(framebuffer_size_callback);
 }
 
-bool Screen::isWindowClosed()
+bool screen::is_window_closed()
 {
-    return glfwWindowShouldClose(Screen::window);
+    return glfwWindowShouldClose(screen::window);
 }
 
-bool Screen::isKeyPressed(int key)
+bool screen::is_key_pressed(int key)
 {
-    return glfwGetKey(Screen::window, key) == GLFW_PRESS;
+    return glfwGetKey(screen::window, key) == GLFW_PRESS;
 }
 
-float Screen::GetTime()
+float screen::get_time()
 {
     return glfwGetTime();
 }
 
-GLFWwindow *Screen::GetWindow()
+GLFWwindow *screen::get_window()
 {
-    return Screen::window;
+    return screen::window;
 }
 
-GLFWglproc Screen::GetProcAddress()
+GLFWglproc screen::get_proc_address()
 {
     return reinterpret_cast<void (*)()>(glfwGetProcAddress);
 }
 
-int Screen::GetWidth()
+int screen::get_width()
 {
-    return Screen::WIDTH;
+    return screen::WIDTH;
 }
 
-int Screen::GetHeight()
+int screen::get_height()
 {
-    return Screen::HEIGHT;
+    return screen::HEIGHT;
 }
 
-void Screen::SetMouseCallback(GLFWcursorposfun callback)
+void screen::set_mouse_callback(GLFWcursorposfun callback)
 {
-    glfwSetCursorPosCallback(Screen::window, callback);
+    glfwSetCursorPosCallback(screen::window, callback);
 }
 
-void Screen::SetSizeCallback(GLFWframebuffersizefun callback)
+void screen::set_size_callback(GLFWframebuffersizefun callback)
 {
-    glfwSetFramebufferSizeCallback(Screen::window, callback);
+    glfwSetFramebufferSizeCallback(screen::window, callback);
 
     INFO("Set framebuffer size callback");
 }
 
-void Screen::SetMouseCapture(bool isCaptured)
+void screen::set_mouse_capture(bool is_captured)
 {
-    if (isCaptured)
+    if (is_captured)
     {
-        glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
+        glfwSetInputMode(screen::window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
         INFO("Mouse captured");
     }
     else
     {
-        glfwSetInputMode(Screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+        glfwSetInputMode(screen::window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
         INFO("Mouse not captured");
     }
 }
 
-void Screen::SetClose()
+void screen::set_close()
 {
-    glfwSetWindowShouldClose(Screen::window, GLFW_TRUE);
+    glfwSetWindowShouldClose(screen::window, GLFW_TRUE);
 }
 
-void Screen::Terminate()
+void screen::terminate()
 {
     glfwTerminate();
-    INFO("Screen terminated");
+    INFO("screen terminated");
 }
 
-void Screen::SwapBuffers()
+void screen::swap_buffers()
 {
-    glfwSwapBuffers(Screen::window);
+    glfwSwapBuffers(screen::window);
 }
 
-void Screen::PollEvents()
+void screen::poll_events()
 {
     glfwPollEvents();
 }
 
-void Screen::SetContextVersion(int major, int minor)
+void screen::set_context_version(int major, int minor)
 {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
@@ -168,49 +167,49 @@ void Screen::SetContextVersion(int major, int minor)
     INFO("Set context to OpenGL version: ", major, ".", minor);
 }
 
-void Screen::SetKeyCallback(GLFWkeyfun callback)
+void screen::set_key_callback(GLFWkeyfun callback)
 {
-    glfwSetKeyCallback(Screen::window, callback);
+    glfwSetKeyCallback(screen::window, callback);
 }
 
-void Screen::SetMousePosCallback(GLFWcursorposfun callback)
+void screen::set_mouse_pos_callback(GLFWcursorposfun callback)
 {
-    glfwSetCursorPosCallback(Screen::GetWindow(), callback);
+    glfwSetCursorPosCallback(screen::get_window(), callback);
 }
 
-void Screen::UseCoreProfile()
+void screen::use_core_profile()
 {
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     INFO("Set OpenGL profile to core");
 }
 
-void Screen::SetHintsApple()
+void screen::set_hints_apple()
 {
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 }
 
-void Screen::CreateWindow(int SCR_WIDTH, int SCR_HEIGHT, const char *title)
+void screen::create_window(int SCR_WIDTH, int SCR_HEIGHT, const char *title)
 {
-    Screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
-    if (Screen::window == NULL)
+    screen::window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, title, NULL, NULL);
+    if (screen::window == NULL)
     {
         ERROR("Failed to create GLFW window");
-        Terminate();
+        terminate();
     }
 }
 
-void Screen::MakeContextCurrent()
+void screen::make_context_current()
 {
-    glfwMakeContextCurrent(Screen::window);
+    glfwMakeContextCurrent(screen::window);
 }
 
-void Screen::Framebuffer_size_callback(GLFWwindow *window, int width,
+void screen::framebuffer_size_callback(GLFWwindow *window, int width,
                                        int height)
 {
 #ifndef USE_IMGUI
     glViewport(0, 0, width, height);
-    Screen::WIDTH = width;
-    Screen::HEIGHT = height;
+    screen::WIDTH = width;
+    screen::HEIGHT = height;
 #endif
 }

@@ -28,56 +28,56 @@
 #include "ecs.hpp"
 #include "engine_logger.hpp"
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
 TEST_CASE("Create and remove and entity")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
-    Entity entity = World::NewEntity();
+    entity_t entity = world::new_entity();
     REQUIRE(entity != -1);
 
-    auto entities = World::getEntities();
+    auto entities = world::get_entities();
     REQUIRE(entities != nullptr);
     REQUIRE(entities->size() == 1);
 
-    World::RemoveEntity(entity);
-    entities = World::getEntities();
+    world::remove_entity(entity);
+    entities = world::get_entities();
     REQUIRE(entities != nullptr);
     REQUIRE(entities->size() == 0);
 
-    World::Delete();
+    world::destroy();
 }
 
 TEST_CASE("Create a bunch of new entities")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
-    Entity entity = World::NewEntity();
+    entity_t entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
-    entity = World::NewEntity();
+    entity = world::new_entity();
     REQUIRE(entity != -1);
 
-    auto entities = World::getEntities();
+    auto entities = world::get_entities();
     REQUIRE(entities != nullptr);
     REQUIRE(entities->size() == 9);
 
-    World::Delete();
+    world::destroy();
 }

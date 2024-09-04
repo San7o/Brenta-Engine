@@ -2,10 +2,10 @@
 
 #include <ostream>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -16,7 +16,7 @@ namespace Types
  * Onlt the messages with a Loglevel greater or equal to the set log level are
  * printed.
  */
-enum LogLevel
+enum log_level
 {
     DEBUG = 0,
     INFO,
@@ -26,8 +26,8 @@ enum LogLevel
     DISABLED
 };
 
-std::ostream &operator<<(std::ostream &os, const LogLevel level);
+std::ostream &operator<<(std::ostream &os, const log_level level);
 
-} // namespace Types
+} // namespace types
 
-} // namespace Brenta
+} // namespace brenta

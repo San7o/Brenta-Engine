@@ -28,38 +28,38 @@
 
 #include "engine_logger.hpp"
 
-using namespace Brenta::Types;
-using namespace Brenta::Utils;
+using namespace brenta;
+using namespace brenta::types;
 
-Buffer::Buffer(GLenum input_target)
+buffer::buffer(GLenum input_target)
 {
     this->target = input_target;
     glGenBuffers(1, &id);
-    Bind();
+    bind();
 }
 
-void Buffer::CopyData(GLsizeiptr size, const void *data, GLenum usage)
+void buffer::copy_data(GLsizeiptr size, const void *data, GLenum usage)
 {
     glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::CopyIndices(GLsizeiptr size, const void *data, GLenum usage)
+void buffer::copy_indices(GLsizeiptr size, const void *data, GLenum usage)
 {
     if (this->target != GL_ELEMENT_ARRAY_BUFFER)
         return;
-    Bind();
+    bind();
     glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::CopyVertices(GLsizeiptr size, const void *data, GLenum usage)
+void buffer::copy_vertices(GLsizeiptr size, const void *data, GLenum usage)
 {
     if (this->target == GL_ELEMENT_ARRAY_BUFFER)
         return;
-    Bind();
+    bind();
     glBufferData(this->target, size, data, usage);
 }
 
-void Buffer::Bind()
+void buffer::bind()
 {
     if (this->id == 0)
     {
@@ -69,12 +69,12 @@ void Buffer::Bind()
     glBindBuffer(this->target, this->id);
 }
 
-void Buffer::Unbind()
+void buffer::unbind()
 {
     glBindBuffer(this->target, 0);
 }
 
-void Buffer::Delete()
+void buffer::destroy()
 {
     if (this->id == 0)
     {
@@ -84,22 +84,22 @@ void Buffer::Delete()
     glDeleteBuffers(1, &this->id);
 }
 
-int Buffer::GetId()
+int buffer::get_id()
 {
     return this->id;
 }
 
-GLenum Buffer::GetTarget()
+GLenum buffer::get_target()
 {
     return this->target;
 }
 
-void Buffer::SetId(unsigned int id)
+void buffer::set_id(unsigned int id)
 {
     this->id = id;
 }
 
-void Buffer::SetTarget(GLenum target)
+void buffer::set_target(GLenum target)
 {
     this->target = target;
 }

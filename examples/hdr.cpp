@@ -34,57 +34,54 @@
 #include <iostream>
 #include <filesystem>
 
-using namespace Brenta;
-using namespace Brenta::Types;
+using namespace brenta;
+using namespace brenta::types;
+using namespace brenta::ecs;
 
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
-const bool isMouseCaptured = false;
 
-using namespace Brenta;
-using namespace Brenta::ECS;
-
-struct TransformComponent : Component
+struct transform_component : component
 {
     glm::vec3 position;
     glm::vec3 rotation;
     float scale;
 
-    TransformComponent()
+    transform_component()
         : position(glm::vec3(0.0f)), rotation(glm::vec3(0.0f)), scale(1.0f)
     {
     }
-    TransformComponent(glm::vec3 position, glm::vec3 rotation, float scale)
+    transform_component(glm::vec3 position, glm::vec3 rotation, float scale)
         : position(position), rotation(rotation), scale(scale)
     {
     }
 };
 
-struct ModelComponent : Component
+struct model_component : component
 {
-    Model model;
+    model mod;
     float shininess;
-    Brenta::Types::ShaderName shader;
+    brenta::types::shader_name_t shader;
     bool hasAtlas;
     int atlasSize;
     int atlasIndex;
     int elapsedFrames = 0;
 
-    ModelComponent()
-        : model(Model()), shininess(0.0f), shader("default_shader"),
+    model_component()
+        : mod(model()), shininess(0.0f), shader("default_shader"),
           hasAtlas(false), atlasSize(0), atlasIndex(0)
     {
     }
-    ModelComponent(Model model, float shininess, Brenta::Types::ShaderName shader)
-        : model(model), shininess(shininess), shader(shader), hasAtlas(false),
+    model_component(model mod, float shininess, brenta::types::shader_name_t shader)
+        : mod(mod), shininess(shininess), shader(shader), hasAtlas(false),
           atlasSize(0), atlasIndex(0)
     {
     }
 };
 
-struct RendererSystem : System<ModelComponent, TransformComponent>
+struct renderer_system : system<model_component, transform_component>
 {
-    void run(std::vector<Entity> matches) const override
+    void run(std::vector<entity_t> matches) const override
     {
         if (matches.empty())
             return;
@@ -92,60 +89,60 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
         for (auto match : matches)
         {
             /* Get the model component */
-            auto model_component =
-                World::EntityToComponent<ModelComponent>(match);
+            auto model_c =
+                world::entity_to_component<model_component>(match);
 
-            auto transform_component =
-                World::EntityToComponent<TransformComponent>(match);
+            auto transform_c =
+                world::entity_to_component<transform_component>(match);
 
-            auto myModel = model_component->model;
-            auto default_shader = model_component->shader;
+            auto my_model = model_c->mod;
+            auto default_shader = model_c->shader;
 
-            Brenta::Types::Translation t = Brenta::Types::Translation();
-            t.setView(camera.GetViewMatrix());
-            t.setProjection(camera.GetProjectionMatrix());
+            brenta::types::translation t = brenta::types::translation();
+            t.set_view(default_camera.get_view_matrix());
+            t.set_projection(default_camera.get_projection_matrix());
 
-            t.setModel(glm::mat4(1.0f));
-            t.translate(transform_component->position);
-            t.rotate(transform_component->rotation);
-            t.scale(transform_component->scale);
+            t.set_model(glm::mat4(1.0f));
+            t.translate(transform_c->position);
+            t.rotate(transform_c->rotation);
+            t.scale(transform_c->scale);
 
-            t.setShader(default_shader);
+            t.set_shader(default_shader);
 
-            Shader::SetVec3(default_shader, "viewPos", camera.GetPosition());
-            Shader::SetFloat(default_shader, "material.shininess",
-                             model_component->shininess);
+            shader::set_vec3(default_shader, "viewPos", default_camera.get_position());
+            shader::set_float(default_shader, "material.shininess",
+                             model_c->shininess);
 
-            Shader::SetInt(default_shader, "atlasIndex", 0);
-            myModel.Draw(default_shader);
+            shader::set_int(default_shader, "atlasIndex", 0);
+            my_model.draw(default_shader);
         }
     }
 };
 
-REGISTER_SYSTEMS(RendererSystem);
+REGISTER_SYSTEMS(renderer_system);
 
-namespace Brenta
+namespace brenta
 {
-    Camera camera;
+    camera default_camera;
 }
 
 int main()
 {
-    Engine engine = Engine::Builder()
+    engine eng = engine::builder()
                         .use_screen(true)
                         .use_logger(true)
-                        .set_log_level(Brenta::Types::LogLevel::DEBUG)
+                        .set_log_level(brenta::types::log_level::DEBUG)
                         .set_screen_width(SCR_WIDTH)
                         .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(isMouseCaptured)
+                        .set_screen_is_mouse_captured(false)
                         .build();
 
-    Camera camera = Camera::Builder()
-                        .set_camera_type(Enums::CameraType::AIRCRAFT)
-                        .set_projection_type(Enums::ProjectionType::PERSPECTIVE)
+    camera default_camera = camera::builder()
+                        .set_camera_type(enums::camera_type::AIRCRAFT)
+                        .set_projection_type(enums::projection_type::PERSPECTIVE)
                         .set_position(glm::vec3(0.0f, 5.0f, 20.0f))
                         .set_up(glm::vec3(0.0f, 1.0f, 0.0f))
-                        .set_eulerAngles(EulerAngles(-90.0f, 0.0f, 0.0f))
+                        .set_euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
                         .build();
 
     // A square
@@ -160,31 +157,31 @@ int main()
         -1.0f, -1.0f, 0.0f,
          1.0f, -1.0f, 0.0f
     };
-    VAO vao;
-    vao.Init();
-    Buffer vbo = Buffer(GL_ARRAY_BUFFER);
-    vbo.CopyData(sizeof(vertices), vertices, GL_STATIC_DRAW);
-    vao.SetVertexData(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-    vao.Unbind();
-    vao.Unbind();
+    vao v;
+    v.init();
+    buffer vbo = buffer(GL_ARRAY_BUFFER);
+    vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
+    v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+    vbo.unbind();
+    v.unbind();
 
-    Shader::New("hdr_shader", 
+    shader::create("hdr_shader", 
                  GL_VERTEX_SHADER,
                  "examples/hdr.vs",
                  GL_FRAGMENT_SHADER,
                  "examples/hdr.fs");
 
 #ifdef USE_IMGUI
-    Brenta::Types::FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
+    brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
 #endif
 
-    ParticleEmitter emitter =
-        ParticleEmitter::Builder()
-            .set_camera(&camera)
+    particle_emitter emitter =
+        particle_emitter::builder()
+            .set_camera(&default_camera)
             .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
             .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
             .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-            .set_starting_timeToLive(0.5f)
+            .set_starting_time_to_live(0.5f)
             .set_num_particles(1000)
             .set_spawn_rate(0.01f)
             .set_scale(1.0f)
@@ -197,62 +194,61 @@ int main()
             .build();
 
     // Room ------------------------------------
-    auto room_entity = World::NewEntity();
-    TransformComponent transform_component;
-    World::AddComponent<TransformComponent>(room_entity, transform_component);
-    if (Shader::GetId("default_shader") == 0)
+    auto room_entity = world::new_entity();
+    world::add_component<transform_component>(room_entity, transform_component());
+    if (shader::get_id("default_shader") == 0)
     {
-        Shader::New("default_shader", GL_VERTEX_SHADER,
+        shader::create("default_shader", GL_VERTEX_SHADER,
                     std::filesystem::absolute("examples/default_shader.vs"),
                     GL_FRAGMENT_SHADER,
                     std::filesystem::absolute("examples/default_shader.fs"));
     }
-    Model model(
+    model mod(
         std::filesystem::absolute("assets/models/sphere/sphere.obj"));
-    auto model_component = ModelComponent(model, 32.0f, "default_shader");
-    World::AddComponent<ModelComponent>(room_entity,
-                                        std::move(model_component));
+    auto model_c = model_component(mod, 32.0f, "default_shader");
+    world::add_component<model_component>(room_entity,
+                                        std::move(model_c));
     INFO("Room entity created");
     // -----------------------------------------
 
-    Time::Update(Screen::GetTime());
-    while (!Screen::isWindowClosed())
+    time::update(screen::get_time());
+    while (!screen::is_window_closed())
     {
-        Screen::PollEvents();
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
+        screen::poll_events();
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
 
 #ifdef USE_IMGUI
-        GUI::new_frame(&fb);
+        gui::new_frame(&fb);
         ImGui::Begin("HDR");
         ImGui::End();
 #endif
-        fb.Bind();
+        fb.bind();
 
-        GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
-        GL::Clear();
+        gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+        gl::clear();
 
         // Our scene here
 
-        Shader::Use("hdr_shader");
+        shader::use("hdr_shader");
 
-        emitter.updateParticles(Time::GetDeltaTime());
-        emitter.renderParticles();
+        emitter.update_particles(time::get_delta_time());
+        emitter.render_particles();
 
-        Time::Update(Screen::GetTime());
-        World::Tick();
+        time::update(screen::get_time());
+        world::tick();
 
         //vao.Bind();
         //glDrawArrays(GL_TRIANGLES, 0, 6);
         //glCheckError();
         //vao.Unbind();
 
-        fb.Unbind();
+        fb.unbind();
 #ifdef USE_IMGUI
-        GUI::render();
+        gui::render();
 #endif
 
-        Screen::SwapBuffers();
+        screen::swap_buffers();
     }
 
     return 0;

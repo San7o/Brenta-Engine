@@ -33,10 +33,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct TransformComponent : Component
+struct TransformComponent : component
 {
     glm::vec3 position;
     glm::vec3 rotation;

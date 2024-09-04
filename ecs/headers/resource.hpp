@@ -26,10 +26,10 @@
 
 #pragma once
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
 /**
@@ -41,22 +41,22 @@ namespace ECS
  * Example creating a resource:
  *
  * ```
- * struct WireframeResource : Resource {
+ * struct wireframe_resource : resource {
  *     bool enabled;
- *     WireframeResource(bool e) : enabled(e) {}
+ *     wireframe_resource(bool e) : enabled(e) {}
  * };
  * ```
  *
  * Example registering a resource:
  * ```
- * World::AddResource<WireframeResource>(WireframeResource(false));
+ * world::add_resource<wireframe_resource>(wireframe_resource(false));
  * ```
  *
  */
-struct Resource
+struct resource
 {
 };
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

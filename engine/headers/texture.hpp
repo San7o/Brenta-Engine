@@ -29,7 +29,7 @@
 #include <glad/glad.h> /* OpenGL driver */
 #include <string>
 
-namespace Brenta
+namespace brenta
 {
 
 /**
@@ -37,7 +37,7 @@ namespace Brenta
  *
  * This class is used to load and manage textures.
  */
-class Texture
+class texture
 {
   public:
     /**
@@ -52,16 +52,16 @@ class Texture
      * @param wrapping Wrapping mode of the texture
      * @param filtering_min Filtering mode of the texture
      * @param filtering_mag Filtering mode of the texture
-     * @param hasMipmap If the texture has mipmaps
+     * @param has_mipmap If the texture has mipmaps
      * @param mipmap_min Mipmap filtering mode of the texture
      * @param mipmap_mag Mipmap filtering mode of the texture
      * @param flip If the texture should be flipped
      * @return The texture ID
      */
     static unsigned int
-    LoadTexture(std::string path, GLint wrapping = GL_REPEAT,
+    load_texture(std::string path, GLint wrapping = GL_REPEAT,
                 GLint filtering_min = GL_NEAREST,
-                GLint filtering_mag = GL_NEAREST, GLboolean hasMipmap = GL_TRUE,
+                GLint filtering_mag = GL_NEAREST, GLboolean has_mipmap = GL_TRUE,
                 GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
                 GLint mipmap_mag = GL_LINEAR, bool flip = true);
     /**
@@ -69,7 +69,7 @@ class Texture
      *
      * This method activates a texture unit.
      */
-    static void ActiveTexture(GLenum texture);
+    static void active_texture(GLenum texture);
     /**
      * @brief Bind a texture
      *
@@ -78,7 +78,7 @@ class Texture
      *
      * You need to bind the texture before using it in the shader.
      */
-    static void BindTexture(GLenum target, unsigned int texture,
+    static void bind_texture(GLenum target, unsigned int texture,
                             GLint wrapping = GL_REPEAT,
                             GLint filtering_min = GL_NEAREST,
                             GLint filtering_mag = GL_NEAREST,
@@ -87,11 +87,11 @@ class Texture
                             GLint mipmap_mag = GL_LINEAR);
 
   private:
-    static void SetTextureWrapping(GLint wrapping);
-    static void SetTextureFiltering(GLint filtering_min, GLint filtering_mag);
-    static void SetMipmap(GLboolean hasMipmap, GLint mipmap_min,
+    static void set_texture_wrapping(GLint wrapping);
+    static void set_texture_filtering(GLint filtering_min, GLint filtering_mag);
+    static void set_mipmap(GLboolean has_mipmap, GLint mipmap_min,
                           GLint mipmap_mag);
-    static void ReadImage(const char *path, bool flip);
+    static void read_image(const char *path, bool flip);
 };
 
 } // namespace Brenta

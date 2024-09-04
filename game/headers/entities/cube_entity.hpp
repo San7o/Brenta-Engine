@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitCubeEntity();
+void init_cube_entity();

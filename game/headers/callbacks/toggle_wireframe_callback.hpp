@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitToggleWireframeCallback();
+void init_toggle_wireframe_callback();

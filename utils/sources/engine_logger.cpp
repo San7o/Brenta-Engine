@@ -30,30 +30,30 @@
 #include <ctime>
 #include <iomanip>
 
-using namespace Brenta::Utils;
+using namespace brenta;
 
-Brenta::Types::LogLevel Logger::level = Brenta::Types::LogLevel::WARNING;
-std::ofstream Logger::log_file;
+brenta::types::log_level logger::level = brenta::types::log_level::WARNING;
+std::ofstream logger::log_file;
 
-void Logger::SetLogLevel(Brenta::Types::LogLevel level)
+void logger::set_log_level(brenta::types::log_level level)
 {
-    Logger::level = level;
+    logger::level = level;
 }
 
-void Logger::Init()
+void logger::init()
 {
-    SetLogFile("logs/log.txt");
+    set_log_file("logs/log.txt");
 }
 
-void Logger::Close()
+void logger::close()
 {
-    Logger::log_file.close();
+    logger::log_file.close();
 }
 
-void Logger::SetLogFile(const std::string &file)
+void logger::set_log_file(const std::string &file)
 {
-    Logger::log_file.open(file, std::ios::app);
-    if (!Logger::log_file.is_open())
+    logger::log_file.open(file, std::ios::app);
+    if (!logger::log_file.is_open())
     {
         std::cout << "Error: Could not open log file" << std::endl;
     }

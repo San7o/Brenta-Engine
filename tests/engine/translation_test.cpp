@@ -28,54 +28,54 @@
 #include "engine_logger.hpp"
 #include "translation.hpp"
 
-using namespace Brenta::Types;
-using namespace Brenta::Utils;
+using namespace brenta;
+using namespace brenta::types;
 
 TEST_CASE("Translation")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
+    logger::set_log_level(brenta::types::log_level::DISABLED);
     
     SECTION("Create a Translation")
     {
-        Translation translation = Translation();
-        REQUIRE(translation.view == glm::mat4(1.0f));
-        REQUIRE(translation.projection == glm::mat4(1.0f));
-        REQUIRE(translation.model == glm::mat4(1.0f));
+        translation t = translation();
+        REQUIRE(t.view == glm::mat4(1.0f));
+        REQUIRE(t.projection == glm::mat4(1.0f));
+        REQUIRE(t.model == glm::mat4(1.0f));
 
         glm::mat4 view = glm::mat4(3.0f);
         glm::mat4 projection = glm::mat4(3.0f);
         glm::mat4 model = glm::mat4(3.0f);
-        translation = Translation(view, projection, model);
-        REQUIRE(translation.view == view);
-        REQUIRE(translation.projection == projection);
-        REQUIRE(translation.model == model);
+        t = translation(view, projection, model);
+        REQUIRE(t.view == view);
+        REQUIRE(t.projection == projection);
+        REQUIRE(t.model == model);
     }
 
     SECTION("set view")
     {
-        Translation translation = Translation();
-        translation.setView(glm::mat4(3.0f));
-        REQUIRE(translation.view == glm::mat4(3.0f));
+        translation t = translation();
+        t.set_view(glm::mat4(3.0f));
+        REQUIRE(t.view == glm::mat4(3.0f));
     }
 
     SECTION("set model")
     {
-        Translation translation = Translation();
-        translation.setModel(glm::mat4(3.0f));
-        REQUIRE(translation.model == glm::mat4(3.0f));
+        translation t = translation();
+        t.set_model(glm::mat4(3.0f));
+        REQUIRE(t.model == glm::mat4(3.0f));
     }
 
     SECTION("translate")
     {
-        Translation translation = Translation();
-        translation.translate(glm::vec3(1.0f, 2.0f, 3.0f));
-        REQUIRE(translation.model == glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, 3.0f)));
+        translation t = translation();
+        t.translate(glm::vec3(1.0f, 2.0f, 3.0f));
+        REQUIRE(t.model == glm::translate(glm::mat4(1.0f), glm::vec3(1.0f, 2.0f, 3.0f)));
     }
 
     SECTION("rotate")
     {
-        Translation translation = Translation();
-        translation.rotate(glm::vec3(1.0f, 2.0f, 3.0f));
+        translation t = translation();
+        t.rotate(glm::vec3(1.0f, 2.0f, 3.0f));
         glm::mat4 model = glm::mat4(1.0);
         model = glm::rotate(model, glm::radians(1.0f),
                         glm::vec3(1.0f, 0.0f, 0.0f));
@@ -83,13 +83,13 @@ TEST_CASE("Translation")
                         glm::vec3(0.0f, 1.0f, 0.0f));
         model = glm::rotate(model, glm::radians(3.0f),
                         glm::vec3(0.0f, 0.0f, 1.0f));
-        REQUIRE(translation.model == model);
+        REQUIRE(t.model == model);
     }
 
     SECTION("scale")
     {
-        Translation translation = Translation();
-        translation.scale(2.0f);
-        REQUIRE(translation.model == glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)));
+        translation t = translation();
+        t.scale(2.0f);
+        REQUIRE(t.model == glm::scale(glm::mat4(1.0f), glm::vec3(2.0f)));
     }
 }

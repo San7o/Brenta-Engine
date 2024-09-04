@@ -32,13 +32,13 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
-typedef std::string MouseCallbackName;
+typedef std::string mouse_callback_name_t;
 
 } // namespace Types
 
@@ -49,17 +49,17 @@ typedef std::string MouseCallbackName;
  * to add and remove callbacks for keyboard and mouse events. You can define
  * your own callbacks and register them with the input subsystem.
  */
-class Input
+class input
 {
   public:
-    Input() = delete;
+    input() = delete;
     /**
      * @brief Initialize the input system
      *
      * This function initializes the input system. It should be called before
      * any other input function is called.
      */
-    static void Init();
+    static void init();
 
     /**
      * @brief Add a keyboard callback
@@ -71,7 +71,7 @@ class Input
      * @param key The key to add the callback to
      * @param callback The callback function
      */
-    static void AddKeyboardCallback(int key, std::function<void()> callback);
+    static void add_keyboard_callback(int key, std::function<void()> callback);
     /**
      * @brief Remove a keyboard callback
      *
@@ -80,7 +80,7 @@ class Input
      *
      * @param key The key to remove the callback from
      */
-    static void RemoveKeyboardCallback(int key);
+    static void remove_keyboard_callback(int key);
     /**
      * @brief Keyboard callback
      *
@@ -93,7 +93,7 @@ class Input
      * @param action The key action
      * @param mods Bit field describing which modifier keys were held down
      */
-    static void KeyCallback(GLFWwindow *window, int key, int scancode,
+    static void key_callback(GLFWwindow *window, int key, int scancode,
                             int action, int mods);
     /**
      * @brief Add a mouse position callback
@@ -107,7 +107,7 @@ class Input
      * @param callback The callback function
      */
     static void
-    AddMousePosCallback(Types::MouseCallbackName name,
+    add_mouse_pos_callback(types::mouse_callback_name_t name,
                         std::function<void(double, double)> callback);
     /**
      * @brief Remove a mouse position callback
@@ -117,7 +117,7 @@ class Input
      *
      * @param callback_name The name of the callback
      */
-    static void RemoveMousePosCallback(Types::MouseCallbackName callback_name);
+    static void remove_mouse_pos_callback(types::mouse_callback_name_t callback_name);
     /**
      * @brief Mouse position callback
      *
@@ -128,12 +128,12 @@ class Input
      * @param xpos The new x-coordinate, in screen coordinates, of the cursor
      * @param ypos The new y-coordinate, in screen coordinates, of the cursor
      */
-    static void MousePosCallback(GLFWwindow *window, double xpos, double ypos);
+    static void mouse_pos_callback(GLFWwindow *window, double xpos, double ypos);
 
   private:
-    static std::unordered_map<int, std::function<void()>> keyboardCallbacks;
+    static std::unordered_map<int, std::function<void()>> keyboard_callbacks;
     static std::unordered_map<std::string, std::function<void(double, double)>>
-        mouseCallbacks;
+        mouse_callbacks;
 };
 
-} // namespace Brenta
+} // namespace brenta

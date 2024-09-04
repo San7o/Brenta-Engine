@@ -34,17 +34,17 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct DirectionalLightComponent : Component
+struct DirectionalLightComponent : component
 {
     glm::vec3 direction;
     glm::vec3 ambient;
     glm::vec3 diffuse;
     glm::vec3 specular;
     float strength;
-    std::vector<Brenta::Types::ShaderName> shaders;
+    std::vector<brenta::types::shader_name_t> shaders;
     DirectionalLightComponent()
         : direction(glm::vec3(0.0f)), ambient(glm::vec3(0.0f)),
           diffuse(glm::vec3(0.0f)), specular(glm::vec3(0.0f)), strength(0.0f)
@@ -53,7 +53,7 @@ struct DirectionalLightComponent : Component
     DirectionalLightComponent(glm::vec3 direction, glm::vec3 ambient,
                               glm::vec3 diffuse, glm::vec3 specular,
                               float strength,
-                              std::vector<Brenta::Types::ShaderName> shaders)
+                              std::vector<brenta::types::shader_name_t> shaders)
         : direction(direction), ambient(ambient), diffuse(diffuse),
           specular(specular), strength(strength), shaders(shaders)
     {

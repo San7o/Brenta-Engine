@@ -28,10 +28,10 @@
 
 #include "entity.hpp"
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
 /**
@@ -44,29 +44,29 @@ namespace ECS
  * Example creating a component:
  *
  * ```
- * struct TransformComponent : Component {
+ * struct transform_component : component {
  *   glm::vec3 position;
  *   glm::vec3 rotation;
  *   float scale;
  *
- *   TransformComponent() : ...
- *   TransformComponent(glm::vec3 position, ...
+ *   transform_component() : ...
+ *   transform_component(glm::vec3 position, ...
  * };
  * ```
  *
  * You need to provide a default constructor,
  * any other constructor is optional.
  */
-struct Component
+struct component
 {
-    Entity entity;
+    entity_t entity;
 
-    bool operator==(const Component &other) const
+    bool operator==(const component &other) const
     {
         return (entity == other.entity);
     }
 };
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

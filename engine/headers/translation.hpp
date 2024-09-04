@@ -32,10 +32,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -45,7 +45,7 @@ namespace Types
  * of an object. The matrices can be set using the setView, setProjection,
  * and setModel methods.
  */
-class Translation
+class translation
 {
   public:
     /**
@@ -67,7 +67,7 @@ class Translation
      * This constructor initializes the view, projection, and model
      * matrices to the identity matrix.
      */
-    Translation();
+    translation();
     /**
      * @brief Translation constructor
      *
@@ -77,28 +77,28 @@ class Translation
      * @param projection The projection matrix
      * @param model The model matrix
      */
-    Translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model);
+    translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model);
 
     /**
      * @brief Set the view matrix
      * @param view The view matrix
      */
-    void setView(glm::mat4 view);
+    void set_view(glm::mat4 view);
     /**
      * @brief Set the projection matrix
      * @param projection The projection matrix
      */
-    void setProjection(glm::mat4 projection);
+    void set_projection(glm::mat4 projection);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setProjection(float fov, float near, float far);
+    void set_projection(float fov, float near, float far);
     /**
      * @brief Set the model matrix
      * @param model The model matrix
      */
-    void setModel(glm::mat4 model);
+    void set_model(glm::mat4 model);
     /**
      * @brief Translate the object
      * @param translation The translation vector
@@ -118,9 +118,9 @@ class Translation
      * @brief Set the shader
      * @param shader_name The shader name
      */
-    void setShader(Types::ShaderName shader_name);
+    void set_shader(types::shader_name_t shader_name);
 };
 
-} // namespace Types
+} // namespace types
 
-} // namespace Brenta
+} // namespace brenta
