@@ -3,4 +3,4 @@ build/
 docs/
 logs/
 release/
-.ini
+*.ini
