@@ -26,51 +26,51 @@
 
 #include "translation.hpp"
 
-using namespace Brenta::Types;
+using namespace brenta::types;
 
-Translation::Translation()
+translation::translation()
 {
     this->view = glm::mat4(1.0f);
     this->projection = glm::mat4(1.0f);
     this->model = glm::mat4(1.0f);
 }
 
-Translation::Translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model)
+translation::translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model)
 {
     this->view = view;
     this->projection = projection;
     this->model = model;
 }
 
-void Translation::setView(glm::mat4 view)
+void translation::set_view(glm::mat4 view)
 {
     this->view = view;
 }
 
-void Translation::setProjection(float fov, float near, float far)
+void translation::set_projection(float fov, float near, float far)
 {
     this->projection = glm::perspective(
         glm::radians(fov),
-        (float) Screen::GetWidth() / (float) Screen::GetHeight(), near, far);
+        (float) screen::get_width() / (float) screen::get_height(), near, far);
 }
 
-void Translation::setProjection(glm::mat4 projection)
+void translation::set_projection(glm::mat4 projection)
 {
     this->projection = projection;
 }
 
-void Translation::setModel(glm::mat4 new_model)
+void translation::set_model(glm::mat4 new_model)
 {
     this->model = new_model;
 }
 
-void Translation::translate(glm::vec3 translation)
+void translation::translate(glm::vec3 translation)
 {
     this->model = glm::translate(this->model, translation);
 }
 
 /* Note: the order of rotations is important */
-void Translation::rotate(glm::vec3 rotation)
+void translation::rotate(glm::vec3 rotation)
 {
     this->model = glm::rotate(this->model, glm::radians(rotation.x),
                               glm::vec3(1.0f, 0.0f, 0.0f));
@@ -80,16 +80,16 @@ void Translation::rotate(glm::vec3 rotation)
                               glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
-void Translation::scale(float scale)
+void translation::scale(float scale)
 {
     this->model = glm::scale(this->model, glm::vec3(scale));
 }
 
-void Translation::setShader(Types::ShaderName shader_name)
+void translation::set_shader(types::shader_name_t shader_name)
 {
-    Shader::Use(shader_name);
+    shader::use(shader_name);
 
-    Shader::SetMat4(shader_name, "view", this->view);
-    Shader::SetMat4(shader_name, "projection", this->projection);
-    Shader::SetMat4(shader_name, "model", this->model);
+    shader::set_mat4(shader_name, "view", this->view);
+    shader::set_mat4(shader_name, "projection", this->projection);
+    shader::set_mat4(shader_name, "model", this->model);
 }

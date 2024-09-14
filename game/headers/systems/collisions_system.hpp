@@ -38,15 +38,15 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
+using namespace brenta::ecs;
+using namespace brenta::ecs::types;
 
 glm::vec3 ResolveCollision(glm::vec3 position1, glm::vec3 position2,
                            float radius1, float radius2, float distance);
 
-struct CollisionsSystem : System<SphereColliderComponent, TransformComponent>
+struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
 {
-    void run(std::vector<Entity> matches) const override
+    void run(std::vector<entity_t> matches) const override
     {
         if (matches.empty())
             return;
@@ -58,15 +58,15 @@ struct CollisionsSystem : System<SphereColliderComponent, TransformComponent>
                 if (i == j)
                     continue;
                 auto sphere_component1 =
-                    World::EntityToComponent<SphereColliderComponent>(
+                    world::entity_to_component<SphereColliderComponent>(
                         matches[i]);
                 auto transform_component1 =
-                    World::EntityToComponent<TransformComponent>(matches[i]);
+                    world::entity_to_component<TransformComponent>(matches[i]);
                 auto sphere_component2 =
-                    World::EntityToComponent<SphereColliderComponent>(
+                    world::entity_to_component<SphereColliderComponent>(
                         matches[j]);
                 auto transform_component2 =
-                    World::EntityToComponent<TransformComponent>(matches[j]);
+                    world::entity_to_component<TransformComponent>(matches[j]);
 
                 float distance = glm::distance(transform_component1->position,
                                                transform_component2->position);
@@ -74,9 +74,9 @@ struct CollisionsSystem : System<SphereColliderComponent, TransformComponent>
                     < sphere_component1->radius + sphere_component2->radius)
                 {
                     auto physics_component1 =
-                        World::EntityToComponent<PhysicsComponent>(matches[i]);
+                        world::entity_to_component<PhysicsComponent>(matches[i]);
                     auto physics_component2 =
-                        World::EntityToComponent<PhysicsComponent>(matches[j]);
+                        world::entity_to_component<PhysicsComponent>(matches[j]);
                     if (physics_component1 == nullptr
                         || physics_component2 == nullptr)
                     {

@@ -28,9 +28,9 @@
 
 #include "resource.hpp"
 
-using namespace Brenta::ECS;
+using namespace brenta::ecs;
 
-struct WireframeResource : Resource
+struct WireframeResource : resource
 {
     bool enabled;
     WireframeResource(bool e) : enabled(e)

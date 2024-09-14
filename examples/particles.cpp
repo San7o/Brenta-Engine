@@ -29,21 +29,21 @@
 #include <bitset>
 #include <filesystem>
 
-using namespace Brenta;
+using namespace brenta;
 
 // Default resolution
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
 
 /* default camera */
-namespace Brenta
+namespace brenta
 {
-Camera camera = Camera();
+    camera default_camera = camera();
 }
 
 int main()
 {
-    Engine engine = Engine::Builder()
+    engine eng = engine::builder()
                         .use_screen(true)
                         .use_logger(true)
                         .set_screen_width(SCR_WIDTH)
@@ -52,7 +52,7 @@ int main()
                         .set_screen_msaa(true)
                         .set_screen_vsync(true)
                         .set_screen_title("Game")
-                        .set_log_level(Brenta::Types::LogLevel::INFO)
+                        .set_log_level(types::log_level::INFO)
                         .set_log_file("./logs/log.txt")
                         .set_gl_blending(true)
                         .set_gl_cull_face(true)
@@ -60,9 +60,9 @@ int main()
                         .set_gl_depth_test(true)
                         .build();
 
-    camera = Camera::Builder()
-                 .set_camera_type(Enums::CameraType::SPHERICAL)
-                 .set_projection_type(Enums::ProjectionType::PERSPECTIVE)
+    default_camera = camera::builder()
+                 .set_camera_type(enums::camera_type::SPHERICAL)
+                 .set_projection_type(enums::projection_type::PERSPECTIVE)
                  .set_spherical_coordinates({1.25f, 1.25f, 10.0f})
                  .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
                  .set_movement_speed(2.5f)
@@ -70,13 +70,13 @@ int main()
                  .set_zoom(45.0f)
                  .build();
 
-    ParticleEmitter emitter =
-        ParticleEmitter::Builder()
-            .set_camera(&camera)
+    particle_emitter emitter =
+        particle_emitter::builder()
+            .set_camera(&default_camera)
             .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
             .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
             .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-            .set_starting_timeToLive(0.5f)
+            .set_starting_time_to_live(0.5f)
             .set_num_particles(1000)
             .set_spawn_rate(0.01f)
             .set_scale(1.0f)
@@ -88,19 +88,22 @@ int main()
             .set_atlas_index(3)
             .build();
 
-    Time::Update(Screen::GetTime());
-    while (!Screen::isWindowClosed())
+    time::update(screen::get_time());
+    while (!screen::is_window_closed())
     {
-        GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
-        GL::Clear();
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
 
-        emitter.updateParticles(Time::GetDeltaTime());
-        emitter.renderParticles();
+        gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+        gl::clear();
 
-        Time::Update(Screen::GetTime());
+        emitter.update_particles(time::get_delta_time());
+        emitter.render_particles();
 
-        Screen::PollEvents();
-        Screen::SwapBuffers();
+        time::update(screen::get_time());
+
+        screen::poll_events();
+        screen::swap_buffers();
     }
 
     return 0;

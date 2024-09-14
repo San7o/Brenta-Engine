@@ -33,10 +33,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct SphereColliderComponent : Component
+struct SphereColliderComponent : component
 {
     float radius;
     SphereColliderComponent() : radius(1.0f)

@@ -31,13 +31,13 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -45,7 +45,7 @@ namespace Types
  *
  * This type is used to represent a null value.
  */
-struct None
+struct none
 {
 };
 

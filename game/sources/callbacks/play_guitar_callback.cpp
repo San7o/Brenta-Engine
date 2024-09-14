@@ -28,10 +28,10 @@
 
 #include "engine.hpp"
 
-using namespace Brenta;
+using namespace brenta;
 
-void InitPlayGuitarCallback()
+void init_play_guitar_callback()
 {
-    auto play_guitar = []() { Audio::PlayAudio("guitar"); };
-    Input::AddKeyboardCallback(GLFW_KEY_P, play_guitar);
+    auto play_guitar = []() { audio::play_audio("guitar"); };
+    input::add_keyboard_callback(GLFW_KEY_P, play_guitar);
 }

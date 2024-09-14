@@ -28,10 +28,10 @@
 
 #include "buffer.hpp"
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -42,7 +42,7 @@ namespace Types
  * functions to create, bind, unbind, delete and rescale
  * the FrameBuffer.
  */
-class FrameBuffer : public Buffer
+class framebuffer : public buffer
 {
   public:
     /**
@@ -53,12 +53,16 @@ class FrameBuffer : public Buffer
      * @brief Render Buffer ID
      */
     GLuint render_buffer_id;
-    
+    /**
+     * @brief Format of the framebuffer
+     * Default is GL_RGBA
+     */
+    GLenum format; 
     /**
      * @brief Empty constructor
      * Does nothing
      */
-    FrameBuffer()
+    framebuffer()
     {
     }
     /**
@@ -67,32 +71,32 @@ class FrameBuffer : public Buffer
      * @param width Width of the framebuffer
      * @param height Height of the framebuffer
      */
-    FrameBuffer(int width, int height);
+    framebuffer(int width, int height, GLenum format = GL_RGBA);
     /**
      * @brief Destructor
      * Deletes the framebuffer and its texture
      */
-    ~FrameBuffer();
+    ~framebuffer();
     /**
      * @brief Bind the framebuffer
      */
-    void Bind();
+    void bind();
     /**
      * @brief Unbind the framebuffer
      */
-    void Unbind();
+    void unbind();
     /**
      * @brief Delete the framebuffer and its texture
      */
-    void Delete();
-    void CopyData(GLsizeiptr size, const void *data, GLenum usage)
+    void destroy();
+    void copy_data(GLsizeiptr size, const void *data, GLenum usage)
     {
     }
 
-    void CopyVertices(GLsizeiptr size, const void *data, GLenum usage)
+    void copy_vertices(GLsizeiptr size, const void *data, GLenum usage)
     {
     }
-    void CopyIndices(GLsizeiptr size, const void *data, GLenum usage)
+    void copy_indices(GLsizeiptr size, const void *data, GLenum usage)
     {
     }
     /**
@@ -100,9 +104,14 @@ class FrameBuffer : public Buffer
      * @param width New width of the framebuffer
      * @param height New height of the framebuffer
      */
-    void Rescale(int width, int height);
+    void rescale(int width, int height);
+    /**
+     * @brief Set the format of the framebuffer
+     * @param format New format of the framebuffer
+     */
+    void set_format(GLenum format);
 };
 
-} // namespace Types
+} // namespace types
 
-} // namespace Brenta
+} // namespace brenta

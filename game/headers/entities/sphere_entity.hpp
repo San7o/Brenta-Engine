@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitSphereEntity();
+void init_sphere_entity();

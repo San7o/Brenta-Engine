@@ -31,54 +31,54 @@
 #include <typeinfo>
 #include <unordered_map>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct TestResource : Resource {
+struct TestResource : resource {
     int payload;
     TestResource(int payload) : payload(payload) {}
 };
 
 TEST_CASE("Add, get and remove a resource from the world")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
     /* add the resource */
     TestResource resource = TestResource(69);
-    World::AddResource<TestResource>(resource);
+    world::add_resource<TestResource>(resource);
     
     /* get the resources */
-    auto resources = World::getResources();
+    auto resources = world::get_resources();
     REQUIRE(resources != nullptr);
     REQUIRE(resources->size() == 1);
     REQUIRE(resources->count(typeid(TestResource)) == 1);
 
     /* get the resource */
-    auto my_resource = World::GetResource<TestResource>();
+    auto my_resource = world::get_resource<TestResource>();
     REQUIRE(my_resource != nullptr);
     REQUIRE(my_resource->payload == 69);
 
     /* remove the resource */
-    World::RemoveResource<TestResource>();
+    world::remove_resource<TestResource>();
     REQUIRE(resources->size() == 0);
     REQUIRE(resources->count(typeid(TestResource)) == 0);
     
     /* get the deleted resource */
-    my_resource = World::GetResource<TestResource>();
+    my_resource = world::get_resource<TestResource>();
     REQUIRE(my_resource == nullptr);
 
-    World::Delete();
+    world::destroy();
 }
 
 TEST_CASE("Get an unexisting resource")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
     /* get the resource */
-    auto my_resource = World::GetResource<TestResource>();
+    auto my_resource = world::get_resource<TestResource>();
     REQUIRE(my_resource == nullptr);
 
-    World::Delete();
+    world::destroy();
 }

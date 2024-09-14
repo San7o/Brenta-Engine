@@ -31,9 +31,9 @@
 #include <stb_image.h> /* Image loading library */
 #include <string>
 
-using namespace Brenta;
+using namespace brenta;
 
-unsigned int Texture::LoadTexture(std::string path, GLint wrapping,
+unsigned int texture::load_texture(std::string path, GLint wrapping,
                                   GLint filtering_min, GLint filtering_mag,
                                   GLboolean hasMipmap, GLint mipmap_min,
                                   GLint mipmap_mag, bool flip)
@@ -44,39 +44,39 @@ unsigned int Texture::LoadTexture(std::string path, GLint wrapping,
     // Texture::BindTexture(GL_TEXTURE_2D, texture, wrapping, filtering_min,
     // filtering_mag, hasMipmap, mipmap_min, mipmap_mag);
 
-    ReadImage(path.c_str(), flip);
+    read_image(path.c_str(), flip);
     return texture;
 }
 
-void Texture::ActiveTexture(GLenum texture)
+void texture::active_texture(GLenum texture)
 {
     glActiveTexture(texture);
 }
 
-void Texture::BindTexture(GLenum target, unsigned int texture, GLint wrapping,
+void texture::bind_texture(GLenum target, unsigned int texture, GLint wrapping,
                           GLint filtering_min, GLint filtering_mag,
                           GLboolean hasMipmap, GLint mipmap_min,
                           GLint mipmap_mag)
 {
     glBindTexture(target, texture);
-    SetTextureWrapping(wrapping);
-    SetTextureFiltering(filtering_min, filtering_mag);
-    SetMipmap(hasMipmap, mipmap_min, mipmap_mag);
+    set_texture_wrapping(wrapping);
+    set_texture_filtering(filtering_min, filtering_mag);
+    set_mipmap(hasMipmap, mipmap_min, mipmap_mag);
 }
 
-void Texture::SetTextureWrapping(GLint wrapping)
+void texture::set_texture_wrapping(GLint wrapping)
 {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapping);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapping);
 }
 
-void Texture::SetTextureFiltering(GLint filtering_min, GLint filtering_mag)
+void texture::set_texture_filtering(GLint filtering_min, GLint filtering_mag)
 {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtering_min);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtering_mag);
 }
 
-void Texture::SetMipmap(GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag)
+void texture::set_mipmap(GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag)
 {
     if (hasMipmap)
     {
@@ -85,7 +85,7 @@ void Texture::SetMipmap(GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag)
     }
 }
 
-void Texture::ReadImage(const char *path, bool flip)
+void texture::read_image(const char *path, bool flip)
 {
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(flip);

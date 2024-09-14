@@ -34,10 +34,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct PhysicsComponent : Component
+struct PhysicsComponent : component
 {
     float mass;
     float density;

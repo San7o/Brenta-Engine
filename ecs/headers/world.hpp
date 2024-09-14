@@ -38,14 +38,13 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace ECS
+namespace ecs
 {
 
-using namespace Types;
-using namespace Brenta::Utils;
+using namespace types;
 
 /**
  * @brief World class
@@ -54,10 +53,10 @@ using namespace Brenta::Utils;
  * systems in the game world, provides acces to them through queries and is
  * responsible for updating the game world.
  */
-class World
+class world
 {
   public:
-    World() = delete;
+    world() = delete;
 
     /**
      * @brief Initialize the world
@@ -65,42 +64,42 @@ class World
      * This method initializes the world, creating the entities, components,
      * and resources containers.
      */
-    static void Init();
+    static void init();
     /**
      * @brief Delete the world
      *
      * This method deletes the world, freeing the entities, components,
      * and resources containers, freeing the memory.
      */
-    static void Delete();
+    static void destroy();
     /**
      * @brief Tick the world
      *
      * This method ticks the world, calling each system in the world.
      */
-    static void Tick();
+    static void tick();
 
     /**
      * @brief Get the entities container
      * @return The entities container
      */
-    static std::set<Entity> *getEntities();
+    static std::set<entity_t> *get_entities();
     /**
      * @brief Get the resources container
      * @return The resources container
      */
-    static UMap<std::type_index, Resource> *getResources();
+    static UMap<std::type_index, resource> *get_resources();
     /**
      * @brief Get the components container
      * @return The components container
      */
-    static UMapVec<std::type_index, Component> *getComponents();
+    static UMapVec<std::type_index, component> *get_components();
 
     /**
      * @brief Create a new entity
      * @return The new entity
      */
-    static Entity NewEntity();
+    static entity_t new_entity();
 
     /**
      * @brief Get a pointer to a resource
@@ -113,10 +112,10 @@ class World
      *
      * Example:
      * ```
-     * auto resource = World::GetResource<Shader>();
+     * auto resource = world::get_resource<shader>();
      * ```
      */
-    template <typename R> static R *GetResource()
+    template <typename R> static R *get_resource()
     {
         if (!resources)
         {
@@ -148,11 +147,11 @@ class World
      *
      * Example:
      * ```
-     * World::AddComponent<Position>(entity, {0, 0, 0});
+     * world::add_component<position>(entity, {0, 0, 0});
      * ```
      */
     template <typename C>
-    static void AddComponent(Entity entity, C new_component)
+    static void add_component(entity_t entity, C new_component)
     {
         if (!components)
         {
@@ -183,10 +182,10 @@ class World
      *
      * Example:
      * ```
-     * World::AddResource<Shader>({shader});
+     * world::add_resource<shader_res>({shader});
      * ```
      */
-    template <typename R> static void AddResource(R resource)
+    template <typename R> static void add_resource(R resource)
     {
         if (!resources)
         {
@@ -209,10 +208,10 @@ class World
      *
      * Example:
      * ```
-     * World::RemoveEntity(entity);
+     * world::remove_entity(entity);
      * ```
      */
-    static void RemoveEntity(Entity entity);
+    static void remove_entity(entity_t entity);
 
     /**
      * @brief Remove a resource
@@ -226,7 +225,7 @@ class World
      * World::RemoveResource<Shader>();
      * ```
      */
-    template <typename R> static void RemoveResource()
+    template <typename R> static void remove_resource()
     {
         if (!resources)
         {
@@ -256,10 +255,10 @@ class World
      *
      * Example:
      * ```
-     * auto component = World::EntityToComponent<Position>(entity);
+     * auto component = world::entity_to_component<position_comp>(entity);
      * ```
      */
-    template <typename C> static C *EntityToComponent(Entity entity)
+    template <typename C> static C *entity_to_component(entity_t entity)
     {
         if (!components)
         {
@@ -289,12 +288,12 @@ class World
      *
      * This method runs all the systems in the world.
      */
-    static void RunSystems();
+    static void run_systems();
 
   private:
-    static SetPtr<Entity> entities;
-    static UMapPtr<std::type_index, Resource> resources;
-    static UMapVecPtr<std::type_index, Component> components;
+    static SetPtr<ecs::entity_t> entities;
+    static UMapPtr<std::type_index, resource> resources;
+    static UMapVecPtr<std::type_index, component> components;
 
     /* Iterate over all systems and run them */
     template <typename Tuple, std::size_t... Is>
@@ -309,27 +308,27 @@ class World
                           std::tuple_size_v<std::remove_reference_t<Tuple>>>{});
     }
     template <typename... T>
-    static std::vector<ECS::Entity> QueryComponentsTuple(std::tuple<T...>)
+    static std::vector<ecs::entity_t> query_components_tuple(std::tuple<T...>)
     {
-        return QueryComponents<T...>();
+        return query_components<T...>();
     }
     template <typename System> static void process(const System &system)
     {
-        using Dependencies = typename System::dependencies;
-        std::vector<ECS::Entity> matches = QueryComponentsTuple(Dependencies{});
+        using dependencies = typename System::dependencies;
+        std::vector<ecs::entity_t> matches = query_components_tuple(dependencies{});
         system.run(matches);
     }
 
-    template <typename C, typename... Components, typename N = None>
-    static std::vector<Entity> QueryComponents()
+    template <typename C, typename... Components, typename N = none>
+    static std::vector<entity_t> query_components()
     {
-        if (!World::components)
+        if (!world::components)
         {
             ERROR("Cannot query: world not initialized");
             return {};
         }
 
-        std::vector<Entity> matched;
+        std::vector<entity_t> matched;
 
         if (!components->count(std::type_index(typeid(C))))
         {
@@ -346,17 +345,17 @@ class World
         if (sizeof...(Components) == 0)
             return matched;
 
-        QueryComponentsRec<Components..., None>(&matched);
+        query_components_rec<Components..., none>(&matched);
 
         return matched;
     }
 
     template <typename C, typename... Components>
-    static void QueryComponentsRec(std::vector<Entity> *entities)
+    static void query_components_rec(std::vector<entity_t> *entities)
     {
         if (entities->empty())
             return;
-        std::vector<Entity> matched;
+        std::vector<entity_t> matched;
 
         if (!components->count(std::type_index(typeid(C))))
         {
@@ -377,10 +376,10 @@ class World
         if (sizeof...(Components) == 0)
             return;
 
-        (QueryComponentsRec<Components>(entities), ...);
+        (query_components_rec<Components>(entities), ...);
     }
 };
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

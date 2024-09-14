@@ -18,45 +18,45 @@ Now we will go a bit deeper on how this works, let's take a look:
 
 ### The Main loop
 
-The main loop calls `World::Tick()`. At each tick, all the 
+The main loop calls `world::tick()`. At each tick, all the 
 Systems will be called in the order they were added in 
 the World. 
 
 The engine provides functions to interact with the window in `Brenta::Screen`, 
-some OpenGL helper functions in `Brenta::GL`, a nice `Brenta::Logger`,
-input handling with `Brenta::Input`, manage time with `Brenta::Time`,
-display text with `Brenta::Text` and more!
+some OpenGL helper functions in `brenta::gl`, a nice `brenta::logger`,
+input handling with `brenta::input`, manage time with `brenta::time`,
+display text with `brenta::text` and more!
 
 ```c++
 #include "engine.hpp"
 #include "ecs.hpp"
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
+
+// Initialize a default camera
+namespace brenta
+{
+    camera default_camera = camera();
+}
 
 int main() {
 
-    Logger::Init();
-    /* 
-     * Set Log level, default = WARNING
-     * The logger will automatically save
-     * all logs in "./logs/log.txt". Check out
-     * "common/engine_logger.h" for more
-     * functionalities
-     */
-    Logger::SetLogLevel(Types::LogLevel::INFO);
+    engine eng = engine::builder()
+        .use_screen(true)
+        .use_audio(true)
+        .use_input(true)
+        .use_logger(true)
+        .use_text(true)
+        .use_ecs(true)
+        .set_screen_width(SCR_WIDTH)
+        .set_screen_height(SCR_HEIGHT)
+        .set_screen_is_mouse_captured(false)
+        // ...
+        .build();
 
-    /* Initialize the screen */
-    Screen::Init(SCR_WIDTH, SCR_HEIGHT);
-
-    /* Load OpenGL */
-    GL::LoadOpenGL();
-
-    /* Initialize the world */
-    World::Init();
-
-    InitPlayer();
-    InitRenderer();
     // Your init functions ...
+    init_player();
+    init_renderer();
 
     /* 
      * It's nice to reset the time
@@ -64,20 +64,20 @@ int main() {
      * so that the first frame will have
      * a delta time of 0.
      */
-    Time::Update(Screen::GetTime());
-    while(!Screen::isWindowClosed()) {
+    time::update(screen::get_time());
+    while(!screen::is_window_closed()) {
 
-        GL::SetColor(0.2f, 0.3f, 0.3f, 1.0f);
-        GL::Clear();
+        gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+        gl::clear();
 
-        World::Tick();
+        world::tick();
 
-        Screen::PollEvents();
-        Screen::SwapBuffers();
+        screen::poll_wvents();
+        screen::swap_buffers();
     }
     
-    World::Delete();
-    Screen::Terminate();
+    // The engine will take care of deallocation
+    // of the submodules
     return 0;
 }
 ```
@@ -91,15 +91,15 @@ You can define your own component like so:
 
 ```c++
 /* This is a component */
-struct ModelComponent : Component {
-    Model model;
-    Types::ShaderName shader;
+struct model_component : component {
+    model mod;
+    types::shader_name_t shader;
 
     /* You need to provide a default constructor */
-    ModelComponent() {};
+    model_component() {};
 
     /* Any other construtor is optional */
-    ModelComponent(Model model, Types::ShaderName shader)
+    model_component(model mod, types::shader_name_t shader)
             : model(model), shader(shader) {}
 };
 ```
@@ -110,8 +110,8 @@ A System is a function that gets called at each
 Tick in the reder loop. It contains all the logic of 
 the World. You will interact with the Entities, 
 Components and Resources via queries. You can specify
-an entity to query by adding components to System<...>,
-the World will provide you with an std::vector<Entity>
+an entity to query by adding components to `system<...>`,
+the World will provide you with an `std::vector<entity_t>`
 of the entities that have all the components you
 specified.
 
@@ -119,20 +119,21 @@ Here is an example:
 
 ```c++
 /* Specify ModelComponent and TransformComponent query */
-struct RendererSystem : System<ModelComponent, TransformComponent> {
+struct renderer_system : system<model_component, transform_component> {
 
     /* You need to define this function */
-    void run(std::vector<Entity> matches) const override {
+    void run(std::vector<entity_t> matches) const override {
       if (matches.empty()) return;
 
       for (auto match : matches) {
           /* Get the model component */
-          auto model_component = World::EntityToComponent<ModelComponent>(match);
-          
+          auto model_c = world::entity_to_component<model_component>(match);
+          auto my_model = model_c->mod;
+
           /* Translate the model */
           // ...
 
-          myModel.Draw(default_shader);
+          my_model.draw(default_shader);
       }
     }
 };
@@ -141,8 +142,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent> {
  * Somewhere in your code you need to
  * have one (and only one) call on this macro
  */
-REGISTER_SYSTEMS(RenderSystem);
-
+REGISTER_SYSTEMS(render_system);
 ```
 
 ### Entity
@@ -151,51 +151,50 @@ You can create Entities and assign Components to them like so:
 
 ```c++
 /* Create the player entity */
-auto player_entity = World::NewEntity();
+auto player_entity = world::new_entity();
 
 
 /* Add the player component to the player entity */
-World::AddComponent<PlayerComponent>(player_entity, PlayerComponent());
+world::add_component<player_component>(player_entity, player_component());
 
 /* Load model and shader */
 // ...
 
 /* Add the model component to the player entity */
-auto model_component = ModelComponent(model, "default_shader");
-World::AddComponent<ModelComponent>(player_entity, model_component);
-
+auto model_c = model_component(mod, "default_shader");
+world::add_component<model_component>(player_entity, model_c);
 ```
 
 ### Resources
 
-Resources hold global data accessible via `World::GetResource<Name>()`.
+Resources hold global data accessible via `world::get_resource<name>()`.
 You can define a Resource like so:
 
 ```c++
 /* This is a resource */
-struct WireframeResource : Resource {
+struct wireframe_resource : resource {
     bool enabled;
-    WireframeResource(bool e) : enabled(e) {}
+    wireframe_resource(bool e) : enabled(e) {}
 };
 
-World::AddResource<WireframeResource>(WireframeResource(false));
+world::add_resource<wireframe_resource>(wireframe_resource(false));
 ```
 
 ### Callbacks
 
 Callbacks are funcitons that are called when the specified `key` is pressed,
-the code responsible for this is in `ECS::Input`. Here is an example:
+the code responsible for this is in `ecs::input`. Here is an example:
 ```c++
 auto toggle_wireframe_callback = []() {
 
-    auto wireframe = World::GetResource("WireframeResource");
+    auto wireframe = world::get_resource("WireframeResource");
     if (wireframe == nullptr) return;
 
-    GL::SetPoligonMode(!wireframe->enabled);
+    gl::set_poligon_mode(!wireframe->enabled);
     wireframe->enabled = !wireframe->enabled;
 };
 
-Input::AddCallback(GLFW_KEY_F, toggle_wireframe_callback);
+input::add_callback(GLFW_KEY_F, toggle_wireframe_callback);
 ```
 
 ### Particles
@@ -206,11 +205,11 @@ of particles. Here's a quick look on the API:
 
 ```C++
 /* Nice builder patterns */
-ParticleEmitter emitter = ParticleEmitter::Builder()
+particle_emitter emitter = particle_emitter::builder()
         .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
         .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
         .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
-        .set_starting_timeToLive(0.5f)
+        .set_starting_time_to_live(0.5f)
         .set_num_particles(1000)
         .set_spawn_rate(0.01f)
         .set_scale(1.0f)
@@ -223,28 +222,29 @@ ParticleEmitter emitter = ParticleEmitter::Builder()
         .build();
 
 // Inside the game loop:
-emitter.updateParticles(Time::GetDeltaTime());
-emitter.renderParticles();
+emitter.update_particles(time::get_delta_time());
+emitter.render_particles();
 ```
 
 
 ### Audio
 
-There is a simple-to-use audio API in `Brenta::Audio`. You can load sound files,
+There is a simple-to-use audio API in `brenta::audio`. You can load sound files,
 create channels and play a sound on a channel. There can be only one sound
 playing per channel, but of course there can be multiple channels playing
 so some channel management from the developer is needed:
 
 ```c++
-Audio::LoadAudio("guitar", std::filesystem::absolute("assets/audio/guitar.wav"));
-Audio::PlayAudio("guitar"); /* This will use the "default_stream", or you can specify
+audio::load_audio("guitar", std::filesystem::absolute("assets/audio/guitar.wav"));
+audio::play_audio("guitar"); /* This will use the "default_stream", or you can specify
                                a particular stream */
-Audio::CreateStream("background_music");
-Audio::PlayAudio("guitar", "background_music");
+audio::create_stream("background_music");
+audio::play_audio("guitar", "background_music");
 ```
 
 There are many other examples in the `examples` directory and in the `game`
-which is guaranteed to be updated to the lastest APIs.
+which is guaranteed to be updated to the lastest APIs. Check out the full documentation
+for a deeper look.
 
 Here is an high lievel simplified view of those objects:
 

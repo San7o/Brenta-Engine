@@ -31,109 +31,108 @@
 
 #include <algorithm>
 
-using namespace Brenta::ECS;
-using namespace Brenta::Utils;
+using namespace brenta::ecs;
 
-SetPtr<Entity> World::entities;
-UMapPtr<std::type_index, Resource> World::resources;
-UMapVecPtr<std::type_index, Component> World::components;
+SetPtr<entity_t> world::entities;
+UMapPtr<std::type_index, resource> world::resources;
+UMapVecPtr<std::type_index, component> world::components;
 
-template <> void World::QueryComponentsRec<None>(std::vector<Entity> *entities)
+template <> void world::query_components_rec<none>(std::vector<entity_t> *entities)
 {
 }
 
-void World::Init()
+void world::init()
 {
-    using namespace Types;
-    World::entities = std::make_unique<std::set<Entity>>();
-    World::resources = std::make_unique<UMap<std::type_index, Resource>>();
-    World::components = std::make_unique<UMapVec<std::type_index, Component>>();
+    using namespace types;
+    world::entities   = std::make_unique<std::set<entity_t>>();
+    world::resources  = std::make_unique<UMap<std::type_index, resource>>();
+    world::components = std::make_unique<UMapVec<std::type_index, component>>();
 
     INFO("World initialized");
 }
 
-void World::Delete()
+void world::destroy()
 {
-    World::entities.reset();
-    World::components.reset();
-    World::resources.reset();
+    world::entities.reset();
+    world::components.reset();
+    world::resources.reset();
 
     INFO("World deleted");
 }
 
-void World::Tick()
+void world::tick()
 {
-    World::RunSystems();
+    world::run_systems();
 }
 
-Entity World::NewEntity()
+entity_t world::new_entity()
 {
-    if (!World::entities)
+    if (!world::entities)
     {
         ERROR("Cannot create entity: world not initialized");
         return -1;
     }
 
-    if (World::entities->empty())
+    if (world::entities->empty())
     {
-        World::entities->insert(1);
+        world::entities->insert(1);
         return 1;
     }
 
-    Entity new_entity = *(World::entities->rbegin()) + 1;
-    World::entities->insert(new_entity);
+    entity_t new_entity = *(world::entities->rbegin()) + 1;
+    world::entities->insert(new_entity);
 
     INFO("New entity created: ", new_entity);
 
     return new_entity;
 }
 
-std::set<Entity> *World::getEntities()
+std::set<entity_t> *world::get_entities()
 {
-    if (!World::entities)
+    if (!world::entities)
     {
         ERROR("Cannot get entities: world not initialized");
         return nullptr;
     }
-    return World::entities.get();
+    return world::entities.get();
 }
 
-UMap<std::type_index, Resource> *World::getResources()
+UMap<std::type_index, resource> *world::get_resources()
 {
-    if (!World::resources)
+    if (!world::resources)
     {
         ERROR("Cannot get resources: world not initialized");
         return nullptr;
     }
-    return World::resources.get();
+    return world::resources.get();
 }
 
-UMapVec<std::type_index, Component> *World::getComponents()
+UMapVec<std::type_index, component> *world::get_components()
 {
-    if (!World::components)
+    if (!world::components)
     {
         ERROR("Cannot get components: world not initialized");
         return nullptr;
     }
-    return World::components.get();
+    return world::components.get();
 }
 
-void World::RemoveEntity(Entity entity)
+void world::remove_entity(entity_t entity)
 {
-    if (!World::entities)
+    if (!world::entities)
     {
         ERROR("Cannot remove entity: world not initialized");
         return;
     }
 
-    World::entities->erase(entity);
+    world::entities->erase(entity);
 
-    for (auto iter = World::components->begin();
-         iter != World::components->end(); iter++)
+    for (auto iter = world::components->begin();
+         iter != world::components->end(); iter++)
     {
         iter->second.erase(
             std::remove_if(iter->second.begin(), iter->second.end(),
-                           [&entity](const std::shared_ptr<Component> &elem)
+                           [&entity](const std::shared_ptr<component> &elem)
                            { return elem->entity == entity; }),
             iter->second.end());
     }

@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitPointLightEntity();
+void init_point_light_entity();

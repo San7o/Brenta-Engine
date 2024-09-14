@@ -26,76 +26,75 @@
 
 #include "engine.hpp"
 
-using namespace Brenta;
-using namespace Brenta::Types;
-using namespace Brenta::Utils;
+using namespace brenta;
+using namespace brenta::types;
 
-std::unordered_map<int, std::function<void()>> Input::keyboardCallbacks;
+std::unordered_map<int, std::function<void()>> input::keyboard_callbacks;
 std::unordered_map<std::string, std::function<void(double, double)>>
-    Input::mouseCallbacks;
+    input::mouse_callbacks;
 
-void Input::Init()
+void input::init()
 {
-    Screen::SetKeyCallback(Input::KeyCallback);
-    Screen::SetMousePosCallback(Input::MousePosCallback);
+    screen::set_key_callback(input::key_callback);
+    screen::set_mouse_pos_callback(input::mouse_pos_callback);
 
     INFO("Input initialized");
 }
 
-void Input::AddKeyboardCallback(int key, std::function<void()> callback)
+void input::add_keyboard_callback(int key, std::function<void()> callback)
 {
-    Input::keyboardCallbacks[key] = callback;
+    input::keyboard_callbacks[key] = callback;
     INFO("Added callback for key: " + std::to_string(key));
 }
 
-void Input::RemoveKeyboardCallback(int key)
+void input::remove_keyboard_callback(int key)
 {
-    if (Input::keyboardCallbacks.find(key) == Input::keyboardCallbacks.end())
+    if (input::keyboard_callbacks.find(key) == input::keyboard_callbacks.end())
     {
         ERROR("No callback found for key: ", key);
         return;
     }
 
-    Input::keyboardCallbacks.erase(key);
+    input::keyboard_callbacks.erase(key);
     INFO("Removed callback for key: ", key);
 }
 
-void Input::KeyCallback(GLFWwindow *window, int key, int scancode, int action,
+void input::key_callback(GLFWwindow *window, int key, int scancode, int action,
                         int mods)
 {
     if (action == GLFW_PRESS)
     {
-        if (Input::keyboardCallbacks.find(key)
-            != Input::keyboardCallbacks.end())
+        if (input::keyboard_callbacks.find(key)
+            != input::keyboard_callbacks.end())
         {
-            Input::keyboardCallbacks.at(key)();
+            input::keyboard_callbacks.at(key)();
         }
     }
 }
 
-void Input::AddMousePosCallback(MouseCallbackName callback_name,
+void input::add_mouse_pos_callback(mouse_callback_name_t callback_name,
                                 std::function<void(double, double)> callback)
 {
-    Input::mouseCallbacks[callback_name] = callback;
+    input::mouse_callbacks[callback_name] = callback;
     INFO("Added callback for mouse: ", callback_name);
 }
 
-void Input::RemoveMousePosCallback(MouseCallbackName callback_name)
+void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
 {
-    if (Input::mouseCallbacks.find(callback_name)
-        == Input::mouseCallbacks.end())
+    if (input::mouse_callbacks.find(callback_name)
+        == input::mouse_callbacks.end())
     {
         ERROR("No callback found for mouse: ", callback_name);
         return;
     }
 
-    Input::mouseCallbacks.erase(callback_name);
+    input::mouse_callbacks.erase(callback_name);
     INFO("Removed callback for mouse: ", callback_name);
 }
 
-void Input::MousePosCallback(GLFWwindow *window, double xpos, double ypos)
+void input::mouse_pos_callback(GLFWwindow *window, double xpos, double ypos)
 {
-    for (auto &callback : Input::mouseCallbacks)
+    for (auto &callback : input::mouse_callbacks)
     {
         callback.second(xpos, ypos);
     }

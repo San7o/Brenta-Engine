@@ -31,10 +31,10 @@
 #include <typeinfo>
 #include <unordered_map>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace brenta::ecs;
 
-struct AComponent : Component {
+struct AComponent : component {
     int payload;
     AComponent() {}
     AComponent(int payload) : payload(payload) {}
@@ -42,14 +42,14 @@ struct AComponent : Component {
 
 TEST_CASE("Add a component to an entity")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
-    Entity entity = World::NewEntity();
+    entity_t entity = world::new_entity();
     REQUIRE(entity != -1);
 
-    World::AddComponent<AComponent>(entity, AComponent(69));
-    auto components = World::getComponents();
+    world::add_component<AComponent>(entity, AComponent(69));
+    auto components = world::get_components();
     REQUIRE(components != nullptr);
     REQUIRE(components->size() == 1);
     REQUIRE(components->count(typeid(AComponent)) == 1);
@@ -63,22 +63,22 @@ TEST_CASE("Add a component to an entity")
     REQUIRE(component->payload == 69);
     REQUIRE(component->entity == entity);
 
-    World::Delete();
+    world::destroy();
 }
 
 TEST_CASE("EntityToComponent")
 {
-    Logger::SetLogLevel(Brenta::Types::LogLevel::DISABLED);
-    World::Init();
+    logger::set_log_level(brenta::types::log_level::DISABLED);
+    world::init();
 
-    Entity entity = World::NewEntity();
+    entity_t entity = world::new_entity();
     REQUIRE(entity != -1);
 
-    World::AddComponent<AComponent>(entity, AComponent(69));
-    auto component = World::EntityToComponent<AComponent>(entity);
+    world::add_component<AComponent>(entity, AComponent(69));
+    auto component = world::entity_to_component<AComponent>(entity);
     REQUIRE(component != nullptr);
     REQUIRE(component->payload == 69);
     REQUIRE(component->entity == entity);
 
-    World::Delete();
+    world::destroy();
 }

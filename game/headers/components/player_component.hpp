@@ -32,10 +32,10 @@
 
 #include <iostream>
 
-using namespace Brenta::ECS;
+using namespace brenta::ecs;
 
 /* Player Component */
-struct PlayerComponent : Component
+struct PlayerComponent : component
 {
     PlayerComponent()
     {

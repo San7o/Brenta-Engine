@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitPlayerEntity();
+void init_player_entity();
