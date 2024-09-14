@@ -79,6 +79,10 @@ struct model_component : component
     }
 };
 
+struct room_component : component {
+    room_component(){}
+};
+
 struct renderer_system : system<model_component, transform_component>
 {
     void run(std::vector<entity_t> matches) const override
@@ -109,17 +113,46 @@ struct renderer_system : system<model_component, transform_component>
 
             t.set_shader(default_shader);
 
-            shader::set_vec3(default_shader, "viewPos", default_camera.get_position());
-            shader::set_float(default_shader, "material.shininess",
-                             model_c->shininess);
-
-            shader::set_int(default_shader, "atlasIndex", 0);
+            //shader::set_vec3(default_shader, "viewPos", default_camera.get_position());
+            //shader::set_float(default_shader, "material.shininess",
+            //                 model_c->shininess);
+            //shader::set_int(default_shader, "atlasIndex", 0);
             my_model.draw(default_shader);
         }
     }
 };
 
-REGISTER_SYSTEMS(renderer_system);
+struct rotate_room_system : system<transform_component, room_component>
+{
+    void run(std::vector<entity_t> matches) const override
+    {
+        if (matches.empty())
+            return;
+        
+        if (screen::is_key_pressed(GLFW_KEY_LEFT))
+        {
+            for (auto match : matches)
+            {
+                auto transform_c =
+                    world::entity_to_component<transform_component>(match);
+
+                transform_c->rotation.y += 1.0f;
+            }
+        }
+        else if (screen::is_key_pressed(GLFW_KEY_RIGHT))
+        {
+            for (auto match : matches)
+            {
+                auto transform_c =
+                    world::entity_to_component<transform_component>(match);
+
+                transform_c->rotation.y -= 1.0f;
+            }
+        }
+    }
+};
+
+REGISTER_SYSTEMS(renderer_system, rotate_room_system);
 
 namespace brenta
 {
@@ -135,16 +168,22 @@ int main()
                         .set_screen_width(SCR_WIDTH)
                         .set_screen_height(SCR_HEIGHT)
                         .set_screen_is_mouse_captured(false)
+                        .set_gl_blending(true)
+                        .set_gl_depth_test(true)
+                        .set_gl_cull_face(true)
+                        .set_gl_multisample(true)
                         .build();
 
-    camera default_camera = camera::builder()
+    default_camera = camera::builder()
                         .set_camera_type(enums::camera_type::AIRCRAFT)
                         .set_projection_type(enums::projection_type::PERSPECTIVE)
-                        .set_position(glm::vec3(0.0f, 5.0f, 20.0f))
+                        .set_position(glm::vec3(0.0f, 20.0f, 25.0f))
                         .set_up(glm::vec3(0.0f, 1.0f, 0.0f))
-                        .set_euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
+                        .set_euler_angles(euler_angles(-90.0f, -30.0f, 0.0f))
+                        .set_zoom(30.0f)
                         .build();
 
+    /*
     // A square
     float vertices[] = {
         // First Triangle
@@ -171,40 +210,28 @@ int main()
                  GL_FRAGMENT_SHADER,
                  "examples/hdr.fs");
 
+    */
+
 #ifdef USE_IMGUI
     brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
 #endif
 
-    particle_emitter emitter =
-        particle_emitter::builder()
-            .set_camera(&default_camera)
-            .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
-            .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-            .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-            .set_starting_time_to_live(0.5f)
-            .set_num_particles(1000)
-            .set_spawn_rate(0.01f)
-            .set_scale(1.0f)
-            .set_atlas_path(
-                std::filesystem::absolute("assets/textures/particle_atlas.png")
-                    .string())
-            .set_atlas_width(8)
-            .set_atlas_height(8)
-            .set_atlas_index(5)
-            .build();
-
     // Room ------------------------------------
     auto room_entity = world::new_entity();
-    world::add_component<transform_component>(room_entity, transform_component());
+    world::add_component<room_component>(room_entity, room_component());
+    auto transform_c = transform_component(glm::vec3(0.0f),
+                    glm::vec3(0.0f, -30.0f, 0.0f), 4.0f);
+    world::add_component<transform_component>(room_entity, transform_c);
     if (shader::get_id("default_shader") == 0)
     {
-        shader::create("default_shader", GL_VERTEX_SHADER,
+        shader::create("default_shader",
+                    GL_VERTEX_SHADER,
                     std::filesystem::absolute("examples/default_shader.vs"),
                     GL_FRAGMENT_SHADER,
                     std::filesystem::absolute("examples/default_shader.fs"));
     }
     model mod(
-        std::filesystem::absolute("assets/models/sphere/sphere.obj"));
+        std::filesystem::absolute("assets/models/90-room/room.obj"));
     auto model_c = model_component(mod, 32.0f, "default_shader");
     world::add_component<model_component>(room_entity,
                                         std::move(model_c));
@@ -229,11 +256,32 @@ int main()
         gl::clear();
 
         // Our scene here
+         
+        // directional light
+        auto shader = "default_shader";
+        shader::use(shader);
+        shader::set_vec3(shader, "dirLight.direction", glm::vec3(-0.2f, -1.0f, -0.3f));
+        shader::set_vec3(shader, "dirLight.ambient", glm::vec3(0.05f, 0.05f, 0.05f));
+        shader::set_vec3(shader, "dirLight.diffuse", glm::vec3(0.4f, 0.4f, 0.4f));
+        shader::set_vec3(shader, "dirLight.specular", glm::vec3(0.5f, 0.5f, 0.5f));
+        shader::set_float(shader, "dirLight.dir_strength", 0.8f);
+        shader::set_bool(shader, "useDirLight", true);
 
-        shader::use("hdr_shader");
+        // point light
+        std::string lightn = "pointLights[0]";
+        shader::set_vec3(shader, (lightn + ".ambient").c_str(), glm::vec3(0.05f, 0.05f, 0.05f));
+        shader::set_vec3(shader, (lightn + ".diffuse").c_str(), glm::vec3(0.8f, 0.8f, 0.8f));
+        shader::set_vec3(shader, (lightn + ".specular").c_str(), glm::vec3(1.0f, 1.0f, 1.0f));
+        shader::set_float(shader, (lightn + ".constant").c_str(), 1.0f);
+        shader::set_float(shader, (lightn + ".linear").c_str(), 0.7f);
+        shader::set_float(shader, (lightn + ".quadratic").c_str(), 1.8f);
+        shader::set_float(shader, (lightn + ".strength").c_str(), 1.0f);
+        shader::set_vec3(shader, (lightn + ".position").c_str(), glm::vec3(0.0f, 10.0f, 0.0f));
+        shader::set_float(shader, (lightn + ".point_strength").c_str(), 1.0f);
+        shader::set_int(shader, "nPointLights", 1);
+        
 
-        emitter.update_particles(time::get_delta_time());
-        emitter.render_particles();
+        //shader::use("hdr_shader");
 
         time::update(screen::get_time());
         world::tick();
