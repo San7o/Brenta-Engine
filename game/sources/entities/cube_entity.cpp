@@ -51,9 +51,9 @@ void init_cube_entity()
     if (shader::get_id("cube_shader") == 0)
     {
         shader::create("cube_shader", GL_VERTEX_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.vs"),
-                    GL_FRAGMENT_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.fs"));
+                       std::filesystem::absolute("game/shaders/shader.vs"),
+                       GL_FRAGMENT_SHADER,
+                       std::filesystem::absolute("game/shaders/shader.fs"));
     }
 
     /* Load the model */
@@ -63,5 +63,5 @@ void init_cube_entity()
     /* Add the model component */
     auto model_component = ModelComponent(m, 32.0f, "cube_shader");
     world::add_component<ModelComponent>(cube_entity,
-                                        std::move(model_component));
+                                         std::move(model_component));
 }

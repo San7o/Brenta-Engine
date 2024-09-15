@@ -71,7 +71,7 @@ class engine
     const char *screen_title;
     bool screen_msaa;
     bool screen_vsync;
-    types::log_level log_level;
+    oak::level log_level;
     std::string log_file;
     std::string text_font;
     int text_size;
@@ -83,7 +83,7 @@ class engine
     engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
            bool uses_text, int screen_width, int screen_height,
            bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
-           const char *screen_title, types::log_level log_level,
+           const char *screen_title, oak::level log_level,
            std::string log_file, std::string text_font, int text_size,
            bool gl_blending, bool gl_cull_face, bool gl_multisample,
            bool gl_depth_test);
@@ -113,8 +113,8 @@ class engine::builder
     bool screen_msaa = false;
     bool screen_vsync = false;
     const char *screen_title = "";
-    types::log_level log_level = types::log_level::WARNING;
-    std::string log_file = "./logs/log.txt";
+    oak::level log_level = oak::level::info;
+    std::string log_file = "";
     std::string text_font = "arial.ttf";
     int text_size = 48;
     bool gl_blending = true;
@@ -133,7 +133,7 @@ class engine::builder
     builder &set_screen_title(const char *screen_title);
     builder &set_screen_msaa(bool screen_msaa);
     builder &set_screen_vsync(bool screen_vsync);
-    builder &set_log_level(types::log_level log_level);
+    builder &set_log_level(oak::level log_level);
     builder &set_log_file(std::string log_file);
     builder &set_text_font(std::string text_font);
     builder &set_text_size(int text_size);
@@ -145,7 +145,7 @@ class engine::builder
     engine build();
 };
 
-} // namespace Brenta
+} // namespace brenta
 
 // Doxygen Documnetation:
 
@@ -470,8 +470,9 @@ class engine::builder
  *   }
  * };
  * ```
- * Note how we used `world::entity_to_component` to get the components associated
- * with an entity. This is a common pattern you will use in your systems.
+ * Note how we used `world::entity_to_component` to get the components
+ * associated with an entity. This is a common pattern you will use in your
+ * systems.
  *
  * After you defined your system, you need to register it. This can be done
  * throught a macro:
@@ -630,7 +631,8 @@ class engine::builder
  *
  * This is an example on how to log a message:
  * ```cpp
- * brenta::logger::log(brenta::types::log_level::DEBUG, "This is a debug message:
+ * brenta::logger::log(brenta::types::log_level::DEBUG, "This is a debug
+ * message:
  * ", "hello");
  * DEBUG("This is a debug message with macro: ", "hello");
  * ```

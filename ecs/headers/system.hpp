@@ -92,6 +92,6 @@ template <typename... T> struct registered_systems
         for_each(systems);                                                     \
     }
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

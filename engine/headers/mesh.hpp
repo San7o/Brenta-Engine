@@ -71,7 +71,7 @@ struct texture
     std::string path;
 };
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief The Mesh class represents a 3D model
@@ -274,4 +274,4 @@ class mesh::builder
     mesh build();
 };
 
-} // namespace Brenta
+} // namespace brenta

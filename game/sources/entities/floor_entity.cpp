@@ -51,9 +51,9 @@ void init_floor_entity()
     {
         /* Load the shader */
         shader::create("default_shader", GL_VERTEX_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.vs"),
-                    GL_FRAGMENT_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.fs"));
+                       std::filesystem::absolute("game/shaders/shader.vs"),
+                       GL_FRAGMENT_SHADER,
+                       std::filesystem::absolute("game/shaders/shader.fs"));
     }
 
     /* Load the model */
@@ -62,5 +62,5 @@ void init_floor_entity()
     /* Add the model component */
     auto model_component = ModelComponent(m, 32.0f, "default_shader");
     world::add_component<ModelComponent>(floor_entity,
-                                        std::move(model_component));
+                                         std::move(model_component));
 }

@@ -25,6 +25,7 @@
  */
 
 #include "model.hpp"
+
 #include "engine_logger.hpp"
 
 #include <iostream>
@@ -63,7 +64,7 @@ void model::load_model(std::string path)
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE
         || !scene->mRootNode)
     {
-        ERROR("Could not load model with assimp: ", importer.GetErrorString());
+        ERROR("Could not load model with assimp: {}", importer.GetErrorString());
         return;
     }
     directory = path.substr(0, path.find_last_of('/'));
@@ -142,8 +143,8 @@ mesh model::process_mesh(aiMesh *m, const aiScene *scene)
 }
 
 std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
-                                                        aiTextureType type,
-                                                        std::string typeName)
+                                                          aiTextureType type,
+                                                          std::string typeName)
 {
     std::vector<types::texture> textures;
     for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)

@@ -81,8 +81,9 @@ particle_emitter::particle_emitter(
 
     // Create shaders
     const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-    shader::create(varyings, 3, "particle_update", GL_VERTEX_SHADER,
-                std::filesystem::absolute("engine/shaders/particle_update.vs"));
+    shader::create(
+        varyings, 3, "particle_update", GL_VERTEX_SHADER,
+        std::filesystem::absolute("engine/shaders/particle_update.vs"));
     shader::create(
         "particle_render", GL_VERTEX_SHADER,
         std::filesystem::absolute("engine/shaders/particle_render.vs").string(),
@@ -139,7 +140,7 @@ void particle_emitter::update_particles(float delta_time)
     shader::set_float("particle_update", "spawnProbability", this->spawn_rate);
     shader::set_vec3("particle_update", "emitterVel", this->starting_velocity);
     shader::set_float("particle_update", "emitterTTL",
-                     this->starting_time_to_live);
+                      this->starting_time_to_live);
     check_opengl_error("settin update shader");
 
     this->vao.bind();
@@ -212,13 +213,14 @@ void particle_emitter::render_particles()
     shader::set_int("particle_render", "atlas_index", this->atlas_index);
     shader::set_float("particle_render", "scale", this->scale);
     shader::set_float("particle_render", "aspect_ratio",
-                     (float) screen::get_width() / (float) screen::get_height());
+                      (float) screen::get_width()
+                          / (float) screen::get_height());
 
     // Set Textures
     texture::active_texture(GL_TEXTURE0);
     texture::bind_texture(GL_TEXTURE_2D, this->atlas, GL_REPEAT, GL_NEAREST,
-                         GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
-                         GL_NEAREST);
+                          GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
+                          GL_NEAREST);
 
     glDrawArrays(GL_POINTS, 0, num_particles);
     check_opengl_error("glDrawArrays");
@@ -259,8 +261,8 @@ particle_emitter::builder::set_starting_spread(glm::vec3 starting_spread)
     return *this;
 }
 
-particle_emitter::builder &
-particle_emitter::builder::set_starting_time_to_live(float starting_time_to_live)
+particle_emitter::builder &particle_emitter::builder::set_starting_time_to_live(
+    float starting_time_to_live)
 {
     this->starting_time_to_live = starting_time_to_live;
     return *this;
@@ -324,8 +326,8 @@ particle_emitter particle_emitter::builder::build()
 {
     /* C++17 has RVO (Return Value Optimization) so move is implicit */
     return particle_emitter(this->starting_position, this->starting_velocity,
-                           this->starting_spread, this->starting_time_to_live,
-                           this->num_particles, this->spawn_rate, this->scale,
-                           this->atlas_path, this->atlas_width,
-                           this->atlas_height, this->atlas_index, this->cam);
+                            this->starting_spread, this->starting_time_to_live,
+                            this->num_particles, this->spawn_rate, this->scale,
+                            this->atlas_path, this->atlas_width,
+                            this->atlas_height, this->atlas_index, this->cam);
 }

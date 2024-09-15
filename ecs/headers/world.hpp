@@ -125,7 +125,7 @@ class world
 
         if (!resources->count(std::type_index(typeid(R))))
         {
-            ERROR("Resource not found: ", std::type_index(typeid(R)).name());
+            ERROR("Resource not found: {}", std::type_index(typeid(R)).name());
             return nullptr;
         }
 
@@ -172,7 +172,7 @@ class world
             components->at(std::type_index(typeid(C))).push_back(component);
         }
 
-        INFO("Added component: ", std::type_index(typeid(C)).name());
+        INFO("Added component: {}", std::type_index(typeid(C)).name());
     }
 
     /**
@@ -195,7 +195,7 @@ class world
 
         resources->insert(
             {std::type_index(typeid(R)), std::make_shared<R>(resource)});
-        INFO("Added Resource: ", std::type_index(typeid(R)).name());
+        INFO("Added Resource: {}", std::type_index(typeid(R)).name());
     }
 
     /**
@@ -235,7 +235,7 @@ class world
 
         if (!resources->count(std::type_index(typeid(R))))
         {
-            ERROR("Resource not found: ", std::type_index(typeid(R)).name());
+            ERROR("Resource not found: {}", std::type_index(typeid(R)).name());
             return;
         }
 
@@ -268,7 +268,7 @@ class world
 
         if (!components->count(std::type_index(typeid(C))))
         {
-            ERROR("Component not found: ", std::type_index(typeid(C)).name());
+            ERROR("Component not found: {}", std::type_index(typeid(C)).name());
             return nullptr;
         }
 
@@ -315,7 +315,8 @@ class world
     template <typename System> static void process(const System &system)
     {
         using dependencies = typename System::dependencies;
-        std::vector<ecs::entity_t> matches = query_components_tuple(dependencies{});
+        std::vector<ecs::entity_t> matches =
+            query_components_tuple(dependencies{});
         system.run(matches);
     }
 

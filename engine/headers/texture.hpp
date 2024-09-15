@@ -58,12 +58,14 @@ class texture
      * @param flip If the texture should be flipped
      * @return The texture ID
      */
-    static unsigned int
-    load_texture(std::string path, GLint wrapping = GL_REPEAT,
-                GLint filtering_min = GL_NEAREST,
-                GLint filtering_mag = GL_NEAREST, GLboolean has_mipmap = GL_TRUE,
-                GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                GLint mipmap_mag = GL_LINEAR, bool flip = true);
+    static unsigned int load_texture(std::string path,
+                                     GLint wrapping = GL_REPEAT,
+                                     GLint filtering_min = GL_NEAREST,
+                                     GLint filtering_mag = GL_NEAREST,
+                                     GLboolean has_mipmap = GL_TRUE,
+                                     GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                                     GLint mipmap_mag = GL_LINEAR,
+                                     bool flip = true);
     /**
      * @brief Activate a texture unit
      *
@@ -79,19 +81,19 @@ class texture
      * You need to bind the texture before using it in the shader.
      */
     static void bind_texture(GLenum target, unsigned int texture,
-                            GLint wrapping = GL_REPEAT,
-                            GLint filtering_min = GL_NEAREST,
-                            GLint filtering_mag = GL_NEAREST,
-                            GLboolean hasMipmap = GL_TRUE,
-                            GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                            GLint mipmap_mag = GL_LINEAR);
+                             GLint wrapping = GL_REPEAT,
+                             GLint filtering_min = GL_NEAREST,
+                             GLint filtering_mag = GL_NEAREST,
+                             GLboolean hasMipmap = GL_TRUE,
+                             GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                             GLint mipmap_mag = GL_LINEAR);
 
   private:
     static void set_texture_wrapping(GLint wrapping);
     static void set_texture_filtering(GLint filtering_min, GLint filtering_mag);
     static void set_mipmap(GLboolean has_mipmap, GLint mipmap_min,
-                          GLint mipmap_mag);
+                           GLint mipmap_mag);
     static void read_image(const char *path, bool flip);
 };
 
-} // namespace Brenta
+} // namespace brenta

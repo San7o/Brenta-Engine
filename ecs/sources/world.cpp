@@ -37,15 +37,16 @@ SetPtr<entity_t> world::entities;
 UMapPtr<std::type_index, resource> world::resources;
 UMapVecPtr<std::type_index, component> world::components;
 
-template <> void world::query_components_rec<none>(std::vector<entity_t> *entities)
+template <>
+void world::query_components_rec<none>(std::vector<entity_t> *entities)
 {
 }
 
 void world::init()
 {
     using namespace types;
-    world::entities   = std::make_unique<std::set<entity_t>>();
-    world::resources  = std::make_unique<UMap<std::type_index, resource>>();
+    world::entities = std::make_unique<std::set<entity_t>>();
+    world::resources = std::make_unique<UMap<std::type_index, resource>>();
     world::components = std::make_unique<UMapVec<std::type_index, component>>();
 
     INFO("World initialized");
@@ -82,7 +83,7 @@ entity_t world::new_entity()
     entity_t new_entity = *(world::entities->rbegin()) + 1;
     world::entities->insert(new_entity);
 
-    INFO("New entity created: ", new_entity);
+    INFO("New entity created: {}", new_entity);
 
     return new_entity;
 }
@@ -137,5 +138,5 @@ void world::remove_entity(entity_t entity)
             iter->second.end());
     }
 
-    INFO("Entity removed: ", entity);
+    INFO("Entity removed: {}", entity);
 }

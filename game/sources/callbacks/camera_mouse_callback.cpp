@@ -84,14 +84,16 @@ void init_camera_mouse_callback()
 
             // Local coordinate system
             glm::vec3 fixed_center =
-                glm::vec3(default_camera.center.x, default_camera.position.y, default_camera.center.z);
-            glm::vec3 front =
-                glm::normalize(default_camera.position - fixed_center); // Versor
-            glm::vec3 right =
-                glm::normalize(glm::cross(front, default_camera.world_up)); // Versor
+                glm::vec3(default_camera.center.x, default_camera.position.y,
+                          default_camera.center.z);
+            glm::vec3 front = glm::normalize(default_camera.position
+                                             - fixed_center); // Versor
+            glm::vec3 right = glm::normalize(
+                glm::cross(front, default_camera.world_up)); // Versor
 
             default_camera.center += right * glm::vec3(xoffset);
-            default_camera.center -= default_camera.world_up * glm::vec3(yoffset);
+            default_camera.center -=
+                default_camera.world_up * glm::vec3(yoffset);
             default_camera.spherical_to_cartesian();
         }
         /* zoom the default_camera */

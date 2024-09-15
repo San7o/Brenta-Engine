@@ -44,8 +44,8 @@ struct fps_system : system<none>
 {
     void run(std::vector<entity_t> _) const override
     {
-        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
-                         0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
+        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f,
+                          25.0f, 0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };
 

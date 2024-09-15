@@ -25,6 +25,7 @@
  */
 
 #include "texture.hpp"
+#include "engine_logger.hpp"
 
 #include <glad/glad.h>
 #include <iostream>
@@ -34,9 +35,9 @@
 using namespace brenta;
 
 unsigned int texture::load_texture(std::string path, GLint wrapping,
-                                  GLint filtering_min, GLint filtering_mag,
-                                  GLboolean hasMipmap, GLint mipmap_min,
-                                  GLint mipmap_mag, bool flip)
+                                   GLint filtering_min, GLint filtering_mag,
+                                   GLboolean hasMipmap, GLint mipmap_min,
+                                   GLint mipmap_mag, bool flip)
 {
     unsigned int texture;
     glGenTextures(1, &texture);
@@ -54,9 +55,9 @@ void texture::active_texture(GLenum texture)
 }
 
 void texture::bind_texture(GLenum target, unsigned int texture, GLint wrapping,
-                          GLint filtering_min, GLint filtering_mag,
-                          GLboolean hasMipmap, GLint mipmap_min,
-                          GLint mipmap_mag)
+                           GLint filtering_min, GLint filtering_mag,
+                           GLboolean hasMipmap, GLint mipmap_min,
+                           GLint mipmap_mag)
 {
     glBindTexture(target, texture);
     set_texture_wrapping(wrapping);
@@ -76,7 +77,8 @@ void texture::set_texture_filtering(GLint filtering_min, GLint filtering_mag)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtering_mag);
 }
 
-void texture::set_mipmap(GLboolean hasMipmap, GLint mipmap_min, GLint mipmap_mag)
+void texture::set_mipmap(GLboolean hasMipmap, GLint mipmap_min,
+                         GLint mipmap_mag)
 {
     if (hasMipmap)
     {
@@ -106,8 +108,7 @@ void texture::read_image(const char *path, bool flip)
     }
     else
     {
-        std::cout << "Failed to load texture at location: " << path
-                  << std::endl;
+        ERROR("Failed to load texture at location: {}", path);
     }
     stbi_image_free(data);
 }

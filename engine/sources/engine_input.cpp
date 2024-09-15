@@ -44,23 +44,23 @@ void input::init()
 void input::add_keyboard_callback(int key, std::function<void()> callback)
 {
     input::keyboard_callbacks[key] = callback;
-    INFO("Added callback for key: " + std::to_string(key));
+    INFO("Added callback for key: {}", std::to_string(key));
 }
 
 void input::remove_keyboard_callback(int key)
 {
     if (input::keyboard_callbacks.find(key) == input::keyboard_callbacks.end())
     {
-        ERROR("No callback found for key: ", key);
+        ERROR("No callback found for key: {}", key);
         return;
     }
 
     input::keyboard_callbacks.erase(key);
-    INFO("Removed callback for key: ", key);
+    INFO("Removed callback for key: {}", key);
 }
 
 void input::key_callback(GLFWwindow *window, int key, int scancode, int action,
-                        int mods)
+                         int mods)
 {
     if (action == GLFW_PRESS)
     {
@@ -73,10 +73,10 @@ void input::key_callback(GLFWwindow *window, int key, int scancode, int action,
 }
 
 void input::add_mouse_pos_callback(mouse_callback_name_t callback_name,
-                                std::function<void(double, double)> callback)
+                                   std::function<void(double, double)> callback)
 {
     input::mouse_callbacks[callback_name] = callback;
-    INFO("Added callback for mouse: ", callback_name);
+    INFO("Added callback for mouse: {}", callback_name);
 }
 
 void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
@@ -84,12 +84,12 @@ void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
     if (input::mouse_callbacks.find(callback_name)
         == input::mouse_callbacks.end())
     {
-        ERROR("No callback found for mouse: ", callback_name);
+        ERROR("No callback found for mouse: {}", callback_name);
         return;
     }
 
     input::mouse_callbacks.erase(callback_name);
-    INFO("Removed callback for mouse: ", callback_name);
+    INFO("Removed callback for mouse: {}", callback_name);
 }
 
 void input::mouse_pos_callback(GLFWwindow *window, double xpos, double ypos)

@@ -61,9 +61,9 @@ void text::load(std::string font, unsigned int font_size)
     }
 
     shader::create("TextShader", GL_VERTEX_SHADER,
-                std::filesystem::absolute("engine/shaders/text.vs"),
-                GL_FRAGMENT_SHADER,
-                std::filesystem::absolute("engine/shaders/text.fs"));
+                   std::filesystem::absolute("engine/shaders/text.vs"),
+                   GL_FRAGMENT_SHADER,
+                   std::filesystem::absolute("engine/shaders/text.fs"));
     text_shader = "TextShader";
     shader::use(text_shader);
 
@@ -135,7 +135,7 @@ void text::load(std::string font, unsigned int font_size)
 }
 
 void text::render_text(std::string text, float x, float y, float scale,
-                      glm::vec3 color)
+                       glm::vec3 color)
 {
     if (text_vao.get_vao() == 0)
     {

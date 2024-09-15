@@ -24,43 +24,39 @@
  *
  */
 
-#include "engine_logger.hpp"
+/**
+ * Just a simple window
+ */
 
-#include <chrono>
-#include <ctime>
-#include <iomanip>
+#include "engine.hpp"
+
+#include <iostream>
 
 using namespace brenta;
 
-brenta::types::log_level logger::level = brenta::types::log_level::WARNING;
-std::ofstream logger::log_file;
+const int SCR_WIDTH = 800;
+const int SCR_HEIGHT = 600;
 
-void logger::set_log_level(brenta::types::log_level level)
+int main()
 {
-    logger::level = level;
-}
+    engine eng = engine::builder()
+                     .use_screen(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .use_logger(true)
+                     .build();
 
-void logger::init()
-{
-    set_log_file("logs/log.txt");
-}
+    INFO("Hello, World!");
 
-void logger::close()
-{
-    logger::log_file.close();
-}
-
-void logger::set_log_file(const std::string &file)
-{
-    logger::log_file.open(file, std::ios::app);
-    if (!logger::log_file.is_open())
+    while (!screen::is_window_closed())
     {
-        std::cout << "Error: Could not open log file" << std::endl;
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
+
+        screen::poll_events();
+        screen::swap_buffers();
     }
 
-    auto now = std::chrono::system_clock::now();
-    auto now_time_t = std::chrono::system_clock::to_time_t(now);
-    std::tm now_tm = *std::localtime(&now_time_t);
-    log_file << "----------" << std::put_time(&now_tm, "%Y-%m-%d %H:%M:%S")
-             << "----------" << std::endl;
+    return 0;
 }

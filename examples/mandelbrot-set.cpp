@@ -41,36 +41,27 @@ const int SCR_HEIGHT = 720;
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .build();
-
+                     .use_screen(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .build();
 
     // A square
-    float vertices[] = {
-        // First Triangle
-        -1.0f,  1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f,
-         1.0f,  1.0f, 0.0f,
+    float vertices[] = {// First Triangle
+                        -1.0f, 1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
 
-        // Second Triangle
-        -1.0f,  1.0f, 0.0f,
-        -1.0f, -1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f
-    };
+                        // Second Triangle
+                        -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f,
+                        0.0f};
     vao v;
     v.init();
     buffer vbo = buffer(GL_ARRAY_BUFFER);
     vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
     v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-    shader::create("fractal", 
-                 GL_VERTEX_SHADER,
-                 "examples/mandelbrot.vs",
-                 GL_FRAGMENT_SHADER,
-                 "examples/mandelbrot.fs");
+    shader::create("fractal", GL_VERTEX_SHADER, "examples/mandelbrot.vs",
+                   GL_FRAGMENT_SHADER, "examples/mandelbrot.fs");
 #ifdef USE_IMGUI
     framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
@@ -82,7 +73,6 @@ int main()
     bool julia = false;
     float animation_speed = 0.5;
     int max_iterations = 100;
-
 
     while (!screen::is_window_closed())
     {
@@ -132,7 +122,8 @@ int main()
         v.bind();
         shader::use("fractal");
         shader::set_int("fractal", "texture", fb.texture_id);
-        shader::set_vec3("fractal", "resolution", glm::vec3(float(SCR_WIDTH), float(SCR_HEIGHT), 0.0f));
+        shader::set_vec3("fractal", "resolution",
+                         glm::vec3(float(SCR_WIDTH), float(SCR_HEIGHT), 0.0f));
         shader::set_vec3("fractal", "offset", offset);
         shader::set_float("fractal", "zoom", zoom);
         shader::set_vec3("fractal", "constant", constant);

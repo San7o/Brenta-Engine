@@ -55,5 +55,5 @@ void init_directional_light_entity()
         1.0f,                          // intensity
         std::vector<brenta::types::shader_name_t>{"default_shader"});
     world::add_component<DirectionalLightComponent>(light_entity,
-                                                   std::move(light_component));
+                                                    std::move(light_component));
 }

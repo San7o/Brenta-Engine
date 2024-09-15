@@ -41,7 +41,7 @@ void audio::init()
     if (SDL_Init(SDL_INIT_AUDIO))
     {
         auto error = SDL_GetError();
-        ERROR("SDL Audio failed to initialize: ", error);
+        ERROR("SDL Audio failed to initialize: {}", error);
         return;
     }
 
@@ -72,16 +72,16 @@ void audio::load_audio(types::audio_name_t name, std::string path)
                     &audiofile.audio_len))
     {
         auto error = SDL_GetError();
-        ERROR("SDL Audio failed to load WAV file: ", error);
+        ERROR("SDL Audio failed to load WAV file: {}", error);
         return;
     }
 
     audio::audio_files.insert({name, audiofile});
-    INFO("Loaded audio at ", path);
+    INFO("Loaded audio at {}", path);
 }
 
 void audio::play_audio(types::audio_name_t audio_name,
-                      types::stream_name_t stream_name)
+                       types::stream_name_t stream_name)
 {
     auto stream = audio::get_stream(stream_name);
     if (stream == nullptr)
@@ -104,7 +104,7 @@ void audio::create_stream(types::stream_name_t name)
     if (stream == NULL)
     {
         const char *error = SDL_GetError();
-        ERROR("SDL Audio failed to create stream: ", error);
+        ERROR("SDL Audio failed to create stream: {}", error);
         return;
     }
 
@@ -117,7 +117,7 @@ types::audio_file_t audio::get_audio_file(types::audio_name_t name)
 {
     if (audio::audio_files.find(name) == audio::audio_files.end())
     {
-        ERROR("Audio file not found with name: ", name);
+        ERROR("Audio file not found with name: {}", name);
         return types::audio_file_t();
     }
     return audio::audio_files.at(name);
@@ -127,7 +127,7 @@ SDL_AudioStream *audio::get_stream(types::stream_name_t name)
 {
     if (audio::streams.find(name) == audio::streams.end())
     {
-        ERROR("Audio stream not found with name: " + name);
+        ERROR("Audio stream not found with name: {}", name);
         return nullptr;
     }
     return audio::streams.at(name);
@@ -144,13 +144,13 @@ void audio::set_volume(types::stream_name_t name, int volume)
 
     if (SDL_SetAudioStreamGain(stream, volume))
         check_error_audio();
-    INFO("Volume set to ", volume);
+    INFO("Volume set to {}", volume);
 }
 
 void audio::check_error_audio()
 {
     auto error = SDL_GetError();
-    ERROR("SDL Audio error: ", error);
+    ERROR("SDL Audio error: {}", error);
 }
 
 void audio::clear_stream(types::stream_name_t name)

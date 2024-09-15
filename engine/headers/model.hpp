@@ -136,8 +136,8 @@ class model
     void process_node(aiNode *node, const aiScene *scene);
     mesh process_mesh(aiMesh *mesh, const aiScene *scene);
     std::vector<types::texture> load_material_textures(aiMaterial *mat,
-                                                     aiTextureType type,
-                                                     std::string type_name);
+                                                       aiTextureType type,
+                                                       std::string type_name);
 };
 
 /**
@@ -168,4 +168,4 @@ class model::builder
     model build();
 };
 
-} // namespace Brenta
+} // namespace brenta

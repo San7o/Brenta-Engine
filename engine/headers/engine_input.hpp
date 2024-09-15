@@ -40,7 +40,7 @@ namespace types
 
 typedef std::string mouse_callback_name_t;
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Input subsystem
@@ -94,7 +94,7 @@ class input
      * @param mods Bit field describing which modifier keys were held down
      */
     static void key_callback(GLFWwindow *window, int key, int scancode,
-                            int action, int mods);
+                             int action, int mods);
     /**
      * @brief Add a mouse position callback
      *
@@ -108,7 +108,7 @@ class input
      */
     static void
     add_mouse_pos_callback(types::mouse_callback_name_t name,
-                        std::function<void(double, double)> callback);
+                           std::function<void(double, double)> callback);
     /**
      * @brief Remove a mouse position callback
      *
@@ -117,7 +117,8 @@ class input
      *
      * @param callback_name The name of the callback
      */
-    static void remove_mouse_pos_callback(types::mouse_callback_name_t callback_name);
+    static void
+    remove_mouse_pos_callback(types::mouse_callback_name_t callback_name);
     /**
      * @brief Mouse position callback
      *
@@ -128,7 +129,8 @@ class input
      * @param xpos The new x-coordinate, in screen coordinates, of the cursor
      * @param ypos The new y-coordinate, in screen coordinates, of the cursor
      */
-    static void mouse_pos_callback(GLFWwindow *window, double xpos, double ypos);
+    static void mouse_pos_callback(GLFWwindow *window, double xpos,
+                                   double ypos);
 
   private:
     static std::unordered_map<int, std::function<void()>> keyboard_callbacks;

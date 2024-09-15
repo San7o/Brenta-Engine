@@ -38,37 +38,38 @@ const int SCR_HEIGHT = 720;
 /* default camera */
 namespace brenta
 {
-    camera default_camera = camera();
+camera default_camera = camera();
 }
 
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .use_logger(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .set_screen_msaa(true)
-                        .set_screen_vsync(true)
-                        .set_screen_title("Game")
-                        .set_log_level(types::log_level::INFO)
-                        .set_log_file("./logs/log.txt")
-                        .set_gl_blending(true)
-                        .set_gl_cull_face(true)
-                        .set_gl_multisample(true)
-                        .set_gl_depth_test(true)
-                        .build();
+                     .use_screen(true)
+                     .use_logger(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .set_screen_msaa(true)
+                     .set_screen_vsync(true)
+                     .set_screen_title("Game")
+                     .set_log_level(oak::level::info)
+                     .set_log_file("./logs/log.txt")
+                     .set_gl_blending(true)
+                     .set_gl_cull_face(true)
+                     .set_gl_multisample(true)
+                     .set_gl_depth_test(true)
+                     .build();
 
-    default_camera = camera::builder()
-                 .set_camera_type(enums::camera_type::SPHERICAL)
-                 .set_projection_type(enums::projection_type::PERSPECTIVE)
-                 .set_spherical_coordinates({1.25f, 1.25f, 10.0f})
-                 .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
-                 .set_movement_speed(2.5f)
-                 .set_mouse_sensitivity(0.05f)
-                 .set_zoom(45.0f)
-                 .build();
+    default_camera =
+        camera::builder()
+            .set_camera_type(enums::camera_type::SPHERICAL)
+            .set_projection_type(enums::projection_type::PERSPECTIVE)
+            .set_spherical_coordinates({1.25f, 1.25f, 10.0f})
+            .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
+            .set_movement_speed(2.5f)
+            .set_mouse_sensitivity(0.05f)
+            .set_zoom(45.0f)
+            .build();
 
     particle_emitter emitter =
         particle_emitter::builder()

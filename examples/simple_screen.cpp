@@ -40,11 +40,11 @@ const int SCR_HEIGHT = 600;
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .build();
+                     .use_screen(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .build();
 
     while (!screen::is_window_closed())
     {

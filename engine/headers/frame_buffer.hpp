@@ -57,7 +57,7 @@ class framebuffer : public buffer
      * @brief Format of the framebuffer
      * Default is GL_RGBA
      */
-    GLenum format; 
+    GLenum format;
     /**
      * @brief Empty constructor
      * Does nothing

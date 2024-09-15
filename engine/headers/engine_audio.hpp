@@ -79,7 +79,7 @@ struct audio_file_t
  *
  */
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Audio subsystem
@@ -102,7 +102,8 @@ class audio
      * audio file, the audio buffer, the length of the audio buffer
      * and the audio format.
      */
-    static std::unordered_map<types::audio_name_t, types::audio_file_t> audio_files;
+    static std::unordered_map<types::audio_name_t, types::audio_file_t>
+        audio_files;
     /**
      * @brief Map of audio streams
      *
@@ -184,7 +185,8 @@ class audio
      * @param audio_name The name of the audio file
      * @param stream_name The name of the stream
      */
-    static void play_audio(types::audio_name_t, types::stream_name_t = "default");
+    static void play_audio(types::audio_name_t,
+                           types::stream_name_t = "default");
     /**
      * @brief Set the volume of a stream
      *

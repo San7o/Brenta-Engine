@@ -58,7 +58,8 @@ struct poison_system : system<player_component, health_component>
             return;
         }
 
-        auto health = world::entity_to_component<health_component>(entities.at(0));
+        auto health =
+            world::entity_to_component<health_component>(entities.at(0));
         health->value--;
         std::cout << "Health: " << health->value << std::endl;
     }
@@ -81,7 +82,8 @@ int main()
 {
     world::init();
     std::cout << "Welcome to my Test Game!" << std::endl;
-    std::cout << "You are poisoned and will lose health every tick" << std::endl;
+    std::cout << "You are poisoned and will lose health every tick"
+              << std::endl;
 
     /* New entity as the player */
     entity_t player_entity = world::new_entity();

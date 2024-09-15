@@ -65,8 +65,8 @@ using UMapVecPtr = std::unique_ptr<UMapVec<T, G>>;
 
 template <typename T> using VecSPtr = std::shared_ptr<std::vector<SPtr<T>>>;
 
-} // namespace Types
+} // namespace types
 
-} // namespace ECS
+} // namespace ecs
 
-} // namespace Brenta
+} // namespace brenta

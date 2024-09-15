@@ -145,6 +145,8 @@ void screen::set_close()
 
 void screen::terminate()
 {
+    INFO("Terminating screen");
+    glfwDestroyWindow(screen::window);
     glfwTerminate();
     INFO("screen terminated");
 }
@@ -164,7 +166,7 @@ void screen::set_context_version(int major, int minor)
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-    INFO("Set context to OpenGL version: ", major, ".", minor);
+    INFO("Set context to OpenGL version: {}.{}", major, minor);
 }
 
 void screen::set_key_callback(GLFWkeyfun callback)

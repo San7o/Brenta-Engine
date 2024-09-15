@@ -74,9 +74,11 @@ struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
                     < sphere_component1->radius + sphere_component2->radius)
                 {
                     auto physics_component1 =
-                        world::entity_to_component<PhysicsComponent>(matches[i]);
+                        world::entity_to_component<PhysicsComponent>(
+                            matches[i]);
                     auto physics_component2 =
-                        world::entity_to_component<PhysicsComponent>(matches[j]);
+                        world::entity_to_component<PhysicsComponent>(
+                            matches[j]);
                     if (physics_component1 == nullptr
                         || physics_component2 == nullptr)
                     {
