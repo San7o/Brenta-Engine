@@ -80,7 +80,7 @@ Brenta Engine features an Entity Component System architecture. The ECS is a des
 ### Entities
 Entities are objects in the game, It's just an ID:
 ```c++
-Entity entity = World::NewEntity();
+entity entity = world::new_entity();
 ```
 ### Components
 Components are pieces of data that are attached to an entity:

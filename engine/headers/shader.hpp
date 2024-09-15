@@ -48,7 +48,7 @@ namespace types
 
 typedef std::string shader_name_t;
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Shader class
@@ -91,7 +91,7 @@ class shader
      */
     template <typename... Args>
     static void create(std::string shader_name, GLenum type, std::string path,
-                    Args... args)
+                       Args... args)
     {
         std::vector<unsigned int> compiled_shaders = {};
         compile_shaders(compiled_shaders, type, path, args...);
@@ -126,8 +126,8 @@ class shader
      */
     template <typename... Args>
     static void create(const GLchar **feedback_varyings, int num_varyings,
-                    std::string shader_name, GLenum type, std::string path,
-                    Args... args)
+                       std::string shader_name, GLenum type, std::string path,
+                       Args... args)
     {
         std::vector<unsigned int> compiled_shaders = {};
         compile_shaders(compiled_shaders, type, path, args...);
@@ -174,7 +174,7 @@ class shader
         }
         catch (std::ifstream::failure &e)
         {
-            ERROR("Error reading shader file: ", path);
+            ERROR("Error reading shader file: {}", path);
             return;
         }
 
@@ -214,8 +214,8 @@ class shader
      * @param name Name of the uniform boolean
      * @param value Value of the boolean
      */
-    static void set_bool(types::shader_name_t shader_name, const std::string &name,
-                        bool value);
+    static void set_bool(types::shader_name_t shader_name,
+                         const std::string &name, bool value);
     /**
      * @brief Set an integer in the shader
      *
@@ -223,8 +223,8 @@ class shader
      * @param name Name of the uniform integer
      * @param value Value of the integer
      */
-    static void set_int(types::shader_name_t shader_name, const std::string &name,
-                       int value);
+    static void set_int(types::shader_name_t shader_name,
+                        const std::string &name, int value);
     /**
      * @brief Set a float in the shader
      *
@@ -232,8 +232,8 @@ class shader
      * @param name Name of the uniform float
      * @param value Value of the float
      */
-    static void set_float(types::shader_name_t shader_name, const std::string &name,
-                         float value);
+    static void set_float(types::shader_name_t shader_name,
+                          const std::string &name, float value);
     /**
      * @brief Set a 4x4 matrix in the shader
      *
@@ -242,7 +242,7 @@ class shader
      * @param value Value of the matrix
      */
     static void set_mat4(types::shader_name_t shader_name, const GLchar *name,
-                        glm::mat4 value);
+                         glm::mat4 value);
     /**
      * @brief Set a 3D vector in the shader
      *
@@ -253,7 +253,7 @@ class shader
      * @param z Z value of the vector
      */
     static void set_vec3(types::shader_name_t shader_name, const GLchar *name,
-                        float x, float y, float z);
+                         float x, float y, float z);
     /**
      * @brief Set a 3D vector in the shader
      *
@@ -262,10 +262,10 @@ class shader
      * @param value Value of the vector
      */
     static void set_vec3(types::shader_name_t shader_name, const GLchar *name,
-                        glm::vec3 value);
+                         glm::vec3 value);
 
   private:
     static void check_compile_errors(unsigned int shader, std::string type);
 };
 
-} // namespace Brenta
+} // namespace brenta

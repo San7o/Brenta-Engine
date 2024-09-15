@@ -25,6 +25,7 @@
  */
 
 #include "mesh.hpp"
+
 #include "engine_logger.hpp"
 
 #include <iostream>
@@ -74,9 +75,9 @@ void mesh::draw(types::shader_name_t shader_name)
             number = std::to_string(specularNr++);
         shader::set_int(shader_name, ("material." + name + number).c_str(), i);
         texture::bind_texture(GL_TEXTURE_2D, textures[i].id, this->wrapping,
-                             this->filtering_min, this->filtering_mag,
-                             this->has_mipmap, this->mipmap_min,
-                             this->mipmap_mag);
+                              this->filtering_min, this->filtering_mag,
+                              this->has_mipmap, this->mipmap_min,
+                              this->mipmap_mag);
     }
     texture::active_texture(GL_TEXTURE0);
 
@@ -91,17 +92,17 @@ void mesh::draw(types::shader_name_t shader_name)
 void mesh::setup_mesh()
 {
     this->vbo.copy_vertices(this->vertices.size() * sizeof(types::vertex),
-                           &this->vertices[0], GL_STATIC_DRAW);
+                            &this->vertices[0], GL_STATIC_DRAW);
     this->ebo.copy_indices(this->indices.size() * sizeof(unsigned int),
-                          &this->indices[0], GL_STATIC_DRAW);
+                           &this->indices[0], GL_STATIC_DRAW);
     this->vao.set_vertex_data(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(types::vertex), (void *) 0);
+                              sizeof(types::vertex), (void *) 0);
     this->vao.set_vertex_data(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(types::vertex),
-                            (void *) offsetof(types::vertex, normal));
+                              sizeof(types::vertex),
+                              (void *) offsetof(types::vertex, normal));
     this->vao.set_vertex_data(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
-                            sizeof(types::vertex),
-                            (void *) offsetof(types::vertex, tex_coords));
+                              sizeof(types::vertex),
+                              (void *) offsetof(types::vertex, tex_coords));
 
     gl::bind_vertex_array(0);
 }

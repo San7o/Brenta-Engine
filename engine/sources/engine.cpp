@@ -1,4 +1,5 @@
 #include "engine.hpp"
+#include "oak/oak.hpp"
 
 #ifdef USE_ECS
 #include "ecs.hpp"
@@ -14,16 +15,51 @@ engine::engine(bool uses_screen, bool uses_audio, bool uses_input,
                bool uses_logger, bool uses_text, int screen_width,
                int screen_height, bool screen_is_mouse_captured,
                bool screen_msaa, bool screen_vsync, const char *screen_title,
-               types::log_level log_level, std::string log_file,
+               oak::level log_level, std::string log_file,
                std::string text_font, int text_size, bool gl_blending,
                bool gl_cull_face, bool gl_multisample, bool gl_depth_test)
 {
+    this->uses_screen = uses_screen;
+    this->uses_audio = uses_audio;
+    this->uses_input = uses_input;
+    this->uses_logger = uses_logger;
+    uses_text = uses_text;
+    this->screen_width = screen_width;
+    this->screen_height = screen_height;
+    this->screen_is_mouse_captured = screen_is_mouse_captured;
+    this->screen_msaa = screen_msaa;
+    this->screen_vsync = screen_vsync;
+    this->screen_title = screen_title;
+    this->log_level = log_level;
+    this->log_file = log_file;
+    this->text_font = text_font;
+    this->text_size = text_size;
+    this->gl_blending = gl_blending;
+    this->gl_cull_face = gl_cull_face;
+    this->gl_multisample = gl_multisample;
+    this->gl_depth_test = gl_depth_test;
+
+    if (uses_logger)
+    {
+        oak::init_writer();
+        oak::set_level(log_level);
+        if (log_file != "")
+        {
+            auto file = oak::set_file(log_file);
+            if (!file.has_value())
+            {
+                ERROR("Failed to open log file: {}", log_file);
+            }
+            INFO("Set log file: {}", log_file);
+        }
+    }
+
     if (uses_screen)
     {
         screen::init(screen_width, screen_height, screen_is_mouse_captured,
                      screen_title, screen_msaa, screen_vsync);
         gl::load_opengl(gl_blending, gl_cull_face, gl_multisample,
-                       gl_depth_test);
+                        gl_depth_test);
     }
 
     if (uses_audio)
@@ -34,13 +70,6 @@ engine::engine(bool uses_screen, bool uses_audio, bool uses_input,
     if (uses_input)
     {
         input::init();
-    }
-
-    if (uses_logger)
-    {
-        logger::init();
-        logger::set_log_level(log_level);
-        logger::set_log_file(log_file);
     }
 
     if (uses_text)
@@ -65,19 +94,19 @@ engine::~engine()
     world::destroy();
 #endif
 
-    if (uses_logger)
-    {
-        logger::close();
-    }
-
-    if (uses_audio)
+    if (this->uses_audio)
     {
         audio::destroy();
     }
 
-    if (uses_screen)
+    if (this->uses_screen)
     {
         screen::terminate();
+    }
+
+    if (this->uses_logger)
+    {
+        oak::stop_writer();
     }
 }
 
@@ -148,7 +177,7 @@ engine::builder &engine::builder::set_screen_vsync(bool screen_vsync)
     return *this;
 }
 
-engine::builder &engine::builder::set_log_level(types::log_level log_level)
+engine::builder &engine::builder::set_log_level(oak::level log_level)
 {
     this->log_level = log_level;
     return *this;

@@ -95,8 +95,8 @@ class vao
      * vertex attribute in the array
      */
     void set_vertex_data(buffer buffer, unsigned int index, GLint size,
-                       GLenum type, GLboolean is_normalized, GLsizei stride,
-                       const void *pointer);
+                         GLenum type, GLboolean is_normalized, GLsizei stride,
+                         const void *pointer);
 };
 
 } // namespace types

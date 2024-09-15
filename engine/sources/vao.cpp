@@ -62,8 +62,8 @@ void vao::unbind()
 }
 
 void vao::set_vertex_data(buffer buffer, unsigned int index, GLint size,
-                        GLenum type, GLboolean normalized, GLsizei stride,
-                        const void *pointer)
+                          GLenum type, GLboolean normalized, GLsizei stride,
+                          const void *pointer)
 {
     bind();
     buffer.bind();

@@ -31,8 +31,8 @@
 #include "ecs.hpp"
 #include "engine.hpp"
 
-#include <iostream>
 #include <filesystem>
+#include <iostream>
 
 using namespace brenta;
 using namespace brenta::types;
@@ -72,7 +72,8 @@ struct model_component : component
           hasAtlas(false), atlasSize(0), atlasIndex(0)
     {
     }
-    model_component(model mod, float shininess, brenta::types::shader_name_t shader)
+    model_component(model mod, float shininess,
+                    brenta::types::shader_name_t shader)
         : mod(mod), shininess(shininess), shader(shader), hasAtlas(false),
           atlasSize(0), atlasIndex(0)
     {
@@ -89,8 +90,7 @@ struct renderer_system : system<model_component, transform_component>
         for (auto match : matches)
         {
             /* Get the model component */
-            auto model_c =
-                world::entity_to_component<model_component>(match);
+            auto model_c = world::entity_to_component<model_component>(match);
 
             auto transform_c =
                 world::entity_to_component<transform_component>(match);
@@ -109,9 +109,10 @@ struct renderer_system : system<model_component, transform_component>
 
             t.set_shader(default_shader);
 
-            shader::set_vec3(default_shader, "viewPos", default_camera.get_position());
+            shader::set_vec3(default_shader, "viewPos",
+                             default_camera.get_position());
             shader::set_float(default_shader, "material.shininess",
-                             model_c->shininess);
+                              model_c->shininess);
 
             shader::set_int(default_shader, "atlasIndex", 0);
             my_model.draw(default_shader);
@@ -123,40 +124,36 @@ REGISTER_SYSTEMS(renderer_system);
 
 namespace brenta
 {
-    camera default_camera;
+camera default_camera;
 }
 
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .use_logger(true)
-                        .set_log_level(brenta::types::log_level::DEBUG)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .build();
+                     .use_screen(true)
+                     .use_logger(true)
+                     .set_log_level(brenta::types::log_level::DEBUG)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .build();
 
-    camera default_camera = camera::builder()
-                        .set_camera_type(enums::camera_type::AIRCRAFT)
-                        .set_projection_type(enums::projection_type::PERSPECTIVE)
-                        .set_position(glm::vec3(0.0f, 5.0f, 20.0f))
-                        .set_up(glm::vec3(0.0f, 1.0f, 0.0f))
-                        .set_euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
-                        .build();
+    camera default_camera =
+        camera::builder()
+            .set_camera_type(enums::camera_type::AIRCRAFT)
+            .set_projection_type(enums::projection_type::PERSPECTIVE)
+            .set_position(glm::vec3(0.0f, 5.0f, 20.0f))
+            .set_up(glm::vec3(0.0f, 1.0f, 0.0f))
+            .set_euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
+            .build();
 
     // A square
-    float vertices[] = {
-        // First Triangle
-        -1.0f,  1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f,
-         1.0f,  1.0f, 0.0f,
+    float vertices[] = {// First Triangle
+                        -1.0f, 1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
 
-        // Second Triangle
-        -1.0f,  1.0f, 0.0f,
-        -1.0f, -1.0f, 0.0f,
-         1.0f, -1.0f, 0.0f
-    };
+                        // Second Triangle
+                        -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f,
+                        0.0f};
     vao v;
     v.init();
     buffer vbo = buffer(GL_ARRAY_BUFFER);
@@ -165,11 +162,8 @@ int main()
     vbo.unbind();
     v.unbind();
 
-    shader::create("hdr_shader", 
-                 GL_VERTEX_SHADER,
-                 "examples/hdr.vs",
-                 GL_FRAGMENT_SHADER,
-                 "examples/hdr.fs");
+    shader::create("hdr_shader", GL_VERTEX_SHADER, "examples/hdr.vs",
+                   GL_FRAGMENT_SHADER, "examples/hdr.fs");
 
 #ifdef USE_IMGUI
     brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
@@ -195,19 +189,18 @@ int main()
 
     // Room ------------------------------------
     auto room_entity = world::new_entity();
-    world::add_component<transform_component>(room_entity, transform_component());
+    world::add_component<transform_component>(room_entity,
+                                              transform_component());
     if (shader::get_id("default_shader") == 0)
     {
         shader::create("default_shader", GL_VERTEX_SHADER,
-                    std::filesystem::absolute("examples/default_shader.vs"),
-                    GL_FRAGMENT_SHADER,
-                    std::filesystem::absolute("examples/default_shader.fs"));
+                       std::filesystem::absolute("examples/default_shader.vs"),
+                       GL_FRAGMENT_SHADER,
+                       std::filesystem::absolute("examples/default_shader.fs"));
     }
-    model mod(
-        std::filesystem::absolute("assets/models/sphere/sphere.obj"));
+    model mod(std::filesystem::absolute("assets/models/sphere/sphere.obj"));
     auto model_c = model_component(mod, 32.0f, "default_shader");
-    world::add_component<model_component>(room_entity,
-                                        std::move(model_c));
+    world::add_component<model_component>(room_entity, std::move(model_c));
     INFO("Room entity created");
     // -----------------------------------------
 
@@ -238,10 +231,10 @@ int main()
         time::update(screen::get_time());
         world::tick();
 
-        //vao.Bind();
-        //glDrawArrays(GL_TRIANGLES, 0, 6);
-        //glCheckError();
-        //vao.Unbind();
+        // vao.Bind();
+        // glDrawArrays(GL_TRIANGLES, 0, 6);
+        // glCheckError();
+        // vao.Unbind();
 
         fb.unbind();
 #ifdef USE_IMGUI

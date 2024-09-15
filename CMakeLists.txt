@@ -79,7 +79,7 @@ endif()
 
 file(GLOB BRENTA_IMGUI_SOURCES "imgui/*.cpp" "imgui/backends/imgui_impl_glfw.cpp"
         "imgui/misc/cpp/imgui_stdlib.cpp" "imgui/backends/imgui_impl_opengl3.cpp" )
-file(GLOB BRENTA_ENGINE_SOURCES "engine/sources/*.c" "engine/sources/*.cpp" "utils/sources/*.cpp" ${BRENTA_EXTRA_SOURCES})
+file(GLOB BRENTA_ENGINE_SOURCES "engine/sources/*.c" "engine/sources/*.cpp" ${BRENTA_EXTRA_SOURCES})
 file(GLOB BRENTA_ECS_SOURCES "ecs/sources/*.cpp")
 file(GLOB BRENTA_TEST_SOURCES "tests/**/*.cpp" "tests/*.cpp")
 file(GLOB BRENTA_MAIN_SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" )
@@ -106,9 +106,14 @@ endif()
 
 if (BRENTA_BUILD_EXAMPLES)
     set(BRENTA_EXAMPLES_INCLUDES ${BRENTA_INCLUDES})
+    
     add_executable(simple_screen ${BRENTA_ENGINE_SOURCES} "examples/simple_screen.cpp")
     target_include_directories(simple_screen PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
     target_link_libraries(simple_screen PRIVATE ${BRENTA_LINK_LIBRARIES})
+
+    add_executable(logger ${BRENTA_ENGINE_SOURCES} "examples/logger.cpp")
+    target_include_directories(logger PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
+    target_link_libraries(logger PRIVATE ${BRENTA_LINK_LIBRARIES})
 
     add_executable(load_opengl ${BRENTA_ENGINE_SOURCES} "examples/load_opengl.cpp")
     target_include_directories(load_opengl PRIVATE ${BRENTA_EXAMPLES_INCLUDES})

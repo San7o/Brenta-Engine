@@ -54,8 +54,8 @@ class gl
      * @param gl_depth_test  Enable depth testing
      */
     static void load_opengl(bool gl_blending = true, bool gl_cull_face = true,
-                           bool gl_multisample = true,
-                           bool gl_depth_test = true);
+                            bool gl_multisample = true,
+                            bool gl_depth_test = true);
     /**
      * @brief Set Poligon Mode
      * @param enable Enable or disable poligon mode
@@ -105,7 +105,7 @@ class gl
      * stored
      */
     static void draw_elements(GLenum mode, int count, GLenum type,
-                             const void *indices);
+                              const void *indices);
     /**
      * @brief Clear
      *
@@ -129,5 +129,4 @@ class gl
 #define check_error() gl::check_error_(__FILE__, __LINE__)
 };
 
-
-} // namespace Brenta
+} // namespace brenta

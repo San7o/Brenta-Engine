@@ -48,6 +48,7 @@ void gui::init()
     /* Setup Platform/Renderer backends */
     ImGui_ImplGlfw_InitForOpenGL(screen::get_window(), true);
     ImGui_ImplOpenGL3_Init();
+    ImGui::SetNextWindowPos(ImVec2(0, 0));
 }
 
 void gui::destroy()
@@ -67,6 +68,7 @@ void gui::new_frame(framebuffer *fb)
 
     // Game window ------------------------------------------
 
+    ImGui::SetNextWindowSize(ImVec2(500, 500));
     ImGui::Begin("Game");
 
     float window_width = ImGui::GetContentRegionAvail().x;

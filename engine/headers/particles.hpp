@@ -136,10 +136,10 @@ class particle_emitter
      * @param camera Camera
      */
     particle_emitter(glm::vec3 starting_position, glm::vec3 starting_velocity,
-                    glm::vec3 starting_spread, float starting_timeToLive,
-                    int num_particles, float spawn_rate, float scale,
-                    std::string atlas_path, int atlas_width, int atlas_height,
-                    int atlas_index, camera *cam);
+                     glm::vec3 starting_spread, float starting_timeToLive,
+                     int num_particles, float spawn_rate, float scale,
+                     std::string atlas_path, int atlas_width, int atlas_height,
+                     int atlas_index, camera *cam);
     /**
      * @brief Destroy the ParticleEmitter object
      */

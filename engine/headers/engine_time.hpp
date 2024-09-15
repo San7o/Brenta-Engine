@@ -82,4 +82,4 @@ class time
     static float last_frame;
 };
 
-} // namespace Brenta
+} // namespace brenta

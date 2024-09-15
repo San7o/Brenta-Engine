@@ -41,19 +41,19 @@ camera::camera(enums::camera_type camera_type,
                types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
                glm::vec3 right)
 {
-    this->camera_type           = camera_type;
-    this->projection_type       = projection_type;
-    this->position              = position;
-    this->world_up              = world_up;
-    this->center                = center;
-    this->movement_speed        = movement_speed;
-    this->mouse_sensitivity     = mouse_sensitivity;
-    this->zoom                  = zoom;
+    this->camera_type = camera_type;
+    this->projection_type = projection_type;
+    this->position = position;
+    this->world_up = world_up;
+    this->center = center;
+    this->movement_speed = movement_speed;
+    this->mouse_sensitivity = mouse_sensitivity;
+    this->zoom = zoom;
     this->spherical_coordinates = spherical_coordinates;
-    this->euler_angles          = euler_angles;
-    this->front                 = front;
-    this->up                    = up;
-    this->right                 = right;
+    this->euler_angles = euler_angles;
+    this->front = front;
+    this->up = up;
+    this->right = right;
 
     /* Update the camera */
     switch (this->camera_type)
@@ -78,7 +78,8 @@ glm::mat4 camera::get_view_matrix()
     case enums::camera_type::SPHERICAL:
         return glm::lookAt(this->position, this->center, this->world_up);
     case enums::camera_type::AIRCRAFT:
-        return glm::lookAt(this->position, this->position + this->front, this->up);
+        return glm::lookAt(this->position, this->position + this->front,
+                           this->up);
     default:
         return glm::mat4(1.0f);
     }
@@ -91,7 +92,7 @@ glm::mat4 camera::get_projection_matrix()
     case enums::projection_type::PERSPECTIVE:
         return glm::perspective(glm::radians(this->zoom),
                                 (float) screen::get_width()
-                                 / (float) screen::get_height(),
+                                    / (float) screen::get_height(),
                                 0.1f, 1000.0f);
     case enums::projection_type::ORTHOGRAPHIC:
         return glm::ortho((float) -screen::get_width() / 2.0f,
@@ -105,14 +106,17 @@ glm::mat4 camera::get_projection_matrix()
 
 void camera::spherical_to_cartesian()
 {
-    this->position.x = sin(this->spherical_coordinates.theta) * cos(this->spherical_coordinates.phi)
-                     * this->spherical_coordinates.radius
-                 + this->center.x;
-    this->position.y = cos(this->spherical_coordinates.theta) * this->spherical_coordinates.radius
-                 + this->center.y;
-    this->position.z = sin(spherical_coordinates.theta) * sin(this->spherical_coordinates.phi)
-                     * this->spherical_coordinates.radius
-                 + this->center.z;
+    this->position.x = sin(this->spherical_coordinates.theta)
+                           * cos(this->spherical_coordinates.phi)
+                           * this->spherical_coordinates.radius
+                       + this->center.x;
+    this->position.y = cos(this->spherical_coordinates.theta)
+                           * this->spherical_coordinates.radius
+                       + this->center.y;
+    this->position.z = sin(spherical_coordinates.theta)
+                           * sin(this->spherical_coordinates.phi)
+                           * this->spherical_coordinates.radius
+                       + this->center.z;
 }
 
 /* For aircraft camera */
@@ -121,10 +125,10 @@ void camera::update_camera_euler()
     /* calculate the new Front vector */
     glm::vec3 new_front;
     new_front.x = cos(glm::radians(euler_angles.yaw))
-              * cos(glm::radians(euler_angles.pitch));
+                  * cos(glm::radians(euler_angles.pitch));
     new_front.y = sin(glm::radians(euler_angles.pitch));
     new_front.z = sin(glm::radians(euler_angles.yaw))
-              * cos(glm::radians(euler_angles.pitch));
+                  * cos(glm::radians(euler_angles.pitch));
     this->front = glm::normalize(new_front);
     /* also re-calculate the Right and Up vector */
     this->right = glm::normalize(glm::cross(this->front, this->world_up));
@@ -292,7 +296,8 @@ void camera::set_last_y(float last_y)
     this->last_y = last_y;
 }
 
-camera::builder &camera::builder::set_camera_type(enums::camera_type camera_type)
+camera::builder &
+camera::builder::set_camera_type(enums::camera_type camera_type)
 {
     this->camera_type = camera_type;
     return *this;
@@ -376,6 +381,6 @@ camera::builder &camera::builder::set_right(glm::vec3 right)
 brenta::camera camera::camera::builder::build()
 {
     return camera(camera_type, projection_type, position, world_up, center,
-                  movement_speed, mouse_sensitivity, zoom, spherical_coordinates,
-                  euler_angles, front, up, right);
+                  movement_speed, mouse_sensitivity, zoom,
+                  spherical_coordinates, euler_angles, front, up, right);
 }

@@ -53,12 +53,12 @@ namespace types
 struct character
 {
     unsigned int texture_id; // ID handle of the glyph texture
-    glm::ivec2 size;        // Size of glyph
-    glm::ivec2 bearing;     // Offset from baseline to left/top of glyph
-    unsigned int advance;   // Offset to advance to next glyph
+    glm::ivec2 size;         // Size of glyph
+    glm::ivec2 bearing;      // Offset from baseline to left/top of glyph
+    unsigned int advance;    // Offset to advance to next glyph
 };
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Text subsystem
@@ -117,7 +117,7 @@ class text
      * @param color Color of the text
      */
     static void render_text(std::string text, float x, float y, float scale,
-                           glm::vec3 color);
+                            glm::vec3 color);
 
   private:
     static types::shader_name_t text_shader;
@@ -125,4 +125,4 @@ class text
     static types::buffer text_vbo;
 };
 
-} // namespace Brenta
+} // namespace brenta

@@ -76,8 +76,9 @@ class screen
      * @param vsync If vertical synchronization is enabled
      */
     static void init(int SCR_WIDTH, int SCR_HEIGHT,
-                     bool is_mouse_captured = false, const char *title = "OpenGL",
-                     bool msaa = false, bool vsync = false);
+                     bool is_mouse_captured = false,
+                     const char *title = "OpenGL", bool msaa = false,
+                     bool vsync = false);
 
     /* Getters */
 
@@ -176,4 +177,4 @@ class screen
                                           int height);
 };
 
-} // namespace Brenta
+} // namespace brenta

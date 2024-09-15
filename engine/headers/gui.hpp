@@ -39,7 +39,7 @@ namespace brenta
  * @brief Gui class
  *
  * This class contains the GUI functions,
- * It's a wrapper around imgui, providing 
+ * It's a wrapper around imgui, providing
  * functions to initialize, update and delete
  * the gui.
  */
@@ -68,6 +68,6 @@ class gui
     static void render();
 };
 
-} // namespace Brenta
+} // namespace brenta
 
 #endif

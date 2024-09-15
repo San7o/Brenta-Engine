@@ -72,9 +72,10 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
 
             t.set_shader(default_shader);
 
-            shader::set_vec3(default_shader, "viewPos", default_camera.get_position());
+            shader::set_vec3(default_shader, "viewPos",
+                             default_camera.get_position());
             shader::set_float(default_shader, "material.shininess",
-                             model_component->shininess);
+                              model_component->shininess);
 
             /* Animation control */
             if (model_component->hasAtlas)
@@ -94,9 +95,9 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
                     model_component->elapsedFrames++;
                 }
                 shader::set_int(default_shader, "atlasSize",
-                               model_component->atlasSize);
+                                model_component->atlasSize);
                 shader::set_int(default_shader, "atlasIndex",
-                               model_component->atlasIndex);
+                                model_component->atlasIndex);
             }
             else
             {

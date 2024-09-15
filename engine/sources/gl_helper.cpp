@@ -35,7 +35,7 @@
 using namespace brenta;
 
 void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
-                    bool gl_depth_test)
+                     bool gl_depth_test)
 {
     GLADloadproc loadproc = (GLADloadproc) screen::get_proc_address();
     if (!gladLoadGLLoader(loadproc))

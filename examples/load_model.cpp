@@ -43,24 +43,24 @@ const int SCR_HEIGHT = 600;
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .set_gl_blending(true)
-                        .set_gl_cull_face(true)
-                        .set_gl_multisample(true)
-                        .set_gl_depth_test(true)
-                        .set_log_level(types::log_level::DEBUG)
-                        .build();
+                     .use_screen(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .set_gl_blending(true)
+                     .set_gl_cull_face(true)
+                     .set_gl_multisample(true)
+                     .set_gl_depth_test(true)
+                     .set_log_level(oak::level::debug)
+                     .build();
 
     /* Load the model */
     model our_model(ABS("assets/models/backpack/backpack.obj"));
 
     /* Load the shader */
     shader::create("default_shader", GL_VERTEX_SHADER,
-                ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
-                ABS("examples/default_shader.fs"));
+                   ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
+                   ABS("examples/default_shader.fs"));
 
     while (!screen::is_window_closed())
     {

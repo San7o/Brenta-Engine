@@ -29,7 +29,6 @@
 #include "ecs.hpp"
 #include "game_ecs.hpp"
 #endif
-
 #include <bitset>
 #include <filesystem>
 
@@ -56,36 +55,37 @@ camera default_camera = camera();
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .use_audio(true)
-                        .use_input(true)
-                        .use_logger(true)
-                        .use_text(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .set_screen_msaa(true)
-                        .set_screen_vsync(true)
-                        .set_screen_title("Game")
-                        .set_log_level(brenta::types::log_level::INFO)
-                        .set_log_file("./logs/log.txt")
-                        .set_text_font("arial.ttf")
-                        .set_text_size(24)
-                        .set_gl_blending(true)
-                        .set_gl_cull_face(true)
-                        .set_gl_multisample(true)
-                        .set_gl_depth_test(true)
-                        .build();
+                     .use_screen(true)
+                     .use_audio(true)
+                     .use_input(true)
+                     .use_logger(true)
+                     .use_text(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .set_screen_msaa(true)
+                     .set_screen_vsync(true)
+                     .set_screen_title("Game")
+                     .set_log_level(oak::level::debug)
+                     .set_log_file("logs/log.txt")
+                     .set_text_font("arial.ttf")
+                     .set_text_size(24)
+                     .set_gl_blending(true)
+                     .set_gl_cull_face(true)
+                     .set_gl_multisample(true)
+                     .set_gl_depth_test(true)
+                     .build();
 
-    default_camera = camera::builder()
-                 .set_camera_type(enums::camera_type::SPHERICAL)
-                 .set_projection_type(enums::projection_type::PERSPECTIVE)
-                 .set_spherical_coordinates({1.25f, 1.25f, 30.0f})
-                 .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
-                 .set_movement_speed(2.5f)
-                 .set_mouse_sensitivity(0.05f)
-                 .set_zoom(45.0f)
-                 .build();
+    default_camera =
+        camera::builder()
+            .set_camera_type(enums::camera_type::SPHERICAL)
+            .set_projection_type(enums::projection_type::PERSPECTIVE)
+            .set_spherical_coordinates({1.25f, 1.25f, 30.0f})
+            .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
+            .set_movement_speed(2.5f)
+            .set_mouse_sensitivity(0.05f)
+            .set_zoom(45.0f)
+            .build();
 
 #ifdef USE_ECS
     init_player_entity();
@@ -105,7 +105,7 @@ int main()
 #endif
 
     audio::load_audio("guitar",
-                     std::filesystem::absolute("assets/audio/guitar.wav"));
+                      std::filesystem::absolute("assets/audio/guitar.wav"));
 
     particle_emitter emitter =
         particle_emitter::builder()

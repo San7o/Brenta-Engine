@@ -43,12 +43,12 @@ const int SCR_HEIGHT = 600;
 int main()
 {
     engine eng = engine::builder()
-                        .use_screen(true)
-                        .use_audio(true) /* Enable audio */
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(false)
-                        .build();
+                     .use_screen(true)
+                     .use_audio(true) /* Enable audio */
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .build();
 
     /* Load an audio file, assign it the name "guitar" */
     audio::load_audio("guitar", ABS("assets/audio/guitar.wav"));

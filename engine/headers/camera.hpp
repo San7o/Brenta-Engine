@@ -90,7 +90,7 @@ struct euler_angles
     }
 };
 
-} // namespace Types
+} // namespace types
 
 namespace enums
 {
@@ -121,7 +121,7 @@ enum camera_movement
     RIGHT
 };
 
-} // namespace Enums
+} // namespace enums
 
 /**
  * @brief The Camera class
@@ -248,9 +248,10 @@ class camera
      *
      * Full constructor that initializes the camera with the specified values.
      */
-    camera(enums::camera_type camera_type, enums::projection_type projection_type,
-           glm::vec3 position, glm::vec3 world_up, glm::vec3 center,
-           float movement_speed, float mouse_sensitivity, float zoom,
+    camera(enums::camera_type camera_type,
+           enums::projection_type projection_type, glm::vec3 position,
+           glm::vec3 world_up, glm::vec3 center, float movement_speed,
+           float mouse_sensitivity, float zoom,
            types::spherical_coordinates spherical_coordinates,
            types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
            glm::vec3 right);
@@ -397,8 +398,8 @@ class camera
      * @brief Set the spherical coordinates of the camera
      * @param sphericalCoordinates The spherical coordinates of the camera
      */
-    void
-    set_spherical_coordinates(types::spherical_coordinates spherical_coordinates);
+    void set_spherical_coordinates(
+        types::spherical_coordinates spherical_coordinates);
     /**
      * @brief Set the euler angles of the camera
      * @param eulerAngles The euler angles of the camera
@@ -469,7 +470,8 @@ class camera::builder
 {
   private:
     enums::camera_type camera_type = enums::camera_type::AIRCRAFT;
-    enums::projection_type projection_type = enums::projection_type::PERSPECTIVE;
+    enums::projection_type projection_type =
+        enums::projection_type::PERSPECTIVE;
     glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
     glm::vec3 world_up = glm::vec3(0.0f, 1.0f, 0.0f);
     glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -491,8 +493,8 @@ class camera::builder
     builder &set_movement_speed(float movement_speed);
     builder &set_mouse_sensitivity(float mouse_sensitivity);
     builder &set_zoom(float zoom);
-    builder &
-    set_spherical_coordinates(types::spherical_coordinates spherical_coordinates);
+    builder &set_spherical_coordinates(
+        types::spherical_coordinates spherical_coordinates);
     builder &set_euler_angles(types::euler_angles euler_angles);
     builder &set_front(glm::vec3 front);
     builder &set_up(glm::vec3 up);
@@ -508,4 +510,4 @@ class camera::builder
  */
 extern camera default_camera;
 
-} // namespace Brenta
+} // namespace brenta

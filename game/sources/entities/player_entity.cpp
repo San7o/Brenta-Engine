@@ -49,23 +49,23 @@ void init_player_entity()
     /* Add the transform component */
     auto transform_component =
         TransformComponent(glm::vec3(0.0f, 1.8f, -5.0f), glm::vec3(0.0f), 1.0f);
-    world::add_component<TransformComponent>(player_entity, transform_component);
+    world::add_component<TransformComponent>(player_entity,
+                                             transform_component);
 
     /* Load the shader */
     if (shader::get_id("default_shader") == 0)
     {
         shader::create("default_shader", GL_VERTEX_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.vs"),
-                    GL_FRAGMENT_SHADER,
-                    std::filesystem::absolute("game/shaders/shader.fs"));
+                       std::filesystem::absolute("game/shaders/shader.vs"),
+                       GL_FRAGMENT_SHADER,
+                       std::filesystem::absolute("game/shaders/shader.fs"));
     }
 
     /* Load the model */
-    model m(
-        std::filesystem::absolute("assets/models/backpack/backpack.obj"));
+    model m(std::filesystem::absolute("assets/models/backpack/backpack.obj"));
 
     /* Add the model component */
     auto model_component = ModelComponent(m, 32.0f, "default_shader");
     world::add_component<ModelComponent>(player_entity,
-                                        std::move(model_component));
+                                         std::move(model_component));
 }
