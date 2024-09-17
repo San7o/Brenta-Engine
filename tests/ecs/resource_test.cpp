@@ -24,9 +24,8 @@
  *
  */
 
-#include "catch_amalgamated.hpp"
+#include "valfuzz/valfuzz.hpp"
 #include "ecs.hpp"
-#include "engine_logger.hpp"
 
 #include <typeinfo>
 #include <unordered_map>
@@ -39,9 +38,8 @@ struct TestResource : resource {
     TestResource(int payload) : payload(payload) {}
 };
 
-TEST_CASE("Add, get and remove a resource from the world")
+TEST(res, "Add, get and remove a resource from the world")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     /* add the resource */
@@ -50,35 +48,34 @@ TEST_CASE("Add, get and remove a resource from the world")
     
     /* get the resources */
     auto resources = world::get_resources();
-    REQUIRE(resources != nullptr);
-    REQUIRE(resources->size() == 1);
-    REQUIRE(resources->count(typeid(TestResource)) == 1);
+    ASSERT(resources != nullptr);
+    ASSERT(resources->size() == 1);
+    ASSERT(resources->count(typeid(TestResource)) == 1);
 
     /* get the resource */
     auto my_resource = world::get_resource<TestResource>();
-    REQUIRE(my_resource != nullptr);
-    REQUIRE(my_resource->payload == 69);
+    ASSERT(my_resource != nullptr);
+    ASSERT(my_resource->payload == 69);
 
     /* remove the resource */
     world::remove_resource<TestResource>();
-    REQUIRE(resources->size() == 0);
-    REQUIRE(resources->count(typeid(TestResource)) == 0);
+    ASSERT(resources->size() == 0);
+    ASSERT(resources->count(typeid(TestResource)) == 0);
     
     /* get the deleted resource */
     my_resource = world::get_resource<TestResource>();
-    REQUIRE(my_resource == nullptr);
+    ASSERT(my_resource == nullptr);
 
     world::destroy();
 }
 
-TEST_CASE("Get an unexisting resource")
+TEST(no_res, "Get an unexisting resource")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     /* get the resource */
     auto my_resource = world::get_resource<TestResource>();
-    REQUIRE(my_resource == nullptr);
+    ASSERT(my_resource == nullptr);
 
     world::destroy();
 }

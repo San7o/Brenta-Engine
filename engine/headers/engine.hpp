@@ -175,10 +175,11 @@ class engine::builder
  * - **brenta::screen**: manages the window and the OpenGL context.
  * - **brenta::audio**: everything audio.
  * - **brenta::input**: manages the screen input using callbacks.
- * - **brenta::logger**: logging manager.
  * - **brenta::text**: text rendering.
  * - **brenta::ecs::world**: the Entity Component System submodule.
  * - **brenta::engine**: manages the setup of the engine.
+ * - **[oak](https://github.com/San7o/oak)**: engine's logger
+ * - **[valfuzz](https://github.com/San7o/valFuzz)**: the engine's testing framework
  *
  * In addition, the engine has multiple classes to provide more functionalities.
  * Those are mostly wrappers around opengl primitives or handy classes providing
@@ -325,12 +326,12 @@ class engine::builder
  * ```
  *
  * \section tests Tests
- *
+ * The engine uses It's own testing framework, [valFuzz](https://github.com/San7o/valFuzz).
  * To build tests, run:
  * ```bash
  * cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
  * cmake --build build -j 4
- * ./buid/unit
+ * ./buid/tests --no-multithread
  * ```
  *
  * \section examples Examples
@@ -616,26 +617,13 @@ class engine::builder
  *
  * \section logger Logger
  *
- * The logger is a simple logging system that allows you to log messages with
- * different levels. The levels are:
- * - **DEBUG**
- * - **INFO**
- * - **WARNING**
- * - **ERROR**
- * - **OUTPUT**
- * - **DISABLED**
- *
- * The logger will only log messages with a level equal or higher than the one
- * you set. You can also set a log file where the messages will be written, the
- * default is `./logs/log.txt`.
- *
- * This is an example on how to log a message:
+ * Check out [oak](https://github.com/San7o/oak)! The engine uses oak as the
+ * logger, you can set the log level and the log file in the engine builder.
+ * You can log messages like so:
  * ```cpp
- * brenta::logger::log(brenta::types::log_level::DEBUG, "This is a debug
- * message:
- * ", "hello");
- * DEBUG("This is a debug message with macro: ", "hello");
+ * oak::info("Hello, world!");
  * ```
+ * Oak has many more advanced features, I suggest you check out the repository.
  *
  * \section text Text
  *

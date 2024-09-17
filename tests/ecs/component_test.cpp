@@ -24,9 +24,8 @@
  *
  */
 
-#include "catch_amalgamated.hpp"
+#include "valfuzz/valfuzz.hpp"
 #include "ecs.hpp"
-#include "engine_logger.hpp"
 
 #include <typeinfo>
 #include <unordered_map>
@@ -40,45 +39,43 @@ struct AComponent : component {
     AComponent(int payload) : payload(payload) {}
 };
 
-TEST_CASE("Add a component to an entity")
+TEST(entity_component, "Add a component to an entity")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     entity_t entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
 
     world::add_component<AComponent>(entity, AComponent(69));
     auto components = world::get_components();
-    REQUIRE(components != nullptr);
-    REQUIRE(components->size() == 1);
-    REQUIRE(components->count(typeid(AComponent)) == 1);
-    REQUIRE(components->at(typeid(AComponent)).size() == 1);
+    ASSERT(components != nullptr);
+    ASSERT(components->size() == 1);
+    ASSERT(components->count(typeid(AComponent)) == 1);
+    ASSERT(components->at(typeid(AComponent)).size() == 1);
 
     auto type_components = components->at(typeid(AComponent));
-    REQUIRE(type_components.size() == 1);
+    ASSERT(type_components.size() == 1);
 
     auto component = static_cast<AComponent*>(type_components[0].get());
-    REQUIRE(component != nullptr);
-    REQUIRE(component->payload == 69);
-    REQUIRE(component->entity == entity);
+    ASSERT(component != nullptr);
+    ASSERT(component->payload == 69);
+    ASSERT(component->entity == entity);
 
     world::destroy();
 }
 
-TEST_CASE("EntityToComponent")
+TEST(entity_to_component, "EntityToComponent")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     entity_t entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
 
     world::add_component<AComponent>(entity, AComponent(69));
     auto component = world::entity_to_component<AComponent>(entity);
-    REQUIRE(component != nullptr);
-    REQUIRE(component->payload == 69);
-    REQUIRE(component->entity == entity);
+    ASSERT(component != nullptr);
+    ASSERT(component->payload == 69);
+    ASSERT(component->entity == entity);
 
     world::destroy();
 }

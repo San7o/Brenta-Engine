@@ -18,7 +18,13 @@ include(cmake/CPM.cmake) # <3
 CPMAddPackage(
     NAME oak
     GITHUB_REPOSITORY San7o/oak
-    GIT_TAG v1.0.1
+    GIT_TAG v1.0.2
+    DOWNLOAD_ONLY True
+)
+CPMAddPackage(
+    NAME valfuzz
+    GITHUB_REPOSITORY San7o/valFuzz
+    GIT_TAG v1.0.0
     DOWNLOAD_ONLY True
 )
 CPMUsePackageLock(package-lock.cmake)
@@ -54,6 +60,10 @@ if (oak_ADDED)
     list(APPEND BRENTA_INCLUDES ${oak_SOURCE_DIR}/include)
     list(APPEND BRENTA_COMPILE_OPTIONS -DOAK_USE_SOCKETS)
     list(APPEND BRENTA_EXTRA_SOURCES ${oak_SOURCE_DIR}/src/oak.cpp)
+endif()
+if (valfuzz_ADDED AND BRENTA_BUILD_TESTS)
+    list(APPEND BRENTA_INCLUDES ${valfuzz_SOURCE_DIR}/include)
+    list(APPEND BRENTA_EXTRA_SOURCES ${valfuzz_SOURCE_DIR}/src/valfuzz.cpp)
 endif()
 if (BRENTA_BUILD_MAIN)
     list(APPEND BRENTA_INCLUDES game/headers)
@@ -98,7 +108,8 @@ if (BRENTA_BUILD_MAIN AND NOT BRENTA_BUILD_TESTS AND NOT BRENTA_BUILD_EXAMPLES)
 endif()
 
 if (BRENTA_BUILD_TESTS)
-    add_executable(tests ${BRENTA_TEST_SOURCES} ${BRENTA_ENGINE_SOURCES} ${BRENTA_ECS_SOURCES})
+    add_executable(tests ${BRENTA_TEST_SOURCES} ${BRENTA_ENGINE_SOURCES}
+            ${BRENTA_ECS_SOURCES} ${BRENTA_IMGUI_SOURCES})
     target_include_directories(tests PRIVATE ${BRENTA_INCLUDES})
     target_link_libraries(tests PRIVATE ${BRENTA_LINK_LIBRARIES})
     target_compile_options(tests PRIVATE ${BRENTA_COMPILE_OPTIONS})

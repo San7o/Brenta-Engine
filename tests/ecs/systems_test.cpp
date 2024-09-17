@@ -24,9 +24,8 @@
  *
  */
 
-#include "catch_amalgamated.hpp"
+#include "valfuzz/valfuzz.hpp"
 #include "ecs.hpp"
-#include "engine_logger.hpp"
 
 using namespace brenta;
 using namespace brenta::ecs;
@@ -53,7 +52,8 @@ struct ComponentC : component {
 /* This system increases the payload of ComponentA and ComponentB */
 struct SystemA : system<ComponentA, ComponentB> {
     void run(std::vector<entity_t> matched) const override {
-        REQUIRE(matched.size() == 1);
+        std::string test_name = "SystemA";
+        ASSERT(matched.size() == 1);
         for (auto e : matched) {
             auto component_a = world::entity_to_component<ComponentA>(e);
             auto component_b = world::entity_to_component<ComponentB>(e);
@@ -66,22 +66,23 @@ struct SystemA : system<ComponentA, ComponentB> {
 /* ComponentC is not assigned to any entity */
 struct SystemB : system<ComponentC> {
     void run(std::vector<entity_t> matched) const override {
-        REQUIRE(matched.size() == 0);
+        std::string test_name = "SystemB";
+        ASSERT(matched.size() == 0);
     }
 };
 
 /* This system has no dependencies and should always run */
 struct SystemC : system<none> {
     void run(std::vector<entity_t> matched) const override {
-        REQUIRE(matched.size() == 0);
+        std::string test_name = "SystemC";
+        ASSERT(matched.size() == 0);
         runs++;
     }
 };
 REGISTER_SYSTEMS(SystemA, SystemB, SystemC);
 
-TEST_CASE("Run some registered systems")
+TEST(systems, "Run some registered systems")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     entity_t e = world::new_entity();
@@ -90,22 +91,22 @@ TEST_CASE("Run some registered systems")
 
     auto component_a = world::entity_to_component<ComponentA>(e);
     auto component_b = world::entity_to_component<ComponentB>(e);
-    REQUIRE(component_a->payload == 69);
-    REQUIRE(component_b->payload == 69);
+    ASSERT(component_a->payload == 69);
+    ASSERT(component_b->payload == 69);
 
     world::tick();
-    REQUIRE(component_a->payload == 70);
-    REQUIRE(component_b->payload == 70);
+    ASSERT(component_a->payload == 70);
+    ASSERT(component_b->payload == 70);
 
     world::tick();
-    REQUIRE(component_a->payload == 71);
-    REQUIRE(component_b->payload == 71);
+    ASSERT(component_a->payload == 71);
+    ASSERT(component_b->payload == 71);
 
     world::tick();
-    REQUIRE(component_a->payload == 72);
-    REQUIRE(component_b->payload == 72);
+    ASSERT(component_a->payload == 72);
+    ASSERT(component_b->payload == 72);
 
-    REQUIRE(runs == 3);
+    ASSERT(runs == 3);
 
     world::destroy();
 }

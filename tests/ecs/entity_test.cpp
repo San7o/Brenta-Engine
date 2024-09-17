@@ -24,60 +24,57 @@
  *
  */
 
-#include "catch_amalgamated.hpp"
+#include "valfuzz/valfuzz.hpp"
 #include "ecs.hpp"
-#include "engine_logger.hpp"
 
 using namespace brenta;
 using namespace brenta::ecs;
 
-TEST_CASE("Create and remove and entity")
+TEST(entity, "Create and remove and entity")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     entity_t entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
 
     auto entities = world::get_entities();
-    REQUIRE(entities != nullptr);
-    REQUIRE(entities->size() == 1);
+    ASSERT(entities != nullptr);
+    ASSERT(entities->size() == 1);
 
     world::remove_entity(entity);
     entities = world::get_entities();
-    REQUIRE(entities != nullptr);
-    REQUIRE(entities->size() == 0);
+    ASSERT(entities != nullptr);
+    ASSERT(entities->size() == 0);
 
     world::destroy();
 }
 
-TEST_CASE("Create a bunch of new entities")
+TEST(entities, "Create a bunch of new entities")
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
     world::init();
 
     entity_t entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
     entity = world::new_entity();
-    REQUIRE(entity != -1);
+    ASSERT(entity != -1);
 
     auto entities = world::get_entities();
-    REQUIRE(entities != nullptr);
-    REQUIRE(entities->size() == 9);
+    ASSERT(entities != nullptr);
+    ASSERT(entities->size() == 9);
 
     world::destroy();
 }
