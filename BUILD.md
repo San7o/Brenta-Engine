@@ -90,7 +90,7 @@ To build tests, run:
 ```bash
 cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
 cmake --build build -j 4
-./buid/unit
+./buid/tests --no-multithread
 ```
 
 # Examples

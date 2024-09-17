@@ -24,76 +24,56 @@
  *
  */
 
-#include "catch_amalgamated.hpp"
+#include "valfuzz/valfuzz.hpp"
 #include "world.hpp"
 #include "engine_logger.hpp"
 
 using namespace brenta;
 using namespace brenta::ecs;
 
-TEST_CASE("Get ECS without inizialization")
+BEFORE()
 {
-    logger::set_log_level(brenta::types::log_level::DISABLED);
-
-    SECTION("Get ECS world entities without inizialization")
-    {
-        auto entities = world::get_entities();
-        REQUIRE(entities == nullptr);
-    }
-
-    SECTION("Get ECS world resources without inizialization")
-    {
-        auto resources = world::get_resources();
-        REQUIRE(resources == nullptr);
-    }
-
-    SECTION("Get ECS world components without inizialization")
-    {
-        auto components = world::get_components();
-        REQUIRE(components == nullptr);
-    }
+    oak::set_level(oak::level::disabled);
 }
 
-TEST_CASE("ECS world inizialization and destruction")
+TEST(ecs_init, "Get ECS without inizialization")
+{
+    auto entities = world::get_entities();
+    ASSERT(entities == nullptr);
+
+    auto resources = world::get_resources();
+    ASSERT(resources == nullptr);
+
+    auto components = world::get_components();
+    ASSERT(components == nullptr);
+}
+
+TEST(ecs_init_destroy, "ECS world inizialization and destruction")
 {
     world::init();
 
-    SECTION("Get ECS world entities after inizialization")
     {
         auto entities = world::get_entities();
-        REQUIRE(entities != nullptr);
-    }
+        ASSERT(entities != nullptr);
 
-    SECTION("Get ECS world resources after inizialization")
-    {
         auto resources = world::get_resources();
-        REQUIRE(resources != nullptr);
-    }
+        ASSERT(resources != nullptr);
 
-    SECTION("Get ECS world components after inizialization")
-    {
         auto components = world::get_components();
-        REQUIRE(components != nullptr);
+        ASSERT(components != nullptr);
     }
 
     world::destroy();
 
-    SECTION("Get ECS world entities after destruction")
     {
         auto entities = world::get_entities();
-        REQUIRE(entities == nullptr);
-    }
+        ASSERT(entities == nullptr);
 
-    SECTION("Get ECS world resources after destruction")
-    {
         auto resources = world::get_resources();
-        REQUIRE(resources == nullptr);
-    }
+        ASSERT(resources == nullptr);
 
-    SECTION("Get ECS world components after destruction")
-    {
         auto components = world::get_components();
-        REQUIRE(components == nullptr);
+        ASSERT(components == nullptr);
     }
 
     world::destroy();
