@@ -11,7 +11,7 @@ Check out `GUIDE.md` for a quick introduction on how the engine works!
 
 The engine also features the following sub projects:
 
-- [oak](https://github.com/San7o/oak): feature-tich, thread-safe, Brenta Engine's logger.
+- [oak](https://github.com/San7o/oak): feature-rich, thread-safe, Brenta Engine's logger.
 - [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
 - [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
 
@@ -101,7 +101,7 @@ struct physics_component : component {
     physics_component() {}
 };
 
-// Somehwere
+// Somewhere
 world::add_component<physics_component>(entity, physics_component);
 ```
 ### Systems
@@ -120,7 +120,7 @@ REGISTER_SYSTEMS(fps_system);
 ```
 <h1 align=center> Building </h1>
 
-All instuctions to build the demo game are in [BUILD](./BUILD.md), there are also instructions on
+All instructions to build the demo game are in [BUILD](./BUILD.md), there are also instructions on
 how to [build unit tests](./tests/README.md) and how to [build examples](./examples/README.md).
 
 <h1 align=center> Contributing </h1>
