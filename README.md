@@ -12,9 +12,7 @@ Check out `GUIDE.md` for a quick introduction on how the engine works!
 The engine also features the following sub projects:
 
 - [oak](https://github.com/San7o/oak): feature-tich, thread-safe, Brenta Engine's logger.
-
 - [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
-
 - [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
 
 

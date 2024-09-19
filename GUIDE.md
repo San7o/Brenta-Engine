@@ -29,15 +29,17 @@ display text with `brenta::text` and more!
 
 ```c++
 #include "engine.hpp"
-#include "ecs.hpp"
+#include "viotecs/viotecs.hpp"
 using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 // Initialize a default camera
 namespace brenta
 {
     camera default_camera = camera();
 }
+
+REGISTER_SYSTEMS(none);
 
 int main() {
 
