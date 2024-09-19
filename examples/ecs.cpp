@@ -24,12 +24,11 @@
  *
  */
 
-#include "world.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <iostream>
 
-using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct player_component : component
 {

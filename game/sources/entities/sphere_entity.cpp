@@ -30,13 +30,13 @@
 #include "components/physics_component.hpp"
 #include "components/sphere_collider_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <filesystem>
 
-using namespace brenta::ecs;
-using namespace brenta::ecs::types;
+using namespace viotecs;
+using namespace viotecs::types;
 using namespace brenta;
 
 void init_sphere_entity()

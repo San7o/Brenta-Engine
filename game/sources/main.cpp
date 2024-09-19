@@ -26,15 +26,15 @@
 
 #include "engine.hpp"
 #ifdef USE_ECS
-#include "ecs.hpp"
 #include "game_ecs.hpp"
+#include "viotecs/viotecs.hpp"
 #endif
 #include <bitset>
 #include <filesystem>
 
 using namespace brenta;
 #ifdef USE_ECS
-using namespace brenta::ecs;
+using namespace viotecs;
 #endif
 
 // Default resolution

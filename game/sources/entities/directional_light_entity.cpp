@@ -29,8 +29,8 @@
 #include "components/directional_light_component.hpp"
 #include "components/model_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <filesystem>
 #include <glm/glm.hpp>
@@ -38,7 +38,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace brenta::ecs;
+using namespace viotecs;
 using namespace brenta;
 
 void init_directional_light_entity()

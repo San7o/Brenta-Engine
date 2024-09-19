@@ -26,14 +26,14 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/fps_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace brenta::ecs;
-using namespace brenta::ecs::types;
+using namespace viotecs;
+using namespace viotecs::types;
 
 struct FPSSystem : system<none>
 {

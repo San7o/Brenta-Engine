@@ -27,12 +27,12 @@
 #pragma once
 
 #include "components/directional_light_component.hpp"
-#include "ecs.hpp"
 #include "systems/directional_light_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct DirectionalLightSystem : system<DirectionalLightComponent>
 {

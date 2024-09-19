@@ -83,10 +83,9 @@ class engine
     engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
            bool uses_text, int screen_width, int screen_height,
            bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
-           const char *screen_title, oak::level log_level,
-           std::string log_file, std::string text_font, int text_size,
-           bool gl_blending, bool gl_cull_face, bool gl_multisample,
-           bool gl_depth_test);
+           const char *screen_title, oak::level log_level, std::string log_file,
+           std::string text_font, int text_size, bool gl_blending,
+           bool gl_cull_face, bool gl_multisample, bool gl_depth_test);
     ~engine();
 
     class builder;
@@ -172,14 +171,16 @@ class engine::builder
  * the Screen.
  *
  * The main submodules are:
+ * * **[viotecs](https://github.com/San7o/viotecs)**: the engine's Entity
+ * Component System
+ * - **[oak](https://github.com/San7o/oak)**: engine's logger
+ * - **[valfuzz](https://github.com/San7o/valFuzz)**: the engine's testing
+ * framework
  * - **brenta::screen**: manages the window and the OpenGL context.
  * - **brenta::audio**: everything audio.
  * - **brenta::input**: manages the screen input using callbacks.
  * - **brenta::text**: text rendering.
- * - **brenta::ecs::world**: the Entity Component System submodule.
  * - **brenta::engine**: manages the setup of the engine.
- * - **[oak](https://github.com/San7o/oak)**: engine's logger
- * - **[valfuzz](https://github.com/San7o/valFuzz)**: the engine's testing framework
  *
  * In addition, the engine has multiple classes to provide more functionalities.
  * Those are mostly wrappers around opengl primitives or handy classes providing
@@ -326,8 +327,8 @@ class engine::builder
  * ```
  *
  * \section tests Tests
- * The engine uses It's own testing framework, [valFuzz](https://github.com/San7o/valFuzz).
- * To build tests, run:
+ * The engine uses It's own testing framework,
+ * [valFuzz](https://github.com/San7o/valFuzz). To build tests, run:
  * ```bash
  * cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
  * cmake --build build -j 4
@@ -352,7 +353,6 @@ class engine::builder
  * The engine is divided into the following directories:
  *
  * - **engine**: contains the source code of the engine
- * - **ecs**: contains all the files related to the Entity Component System
  * - **utils**: contains utility classes like the Logger, those classes are
  * ussed both by the engine and the ECS
  * - **tests**: contains the tests for the engine
@@ -370,141 +370,16 @@ class engine::builder
  * - **LICENSE**: the license file
  *
  * \section namespaces Namespaces
- * The engine uses the `brenta` namespace. There are also some subnamespaces:
+ * The engine uses the `brenta` namespace. There are also some subnamespace:
  * - **brenta::types**: contains the types used in the engine
- * - **brenta::ecs**: contains the types used in the ECS
+ * - **oak**: the logger
+ * - **viotecs**: the ECS
+ * - **valfuzz**: the testing framework
  *
  * \page ECS
- * Brenta Engine features an Entity Component System architecture. The ECS is a
- * design pattern that allows you to structure your code in a way that is more
- * modular and scalable.
  *
- * The ECS is composed of three main parts:
- * - **Entity**: an entity is an object in the game, it is just an ID
- * - **Component**: a component is a piece of data that is attached to an entity
- * - **System**: a system is a piece of code that operates on entities with
- * specific components. They get autocamically executed at each game tick.
- * - **Resources**: resources are shared global data that can be accessed by any
- * system
- *
- * With those building blocks, you can create any game or application. The ECS
- * is optional, you can use the engine without it.
- *
- * \subsection header Header
- * Everything you need to use the ECS is in the `ecs` directory. To use the ECS,
- * include the `ecs.hpp` header:
- * ```cpp
- * #include "ecs.hpp"
- * using namespace brenta::ecs;
- * ```
- *
- * \section world The World
- *
- * Everything that exists in the ECS is contained in the `World` class. The
- * World is a singleton accessible from anywhere in the code and It will be your
- * entry point to the ECS. You can create entities, assign components to them,
- * and query entities with specific components. Let's take a look on how to use
- * the World API.
- *
- * \section entity Creating new Entities
- * Creating an entity is very straightforward, you can ask the world to create
- * one for you:
- * ```cpp
- * entity_t entity = world::new_entity();
- * ```
- * This will return a new entity with a unique ID or -1 if the entity could not
- * be created.
- *
- * \section component Assigning Components to Entities
- *
- * To assign a component to an entity, first you need to create a component.
- * Components are just structs with data that extend the `Component` class. Note
- * that you need to implement a default empty constructor for your component.
- *
- * For example:
- * ```cpp
- * struct position_component : public component {
- *     float x, y, z;
- *     position_component(); // Required
- *     position_component(float x, float y, float z); // Optional
- * }
- * ```
- *
- * You can find many more examples in `examples/components.cpp`.
- *
- * Once you have created a component, you can assign it to an entity:
- * ```cpp
- * position_component position(0.0f, 0.0f, 0.0f);
- * world::add_component<position_component>(entity, position);
- * ```
- *
- * \section system Creating Systems
- *
- * Systems are classes that extend the `system` class. Systems can query
- * entities with specific components and operate on them. They have a run method
- * that will be called at each tick. Systems can define which components to
- * query by specifying them in the template arguments (see the example below),
- * they will receive a vector of entities that match the query.
- *
- * **Note** that if your System does not need to query any component, you need
- * to pass `None` as the template argument.
- *
- * You can create a system like so:
- *
- * ```cpp
- *
- * struct renderer_system : system<model_component, transform_component> {
- *   // you need to implement the run method
- *   void run(std::vector<entity_t> matches) const override {
- *     if (matches.empty()) return;
- *
- *     for (auto match : matches) {
- *         // get the components associated to an entity
- *         auto model_component =
- *                world::entity_to_component<model_component>(match);
- *         auto my_model = model_component->mod;
- *
- *         // ...
- *
- *         my_model.draw(default_shader);
- *     }
- *   }
- * };
- * ```
- * Note how we used `world::entity_to_component` to get the components
- * associated with an entity. This is a common pattern you will use in your
- * systems.
- *
- * After you defined your system, you need to register it. This can be done
- * throught a macro:
- * ```cpp
- * REGISTER_SYSTEMS(renderer_system);
- * ```
- * **Note**: You can register as many systems as you want but passing the
- * systems as a comma separated list to the macro, but you have to use
- * `REGISTER_SYSTEM` once and only once in your code, this is because systems
- * are registered in a global type.
- *
- * \section resources Resources
- *
- * Resources are data, like components, but they are not associated with
- * entities. Things like the day in the game, the number of enemies, etc should
- * be resources.
- *
- * You can create a resource like so:
- * ```cpp
- * struct day_resource : public resource {
- *    int day;
- *    day_resource() : day(0) {}
- *    day_resource(int day) : day(day) {}
- * };
- * ```
- *
- * You can register a resource like so:
- * ```cpp
- * world::add_resource<day_resource>(day_resource(1337));
- * ```
- *
+ * You can find updated documentation on the ECS in the dedicated
+ * [repository](https://github.com/San7o/viotecs).
  *
  * \page Engine
  * In this section we will see how to use various features of the engine.

@@ -7,19 +7,29 @@ inspired by the Brenta Dolimites in the Italian Alps.
 
 Check out `GUIDE.md` for a quick introduction on how the engine works!
 
+<h2 align=center>  Related Projects </h2>
+
+The engine also features the following sub projects:
+
+- [oak](https://github.com/San7o/oak): feature-tich, thread-safe, Brenta Engine's logger.
+
+- [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
+
+- [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
+
+
 <h1 align=center>  Features </h1>
 
 The engine is composed of many submodules independent from each other, those are:
 - `Screen`: manages the window and the OpenGL context.
 - `Audio`: everything audio.
 - `Input`: manages the screen input using callbacks.
-- `Logger`: logging manager.
 - `Text`: text rendering.
-- `World`: the Entity Component System submodule.
 - `Engine`: manages the setup of the engine.
+- `Particles`: generate parametrized particles.
 
 In addition to those, Brenta comes with many utility functions and classes, to get
-a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.0/), **every class and function is highly documented.**
+a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.1/), **every class and function is highly documented.**
 
 ### Ergonomic APIs
 ```c++

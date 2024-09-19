@@ -26,14 +26,14 @@
 
 #include "components/model_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "entities/robot_entity.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <filesystem>
 
 using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 void init_robot_entity()
 {

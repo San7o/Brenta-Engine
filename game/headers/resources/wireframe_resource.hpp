@@ -26,9 +26,9 @@
 
 #pragma once
 
-#include "resource.hpp"
+#include "viotecs/viotecs.hpp"
 
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct WireframeResource : resource
 {

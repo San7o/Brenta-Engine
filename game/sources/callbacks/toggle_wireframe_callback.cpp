@@ -26,13 +26,13 @@
 
 #include "callbacks/toggle_wireframe_callback.hpp"
 
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "resources/wireframe_resource.hpp"
+#include "viotecs/viotecs.hpp"
 
 using namespace brenta;
-using namespace brenta::ecs;
-using namespace brenta::ecs::types;
+using namespace viotecs;
+using namespace viotecs::types;
 
 void init_toggle_wireframe_callback()
 {

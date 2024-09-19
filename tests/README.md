@@ -5,7 +5,7 @@ which should already be downloaded and properly configured In the engine's cmake
 
 To build and run test, use the following commands:
 ```bash
-cmake -Bbuild -DBUILD_TESTS=ON
+cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
 cmake --build build -j 4
 ./buid/tests --no-multithread
 ```

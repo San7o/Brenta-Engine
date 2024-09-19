@@ -27,12 +27,12 @@
 #pragma once
 
 #include "components/model_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <iostream>
 
-using namespace brenta::ecs;
+using namespace viotecs;
 
 /* Player Component */
 struct PlayerComponent : component
