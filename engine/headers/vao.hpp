@@ -30,10 +30,10 @@
 
 #include <glad/glad.h> /* OpenGL driver */
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -41,20 +41,20 @@ namespace Types
  *
  * Wrapper for OpenGL Vertex Array Objects
  */
-class VAO
+class vao
 {
   public:
     /**
      * @brief Vertex Array Object (VAO)
      */
-    unsigned int vao;
+    unsigned int vao_id;
 
     /**
      * @brief Empty Constructor
      *
      * Does nothing
      */
-    VAO()
+    vao()
     {
     }
     /**
@@ -62,25 +62,25 @@ class VAO
      *
      * Creates a new VAO
      */
-    void Init();
+    void init();
 
     /**
      * @brief Get the VAO
      * @return The VAO
      */
-    unsigned int GetVAO();
+    unsigned int get_vao();
     /**
      * @brief Bind the VAO
      */
-    void Bind();
+    void bind();
     /**
      * @brief Unbind the VAO
      */
-    void Unbind();
+    void unbind();
     /**
      * @brief Delete the VAO
      */
-    void Delete();
+    void destroy();
     /**
      * @brief Set the vertex data
      *
@@ -88,17 +88,17 @@ class VAO
      * @param index The index of the vertex attribute
      * @param size The number of components per attribute
      * @param type The data type of each component
-     * @param normalized Whether the data should be normalized
+     * @param is_normalized Whether the data should be normalized
      * @param stride The byte offset between consecutive generic vertex
      * attributes
      * @param pointer The offset of the first component of the first generic
      * vertex attribute in the array
      */
-    void SetVertexData(Buffer buffer, unsigned int index, GLint size,
-                       GLenum type, GLboolean normalized, GLsizei stride,
-                       const void *pointer);
+    void set_vertex_data(buffer buffer, unsigned int index, GLint size,
+                         GLenum type, GLboolean is_normalized, GLsizei stride,
+                         const void *pointer);
 };
 
-} // namespace Types
+} // namespace types
 
-} // namespace Brenta
+} // namespace brenta

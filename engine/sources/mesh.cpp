@@ -30,34 +30,33 @@
 
 #include <iostream>
 
-using namespace Brenta;
-using namespace Brenta::Utils;
+using namespace brenta;
 
-Mesh::Mesh(std::vector<Types::Vertex> vertices,
+mesh::mesh(std::vector<types::vertex> vertices,
            std::vector<unsigned int> indices,
-           std::vector<Types::Texture> textures, GLint wrapping,
-           GLint filtering_min, GLint filtering_mag, GLboolean hasMipmap,
+           std::vector<types::texture> textures, GLint wrapping,
+           GLint filtering_min, GLint filtering_mag, GLboolean has_mipmap,
            GLint mipmap_min, GLint mipmap_max)
 {
-    this->vao.Init();
+    this->vao.init();
     this->vertices = vertices;
     this->indices = indices;
     this->textures = textures;
-    this->vbo = Types::Buffer(GL_ARRAY_BUFFER);
-    this->ebo = Types::Buffer(GL_ELEMENT_ARRAY_BUFFER);
+    this->vbo = types::buffer(GL_ARRAY_BUFFER);
+    this->ebo = types::buffer(GL_ELEMENT_ARRAY_BUFFER);
     this->wrapping = wrapping;
     this->filtering_min = filtering_min;
     this->filtering_mag = filtering_mag;
-    this->hasMipmap = hasMipmap;
+    this->has_mipmap = has_mipmap;
     this->mipmap_min = mipmap_min;
     this->mipmap_mag = mipmap_max;
 
-    setupMesh();
+    setup_mesh();
 }
 
-void Mesh::Draw(Types::ShaderName shader_name)
+void mesh::draw(types::shader_name_t shader_name)
 {
-    if (this->vao.GetVAO() == 0)
+    if (this->vao.get_vao() == 0)
     {
         ERROR("Mesh not initialized");
         return;
@@ -67,98 +66,98 @@ void Mesh::Draw(Types::ShaderName shader_name)
     unsigned int specularNr = 1;
     for (unsigned int i = 0; i < this->textures.size(); i++)
     {
-        Texture::ActiveTexture(GL_TEXTURE0 + i);
+        texture::active_texture(GL_TEXTURE0 + i);
         std::string number;
         std::string name = textures[i].type;
         if (name == "texture_diffuse")
             number = std::to_string(diffuseNr++);
         else if (name == "texture_specular")
             number = std::to_string(specularNr++);
-        Shader::SetInt(shader_name, ("material." + name + number).c_str(), i);
-        Texture::BindTexture(GL_TEXTURE_2D, textures[i].id, this->wrapping,
-                             this->filtering_min, this->filtering_mag,
-                             this->hasMipmap, this->mipmap_min,
-                             this->mipmap_mag);
+        shader::set_int(shader_name, ("material." + name + number).c_str(), i);
+        texture::bind_texture(GL_TEXTURE_2D, textures[i].id, this->wrapping,
+                              this->filtering_min, this->filtering_mag,
+                              this->has_mipmap, this->mipmap_min,
+                              this->mipmap_mag);
     }
-    Texture::ActiveTexture(GL_TEXTURE0);
+    texture::active_texture(GL_TEXTURE0);
 
     // draw mesh
-    this->vao.Bind();
-    GL::DrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
-    this->vao.Unbind();
+    this->vao.bind();
+    gl::draw_elements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+    this->vao.unbind();
 
-    Texture::ActiveTexture(GL_TEXTURE0);
+    texture::active_texture(GL_TEXTURE0);
 }
 
-void Mesh::setupMesh()
+void mesh::setup_mesh()
 {
-    this->vbo.CopyVertices(this->vertices.size() * sizeof(Types::Vertex),
-                           &this->vertices[0], GL_STATIC_DRAW);
-    this->ebo.CopyIndices(this->indices.size() * sizeof(unsigned int),
-                          &this->indices[0], GL_STATIC_DRAW);
-    this->vao.SetVertexData(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(Types::Vertex), (void *) 0);
-    this->vao.SetVertexData(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(Types::Vertex),
-                            (void *) offsetof(Types::Vertex, Normal));
-    this->vao.SetVertexData(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
-                            sizeof(Types::Vertex),
-                            (void *) offsetof(Types::Vertex, TexCoords));
+    this->vbo.copy_vertices(this->vertices.size() * sizeof(types::vertex),
+                            &this->vertices[0], GL_STATIC_DRAW);
+    this->ebo.copy_indices(this->indices.size() * sizeof(unsigned int),
+                           &this->indices[0], GL_STATIC_DRAW);
+    this->vao.set_vertex_data(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
+                              sizeof(types::vertex), (void *) 0);
+    this->vao.set_vertex_data(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
+                              sizeof(types::vertex),
+                              (void *) offsetof(types::vertex, normal));
+    this->vao.set_vertex_data(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
+                              sizeof(types::vertex),
+                              (void *) offsetof(types::vertex, tex_coords));
 
-    GL::BindVertexArray(0);
+    gl::bind_vertex_array(0);
 }
 
-Mesh::Builder &Mesh::Builder::set_vertices(std::vector<Types::Vertex> vertices)
+mesh::builder &mesh::builder::set_vertices(std::vector<types::vertex> vertices)
 {
     this->vertices = vertices;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_indices(std::vector<unsigned int> indices)
+mesh::builder &mesh::builder::set_indices(std::vector<unsigned int> indices)
 {
     this->indices = indices;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_textures(std::vector<Types::Texture> textures)
+mesh::builder &mesh::builder::set_textures(std::vector<types::texture> textures)
 {
     this->textures = textures;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_wrapping(GLint wrapping)
+mesh::builder &mesh::builder::set_wrapping(GLint wrapping)
 {
     this->wrapping = wrapping;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_filtering_min(GLint filtering_min)
+mesh::builder &mesh::builder::set_filtering_min(GLint filtering_min)
 {
     this->filtering_min = filtering_min;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_filtering_mag(GLint filtering_mag)
+mesh::builder &mesh::builder::set_filtering_mag(GLint filtering_mag)
 {
     this->filtering_mag = filtering_mag;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_hasMipmap(GLboolean hasMipmap)
+mesh::builder &mesh::builder::set_has_mipmap(GLboolean has_mipmap)
 {
-    this->hasMipmap = hasMipmap;
+    this->has_mipmap = has_mipmap;
     return *this;
 }
 
-Mesh::Builder &Mesh::Builder::set_mipmap_min(GLint mipmap_min)
+mesh::builder &mesh::builder::set_mipmap_min(GLint mipmap_min)
 {
     this->mipmap_min = mipmap_min;
     return *this;
 }
 
-Mesh Mesh::Builder::build()
+mesh mesh::builder::build()
 {
-    return Mesh(this->vertices, this->indices, this->textures, this->wrapping,
-                this->filtering_min, this->filtering_mag, this->hasMipmap,
+    return mesh(this->vertices, this->indices, this->textures, this->wrapping,
+                this->filtering_min, this->filtering_mag, this->has_mipmap,
                 this->mipmap_min, this->mipmap_mag);
 }

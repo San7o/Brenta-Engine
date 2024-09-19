@@ -26,33 +26,33 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace viotecs;
 
 /* Model Component */
-struct ModelComponent : Component
+struct ModelComponent : component
 {
-    Model model;
+    model mod;
     float shininess;
-    Brenta::Types::ShaderName shader;
+    brenta::types::shader_name_t shader;
     bool hasAtlas;
     int atlasSize;
     int atlasIndex;
     int elapsedFrames = 0;
 
     ModelComponent()
-        : model(Model()), shininess(0.0f), shader("default_shader"),
+        : mod(model()), shininess(0.0f), shader("default_shader"),
           hasAtlas(false), atlasSize(0), atlasIndex(0)
     {
     }
-    ModelComponent(Model model, float shininess,
-                   Brenta::Types::ShaderName shader, bool hasAtlas = false,
+    ModelComponent(model mod, float shininess,
+                   brenta::types::shader_name_t shader, bool hasAtlas = false,
                    int atlasSize = 0, int atlasIndex = 0)
-        : model(model), shininess(shininess), shader(shader),
-          hasAtlas(hasAtlas), atlasSize(atlasSize), atlasIndex(atlasIndex)
+        : mod(mod), shininess(shininess), shader(shader), hasAtlas(hasAtlas),
+          atlasSize(atlasSize), atlasIndex(atlasIndex)
     {
     }
 };

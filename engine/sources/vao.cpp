@@ -28,57 +28,57 @@
 
 #include "engine_logger.hpp"
 
-using namespace Brenta::Types;
+using namespace brenta::types;
 
-void VAO::Init()
+void vao::init()
 {
-    glGenVertexArrays(1, &vao);
-    Bind();
+    glGenVertexArrays(1, &vao_id);
+    bind();
 }
 
-unsigned int VAO::GetVAO()
+unsigned int vao::get_vao()
 {
-    if (vao == 0)
+    if (vao_id == 0)
     {
         ERROR("VAO not initialized");
         return 0;
     }
-    return vao;
+    return vao_id;
 }
 
-void VAO::Bind()
+void vao::bind()
 {
-    if (vao == 0)
+    if (this->get_vao() == 0)
     {
         ERROR("VAO not initialized");
         return;
     }
-    glBindVertexArray(vao);
+    glBindVertexArray(this->get_vao());
 }
 
-void VAO::Unbind()
+void vao::unbind()
 {
     glBindVertexArray(0);
 }
 
-void VAO::SetVertexData(Buffer buffer, unsigned int index, GLint size,
-                        GLenum type, GLboolean normalized, GLsizei stride,
-                        const void *pointer)
+void vao::set_vertex_data(buffer buffer, unsigned int index, GLint size,
+                          GLenum type, GLboolean normalized, GLsizei stride,
+                          const void *pointer)
 {
-    Bind();
-    buffer.Bind();
+    bind();
+    buffer.bind();
     glVertexAttribPointer(index, size, type, normalized, stride, pointer);
     glEnableVertexAttribArray(index);
-    buffer.Unbind();
-    Unbind();
+    buffer.unbind();
+    unbind();
 }
 
-void VAO::Delete()
+void vao::destroy()
 {
-    if (vao == 0)
+    if (this->get_vao() == 0)
     {
         ERROR("VAO not initialized");
         return;
     }
-    glDeleteVertexArrays(1, &vao);
+    glDeleteVertexArrays(1, &this->vao_id);
 }

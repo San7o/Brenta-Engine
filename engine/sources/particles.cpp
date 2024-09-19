@@ -35,14 +35,14 @@
 #include <iostream>
 #include <time.h>
 
-using namespace Brenta;
+using namespace brenta;
 
-ParticleEmitter::ParticleEmitter()
+particle_emitter::particle_emitter()
 {
     starting_position = glm::vec3(0.0f, 0.0f, 0.0f);
     starting_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
     starting_spread = glm::vec3(0.0f, 0.0f, 0.0f);
-    starting_timeToLive = 1.0f;
+    starting_time_to_live = 1.0f;
     num_particles = MAX_PARTICLES;
     spawn_rate = 0.01f;
     scale = 1.0f;
@@ -51,19 +51,19 @@ ParticleEmitter::ParticleEmitter()
     atlas_height = 8;
     atlas_index = 0;
     current = 0;
-    camera = nullptr;
+    cam = nullptr;
 }
 
-ParticleEmitter::ParticleEmitter(
+particle_emitter::particle_emitter(
     glm::vec3 starting_position, glm::vec3 starting_velocity,
-    glm::vec3 starting_spread, float starting_timeToLive, int num_particles,
+    glm::vec3 starting_spread, float starting_time_to_live, int num_particles,
     float spawn_rate, float scale, std::string atlas_path, int atlas_width,
-    int atlas_height, int atlas_index, Camera *camera)
+    int atlas_height, int atlas_index, camera *cam)
 {
     this->starting_position = starting_position;
     this->starting_velocity = starting_velocity;
     this->starting_spread = starting_spread;
-    this->starting_timeToLive = starting_timeToLive;
+    this->starting_time_to_live = starting_time_to_live;
     this->num_particles = num_particles;
     this->spawn_rate = spawn_rate;
     this->scale = scale;
@@ -72,18 +72,19 @@ ParticleEmitter::ParticleEmitter(
     this->atlas_height = atlas_height;
     this->atlas_index = atlas_index;
     this->current = 0;
-    this->camera = camera;
+    this->cam = cam;
 
     // Load Texture Atlas
-    this->atlas = Texture::LoadTexture(
+    this->atlas = texture::load_texture(
         atlas_path, GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE,
         GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST, false);
 
     // Create shaders
     const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-    Shader::New(varyings, 3, "particle_update", GL_VERTEX_SHADER,
-                std::filesystem::absolute("engine/shaders/particle_update.vs"));
-    Shader::New(
+    shader::create(
+        varyings, 3, "particle_update", GL_VERTEX_SHADER,
+        std::filesystem::absolute("engine/shaders/particle_update.vs"));
+    shader::create(
         "particle_render", GL_VERTEX_SHADER,
         std::filesystem::absolute("engine/shaders/particle_render.vs").string(),
         GL_GEOMETRY_SHADER,
@@ -95,13 +96,13 @@ ParticleEmitter::ParticleEmitter(
     // This is needed to render points
     glEnable(GL_PROGRAM_POINT_SIZE);
 
-    this->vao.Init();
-    this->vao.Bind();
-    checkOpenGLError("vao bind");
+    this->vao.init();
+    this->vao.bind();
+    check_opengl_error("vao bind");
 
     // Create fbos
-    this->fbo[0] = Types::Buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
-    this->fbo[1] = Types::Buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+    this->fbo[0] = types::buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+    this->fbo[1] = types::buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
 
     glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0].id);
     glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -113,39 +114,39 @@ ParticleEmitter::ParticleEmitter(
                  this->num_particles * 2 * sizeof(glm::vec3)
                      + this->num_particles * sizeof(float),
                  NULL, GL_DYNAMIC_COPY);
-    checkOpenGLError("glBindBufferBase A");
+    check_opengl_error("glBindBufferBase A");
 
     // Unbind buffers
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    this->vao.Unbind();
+    this->vao.unbind();
 }
 
-ParticleEmitter::~ParticleEmitter()
+particle_emitter::~particle_emitter()
 {
-    fbo[0].Delete();
-    fbo[1].Delete();
+    fbo[0].destroy();
+    fbo[1].destroy();
     INFO("Deleted ParticleEmitter");
 }
 
 // Update particles using Transform Feedback
 // directly from the wiki
-void ParticleEmitter::updateParticles(float deltaTime)
+void particle_emitter::update_particles(float delta_time)
 {
-    Shader::Use("particle_update");
-    Shader::SetFloat("particle_update", "deltaTime", deltaTime);
-    Shader::SetVec3("particle_update", "emitterPos", this->starting_position);
-    Shader::SetVec3("particle_update", "emitterSpread", this->starting_spread);
-    Shader::SetFloat("particle_update", "spawnProbability", this->spawn_rate);
-    Shader::SetVec3("particle_update", "emitterVel", this->starting_velocity);
-    Shader::SetFloat("particle_update", "emitterTTL",
-                     this->starting_timeToLive);
-    checkOpenGLError("settin update shader");
+    shader::use("particle_update");
+    shader::set_float("particle_update", "deltaTime", delta_time);
+    shader::set_vec3("particle_update", "emitterPos", this->starting_position);
+    shader::set_vec3("particle_update", "emitterSpread", this->starting_spread);
+    shader::set_float("particle_update", "spawnProbability", this->spawn_rate);
+    shader::set_vec3("particle_update", "emitterVel", this->starting_velocity);
+    shader::set_float("particle_update", "emitterTTL",
+                      this->starting_time_to_live);
+    check_opengl_error("settin update shader");
 
-    this->vao.Bind();
+    this->vao.bind();
 
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current].id);
-    checkOpenGLError("glBindBufferBase B");
+    check_opengl_error("glBindBufferBase B");
 
     glBindBuffer(GL_ARRAY_BUFFER, fbo[!current].id);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
@@ -163,10 +164,10 @@ void ParticleEmitter::updateParticles(float deltaTime)
     // Start transform feedback
     glEnable(GL_RASTERIZER_DISCARD);     // Disable rasterization
     glBeginTransformFeedback(GL_POINTS); // Enter transform feedback mode
-    checkOpenGLError("glBeginTransformFeedback");
+    check_opengl_error("glBeginTransformFeedback");
 
     glDrawArrays(GL_POINTS, 0, num_particles);
-    checkOpenGLError("glDrawTransformFeedback");
+    check_opengl_error("glDrawTransformFeedback");
 
     glEndTransformFeedback();         // Exit transform feedback mode
     glDisable(GL_RASTERIZER_DISCARD); // Enable rasterization
@@ -174,22 +175,22 @@ void ParticleEmitter::updateParticles(float deltaTime)
     glBindVertexArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
-    this->vao.Unbind();
+    this->vao.unbind();
     current = !current; // Swap buffers
 }
 
 // Render particles
-void ParticleEmitter::renderParticles()
+void particle_emitter::render_particles()
 {
-    if (camera == nullptr)
+    if (this->cam == nullptr)
     {
         ERROR("Camera not set or null for ParticleEmitter");
         return;
     }
 
-    Shader::Use("particle_render");
+    shader::use("particle_render");
 
-    this->vao.Bind();
+    this->vao.bind();
 
     glBindBuffer(GL_ARRAY_BUFFER, fbo[current].id);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
@@ -198,134 +199,135 @@ void ParticleEmitter::renderParticles()
     glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE,
                           2 * sizeof(glm::vec3) + sizeof(float),
                           (void *) (2 * sizeof(glm::vec3)));
-    checkOpenGLError("glVertexAttribPointer");
+    check_opengl_error("glVertexAttribPointer");
     glEnableVertexAttribArray(1);
 
     // Set uniforms
-    Types::Translation t = Types::Translation();
-    t.setView(camera->GetViewMatrix());
-    t.setProjection(camera->GetProjectionMatrix());
-    t.setModel(glm::mat4(1.0f));
-    t.setShader("particle_render");
-    Shader::SetInt("particle_render", "atlas_width", this->atlas_width);
-    Shader::SetInt("particle_render", "atlas_height", this->atlas_height);
-    Shader::SetInt("particle_render", "atlas_index", this->atlas_index);
-    Shader::SetFloat("particle_render", "scale", this->scale);
-    Shader::SetFloat("particle_render", "aspect_ratio",
-                     (float) Screen::GetWidth() / (float) Screen::GetHeight());
+    types::translation t = types::translation();
+    t.set_view(this->cam->get_view_matrix());
+    t.set_projection(this->cam->get_projection_matrix());
+    t.set_model(glm::mat4(1.0f));
+    t.set_shader("particle_render");
+    shader::set_int("particle_render", "atlas_width", this->atlas_width);
+    shader::set_int("particle_render", "atlas_height", this->atlas_height);
+    shader::set_int("particle_render", "atlas_index", this->atlas_index);
+    shader::set_float("particle_render", "scale", this->scale);
+    shader::set_float("particle_render", "aspect_ratio",
+                      (float) screen::get_width()
+                          / (float) screen::get_height());
 
     // Set Textures
-    Texture::ActiveTexture(GL_TEXTURE0);
-    Texture::BindTexture(GL_TEXTURE_2D, this->atlas, GL_REPEAT, GL_NEAREST,
-                         GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
-                         GL_NEAREST);
+    texture::active_texture(GL_TEXTURE0);
+    texture::bind_texture(GL_TEXTURE_2D, this->atlas, GL_REPEAT, GL_NEAREST,
+                          GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
+                          GL_NEAREST);
 
     glDrawArrays(GL_POINTS, 0, num_particles);
-    checkOpenGLError("glDrawArrays");
+    check_opengl_error("glDrawArrays");
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    vao.Unbind();
+    vao.unbind();
 }
 
-void ParticleEmitter::checkOpenGLError(const std::string &functionName)
+void particle_emitter::check_opengl_error(const std::string &function_name)
 {
     GLenum error;
     while ((error = glGetError()) != GL_NO_ERROR)
     {
-        std::cerr << "OpenGL Error after " << functionName << ": " << error
+        std::cerr << "OpenGL Error after " << function_name << ": " << error
                   << std::endl;
     }
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_starting_position(glm::vec3 starting_position)
+particle_emitter::builder &
+particle_emitter::builder::set_starting_position(glm::vec3 starting_position)
 {
     this->starting_position = starting_position;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_starting_velocity(glm::vec3 starting_velocity)
+particle_emitter::builder &
+particle_emitter::builder::set_starting_velocity(glm::vec3 starting_velocity)
 {
     this->starting_velocity = starting_velocity;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_starting_spread(glm::vec3 starting_spread)
+particle_emitter::builder &
+particle_emitter::builder::set_starting_spread(glm::vec3 starting_spread)
 {
     this->starting_spread = starting_spread;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_starting_timeToLive(float starting_timeToLive)
+particle_emitter::builder &particle_emitter::builder::set_starting_time_to_live(
+    float starting_time_to_live)
 {
-    this->starting_timeToLive = starting_timeToLive;
+    this->starting_time_to_live = starting_time_to_live;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_num_particles(int num_particles)
+particle_emitter::builder &
+particle_emitter::builder::set_num_particles(int num_particles)
 {
     this->num_particles = num_particles;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_spawn_rate(float spawn_rate)
+particle_emitter::builder &
+particle_emitter::builder::set_spawn_rate(float spawn_rate)
 {
     this->spawn_rate = spawn_rate;
     return *this;
 }
 
-ParticleEmitter::Builder &ParticleEmitter::Builder::set_scale(float scale)
+particle_emitter::builder &particle_emitter::builder::set_scale(float scale)
 {
     this->scale = scale;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_atlas_path(std::string atlas_path)
+particle_emitter::builder &
+particle_emitter::builder::set_atlas_path(std::string atlas_path)
 {
     this->atlas_path = atlas_path;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_atlas_width(int atlas_width)
+particle_emitter::builder &
+particle_emitter::builder::set_atlas_width(int atlas_width)
 {
     this->atlas_width = atlas_width;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_atlas_height(int atlas_height)
+particle_emitter::builder &
+particle_emitter::builder::set_atlas_height(int atlas_height)
 {
     this->atlas_height = atlas_height;
     return *this;
 }
 
-ParticleEmitter::Builder &
-ParticleEmitter::Builder::set_atlas_index(int atlas_index)
+particle_emitter::builder &
+particle_emitter::builder::set_atlas_index(int atlas_index)
 {
     this->atlas_index = atlas_index;
     return *this;
 }
 
-ParticleEmitter::Builder &ParticleEmitter::Builder::set_camera(Camera *camera)
+particle_emitter::builder &particle_emitter::builder::set_camera(camera *cam)
 {
-    this->camera = camera;
+    this->cam = cam;
     return *this;
 }
 
-ParticleEmitter ParticleEmitter::Builder::build()
+particle_emitter particle_emitter::builder::build()
 {
     /* C++17 has RVO (Return Value Optimization) so move is implicit */
-    return ParticleEmitter(this->starting_position, this->starting_velocity,
-                           this->starting_spread, this->starting_timeToLive,
-                           this->num_particles, this->spawn_rate, this->scale,
-                           this->atlas_path, this->atlas_width,
-                           this->atlas_height, this->atlas_index, this->camera);
+    return particle_emitter(this->starting_position, this->starting_velocity,
+                            this->starting_spread, this->starting_time_to_live,
+                            this->num_particles, this->spawn_rate, this->scale,
+                            this->atlas_path, this->atlas_width,
+                            this->atlas_height, this->atlas_index, this->cam);
 }

@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitCameraMouseCallback();
+void init_camera_mouse_callback();

@@ -24,82 +24,84 @@
  *
  */
 
-#include "world.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <iostream>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace viotecs;
 
-struct PlayerComponent : Component
+struct player_component : component
 {
-    PlayerComponent()
+    player_component()
     {
     }
 };
 
-struct HealthComponent : Component
+struct health_component : component
 {
     int value;
-    HealthComponent()
+    health_component()
     {
     }
-    HealthComponent(int value) : value(value)
+    health_component(int value) : value(value)
     {
     }
 };
 
-struct PoisonSystem : System<PlayerComponent, HealthComponent>
+struct poison_system : system<player_component, health_component>
 {
-    void run(std::vector<Entity> entities) const override
+    void run(std::vector<entity_t> entities) const override
     {
         if (entities.empty())
         {
             return;
         }
 
-        auto health = World::EntityToComponent<HealthComponent>(entities.at(0));
+        auto health =
+            world::entity_to_component<health_component>(entities.at(0));
         health->value--;
         std::cout << "Health: " << health->value << std::endl;
     }
 };
 
-struct GlobalResource : Resource
+struct global_resource : resource
 {
     int value;
-    GlobalResource()
+    global_resource()
     {
     }
-    GlobalResource(int value) : value(value)
+    global_resource(int value) : value(value)
     {
     }
 };
 
-REGISTER_SYSTEMS(PoisonSystem);
+REGISTER_SYSTEMS(poison_system);
 
 int main()
 {
-    World::Init();
+    world::init();
     std::cout << "Welcome to my Test Game!" << std::endl;
+    std::cout << "You are poisoned and will lose health every tick"
+              << std::endl;
 
     /* New entity as the player */
-    Entity player_entity = World::NewEntity();
+    entity_t player_entity = world::new_entity();
 
     /* Add the Player component to the entity */
-    World::AddComponent<PlayerComponent>(player_entity, PlayerComponent());
+    world::add_component<player_component>(player_entity, player_component());
 
     /* Add a health component to the entity */
-    auto health_component = HealthComponent(100);
-    World::AddComponent<HealthComponent>(player_entity, health_component);
+    auto health = health_component(100);
+    world::add_component<health_component>(player_entity, health);
 
-    World::AddResource<GlobalResource>(GlobalResource(10));
+    world::add_resource<global_resource>(global_resource(10));
 
     /* Main loop */
     for (int i = 0; i < 10; i++)
     {
-        World::Tick();
+        world::tick();
     }
 
-    World::Delete();
+    world::destroy();
     return 0;
 }

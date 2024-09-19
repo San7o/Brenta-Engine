@@ -27,16 +27,16 @@
 #pragma once
 
 #include "components/directional_light_component.hpp"
-#include "ecs.hpp"
 #include "systems/directional_light_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace Brenta::ECS;
+using namespace viotecs;
 
-struct DirectionalLightSystem : System<DirectionalLightComponent>
+struct DirectionalLightSystem : system<DirectionalLightComponent>
 {
-    void run(std::vector<Entity> entities) const override
+    void run(std::vector<entity_t> entities) const override
     {
         if (entities.empty())
             return;
@@ -44,25 +44,26 @@ struct DirectionalLightSystem : System<DirectionalLightComponent>
         for (auto entity : entities)
         {
             auto light =
-                World::EntityToComponent<DirectionalLightComponent>(entity);
+                world::entity_to_component<DirectionalLightComponent>(entity);
 
             for (auto shader : light->shaders)
             {
-                if (Shader::GetId(shader) == (unsigned int) 0)
+                if (shader::get_id(shader) == (unsigned int) 0)
                 {
-                    ERROR("Light shader not found with name: ", shader);
+                    ERROR("Light shader not found with name: {}", shader);
                     continue;
                 }
-                Shader::Use(shader);
+                shader::use(shader);
 
                 /* Set the light properties */
-                Shader::SetVec3(shader, "dirLight.direction", light->direction);
-                Shader::SetVec3(shader, "dirLight.ambient", light->ambient);
-                Shader::SetVec3(shader, "dirLight.diffuse", light->diffuse);
-                Shader::SetVec3(shader, "dirLight.specular", light->specular);
-                Shader::SetFloat(shader, "dirLight.dir_strength",
-                                 light->strength);
-                Shader::SetBool(shader, "useDirLight", true);
+                shader::set_vec3(shader, "dirLight.direction",
+                                 light->direction);
+                shader::set_vec3(shader, "dirLight.ambient", light->ambient);
+                shader::set_vec3(shader, "dirLight.diffuse", light->diffuse);
+                shader::set_vec3(shader, "dirLight.specular", light->specular);
+                shader::set_float(shader, "dirLight.dir_strength",
+                                  light->strength);
+                shader::set_bool(shader, "useDirLight", true);
             }
         }
     }

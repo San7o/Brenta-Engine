@@ -28,21 +28,21 @@
 
 #include "components/physics_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/physics_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
+using namespace viotecs;
+using namespace viotecs::types;
 
-struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
+struct PhysicsSystem : system<PhysicsComponent, TransformComponent>
 {
-    void run(std::vector<Entity> matches) const override
+    void run(std::vector<entity_t> matches) const override
     {
         if (matches.empty())
             return;
@@ -50,20 +50,20 @@ struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
         for (auto match : matches)
         {
             auto physics_component =
-                World::EntityToComponent<PhysicsComponent>(match);
+                world::entity_to_component<PhysicsComponent>(match);
 
             auto transform_component =
-                World::EntityToComponent<TransformComponent>(match);
+                world::entity_to_component<TransformComponent>(match);
 
             if (physics_component->acceleration != glm::vec3(0.0f))
             {
                 physics_component->velocity +=
-                    physics_component->acceleration * Time::GetDeltaTime();
+                    physics_component->acceleration * time::get_delta_time();
             }
             if (physics_component->velocity != glm::vec3(0.0f))
             {
                 transform_component->position +=
-                    physics_component->velocity * Time::GetDeltaTime();
+                    physics_component->velocity * time::get_delta_time();
             }
         }
     }

@@ -1,205 +1,234 @@
 #include "engine.hpp"
 
-#ifdef USE_ECS
-#include "ecs.hpp"
-#endif
-
-using namespace Brenta;
-using namespace Brenta::Utils;
+#include "oak/oak.hpp"
 
 #ifdef USE_ECS
-using namespace Brenta::ECS;
+#include "viotecs/viotecs.hpp"
 #endif
 
-Engine::Engine(bool uses_screen, bool uses_audio, bool uses_input,
+using namespace brenta;
+
+#ifdef USE_ECS
+using namespace viotecs;
+#endif
+
+engine::engine(bool uses_screen, bool uses_audio, bool uses_input,
                bool uses_logger, bool uses_text, int screen_width,
                int screen_height, bool screen_is_mouse_captured,
                bool screen_msaa, bool screen_vsync, const char *screen_title,
-               Types::LogLevel log_level, std::string log_file,
+               oak::level log_level, std::string log_file,
                std::string text_font, int text_size, bool gl_blending,
                bool gl_cull_face, bool gl_multisample, bool gl_depth_test)
 {
+    this->uses_screen = uses_screen;
+    this->uses_audio = uses_audio;
+    this->uses_input = uses_input;
+    this->uses_logger = uses_logger;
+    uses_text = uses_text;
+    this->screen_width = screen_width;
+    this->screen_height = screen_height;
+    this->screen_is_mouse_captured = screen_is_mouse_captured;
+    this->screen_msaa = screen_msaa;
+    this->screen_vsync = screen_vsync;
+    this->screen_title = screen_title;
+    this->log_level = log_level;
+    this->log_file = log_file;
+    this->text_font = text_font;
+    this->text_size = text_size;
+    this->gl_blending = gl_blending;
+    this->gl_cull_face = gl_cull_face;
+    this->gl_multisample = gl_multisample;
+    this->gl_depth_test = gl_depth_test;
+
+    if (uses_logger)
+    {
+        oak::init_writer();
+        oak::set_level(log_level);
+        if (log_file != "")
+        {
+            auto file = oak::set_file(log_file);
+            if (!file.has_value())
+            {
+                ERROR("Failed to open log file: {}", log_file);
+            }
+            INFO("Set log file: {}", log_file);
+        }
+    }
+
     if (uses_screen)
     {
-        Screen::Init(screen_width, screen_height, screen_is_mouse_captured,
+        screen::init(screen_width, screen_height, screen_is_mouse_captured,
                      screen_title, screen_msaa, screen_vsync);
-        GL::LoadOpenGL(gl_blending, gl_cull_face, gl_multisample,
-                       gl_depth_test);
+        gl::load_opengl(gl_blending, gl_cull_face, gl_multisample,
+                        gl_depth_test);
     }
 
     if (uses_audio)
     {
-        Audio::Init();
+        audio::init();
     }
 
     if (uses_input)
     {
-        Input::Init();
-    }
-
-    if (uses_logger)
-    {
-        Logger::Init();
-        Logger::SetLogLevel(log_level);
-        Logger::SetLogFile(log_file);
+        input::init();
     }
 
     if (uses_text)
     {
-        Text::Init();
-        Text::Load(text_font, text_size);
+        text::init();
+        text::load(text_font, text_size);
     }
 #ifdef USE_ECS
-    World::Init();
+    world::init();
 #endif
 #ifdef USE_IMGUI
-    GUI::Init();
+    gui::init();
 #endif
 }
 
-Engine::~Engine()
+engine::~engine()
 {
 #ifdef USE_IMGUI
-    GUI::Delete();
+    gui::destroy();
 #endif
 #ifdef USE_ECS
-    World::Delete();
+    world::destroy();
 #endif
 
-    if (uses_logger)
+    if (this->uses_audio)
     {
-        Logger::Close();
+        audio::destroy();
     }
 
-    if (uses_audio)
+    if (this->uses_screen)
     {
-        Audio::Destroy();
+        screen::terminate();
     }
 
-    if (uses_screen)
+    if (this->uses_logger)
     {
-        Screen::Terminate();
+        oak::stop_writer();
     }
 }
 
-Engine::Builder &Engine::Builder::use_screen(bool uses_screen)
+engine::builder &engine::builder::use_screen(bool uses_screen)
 {
     this->uses_screen = uses_screen;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::use_audio(bool uses_audio)
+engine::builder &engine::builder::use_audio(bool uses_audio)
 {
     this->uses_audio = uses_audio;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::use_input(bool uses_input)
+engine::builder &engine::builder::use_input(bool uses_input)
 {
     this->uses_input = uses_input;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::use_logger(bool uses_logger)
+engine::builder &engine::builder::use_logger(bool uses_logger)
 {
     this->uses_logger = uses_logger;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::use_text(bool uses_text)
+engine::builder &engine::builder::use_text(bool uses_text)
 {
     this->uses_text = uses_text;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_screen_width(int screen_width)
+engine::builder &engine::builder::set_screen_width(int screen_width)
 {
     this->screen_width = screen_width;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_screen_height(int screen_height)
+engine::builder &engine::builder::set_screen_height(int screen_height)
 {
     this->screen_height = screen_height;
     return *this;
 }
 
-Engine::Builder &
-Engine::Builder::set_screen_is_mouse_captured(bool screen_is_mouse_captured)
+engine::builder &
+engine::builder::set_screen_is_mouse_captured(bool screen_is_mouse_captured)
 {
     this->screen_is_mouse_captured = screen_is_mouse_captured;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_screen_title(const char *screen_title)
+engine::builder &engine::builder::set_screen_title(const char *screen_title)
 {
     this->screen_title = screen_title;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_screen_msaa(bool screen_msaa)
+engine::builder &engine::builder::set_screen_msaa(bool screen_msaa)
 {
     this->screen_msaa = screen_msaa;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_screen_vsync(bool screen_vsync)
+engine::builder &engine::builder::set_screen_vsync(bool screen_vsync)
 {
     this->screen_vsync = screen_vsync;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_log_level(Types::LogLevel log_level)
+engine::builder &engine::builder::set_log_level(oak::level log_level)
 {
     this->log_level = log_level;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_log_file(std::string log_file)
+engine::builder &engine::builder::set_log_file(std::string log_file)
 {
     this->log_file = log_file;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_text_font(std::string text_font)
+engine::builder &engine::builder::set_text_font(std::string text_font)
 {
     this->text_font = text_font;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_text_size(int text_size)
+engine::builder &engine::builder::set_text_size(int text_size)
 {
     this->text_size = text_size;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_gl_blending(bool gl_blending)
+engine::builder &engine::builder::set_gl_blending(bool gl_blending)
 {
     this->gl_blending = gl_blending;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_gl_cull_face(bool gl_cull_face)
+engine::builder &engine::builder::set_gl_cull_face(bool gl_cull_face)
 {
     this->gl_cull_face = gl_cull_face;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_gl_multisample(bool gl_multisample)
+engine::builder &engine::builder::set_gl_multisample(bool gl_multisample)
 {
     this->gl_multisample = gl_multisample;
     return *this;
 }
 
-Engine::Builder &Engine::Builder::set_gl_depth_test(bool gl_depth_test)
+engine::builder &engine::builder::set_gl_depth_test(bool gl_depth_test)
 {
     this->gl_depth_test = gl_depth_test;
     return *this;
 }
 
-Engine Engine::Builder::build()
+engine engine::builder::build()
 {
-    return Engine(uses_screen, uses_audio, uses_input, uses_logger, uses_text,
+    return engine(uses_screen, uses_audio, uses_input, uses_logger, uses_text,
                   screen_width, screen_height, screen_is_mouse_captured,
                   screen_msaa, screen_vsync, screen_title, log_level, log_file,
                   text_font, text_size, gl_blending, gl_cull_face,

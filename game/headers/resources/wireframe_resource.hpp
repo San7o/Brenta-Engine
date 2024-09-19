@@ -26,11 +26,11 @@
 
 #pragma once
 
-#include "resource.hpp"
+#include "viotecs/viotecs.hpp"
 
-using namespace Brenta::ECS;
+using namespace viotecs;
 
-struct WireframeResource : Resource
+struct WireframeResource : resource
 {
     bool enabled;
     WireframeResource(bool e) : enabled(e)

@@ -26,7 +26,7 @@
 
 #pragma once
 
-namespace Brenta
+namespace brenta
 {
 
 /**
@@ -36,10 +36,10 @@ namespace Brenta
  * get the current time, the time since the last frame and the frames per
  * second of the program.
  */
-class Time
+class time
 {
   public:
-    Time() = delete;
+    time() = delete;
 
     /**
      * @brief Get the current time
@@ -49,7 +49,7 @@ class Time
      *
      * @return The current time in seconds
      */
-    static float GetCurrentTime();
+    static float get_current_time();
     /**
      * @brief Get the time since the last frame
      *
@@ -57,7 +57,7 @@ class Time
      *
      * @return The time since the last frame in seconds
      */
-    static float GetDeltaTime();
+    static float get_delta_time();
     /**
      * @brief Get the frames per second
      *
@@ -65,7 +65,7 @@ class Time
      *
      * @return The frames per second
      */
-    static float GetFPS();
+    static float get_fps();
     /**
      * @brief Update the time
      *
@@ -74,12 +74,12 @@ class Time
      *
      * @param newTime The new time of the program
      */
-    static void Update(float newTime);
+    static void update(float new_time);
 
   private:
-    static float currentTime;
-    static float deltaTime;
-    static float lastFrame;
+    static float current_time;
+    static float delta_time;
+    static float last_frame;
 };
 
-} // namespace Brenta
+} // namespace brenta

@@ -31,39 +31,38 @@
 
 #include <cmath>
 
-using namespace Brenta;
-using namespace Brenta::Utils;
+using namespace brenta;
 
-Camera::Camera(Enums::CameraType camera_type,
-               Enums::ProjectionType projection_type, glm::vec3 position,
-               glm::vec3 worldUp, glm::vec3 center, float movementSpeed,
-               float mouseSensitivity, float zoom,
-               Types::SphericalCoordinates sphericalCoordinates,
-               Types::EulerAngles eulerAngles, glm::vec3 front, glm::vec3 up,
+camera::camera(enums::camera_type camera_type,
+               enums::projection_type projection_type, glm::vec3 position,
+               glm::vec3 world_up, glm::vec3 center, float movement_speed,
+               float mouse_sensitivity, float zoom,
+               types::spherical_coordinates spherical_coordinates,
+               types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
                glm::vec3 right)
 {
-    this->CameraType = camera_type;
-    this->ProjectionType = projection_type;
-    this->Position = position;
-    this->WorldUp = worldUp;
+    this->camera_type = camera_type;
+    this->projection_type = projection_type;
+    this->position = position;
+    this->world_up = world_up;
     this->center = center;
-    this->MovementSpeed = movementSpeed;
-    this->MouseSensitivity = mouseSensitivity;
-    this->Zoom = zoom;
-    this->sphericalCoordinates = sphericalCoordinates;
-    this->eulerAngles = eulerAngles;
-    this->Front = front;
-    this->Up = up;
-    this->Right = right;
+    this->movement_speed = movement_speed;
+    this->mouse_sensitivity = mouse_sensitivity;
+    this->zoom = zoom;
+    this->spherical_coordinates = spherical_coordinates;
+    this->euler_angles = euler_angles;
+    this->front = front;
+    this->up = up;
+    this->right = right;
 
     /* Update the camera */
-    switch (this->CameraType)
+    switch (this->camera_type)
     {
-    case Enums::CameraType::SPHERICAL:
-        SphericalToCartesian();
+    case enums::camera_type::SPHERICAL:
+        spherical_to_cartesian();
         break;
-    case Enums::CameraType::AIRCRAFT:
-        updateCameraEuler();
+    case enums::camera_type::AIRCRAFT:
+        update_camera_euler();
         break;
     default:
         break;
@@ -72,311 +71,316 @@ Camera::Camera(Enums::CameraType camera_type,
     INFO("Camera created");
 }
 
-glm::mat4 Camera::GetViewMatrix()
+glm::mat4 camera::get_view_matrix()
 {
-    switch (CameraType)
+    switch (camera_type)
     {
-    case Enums::CameraType::SPHERICAL:
-        return glm::lookAt(Position, center, WorldUp);
-    case Enums::CameraType::AIRCRAFT:
-        return glm::lookAt(Position, Position + Front, Up);
+    case enums::camera_type::SPHERICAL:
+        return glm::lookAt(this->position, this->center, this->world_up);
+    case enums::camera_type::AIRCRAFT:
+        return glm::lookAt(this->position, this->position + this->front,
+                           this->up);
     default:
         return glm::mat4(1.0f);
     }
 }
 
-glm::mat4 Camera::GetProjectionMatrix()
+glm::mat4 camera::get_projection_matrix()
 {
-    switch (ProjectionType)
+    switch (this->projection_type)
     {
-    case Enums::ProjectionType::PERSPECTIVE:
-        return glm::perspective(glm::radians(Zoom),
-                                (float) Screen::GetWidth()
-                                    / (float) Screen::GetHeight(),
+    case enums::projection_type::PERSPECTIVE:
+        return glm::perspective(glm::radians(this->zoom),
+                                (float) screen::get_width()
+                                    / (float) screen::get_height(),
                                 0.1f, 1000.0f);
-    case Enums::ProjectionType::ORTHOGRAPHIC:
-        return glm::ortho((float) -Screen::GetWidth() / 2.0f,
-                          (float) Screen::GetWidth() / 2.0f,
-                          (float) -Screen::GetHeight() / 2.0f,
-                          (float) Screen::GetHeight() / 2.0f, 0.1f, 100.0f);
+    case enums::projection_type::ORTHOGRAPHIC:
+        return glm::ortho((float) -screen::get_width() / 2.0f,
+                          (float) screen::get_width() / 2.0f,
+                          (float) -screen::get_height() / 2.0f,
+                          (float) screen::get_height() / 2.0f, 0.1f, 100.0f);
     default:
         return glm::mat4(1.0f);
     }
 }
 
-void Camera::SphericalToCartesian()
+void camera::spherical_to_cartesian()
 {
-    Position.x = sin(sphericalCoordinates.theta) * cos(sphericalCoordinates.phi)
-                     * sphericalCoordinates.radius
-                 + center.x;
-    Position.y = cos(sphericalCoordinates.theta) * sphericalCoordinates.radius
-                 + center.y;
-    Position.z = sin(sphericalCoordinates.theta) * sin(sphericalCoordinates.phi)
-                     * sphericalCoordinates.radius
-                 + center.z;
+    this->position.x = sin(this->spherical_coordinates.theta)
+                           * cos(this->spherical_coordinates.phi)
+                           * this->spherical_coordinates.radius
+                       + this->center.x;
+    this->position.y = cos(this->spherical_coordinates.theta)
+                           * this->spherical_coordinates.radius
+                       + this->center.y;
+    this->position.z = sin(spherical_coordinates.theta)
+                           * sin(this->spherical_coordinates.phi)
+                           * this->spherical_coordinates.radius
+                       + this->center.z;
 }
 
 /* For aircraft camera */
-void Camera::updateCameraEuler()
+void camera::update_camera_euler()
 {
     /* calculate the new Front vector */
-    glm::vec3 front;
-    front.x = cos(glm::radians(eulerAngles.yaw))
-              * cos(glm::radians(eulerAngles.pitch));
-    front.y = sin(glm::radians(eulerAngles.pitch));
-    front.z = sin(glm::radians(eulerAngles.yaw))
-              * cos(glm::radians(eulerAngles.pitch));
-    Front = glm::normalize(front);
+    glm::vec3 new_front;
+    new_front.x = cos(glm::radians(euler_angles.yaw))
+                  * cos(glm::radians(euler_angles.pitch));
+    new_front.y = sin(glm::radians(euler_angles.pitch));
+    new_front.z = sin(glm::radians(euler_angles.yaw))
+                  * cos(glm::radians(euler_angles.pitch));
+    this->front = glm::normalize(new_front);
     /* also re-calculate the Right and Up vector */
-    Right = glm::normalize(glm::cross(Front, WorldUp));
-    Up = glm::normalize(glm::cross(Right, Front));
+    this->right = glm::normalize(glm::cross(this->front, this->world_up));
+    this->up = glm::normalize(glm::cross(this->right, this->front));
 }
 
-Enums::CameraType Camera::GetCameraType()
+enums::camera_type camera::get_camera_type()
 {
-    return CameraType;
+    return this->camera_type;
 }
 
-void Camera::SetCameraType(Enums::CameraType cameraType)
+void camera::set_camera_type(enums::camera_type camera_type)
 {
-    Camera::CameraType = cameraType;
+    this->camera_type = camera_type;
 }
 
-Enums::ProjectionType Camera::GetProjectionType()
+enums::projection_type camera::get_projection_type()
 {
-    return ProjectionType;
+    return this->projection_type;
 }
 
-void Camera::SetProjectionType(Enums::ProjectionType projectionType)
+void camera::set_projection_type(enums::projection_type projection_type)
 {
-    Camera::ProjectionType = projectionType;
+    this->projection_type = projection_type;
 }
 
-glm::vec3 Camera::GetPosition()
+glm::vec3 camera::get_position()
 {
-    return Position;
+    return this->position;
 }
 
-void Camera::SetPosition(glm::vec3 position)
+void camera::set_position(glm::vec3 position)
 {
-    Camera::Position = position;
+    this->position = position;
 }
 
-glm::vec3 Camera::GetWorldUp()
+glm::vec3 camera::get_world_up()
 {
-    return WorldUp;
+    return this->world_up;
 }
 
-void Camera::SetWorldUp(glm::vec3 worldUp)
+void camera::set_world_up(glm::vec3 world_up)
 {
-    Camera::WorldUp = worldUp;
+    this->world_up = world_up;
 }
 
-glm::vec3 Camera::GetCenter()
+glm::vec3 camera::get_center()
 {
-    return center;
+    return this->center;
 }
 
-void Camera::SetCenter(glm::vec3 center)
+void camera::set_center(glm::vec3 center)
 {
-    Camera::center = center;
+    this->center = center;
 }
 
-float Camera::GetMovementSpeed()
+float camera::get_movement_speed()
 {
-    return MovementSpeed;
+    return this->movement_speed;
 }
 
-void Camera::SetMovementSpeed(float movementSpeed)
+void camera::set_movement_speed(float movement_speed)
 {
-    Camera::MovementSpeed = movementSpeed;
+    this->movement_speed = movement_speed;
 }
 
-float Camera::GetMouseSensitivity()
+float camera::get_mouse_sensitivity()
 {
-    return MouseSensitivity;
+    return this->mouse_sensitivity;
 }
 
-void Camera::SetMouseSensitivity(float mouseSensitivity)
+void camera::set_mouse_sensitivity(float mouse_sensitivity)
 {
-    Camera::MouseSensitivity = mouseSensitivity;
+    this->mouse_sensitivity = mouse_sensitivity;
 }
 
-float Camera::GetZoom()
+float camera::get_zoom()
 {
-    return Zoom;
+    return this->zoom;
 }
 
-void Camera::SetZoom(float zoom)
+void camera::set_zoom(float zoom)
 {
-    Camera::Zoom = zoom;
+    this->zoom = zoom;
 }
 
-Types::SphericalCoordinates Camera::GetSphericalCoordinates()
+types::spherical_coordinates camera::get_spherical_coordinates()
 {
-    return sphericalCoordinates;
+    return this->spherical_coordinates;
 }
 
-void Camera::SetSphericalCoordinates(
-    Types::SphericalCoordinates sphericalCoordinates)
+void camera::set_spherical_coordinates(
+    types::spherical_coordinates spherical_coordinates)
 {
-    Camera::sphericalCoordinates = sphericalCoordinates;
+    this->spherical_coordinates = spherical_coordinates;
 }
 
-Types::EulerAngles Camera::GetEulerAngles()
+types::euler_angles camera::get_euler_angles()
 {
-    return eulerAngles;
+    return this->euler_angles;
 }
 
-void Camera::SetEulerAngles(Types::EulerAngles eulerAngles)
+void camera::set_euler_angles(types::euler_angles euler_angles)
 {
-    Camera::eulerAngles = eulerAngles;
+    camera::euler_angles = euler_angles;
 }
 
-glm::vec3 Camera::GetFront()
+glm::vec3 camera::get_front()
 {
-    return Front;
+    return this->front;
 }
 
-void Camera::SetFront(glm::vec3 front)
+void camera::set_front(glm::vec3 front)
 {
-    Camera::Front = front;
+    this->front = front;
 }
 
-glm::vec3 Camera::GetUp()
+glm::vec3 camera::get_up()
 {
-    return Up;
+    return this->up;
 }
 
-void Camera::SetUp(glm::vec3 up)
+void camera::set_up(glm::vec3 up)
 {
-    Camera::Up = up;
+    this->up = up;
 }
 
-glm::vec3 Camera::GetRight()
+glm::vec3 camera::get_right()
 {
-    return Right;
+    return this->right;
 }
 
-void Camera::SetRight(glm::vec3 right)
+void camera::set_right(glm::vec3 right)
 {
-    Camera::Right = right;
+    this->right = right;
 }
 
-bool Camera::GetFirstMouse()
+bool camera::get_first_mouse()
 {
-    return firstMouse;
+    return this->first_mouse;
 }
 
-void Camera::SetFirstMouse(bool firstMouse)
+void camera::set_first_mouse(bool first_mouse)
 {
-    Camera::firstMouse = firstMouse;
+    this->first_mouse = first_mouse;
 }
 
-float Camera::GetLastX()
+float camera::get_last_x()
 {
-    return lastX;
+    return this->last_x;
 }
 
-void Camera::SetLastX(float lastX)
+void camera::set_last_x(float last_x)
 {
-    Camera::lastX = lastX;
+    this->last_x = last_x;
 }
 
-float Camera::GetLastY()
+float camera::get_last_y()
 {
-    return lastY;
+    return this->last_y;
 }
 
-void Camera::SetLastY(float lastY)
+void camera::set_last_y(float last_y)
 {
-    Camera::lastY = lastY;
+    this->last_y = last_y;
 }
 
-Camera::Builder &Camera::Builder::set_camera_type(Enums::CameraType camera_type)
+camera::builder &
+camera::builder::set_camera_type(enums::camera_type camera_type)
 {
     this->camera_type = camera_type;
     return *this;
 }
 
-Camera::Builder &
-Camera::Builder::set_projection_type(Enums::ProjectionType projection_type)
+camera::builder &
+camera::builder::set_projection_type(enums::projection_type projection_type)
 {
     this->projection_type = projection_type;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_position(glm::vec3 position)
+camera::builder &camera::builder::set_position(glm::vec3 position)
 {
     this->position = position;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_world_up(glm::vec3 worldUp)
+camera::builder &camera::builder::set_world_up(glm::vec3 world_up)
 {
-    this->worldUp = worldUp;
+    this->world_up = world_up;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_center(glm::vec3 center)
+camera::builder &camera::builder::set_center(glm::vec3 center)
 {
     this->center = center;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_movement_speed(float movementSpeed)
+camera::builder &camera::builder::set_movement_speed(float movement_speed)
 {
-    this->movementSpeed = movementSpeed;
+    this->movement_speed = movement_speed;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_mouse_sensitivity(float mouseSensitivity)
+camera::builder &camera::builder::set_mouse_sensitivity(float mouse_sensitivity)
 {
-    this->mouseSensitivity = mouseSensitivity;
+    this->mouse_sensitivity = mouse_sensitivity;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_zoom(float zoom)
+camera::builder &camera::builder::set_zoom(float zoom)
 {
     this->zoom = zoom;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_spherical_coordinates(
-    Types::SphericalCoordinates sphericalCoordinates)
+camera::builder &camera::builder::set_spherical_coordinates(
+    types::spherical_coordinates spherical_coordinates)
 {
-    this->sphericalCoordinates = sphericalCoordinates;
+    this->spherical_coordinates = spherical_coordinates;
     return *this;
 }
 
-Camera::Builder &
-Camera::Builder::set_eulerAngles(Types::EulerAngles eulerAngles)
+camera::builder &
+camera::builder::set_euler_angles(types::euler_angles euler_angles)
 {
-    this->eulerAngles = eulerAngles;
+    this->euler_angles = euler_angles;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_front(glm::vec3 front)
+camera::builder &camera::builder::set_front(glm::vec3 front)
 {
     this->front = front;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_up(glm::vec3 up)
+camera::builder &camera::builder::set_up(glm::vec3 up)
 {
     this->up = up;
     return *this;
 }
 
-Camera::Builder &Camera::Builder::set_right(glm::vec3 right)
+camera::builder &camera::builder::set_right(glm::vec3 right)
 {
     this->right = right;
     return *this;
 }
 
-Camera Camera::Camera::Builder::build()
+brenta::camera camera::camera::builder::build()
 {
-    return Camera(camera_type, projection_type, position, worldUp, center,
-                  movementSpeed, mouseSensitivity, zoom, sphericalCoordinates,
-                  eulerAngles, front, up, right);
+    return camera(camera_type, projection_type, position, world_up, center,
+                  movement_speed, mouse_sensitivity, zoom,
+                  spherical_coordinates, euler_angles, front, up, right);
 }

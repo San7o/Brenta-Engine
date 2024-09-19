@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitCloseWindowCallback();
+void init_close_window_callback();

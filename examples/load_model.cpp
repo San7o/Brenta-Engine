@@ -33,48 +33,47 @@
 #include <filesystem>
 #include <iostream>
 
-using namespace Brenta;
+using namespace brenta;
 
 const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
-const bool isMouseCaptured = false;
 
 #define ABS(...) std::filesystem::absolute(__VA_ARGS__)
 
 int main()
 {
-    Engine engine = Engine::Builder()
-                        .use_screen(true)
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(isMouseCaptured)
-                        .set_gl_blending(true)
-                        .set_gl_cull_face(true)
-                        .set_gl_multisample(true)
-                        .set_gl_depth_test(true)
-                        .set_log_level(Brenta::Types::LogLevel::DEBUG)
-                        .build();
+    engine eng = engine::builder()
+                     .use_screen(true)
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .set_gl_blending(true)
+                     .set_gl_cull_face(true)
+                     .set_gl_multisample(true)
+                     .set_gl_depth_test(true)
+                     .set_log_level(oak::level::debug)
+                     .build();
 
     /* Load the model */
-    Model ourModel(ABS("assets/models/backpack/backpack.obj"));
+    model our_model(ABS("assets/models/backpack/backpack.obj"));
 
     /* Load the shader */
-    Shader::New("default_shader", GL_VERTEX_SHADER,
-                ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
-                ABS("examples/default_shader.fs"));
+    shader::create("default_shader", GL_VERTEX_SHADER,
+                   ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
+                   ABS("examples/default_shader.fs"));
 
-    while (!Screen::isWindowClosed())
+    while (!screen::is_window_closed())
     {
         /* Input */
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
 
         /* Clear */
-        GL::SetColor(0.2f, 0.2f, 0.207f, 1.0f);
-        GL::Clear();
+        gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+        gl::clear();
 
         /* Draw */
-        Shader::Use("default_shader");
+        shader::use("default_shader");
 
         /* Make transformations */
         glm::mat4 view = glm::mat4(1.0f); /* Camera position */
@@ -84,15 +83,15 @@ int main()
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 
-        Shader::SetMat4("default_shader", "view", view);
-        Shader::SetMat4("default_shader", "projection", projection);
-        Shader::SetMat4("default_shader", "model", model);
+        shader::set_mat4("default_shader", "view", view);
+        shader::set_mat4("default_shader", "projection", projection);
+        shader::set_mat4("default_shader", "model", model);
 
         /* Draw the model */
-        ourModel.Draw("default_shader");
+        our_model.draw("default_shader");
 
-        Screen::PollEvents();
-        Screen::SwapBuffers();
+        screen::poll_events();
+        screen::swap_buffers();
     }
 
     return 0;

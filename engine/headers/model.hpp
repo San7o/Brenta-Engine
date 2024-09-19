@@ -36,7 +36,7 @@
 #include <string>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
 /**
@@ -44,7 +44,7 @@ namespace Brenta
  *
  * This class is used to load a model from a file and draw it
  */
-class Model
+class model
 {
   public:
     /**
@@ -70,7 +70,7 @@ class Model
      *
      * Check Mesh for more information
      */
-    GLboolean hasMipmap;
+    GLboolean has_mipmap;
     /**
      * @brief Mipmap filtering mode
      *
@@ -93,7 +93,7 @@ class Model
      *
      * Does nothing
      */
-    Model()
+    model()
     {
     }
     /**
@@ -108,64 +108,64 @@ class Model
      * @param mipmap_mag Mipmap filtering mode
      * @param flip If the texture should be flipped
      */
-    Model(std::string const &path, GLint wrapping = GL_REPEAT,
+    model(std::string const &path, GLint wrapping = GL_REPEAT,
           GLint filtering_min = GL_NEAREST, GLint filtering_mag = GL_LINEAR,
-          GLboolean hasMipmap = GL_TRUE,
+          GLboolean has_mipmap = GL_TRUE,
           GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
           GLint mipmap_mag = GL_LINEAR, bool flip = true);
 
     /**
      * @brief Builder class for Model
      */
-    class Builder;
+    class builder;
 
     /**
      * @brief Draw the model
      *
      * @param shader Shader to use
      */
-    void Draw(Types::ShaderName shader);
+    void draw(types::shader_name_t shader);
 
   private:
     // model data
-    std::vector<Mesh> meshes;
-    std::vector<Types::Texture> textures_loaded;
+    std::vector<mesh> meshes;
+    std::vector<types::texture> textures_loaded;
     std::string directory;
 
-    void loadModel(std::string path);
-    void processNode(aiNode *node, const aiScene *scene);
-    Mesh processMesh(aiMesh *mesh, const aiScene *scene);
-    std::vector<Types::Texture> loadMaterialTextures(aiMaterial *mat,
-                                                     aiTextureType type,
-                                                     std::string typeName);
+    void load_model(std::string path);
+    void process_node(aiNode *node, const aiScene *scene);
+    mesh process_mesh(aiMesh *mesh, const aiScene *scene);
+    std::vector<types::texture> load_material_textures(aiMaterial *mat,
+                                                       aiTextureType type,
+                                                       std::string type_name);
 };
 
 /**
  * @brief Builder class for Model
  */
-class Model::Builder
+class model::builder
 {
   private:
     std::string path;
     GLint wrapping = GL_REPEAT;
     GLint filtering_min = GL_NEAREST;
     GLint filtering_mag = GL_LINEAR;
-    GLboolean hasMipmap = GL_TRUE;
+    GLboolean has_mipmap = GL_TRUE;
     GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR;
     GLint mipmap_mag = GL_LINEAR;
     bool flip = true;
 
   public:
-    Builder &set_path(std::string path);
-    Builder &set_wrapping(GLint wrapping);
-    Builder &set_filtering_min(GLint filtering_min);
-    Builder &set_filtering_mag(GLint filtering_mag);
-    Builder &set_hasMipmap(GLboolean hasMipmap);
-    Builder &set_mipmap_min(GLint mipmap_min);
-    Builder &set_mipmap_mag(GLint mipmap_mag);
-    Builder &set_flip(bool flip);
+    builder &set_path(std::string path);
+    builder &set_wrapping(GLint wrapping);
+    builder &set_filtering_min(GLint filtering_min);
+    builder &set_filtering_mag(GLint filtering_mag);
+    builder &set_has_mipmap(GLboolean has_mipmap);
+    builder &set_mipmap_min(GLint mipmap_min);
+    builder &set_mipmap_mag(GLint mipmap_mag);
+    builder &set_flip(bool flip);
 
-    Model build();
+    model build();
 };
 
-} // namespace Brenta
+} // namespace brenta

@@ -31,15 +31,15 @@
 #include <unordered_map>
 #include <vector>
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
-typedef std::string StreamName;
+typedef std::string stream_name_t;
 
-typedef std::string AudioName;
+typedef std::string audio_name_t;
 
 /**
  * @brief Struct containing information about an audio file
@@ -49,7 +49,7 @@ typedef std::string AudioName;
  * audio buffer and the audio format. It is autocamatically created by the
  * engine when an audio file is loaded with the LoadAudio function.
  */
-struct AudioFile
+struct audio_file_t
 {
     /**
      * @brief The path to the audio file
@@ -79,7 +79,7 @@ struct AudioFile
  *
  */
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Audio subsystem
@@ -90,7 +90,7 @@ struct AudioFile
  * needs to be initialized and destroyed by the engine. Audio files and
  * streamd are stored in maps and are identified by this name.
  */
-class Audio
+class audio
 {
   public:
     /**
@@ -102,7 +102,8 @@ class Audio
      * audio file, the audio buffer, the length of the audio buffer
      * and the audio format.
      */
-    static std::unordered_map<Types::AudioName, Types::AudioFile> audiofiles;
+    static std::unordered_map<types::audio_name_t, types::audio_file_t>
+        audio_files;
     /**
      * @brief Map of audio streams
      *
@@ -114,9 +115,9 @@ class Audio
      * stream called "default", the handling of the streams is left to the
      * programmer.
      */
-    static std::unordered_map<Types::StreamName, SDL_AudioStream *> streams;
+    static std::unordered_map<types::stream_name_t, SDL_AudioStream *> streams;
 
-    Audio() = delete;
+    audio() = delete;
     /**
      * @brief Initialize the audio system
      *
@@ -124,14 +125,14 @@ class Audio
      * It is called automatically by the engine when the game is
      * started. It creates a default stream called "default".
      */
-    static void Init();
+    static void init();
     /**
      * @brief Destroy the audio system
      *
      * This function frees all audio streams and audio files,
      * and closes the audio system.
      */
-    static void Destroy();
+    static void destroy();
 
     /**
      * @brief Get an audio file
@@ -142,7 +143,7 @@ class Audio
      * @param name The name of the audio file
      * @return The audio file
      */
-    static Types::AudioFile GetAudioFile(Types::AudioName name);
+    static types::audio_file_t get_audio_file(types::audio_name_t name);
     /**
      * @brief Get an audio stream
      *
@@ -152,7 +153,7 @@ class Audio
      * @param name The name of the audio stream
      * @return The audio stream
      */
-    static SDL_AudioStream *GetStream(Types::StreamName name);
+    static SDL_AudioStream *get_stream(types::stream_name_t name);
 
     /**
      * @brief Load an audio file
@@ -163,7 +164,7 @@ class Audio
      * @param name The name of the audio file
      * @param path The path to the audio file
      */
-    static void LoadAudio(Types::AudioName name, std::string path);
+    static void load_audio(types::audio_name_t name, std::string path);
     /**
      * @brief Create an audio stream
      *
@@ -172,7 +173,7 @@ class Audio
      *
      * @param name The name of the stream
      */
-    static void CreateStream(Types::StreamName);
+    static void create_stream(types::stream_name_t);
     /**
      * @brief Play an audio file
      *
@@ -184,7 +185,8 @@ class Audio
      * @param audio_name The name of the audio file
      * @param stream_name The name of the stream
      */
-    static void PlayAudio(Types::AudioName, Types::StreamName = "default");
+    static void play_audio(types::audio_name_t,
+                           types::stream_name_t = "default");
     /**
      * @brief Set the volume of a stream
      *
@@ -194,7 +196,7 @@ class Audio
      * @param name The name of the stream
      * @param volume The volume of the stream
      */
-    static void SetVolume(Types::StreamName name, int volume);
+    static void set_volume(types::stream_name_t name, int volume);
     /**
      * @brief Pause a stream
      *
@@ -203,7 +205,7 @@ class Audio
      *
      * @param name The name of the stream
      */
-    static void PauseStream(Types::StreamName name);
+    static void pause_stream(types::stream_name_t name);
     /**
      * @brief Resume a stream
      *
@@ -212,7 +214,7 @@ class Audio
      *
      * @param name The name of the stream
      */
-    static void ResumeStream(Types::StreamName name);
+    static void resume_stream(types::stream_name_t name);
     /**
      * @brief Stop a stream
      *
@@ -221,10 +223,10 @@ class Audio
      *
      * @param name The name of the stream
      */
-    static void ClearStream(Types::StreamName name);
+    static void clear_stream(types::stream_name_t name);
 
   private:
-    static void CheckError();
+    static void check_error_audio();
 };
 
-} // namespace Brenta
+} // namespace brenta

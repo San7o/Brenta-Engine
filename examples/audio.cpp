@@ -33,41 +33,40 @@
 #include <filesystem>
 #include <iostream>
 
-using namespace Brenta;
+using namespace brenta;
 
 const int SCR_WIDTH = 800;
 const int SCR_HEIGHT = 600;
-const bool isMouseCaptured = false;
 
 #define ABS(...) std::filesystem::absolute(__VA_ARGS__)
 
 int main()
 {
-    Engine engine = Engine::Builder()
-                        .use_screen(true)
-                        .use_audio(true) /* Enable audio */
-                        .set_screen_width(SCR_WIDTH)
-                        .set_screen_height(SCR_HEIGHT)
-                        .set_screen_is_mouse_captured(isMouseCaptured)
-                        .build();
+    engine eng = engine::builder()
+                     .use_screen(true)
+                     .use_audio(true) /* Enable audio */
+                     .set_screen_width(SCR_WIDTH)
+                     .set_screen_height(SCR_HEIGHT)
+                     .set_screen_is_mouse_captured(false)
+                     .build();
 
     /* Load an audio file, assign it the name "guitar" */
-    Audio::LoadAudio("guitar", ABS("assets/audio/guitar.wav"));
+    audio::load_audio("guitar", ABS("assets/audio/guitar.wav"));
 
-    while (!Screen::isWindowClosed())
+    while (!screen::is_window_closed())
     {
-        if (Screen::isKeyPressed(GLFW_KEY_ESCAPE))
-            Screen::SetClose();
+        if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
+            screen::set_close();
 
         /*
          * Press space to play the audio "guitar" in the
          * default audio stream
          */
-        if (Screen::isKeyPressed(GLFW_KEY_SPACE))
-            Audio::PlayAudio("guitar");
+        if (screen::is_key_pressed(GLFW_KEY_SPACE))
+            audio::play_audio("guitar");
 
-        Screen::PollEvents();
-        Screen::SwapBuffers();
+        screen::poll_events();
+        screen::swap_buffers();
     }
 
     return 0;

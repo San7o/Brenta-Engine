@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitFloorEntity();
+void init_floor_entity();

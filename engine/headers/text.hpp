@@ -36,10 +36,10 @@
 
 #include "engine.hpp"
 
-namespace Brenta
+namespace brenta
 {
 
-namespace Types
+namespace types
 {
 
 /**
@@ -50,15 +50,15 @@ namespace Types
  * the texture ID, the size of the glyph, the bearing, and the
  * advance of the glyph.
  */
-struct Character
+struct character
 {
-    unsigned int TextureID; // ID handle of the glyph texture
-    glm::ivec2 Size;        // Size of glyph
-    glm::ivec2 Bearing;     // Offset from baseline to left/top of glyph
-    unsigned int Advance;   // Offset to advance to next glyph
+    unsigned int texture_id; // ID handle of the glyph texture
+    glm::ivec2 size;         // Size of glyph
+    glm::ivec2 bearing;      // Offset from baseline to left/top of glyph
+    unsigned int advance;    // Offset to advance to next glyph
 };
 
-} // namespace Types
+} // namespace types
 
 /**
  * @brief Text subsystem
@@ -67,7 +67,7 @@ struct Character
  * is rendered using the FreeType library to load the font and
  * the characters, and OpenGL to render the text on the screen.
  */
-class Text
+class text
 {
   public:
     /**
@@ -75,9 +75,9 @@ class Text
      *
      * Map an ascii character to a Character struct
      */
-    static std::map<char, Types::Character> characters;
+    static std::map<char, types::character> characters;
 
-    Text() = delete;
+    text() = delete;
     /**
      * @brief Initialize the text subsystem
      *
@@ -89,7 +89,7 @@ class Text
      * Note: opengl context must be created before calling this
      * method.
      */
-    static void Init();
+    static void init();
 
     /**
      * @brief Load a font
@@ -99,9 +99,9 @@ class Text
      * characters are stored in the characters map.
      *
      * @param font_name Name of the font file
-     * @param fontSize Size of the font
+     * @param font_size Size of the font
      */
-    static void Load(std::string font_name, unsigned int fontSize);
+    static void load(std::string font_name, unsigned int font_size);
     /**
      * @brief Render text
      *
@@ -116,13 +116,13 @@ class Text
      * @param scale Scale of the text
      * @param color Color of the text
      */
-    static void RenderText(std::string text, float x, float y, float scale,
-                           glm::vec3 color);
+    static void render_text(std::string text, float x, float y, float scale,
+                            glm::vec3 color);
 
   private:
-    static Types::ShaderName textShader;
-    static Types::VAO textVao;
-    static Types::Buffer textVbo;
+    static types::shader_name_t text_shader;
+    static types::vao text_vao;
+    static types::buffer text_vbo;
 };
 
-} // namespace Brenta
+} // namespace brenta

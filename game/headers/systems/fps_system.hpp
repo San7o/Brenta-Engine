@@ -26,20 +26,20 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/fps_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
+using namespace viotecs;
+using namespace viotecs::types;
 
-struct FPSSystem : System<None>
+struct FPSSystem : system<none>
 {
-    void run(std::vector<Entity> _) const override
+    void run(std::vector<entity_t> _) const override
     {
-        Text::RenderText("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
-                         0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
+        text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f,
+                          25.0f, 0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };

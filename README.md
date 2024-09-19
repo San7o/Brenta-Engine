@@ -7,23 +7,33 @@ inspired by the Brenta Dolimites in the Italian Alps.
 
 Check out `GUIDE.md` for a quick introduction on how the engine works!
 
+<h2 align=center>  Related Projects </h2>
+
+The engine also features the following sub projects:
+
+- [oak](https://github.com/San7o/oak): feature-tich, thread-safe, Brenta Engine's logger.
+
+- [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
+
+- [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
+
+
 <h1 align=center>  Features </h1>
 
 The engine is composed of many submodules independent from each other, those are:
 - `Screen`: manages the window and the OpenGL context.
 - `Audio`: everything audio.
 - `Input`: manages the screen input using callbacks.
-- `Logger`: logging manager.
 - `Text`: text rendering.
-- `World`: the Entity Component System submodule.
 - `Engine`: manages the setup of the engine.
+- `Particles`: generate parametrized particles.
 
 In addition to those, Brenta comes with many utility functions and classes, to get
-a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.0/), **every class and function is highly documented.**
+a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.1/), **every class and function is highly documented.**
 
 ### Ergonomic APIs
 ```c++
-Engine engine = Engine::Builder()
+engine game = engine::builder()
     .use_screen(true)
     .use_audio(true)
     .use_input(true)
@@ -39,7 +49,7 @@ Engine engine = Engine::Builder()
 
 ### Model Loading
 ```c++
-Model my_model("assets/models/backpack/backpack.obj");
+model my_model("assets/models/backpack/backpack.obj");
 ```
 ![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)
 
@@ -47,13 +57,13 @@ Model my_model("assets/models/backpack/backpack.obj");
 ### Particles
 
 ```c++
-ParticleEmitter emitter =
-    ParticleEmitter::Builder()
+particle_emitter emitter =
+    particle_emitter::builder()
         .set_camera(&camera)
         .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
         .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
         .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-        .set_starting_timeToLive(0.5f)
+        .set_starting_time_to_live(0.5f)
         .set_num_particles(1000)
         .set_spawn_rate(0.01f)
         .set_scale(1.0f)
@@ -80,35 +90,35 @@ Brenta Engine features an Entity Component System architecture. The ECS is a des
 ### Entities
 Entities are objects in the game, It's just an ID:
 ```c++
-Entity entity = World::NewEntity();
+entity entity = world::new_entity();
 ```
 ### Components
 Components are pieces of data that are attached to an entity:
 ```c++
-struct PhysicsComponent : Component {
+struct physics_component : component {
     float mass;
     float density;
     glm::vec3 velocity;
     glm::vec3 acceleration;
-    PhysicsComponent() {}
+    physics_component() {}
 };
 
 // Somehwere
-World::AddComponent<PhysicsComponent>(entity, physics_component);
+world::add_component<physics_component>(entity, physics_component);
 ```
 ### Systems
 Systems are functions that operate on entities with specific components. They
 are called at each game tick by the `World`:
 ```c++
-struct FPSSystem : System<None> {
-    void run(std::vector<Entity> _) const override {
-        Text::RenderText("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
+struct fps_system : system<none> {
+    void run(std::vector<entity_t> _) const override {
+        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
                          0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };
 
 // Somewhere
-REGISTER_SYSTEMS(FPSSystem);
+REGISTER_SYSTEMS(fps_system);
 ```
 <h1 align=center> Building </h1>
 

@@ -32,42 +32,42 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-namespace Brenta
+namespace brenta
 {
 
 /**
- * @brief GUI class
+ * @brief Gui class
  *
  * This class contains the GUI functions,
- * It's a wrapper around imgui, providing 
+ * It's a wrapper around imgui, providing
  * functions to initialize, update and delete
- * the GUI.
+ * the gui.
  */
-class GUI
+class gui
 {
   public:
     /**
-     * @brief Initialize the GUI
+     * @brief Initialize the gui
      */
-    static void Init();
+    static void init();
     /**
-     * @brief Delete the GUI
+     * @brief Delete the gui
      */
-    static void Delete();
+    static void destroy();
     /**
      * @brief Start a new frame
      * To be called at each frame
      * before rendering.
      */
-    static void new_frame(Types::FrameBuffer *fb);
+    static void new_frame(types::framebuffer *fb);
     /**
-     * @brief Render the GUI
+     * @brief Render the gui
      * To be called at each frame
      * after rendering.
      */
     static void render();
 };
 
-} // namespace Brenta
+} // namespace brenta
 
 #endif

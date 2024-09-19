@@ -26,4 +26,4 @@
 
 #pragma once
 
-void InitRobotEntity();
+void init_robot_entity();

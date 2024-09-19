@@ -88,16 +88,16 @@ make format
 
 To build tests, run:
 ```bash
-cmake -Bbuild -DBUILD_TESTS=ON
+cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
 cmake --build build -j 4
-./buid/unit
+./buid/tests --no-multithread
 ```
 
 # Examples
 
 There is an `examples` directory, you can run an exmple with the following command:
 ```bash
-cmake -Bbuild -DBUILD_EXAMPLES=ON
+cmake -Bbuild -DBRENTA_BUILD_EXAMPLES=ON
 cmake --build build -j 4 --target load_model
 ./build/load_model
 ```

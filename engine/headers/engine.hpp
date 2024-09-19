@@ -45,7 +45,7 @@
 #include "translation.hpp"
 #include "vao.hpp"
 
-namespace Brenta
+namespace brenta
 {
 
 /**
@@ -57,7 +57,7 @@ namespace Brenta
  *
  * It automatically destroys the subsystems when the engine is destroyed.
  */
-class Engine
+class engine
 {
   public:
     bool uses_screen;
@@ -71,7 +71,7 @@ class Engine
     const char *screen_title;
     bool screen_msaa;
     bool screen_vsync;
-    Types::LogLevel log_level;
+    oak::level log_level;
     std::string log_file;
     std::string text_font;
     int text_size;
@@ -80,16 +80,15 @@ class Engine
     bool gl_multisample;
     bool gl_depth_test;
 
-    Engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
+    engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
            bool uses_text, int screen_width, int screen_height,
            bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
-           const char *screen_title, Types::LogLevel log_level,
-           std::string log_file, std::string text_font, int text_size,
-           bool gl_blending, bool gl_cull_face, bool gl_multisample,
-           bool gl_depth_test);
-    ~Engine();
+           const char *screen_title, oak::level log_level, std::string log_file,
+           std::string text_font, int text_size, bool gl_blending,
+           bool gl_cull_face, bool gl_multisample, bool gl_depth_test);
+    ~engine();
 
-    class Builder;
+    class builder;
 };
 
 /**
@@ -99,7 +98,7 @@ class Engine
  * engine using the methods of this class and then call the build method to
  * create the engine.
  */
-class Engine::Builder
+class engine::builder
 {
   public:
     bool uses_screen = false;
@@ -113,8 +112,8 @@ class Engine::Builder
     bool screen_msaa = false;
     bool screen_vsync = false;
     const char *screen_title = "";
-    Types::LogLevel log_level = Types::LogLevel::WARNING;
-    std::string log_file = "./logs/log.txt";
+    oak::level log_level = oak::level::info;
+    std::string log_file = "";
     std::string text_font = "arial.ttf";
     int text_size = 48;
     bool gl_blending = true;
@@ -122,30 +121,30 @@ class Engine::Builder
     bool gl_multisample = true;
     bool gl_depth_test = true;
 
-    Builder &use_screen(bool uses_screen);
-    Builder &use_audio(bool uses_audio);
-    Builder &use_input(bool uses_input);
-    Builder &use_logger(bool uses_logger);
-    Builder &use_text(bool uses_text);
-    Builder &set_screen_width(int screen_width);
-    Builder &set_screen_height(int screen_height);
-    Builder &set_screen_is_mouse_captured(bool screen_is_mouse_captured);
-    Builder &set_screen_title(const char *screen_title);
-    Builder &set_screen_msaa(bool screen_msaa);
-    Builder &set_screen_vsync(bool screen_vsync);
-    Builder &set_log_level(Types::LogLevel log_level);
-    Builder &set_log_file(std::string log_file);
-    Builder &set_text_font(std::string text_font);
-    Builder &set_text_size(int text_size);
-    Builder &set_gl_blending(bool gl_blending);
-    Builder &set_gl_cull_face(bool gl_cull_face);
-    Builder &set_gl_multisample(bool gl_multisample);
-    Builder &set_gl_depth_test(bool gl_depth_test);
+    builder &use_screen(bool uses_screen);
+    builder &use_audio(bool uses_audio);
+    builder &use_input(bool uses_input);
+    builder &use_logger(bool uses_logger);
+    builder &use_text(bool uses_text);
+    builder &set_screen_width(int screen_width);
+    builder &set_screen_height(int screen_height);
+    builder &set_screen_is_mouse_captured(bool screen_is_mouse_captured);
+    builder &set_screen_title(const char *screen_title);
+    builder &set_screen_msaa(bool screen_msaa);
+    builder &set_screen_vsync(bool screen_vsync);
+    builder &set_log_level(oak::level log_level);
+    builder &set_log_file(std::string log_file);
+    builder &set_text_font(std::string text_font);
+    builder &set_text_size(int text_size);
+    builder &set_gl_blending(bool gl_blending);
+    builder &set_gl_cull_face(bool gl_cull_face);
+    builder &set_gl_multisample(bool gl_multisample);
+    builder &set_gl_depth_test(bool gl_depth_test);
 
-    Engine build();
+    engine build();
 };
 
-} // namespace Brenta
+} // namespace brenta
 
 // Doxygen Documnetation:
 
@@ -172,13 +171,16 @@ class Engine::Builder
  * the Screen.
  *
  * The main submodules are:
- * - **Brenta::Screen**: manages the window and the OpenGL context.
- * - **Brenta::Audio**: everything audio.
- * - **Brenta::Input**: manages the screen input using callbacks.
- * - **Brenta::Utils::Logger**: logging manager.
- * - **Brenta::Text**: text rendering.
- * - **Brenta::ECS::World**: the Entity Component System submodule.
- * - **Brenta::Engine**: manages the setup of the engine.
+ * * **[viotecs](https://github.com/San7o/viotecs)**: the engine's Entity
+ * Component System
+ * - **[oak](https://github.com/San7o/oak)**: engine's logger
+ * - **[valfuzz](https://github.com/San7o/valFuzz)**: the engine's testing
+ * framework
+ * - **brenta::screen**: manages the window and the OpenGL context.
+ * - **brenta::audio**: everything audio.
+ * - **brenta::input**: manages the screen input using callbacks.
+ * - **brenta::text**: text rendering.
+ * - **brenta::engine**: manages the setup of the engine.
  *
  * In addition, the engine has multiple classes to provide more functionalities.
  * Those are mostly wrappers around opengl primitives or handy classes providing
@@ -186,17 +188,19 @@ class Engine::Builder
  * iniitalize them.
  *
  * The classes are:
- * - **Brenta::GL**: provides some useful OpenGL functions.
- * - **Brenta::Mesh**: a 3D openGL mesh.
- * - **Brenta::Model**: a 3D openGL model.
- * - **Brenta::ParticleEmitter**: create and customize particles.
- * - **Brenta::Shader**: manages the shaders.
- * - **Brenta::Texture**: manages the textures.
- * - **Brenta::Types::Translation**: manages the translations.
- * - **Brenta::Types::VAO**: wrapper around the Vertex Array Objects.
- * - **Brenta::Types::Buffer**: wrapper around the Buffers.
- * - **Brenta::Time**: manages the time.
- * - **Brenta::Camera**: manages the camera.
+ * - **brenta::gl**: provides some useful OpenGL functions.
+ * - **brenta::mesh**: a 3D openGL mesh.
+ * - **brenta::model**: a 3D openGL model.
+ * - **brenta::particle_emitter**: create and customize particles.
+ * - **brenta::shader**: manages the shaders.
+ * - **brenta::texture**: manages the textures.
+ * - **brenta::types::translation**: manages the translations.
+ * - **brenta::types::vao**: wrapper around the Vertex Array Objects.
+ * - **brenta::types::buffer**: wrapper around the Buffers.
+ * - **brenta::types::framebuffer**: framebuffer wrapper.
+ * - **brenta::time**: manages the time.
+ * - **brenta::camera**: manages the camera.
+ * - **brenta::gui**: provides helper functions to ImGUI.
  *
  * \section graphics Graphics
  *
@@ -323,12 +327,12 @@ class Engine::Builder
  * ```
  *
  * \section tests Tests
- *
- * To build tests, run:
+ * The engine uses It's own testing framework,
+ * [valFuzz](https://github.com/San7o/valFuzz). To build tests, run:
  * ```bash
- * cmake -Bbuild -DBUILD_TESTS=ON
+ * cmake -Bbuild -DBRENTA_BUILD_TESTS=ON
  * cmake --build build -j 4
- * ./buid/unit
+ * ./buid/tests --no-multithread
  * ```
  *
  * \section examples Examples
@@ -336,7 +340,7 @@ class Engine::Builder
  * There is an `examples` directory, you can run an exmple with the following
  * command:
  * ```bash
- * cmake -Bbuild -DBUILD_EXAMPLES=ON
+ * cmake -Bbuild -DBRENTA_BUILD_EXAMPLES=ON
  * cmake --build build -j 4 --target load_model
  * ./build/load_model
  * ```
@@ -349,7 +353,6 @@ class Engine::Builder
  * The engine is divided into the following directories:
  *
  * - **engine**: contains the source code of the engine
- * - **ecs**: contains all the files related to the Entity Component System
  * - **utils**: contains utility classes like the Logger, those classes are
  * ussed both by the engine and the ECS
  * - **tests**: contains the tests for the engine
@@ -367,140 +370,16 @@ class Engine::Builder
  * - **LICENSE**: the license file
  *
  * \section namespaces Namespaces
- * The engine uses the `Brenta` namespace. There are also some subnamespaces:
- * - **Brenta::Types**: contains the types used in the engine
- * - **Brenta::ECS**: contains the types used in the ECS
- * - **Brenta::Utils**: contains the utility classes (the logger)
+ * The engine uses the `brenta` namespace. There are also some subnamespace:
+ * - **brenta::types**: contains the types used in the engine
+ * - **oak**: the logger
+ * - **viotecs**: the ECS
+ * - **valfuzz**: the testing framework
  *
  * \page ECS
- * Brenta Engine features an Entity Component System architecture. The ECS is a
- * design pattern that allows you to structure your code in a way that is more
- * modular and scalable.
  *
- * The ECS is composed of three main parts:
- * - **Entity**: an entity is an object in the game, it is just an ID
- * - **Component**: a component is a piece of data that is attached to an entity
- * - **System**: a system is a piece of code that operates on entities with
- * specific components. They get autocamically executed at each game tick.
- * - **Resources**: resources are shared global data that can be accessed by any
- * system
- *
- * With those building blocks, you can create any game or application. The ECS
- * is optional, you can use the engine without it.
- *
- * \subsection header Header
- * Everything you need to use the ECS is in the `ecs` directory. To use the ECS,
- * include the `ecs.hpp` header:
- * ```cpp
- * #include "ecs.hpp"
- * using namespace Brenta::ECS;
- * ```
- *
- * \section world The World
- *
- * Everything that exists in the ECS is contained in the `World` class. The
- * World is a singleton accessible from anywhere in the code and It will be your
- * entry point to the ECS. You can create entities, assign components to them,
- * and query entities with specific components. Let's take a look on how to use
- * the World API.
- *
- * \section entity Creating new Entities
- * Creating an entity is very straightforward, you can ask the world to create
- * one for you:
- * ```cpp
- * Entity entity = World::NewEntity();
- * ```
- * This will return a new entity with a unique ID or -1 if the entity could not
- * be created.
- *
- * \section component Assigning Components to Entities
- *
- * To assign a component to an entity, first you need to create a component.
- * Components are just structs with data that extend the `Component` class. Note
- * that you need to implement a default empty constructor for your component.
- *
- * For example:
- * ```cpp
- * struct PositionComponent : public Component {
- *     float x, y, z;
- *     PositionComponent(); // Required
- *     PositionComponent(float x, float y, float z); // Optional
- * }
- * ```
- *
- * You can find many more examples in `examples/components.cpp`.
- *
- * Once you have created a component, you can assign it to an entity:
- * ```cpp
- * PositionComponent position(0.0f, 0.0f, 0.0f);
- * World::AddComponent<PositionComponent>(entity, position);
- * ```
- *
- * \section system Creating Systems
- *
- * Systems are classes that extend the `System` class. Systems can query
- * entities with specific components and operate on them. They have a run method
- * that will be called at each tick. Systems can define which components to
- * query by specifying them in the template arguments (see the example below),
- * they will receive a vector of entities that match the query.
- *
- * **Note** that if your System does not need to query any component, you need
- * to pass `None` as the template argument.
- *
- * You can create a system like so:
- *
- * ```cpp
- *
- * struct RendererSystem : System<ModelComponent, TransformComponent> {
- *   // you need to implement the run method
- *   void run(std::vector<Entity> matches) const override {
- *     if (matches.empty()) return;
- *
- *     for (auto match : matches) {
- *         // get the components associated to an entity
- *         auto model_component =
- * World::EntityToComponent<ModelComponent>(match);
- *
- *         // ...
- *
- *         myModel.Draw(default_shader);
- *     }
- *   }
- * };
- * ```
- * Note how we used `World::EntityToComponent` to get the components associated
- * with an entity. This is a common pattern you will use in your systems.
- *
- * After you defined your system, you need to register it. This can be done
- * throught a macro:
- * ```cpp
- * REGISTER_SYSTEMS(RendererSystem);
- * ```
- * **Note**: You can register as many systems as you want but passing the
- * systems as a comma separated list to the macro, but you have to use
- * `REGISTER_SYSTEM` once and only once in your code, this is because systems
- * are registered in a global type.
- *
- * \section resources Resources
- *
- * Resources are data, like components, but they are not associated with
- * entities. Things like the day in the game, the number of enemies, etc should
- * be resources.
- *
- * You can create a resource like so:
- * ```cpp
- * struct DayResource : public Resource {
- *    int day;
- *    DayResource() : day(0) {}
- *    DayResource(int day) : day(day) {}
- * };
- * ```
- *
- * You can register a resource like so:
- * ```cpp
- * World::AddResource<WireframeResource>(WireframeResource(false));
- * ```
- *
+ * You can find updated documentation on the ECS in the dedicated
+ * [repository](https://github.com/San7o/viotecs).
  *
  * \page Engine
  * In this section we will see how to use various features of the engine.
@@ -512,7 +391,7 @@ class Engine::Builder
  *
  * To create an engine, you can use the Builder class:
  * ```cpp
- * Brenta::Engine engine = Brenta::Engine::Builder()
+ * brenta::engine eng = brenta::engine::builder()
  *     .use_screen(true)
  *     .use_audio(true)
  *     .use_input(true)
@@ -524,7 +403,7 @@ class Engine::Builder
  *     // ...
  *     .build();
  * ```
- * You can read every option in the `Brenta::Engine::Builder` class.
+ * You can read every option in the `brenta::engine::builder` class.
  * Let's go through some subsystems.
  *
  * \section input Input
@@ -536,14 +415,14 @@ class Engine::Builder
  * ```cpp
  * auto toggle_wireframe_callback = []() {
  *
- *     auto wireframe = World::GetResource("WireframeResource");
+ *     auto wireframe = world::get_resource("WireframeResource");
  *     if (wireframe == nullptr) return;
  *
- *     GL::SetPoligonMode(!wireframe->enabled);
+ *     gl::set_poligon_mode(!wireframe->enabled);
  *     wireframe->enabled = !wireframe->enabled;
  * };
  *
- * Input::AddkeyboardCallback(GLFW_KEY_F, toggle_wireframe_callback);
+ * input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
  * ```
  * In this example we register a keyboard callback that toggles the wireframe
  * mode when the `F` key is pressed. You can use
@@ -551,8 +430,8 @@ class Engine::Builder
  * be called with the x and y position of the mouse.
  *
  * You can also remove the callbacks with
- * `Brenta::Input::RemoveKeyboardCallback` and
- * `Brenta::Input::RemoveMousePosCallback`.
+ * `brenta::input::remove_keyboard_callback` and
+ * `brenta::input::remove_mouse_pos_callback`.
  *
  * \section audio Audio
  *
@@ -563,38 +442,38 @@ class Engine::Builder
  *
  * You can load an audio file like so:
  * ```cpp
- * Audio::LoadAudio("guitar", "assets/audio/guitar.wav");
+ * audio::load_audio("guitar", "assets/audio/guitar.wav");
  * ```
  * We are identifying this audio file with the name `guitar`.
  *
  * You can create a stream with the name "music" like so:
  * ```cpp
- * Audio::CreateStream("music");
+ * audio::create_stream("music");
  * ```
  *
  * And finally play the "guitar" audio like so:
  * ```cpp
- * Audio::PlayAudio("guitar", "music");
+ * sudio::play_audio("guitar", "music");
  * ```
  * The subsystem will provide you a default stream named "default" if you don't
  * want to create a stream.
  *
- * You can Pause and Resume streams with `Brenta::Audio::PauseStream` and
- * `Brenta::Audio::ResumeStream`, set the volume and stop it. You can find
+ * You can Pause and Resume streams with `brenta::audio::pause_stream` and
+ * `brenta::audio::resume_stream`, set the volume and stop it. You can find
  * the API in `Brenta::Audio`.
  *
  * \section particles Particles
  *
- * You can create and customize particles via the `Brenta::ParticleEmitter`
+ * You can create and customize particles via the `brenta::particle_emitter`
  * class. All the computation is done in the GPU so the engine can handle lots
  * and lots of particles. Here's a quick look on the API:
  *
  * ```cpp
- * ParticleEmitter emitter = ParticleEmitter::Builder()
- *         .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+ * particle_emitter emitter = particle_emitter::builder()
+ *        .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
  *        .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
  *        .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
- *        .set_starting_timeToLive(0.5f)
+ *        .set_starting_time_to_live(0.5f)
  *        .set_num_particles(1000)
  *        .set_spawn_rate(0.01f)
  *        .set_scale(1.0f)
@@ -607,38 +486,27 @@ class Engine::Builder
  *        .build();
  *
  * // Inside the game loop:
- * emitter.updateParticles(Time::GetDeltaTime());
- * emitter.renderParticles();
+ * emitter.update_particles(time::get_delta_time());
+ * emitter.render_particles();
  * ```
  *
  * \section logger Logger
  *
- * The logger is a simple logging system that allows you to log messages with
- * different levels. The levels are:
- * - **DEBUG**
- * - **INFO**
- * - **WARNING**
- * - **ERROR**
- * - **OUTPUT**
- * - **DISABLED**
- *
- * The logger will only log messages with a level equal or higher than the one
- * you set. You can also set a log file where the messages will be written, the
- * default is `./logs/log.txt`.
- *
- * This is an example on how to log a message:
+ * Check out [oak](https://github.com/San7o/oak)! The engine uses oak as the
+ * logger, you can set the log level and the log file in the engine builder.
+ * You can log messages like so:
  * ```cpp
- * Brenta::Logger::Log(Brenta::Types::LogLevel::DEBUG, "This is a debug message:
- * ", "hello"); DEBUG("This is a debug message with macro: ", "hello");
+ * oak::info("Hello, world!");
  * ```
+ * Oak has many more advanced features, I suggest you check out the repository.
  *
  * \section text Text
  *
- * The `Brenta::Text` subsystem allows you to render text on the screen. You can
+ * The `brenta::text` subsystem allows you to render text on the screen. You can
  * set the font and font size of your text, and render it in the main loop like
  * this:
  * ```cpp
- * Text::RenderText("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
+ * text::render_text("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
  * ```
  *
  * \section more More

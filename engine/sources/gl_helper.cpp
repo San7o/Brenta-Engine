@@ -32,21 +32,20 @@
 
 #include <iostream>
 
-using namespace Brenta;
-using namespace Brenta::Utils;
+using namespace brenta;
 
-void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
-                    bool gl_depth_test)
+void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
+                     bool gl_depth_test)
 {
-    GLADloadproc loadproc = (GLADloadproc) Screen::GetProcAddress();
+    GLADloadproc loadproc = (GLADloadproc) screen::get_proc_address();
     if (!gladLoadGLLoader(loadproc))
     {
         ERROR("Failed to initialize GLAD");
         exit(-1);
     }
 
-    int SCR_WIDTH = Screen::GetWidth();
-    int SCR_HEIGHT = Screen::GetHeight();
+    int SCR_WIDTH = screen::get_width();
+    int SCR_HEIGHT = screen::get_height();
 
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
     glEnable(GL_DEPTH_TEST);                 /* Enable depth testing */
@@ -76,12 +75,12 @@ void GL::LoadOpenGL(bool gl_blending, bool gl_cull_face, bool gl_multisample,
         INFO("Enabled GL_MULTISAMPLE");
     }
 
-    GLenum errcode = GL::glCheckError();
+    GLenum errcode = gl::check_error();
     if (!errcode)
         INFO("OpenGl loaded");
 }
 
-void GL::SetPoligonMode(GLboolean enable)
+void gl::set_poligon_mode(GLboolean enable)
 {
     if (enable)
     {
@@ -95,38 +94,38 @@ void GL::SetPoligonMode(GLboolean enable)
     }
 }
 
-void GL::SetViewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
+void gl::set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
 {
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
 }
 
-void GL::SetColor(float r, float g, float b, float a)
+void gl::set_color(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a); /* Set clear color */
 }
 
-void GL::DrawArrays(GLenum mode, int first, int count)
+void gl::draw_arrays(GLenum mode, int first, int count)
 {
     glDrawArrays(mode, first, count);
 }
 
-void GL::DrawElements(GLenum mode, int count, GLenum type, const void *indices)
+void gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
 {
     glDrawElements(mode, count, type, indices);
 }
 
-void GL::Clear()
+void gl::clear()
 {
     /* Clear color and depth buffer */
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
-void GL::BindVertexArray(unsigned int n)
+void gl::bind_vertex_array(unsigned int n)
 {
     glBindVertexArray(n);
 }
 
-GLenum GL::glCheckError_(const char *file, int line)
+GLenum gl::check_error_(const char *file, int line)
 {
     GLenum errorCode;
     while ((errorCode = glGetError()) != GL_NO_ERROR)

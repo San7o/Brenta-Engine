@@ -30,26 +30,25 @@
 
 #include <filesystem>
 
-using namespace Brenta;
-using namespace Brenta::Types;
+using namespace brenta;
+using namespace brenta::types;
 
-Types::ShaderName Text::textShader;
-Types::VAO Text::textVao;
-Types::Buffer Text::textVbo;
-std::map<char, Types::Character> Text::characters;
+types::shader_name_t text::text_shader;
+types::vao text::text_vao;
+types::buffer text::text_vbo;
+std::map<char, types::character> text::characters;
 
-void Text::Init()
+void text::init()
 {
-    Text::textVbo = Types::Buffer(GL_ARRAY_BUFFER);
-    Text::textVao.Init();
-    ;
+    text::text_vbo = types::buffer(GL_ARRAY_BUFFER);
+    text::text_vao.init();
 
     INFO("Text initialized");
 }
 
-void Text::Load(std::string font, unsigned int fontSize)
+void text::load(std::string font, unsigned int font_size)
 {
-    if (textVao.GetVAO() == 0)
+    if (text_vao.get_vao() == 0)
     {
         ERROR("Text not initialized");
         return;
@@ -61,12 +60,12 @@ void Text::Load(std::string font, unsigned int fontSize)
         return;
     }
 
-    Shader::New("TextShader", GL_VERTEX_SHADER,
-                std::filesystem::absolute("engine/shaders/text.vs"),
-                GL_FRAGMENT_SHADER,
-                std::filesystem::absolute("engine/shaders/text.fs"));
-    textShader = "TextShader";
-    Shader::Use(textShader);
+    shader::create("TextShader", GL_VERTEX_SHADER,
+                   std::filesystem::absolute("engine/shaders/text.vs"),
+                   GL_FRAGMENT_SHADER,
+                   std::filesystem::absolute("engine/shaders/text.fs"));
+    text_shader = "TextShader";
+    shader::use(text_shader);
 
     // find path to font
     std::string font_name = std::filesystem::absolute("assets/fonts/" + font);
@@ -102,7 +101,7 @@ void Text::Load(std::string font, unsigned int fontSize)
             // generate texture
             unsigned int texture;
             glGenTextures(1, &texture);
-            Texture::BindTexture(GL_TEXTURE_2D, texture);
+            texture::bind_texture(GL_TEXTURE_2D, texture);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width,
                          face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
                          face->glyph->bitmap.buffer);
@@ -112,64 +111,64 @@ void Text::Load(std::string font, unsigned int fontSize)
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
             // now store character for later use
-            Character character = {
+            character character_ = {
                 texture,
                 glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
                 glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
                 static_cast<unsigned int>(face->glyph->advance.x)};
-            characters.insert(std::pair<char, Character>(c, character));
+            characters.insert(std::pair<char, character>(c, character_));
         }
-        Texture::BindTexture(GL_TEXTURE_2D, 0);
+        texture::bind_texture(GL_TEXTURE_2D, 0);
     }
     // destroy FreeType once we're finished
     FT_Done_Face(face);
     FT_Done_FreeType(ft);
 
     // configure VAO/VBO for texture quads
-    textVao.Bind();
-    textVbo.Bind();
+    text_vao.bind();
+    text_vbo.bind();
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-    textVbo.Unbind();
-    textVao.Unbind();
+    text_vbo.unbind();
+    text_vao.unbind();
 }
 
-void Text::RenderText(std::string text, float x, float y, float scale,
-                      glm::vec3 color)
+void text::render_text(std::string text, float x, float y, float scale,
+                       glm::vec3 color)
 {
-    if (textVao.GetVAO() == 0)
+    if (text_vao.get_vao() == 0)
     {
         ERROR("Text not initialized");
         return;
     }
 
-    Shader::Use(textShader);
-    unsigned int textShaderId = Shader::GetId(textShader);
+    shader::use(text_shader);
+    unsigned int textShaderId = shader::get_id(text_shader);
 
     glUniform3f(glGetUniformLocation(textShaderId, "textColor"), color.x,
                 color.y, color.z);
 
     glm::mat4 projection =
-        glm::ortho(0.0f, static_cast<float>(Screen::GetWidth()), 0.0f,
-                   static_cast<float>(Screen::GetHeight()));
+        glm::ortho(0.0f, static_cast<float>(screen::get_width()), 0.0f,
+                   static_cast<float>(screen::get_height()));
     glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1,
                        GL_FALSE, glm::value_ptr(projection));
 
     glActiveTexture(GL_TEXTURE0);
-    textVao.Bind();
+    text_vao.bind();
 
     // iterate through all characters
     std::string::const_iterator c;
     for (c = text.begin(); c != text.end(); c++)
     {
-        Character ch = characters[*c];
+        character ch = characters[*c];
 
-        float xpos = x + ch.Bearing.x * scale;
-        float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+        float xpos = x + ch.bearing.x * scale;
+        float ypos = y - (ch.size.y - ch.bearing.y) * scale;
 
-        float w = ch.Size.x * scale;
-        float h = ch.Size.y * scale;
+        float w = ch.size.x * scale;
+        float h = ch.size.y * scale;
 
         // update VBO for each character
 
@@ -181,10 +180,10 @@ void Text::RenderText(std::string text, float x, float y, float scale,
             {xpos + w, ypos + h, 1.0, 0.0}};
 
         // render glyph texture over quad
-        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+        glBindTexture(GL_TEXTURE_2D, ch.texture_id);
 
         // update content of VBO memory
-        glBindBuffer(GL_ARRAY_BUFFER, textVbo.id);
+        glBindBuffer(GL_ARRAY_BUFFER, text_vbo.id);
         glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
         glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -192,7 +191,7 @@ void Text::RenderText(std::string text, float x, float y, float scale,
         glDrawArrays(GL_TRIANGLES, 0, 6);
         // now advance cursors for next glyph (note that advance is number
         // of 1/64 pixels)
-        x += (ch.Advance >> 6)
+        x += (ch.advance >> 6)
              * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
     }
     glBindVertexArray(0);

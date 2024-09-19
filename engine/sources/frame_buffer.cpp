@@ -30,12 +30,13 @@
 #include "gl_helper.hpp"
 #include "screen.hpp"
 
-using namespace Brenta;
-using namespace Brenta::Types;
-using namespace Brenta::Utils;
+using namespace brenta;
+using namespace brenta::types;
 
-FrameBuffer::FrameBuffer(int width, int height)
+framebuffer::framebuffer(int width, int height, GLenum format)
 {
+    this->format = format;
+
     glGenFramebuffers(1, &this->id);
     if (this->id == 0)
     {
@@ -43,7 +44,7 @@ FrameBuffer::FrameBuffer(int width, int height)
         exit(1);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
-    glCheckError();
+    check_error();
 
     glGenTextures(1, &this->texture_id);
     if (this->texture_id == 0)
@@ -52,9 +53,9 @@ FrameBuffer::FrameBuffer(int width, int height)
         exit(1);
     }
     glBindTexture(GL_TEXTURE_2D, this->texture_id);
-    glCheckError();
+    check_error();
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGB,
                  GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -66,7 +67,7 @@ FrameBuffer::FrameBuffer(int width, int height)
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
                               GL_RENDERBUFFER, this->render_buffer_id);
-    glCheckError();
+    check_error();
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
     {
@@ -79,31 +80,31 @@ FrameBuffer::FrameBuffer(int width, int height)
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 }
 
-FrameBuffer::~FrameBuffer()
+framebuffer::~framebuffer()
 {
     glDeleteFramebuffers(1, &this->id);
     glDeleteTextures(1, &this->texture_id);
 }
 
-void FrameBuffer::Bind()
+void framebuffer::bind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
-    glCheckError();
+    check_error();
 }
 
-void FrameBuffer::Unbind()
+void framebuffer::unbind()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glCheckError();
+    check_error();
 }
 
-void FrameBuffer::Delete()
+void framebuffer::destroy()
 {
     glDeleteFramebuffers(1, &this->id);
     glDeleteTextures(1, &this->texture_id);
 }
 
-void FrameBuffer::Rescale(int width, int height)
+void framebuffer::rescale(int width, int height)
 {
     glBindFramebuffer(GL_FRAMEBUFFER, this->id);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -113,22 +114,27 @@ void FrameBuffer::Rescale(int width, int height)
     }
 
     glBindTexture(GL_TEXTURE_2D, this->texture_id);
-    glCheckError();
+    check_error();
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB,
+    glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGBA,
                  GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
                            this->texture_id, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
-    glCheckError();
+    check_error();
 
     glBindRenderbuffer(GL_RENDERBUFFER, this->render_buffer_id);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
                               GL_RENDERBUFFER, this->render_buffer_id);
 
-    Screen::WIDTH = width;
-    Screen::HEIGHT = height;
+    screen::WIDTH = width;
+    screen::HEIGHT = height;
+}
+
+void framebuffer::set_format(GLenum format)
+{
+    this->format = format;
 }

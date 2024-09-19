@@ -29,9 +29,9 @@
 #include "components/model_component.hpp"
 #include "components/player_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/renderer_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -40,11 +40,11 @@
 
 #define ANIMATION_SPEED 24
 
-using namespace Brenta::ECS;
+using namespace viotecs;
 
-struct RendererSystem : System<ModelComponent, TransformComponent>
+struct RendererSystem : system<ModelComponent, TransformComponent>
 {
-    void run(std::vector<Entity> matches) const override
+    void run(std::vector<entity_t> matches) const override
     {
         if (matches.empty())
             return;
@@ -53,28 +53,29 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
         {
             /* Get the model component */
             auto model_component =
-                World::EntityToComponent<ModelComponent>(match);
+                world::entity_to_component<ModelComponent>(match);
 
             auto transform_component =
-                World::EntityToComponent<TransformComponent>(match);
+                world::entity_to_component<TransformComponent>(match);
 
-            auto myModel = model_component->model;
+            auto myModel = model_component->mod;
             auto default_shader = model_component->shader;
 
-            Brenta::Types::Translation t = Brenta::Types::Translation();
-            t.setView(camera.GetViewMatrix());
-            t.setProjection(camera.GetProjectionMatrix());
+            brenta::types::translation t = brenta::types::translation();
+            t.set_view(default_camera.get_view_matrix());
+            t.set_projection(default_camera.get_projection_matrix());
 
-            t.setModel(glm::mat4(1.0f));
+            t.set_model(glm::mat4(1.0f));
             t.translate(transform_component->position);
             t.rotate(transform_component->rotation);
             t.scale(transform_component->scale);
 
-            t.setShader(default_shader);
+            t.set_shader(default_shader);
 
-            Shader::SetVec3(default_shader, "viewPos", camera.GetPosition());
-            Shader::SetFloat(default_shader, "material.shininess",
-                             model_component->shininess);
+            shader::set_vec3(default_shader, "viewPos",
+                             default_camera.get_position());
+            shader::set_float(default_shader, "material.shininess",
+                              model_component->shininess);
 
             /* Animation control */
             if (model_component->hasAtlas)
@@ -93,17 +94,17 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
                 {
                     model_component->elapsedFrames++;
                 }
-                Shader::SetInt(default_shader, "atlasSize",
-                               model_component->atlasSize);
-                Shader::SetInt(default_shader, "atlasIndex",
-                               model_component->atlasIndex);
+                shader::set_int(default_shader, "atlasSize",
+                                model_component->atlasSize);
+                shader::set_int(default_shader, "atlasIndex",
+                                model_component->atlasIndex);
             }
             else
             {
-                Shader::SetInt(default_shader, "atlasIndex", 0);
+                shader::set_int(default_shader, "atlasIndex", 0);
             }
 
-            myModel.Draw(default_shader);
+            myModel.draw(default_shader);
         }
     }
 };

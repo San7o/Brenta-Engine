@@ -25,7 +25,7 @@
           name = "engine-dev-shell";
           hardeningDisable = ["all"];
           packages = with pkgsFor.${system}; [
-            libz                    # needed for assimp
+            libz.dev                # needed for assimp
             stdenv.cc.cc.lib        # libc
             cmake                   # build system
             glfw-wayland-minecraft  # OpenGL windowing library
@@ -39,7 +39,7 @@
               zsh
           '';
 
-          LD_LIBRARY_PATH="${pkgsFor.${system}.libz}/lib:${pkgsFor.${system}.alsa-lib.dev}";
+          LD_LIBRARY_PATH="${pkgsFor.${system}.libz.dev}:${pkgsFor.${system}.alsa-lib.dev}";
         };
     });
   };

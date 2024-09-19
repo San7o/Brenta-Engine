@@ -30,18 +30,18 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace Brenta;
-using namespace Brenta::ECS;
+using namespace brenta;
+using namespace viotecs;
 
-struct PhysicsComponent : Component
+struct PhysicsComponent : component
 {
     float mass;
     float density;
@@ -62,14 +62,14 @@ struct PhysicsComponent : Component
     }
 };
 
-struct PlayerComponent : Component
+struct PlayerComponent : component
 {
     PlayerComponent()
     {
     }
 };
 
-struct TransformComponent : Component
+struct TransformComponent : component
 {
     glm::vec3 position;
     glm::vec3 rotation;
@@ -85,7 +85,7 @@ struct TransformComponent : Component
     }
 };
 
-struct PointLightComponent : Component
+struct PointLightComponent : component
 {
     glm::vec3 ambient;
     glm::vec3 diffuse;
@@ -95,7 +95,7 @@ struct PointLightComponent : Component
     float linear;
     float quadratic;
     float strength;
-    std::vector<Brenta::Types::ShaderName> shaders;
+    std::vector<brenta::types::shader_name_t> shaders;
 
     PointLightComponent()
         : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),

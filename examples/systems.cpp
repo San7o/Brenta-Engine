@@ -30,27 +30,28 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/fps_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace Brenta::ECS;
-using namespace Brenta::ECS::Types;
+using namespace viotecs;
+using namespace viotecs::types;
 
-struct FPSSystem : System<None>
+// With no dependencies, use the `none` type
+struct fps_system : system<none>
 {
-    void run(std::vector<Entity> _) const override
+    void run(std::vector<entity_t> _) const override
     {
-        Text::RenderText("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
-                         0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
+        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f,
+                          25.0f, 0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };
 
-struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
+struct physics_system : system<physics_component, transform_component>
 {
-    void run(std::vector<Entity> matches) const override
+    void run(std::vector<entity_t> matches) const override
     {
         if (matches.empty())
             return;
@@ -58,20 +59,20 @@ struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
         for (auto match : matches)
         {
             auto physics_component =
-                World::EntityToComponent<PhysicsComponent>(match);
+                world::entity_to_component<physics_component>(match);
 
             auto transform_component =
-                World::EntityToComponent<TransformComponent>(match);
+                world::entity_to_component<transform_component>(match);
 
             if (physics_component->acceleration != glm::vec3(0.0f))
             {
                 physics_component->velocity +=
-                    physics_component->acceleration * Time::GetDeltaTime();
+                    physics_component->acceleration * time::get_delta_time();
             }
             if (physics_component->velocity != glm::vec3(0.0f))
             {
                 transform_component->position +=
-                    physics_component->velocity * Time::GetDeltaTime();
+                    physics_component->velocity * time::get_delta_time();
             }
         }
     }
