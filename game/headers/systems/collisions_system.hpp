@@ -29,17 +29,17 @@
 #include "components/physics_component.hpp"
 #include "components/sphere_collider_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/collisions_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-using namespace brenta::ecs;
-using namespace brenta::ecs::types;
+using namespace viotecs;
+using namespace viotecs::types;
 
 glm::vec3 ResolveCollision(glm::vec3 position1, glm::vec3 position2,
                            float radius1, float radius2, float distance);

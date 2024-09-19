@@ -25,10 +25,14 @@
  */
 
 #include "valfuzz/valfuzz.hpp"
+#include "viotecs/viotecs.hpp"
 #include "translation.hpp"
 
 using namespace brenta;
 using namespace brenta::types;
+using namespace viotecs;
+
+REGISTER_SYSTEMS();
 
 TEST(new_translation, "Create a Translation")
 {

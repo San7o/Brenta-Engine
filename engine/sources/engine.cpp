@@ -1,14 +1,15 @@
 #include "engine.hpp"
+
 #include "oak/oak.hpp"
 
 #ifdef USE_ECS
-#include "ecs.hpp"
+#include "viotecs/viotecs.hpp"
 #endif
 
 using namespace brenta;
 
 #ifdef USE_ECS
-using namespace brenta::ecs;
+using namespace viotecs;
 #endif
 
 engine::engine(bool uses_screen, bool uses_audio, bool uses_input,

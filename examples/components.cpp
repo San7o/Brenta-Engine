@@ -30,8 +30,8 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -39,7 +39,7 @@
 #include <vector>
 
 using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct PhysicsComponent : component
 {

@@ -28,15 +28,15 @@
  * Just a simple window
  */
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <filesystem>
 #include <iostream>
 
 using namespace brenta;
 using namespace brenta::types;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;

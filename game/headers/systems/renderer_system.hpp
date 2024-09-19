@@ -29,9 +29,9 @@
 #include "components/model_component.hpp"
 #include "components/player_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
 #include "systems/renderer_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -40,7 +40,7 @@
 
 #define ANIMATION_SPEED 24
 
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct RendererSystem : system<ModelComponent, TransformComponent>
 {

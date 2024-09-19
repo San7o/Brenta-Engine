@@ -27,6 +27,12 @@ CPMAddPackage(
     GIT_TAG v1.0.0
     DOWNLOAD_ONLY True
 )
+CPMAddPackage(
+    NAME viotecs
+    GITHUB_REPOSITORY San7o/viotecs
+    GIT_TAG v1.0.0
+    DOWNLOAD_ONLY True
+)
 CPMUsePackageLock(package-lock.cmake)
 
 set(CMAKE_CXX_STANDARD 23)
@@ -52,6 +58,7 @@ set(BRENTA_COMPILE_OPTIONS)
 set(BRENTA_LINK_LIBRARIES)
 set(BRENTA_COMPILE_OPTIONS)
 set(BRENTA_EXTRA_SOURCES)
+set(BRENTA_TEST_INCLUDES)
 
 list(APPEND BRENTA_INCLUDES include utils/headers engine/headers)
 list(APPEND BRENTA_COMPILE_OPTIONS -Wall) # TODO: add more
@@ -61,9 +68,13 @@ if (oak_ADDED)
     list(APPEND BRENTA_COMPILE_OPTIONS -DOAK_USE_SOCKETS)
     list(APPEND BRENTA_EXTRA_SOURCES ${oak_SOURCE_DIR}/src/oak.cpp)
 endif()
+if (viotecs_ADDED AND BRENTA_BUILD_ECS)
+    list(APPEND BRENTA_COMPILE_OPTIONS -DUSE_ECS)
+    list(APPEND BRENTA_INCLUDES ${viotecs_SOURCE_DIR}/include)
+    file(GLOB BRENTA_ECS_SOURCES ${viotecs_SOURCE_DIR}/src/world.cpp)
+endif()
 if (valfuzz_ADDED AND BRENTA_BUILD_TESTS)
-    list(APPEND BRENTA_INCLUDES ${valfuzz_SOURCE_DIR}/include)
-    list(APPEND BRENTA_EXTRA_SOURCES ${valfuzz_SOURCE_DIR}/src/valfuzz.cpp)
+    list(APPEND BRENTA_TEST_INCLUDES ${valfuzz_SOURCE_DIR}/include)
 endif()
 if (BRENTA_BUILD_MAIN)
     list(APPEND BRENTA_INCLUDES game/headers)
@@ -72,10 +83,6 @@ if (BRENTA_BUILD_IMGUI)
     list(APPEND BRENTA_INCLUDES imgui imgui/backends
             imgui/misc/cpp)
     list(APPEND BRENTA_COMPILE_OPTIONS -DUSE_IMGUI)
-endif()
-if (BRENTA_BUILD_ECS)
-    list(APPEND BRENTA_INCLUDES ecs/headers)
-    list(APPEND BRENTA_COMPILE_OPTIONS -DUSE_ECS)
 endif()
 if (BRENTA_BUILD_STATIC)
     list(APPEND BRENTA_LINK_LIBRARIES GL dl z m stdc++fs glfw
@@ -90,8 +97,7 @@ endif()
 file(GLOB BRENTA_IMGUI_SOURCES "imgui/*.cpp" "imgui/backends/imgui_impl_glfw.cpp"
         "imgui/misc/cpp/imgui_stdlib.cpp" "imgui/backends/imgui_impl_opengl3.cpp" )
 file(GLOB BRENTA_ENGINE_SOURCES "engine/sources/*.c" "engine/sources/*.cpp" ${BRENTA_EXTRA_SOURCES})
-file(GLOB BRENTA_ECS_SOURCES "ecs/sources/*.cpp")
-file(GLOB BRENTA_TEST_SOURCES "tests/**/*.cpp" "tests/*.cpp")
+file(GLOB BRENTA_TEST_SOURCES "tests/**/*.cpp" "tests/*.cpp" ${valfuzz_SOURCE_DIR}/src/valfuzz.cpp)
 file(GLOB BRENTA_MAIN_SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" )
 
 if (BRENTA_BUILD_MAIN AND NOT BRENTA_BUILD_TESTS AND NOT BRENTA_BUILD_EXAMPLES)
@@ -108,9 +114,14 @@ if (BRENTA_BUILD_MAIN AND NOT BRENTA_BUILD_TESTS AND NOT BRENTA_BUILD_EXAMPLES)
 endif()
 
 if (BRENTA_BUILD_TESTS)
-    add_executable(tests ${BRENTA_TEST_SOURCES} ${BRENTA_ENGINE_SOURCES}
-            ${BRENTA_ECS_SOURCES} ${BRENTA_IMGUI_SOURCES})
-    target_include_directories(tests PRIVATE ${BRENTA_INCLUDES})
+    if (BRENTA_BUILD_ECS)
+        add_executable(tests ${BRENTA_ENGINE_SOURCES} ${BRENTA_ECS_SOURCES}
+                ${BRENTA_TEST_SOURCES} ${BRENTA_IMGUI_SOURCES}) 
+    else()
+        add_executable(tests ${BRENTA_ENGINE_SOURCES}
+                    ${BRENTA_TEST_SOURCES} ${BRENTA_IMGUI_SOURCES})
+    endif()
+    target_include_directories(tests PRIVATE ${BRENTA_INCLUDES} ${BRENTA_TEST_INCLUDES})
     target_link_libraries(tests PRIVATE ${BRENTA_LINK_LIBRARIES})
     target_compile_options(tests PRIVATE ${BRENTA_COMPILE_OPTIONS})
 endif()

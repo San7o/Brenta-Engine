@@ -26,11 +26,11 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 /* Model Component */
 struct ModelComponent : component

@@ -25,6 +25,7 @@
  */
 
 #include "texture.hpp"
+
 #include "engine_logger.hpp"
 
 #include <glad/glad.h>

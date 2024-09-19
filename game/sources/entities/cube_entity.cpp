@@ -28,13 +28,13 @@
 
 #include "components/model_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <filesystem>
 
-using namespace brenta::ecs;
-using namespace brenta::ecs::types;
+using namespace viotecs;
+using namespace viotecs::types;
 using namespace brenta;
 
 void init_cube_entity()

@@ -26,15 +26,15 @@
 
 #pragma once
 
-#include "ecs.hpp"
 #include "engine.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace brenta;
-using namespace brenta::ecs;
+using namespace viotecs;
 
 struct TransformComponent : component
 {

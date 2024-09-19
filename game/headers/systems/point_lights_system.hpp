@@ -28,12 +28,12 @@
 
 #include "components/point_light_component.hpp"
 #include "components/transform_component.hpp"
-#include "ecs.hpp"
 #include "systems/point_lights_system.hpp"
+#include "viotecs/viotecs.hpp"
 
 #include <vector>
 
-using namespace brenta::ecs;
+using namespace viotecs;
 
 /* Load the lights on the shaders */
 struct PointLightsSystem : system<TransformComponent, PointLightComponent>
