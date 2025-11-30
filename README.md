@@ -1,4 +1,4 @@
-![Brenta-Engine-Banner](./assets/brenta-engine-banner.png)
+![Brenta-Engine-Banner](./utils/docs-images/brenta-engine-banner.png)
 
 **Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
 using the Entity Component System architecture. The engine was
