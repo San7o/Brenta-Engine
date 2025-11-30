@@ -1,3 +1,40 @@
 .PHONY: format
 format:
-	find include/brenta src examples -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
+	find include/brenta src examples tests -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
+
+DOCS_DIR := docs
+HTML_DIR := docs/html
+DOCS := ${wildcard ${DOCS_DIR}/*.md}
+HTML := ${patsubst ${DOCS_DIR}/%.md, ${HTML_DIR}/%.html, ${DOCS}}
+HTML_INTRO := utils/website/intro.html
+HTML_OUTRO := utils/website/outro.html
+INDEX_FILE := utils/website/index.html
+TMP_FILE := /tmp/padoc-out.html
+HIGHLIGHT_STYLE := tango
+PANDOC_FLAGS := --highlight-style ${HIGHLIGHT_STYLE}
+
+html: ${HTML} index doxigen ## Generate the html documentation
+
+doxigen:
+	doxygen ./utils/doxygen.conf
+	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxigen.html
+
+index: ${INDEX_FILE} ${HTML_INTRO} ${HTML_OUTRO} 
+	cp ${HTML_INTRO} ${HTML_DIR}/index.html
+	cat ${INDEX_FILE} >> ${HTML_DIR}/index.html
+	cat ${HTML_OUTRO} >> ${HTML_DIR}/index.html
+
+$(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
+	pandoc $< -o ${TMP_FILE} ${PANDOC_FLAGS}
+	cp ${HTML_INTRO} $@
+	cat ${TMP_FILE} >> $@
+	cat ${HTML_OUTRO} >> $@
+	sed -i 's/\.md/\.html/g' $@
+	sed -i 's/..\/examples/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/examples/g' $@
+	sed -i 's/..\/tests/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/tests/g' $@
+
+$(HTML_DIR):
+	mkdir -p ${HTML_DIR}
+
+clean-html:  ## Remove the html docs directory
+	rm ${HTML_DIR}/*.html

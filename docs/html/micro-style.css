@@ -1,0 +1,283 @@
+ /* ---------------------------------------------------------------- *\
+ *
+ *  micro-style.css
+ *  ===============
+ *
+ *  Minimal, simple, tunable style for your websites.
+ *
+ *  Author:  Giovanni Santini
+ *  Mail:    giovanni.santini@proton.me
+ *  License: MIT
+ *
+ \* ---------------------------------------------------------------- */
+
+/*
+ * Global colors
+ *
+ * There are two variants for each color, one for light theme and
+ * the other for dark theme. The client's browser will decide which
+ * one to use based on the user's default settings.
+ */
+:root {
+  /* Base colors */
+  --bg: #FFFFFF;
+  --text: #000000;
+  --link: #0000ff;
+  --link-visited: #000099;
+  --link-hover: #0000aa;
+  --link-active: #0000cc;
+  --code-background: #eeeeee;
+
+  /*
+   * Syntax highlighting - light theme
+   *
+   * These colors are used for code blocks
+   */
+  --code-alert: #b00000;
+  --code-error: #a40000;
+  --code-comment: #606060;
+  --code-string: #008000;
+  --code-keyword: #0000ff;
+  --code-operator: #aa5500;
+  --code-datatype: #0000ff;
+  --code-function: #795e00;
+  --code-constant: #800080;
+  --code-number: #800080;
+  --code-attribute: #008000;
+  --code-warning: #aa5500;
+  --code-variable: #000000;
+  --code-special: #aa5500;
+}
+
+/*
+ * Dark mode
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Base colors */
+    --bg: #090909;
+    --text: #FFFFFF;
+    --link: #4dc5ff;
+    --link-visited: #39a7d9;
+    --link-hover: #66d9ff;
+    --link-active: #1fb6ff;
+    --code-background: #090912;
+
+    /* Syntax highlighting - dark theme */
+    --code-alert: #ff5555;
+    --code-error: #ff4444;
+    --code-comment: #888888;
+    --code-string: #50fa7b;
+    --code-keyword: #8be9fd;
+    --code-operator: #ffb86c;
+    --code-datatype: #8be9fd;
+    --code-function: #f1fa8c;
+    --code-constant: #bd93f9;
+    --code-number: #bd93f9;
+    --code-attribute: #50fa7b;
+    --code-warning: #ffb86c;
+    --code-variable: #f8f8f2;
+    --code-special: #ffb86c;
+  }
+}
+
+body {
+  color: var(--text);
+  background-color: var(--bg);
+
+  display: grid;
+  grid-template-columns: 1fr min(80rem, 65%) 1fr;
+  
+  font-family: monospace;
+  font-size: 1rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+body > * {
+  grid-column: 2;
+}
+
+body > .topnav {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.centered {
+  text-align: center;
+}
+
+hr {
+  margin: 1rem auto;
+  width: 100%;
+}
+
+/*
+ * Headings
+ */
+
+h1 {
+  margin-top: 3rem;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.2rem;
+}
+
+/*
+ * Links
+ */
+
+a:link {
+  color: var(--link);
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+a:hover {
+  color: var(--link-hover);
+}
+
+a:active {
+  color: var(--link-active);
+}
+
+/*
+ * Images
+ */
+
+figure,
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+figure img {
+  display: block;
+  margin: 0 auto;
+}
+
+/*
+ * Code
+ */
+
+/* Classes are compatible with Pandoc */
+
+code {
+  font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+  font-size: 100%;
+  margin: 0;
+  hyphens: manual;
+}
+
+.sourceCode {
+  background-color: var(--code-background);
+  overflow: auto;
+  margin: 1em 0;
+}
+
+pre {
+  padding: 1rem 1.4rem;
+  margin: 0;
+  overflow: visible;
+}
+
+pre code {
+  overflow: visible;
+  overflow-wrap: normal;
+}
+
+/* Code colors */
+
+code span.al { color: var(--code-alert); }        /* Alert */
+code span.er { color: var(--code-error); font-weight: bold; } /* Error */
+
+code span.co,
+code span.cv,
+code span.do,
+code span.pp { color: var(--code-comment); font-style: italic; } 
+
+code span.ch,
+code span.ss,
+code span.st,
+code span.vs,
+code span.at { color: var(--code-string); }
+
+code span.kw,
+code span.dt { color: var(--code-keyword); font-weight: bold; }
+
+code span.op,
+code span.an,
+code span.in,
+code span.wa,
+code span.sc { color: var(--code-operator); font-weight: bold; }
+
+code span.fu { color: var(--code-function); font-weight: bold; }
+
+code span.cn,
+code span.dv,
+code span.fl { color: var(--code-constant); }
+
+code span.va,
+code span.ot,
+code span.ex,
+code span.im { color: var(--code-variable); }
+
+/*
+ * Different screen sizes
+ *
+ * Note: you should add the following tag in each <head>:
+ *
+ *  <meta name="viewport" content="width=device-width, initial-scale=1">
+ *
+*/
+@media only screen and (max-width: 1200px) {
+
+  body {
+    grid-template-columns: 1fr min(80rem, 85%) 1fr;
+  }
+    
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+
+  body {
+    grid-template-columns: 1fr min(80rem, 90%) 1fr;
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+}

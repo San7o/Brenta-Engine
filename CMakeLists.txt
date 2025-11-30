@@ -74,7 +74,7 @@ set(BRENTA_DEPS_LIBS)
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external)
 
-if (BRENTA_BUILD_EXAMPLES)
+if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   list(APPEND BRENTA_DEPS_SOURCES
     ${PROJECT_SOURCE_DIR}/external/glad/glad.cpp)
   list(APPEND BRENTA_DEPS_HEADERS
@@ -90,7 +90,7 @@ list(APPEND BRENTA_DEPS_LIBS assimp::assimp)
 # Freetype
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external/freetype/include)
-if (BRENTA_BUILD_EXAMPLES)
+if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   add_subdirectory(external/freetype)
   list(APPEND BRENTA_DEPS_LIBS freetype)
 endif()
@@ -98,7 +98,7 @@ endif()
 # glfw
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external/glfw/include)
-if (BRENTA_BUILD_EXAMPLES)
+if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   add_subdirectory(external/glfw)
   list(APPEND BRENTA_DEPS_LIBS glfw)
 endif()
@@ -106,14 +106,14 @@ endif()
 # glm
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external/glm/include)
-if (BRENTA_BUILD_EXAMPLES)
+if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   add_subdirectory(external/glm)
   list(APPEND BRENTA_DEPS_LIBS glm)
 endif()
 
 # SDL
-# For now we are depending on SDL3 for audio, this should be changed
-# to miniaudio
+# TODO: For now we are depending on SDL3 for audio, this should be
+# changed to miniaudio
 list(APPEND BRENTA_DEPS_LIBS SDL3)
 
 # ImGUI
@@ -127,7 +127,7 @@ if (BRENTA_USE_IMGUI)
   # ImGUI wants X11
   list(APPEND BRENTA_DEPS_LIBS X11)
   
-  if (BRENTA_BUILD_EXAMPLES)
+  if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
     file(GLOB IMGUI_SOURCES
       "external/imgui/*.cpp"
       "external/imgui/backends/imgui_impl_glfw.cpp"
@@ -141,7 +141,7 @@ endif()
 # Oak
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external/oak/include)
-if (BRENTA_BUILD_EXAMPLES)
+if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   add_subdirectory(external/oak)
   list(APPEND BRENTA_DEPS_LIBS oak)
 endif()
@@ -153,7 +153,7 @@ if (BRENTA_USE_ECS)
   list(APPEND BRENTA_DEPS_INCLUDES
     ${PROJECT_SOURCE_DIR}/external/viotecs/include)
   
-  if (BRENTA_BUILD_EXAMPLES)
+  if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
     add_subdirectory(external/viotecs)
     list(APPEND BRENTA_DEPS_LIBS viotecs)
   endif()
@@ -161,10 +161,7 @@ endif()
 
 # Valfuzz
 if (BRENTA_BUILD_TESTS)
-  list(APPEND BRENTA_DEPS_INCLUDES
-    ${PROJECT_SOURCE_DIR}/external/valfuzz/include)
-  add_subdirectory(external/valfuzz)
-  list(APPEND BRENTA_DEPS_LIBS valfuzz)
+  add_subdirectory(external/valFuzz)
 endif()
 
 #
@@ -231,7 +228,6 @@ function(add_example NAME)
     ${BRENTA_DEPS_LIBS})
   target_compile_definitions(${NAME} PRIVATE
     ${BRENTA_DEFINES})
-  
 endfunction()
 
 if (BRENTA_BUILD_EXAMPLES)
@@ -247,7 +243,40 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(mandelbrot-set)
   add_example(particles)
   add_example(text)
-  
+
+  # Demo
+  file(GLOB_RECURSE DEMO_SOURCES
+    ${PROJECT_SOURCE_DIR}/examples/demo/src/**/*.cpp
+    ${PROJECT_SOURCE_DIR}/examples/demo/src/*.cpp)
+  add_executable(demo ${DEMO_SOURCES})
+  target_include_directories(demo PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/examples/demo/include
+    ${BRENTA_DEPS_INCLUDES})
+  target_link_libraries(demo PRIVATE
+    ${PROJECT_NAME}
+    ${BRENTA_DEPS_LIBS})
+  target_compile_definitions(demo PRIVATE
+    ${BRENTA_DEFINES})
+
+endif()
+
+if (BRENTA_BUILD_TESTS)
+  file(GLOB_RECURSE BRENTA_TESTS_SRC
+    ${PROJECT_SOURCE_DIR}/tests/**/*.cpp)
+  add_executable(test
+    ${PROJECT_SOURCE_DIR}/tests/tests.cpp
+    ${BRENTA_TESTS_SRC})
+  target_include_directories(test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/external/valFuzz/include
+    ${BRENTA_DEPS_INCLUDES})
+  target_link_libraries(test PRIVATE
+    valfuzz
+    ${BRENTA_DEPS_LIBS}
+    ${PROJECT_NAME})
+  target_compile_definitions(test PRIVATE
+    ${BRENTA_DEFINES})
 endif()
 
 #

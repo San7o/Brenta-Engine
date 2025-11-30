@@ -26,10 +26,13 @@ The engine is composed of many submodules independent from each other, those are
 - `Engine`: manages the setup of the engine.
 - `Particles`: generate parametrized particles.
 
-In addition to those, Brenta comes with many utility functions and classes, to get
-a detailed look at the engine, please visit the [documentation](https://san7o.github.io/brenta-engine-documentation/v1.1/), **every class and function is highly documented.**
+In addition to those, Brenta comes with many utility functions and
+classes, to get a detailed look at the engine, please visit the
+[documentation](https://san7o.github.io/brenta-engine-documentation/v1.1/),
+**every class and function is highly documented.**
 
 ### Ergonomic APIs
+
 ```c++
 engine game = engine::builder()
     .use_screen(true)
@@ -46,9 +49,11 @@ engine game = engine::builder()
 ```
 
 ### Model Loading
+
 ```c++
 model my_model("assets/models/backpack/backpack.obj");
 ```
+
 ![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)
 
 
@@ -75,9 +80,11 @@ particle_emitter emitter =
 ![particles_short](https://github.com/user-attachments/assets/27d5ac09-00ce-4379-bf47-d16c24de9508)
 
 ### Texture Animation using an Atlas
+
 ![texture_atlas_short](https://github.com/user-attachments/assets/1a379fa5-741b-4087-a078-68a86a1fea98)
 
 ### 3D Camera
+
 https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 Also collisions, lighting, text and audio!
@@ -89,12 +96,17 @@ ECS is a design pattern that allows you to structure your code in a
 way that is more modular and scalable.
 
 ### Entities
-Entities are objects in the game, It's just an ID:
+
+Entities are objects in the game, it's just an ID:
+
 ```c++
 entity entity = world::new_entity();
 ```
+
 ### Components
+
 Components are pieces of data that are attached to an entity:
+
 ```c++
 struct physics_component : component {
     float mass;
@@ -106,10 +118,14 @@ struct physics_component : component {
 
 // Somewhere
 world::add_component<physics_component>(entity, physics_component);
+
 ```
+
 ### Systems
+
 Systems are functions that operate on entities with specific components. They
 are called at each game tick by the `World`:
+
 ```c++
 struct fps_system : system<none> {
     void run(std::vector<entity_t> _) const override {
@@ -121,19 +137,22 @@ struct fps_system : system<none> {
 // Somewhere
 REGISTER_SYSTEMS(fps_system);
 ```
+
 <h1 align=center> Building </h1>
 
-All instructions to build the demo game are in [BUILD](./BUILD.md), there are also instructions on
-how to [build unit tests](./tests/README.md) and how to [build examples](./examples/README.md).
+All instructions to build the demo game are in [BUILD](./docs/BUILD.md),
+there are also instructions on how to [build unit tests](./tests/README.md)
+and how to [build examples](./examples/README.md).
 
 <h1 align=center> Contributing </h1>
 
-Even if this is not an advanced graphics engine, It provides many
+Even if this is not an advanced graphics engine, it provides many
 opportunities for you to practice and improve your programming
 skills. You can look at the current issues to get an idea of where the
-engine is going and where It needs help. As the engine grows, help
+engine is going and where it needs help. As the engine grows, help
 from contributors will be essential to keep the project alive.
 
-Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
+Check out [CONTRIBUTING](./docs/CONTRIBUTING.md) for information on
+how to contribute.
 
-The engine is licensed under [MIT](https://en.wikipedia.org/wiki/MIT_License) license.
+The engine is licensed under [MIT](./LICENSE) license.

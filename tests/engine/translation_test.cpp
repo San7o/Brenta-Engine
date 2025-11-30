@@ -3,8 +3,12 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/engine.hpp>
 #include <valfuzz/valfuzz.hpp>
 #include <viotecs/viotecs.hpp>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 using namespace brenta;
 using namespace brenta::types;
