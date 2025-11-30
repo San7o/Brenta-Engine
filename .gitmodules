@@ -13,9 +13,9 @@
 [submodule "external/oak"]
 	path = external/oak
 	url = https://github.com/San7o/oak
-[submodule "external/valfuzz"]
-	path = external/valfuzz
-	url = https://github.com/San7o/valfuzz
+[submodule "external/valFuzz"]
+	path = external/valFuzz
+	url = https://github.com/San7o/valFuzz
 [submodule "external/viotecs"]
 	path = external/viotecs
 	url = https://github.com/San7o/viotecs
