@@ -83,7 +83,10 @@ https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 Also collisions, lighting, text and audio!
 
 <h1 align=center> ECS </h1>
-Brenta Engine features an Entity Component System architecture. The ECS is a design pattern that allows you to structure your code in a way that is more modular and scalable.
+
+Brenta Engine features an Entity Component System architecture. The
+ECS is a design pattern that allows you to structure your code in a
+way that is more modular and scalable.
 
 ### Entities
 Entities are objects in the game, It's just an ID:
@@ -125,7 +128,11 @@ how to [build unit tests](./tests/README.md) and how to [build examples](./examp
 
 <h1 align=center> Contributing </h1>
 
-Even if this is not an advanced graphics engine, It provides many opportunities for you to practice and improve your programming skills. You can look at the current issues to get an idea of where the engine is going and where It needs help. As the engine grows, help from contributors will be essential to keep the project alive.
+Even if this is not an advanced graphics engine, It provides many
+opportunities for you to practice and improve your programming
+skills. You can look at the current issues to get an idea of where the
+engine is going and where It needs help. As the engine grows, help
+from contributors will be essential to keep the project alive.
 
 Check out [CONTRIBUTING](./CONTRIBUTING.md) for information on how to contribute.
 

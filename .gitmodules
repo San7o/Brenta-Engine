@@ -1,0 +1,23 @@
+[submodule "external/glfw"]
+	path = external/glfw
+	url = https://github.com/glfw/glfw.git
+[submodule "external/assimp"]
+	path = external/assimp
+	url = https://github.com/assimp/assimp.git
+[submodule "external/freetype"]
+	path = external/freetype
+	url = https://gitlab.freedesktop.org/freetype/freetype.git
+[submodule "external/imgui"]
+	path = external/imgui
+	url = https://github.com/ocornut/imgui
+[submodule "external/oak"]
+	path = external/oak
+	url = https://github.com/San7o/oak
+[submodule "external/valfuzz"]
+	path = external/valfuzz
+	url = https://github.com/San7o/valfuzz
+[submodule "external/viotecs"]
+	path = external/viotecs
+	url = https://github.com/San7o/viotecs
+ 
+  

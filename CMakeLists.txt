@@ -1,169 +1,276 @@
-cmake_minimum_required(VERSION 3.29.2)
-project("Brenta Engine")
+# ====================================================================
+# Project:   Brenta Engine
+# Author:    Giovanni Santini
+# Mail:      giovanni.santini@proton.me
+# Github:    @San7o
+# License:   MIT
+# ====================================================================
 
-set(LIBS_DIR ${CMAKE_SOURCE_DIR}/lib)
-link_directories(${LIBS_DIR})
-find_library(asound asound REQUIRED)
-find_library(freetype freetype REQUIRED)
-find_library(harfbuzz harfbuzz REQUIRED)
-find_library(assimp assimp PATHS ${CMAKE_SOURCE_DIR}/lib REQUIRED)
-find_library(glfw glfw REQUIRED)
-find_library(GL GL REQUIRED)
-find_library(dl dl REQUIRED)
-find_library(m m REQUIRED)
-find_library(pthread pthread REQUIRED)
+cmake_minimum_required(VERSION 3.16)
 
-include(cmake/CPM.cmake) # <3
-
-CPMAddPackage(
-    NAME oak
-    GITHUB_REPOSITORY San7o/oak
-    GIT_TAG v1.0.2
-    DOWNLOAD_ONLY True
+project(brenta
+  VERSION 2.0.0
+  DESCRIPTION "Brenta Engine"
+  LANGUAGES CXX C
 )
-CPMAddPackage(
-    NAME valfuzz
-    GITHUB_REPOSITORY San7o/valFuzz
-    GIT_TAG v1.0.0
-    DOWNLOAD_ONLY True
-)
-CPMAddPackage(
-    NAME viotecs
-    GITHUB_REPOSITORY San7o/viotecs
-    GIT_TAG v1.0.0
-    DOWNLOAD_ONLY True
-)
-CPMUsePackageLock(package-lock.cmake)
 
 set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)  # no gnu extensions
+set(CMAKE_C_STANDARD 17)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_C_EXTENSIONS OFF)
 
-# Harfbuzz causes problems when linking
-set (CMAKE_DISABLE_FIND_PACKAGE_HarfBuzz TRUE)
-
-set(CMAKE_C_STANDARD 99)
-set(CMAKE_C_STANDARD_REQUIRED True)
-
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
-
-option(BRENTA_BUILD_IMGUI "Build with ImGui" ON)
-option(BRENTA_BUILD_MAIN "Build main" ON)
-option(BRENTA_BUILD_TESTS "Build unit tests" OFF)
-option(BRENTA_BUILD_EXAMPLES "Build examples" OFF)
-option(BRENTA_BUILD_ECS "Build with ECS" ON)
-option(BRENTA_BUILD_STATIC "Build static library" OFF)
-
-set(BRENTA_INCLUDES)
-set(BRENTA_COMPILE_OPTIONS)
-set(BRENTA_LINK_LIBRARIES)
-set(BRENTA_COMPILE_OPTIONS)
-set(BRENTA_EXTRA_SOURCES)
-set(BRENTA_TEST_INCLUDES)
-
-list(APPEND BRENTA_INCLUDES include utils/headers engine/headers)
-list(APPEND BRENTA_COMPILE_OPTIONS -Wall) # TODO: add more
-
-if (oak_ADDED)
-    list(APPEND BRENTA_INCLUDES ${oak_SOURCE_DIR}/include)
-    list(APPEND BRENTA_COMPILE_OPTIONS -DOAK_USE_SOCKETS)
-    list(APPEND BRENTA_EXTRA_SOURCES ${oak_SOURCE_DIR}/src/oak.cpp)
+find_program(CCACHE_PROGRAM ccache) # use ccache if available
+if(CCACHE_PROGRAM)
+  message(STATUS "Using ccache: ${CCACHE_PROGRAM}")
+  set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
 endif()
-if (viotecs_ADDED AND BRENTA_BUILD_ECS)
-    list(APPEND BRENTA_COMPILE_OPTIONS -DUSE_ECS)
-    list(APPEND BRENTA_INCLUDES ${viotecs_SOURCE_DIR}/include)
-    file(GLOB BRENTA_ECS_SOURCES ${viotecs_SOURCE_DIR}/src/world.cpp)
-endif()
-if (valfuzz_ADDED AND BRENTA_BUILD_TESTS)
-    list(APPEND BRENTA_TEST_INCLUDES ${valfuzz_SOURCE_DIR}/include)
-endif()
-if (BRENTA_BUILD_MAIN)
-    list(APPEND BRENTA_INCLUDES game/headers)
-endif()
-if (BRENTA_BUILD_IMGUI)
-    list(APPEND BRENTA_INCLUDES imgui imgui/backends
-            imgui/misc/cpp)
-    list(APPEND BRENTA_COMPILE_OPTIONS -DUSE_IMGUI)
-endif()
-if (BRENTA_BUILD_STATIC)
-    list(APPEND BRENTA_LINK_LIBRARIES GL dl z m stdc++fs glfw
-            asound ${LIBS_DIR}/libassimp.a
-            ${LIBS_DIR}/libfreetype.a ${LIBS_DIR}/libharfbuzz.a
-            ${LIBS_DIR}/libSDL3.a)
+
+set(BRENTA_DEFINES)
+
+if(MSVC)
+  set(BRENTA_WARNING_FLAGS /W4 /permissive-)
+  set(BRENTA_DEBUG_FLAGS /Zi /Od)
+  set(BRENTA_RELEASE_FLAGS /O2)
+  set(BRENTA_DEBUG_DEFINES _DEBUG)
+elseif(MINGW)
+  set(BRENTA_WARNING_FLAGS -Wall -Wextra -Wpedantic)
+  set(BRENTA_DEBUG_FLAGS -O0 -ggdb)
+  set(BRENTA_RELEASE_FLAGS -O3)
+  set(BRENTA_DEBUG_DEFINES DEBUG)
 else()
-    list(APPEND BRENTA_LINK_LIBRARIES GL dl z m stdc++fs glfw
-            asound assimp freetype harfbuzz SDL3)
+  set(BRENTA_WARNING_FLAGS -Wall -Wextra -Werror -Wpedantic)
+  set(BRENTA_DEBUG_FLAGS -O0 -ggdb -fsanitize=address)
+  set(BRENTA_RELEASE_FLAGS -O3)
+  set(BRENTA_DEBUG_DEFINES DEBUG)
+  set(BRENTA_DEBUG_LINK_FLAGS -fsanitize=address)
 endif()
 
-file(GLOB BRENTA_IMGUI_SOURCES "imgui/*.cpp" "imgui/backends/imgui_impl_glfw.cpp"
-        "imgui/misc/cpp/imgui_stdlib.cpp" "imgui/backends/imgui_impl_opengl3.cpp" )
-file(GLOB BRENTA_ENGINE_SOURCES "engine/sources/*.c" "engine/sources/*.cpp" ${BRENTA_EXTRA_SOURCES})
-file(GLOB BRENTA_TEST_SOURCES "tests/**/*.cpp" "tests/*.cpp" ${valfuzz_SOURCE_DIR}/src/valfuzz.cpp)
-file(GLOB BRENTA_MAIN_SOURCES "game/sources/**/*.cpp" "game/sources/*.cpp" )
+#
+# Options
+#
 
-if (BRENTA_BUILD_MAIN AND NOT BRENTA_BUILD_TESTS AND NOT BRENTA_BUILD_EXAMPLES)
-    if (BRENTA_BUILD_ECS)
-        add_executable(main ${BRENTA_ENGINE_SOURCES} ${BRENTA_ECS_SOURCES}
-                    ${BRENTA_MAIN_SOURCES} ${BRENTA_IMGUI_SOURCES})
-    else()
-        add_executable(main ${BRENTA_ENGINE_SOURCES} ${BRENTA_MAIN_SOURCES}
-                    ${BRENTA_IMGUI_SOURCES} ${BRENTA_IMGUI_SOURCES})
-    endif()
-    target_include_directories(main PRIVATE ${BRENTA_INCLUDES})
-    target_link_libraries(main PRIVATE ${BRENTA_LINK_LIBRARIES})
-    target_compile_options(main PRIVATE ${BRENTA_COMPILE_OPTIONS})
-endif()
+option(BUILD_SHARED_LIBS "Build shared library" ON)
+option(BRENTA_BUILD_EXAMPLES "Build examples" OFF)
+option(BRENTA_BUILD_TESTS "Build unit tests" OFF)
+option(BRENTA_USE_IMGUI "Enable ImGUI support" ON)
+option(BRENTA_USE_ECS "Enable ECS support" ON)
 
-if (BRENTA_BUILD_TESTS)
-    if (BRENTA_BUILD_ECS)
-        add_executable(tests ${BRENTA_ENGINE_SOURCES} ${BRENTA_ECS_SOURCES}
-                ${BRENTA_TEST_SOURCES} ${BRENTA_IMGUI_SOURCES}) 
-    else()
-        add_executable(tests ${BRENTA_ENGINE_SOURCES}
-                    ${BRENTA_TEST_SOURCES} ${BRENTA_IMGUI_SOURCES})
-    endif()
-    target_include_directories(tests PRIVATE ${BRENTA_INCLUDES} ${BRENTA_TEST_INCLUDES})
-    target_link_libraries(tests PRIVATE ${BRENTA_LINK_LIBRARIES})
-    target_compile_options(tests PRIVATE ${BRENTA_COMPILE_OPTIONS})
+if(NOT CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type (Debug, Release)" FORCE)
 endif()
+message(STATUS "Build type: ${CMAKE_BUILD_TYPE}")
+
+#
+# Dependencies
+#
+
+set(BRENTA_DEPS_SOURCES)
+set(BRENTA_DEPS_HEADERS)
+set(BRENTA_DEPS_INCLUDES)
+set(BRENTA_DEPS_LIBS)
+
+list(APPEND BRENTA_DEPS_INCLUDES
+  ${PROJECT_SOURCE_DIR}/external)
 
 if (BRENTA_BUILD_EXAMPLES)
-    set(BRENTA_EXAMPLES_INCLUDES ${BRENTA_INCLUDES})
-    
-    add_executable(simple_screen ${BRENTA_ENGINE_SOURCES} "examples/simple_screen.cpp")
-    target_include_directories(simple_screen PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(simple_screen PRIVATE ${BRENTA_LINK_LIBRARIES})
-
-    add_executable(logger ${BRENTA_ENGINE_SOURCES} "examples/logger.cpp")
-    target_include_directories(logger PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(logger PRIVATE ${BRENTA_LINK_LIBRARIES})
-
-    add_executable(load_opengl ${BRENTA_ENGINE_SOURCES} "examples/load_opengl.cpp")
-    target_include_directories(load_opengl PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(load_opengl PRIVATE ${BRENTA_LINK_LIBRARIES})
-
-    add_executable(load_model ${BRENTA_ENGINE_SOURCES} "examples/load_model.cpp")
-    target_include_directories(load_model PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(load_model PRIVATE ${BRENTA_LINK_LIBRARIES})
-
-    add_executable(ecs ${BRENTA_ENGINE_SOURCES} ${BRENTA_ECS_SOURCES} "examples/ecs.cpp")
-    target_compile_options(ecs PRIVATE -DUSE_ECS)
-    target_include_directories(ecs PRIVATE ecs/headers ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(ecs PRIVATE ${BRENTA_LINK_LIBRARIES})
-    
-    add_executable(particles ${BRENTA_ENGINE_SOURCES} "examples/particles.cpp")
-    target_include_directories(particles PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(particles PRIVATE ${BRENTA_LINK_LIBRARIES})
-    
-    add_executable(audio ${BRENTA_ENGINE_SOURCES} "examples/audio.cpp")
-    target_include_directories(audio PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(audio PRIVATE ${BRENTA_LINK_LIBRARIES})
-    
-    add_executable(text ${BRENTA_ENGINE_SOURCES} "examples/text.cpp")
-    target_include_directories(text PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(text PRIVATE ${BRENTA_LINK_LIBRARIES})
-    
-    add_executable(mandelbrot ${BRENTA_ENGINE_SOURCES} ${BRENTA_IMGUI_SOURCES} "examples/mandelbrot-set.cpp")
-    target_compile_options(mandelbrot PRIVATE -DUSE_IMGUI)
-    target_include_directories(mandelbrot PRIVATE ${BRENTA_EXAMPLES_INCLUDES})
-    target_link_libraries(mandelbrot PRIVATE ${BRENTA_LINK_LIBRARIES})
+  list(APPEND BRENTA_DEPS_SOURCES
+    ${PROJECT_SOURCE_DIR}/external/glad/glad.cpp)
+  list(APPEND BRENTA_DEPS_HEADERS
+    ${PROJECT_SOURCE_DIR}/external/glad/glad.h)
 endif()
+
+# Assimp
+set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+add_subdirectory(external/assimp)
+target_compile_definitions(assimp PRIVATE _GNU_SOURCE)
+list(APPEND BRENTA_DEPS_LIBS assimp::assimp)
+
+# Freetype
+list(APPEND BRENTA_DEPS_INCLUDES
+  ${PROJECT_SOURCE_DIR}/external/freetype/include)
+if (BRENTA_BUILD_EXAMPLES)
+  add_subdirectory(external/freetype)
+  list(APPEND BRENTA_DEPS_LIBS freetype)
+endif()
+
+# glfw
+list(APPEND BRENTA_DEPS_INCLUDES
+  ${PROJECT_SOURCE_DIR}/external/glfw/include)
+if (BRENTA_BUILD_EXAMPLES)
+  add_subdirectory(external/glfw)
+  list(APPEND BRENTA_DEPS_LIBS glfw)
+endif()
+
+# glm
+list(APPEND BRENTA_DEPS_INCLUDES
+  ${PROJECT_SOURCE_DIR}/external/glm/include)
+if (BRENTA_BUILD_EXAMPLES)
+  add_subdirectory(external/glm)
+  list(APPEND BRENTA_DEPS_LIBS glm)
+endif()
+
+# SDL
+# For now we are depending on SDL3 for audio, this should be changed
+# to miniaudio
+list(APPEND BRENTA_DEPS_LIBS SDL3)
+
+# ImGUI
+if (BRENTA_USE_IMGUI)
+  message(STATUS "Using ImGUI")
+  list(APPEND BRENTA_DEFINES USE_IMGUI)
+  list(APPEND BRENTA_DEPS_INCLUDES
+    ${PROJECT_SOURCE_DIR}/external/imgui
+    ${PROJECT_SOURCE_DIR}/external/imgui/backends)
+
+  # ImGUI wants X11
+  list(APPEND BRENTA_DEPS_LIBS X11)
+  
+  if (BRENTA_BUILD_EXAMPLES)
+    file(GLOB IMGUI_SOURCES
+      "external/imgui/*.cpp"
+      "external/imgui/backends/imgui_impl_glfw.cpp"
+      "external/imgui/misc/cpp/imgui_stdlib.cpp"
+      "external/imgui/backends/imgui_impl_opengl3.cpp")
+    list(APPEND BRENTA_DEPS_SOURCES ${IMGUI_SOURCES})
+    list(APPEND BRENTA_DEPS_HEADERS "external/imgui/imgui.h")
+  endif()
+endif()
+
+# Oak
+list(APPEND BRENTA_DEPS_INCLUDES
+  ${PROJECT_SOURCE_DIR}/external/oak/include)
+if (BRENTA_BUILD_EXAMPLES)
+  add_subdirectory(external/oak)
+  list(APPEND BRENTA_DEPS_LIBS oak)
+endif()
+
+# Viotecs
+if (BRENTA_USE_ECS)
+  message(STATUS "Using viotecs")
+  list(APPEND BRENTA_DEFINES USE_ECS)
+  list(APPEND BRENTA_DEPS_INCLUDES
+    ${PROJECT_SOURCE_DIR}/external/viotecs/include)
+  
+  if (BRENTA_BUILD_EXAMPLES)
+    add_subdirectory(external/viotecs)
+    list(APPEND BRENTA_DEPS_LIBS viotecs)
+  endif()
+endif()
+
+# Valfuzz
+if (BRENTA_BUILD_TESTS)
+  list(APPEND BRENTA_DEPS_INCLUDES
+    ${PROJECT_SOURCE_DIR}/external/valfuzz/include)
+  add_subdirectory(external/valfuzz)
+  list(APPEND BRENTA_DEPS_LIBS valfuzz)
+endif()
+
+#
+# Sources and headers
+#
+
+file(GLOB_RECURSE BRENTA_SOURCES "src/*.cpp")
+file(GLOB_RECURSE BRENTA_HEADERS "include/brenta/*.hpp")
+
+#
+# Targets
+#
+
+if (BUILD_SHARED_LIBS)
+  message(STATUS "Building shared library")
+  add_library(${PROJECT_NAME} SHARED
+    ${BRENTA_SOURCES}
+    ${BRENTA_HEADERS}
+    ${BRENTA_DEPS_SOURCES}
+    ${BRENTA_DEPS_HEADERS})
+else()
+  message(STATUS "Building static library")  
+  add_library(${PROJECT_NAME} STATIC
+    ${BRENTA_SOURCES}
+    ${BRENTA_HEADERS}
+    ${BRENTA_DEPS_SOURCES}
+    ${BRENTA_DEPS_HEADERS})
+endif()
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+  ${PROJECT_SOURCE_DIR}/include
+  ${BRENTA_DEPS_INCLUDES})
+target_link_libraries(${PROJECT_NAME} assimp::assimp)
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+  ${BRENTA_DEFINES})
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+  message(STATUS "Configuring Debug build options...")
+
+  target_compile_definitions(${PROJECT_NAME} PRIVATE
+    ${BRENTA_DEBUG_DEFINES})
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    ${BRENTA_DEBUG_FLAGS}
+    ${BRENTA_WARNING_FLAGS})
+  if(NOT MSVC)
+    target_link_options(${PROJECT_NAME} PRIVATE
+      ${BRENTA_DEBUG_LINK_FLAGS})
+  endif()
+elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
+  message(STATUS "Configuring Release build options...")
+  target_compile_options(${PROJECT_NAME} PRIVATE
+    ${BRENTA_RELEASE_FLAGS}
+    ${BRENTA_WARNING_FLAGS})
+endif()
+
+function(add_example NAME)
+  add_executable(${NAME}
+    ${PROJECT_SOURCE_DIR}/examples/${NAME}.cpp)
+  target_include_directories(${NAME} PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${BRENTA_DEPS_INCLUDES})
+  target_link_libraries(${NAME} PRIVATE
+    ${PROJECT_NAME}
+    ${BRENTA_DEPS_LIBS})
+  target_compile_definitions(${NAME} PRIVATE
+    ${BRENTA_DEFINES})
+  
+endfunction()
+
+if (BRENTA_BUILD_EXAMPLES)
+  message(STATUS "Building examples")
+  
+  add_example(simple_screen)
+  add_example(audio)
+  add_example(components)
+  add_example(ecs)
+  add_example(load_model)
+  add_example(load_opengl)
+  add_example(logger)
+  add_example(mandelbrot-set)
+  add_example(particles)
+  add_example(text)
+  
+endif()
+
+#
+# Installation
+#
+
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION lib
+)
+install(DIRECTORY include/ DESTINATION include)
+
+#
+# Packaging support
+#
+
+include(CMakePackageConfigHelpers)
+
+write_basic_package_version_file(
+  "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
+  VERSION ${PROJECT_VERSION}
+  COMPATIBILITY AnyNewerVersion
+)
+
+#
+# End of CMakeLists.txt
+# ====================================================================

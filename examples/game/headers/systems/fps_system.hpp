@@ -1,0 +1,22 @@
+// SPDX-License-Identifier: MIT
+// Author:  Giovanni Santini
+// Mail:    giovanni.santini@proton.me
+// Github:  @San7o
+
+#pragma once
+
+#include <brenta/engine.hpp>
+#include <vector>
+#include <viotecs/viotecs.hpp>
+
+using namespace viotecs;
+using namespace viotecs::types;
+
+struct FPSSystem : system<none>
+{
+  void run(std::vector<entity_t> _) const override
+  {
+    brenta::text::render_text("FPS: " + std::to_string(brenta::time::get_fps()),
+                              25.0f, 25.0f, 0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
+  }
+};

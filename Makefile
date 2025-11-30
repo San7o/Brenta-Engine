@@ -1,2 +1,3 @@
+.PHONY: format
 format:
-	find  game engine utils examples -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -i
+	find include/brenta src examples -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
