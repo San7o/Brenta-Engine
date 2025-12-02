@@ -14,14 +14,14 @@ struct DirLight {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
-    float dir_strength;
+    float strength;
 };
 uniform DirLight dirLight;
 uniform bool useDirLight = false; // Set this to true to enable directional light
 
 struct PointLight {
     vec3 position;
-    float point_strength;
+    float strength;
 
     vec3 ambient;
     vec3 diffuse;
@@ -99,7 +99,7 @@ vec3 CalcDirLight(DirLight light, vec3 normal, vec3 viewDir)
     vec3 ambient  = light.ambient  * vec3(texture(material.texture_diffuse1, TexCoords));
     vec3 diffuse  = light.diffuse  * diff * vec3(texture(material.texture_diffuse1, TexCoords));
     vec3 specular = light.specular * spec * vec3(texture(material.texture_specular1, TexCoords));
-    return (ambient + diffuse + specular) * light.dir_strength;
+    return (ambient + diffuse + specular) * light.strength;
 }
 
 vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
@@ -125,5 +125,5 @@ vec3 CalcPointLight(PointLight light, vec3 normal, vec3 fragPos, vec3 viewDir)
     ambient  *= attenuation;
     diffuse  *= attenuation;
     specular *= attenuation;
-    return (ambient + diffuse + specular) * light.point_strength;
+    return (ambient + diffuse + specular) * light.strength;
 }

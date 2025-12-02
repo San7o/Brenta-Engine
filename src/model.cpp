@@ -33,7 +33,7 @@ void model::draw(types::shader_name_t shader)
 
 void model::load_model(std::string path)
 {
-  /* Load with assimp */
+  // Load with assimp
   Assimp::Importer importer;
   const aiScene *scene =
     importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -146,6 +146,10 @@ std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
   }
   return textures;
 }
+
+//
+// Builder functions
+//
 
 model::builder &model::builder::set_path(std::string path)
 {

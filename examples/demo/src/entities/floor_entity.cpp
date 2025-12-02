@@ -3,9 +3,9 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <demo/entities/floor_entity.hpp>
 #include <demo/components/model_component.hpp>
 #include <demo/components/transform_component.hpp>
+#include <demo/entities/floor_entity.hpp>
 
 #include <brenta/engine.hpp>
 #include <viotecs/viotecs.hpp>
@@ -29,10 +29,12 @@ void init_floor_entity()
   if (shader::get_id("default_shader") == 0)
   {
     /* Load the shader */
-    shader::create("default_shader", GL_VERTEX_SHADER,
-                   std::filesystem::absolute("examples/demo/shaders/shader.vs"),
-                   GL_FRAGMENT_SHADER,
-                   std::filesystem::absolute("examples/demo/shaders/shader.fs"));
+    shader::create(
+      "default_shader",
+      GL_VERTEX_SHADER,
+      std::filesystem::absolute("examples/demo/shaders/shader.vs"),
+      GL_FRAGMENT_SHADER,
+      std::filesystem::absolute("examples/demo/shaders/shader.fs"));
   }
 
   /* Load the model */

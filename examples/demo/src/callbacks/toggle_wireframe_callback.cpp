@@ -3,10 +3,9 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/engine.hpp>
 #include <demo/callbacks/toggle_wireframe_callback.hpp>
 #include <demo/resources/wireframe_resource.hpp>
-
-#include <brenta/engine.hpp>
 #include <viotecs/viotecs.hpp>
 
 using namespace brenta;

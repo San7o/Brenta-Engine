@@ -7,10 +7,8 @@
 
 #include <demo/components/directional_light_component.hpp>
 #include <demo/systems/directional_light_system.hpp>
-
-#include <viotecs/viotecs.hpp>
-
 #include <vector>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 
@@ -40,7 +38,7 @@ struct DirectionalLightSystem : system<DirectionalLightComponent>
         shader::set_vec3(shader, "dirLight.ambient", light->ambient);
         shader::set_vec3(shader, "dirLight.diffuse", light->diffuse);
         shader::set_vec3(shader, "dirLight.specular", light->specular);
-        shader::set_float(shader, "dirLight.dir_strength", light->strength);
+        shader::set_float(shader, "dirLight.strength", light->strength);
         shader::set_bool(shader, "useDirLight", true);
       }
     }

@@ -3,9 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <demo/callbacks/play_guitar_callback.hpp>
-
 #include <brenta/engine.hpp>
+#include <demo/callbacks/play_guitar_callback.hpp>
 
 using namespace brenta;
 

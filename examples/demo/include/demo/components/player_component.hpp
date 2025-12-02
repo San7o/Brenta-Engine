@@ -5,11 +5,10 @@
 
 #pragma once
 
-#include <demo/components/model_component.hpp>
 #include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
+#include <demo/components/model_component.hpp>
 #include <iostream>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 

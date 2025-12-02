@@ -8,10 +8,8 @@
 #include <demo/components/point_light_component.hpp>
 #include <demo/components/transform_component.hpp>
 #include <demo/systems/point_lights_system.hpp>
-
-#include <viotecs/viotecs.hpp>
-
 #include <vector>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 
@@ -59,7 +57,7 @@ struct PointLightsSystem : system<TransformComponent, PointLightComponent>
                           light->strength);
         shader::set_vec3(shader, (lightn + ".position").c_str(),
                          transform->position);
-        shader::set_float(shader, (lightn + ".point_strength").c_str(),
+        shader::set_float(shader, (lightn + ".strength").c_str(),
                           light->strength);
         shader::set_int(shader, "nPointLights", entities.size());
       }

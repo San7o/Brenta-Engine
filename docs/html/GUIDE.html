@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="./index.html">Brenta Engine</a>
+      <a href="./BUILD.html">Build</a>
+      <a href="./GUIDE.html">Guide</a>
+      <a href="./CONTRIBUTING.html">Contributing</a>
+      <a href="./annotated.html">Data structures</a>
+      <a href="./files.html">Files</a>
+      <a href="https://github.com/San7o/Brenta-Engine">Github</a>
+    </div>
+<h1 id="guide">Guide</h1>
+<p>Welcome to this quick guide on most of the features of the engine.
+For each feature, an example with context will be shown. Enjoy the read
+:)</p>
+<p>For updated examples, see <a
+href="https://github.com/San7o/Brenta-Engine/tree/main/examples/README.html">examples</a>.</p>
+<h2 id="engine-class">Engine Class</h2>
+<p>To initialize any subsystem, you can use the <code>Engine</code>
+class. This is not mandatory, you can initialize and destroy the
+subsystems manually, but the Engine class provides a nice way to do
+it.</p>
+<p>To create an engine, you can use the Builder class:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>brenta<span class="op">::</span>engine eng <span class="op">=</span> brenta<span class="op">::</span>engine<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_screen<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_audio<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_input<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_logger<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_text<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_ecs<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>set_screen_width<span class="op">(</span><span class="dv">1280</span><span class="op">)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>set_screen_height<span class="op">(</span><span class="dv">720</span><span class="op">)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span></code></pre></div>
+<p>We will now go through some subsystems and explain how to use
+them.</p>
+<h2 id="input">Input</h2>
+<p>You can register callback functions for the input. Those functions
+are called when the specified <code>key</code> is pressed, or the mouse
+is moved, depending on the callback you register.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> toggle_wireframe_callback <span class="op">=</span> <span class="op">[]()</span> <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">auto</span> wireframe <span class="op">=</span> world<span class="op">::</span>get_resource<span class="op">(</span><span class="st">&quot;WireframeResource&quot;</span><span class="op">);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>wireframe <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_poligon_mode<span class="op">(!</span>wireframe<span class="op">-&gt;</span>enabled<span class="op">);</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    wireframe<span class="op">-&gt;</span>enabled <span class="op">=</span> <span class="op">!</span>wireframe<span class="op">-&gt;</span>enabled<span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>input<span class="op">::</span>add_keyboard_callback<span class="op">(</span>GLFW_KEY_F<span class="op">,</span> toggle_wireframe_callback<span class="op">);</span></span></code></pre></div>
+<p>In this example we register a keyboard callback that toggles the
+wireframe mode when the <code>F</code> key is pressed. You can use
+<code>Brenta::Input::AddMousePosCallback</code> to register a mouse
+callback, this ill be called with the x and y position of the mouse.</p>
+<p>You can also remove the callbacks with
+<code>brenta::input::remove_keyboard_callback</code> and
+<code>brenta::input::remove_mouse_pos_callback</code>.</p>
+<h2 id="audio">Audio</h2>
+<p>The audio subsystem is very simple: there are audio streams and audio
+files, you can play an audio file on a stream (not multiple streams) and
+stop it, so you need to have multiple streams if you want to play
+multiple audio files at the same time.</p>
+<p>You can load an audio file like so:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>audio<span class="op">::</span>load_audio<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">,</span> <span class="st">&quot;assets/audio/guitar.wav&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>We are identifying this audio file with the name
+<code>guitar</code>.</p>
+<p>You can create a stream with the name “music” like so:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>audio<span class="op">::</span>create_stream<span class="op">(</span><span class="st">&quot;music&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>And finally play the <code>guitar</code> audio like so:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sudio<span class="op">::</span>play_audio<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">,</span> <span class="st">&quot;music&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>The subsystem will provide you a default stream named
+<code>default</code> if you don’t want to create a stream.</p>
+<p>You can Pause and Resume streams with
+<code>brenta::audio::pause_stream</code> and
+<code>brenta::audio::resume_stream</code>, set the volume and stop it.
+You can find the API in <code>Brenta::Audio</code>.</p>
+<h2 id="particles">Particles</h2>
+<p>You can create and customize particles via the
+<code>brenta::particle_emitter</code> class. All the computation is done
+in the GPU so the engine can handle lots and lots of particles. Here’s a
+quick look on the API:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>particle_emitter emitter <span class="op">=</span> particle_emitter<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_starting_position<span class="op">(</span>glm<span class="op">::</span>vec3<span class="op">(</span><span class="fl">0.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">5.0</span><span class="bu">f</span><span class="op">))</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_starting_velocity<span class="op">(</span>glm<span class="op">::</span>vec3<span class="op">(</span><span class="fl">0.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">5.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.0</span><span class="bu">f</span><span class="op">))</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_starting_spread<span class="op">(</span>glm<span class="op">::</span>vec3<span class="op">(</span><span class="fl">10.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">10.0</span><span class="bu">f</span><span class="op">,</span> <span class="fl">10.0</span><span class="bu">f</span><span class="op">))</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_starting_time_to_live<span class="op">(</span><span class="fl">0.5</span><span class="bu">f</span><span class="op">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_num_particles<span class="op">(</span><span class="dv">1000</span><span class="op">)</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_spawn_rate<span class="op">(</span><span class="fl">0.01</span><span class="bu">f</span><span class="op">)</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_scale<span class="op">(</span><span class="fl">1.0</span><span class="bu">f</span><span class="op">)</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_atlas_path<span class="op">(</span><span class="bu">std::</span>filesystem::absolute<span class="op">(</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;assets/textures/particle_atlas.png&quot;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="op">).</span>string<span class="op">())</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_atlas_width<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_atlas_height<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>set_atlas_index<span class="op">(</span><span class="dv">45</span><span class="op">)</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Inside the game loop:</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>update_particles<span class="op">(</span>time<span class="op">::</span>get_delta_time<span class="op">());</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>render_particles<span class="op">();</span></span></code></pre></div>
+<h2 id="logger">Logger</h2>
+<p>Check out <a href="https://github.com/San7o/oak">oak</a>! The engine
+uses oak as the logger, you can set the log level and the log file in
+the engine builder. You can log messages like so:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>oak<span class="op">::</span>info<span class="op">(</span><span class="st">&quot;Hello, world!&quot;</span><span class="op">);</span></span></code></pre></div>
+<p>Oak has many more advanced features, I suggest you check out the
+repository.</p>
+<h2 id="text">Text</h2>
+<p>The <code>brenta::text</code> subsystem allows you to render text on
+the screen. You can set the font and font size of your text, and render
+it in the main loop like this:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>text<span class="op">::</span>render_text<span class="op">(</span><span class="st">&quot;Hello OpenGL!&quot;</span><span class="op">,</span> x<span class="op">,</span> y<span class="op">,</span> scale<span class="op">,</span> glm<span class="op">::</span>vec3<span class="op">(</span>r<span class="op">,</span> g<span class="op">,</span> b<span class="op">));</span></span></code></pre></div>
+<h2 id="ecs">ECS</h2>
+<p>Everything in the ECS exists in the <code>World</code>, you can think
+of it as a global state of everything that is happening. The World
+contains <code>Entities</code>, those are the most elemental things that
+exist. You can add <code>Components</code> to entities, which are their
+properties (like Health, Position, Mesh). You interact with those
+components through <code>Systems</code> by making <code>Queries</code>
+on their components. There are also <code>Resources</code> that store
+global data. Uh that was quick, read it again if you need it to. Now we
+will go a bit deeper on how this works.</p>
+<h3 id="the-main-loop">The Main loop</h3>
+<p>The main loop calls <code>world::tick()</code>. At each tick, all the
+Systems will be called in the order they were added in the World.</p>
+<p>The engine provides functions to interact with the window in
+<code>Brenta::Screen</code>, some OpenGL helper functions in
+<code>brenta::gl</code>, a nice <code>brenta::logger</code>, input
+handling with <code>brenta::input</code>, manage time with
+<code>brenta::time</code>, display text with <code>brenta::text</code>
+and more!</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;brenta/engine.hpp&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;viotecs/viotecs.hpp&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> brenta<span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> viotecs<span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Initialize a default camera</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> brenta</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  camera default_camera <span class="op">=</span> camera<span class="op">();</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>REGISTER_SYSTEMS<span class="op">(</span>none<span class="op">);</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  engine eng <span class="op">=</span> engine<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_screen<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_audio<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_input<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_logger<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_text<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>use_ecs<span class="op">(</span><span class="kw">true</span><span class="op">)</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>set_screen_width<span class="op">(</span>SCR_WIDTH<span class="op">)</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>set_screen_height<span class="op">(</span>SCR_HEIGHT<span class="op">)</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>set_screen_is_mouse_captured<span class="op">(</span><span class="kw">false</span><span class="op">)</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="co">// ...</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Your init functions ...</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  init_player<span class="op">();</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  init_renderer<span class="op">();</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* </span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">   * It is nice to reset the time</span></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">   * before starting the game loop</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">   * so that the first frame will have</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">   * a delta time of 0.</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  time<span class="op">::</span>update<span class="op">(</span>screen<span class="op">::</span>get_time<span class="op">());</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>screen<span class="op">::</span>is_window_closed<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>clear<span class="op">();</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    world<span class="op">::</span>tick<span class="op">();</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    screen<span class="op">::</span>poll_wvents<span class="op">();</span></span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a>    screen<span class="op">::</span>swap_buffers<span class="op">();</span></span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The engine will take care of deallocation</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the submodules</span></span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h3 id="component">Component</h3>
+<p>A Component is a piece of data (more precisely, a struct) that gets
+assigned to an Entity.</p>
+<p>You can define your own component like so:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* This is a component */</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> model_component <span class="op">:</span> component <span class="op">{</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  model mod<span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  types<span class="op">::</span><span class="dt">shader_name_t</span> shader<span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* You need to provide a default constructor */</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  model_component<span class="op">()</span> <span class="op">{};</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* Any other construtor is optional */</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  model_component<span class="op">(</span>model mod<span class="op">,</span> types<span class="op">::</span><span class="dt">shader_name_t</span> shader<span class="op">)</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span> model<span class="op">(</span>model<span class="op">),</span> shader<span class="op">(</span>shader<span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="system">System</h3>
+<p>A System is a function that gets called at each Tick in the reder
+loop. It contains all the logic of the World. You will interact with the
+Entities, Components and Resources via queries. You can specify an
+entity to query by adding components to <code>system&lt;...&gt;</code>,
+the World will provide you with an
+<code>std::vector&lt;entity_t&gt;</code> of the entities that have all
+the components you specified.</p>
+<p>Here is an example:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Specify ModelComponent and TransformComponent query */</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> renderer_system <span class="op">:</span> system<span class="op">&lt;</span>model_component<span class="op">,</span> transform_component<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* You need to define this function */</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> run<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">entity_t</span><span class="op">&gt;</span> matches<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>matches<span class="op">.</span>empty<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> match <span class="op">:</span> matches<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">/* Get the model component */</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">auto</span> model_c <span class="op">=</span> world<span class="op">::</span>entity_to_component<span class="op">&lt;</span>model_component<span class="op">&gt;(</span>match<span class="op">);</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">auto</span> my_model <span class="op">=</span> model_c<span class="op">-&gt;</span>mod<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>      <span class="co">/* Translate the model */</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>      <span class="co">// ...</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>      my_model<span class="op">.</span>draw<span class="op">(</span>default_shader<span class="op">);</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">/* </span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co"> * Somewhere in your code you need to</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co"> * have one (and only one) call on this macro</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a><span class="co"> */</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>REGISTER_SYSTEMS<span class="op">(</span>render_system<span class="op">);</span></span></code></pre></div>
+<h3 id="entity">Entity</h3>
+<p>You can create Entities and assign Components to them like so:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* Create the player entity */</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> player_entity <span class="op">=</span> world<span class="op">::</span>new_entity<span class="op">();</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">/* Add the player component to the player entity */</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_component<span class="op">&lt;</span>player_component<span class="op">&gt;(</span>player_entity<span class="op">,</span> player_component<span class="op">());</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">/* Load model and shader */</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">/* Add the model component to the player entity */</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> model_c <span class="op">=</span> model_component<span class="op">(</span>mod<span class="op">,</span> <span class="st">&quot;default_shader&quot;</span><span class="op">);</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_component<span class="op">&lt;</span>model_component<span class="op">&gt;(</span>player_entity<span class="op">,</span> model_c<span class="op">);</span></span></code></pre></div>
+<h3 id="resources">Resources</h3>
+<p>Resources hold global data accessible via
+<code>world::get_resource&lt;name&gt;()</code>. You can define a
+Resource like so:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* This is a resource */</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> wireframe_resource <span class="op">:</span> resource <span class="op">{</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bool</span> enabled<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  wireframe_resource<span class="op">(</span><span class="dt">bool</span> e<span class="op">)</span> <span class="op">:</span> enabled<span class="op">(</span>e<span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_resource<span class="op">&lt;</span>wireframe_resource<span class="op">&gt;(</span>wireframe_resource<span class="op">(</span><span class="kw">false</span><span class="op">));</span></span></code></pre></div>
+<p>Here is an high lievel simplified view of those objects:</p>
+<figure>
+<img
+src="https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+<p>There are many other examples in the <code>examples</code> directory
+and in the <code>demo</code> which is guaranteed to be updated to the
+lastest APIs.</p>
+
+<footer>
+  
+<hr>
+
+  <p>Author: Giovanni Santini <a href="mailto:giovanni.santini@proton.me">giovanni.santini@proton.me</a>
+  </p>
+<p>Code: GitHub <a href="https://github.com/San7o/Brenta-Engine/tree/main">@San7o/Brenta-Engine</a>
+<p>License: MIT <a href="https://github.com/San7o/Brenta-Engine/blob/main/LICENSE">LICENSE</a>
+  </p>
+</footer>
+
+</body>
+</html>

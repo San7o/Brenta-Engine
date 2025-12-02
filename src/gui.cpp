@@ -18,12 +18,13 @@ void gui::init()
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
-  /* Enable Keyboard and Gamepad Controls */
+  
+  // Enable Keyboard and Gamepad Controls
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
-  /* Setup Platform/Renderer backends */
+  // Setup Platform/Renderer backends
   ImGui_ImplGlfw_InitForOpenGL(screen::get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
@@ -44,7 +45,9 @@ void gui::new_frame(framebuffer *fb)
 
   ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());
 
-  // Game window ------------------------------------------
+  //
+  // Game window
+  //
 
   ImGui::SetNextWindowSize(ImVec2(500, 500));
   ImGui::Begin("Game");

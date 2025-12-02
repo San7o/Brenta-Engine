@@ -82,8 +82,8 @@ int main()
   world::add_resource<WireframeResource>(WireframeResource(false));
 #endif
 
-  audio::load_audio("guitar",
-                    std::filesystem::absolute("examples/assets/audio/guitar.wav"));
+  audio::load_audio(
+    "guitar", std::filesystem::absolute("examples/assets/audio/guitar.wav"));
 
   particle_emitter emitter =
     particle_emitter::builder()

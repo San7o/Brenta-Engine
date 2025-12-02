@@ -10,7 +10,7 @@ using namespace brenta::types;
 
 void vao::init()
 {
-  glGenVertexArrays(1, &vao_id);
+  glGenVertexArrays(1, &this->vao_id);
   bind();
 }
 

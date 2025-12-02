@@ -213,6 +213,10 @@ void particle_emitter::check_opengl_error(const std::string &function_name)
   }
 }
 
+//
+// Builder functions
+//
+
 particle_emitter::builder &
 particle_emitter::builder::set_starting_position(glm::vec3 starting_position)
 {

@@ -5,17 +5,15 @@
 
 #pragma once
 
+#include <brenta/engine.hpp>
 #include <demo/components/physics_component.hpp>
 #include <demo/components/transform_component.hpp>
 #include <demo/systems/physics_system.hpp>
-
-#include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 using namespace viotecs::types;

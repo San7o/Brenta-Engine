@@ -5,12 +5,10 @@
 
 #pragma once
 
-#include <demo/systems/debug_text_system.hpp>
-
 #include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
+#include <demo/systems/debug_text_system.hpp>
 #include <vector>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 using namespace viotecs::types;

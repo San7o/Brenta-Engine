@@ -4,9 +4,5 @@ var searchData=
   ['bind_5ftexture_1',['bind_texture',['../classbrenta_1_1texture.html#aeaf372220a376e21b544f35a7a8fbb1d',1,'brenta::texture']]],
   ['bind_5fvertex_5farray_2',['bind_vertex_array',['../classbrenta_1_1gl.html#a9f1202446652590a46426989a357024f',1,'brenta::gl']]],
   ['buffer_3',['buffer',['../classbrenta_1_1types_1_1buffer.html',1,'brenta::types::buffer'],['../classbrenta_1_1types_1_1buffer.html#aafbc9b192c26c6ad9b46a741b3a4667d',1,'brenta::types::buffer::buffer()'],['../classbrenta_1_1types_1_1buffer.html#a8e1ed8cd3651e3e6d900c57284b6f3fd',1,'brenta::types::buffer::buffer(GLenum input_target)']]],
-  ['bugs_4',['Reporting Bugs',['../Contributing.html#bugs',1,'']]],
-  ['builder_5',['builder',['../classbrenta_1_1camera_1_1builder.html',1,'brenta::camera::builder'],['../classbrenta_1_1engine_1_1builder.html',1,'brenta::engine::builder'],['../classbrenta_1_1mesh_1_1builder.html',1,'brenta::mesh::builder'],['../classbrenta_1_1model_1_1builder.html',1,'brenta::model::builder'],['../classbrenta_1_1particle__emitter_1_1builder.html',1,'brenta::particle_emitter::builder']]],
-  ['building_6',['Building',['../Building.html',1,'']]],
-  ['building_20documentation_7',['Building documentation',['../Building.html#documentation',1,'']]],
-  ['building_20libassimp_8',['Building libassimp',['../Building.html#libassimo',1,'']]]
+  ['builder_4',['builder',['../classbrenta_1_1camera_1_1builder.html',1,'brenta::camera::builder'],['../classbrenta_1_1engine_1_1builder.html',1,'brenta::engine::builder'],['../classbrenta_1_1mesh_1_1builder.html',1,'brenta::mesh::builder'],['../classbrenta_1_1model_1_1builder.html',1,'brenta::model::builder'],['../classbrenta_1_1particle__emitter_1_1builder.html',1,'brenta::particle_emitter::builder']]]
 ];

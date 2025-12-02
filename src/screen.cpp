@@ -25,20 +25,21 @@ void screen::init(int SCR_WIDTH, int SCR_HEIGHT, bool is_mouse_captured,
   if (glfwInit() == GLFW_FALSE)
   {
     ERROR("Failed to initialize GLFW on init");
+    return;
   }
 
-  set_context_version(3, 3); /* OpenGL 3.3 */
+  set_context_version(3, 3);
   use_core_profile();
 
   if (msaa)
   {
-    glfwWindowHint(GLFW_SAMPLES, 4); /* MSAA */
+    glfwWindowHint(GLFW_SAMPLES, 4);
     INFO("Enabled MSAA");
   }
 
   if (!vsync)
   {
-    glfwSwapInterval(0); /* Disable VSync */
+    glfwSwapInterval(0);
     INFO("Disabled VSync");
   }
 
@@ -50,7 +51,7 @@ void screen::init(int SCR_WIDTH, int SCR_HEIGHT, bool is_mouse_captured,
   make_context_current();
   set_mouse_capture(is_mouse_captured);
 
-  /* Set the callback for resizing the window */
+  // Set the callback for resizing the window
   screen::set_size_callback(framebuffer_size_callback);
 }
 

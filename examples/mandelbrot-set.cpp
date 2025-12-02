@@ -101,7 +101,6 @@ int main()
     // Render here
     v.bind();
     shader::use("fractal");
-    shader::set_int("fractal", "texture", fb.texture_id);
     shader::set_vec3("fractal", "resolution",
                      glm::vec3(float(SCR_WIDTH), float(SCR_HEIGHT), 0.0f));
     shader::set_vec3("fractal", "offset", offset);

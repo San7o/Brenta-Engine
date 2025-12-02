@@ -6,11 +6,10 @@
 #pragma once
 
 #include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <viotecs/viotecs.hpp>
 
 using namespace brenta;
 using namespace viotecs;

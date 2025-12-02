@@ -3,14 +3,12 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/engine.hpp>
 #include <demo/components/model_component.hpp>
 #include <demo/components/transform_component.hpp>
 #include <demo/entities/robot_entity.hpp>
-
-#include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
 #include <filesystem>
+#include <viotecs/viotecs.hpp>
 
 using namespace brenta;
 using namespace viotecs;
@@ -35,10 +33,10 @@ void init_robot_entity()
   }
 
   /* Load the model */
-  model m(
-    std::filesystem::absolute("examples/assets/models/robot_sprite/robot_sprite.obj"),
-    GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST,
-    GL_NEAREST, false);
+  model m(std::filesystem::absolute(
+            "examples/assets/models/robot_sprite/robot_sprite.obj"),
+          GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST,
+          GL_NEAREST, false);
 
   /* Add the model component */
   auto model_component = ModelComponent(m, 32.0f, "default_shader", true, 4, 0);

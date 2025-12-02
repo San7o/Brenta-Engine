@@ -24,15 +24,15 @@ void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
   int SCR_WIDTH = screen::get_width();
   int SCR_HEIGHT = screen::get_height();
 
-  glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
+  glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
 
   if (gl_depth_test)
   {
-    glEnable(GL_DEPTH_TEST); /* Enable depth testing */
+    glEnable(GL_DEPTH_TEST);
     INFO("Enabled GL_DEPTH_TEST");
   }
 
-  /* Enable blending for transparency */
+  // Enable blending for transparency
   if (gl_blending)
   {
     glEnable(GL_BLEND);
@@ -40,16 +40,16 @@ void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
     INFO("Enabled GL_BLEND (transparency)");
   }
 
-  /* Enable face culling, draw only visible triangles
-   * based on their orientation (defined clockwise or counterclockwise) */
+  // Enable face culling, draw only visible triangles
+  // based on their orientation (defined clockwise or counterclockwise)
   if (gl_cull_face)
   {
     glEnable(GL_CULL_FACE);
     INFO("Enabled GL_CULL_FACE (draw only visible triangles)");
   }
 
-  /* Enable multisampling
-   * Only works for a multisample buffer. */
+  // Enable multisampling
+  // Only works for a multisample buffer. */
   if (gl_multisample)
   {
     glEnable(GL_MULTISAMPLE);
@@ -77,12 +77,12 @@ void gl::set_poligon_mode(GLboolean enable)
 
 void gl::set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
 {
-  glViewport(x, y, SCR_WIDTH, SCR_HEIGHT); /* Set viewport */
+  glViewport(x, y, SCR_WIDTH, SCR_HEIGHT);
 }
 
 void gl::set_color(float r, float g, float b, float a)
 {
-  glClearColor(r, g, b, a); /* Set clear color */
+  glClearColor(r, g, b, a);
 }
 
 void gl::draw_arrays(GLenum mode, int first, int count)
@@ -97,7 +97,6 @@ void gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
 
 void gl::clear()
 {
-  /* Clear color and depth buffer */
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 

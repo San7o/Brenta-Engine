@@ -17,6 +17,7 @@ This guide will help you understand how to contribute effectively.
 
 If you find a bug in the game engine, please report it by opening an
 issue. Include as much detail as possible:
+
 - A clear and descriptive title.
 - Steps to reproduce the problem.
 - Expected and actual behavior.
@@ -27,13 +28,15 @@ issue. Include as much detail as possible:
 
 Suggestions for new features or improvements are welcome! To suggest a
 feature:
+
 - Open an issue with the tag `enhancement`.
 - Provide a clear and concise description of the feature.
 - Explain why this feature would be beneficial to the engine.
 
 ### Contributing Code
 
-If you're ready to contribute code:
+If you are ready to contribute code:
+
 - Fork the repository.
 - Create a branch for your feature/bugfix: `git checkout -b
   feature/your-feature-name`.
@@ -43,12 +46,7 @@ If you're ready to contribute code:
 - Open a pull request against the `dev` branch with a detailed
   description of your changes.
 
-### Discord
-
-Once the project gets officially released, a discord server will be
-created for anyone interested in the project.
-
 ### License
 
 By contributing, you agree that your contributions will be licensed
-under the project's MIT License.
+under the MIT License.

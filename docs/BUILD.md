@@ -94,7 +94,7 @@ make html
 
 The index will be located in `docs/html/index.html`.
 
-# Format code
+## Format code
 
 To format the code using `clang-format`:
 

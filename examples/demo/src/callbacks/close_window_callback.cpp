@@ -3,9 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <demo/callbacks/close_window_callback.hpp>
-
 #include <brenta/engine.hpp>
+#include <demo/callbacks/close_window_callback.hpp>
 
 using namespace brenta;
 

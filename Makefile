@@ -8,21 +8,15 @@ DOCS := ${wildcard ${DOCS_DIR}/*.md}
 HTML := ${patsubst ${DOCS_DIR}/%.md, ${HTML_DIR}/%.html, ${DOCS}}
 HTML_INTRO := utils/website/intro.html
 HTML_OUTRO := utils/website/outro.html
-INDEX_FILE := utils/website/index.html
 TMP_FILE := /tmp/padoc-out.html
 HIGHLIGHT_STYLE := tango
 PANDOC_FLAGS := --highlight-style ${HIGHLIGHT_STYLE}
 
-html: ${HTML} index doxigen ## Generate the html documentation
+html: doxigen ${HTML}
 
 doxigen:
-	doxygen ./utils/doxygen.conf
-	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxigen.html
-
-index: ${INDEX_FILE} ${HTML_INTRO} ${HTML_OUTRO} 
-	cp ${HTML_INTRO} ${HTML_DIR}/index.html
-	cat ${INDEX_FILE} >> ${HTML_DIR}/index.html
-	cat ${HTML_OUTRO} >> ${HTML_DIR}/index.html
+	doxygen ./utils/doxygen/doxygen.conf
+	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxygen.html
 
 $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	pandoc $< -o ${TMP_FILE} ${PANDOC_FLAGS}

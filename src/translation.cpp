@@ -65,11 +65,15 @@ void translation::scale(float scale)
   this->model = glm::scale(this->model, glm::vec3(scale));
 }
 
-void translation::set_shader(types::shader_name_t shader_name)
+bool translation::set_shader(types::shader_name_t shader_name)
 {
-  shader::use(shader_name);
+  if (!shader::use(shader_name))
+    return false;
 
-  shader::set_mat4(shader_name, "view", this->view);
-  shader::set_mat4(shader_name, "projection", this->projection);
-  shader::set_mat4(shader_name, "model", this->model);
+  if (!shader::set_mat4(shader_name, "view", this->view) ||
+      !shader::set_mat4(shader_name, "projection", this->projection) ||
+      !shader::set_mat4(shader_name, "model", this->model))
+    return false;
+
+  return true;
 }

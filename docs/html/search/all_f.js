@@ -52,8 +52,5 @@ var searchData=
   ['starting_5ftime_5fto_5flive_49',['starting_time_to_live',['../classbrenta_1_1particle__emitter.html#a52cf6b56274f01e5f7a32f093bf1f532',1,'brenta::particle_emitter']]],
   ['starting_5fvelocity_50',['starting_velocity',['../classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf',1,'brenta::particle_emitter']]],
   ['streams_51',['streams',['../classbrenta_1_1audio.html#a1123b2568f5aa72f029b7438ec7637a7',1,'brenta::audio']]],
-  ['structure_52',['Structure',['../Directory.html',1,'']]],
-  ['submodules_53',['The Submodules',['../index.html#submodules',1,'']]],
-  ['supported_20platforms_54',['Supported Platforms',['../Building.html#supported_platforms',1,'']]],
-  ['swap_5fbuffers_55',['swap_buffers',['../classbrenta_1_1screen.html#af8630d146f415681c35357a9b6b9c79f',1,'brenta::screen']]]
+  ['swap_5fbuffers_52',['swap_buffers',['../classbrenta_1_1screen.html#af8630d146f415681c35357a9b6b9c79f',1,'brenta::screen']]]
 ];

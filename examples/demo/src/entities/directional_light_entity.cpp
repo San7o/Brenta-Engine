@@ -3,19 +3,17 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <demo/entities/directional_light_entity.hpp>
+#include <brenta/engine.hpp>
 #include <demo/components/directional_light_component.hpp>
 #include <demo/components/model_component.hpp>
 #include <demo/components/transform_component.hpp>
-
-#include <brenta/engine.hpp>
-#include <viotecs/viotecs.hpp>
-
+#include <demo/entities/directional_light_entity.hpp>
 #include <filesystem>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
+#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 using namespace brenta;

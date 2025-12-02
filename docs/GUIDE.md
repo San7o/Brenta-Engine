@@ -5,17 +5,149 @@ each feature, an example with context will be shown. Enjoy the read :)
 
 For updated examples, see [examples](../examples/README.md).
 
-## How it works
+## Engine Class
+
+To initialize any subsystem, you can use the `Engine` class. This is
+not mandatory, you can initialize and destroy the subsystems manually,
+but the Engine class provides a nice way to do it.
+
+To create an engine, you can use the Builder class:
+
+```cpp
+brenta::engine eng = brenta::engine::builder()
+    .use_screen(true)
+    .use_audio(true)
+    .use_input(true)
+    .use_logger(true)
+    .use_text(true)
+    .use_ecs(true)
+    .set_screen_width(1280)
+    .set_screen_height(720)
+    // ...
+    .build();
+```
+
+We will now go through some subsystems and explain how to use them.
+
+## Input
+
+You can register callback functions for the input. Those functions are
+called when the specified `key` is pressed, or the mouse is moved,
+depending on the callback you register.
+
+```cpp
+auto toggle_wireframe_callback = []() {
+
+    auto wireframe = world::get_resource("WireframeResource");
+    if (wireframe == nullptr) return;
+
+    gl::set_poligon_mode(!wireframe->enabled);
+    wireframe->enabled = !wireframe->enabled;
+};
+
+input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
+```
+
+In this example we register a keyboard callback that toggles the
+wireframe mode when the `F` key is pressed. You can use
+`Brenta::Input::AddMousePosCallback` to register a mouse callback,
+this ill be called with the x and y position of the mouse.
+
+You can also remove the callbacks with
+`brenta::input::remove_keyboard_callback` and
+`brenta::input::remove_mouse_pos_callback`.
+
+## Audio
+
+The audio subsystem is very simple: there are audio streams and audio
+files, you can play an audio file on a stream (not multiple streams)
+and stop it, so you need to have multiple streams if you want to play
+multiple audio files at the same time.
+
+You can load an audio file like so:
+
+```cpp
+audio::load_audio("guitar", "assets/audio/guitar.wav");
+```
+
+We are identifying this audio file with the name `guitar`.
+
+You can create a stream with the name "music" like so:
+
+```cpp
+audio::create_stream("music");
+```
+
+And finally play the `guitar` audio like so:
+
+```cpp
+sudio::play_audio("guitar", "music");
+```
+The subsystem will provide you a default stream named `default` if you don't
+want to create a stream.
+
+You can Pause and Resume streams with `brenta::audio::pause_stream` and
+`brenta::audio::resume_stream`, set the volume and stop it. You can find
+the API in `Brenta::Audio`.
+
+## Particles
+
+You can create and customize particles via the
+`brenta::particle_emitter` class. All the computation is done in the
+GPU so the engine can handle lots and lots of particles. Here's a
+quick look on the API:
+
+```cpp
+particle_emitter emitter = particle_emitter::builder()
+       .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+       .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+       .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
+       .set_starting_time_to_live(0.5f)
+       .set_num_particles(1000)
+       .set_spawn_rate(0.01f)
+       .set_scale(1.0f)
+       .set_atlas_path(std::filesystem::absolute(
+           "assets/textures/particle_atlas.png"
+       ).string())
+       .set_atlas_width(8)
+       .set_atlas_height(8)
+       .set_atlas_index(45)
+       .build();
+
+// Inside the game loop:
+emitter.update_particles(time::get_delta_time());
+emitter.render_particles();
+```
+
+## Logger
+
+Check out [oak](https://github.com/San7o/oak)! The engine uses oak as the
+logger, you can set the log level and the log file in the engine builder.
+You can log messages like so:
+```cpp
+oak::info("Hello, world!");
+```
+Oak has many more advanced features, I suggest you check out the repository.
+
+## Text
+
+The `brenta::text` subsystem allows you to render text on the screen. You can
+set the font and font size of your text, and render it in the main loop like
+this:
+```cpp
+text::render_text("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
+```
+
+## ECS
 
 Everything in the ECS exists in the `World`, you can think of it as a
-global state of everything that's happening.  The World contains
+global state of everything that is happening.  The World contains
 `Entities`, those are the most elemental things that exist.  You can
-add `Components` to entities, which are their "properties" (like
-Health, Position, Mesh). You interact with those components through
-`Systems` by making `Queries` on their components. There are also
-`Resources` that store global data. Uh that was quick, read it again
-if you need it to.  Now we will go a bit deeper on how this works,
-let's take a look:
+add `Components` to entities, which are their properties (like Health,
+Position, Mesh). You interact with those components through `Systems`
+by making `Queries` on their components. There are also `Resources`
+that store global data. Uh that was quick, read it again if you need
+it to.  Now we will go a bit deeper on how this works.
 
 ### The Main loop
 
@@ -28,59 +160,60 @@ The engine provides functions to interact with the window in
 with `brenta::time`, display text with `brenta::text` and more!
 
 ```c++
-#include "engine.hpp"
-#include "viotecs/viotecs.hpp"
+#include <brenta/engine.hpp>
+#include <viotecs/viotecs.hpp>
+
 using namespace brenta;
 using namespace viotecs;
 
 // Initialize a default camera
 namespace brenta
 {
-    camera default_camera = camera();
+  camera default_camera = camera();
 }
 
 REGISTER_SYSTEMS(none);
 
 int main() {
 
-    engine eng = engine::builder()
-        .use_screen(true)
-        .use_audio(true)
-        .use_input(true)
-        .use_logger(true)
-        .use_text(true)
-        .use_ecs(true)
-        .set_screen_width(SCR_WIDTH)
-        .set_screen_height(SCR_HEIGHT)
-        .set_screen_is_mouse_captured(false)
-        // ...
-        .build();
+  engine eng = engine::builder()
+    .use_screen(true)
+    .use_audio(true)
+    .use_input(true)
+    .use_logger(true)
+    .use_text(true)
+    .use_ecs(true)
+    .set_screen_width(SCR_WIDTH)
+    .set_screen_height(SCR_HEIGHT)
+    .set_screen_is_mouse_captured(false)
+    // ...
+    .build();
 
-    // Your init functions ...
-    init_player();
-    init_renderer();
+  // Your init functions ...
+  init_player();
+  init_renderer();
 
-    /* 
-     * It's nice to reset the time
-     * before starting the game loop
-     * so that the first frame will have
-     * a delta time of 0.
-     */
-    time::update(screen::get_time());
-    while(!screen::is_window_closed()) {
+  /* 
+   * It is nice to reset the time
+   * before starting the game loop
+   * so that the first frame will have
+   * a delta time of 0.
+   */
+  time::update(screen::get_time());
+  while(!screen::is_window_closed()) {
 
-        gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-        gl::clear();
+    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    gl::clear();
 
-        world::tick();
+    world::tick();
 
-        screen::poll_wvents();
-        screen::swap_buffers();
-    }
-    
-    // The engine will take care of deallocation
-    // of the submodules
-    return 0;
+    screen::poll_wvents();
+    screen::swap_buffers();
+  }
+  
+  // The engine will take care of deallocation
+  // of the submodules
+  return 0;
 }
 ```
 
@@ -94,15 +227,15 @@ You can define your own component like so:
 ```c++
 /* This is a component */
 struct model_component : component {
-    model mod;
-    types::shader_name_t shader;
+  model mod;
+  types::shader_name_t shader;
 
-    /* You need to provide a default constructor */
-    model_component() {};
+  /* You need to provide a default constructor */
+  model_component() {};
 
-    /* Any other construtor is optional */
-    model_component(model mod, types::shader_name_t shader)
-            : model(model), shader(shader) {}
+  /* Any other construtor is optional */
+  model_component(model mod, types::shader_name_t shader)
+        : model(model), shader(shader) {}
 };
 ```
 
@@ -121,21 +254,21 @@ Here is an example:
 /* Specify ModelComponent and TransformComponent query */
 struct renderer_system : system<model_component, transform_component> {
 
-    /* You need to define this function */
-    void run(std::vector<entity_t> matches) const override {
-      if (matches.empty()) return;
+  /* You need to define this function */
+  void run(std::vector<entity_t> matches) const override {
+    if (matches.empty()) return;
 
-      for (auto match : matches) {
-          /* Get the model component */
-          auto model_c = world::entity_to_component<model_component>(match);
-          auto my_model = model_c->mod;
+    for (auto match : matches) {
+      /* Get the model component */
+      auto model_c = world::entity_to_component<model_component>(match);
+      auto my_model = model_c->mod;
 
-          /* Translate the model */
-          // ...
+      /* Translate the model */
+      // ...
 
-          my_model.draw(default_shader);
-      }
+      my_model.draw(default_shader);
     }
+  }
 };
 
 /* 
@@ -173,82 +306,17 @@ You can define a Resource like so:
 ```c++
 /* This is a resource */
 struct wireframe_resource : resource {
-    bool enabled;
-    wireframe_resource(bool e) : enabled(e) {}
+  bool enabled;
+  wireframe_resource(bool e) : enabled(e) {}
 };
 
 world::add_resource<wireframe_resource>(wireframe_resource(false));
 ```
 
-### Callbacks
-
-Callbacks are funcitons that are called when the specified `key` is
-pressed, the code responsible for this is in `ecs::input`. Here is an
-example:
-
-```c++
-auto toggle_wireframe_callback = []() {
-
-    auto wireframe = world::get_resource("WireframeResource");
-    if (wireframe == nullptr) return;
-
-    gl::set_poligon_mode(!wireframe->enabled);
-    wireframe->enabled = !wireframe->enabled;
-};
-
-input::add_callback(GLFW_KEY_F, toggle_wireframe_callback);
-```
-
-### Particles
-
-You can create and customize particles via the
-`Brenta::ParticleEmitter` class. All the computation is done in the
-GPU so the engine can handle lots and lots of particles. Here's a
-quick look on the API:
-
-```C++
-/* Nice builder patterns */
-particle_emitter emitter = particle_emitter::builder()
-        .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
-        .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-        .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
-        .set_starting_time_to_live(0.5f)
-        .set_num_particles(1000)
-        .set_spawn_rate(0.01f)
-        .set_scale(1.0f)
-        .set_atlas_path(std::filesystem::absolute(
-            "assets/textures/particle_atlas.png"
-        ).string())
-        .set_atlas_width(8)
-        .set_atlas_height(8)
-        .set_atlas_index(45)
-        .build();
-
-// Inside the game loop:
-emitter.update_particles(time::get_delta_time());
-emitter.render_particles();
-```
-
-### Audio
-
-There is a simple-to-use audio API in `brenta::audio`. You can load
-sound files, create channels and play a sound on a channel. There can
-be only one sound playing per channel, but of course there can be
-multiple channels playing so some channel management from the
-developer is needed:
-
-```c++
-audio::load_audio("guitar", std::filesystem::absolute("assets/audio/guitar.wav"));
-audio::play_audio("guitar"); /* This will use the "default_stream", or you can specify
-                               a particular stream */
-audio::create_stream("background_music");
-audio::play_audio("guitar", "background_music");
-```
-
-There are many other examples in the `examples` directory and in the
-`game` which is guaranteed to be updated to the lastest APIs. Check
-out the full documentation for a deeper look.
-
 Here is an high lievel simplified view of those objects:
 
 ![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
+
+
+There are many other examples in the `examples` directory and in the
+`demo` which is guaranteed to be updated to the lastest APIs.

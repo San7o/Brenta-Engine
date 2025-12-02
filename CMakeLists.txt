@@ -9,10 +9,9 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(brenta
-  VERSION 2.0.0
+  VERSION 1.2.0
   DESCRIPTION "Brenta Engine"
-  LANGUAGES CXX C
-)
+  LANGUAGES CXX C)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -71,6 +70,22 @@ set(BRENTA_DEPS_HEADERS)
 set(BRENTA_DEPS_INCLUDES)
 set(BRENTA_DEPS_LIBS)
 
+macro(register_dependency NAME)
+  message(STATUS "Using ${NAME}")
+  list(APPEND BRENTA_DEPS_INCLUDES
+    ${PROJECT_SOURCE_DIR}/external/${NAME}/include)
+  if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
+    list(APPEND BRENTA_DEPS_LIBS ${NAME})
+    if(NOT TARGET ${NAME})
+      add_subdirectory(external/${NAME})
+    endif()
+  endif()
+endmacro()
+
+register_dependency(freetype)
+register_dependency(glfw)
+register_dependency(glm)
+
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external)
 
@@ -82,38 +97,16 @@ if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
 endif()
 
 # Assimp
+message(STATUS "Using assimp")
 set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/assimp)
 target_compile_definitions(assimp PRIVATE _GNU_SOURCE)
 list(APPEND BRENTA_DEPS_LIBS assimp::assimp)
 
-# Freetype
-list(APPEND BRENTA_DEPS_INCLUDES
-  ${PROJECT_SOURCE_DIR}/external/freetype/include)
-if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
-  add_subdirectory(external/freetype)
-  list(APPEND BRENTA_DEPS_LIBS freetype)
-endif()
-
-# glfw
-list(APPEND BRENTA_DEPS_INCLUDES
-  ${PROJECT_SOURCE_DIR}/external/glfw/include)
-if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
-  add_subdirectory(external/glfw)
-  list(APPEND BRENTA_DEPS_LIBS glfw)
-endif()
-
-# glm
-list(APPEND BRENTA_DEPS_INCLUDES
-  ${PROJECT_SOURCE_DIR}/external/glm/include)
-if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
-  add_subdirectory(external/glm)
-  list(APPEND BRENTA_DEPS_LIBS glm)
-endif()
-
 # SDL
 # TODO: For now we are depending on SDL3 for audio, this should be
 # changed to miniaudio
+message(STATUS "Using SDL")
 list(APPEND BRENTA_DEPS_LIBS SDL3)
 
 # ImGUI
@@ -138,31 +131,22 @@ if (BRENTA_USE_IMGUI)
   endif()
 endif()
 
-# Oak
-list(APPEND BRENTA_DEPS_INCLUDES
-  ${PROJECT_SOURCE_DIR}/external/oak/include)
-if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
-  add_subdirectory(external/oak)
-  list(APPEND BRENTA_DEPS_LIBS oak)
-endif()
-
 # Viotecs
 if (BRENTA_USE_ECS)
-  message(STATUS "Using viotecs")
   list(APPEND BRENTA_DEFINES USE_ECS)
-  list(APPEND BRENTA_DEPS_INCLUDES
-    ${PROJECT_SOURCE_DIR}/external/viotecs/include)
-  
-  if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
-    add_subdirectory(external/viotecs)
-    list(APPEND BRENTA_DEPS_LIBS viotecs)
-  endif()
+  register_dependency(viotecs)
 endif()
 
 # Valfuzz
 if (BRENTA_BUILD_TESTS)
+  message(STATUS "Using valFuzz")
   add_subdirectory(external/valFuzz)
 endif()
+
+# Add oak after viotecs and valfuzz
+register_dependency(oak)
+
+list(APPEND BRENTA_DEPS_LIBS GL pthread dl m)
 
 #
 # Sources and headers
@@ -194,7 +178,8 @@ endif()
 target_include_directories(${PROJECT_NAME} PRIVATE
   ${PROJECT_SOURCE_DIR}/include
   ${BRENTA_DEPS_INCLUDES})
-target_link_libraries(${PROJECT_NAME} assimp::assimp)
+target_link_libraries(${PROJECT_NAME}
+  ${BRENTA_DEPS_LIBS})
 target_compile_definitions(${PROJECT_NAME} PRIVATE
   ${BRENTA_DEFINES})
 
@@ -218,6 +203,8 @@ elseif(CMAKE_BUILD_TYPE STREQUAL "Release")
 endif()
 
 function(add_example NAME)
+  message(STATUS "Added example ${NAME}")
+  
   add_executable(${NAME}
     ${PROJECT_SOURCE_DIR}/examples/${NAME}.cpp)
   target_include_directories(${NAME} PRIVATE
@@ -284,8 +271,7 @@ endif()
 #
 
 install(TARGETS ${PROJECT_NAME}
-  RUNTIME DESTINATION lib
-)
+  RUNTIME DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)
 
 #
@@ -297,8 +283,7 @@ include(CMakePackageConfigHelpers)
 write_basic_package_version_file(
   "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}ConfigVersion.cmake"
   VERSION ${PROJECT_VERSION}
-  COMPATIBILITY AnyNewerVersion
-)
+  COMPATIBILITY AnyNewerVersion)
 
 #
 # End of CMakeLists.txt

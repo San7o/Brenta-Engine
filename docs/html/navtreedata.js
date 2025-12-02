@@ -25,41 +25,6 @@
 var NAVTREE =
 [
   [ "Brenta Engine", "index.html", [
-    [ "Home", "index.html", "index" ],
-    [ "Building", "Building.html", [
-      [ "Supported Platforms", "Building.html#supported_platforms", null ],
-      [ "Dependencies", "Building.html#dependencies", [
-        [ "Nix", "Building.html#nix", null ],
-        [ "Building libassimp", "Building.html#libassimo", null ]
-      ] ],
-      [ "Compiling the Game", "Building.html#compiling", null ],
-      [ "Building documentation", "Building.html#documentation", null ],
-      [ "Format code", "Building.html#format", null ],
-      [ "Tests", "Building.html#tests", null ],
-      [ "Examples", "Building.html#examples", null ]
-    ] ],
-    [ "Structure", "Directory.html", [
-      [ "Directories", "Directory.html#directories", null ],
-      [ "Files", "Directory.html#files", null ],
-      [ "Namespaces", "Directory.html#namespaces", null ]
-    ] ],
-    [ "ECS", "ECS.html", null ],
-    [ "Engine", "Engine.html", [
-      [ "Engine Class", "Engine.html#engine", null ],
-      [ "Input", "Engine.html#input", null ],
-      [ "Audio", "Engine.html#audio", null ],
-      [ "Particles", "Engine.html#particles", null ],
-      [ "Logger", "Engine.html#logger", null ],
-      [ "Text", "Engine.html#text", null ],
-      [ "More", "Engine.html#more", null ]
-    ] ],
-    [ "Contributing", "Contributing.html", [
-      [ "How to contribute", "Contributing.html#how", [
-        [ "Reporting Bugs", "Contributing.html#bugs", null ],
-        [ "Adding Features", "Contributing.html#features", null ],
-        [ "Contributing Code", "Contributing.html#code", null ]
-      ] ]
-    ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -78,8 +43,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Building.html",
-"classbrenta_1_1types_1_1translation.html"
+"annotated.html",
+"engine_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

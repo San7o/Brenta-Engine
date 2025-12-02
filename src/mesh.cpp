@@ -83,6 +83,10 @@ void mesh::setup_mesh()
   gl::bind_vertex_array(0);
 }
 
+//
+// Builder functions
+//
+
 mesh::builder &mesh::builder::set_vertices(std::vector<types::vertex> vertices)
 {
   this->vertices = vertices;
