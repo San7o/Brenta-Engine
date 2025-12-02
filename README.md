@@ -5,7 +5,8 @@ using the Entity Component System architecture. The engine was
 created by Giovanni Santini in the summer of 2024, the name is
 inspired by the Brenta Dolimites in the Italian Alps.
 
-Check out `GUIDE.md` for a quick introduction on how the engine works!
+Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
+the engine works!
 
 <h2 align=center>  Related Projects </h2>
 
@@ -28,7 +29,7 @@ The engine is composed of many submodules independent from each other, those are
 
 In addition to those, Brenta comes with many utility functions and
 classes, to get a detailed look at the engine, please visit the
-[documentation](https://san7o.github.io/brenta-engine-documentation/v1.1/),
+[documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
 **every class and function is highly documented.**
 
 ### Ergonomic APIs
