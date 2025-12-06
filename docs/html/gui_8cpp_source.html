@@ -122,69 +122,72 @@ $(function(){initNavTree('gui_8cpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  IMGUI_CHECKVERSION();</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  ImGui::CreateContext();</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  ImGuiIO &amp;io = ImGui::GetIO();</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="comment">/* Enable Keyboard and Gamepad Controls */</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="comment">/* Setup Platform/Renderer backends */</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  ImGui_ImplGlfw_InitForOpenGL(<a class="code hl_function" href="classbrenta_1_1screen.html#a1862db807c8c7636cf196c70aee6015b">screen::get_window</a>(), <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  ImGui_ImplOpenGL3_Init();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  ImGui::SetNextWindowPos(ImVec2(0, 0));</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="comment">// Enable Keyboard and Gamepad Controls</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="comment">// Setup Platform/Renderer backends</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  ImGui_ImplGlfw_InitForOpenGL(<a class="code hl_function" href="classbrenta_1_1screen.html#a1862db807c8c7636cf196c70aee6015b">screen::get_window</a>(), <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  ImGui_ImplOpenGL3_Init();</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  ImGui::SetNextWindowPos(ImVec2(0, 0));</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>}</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">gui::destroy</a>()</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  ImGui_ImplOpenGL3_Shutdown();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  ImGui_ImplGlfw_Shutdown();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  ImGui::DestroyContext();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="}">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">   33</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">gui::destroy</a>()</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  ImGui_ImplOpenGL3_Shutdown();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  ImGui_ImplGlfw_Shutdown();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  ImGui::DestroyContext();</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
 </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">gui::new_frame</a>(<a class="code hl_class" href="classbrenta_1_1types_1_1framebuffer.html">framebuffer</a> *fb)</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  ImGui_ImplOpenGL3_NewFrame();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  ImGui_ImplGlfw_NewFrame();</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  ImGui::NewFrame();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="comment">// Game window ------------------------------------------</span></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  ImGui::SetNextWindowSize(ImVec2(500, 500));</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  ImGui::Begin(<span class="stringliteral">&quot;Game&quot;</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">   40</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">gui::new_frame</a>(<a class="code hl_class" href="classbrenta_1_1types_1_1framebuffer.html">framebuffer</a> *fb)</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  ImGui_ImplOpenGL3_NewFrame();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  ImGui_ImplGlfw_NewFrame();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  ImGui::NewFrame();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  ImGui::DockSpaceOverViewport(0, ImGui::GetMainViewport());</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="comment">//</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// Game window</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="comment">//</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordtype">float</span> window_width = ImGui::GetContentRegionAvail().x;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordtype">float</span> window_height = ImGui::GetContentRegionAvail().y;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  ImGui::SetNextWindowSize(ImVec2(500, 500));</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  ImGui::Begin(<span class="stringliteral">&quot;Game&quot;</span>);</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  fb-&gt;<a class="code hl_function" href="classbrenta_1_1types_1_1framebuffer.html#aee79e8a45b7c0f966bb439b7f5b4e2be">rescale</a>(window_width, window_height);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_function" href="classbrenta_1_1gl.html#a10a5ba7e449675360bf82fc2cfe10b52">gl::set_viewport</a>(0, 0, window_width, window_height);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">float</span> window_width = ImGui::GetContentRegionAvail().x;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordtype">float</span> window_height = ImGui::GetContentRegionAvail().y;</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  ImGui::Image((<span class="keywordtype">void</span> *) (intptr_t) fb-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1framebuffer.html#a268a988bb67432f5191d4d2da23ff8a3">texture_id</a>,</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>               ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  fb-&gt;<a class="code hl_function" href="classbrenta_1_1types_1_1framebuffer.html#aee79e8a45b7c0f966bb439b7f5b4e2be">rescale</a>(window_width, window_height);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_function" href="classbrenta_1_1gl.html#a10a5ba7e449675360bf82fc2cfe10b52">gl::set_viewport</a>(0, 0, window_width, window_height);</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  ImGui::End();</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
-</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  ImGui::Image((<span class="keywordtype">void</span> *) (intptr_t) fb-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1framebuffer.html#a268a988bb67432f5191d4d2da23ff8a3">texture_id</a>,</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>               ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));</div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">   64</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">gui::render</a>()</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  ImGui::Render();</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  ImGui::End();</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="preprocessor">#endif</span></div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
+<div class="foldopen" id="foldopen00067" data-start="{" data-end="}">
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">   67</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">gui::render</a>()</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  ImGui::Render();</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span><span class="preprocessor">#endif</span></div>
 <div class="ttc" id="aclassbrenta_1_1gl_html_a10a5ba7e449675360bf82fc2cfe10b52"><div class="ttname"><a href="classbrenta_1_1gl.html#a10a5ba7e449675360bf82fc2cfe10b52">brenta::gl::set_viewport</a></div><div class="ttdeci">static void set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)</div><div class="ttdoc">Set Viewport.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00078">gl.cpp:78</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a6f70a8c24f76a12344db36e2b2c55914"><div class="ttname"><a href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">brenta::gui::destroy</a></div><div class="ttdeci">static void destroy()</div><div class="ttdoc">Delete the gui.</div><div class="ttdef"><b>Definition</b> <a href="#l00032">gui.cpp:32</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a7b4660a6c5c99625fb5e4900db49751b"><div class="ttname"><a href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">brenta::gui::new_frame</a></div><div class="ttdeci">static void new_frame(types::framebuffer *fb)</div><div class="ttdoc">Start a new frame To be called at each frame before rendering.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">gui.cpp:39</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a822a3004d1fe1c9d9e7933e26caebf99"><div class="ttname"><a href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">brenta::gui::render</a></div><div class="ttdeci">static void render()</div><div class="ttdoc">Render the gui To be called at each frame after rendering.</div><div class="ttdef"><b>Definition</b> <a href="#l00064">gui.cpp:64</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html_a6f70a8c24f76a12344db36e2b2c55914"><div class="ttname"><a href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">brenta::gui::destroy</a></div><div class="ttdeci">static void destroy()</div><div class="ttdoc">Delete the gui.</div><div class="ttdef"><b>Definition</b> <a href="#l00033">gui.cpp:33</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html_a7b4660a6c5c99625fb5e4900db49751b"><div class="ttname"><a href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">brenta::gui::new_frame</a></div><div class="ttdeci">static void new_frame(types::framebuffer *fb)</div><div class="ttdoc">Start a new frame To be called at each frame before rendering.</div><div class="ttdef"><b>Definition</b> <a href="#l00040">gui.cpp:40</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html_a822a3004d1fe1c9d9e7933e26caebf99"><div class="ttname"><a href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">brenta::gui::render</a></div><div class="ttdeci">static void render()</div><div class="ttdoc">Render the gui To be called at each frame after rendering.</div><div class="ttdef"><b>Definition</b> <a href="#l00067">gui.cpp:67</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1gui_html_aebb43466de560416eccb0c2a70d7d92d"><div class="ttname"><a href="classbrenta_1_1gui.html#aebb43466de560416eccb0c2a70d7d92d">brenta::gui::init</a></div><div class="ttdeci">static void init()</div><div class="ttdoc">Initialize the gui.</div><div class="ttdef"><b>Definition</b> <a href="#l00016">gui.cpp:16</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1screen_html_a1862db807c8c7636cf196c70aee6015b"><div class="ttname"><a href="classbrenta_1_1screen.html#a1862db807c8c7636cf196c70aee6015b">brenta::screen::get_window</a></div><div class="ttdeci">static GLFWwindow * get_window()</div><div class="ttdoc">Get the window.</div><div class="ttdef"><b>Definition</b> <a href="screen_8cpp_source.html#l00072">screen.cpp:72</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1screen_html_a1862db807c8c7636cf196c70aee6015b"><div class="ttname"><a href="classbrenta_1_1screen.html#a1862db807c8c7636cf196c70aee6015b">brenta::screen::get_window</a></div><div class="ttdeci">static GLFWwindow * get_window()</div><div class="ttdoc">Get the window.</div><div class="ttdef"><b>Definition</b> <a href="screen_8cpp_source.html#l00073">screen.cpp:73</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1framebuffer_html"><div class="ttname"><a href="classbrenta_1_1types_1_1framebuffer.html">brenta::types::framebuffer</a></div><div class="ttdoc">FrameBuffer class.</div><div class="ttdef"><b>Definition</b> <a href="frame__buffer_8hpp_source.html#l00025">frame_buffer.hpp:26</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1framebuffer_html_a268a988bb67432f5191d4d2da23ff8a3"><div class="ttname"><a href="classbrenta_1_1types_1_1framebuffer.html#a268a988bb67432f5191d4d2da23ff8a3">brenta::types::framebuffer::texture_id</a></div><div class="ttdeci">GLuint texture_id</div><div class="ttdoc">Itexture ID.</div><div class="ttdef"><b>Definition</b> <a href="frame__buffer_8hpp_source.html#l00031">frame_buffer.hpp:31</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1framebuffer_html_aee79e8a45b7c0f966bb439b7f5b4e2be"><div class="ttname"><a href="classbrenta_1_1types_1_1framebuffer.html#aee79e8a45b7c0f966bb439b7f5b4e2be">brenta::types::framebuffer::rescale</a></div><div class="ttdeci">void rescale(int width, int height)</div><div class="ttdoc">Rescale the framebuffer.</div><div class="ttdef"><b>Definition</b> <a href="frame__buffer_8cpp_source.html#l00085">frame_buffer.cpp:85</a></div></div>

@@ -7,7 +7,7 @@ var classbrenta_1_1types_1_1translation =
     [ "set_model", "classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b", null ],
     [ "set_projection", "classbrenta_1_1types_1_1translation.html#adfaddc487e21d263c17a0997b4fe2cbf", null ],
     [ "set_projection", "classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8", null ],
-    [ "set_shader", "classbrenta_1_1types_1_1translation.html#a3e52238a4c2d25b6efffb03826f80854", null ],
+    [ "set_shader", "classbrenta_1_1types_1_1translation.html#adb7582eb746bf9c5cca6a9eca697ac15", null ],
     [ "set_view", "classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783", null ],
     [ "translate", "classbrenta_1_1types_1_1translation.html#ae01bf699306b8387b78d195944e705b1", null ],
     [ "model", "classbrenta_1_1types_1_1translation.html#a31e6ef1e3a598b3f4b889cfc8ddc2838", null ],

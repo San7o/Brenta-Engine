@@ -29,6 +29,7 @@ The engine is composed of many submodules independent from each other, those are
 
 In addition to those, Brenta comes with many utility functions and
 classes, to get a detailed look at the engine, please visit the
+[website](https://san7o.github.io/Brenta-Engine/) and code
 [documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
 **every class and function is highly documented.**
 

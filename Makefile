@@ -24,8 +24,7 @@ $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	cat ${TMP_FILE} >> $@
 	cat ${HTML_OUTRO} >> $@
 	sed -i 's/\.md/\.html/g' $@
-	sed -i 's/..\/examples/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/examples/g' $@
-	sed -i 's/..\/tests/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/tests/g' $@
+	sed -i 's/..\/utils/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/utils/g' $@
 
 $(HTML_DIR):
 	mkdir -p ${HTML_DIR}
