@@ -17,6 +17,7 @@ html: doxigen ${HTML}
 doxigen:
 	doxygen ./utils/doxygen/doxygen.conf
 	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxygen.html
+	cp -r utils/docs-images ${HTML_DIR}/images
 
 $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	pandoc $< -o ${TMP_FILE} ${PANDOC_FLAGS}
@@ -24,7 +25,7 @@ $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	cat ${TMP_FILE} >> $@
 	cat ${HTML_OUTRO} >> $@
 	sed -i 's/\.md/\.html/g' $@
-	sed -i 's/..\/utils/https:\/\/github.com\/San7o\/Brenta-Engine\/tree\/main\/utils/g' $@
+	sed -i 's/.\/html/.\//g' $@
 
 $(HTML_DIR):
 	mkdir -p ${HTML_DIR}

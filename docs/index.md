@@ -1,6 +1,4 @@
-![Brenta-Engine-Banner](../utils/docs-images/brenta-engine-banner.png)
-
-# Brenta Engine
+![](./html/images/brenta-engine-banner.png)
 
 Hi and welcome to the **Brenta Engine** website! Brenta Engine is a
 simple 3D engine written in modern C++/OpenGL using the Entity
