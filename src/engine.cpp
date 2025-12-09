@@ -17,6 +17,8 @@ std::expected<void, std::string> engine::initialize()
     if (!s.get().initialize().has_value())
       return std::unexpected(s.get().subsystem_name);
   }
+
+  INFO("engine initialized")
   return {};
 }
 
@@ -29,7 +31,8 @@ std::expected<void, std::string> engine::terminate()
     if (!s.get().terminate().has_value())
       return std::unexpected(s.get().subsystem_name);
 
-  } 
+  }
+  INFO("engine terminated");
   return {};
 }
 
@@ -53,6 +56,12 @@ std::expected<void, std::string> engine::add_subsystem(subsystem::builder &&buil
 //
 
 brenta::engine::builder &engine::builder::subsystem(subsystem::builder &builder)
+{
+  this->subsystems.push_back(builder.build());
+  return *this;
+}
+
+brenta::engine::builder &engine::builder::subsystem(subsystem::builder &&builder)
 {
   this->subsystems.push_back(builder.build());
   return *this;

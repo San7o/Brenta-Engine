@@ -130,7 +130,7 @@ public:
   builder &msaa();
   builder &vsync();
   
-  subsystem &build();
+  subsystem &build() override;
 };
   
 } // namespace brenta

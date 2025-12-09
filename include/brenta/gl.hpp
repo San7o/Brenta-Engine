@@ -142,7 +142,7 @@ public:
   builder &multisample();
   builder &depth_test();
 
-  subsystem &build();
+  subsystem &build() override;
   
 };
   

@@ -57,13 +57,14 @@ std::expected<void, std::string> gl::initialize()
 
   GLenum errcode = gl::check_error();
   if (!errcode)
-    INFO("OpenGl initialized");
+    INFO("gl initialized");
 
   return {};
 }
 
 std::expected<void, std::string> gl::terminate()
 {
+  INFO("gl terminated")
   return {};
 }
 

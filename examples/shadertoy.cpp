@@ -9,6 +9,8 @@
 // Play with shaders interactively
 //
 
+#ifdef BRENTA_USE_IMGUI
+
 #include <brenta/engine.hpp>
 
 #include <iostream>
@@ -38,6 +40,7 @@ int main(int argc, char** argv)
                .cull_face()
                .multisample()
                .depth_test())
+    .subsystem(gui::builder())
     .build();
 
 
@@ -46,7 +49,6 @@ int main(int argc, char** argv)
   // - input
   // - text
   // - ecs
-  // - imgui
   
   auto ret = engine.initialize();
   if (!ret.has_value())
@@ -56,6 +58,12 @@ int main(int argc, char** argv)
   }
 
   //
+  // Variables
+  //
+  
+  types::framebuffer fb(window::get_width(), window::get_height());
+  
+  //
   // Game loop
   //
 
@@ -64,6 +72,15 @@ int main(int argc, char** argv)
     if (window::is_key_pressed(GLFW_KEY_ESCAPE))
       window::close();
 
+    gui::new_frame(&fb);
+
+    fb.bind();
+    gl::clear();
+
+    // Draw here....
+
+    fb.unbind();
+    gui::render();
     
     window::poll_events();
     window::swap_buffers();
@@ -81,3 +98,5 @@ int main(int argc, char** argv)
   }
   return 0;
 }
+
+#endif // BRENTA_USE_IMGUI

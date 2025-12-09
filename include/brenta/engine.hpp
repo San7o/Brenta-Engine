@@ -89,7 +89,8 @@ public:
   ~builder() = default;
   
   builder &subsystem(subsystem::builder &builder);
-  brenta::subsystem &build();
+  builder &subsystem(subsystem::builder &&builder);
+  brenta::subsystem &build() override;
   
 };
 

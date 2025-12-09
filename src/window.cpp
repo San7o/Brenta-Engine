@@ -56,12 +56,13 @@ std::expected<void, std::string> window::initialize()
 
   set_size_callback(framebuffer_size_callback);
 
+  INFO("window initialized")
   return {};
 }
 
 std::expected<void, std::string> window::terminate()
 {
-  INFO("Terminating window");
+  INFO("terminating window");
   glfwDestroyWindow(this->window_backend);
   glfwTerminate();
   INFO("window terminated");
@@ -119,7 +120,7 @@ void window::set_size_callback(GLFWframebuffersizefun callback)
 {
   glfwSetFramebufferSizeCallback(window::window_backend, callback);
 
-  INFO("Set framebuffer size callback");
+  INFO("set framebuffer size callback");
 }
 
 void window::set_mouse_capture(bool is_captured)
@@ -128,12 +129,12 @@ void window::set_mouse_capture(bool is_captured)
   if (is_captured)
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("Mouse capture enabled");
+    INFO("mouse capture enabled");
   }
   else
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("Mouse capture disabled");
+    INFO("mouse capture disabled");
   }
 }
 
@@ -157,7 +158,7 @@ void window::set_context_version(int major, int minor)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-  INFO("Set context to OpenGL version: {}.{}", major, minor);
+  INFO("set context to OpenGL version: {}.{}", major, minor);
 }
 
 void window::set_key_callback(GLFWkeyfun callback)
@@ -174,7 +175,7 @@ void window::use_core_profile()
 {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  INFO("Set OpenGL profile to core");
+  INFO("set OpenGL profile to core");
 }
 
 void window::set_hints_apple()
