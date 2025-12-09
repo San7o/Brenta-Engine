@@ -12,6 +12,14 @@
 
 using namespace brenta;
 
+int window::width;
+int window::height;
+GLFWwindow *window::window_backend;
+std::string window::title;
+bool window::capture_mouse;
+bool window::msaa;
+bool window::vsync;
+
 std::expected<void, std::string> window::initialize()
 {
   if (glfwInit() == GLFW_FALSE)
@@ -67,14 +75,14 @@ window &window::instance()
   return _instance;
 }
 
-bool window::is_window_closed()
+bool window::should_close()
 {
-  return glfwWindowShouldClose(this->window_backend);
+  return glfwWindowShouldClose(window::window_backend);
 }
 
 bool window::is_key_pressed(int key)
 {
-  return glfwGetKey(this->window_backend, key) == GLFW_PRESS;
+  return glfwGetKey(window::window_backend, key) == GLFW_PRESS;
 }
 
 float window::get_time()
@@ -104,38 +112,39 @@ int window::get_height()
 
 void window::set_mouse_callback(GLFWcursorposfun callback)
 {
-  glfwSetCursorPosCallback(this->window_backend, callback);
+  glfwSetCursorPosCallback(window::window_backend, callback);
 }
 
 void window::set_size_callback(GLFWframebuffersizefun callback)
 {
-  glfwSetFramebufferSizeCallback(this->window_backend, callback);
+  glfwSetFramebufferSizeCallback(window::window_backend, callback);
 
   INFO("Set framebuffer size callback");
 }
 
 void window::set_mouse_capture(bool is_captured)
 {
+  window::capture_mouse = is_captured;
   if (is_captured)
   {
-    glfwSetInputMode(this->window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("Mouse captured");
+    glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    INFO("Mouse capture enabled");
   }
   else
   {
-    glfwSetInputMode(this->window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("Mouse not captured");
+    glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    INFO("Mouse capture disabled");
   }
 }
 
-void window::set_close()
+void window::close()
 {
-  glfwSetWindowShouldClose(this->window_backend, GLFW_TRUE);
+  glfwSetWindowShouldClose(window::window_backend, GLFW_TRUE);
 }
 
 void window::swap_buffers()
 {
-  glfwSwapBuffers(this->window_backend);
+  glfwSwapBuffers(window::window_backend);
 }
 
 void window::poll_events()
@@ -153,7 +162,7 @@ void window::set_context_version(int major, int minor)
 
 void window::set_key_callback(GLFWkeyfun callback)
 {
-  glfwSetKeyCallback(this->window_backend, callback);
+  glfwSetKeyCallback(window::window_backend, callback);
 }
 
 void window::set_mouse_pos_callback(GLFWcursorposfun callback)
@@ -175,18 +184,18 @@ void window::set_hints_apple()
 
 void window::create_window(int width, int height, std::string title)
 {
-  this->window_backend = glfwCreateWindow(width, height, title.c_str(),
+  window::window_backend = glfwCreateWindow(width, height, title.c_str(),
                                           NULL, NULL);
-  if (this->window_backend == NULL)
+  if (window::window_backend == NULL)
   {
     ERROR("Failed to create GLFW window");
-    terminate();
+    window::instance().terminate();
   }
 }
 
 void window::make_context_current()
 {
-  glfwMakeContextCurrent(this->window_backend);
+  glfwMakeContextCurrent(window::window_backend);
 }
 
 void window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
@@ -195,8 +204,8 @@ void window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
 {
 #ifndef BRENTA_USE_IMGUI
   glViewport(0, 0, width, height);
-  this->width = width;
-  this->height = height;
+  window::width = width;
+  window::height = height;
 #endif
 }
 
@@ -206,41 +215,47 @@ void window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
 
 window::builder &window::builder::width(int width)
 {
-  this->_window.width = width;
+  this->_width = width;
   return *this;
 }
 
 window::builder &window::builder::height(int height)
 {
-  this->_window.height = height;
+  this->_height = height;
   return *this;
 }
 
 window::builder &window::builder::title(std::string title)
 {
-  this->_window.title = title;
+  this->_title = title;
   return *this;
 }
 
 window::builder &window::builder::capture_mouse()
 {
-  this->_window.capture_mouse = true;
+  this->_capture_mouse = true;
   return *this;
 }
 
 window::builder &window::builder::msaa()
 {
-  this->_window.msaa = true;
+  this->_msaa = true;
   return *this;
 }
 
 window::builder &window::builder::vsync()
 {
-  this->_window.vsync = true;
+  this->_vsync = true;
   return *this;
 }
 
 subsystem &window::builder::build()
 {
-  return this->_window;
+  window::width = this->_width;
+  window::height = this->_height;
+  window::title = this->_title;
+  window::capture_mouse = this->_capture_mouse;
+  window::msaa = this->_msaa;
+  window::vsync = this->_vsync;
+  return window::instance();
 }

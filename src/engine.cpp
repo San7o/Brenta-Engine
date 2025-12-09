@@ -8,6 +8,8 @@
 
 using namespace brenta;
 
+std::vector<std::reference_wrapper<subsystem>> engine::subsystems;
+
 std::expected<void, std::string> engine::initialize()
 {
   for (auto& s : this->subsystems)
@@ -42,7 +44,7 @@ std::expected<void, std::string> engine::add_subsystem(subsystem::builder &&buil
   std::reference_wrapper<brenta::subsystem> s = builder.build();
   if (!s.get().initialize().has_value())
     return std::unexpected(s.get().subsystem_name);
-  this->subsystems.push_back(s);
+  engine::subsystems.push_back(s);
   return {};
 }
 
@@ -52,11 +54,12 @@ std::expected<void, std::string> engine::add_subsystem(subsystem::builder &&buil
 
 brenta::engine::builder &engine::builder::subsystem(subsystem::builder &builder)
 {
-  this->_engine.subsystems.push_back(builder.build());
+  this->subsystems.push_back(builder.build());
   return *this;
 }
 
 subsystem &engine::builder::build()
 {
-  return this->_engine;
+  engine::subsystems = this->subsystems;
+  return engine::instance();
 }

@@ -45,7 +45,7 @@ class engine : public subsystem
 {
 protected:
 
-  std::vector<std::reference_wrapper<subsystem>> subsystems;
+  static std::vector<std::reference_wrapper<subsystem>> subsystems;
 
 public:
 
@@ -67,7 +67,7 @@ public:
    * @brief Initialize a subsistem and add it to the managed
    * subsystems
    */
-  std::expected<void, std::string> add_subsystem(subsystem::builder &&builder);
+  static std::expected<void, std::string> add_subsystem(subsystem::builder &&builder);
   
   class builder;
 };
@@ -81,11 +81,11 @@ class engine::builder : public subsystem::builder
 {
 private:
   
-  engine &_engine;
+  std::vector<std::reference_wrapper<brenta::subsystem>> subsystems;
   
 public:
 
-  builder() : _engine(engine::instance()) {}
+  builder() = default;
   ~builder() = default;
   
   builder &subsystem(subsystem::builder &builder);

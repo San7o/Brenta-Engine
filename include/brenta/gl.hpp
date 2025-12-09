@@ -9,7 +9,14 @@
 
 #pragma once
 
+#include <brenta/subsystem.hpp>
+
 #include <glad/glad.h> // OpenGL driver
+
+#include <expected>
+#include <string>
+
+#define check_error() gl::_check_error(__FILE__, __LINE__)
 
 namespace brenta
 {
@@ -19,27 +26,35 @@ namespace brenta
  *
  * This class contains helper functions to interact with OpenGL.
  */
-class gl
+class gl : public subsystem
 {
+protected:
+
+  static bool enable_blending;
+  static bool enable_cull_face;
+  static bool enable_multisample;
+  static bool enable_depth_test;
+  
 public:
-  /**
-   * @brief Load OpenGL
-   *
-   * This function loads OpenGL and sets some default values.
-   *
-   * @param gl_blending    Enable blending
-   * @param gl_cull_face   Enable face culling
-   * @param gl_multisample Enable multisampling
-   * @param gl_depth_test  Enable depth testing
-   */
-  static void load_opengl(bool gl_blending = true, bool gl_cull_face = true,
-                          bool gl_multisample = true,
-                          bool gl_depth_test = true);
+
+  class builder;
+  
+  std::string subsystem_name = "gl";
+
+  gl() = default;
+  ~gl() = default;
+
+  static gl &instance();
+
+  std::expected<void, std::string> initialize() override;
+  std::expected<void, std::string> terminate() override;
+  
   /**
    * @brief Set Poligon Mode
    * @param enable Enable or disable poligon mode
    */
   static void set_poligon_mode(GLboolean enable);
+  
   /**
    * @brief Set Viewport
    *
@@ -47,10 +62,11 @@ public:
    *
    * @param x          X coordinate of the viewport
    * @param y          Y coordinate of the viewport
-   * @param SCR_WIDTH  Width of the viewport
-   * @param SCR_HEIGHT Height of the viewport
+   * @param width      Width of the viewport
+   * @param height     Height of the viewport
    */
-  static void set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT);
+  static void set_viewport(int x, int y, int width, int height);
+  
   /**
    * @brief Set Clear Color
    *
@@ -62,6 +78,7 @@ public:
    * @param a Alpha component of the clear color
    */
   static void set_color(float r, float g, float b, float a);
+  
   /**
    * @brief Draw Arrays
    *
@@ -72,6 +89,7 @@ public:
    * @param count Specifies the number of indices to be rendered
    */
   static void draw_arrays(GLenum mode, int first, int count);
+  
   /**
    * @brief Draw Elements
    *
@@ -85,18 +103,16 @@ public:
    */
   static void draw_elements(GLenum mode, int count, GLenum type,
                             const void *indices);
+  
   /**
    * @brief Clear
    *
    * This function clears the color and depth buffer.
    */
   static void clear();
-  /**
-   * @brief Enable Depth Test
-   *
-   * This function enables the depth test.
-   */
+  
   static void bind_vertex_array(unsigned int n);
+  
   /**
    * @brief Check OpenGL error
    *
@@ -104,8 +120,30 @@ public:
    *
    * @return The error code
    */
-  static GLenum check_error_(const char *file, int line);
-#define check_error() gl::check_error_(__FILE__, __LINE__)
+  static GLenum _check_error(const char *file, int line);
 };
 
+class gl::builder : public subsystem::builder
+{
+private:
+
+  bool enable_blending = false;
+  bool enable_cull_face = false;
+  bool enable_multisample = false;
+  bool enable_depth_test = false;
+
+public:
+
+  builder() = default;
+  ~builder() = default;
+
+  builder &blending();
+  builder &cull_face();
+  builder &multisample();
+  builder &depth_test();
+
+  subsystem &build();
+  
+};
+  
 } // namespace brenta

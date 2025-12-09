@@ -129,8 +129,8 @@ void text::render_text(std::string text, float x, float y, float scale,
               color.z);
 
   glm::mat4 projection =
-    glm::ortho(0.0f, static_cast<float>(window::instance().get_width()), 0.0f,
-               static_cast<float>(window::instance().get_height()));
+    glm::ortho(0.0f, static_cast<float>(window::get_width()), 0.0f,
+               static_cast<float>(window::get_height()));
   glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1,
                      GL_FALSE, glm::value_ptr(projection));
 

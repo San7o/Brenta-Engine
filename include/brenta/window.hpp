@@ -29,16 +29,18 @@ class window : public subsystem
 {
 protected:
 
-  int width = 1280;
-  int height = 720;
-  GLFWwindow *window_backend = NULL;
-  std::string title = "Brenta Engine";
-  bool capture_mouse = false;
-  bool msaa = false;
-  bool vsync = false;
+  static int width;
+  static int height;
+  static GLFWwindow *window_backend;
+  static std::string title;
+  static bool capture_mouse;
+  static bool msaa;
+  static bool vsync;
   
 public:
 
+  class builder;
+  
   std::string subsystem_name = "window";
   
   window() = default;
@@ -52,34 +54,32 @@ public:
    */
   static brenta::window &instance();
   
-  class builder;
-  
   //
   // Getters
   //
   
-  int get_width();
-  int get_height();
-  bool is_window_closed();
-  bool is_key_pressed(int key);
-  float get_time();
-  GLFWwindow *get_window();  
+  static int get_width();
+  static int get_height();
+  static bool should_close();
+  static bool is_key_pressed(int key);
+  static float get_time();
+  static GLFWwindow *get_window();  
   /**
    * @brief Get the OpenGL function pointer
    * @return OpenGL function pointer
    */
-  GLFWglproc get_proc_address();
+  static GLFWglproc get_proc_address();
 
   //
   // Setters
   //
 
-  void set_mouse_callback(GLFWcursorposfun callback);
-  void set_size_callback(GLFWframebuffersizefun callback);
-  void set_mouse_pos_callback(GLFWcursorposfun callback);
-  void set_key_callback(GLFWkeyfun callback);
-  void set_mouse_capture(bool is_captured);
-  void set_close();
+  static void set_mouse_callback(GLFWcursorposfun callback);
+  static void set_size_callback(GLFWframebuffersizefun callback);
+  static void set_mouse_pos_callback(GLFWcursorposfun callback);
+  static void set_key_callback(GLFWkeyfun callback);
+  static void set_mouse_capture(bool is_captured);
+  static void close();
 
   //
   // Utils
@@ -90,18 +90,19 @@ public:
    *
    * Having two buffers is done to avoid flickering.
    */
-  void swap_buffers();
+  static void swap_buffers();
   /**
    * @brief Poll all pending events
    */
-  void poll_events();
+  static void poll_events();
 
 private:
-  void set_context_version(int major, int minor);
-  void use_core_profile();
-  void set_hints_apple();
-  void create_window(int width, int height, std::string title);
-  void make_context_current();
+  
+  static void set_context_version(int major, int minor);
+  static void use_core_profile();
+  static void set_hints_apple();
+  static void create_window(int width, int height, std::string title);
+  static void make_context_current();
   static void framebuffer_size_callback(GLFWwindow *window_backend, int width,
                                         int height);
 };
@@ -110,11 +111,16 @@ class window::builder : public subsystem::builder
 {
 private:
   
-  window &_window;
+  int _width = 800;
+  int _height = 600;
+  std::string _title = "Brenta Engine";
+  bool _capture_mouse = false;
+  bool _msaa = false;
+  bool _vsync = false;
   
 public:
 
-  builder() : _window(window::instance()) {}
+  builder() = default;
   ~builder() = default;
   
   builder &width(int width);

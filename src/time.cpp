@@ -14,7 +14,7 @@ float time::last_frame = 0.0f;
 
 float time::get_current_time()
 {
-  return window::instance().get_time();
+  return window::get_time();
 }
 
 float time::get_delta_time()

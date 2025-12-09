@@ -177,8 +177,8 @@ void particle_emitter::render_particles()
   glEnableVertexAttribArray(1);
 
   // Set uniforms
-  int window_width = window::instance().get_width();
-  int window_height = window::instance().get_height();
+  int window_width = window::get_width();
+  int window_height = window::get_height();
   types::translation t = types::translation();
   t.set_view(this->cam->get_view_matrix());
   t.set_projection(this->cam->get_projection_matrix(window_width, window_height));

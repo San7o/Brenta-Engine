@@ -25,7 +25,7 @@ void gui::init()
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
   // Setup Platform/Renderer backends
-  ImGui_ImplGlfw_InitForOpenGL(window::instance().get_window(), true);
+  ImGui_ImplGlfw_InitForOpenGL(window::get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 }
