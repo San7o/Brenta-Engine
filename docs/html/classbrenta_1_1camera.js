@@ -13,7 +13,7 @@ var classbrenta_1_1camera =
     [ "get_mouse_sensitivity", "classbrenta_1_1camera.html#aba4542e519548171330c220ba3817e65", null ],
     [ "get_movement_speed", "classbrenta_1_1camera.html#a9e57deb08d04838271e62b37ca121896", null ],
     [ "get_position", "classbrenta_1_1camera.html#a1d05d34ae3d66a5c942814e82035243a", null ],
-    [ "get_projection_matrix", "classbrenta_1_1camera.html#aa268f09b09f6d3163fdfef1fb1ec2bd2", null ],
+    [ "get_projection_matrix", "classbrenta_1_1camera.html#af49703def2f343334bb4f3d1333fb577", null ],
     [ "get_projection_type", "classbrenta_1_1camera.html#ace8d42304e9ee830402f2e2a67996c83", null ],
     [ "get_right", "classbrenta_1_1camera.html#a2c3a151f13844691cc39eb79f88535c5", null ],
     [ "get_spherical_coordinates", "classbrenta_1_1camera.html#a2dec820889c0aa97a9c400ec6391fb8d", null ],

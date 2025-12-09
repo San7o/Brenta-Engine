@@ -99,8 +99,12 @@ $(function(){initNavTree('classbrenta_1_1audio.html',''); initResizable(true); }
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::audio Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -109,33 +113,53 @@ $(function(){initNavTree('classbrenta_1_1audio.html',''); initResizable(true); }
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="audio_8hpp_source.html">audio.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for brenta::audio:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classbrenta_1_1audio.png" usemap="#brenta::audio_map" alt=""/>
+  <map id="brenta::audio_map" name="brenta::audio_map">
+<area href="classbrenta_1_1subsystem.html" title="Subsystem interface." alt="brenta::subsystem" shape="rect" coords="0,0,112,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1audio_1_1builder.html">builder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a496e77dd5a6fec661e6bc286f67507c9" id="r_a496e77dd5a6fec661e6bc286f67507c9"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a496e77dd5a6fec661e6bc286f67507c9">initialize</a> () override</td></tr>
+<tr class="memdesc:a496e77dd5a6fec661e6bc286f67507c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the audio subsystem.  <br /></td></tr>
+<tr class="separator:a496e77dd5a6fec661e6bc286f67507c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcd4ee54c94d12a5144f2d86a5a35414" id="r_abcd4ee54c94d12a5144f2d86a5a35414"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abcd4ee54c94d12a5144f2d86a5a35414">terminate</a> () override</td></tr>
+<tr class="memdesc:abcd4ee54c94d12a5144f2d86a5a35414"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the audio system.  <br /></td></tr>
+<tr class="separator:abcd4ee54c94d12a5144f2d86a5a35414"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:ae1a88f98ff4d261f3184b37824e7baf0" id="r_ae1a88f98ff4d261f3184b37824e7baf0"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1a88f98ff4d261f3184b37824e7baf0">init</a> ()</td></tr>
-<tr class="memdesc:ae1a88f98ff4d261f3184b37824e7baf0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the audio system.  <br /></td></tr>
-<tr class="separator:ae1a88f98ff4d261f3184b37824e7baf0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0dbd75bc5672effd7e93f0553b0d9e6f" id="r_a0dbd75bc5672effd7e93f0553b0d9e6f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0dbd75bc5672effd7e93f0553b0d9e6f">destroy</a> ()</td></tr>
-<tr class="memdesc:a0dbd75bc5672effd7e93f0553b0d9e6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the audio system.  <br /></td></tr>
-<tr class="separator:a0dbd75bc5672effd7e93f0553b0d9e6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ccdff20b31fbce762f756245f1947fe" id="r_a7ccdff20b31fbce762f756245f1947fe"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1audio.html">audio</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7ccdff20b31fbce762f756245f1947fe">instance</a> ()</td></tr>
+<tr class="separator:a7ccdff20b31fbce762f756245f1947fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a48fef9397e95cfa0b047c15d836a22b3" id="r_a48fef9397e95cfa0b047c15d836a22b3"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structbrenta_1_1types_1_1audio__file__t.html">types::audio_file_t</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a48fef9397e95cfa0b047c15d836a22b3">get_audio_file</a> (types::audio_name_t name)</td></tr>
 <tr class="memdesc:a48fef9397e95cfa0b047c15d836a22b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an audio file.  <br /></td></tr>
 <tr class="separator:a48fef9397e95cfa0b047c15d836a22b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae20e4621986bdf594cd6cb1a12f98864" id="r_ae20e4621986bdf594cd6cb1a12f98864"><td class="memItemLeft" align="right" valign="top">static SDL_AudioStream *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae20e4621986bdf594cd6cb1a12f98864">get_stream</a> (types::stream_name_t name)</td></tr>
 <tr class="memdesc:ae20e4621986bdf594cd6cb1a12f98864"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get an audio stream.  <br /></td></tr>
 <tr class="separator:ae20e4621986bdf594cd6cb1a12f98864"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11ab19d9b6b90efbcb5993468500c1ea" id="r_a11ab19d9b6b90efbcb5993468500c1ea"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a11ab19d9b6b90efbcb5993468500c1ea">load_audio</a> (types::audio_name_t name, std::string path)</td></tr>
-<tr class="memdesc:a11ab19d9b6b90efbcb5993468500c1ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an audio file.  <br /></td></tr>
-<tr class="separator:a11ab19d9b6b90efbcb5993468500c1ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a042ea242d50002f9d59329ca6fd31d45" id="r_a042ea242d50002f9d59329ca6fd31d45"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a042ea242d50002f9d59329ca6fd31d45">load</a> (types::audio_name_t name, std::string path)</td></tr>
+<tr class="memdesc:a042ea242d50002f9d59329ca6fd31d45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load an audio file.  <br /></td></tr>
+<tr class="separator:a042ea242d50002f9d59329ca6fd31d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a85806d79d2556e2ebea46b578edea346" id="r_a85806d79d2556e2ebea46b578edea346"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a85806d79d2556e2ebea46b578edea346">create_stream</a> (types::stream_name_t)</td></tr>
 <tr class="memdesc:a85806d79d2556e2ebea46b578edea346"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an audio stream.  <br /></td></tr>
 <tr class="separator:a85806d79d2556e2ebea46b578edea346"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a417323e12764d43a833ec0f400e6e01b" id="r_a417323e12764d43a833ec0f400e6e01b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a417323e12764d43a833ec0f400e6e01b">play_audio</a> (types::audio_name_t, types::stream_name_t=&quot;default&quot;)</td></tr>
 <tr class="memdesc:a417323e12764d43a833ec0f400e6e01b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play an audio file.  <br /></td></tr>
 <tr class="separator:a417323e12764d43a833ec0f400e6e01b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a637d59f4ad5ba2bf817cd352c3a258" id="r_a8a637d59f4ad5ba2bf817cd352c3a258"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8a637d59f4ad5ba2bf817cd352c3a258">set_volume</a> (types::stream_name_t name, int volume)</td></tr>
-<tr class="memdesc:a8a637d59f4ad5ba2bf817cd352c3a258"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume of a stream.  <br /></td></tr>
-<tr class="separator:a8a637d59f4ad5ba2bf817cd352c3a258"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6121dd94e2436717f32d383c37a268ee" id="r_a6121dd94e2436717f32d383c37a268ee"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6121dd94e2436717f32d383c37a268ee">set_volume</a> (types::stream_name_t name, float gain)</td></tr>
+<tr class="memdesc:a6121dd94e2436717f32d383c37a268ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the volume (gain) of a stream.  <br /></td></tr>
+<tr class="separator:a6121dd94e2436717f32d383c37a268ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a90d6ff6e9009d8d386e47bf93c3ed6f2" id="r_a90d6ff6e9009d8d386e47bf93c3ed6f2"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90d6ff6e9009d8d386e47bf93c3ed6f2">pause_stream</a> (types::stream_name_t name)</td></tr>
 <tr class="memdesc:a90d6ff6e9009d8d386e47bf93c3ed6f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pause a stream.  <br /></td></tr>
 <tr class="separator:a90d6ff6e9009d8d386e47bf93c3ed6f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -146,6 +170,14 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a79231d6069f60310cb305bfba97fdb85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stop a stream.  <br /></td></tr>
 <tr class="separator:a79231d6069f60310cb305bfba97fdb85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:a594e950d8af10b3f7a4083349544c1ae" id="r_a594e950d8af10b3f7a4083349544c1ae"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a594e950d8af10b3f7a4083349544c1ae">subsystem_name</a> = &quot;audio&quot;</td></tr>
+<tr class="separator:a594e950d8af10b3f7a4083349544c1ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
+<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a1ab79e5e339e1b21b0cf8115cddbd4cc" id="r_a1ab79e5e339e1b21b0cf8115cddbd4cc"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; types::audio_name_t, <a class="el" href="structbrenta_1_1types_1_1audio__file__t.html">types::audio_file_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1ab79e5e339e1b21b0cf8115cddbd4cc">audio_files</a></td></tr>
@@ -154,12 +186,19 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:a1123b2568f5aa72f029b7438ec7637a7" id="r_a1123b2568f5aa72f029b7438ec7637a7"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; types::stream_name_t, SDL_AudioStream * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1123b2568f5aa72f029b7438ec7637a7">streams</a></td></tr>
 <tr class="memdesc:a1123b2568f5aa72f029b7438ec7637a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Map of audio streams.  <br /></td></tr>
 <tr class="separator:a1123b2568f5aa72f029b7438ec7637a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a90d5b2f42c775e2f07de7e366fd8fb8b" id="r_a90d5b2f42c775e2f07de7e366fd8fb8b"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; types::audio_name_t, std::string &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90d5b2f42c775e2f07de7e366fd8fb8b">init_files</a></td></tr>
+<tr class="separator:a90d5b2f42c775e2f07de7e366fd8fb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d291eb69b20f063ee40d44ffa2e5517" id="r_a2d291eb69b20f063ee40d44ffa2e5517"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::pair&lt; types::stream_name_t, float &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2d291eb69b20f063ee40d44ffa2e5517">init_streams</a></td></tr>
+<tr class="separator:a2d291eb69b20f063ee40d44ffa2e5517"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Audio subsystem. </p>
 <p>This class contains the audio subsystem of the engine. It is used to load audio files, create audio streams, play audio files on streams, set the volume of streams, pause, resume and stop streams. The audio system needs to be initialized and destroyed by the engine. Audio files and streamd are stored in maps and are identified by this name. </p>
 
-<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00072">72</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00077">77</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a79231d6069f60310cb305bfba97fdb85" name="a79231d6069f60310cb305bfba97fdb85"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a79231d6069f60310cb305bfba97fdb85">&#9670;&#160;</a></span>clear_stream()</h2>
@@ -193,7 +232,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00132">132</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00153">153</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -229,37 +268,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00076">76</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a0dbd75bc5672effd7e93f0553b0d9e6f" name="a0dbd75bc5672effd7e93f0553b0d9e6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0dbd75bc5672effd7e93f0553b0d9e6f">&#9670;&#160;</a></span>destroy()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void audio::destroy </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Destroy the audio system. </p>
-<p>This function frees all audio streams and audio files, and closes the audio system. </p>
-
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00029">29</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00097">97</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +305,7 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The audio file </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00092">92</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00113">113</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -333,12 +342,12 @@ Static Public Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The audio stream </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00102">102</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00123">123</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae1a88f98ff4d261f3184b37824e7baf0" name="ae1a88f98ff4d261f3184b37824e7baf0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1a88f98ff4d261f3184b37824e7baf0">&#9670;&#160;</a></span>init()</h2>
+<a id="a496e77dd5a6fec661e6bc286f67507c9" name="a496e77dd5a6fec661e6bc286f67507c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a496e77dd5a6fec661e6bc286f67507c9">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -347,7 +356,39 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void audio::init </td>
+          <td class="memname">std::expected&lt; void, std::string &gt; audio::initialize </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initialize the audio subsystem. </p>
+<p>This function initializes the audio subsystem of the engine. It creates a default stream called "default". </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00018">18</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7ccdff20b31fbce762f756245f1947fe" name="a7ccdff20b31fbce762f756245f1947fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ccdff20b31fbce762f756245f1947fe">&#9670;&#160;</a></span>instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classbrenta_1_1audio.html">audio</a> &amp; audio::instance </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -360,15 +401,12 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize the audio system. </p>
-<p>This function initializes the audio system of the engine. It is called automatically by the engine when the game is started. It creates a default stream called "default". </p>
-
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00016">16</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00058">58</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a11ab19d9b6b90efbcb5993468500c1ea" name="a11ab19d9b6b90efbcb5993468500c1ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11ab19d9b6b90efbcb5993468500c1ea">&#9670;&#160;</a></span>load_audio()</h2>
+<a id="a042ea242d50002f9d59329ca6fd31d45" name="a042ea242d50002f9d59329ca6fd31d45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a042ea242d50002f9d59329ca6fd31d45">&#9670;&#160;</a></span>load()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -377,7 +415,7 @@ Static Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void audio::load_audio </td>
+          <td class="memname">void audio::load </td>
           <td>(</td>
           <td class="paramtype">types::audio_name_t</td>          <td class="paramname"><span class="paramname"><em>name</em></span>, </td>
         </tr>
@@ -404,7 +442,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00043">43</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00064">64</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -440,7 +478,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00146">146</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00167">167</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -481,7 +519,7 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00060">60</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00081">81</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -517,12 +555,12 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00160">160</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00181">181</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a8a637d59f4ad5ba2bf817cd352c3a258" name="a8a637d59f4ad5ba2bf817cd352c3a258"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8a637d59f4ad5ba2bf817cd352c3a258">&#9670;&#160;</a></span>set_volume()</h2>
+<a id="a6121dd94e2436717f32d383c37a268ee" name="a6121dd94e2436717f32d383c37a268ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6121dd94e2436717f32d383c37a268ee">&#9670;&#160;</a></span>set_volume()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -538,7 +576,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>volume</em></span>&#160;)</td>
+          <td class="paramtype">float</td>          <td class="paramname"><span class="paramname"><em>gain</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -548,8 +586,8 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Set the volume of a stream. </p>
-<p>This function sets the volume of the stream with the given name. If the stream does not exist, it does nothing.</p>
+<p>Set the volume (gain) of a stream. </p>
+<p>A gain of 1.0 does not change anything, a gain of 0.0 is silent. This function sets the volume of the stream with the given name. If the stream does not exist, it does nothing.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>The name of the stream </td></tr>
@@ -558,7 +596,39 @@ Static Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00112">112</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00133">133</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
+
+</div>
+</div>
+<a id="abcd4ee54c94d12a5144f2d86a5a35414" name="abcd4ee54c94d12a5144f2d86a5a35414"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcd4ee54c94d12a5144f2d86a5a35414">&#9670;&#160;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, std::string &gt; audio::terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Destroy the audio system. </p>
+<p>This function frees all audio streams and audio files, and closes the audio system. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="audio_8cpp_source.html#l00043">43</a> of file <a class="el" href="audio_8cpp_source.html">audio.cpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +656,57 @@ Static Public Attributes</h2></td></tr>
 <p>Map of audio files. </p>
 <p>This map contains all the audio files loaded by the engine. The key is the name of the audio file provided by the user, the value is the struct AudioFile containing the path to the audio file, the audio buffer, the length of the audio buffer and the audio format. </p>
 
+<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00104">104</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a90d5b2f42c775e2f07de7e366fd8fb8b" name="a90d5b2f42c775e2f07de7e366fd8fb8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90d5b2f42c775e2f07de7e366fd8fb8b">&#9670;&#160;</a></span>init_files</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; types::audio_name_t, std::string &gt; &gt; audio::init_files</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A list of pairs (id, pathname) of audio files that will be loaded when the subsystem is initialized. </p>
+
 <p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00085">85</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2d291eb69b20f063ee40d44ffa2e5517" name="a2d291eb69b20f063ee40d44ffa2e5517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d291eb69b20f063ee40d44ffa2e5517">&#9670;&#160;</a></span>init_streams</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::pair&lt; types::stream_name_t, float &gt; &gt; audio::init_streams</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>A list of pairs (id, gain) of streams that will be created when the subsystem is initialized. </p>
+
+<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00090">90</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
 
 </div>
 </div>
@@ -613,7 +733,23 @@ Static Public Attributes</h2></td></tr>
 <p>Map of audio streams. </p>
 <p>This map contains all the audio streams created by the engine. The key is the name of the stream provided by the user, the value is the SDL_AudioStream pointer. A stream can only play one audio file at a time, so multiple streams need to be created to play multiple audio files at the same time. The engine creates a default stream called "default", the handling of the streams is left to the programmer. </p>
 
-<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00097">97</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00117">117</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a594e950d8af10b3f7a4083349544c1ae" name="a594e950d8af10b3f7a4083349544c1ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a594e950d8af10b3f7a4083349544c1ae">&#9670;&#160;</a></span>subsystem_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string brenta::audio::subsystem_name = &quot;audio&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="audio_8hpp_source.html#l00121">121</a> of file <a class="el" href="audio_8hpp_source.html">audio.hpp</a>.</p>
 
 </div>
 </div>

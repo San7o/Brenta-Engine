@@ -106,7 +106,7 @@ $(function(){initNavTree('time_8cpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Mail:    giovanni.santini@proton.me</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/screen.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/time.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">using namespace </span>brenta;</div>
@@ -118,7 +118,7 @@ $(function(){initNavTree('time_8cpp_source.html',''); initResizable(true); });
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">   15</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">time::get_current_time</a>()</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classbrenta_1_1screen.html#ae03e7a26cc3a045d382140784764d931">screen::get_time</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> window::get_time();</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
 </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
@@ -144,7 +144,6 @@ $(function(){initNavTree('time_8cpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  last_frame = current_time;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
 </div>
-<div class="ttc" id="aclassbrenta_1_1screen_html_ae03e7a26cc3a045d382140784764d931"><div class="ttname"><a href="classbrenta_1_1screen.html#ae03e7a26cc3a045d382140784764d931">brenta::screen::get_time</a></div><div class="ttdeci">static float get_time()</div><div class="ttdoc">Get the time.</div><div class="ttdef"><b>Definition</b> <a href="screen_8cpp_source.html#l00068">screen.cpp:68</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1time_html_a35621abc39ae9c6b06683abbf4837c1f"><div class="ttname"><a href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">brenta::time::get_current_time</a></div><div class="ttdeci">static float get_current_time()</div><div class="ttdoc">Get the current time.</div><div class="ttdef"><b>Definition</b> <a href="#l00015">time.cpp:15</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1time_html_a506678831ff67ca3e194da45c2c9c9f7"><div class="ttname"><a href="classbrenta_1_1time.html#a506678831ff67ca3e194da45c2c9c9f7">brenta::time::update</a></div><div class="ttdeci">static void update(float new_time)</div><div class="ttdoc">Update the time.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">time.cpp:30</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1time_html_a7da826481e6cc1db2a724ff6d6673701"><div class="ttname"><a href="classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701">brenta::time::get_delta_time</a></div><div class="ttdeci">static float get_delta_time()</div><div class="ttdoc">Get the time since the last frame.</div><div class="ttdef"><b>Definition</b> <a href="#l00020">time.cpp:20</a></div></div>

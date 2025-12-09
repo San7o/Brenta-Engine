@@ -19,13 +19,15 @@ var annotated_dup =
       [ "gl", "classbrenta_1_1gl.html", "classbrenta_1_1gl" ],
       [ "gui", "classbrenta_1_1gui.html", "classbrenta_1_1gui" ],
       [ "input", "classbrenta_1_1input.html", "classbrenta_1_1input" ],
+      [ "logger", "classbrenta_1_1logger.html", "classbrenta_1_1logger" ],
       [ "mesh", "classbrenta_1_1mesh.html", "classbrenta_1_1mesh" ],
       [ "model", "classbrenta_1_1model.html", "classbrenta_1_1model" ],
       [ "particle_emitter", "classbrenta_1_1particle__emitter.html", "classbrenta_1_1particle__emitter" ],
-      [ "screen", "classbrenta_1_1screen.html", "classbrenta_1_1screen" ],
       [ "shader", "classbrenta_1_1shader.html", "classbrenta_1_1shader" ],
+      [ "subsystem", "classbrenta_1_1subsystem.html", "classbrenta_1_1subsystem" ],
       [ "text", "classbrenta_1_1text.html", "classbrenta_1_1text" ],
       [ "texture", "classbrenta_1_1texture.html", "classbrenta_1_1texture" ],
-      [ "time", "classbrenta_1_1time.html", "classbrenta_1_1time" ]
+      [ "time", "classbrenta_1_1time.html", "classbrenta_1_1time" ],
+      [ "window", "classbrenta_1_1window.html", "classbrenta_1_1window" ]
     ] ]
 ];

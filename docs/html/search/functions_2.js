@@ -1,12 +1,6 @@
 var searchData=
 [
-  ['camera_0',['camera',['../classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e',1,'brenta::camera::camera()=default'],['../classbrenta_1_1camera.html#a54f38c7bb6568e2011e6d236e56bd66e',1,'brenta::camera::camera(enums::camera_type camera_type, enums::projection_type projection_type, glm::vec3 position, glm::vec3 world_up, glm::vec3 center, float movement_speed, float mouse_sensitivity, float zoom, types::spherical_coordinates spherical_coordinates, types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up, glm::vec3 right)']]],
-  ['check_5ferror_5f_1',['check_error_',['../classbrenta_1_1gl.html#abad318d324046f5e38657fa16fd8b7ab',1,'brenta::gl']]],
-  ['clear_2',['clear',['../classbrenta_1_1gl.html#a3e2435d63372b4747cd4f0a5c7cd1f3b',1,'brenta::gl']]],
-  ['clear_5fstream_3',['clear_stream',['../classbrenta_1_1audio.html#a79231d6069f60310cb305bfba97fdb85',1,'brenta::audio']]],
-  ['copy_5fdata_4',['copy_data',['../classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466',1,'brenta::types::buffer']]],
-  ['copy_5findices_5',['copy_indices',['../classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3',1,'brenta::types::buffer']]],
-  ['copy_5fvertices_6',['copy_vertices',['../classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8',1,'brenta::types::buffer']]],
-  ['create_7',['create',['../classbrenta_1_1shader.html#a98f844b96534b21b102db3540bc62937',1,'brenta::shader::create(std::string shader_name, GLenum type, std::string path, Args... args)'],['../classbrenta_1_1shader.html#a7928e34a5b48eb4171a7d29eb5022e75',1,'brenta::shader::create(const GLchar **feedback_varyings, int num_varyings, std::string shader_name, GLenum type, std::string path, Args... args)']]],
-  ['create_5fstream_8',['create_stream',['../classbrenta_1_1audio.html#a85806d79d2556e2ebea46b578edea346',1,'brenta::audio']]]
+  ['bind_0',['bind',['../classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24',1,'brenta::types::buffer::bind()'],['../classbrenta_1_1types_1_1framebuffer.html#af920ab8bbef71e119459a4445add1b91',1,'brenta::types::framebuffer::bind()'],['../classbrenta_1_1types_1_1vao.html#a1beb018bd21f3f01f54a494c3fe50f6e',1,'brenta::types::vao::bind()']]],
+  ['bind_5ftexture_1',['bind_texture',['../classbrenta_1_1texture.html#aeaf372220a376e21b544f35a7a8fbb1d',1,'brenta::texture']]],
+  ['buffer_2',['buffer',['../classbrenta_1_1types_1_1buffer.html#aafbc9b192c26c6ad9b46a741b3a4667d',1,'brenta::types::buffer::buffer()'],['../classbrenta_1_1types_1_1buffer.html#a8e1ed8cd3651e3e6d900c57284b6f3fd',1,'brenta::types::buffer::buffer(GLenum input_target)']]]
 ];

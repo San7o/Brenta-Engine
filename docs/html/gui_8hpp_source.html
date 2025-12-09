@@ -107,35 +107,63 @@ $(function(){initNavTree('gui_8hpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#ifdef BRENTA_USE_IMGUI</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/frame_buffer.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;imgui_impl_glfw.h&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;imgui_impl_opengl3.h&gt;</span></div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>brenta</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifdef BRENTA_USE_IMGUI</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/frame_buffer.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/subsystem.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;imgui.h&gt;</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;imgui_impl_glfw.h&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;imgui_impl_opengl3.h&gt;</span></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="};">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html">   25</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1gui.html">gui</a></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#aebb43466de560416eccb0c2a70d7d92d">init</a>();</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">destroy</a>();</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">new_frame</a>(<a class="code hl_class" href="classbrenta_1_1types_1_1framebuffer.html">types::framebuffer</a> *fb);</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">render</a>();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>};</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">namespace </span>brenta</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
+<div class="foldopen" id="foldopen00026" data-start="{" data-end="};">
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui.html">   26</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1gui.html">gui</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1subsystem.html">subsystem</a></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>{</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1gui_1_1builder.html">builder</a>;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  std::string subsystem_name = <span class="stringliteral">&quot;gui&quot;</span>;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classbrenta_1_1gui.html">gui</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_class" href="classbrenta_1_1gui.html">~gui</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  std::expected&lt;void, std::string&gt; initialize() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  std::expected&lt;void, std::string&gt; terminate() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1gui.html">gui</a> &amp;instance();</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">new_frame</a>(<a class="code hl_class" href="classbrenta_1_1types_1_1framebuffer.html">types::framebuffer</a> *fb);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">render</a>();</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>} <span class="comment">// namespace brenta</span></div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html"><div class="ttname"><a href="classbrenta_1_1gui.html">brenta::gui</a></div><div class="ttdoc">Gui class.</div><div class="ttdef"><b>Definition</b> <a href="#l00025">gui.hpp:26</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a6f70a8c24f76a12344db36e2b2c55914"><div class="ttname"><a href="classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914">brenta::gui::destroy</a></div><div class="ttdeci">static void destroy()</div><div class="ttdoc">Delete the gui.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00033">gui.cpp:33</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a7b4660a6c5c99625fb5e4900db49751b"><div class="ttname"><a href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">brenta::gui::new_frame</a></div><div class="ttdeci">static void new_frame(types::framebuffer *fb)</div><div class="ttdoc">Start a new frame To be called at each frame before rendering.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00040">gui.cpp:40</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_a822a3004d1fe1c9d9e7933e26caebf99"><div class="ttname"><a href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">brenta::gui::render</a></div><div class="ttdeci">static void render()</div><div class="ttdoc">Render the gui To be called at each frame after rendering.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00067">gui.cpp:67</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1gui_html_aebb43466de560416eccb0c2a70d7d92d"><div class="ttname"><a href="classbrenta_1_1gui.html#aebb43466de560416eccb0c2a70d7d92d">brenta::gui::init</a></div><div class="ttdeci">static void init()</div><div class="ttdoc">Initialize the gui.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00016">gui.cpp:16</a></div></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="foldopen" id="foldopen00056" data-start="{" data-end="};">
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno"><a class="line" href="classbrenta_1_1gui_1_1builder.html">   56</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1gui_1_1builder.html">gui::builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1subsystem_1_1builder.html">subsystem::builder</a></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>{</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_class" href="classbrenta_1_1gui_1_1builder.html">builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_class" href="classbrenta_1_1gui_1_1builder.html">~builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <a class="code hl_class" href="classbrenta_1_1subsystem.html">brenta::subsystem</a> &amp;build() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
+</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>} <span class="comment">// namespace brenta</span></div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span><span class="preprocessor">#endif </span><span class="comment">// BRENTA_USE_IMGUI</span></div>
+<div class="ttc" id="aclassbrenta_1_1gui_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1gui_1_1builder.html">brenta::gui::builder</a></div><div class="ttdef"><b>Definition</b> <a href="#l00056">gui.hpp:57</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html"><div class="ttname"><a href="classbrenta_1_1gui.html">brenta::gui</a></div><div class="ttdoc">Gui class.</div><div class="ttdef"><b>Definition</b> <a href="#l00026">gui.hpp:27</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html_a7b4660a6c5c99625fb5e4900db49751b"><div class="ttname"><a href="classbrenta_1_1gui.html#a7b4660a6c5c99625fb5e4900db49751b">brenta::gui::new_frame</a></div><div class="ttdeci">static void new_frame(types::framebuffer *fb)</div><div class="ttdoc">Start a new frame To be called at each frame before rendering.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00054">gui.cpp:54</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gui_html_a822a3004d1fe1c9d9e7933e26caebf99"><div class="ttname"><a href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">brenta::gui::render</a></div><div class="ttdeci">static void render()</div><div class="ttdoc">Render the gui To be called at each frame after rendering.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00081">gui.cpp:81</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1subsystem_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1subsystem_1_1builder.html">brenta::subsystem::builder</a></div><div class="ttdoc">Builder interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00040">subsystem.hpp:41</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1subsystem_html"><div class="ttname"><a href="classbrenta_1_1subsystem.html">brenta::subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1framebuffer_html"><div class="ttname"><a href="classbrenta_1_1types_1_1framebuffer.html">brenta::types::framebuffer</a></div><div class="ttdoc">FrameBuffer class.</div><div class="ttdef"><b>Definition</b> <a href="frame__buffer_8hpp_source.html#l00025">frame_buffer.hpp:26</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
