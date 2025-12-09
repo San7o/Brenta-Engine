@@ -115,7 +115,8 @@ if (BRENTA_BRENTA_USE_IMGUI)
   list(APPEND BRENTA_DEFINES BRENTA_USE_IMGUI)
   list(APPEND BRENTA_DEPS_INCLUDES
     ${PROJECT_SOURCE_DIR}/external/imgui
-    ${PROJECT_SOURCE_DIR}/external/imgui/backends)
+    ${PROJECT_SOURCE_DIR}/external/imgui/backends
+    ${PROJECT_SOURCE_DIR}/external/imgui/misc/cpp)
 
   # ImGUI wants X11
   list(APPEND BRENTA_DEPS_LIBS X11)
@@ -125,7 +126,8 @@ if (BRENTA_BRENTA_USE_IMGUI)
       "external/imgui/*.cpp"
       "external/imgui/backends/imgui_impl_glfw.cpp"
       "external/imgui/misc/cpp/imgui_stdlib.cpp"
-      "external/imgui/backends/imgui_impl_opengl3.cpp")
+      "external/imgui/backends/imgui_impl_opengl3.cpp"
+      "external/imgui/misc/cpp/imgui_stdlib.h")
     list(APPEND BRENTA_DEPS_SOURCES ${IMGUI_SOURCES})
     list(APPEND BRENTA_DEPS_HEADERS "external/imgui/imgui.h")
   endif()
