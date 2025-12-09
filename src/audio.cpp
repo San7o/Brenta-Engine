@@ -10,23 +10,37 @@
 
 using namespace brenta;
 
+std::vector<std::pair<types::audio_name_t, std::string>> audio::init_files;
+std::vector<std::pair<types::stream_name_t, float>> audio::init_streams;
 std::unordered_map<types::audio_name_t, types::audio_file_t> audio::audio_files;
 std::unordered_map<types::stream_name_t, SDL_AudioStream *> audio::streams;
 
-void audio::init()
+std::expected<void, std::string> audio::initialize()
 {
   if (!SDL_Init(SDL_INIT_AUDIO))
   {
     auto error = SDL_GetError();
     ERROR("SDL Audio failed to initialize: {}", error);
-    return;
+    return std::unexpected(this->subsystem_name);
   }
 
-  audio::create_stream("default");
-  INFO("SDL Audio initialized");
+  for (auto& f : init_files)
+  {
+    load(f.first, f.second);
+  }
+
+  for (auto& s : init_streams)
+  {
+    create_stream(s.first);
+    set_volume(s.first, s.second);
+  }
+
+  create_stream("default");
+  INFO("audio initialized");
+  return {};
 }
 
-void audio::destroy()
+std::expected<void, std::string> audio::terminate()
 {
   for (auto &stream : audio::streams)
     SDL_DestroyAudioStream(stream.second);
@@ -37,10 +51,17 @@ void audio::destroy()
   }
 
   SDL_Quit();
-  INFO("SDL Audio destroyed");
+  INFO("audio termianted");
+  return {};
 }
 
-void audio::load_audio(types::audio_name_t name, std::string path)
+audio &audio::instance()
+{
+  static audio _audio;
+  return _audio;
+}
+
+void audio::load(types::audio_name_t name, std::string path)
 {
   types::audio_file_t audiofile;
   audiofile.path = path;
@@ -109,7 +130,7 @@ SDL_AudioStream *audio::get_stream(types::stream_name_t name)
   return audio::streams.at(name);
 }
 
-void audio::set_volume(types::stream_name_t name, int volume)
+void audio::set_volume(types::stream_name_t name, float gain)
 {
   auto stream = audio::get_stream(name);
   if (stream == nullptr)
@@ -118,9 +139,9 @@ void audio::set_volume(types::stream_name_t name, int volume)
     return;
   }
 
-  if (!SDL_SetAudioStreamGain(stream, volume))
+  if (!SDL_SetAudioStreamGain(stream, gain))
     check_error_audio();
-  INFO("Volume set to {}", volume);
+  INFO("Volume set to {}", gain);
 }
 
 void audio::check_error_audio()
@@ -169,4 +190,27 @@ void audio::resume_stream(types::stream_name_t name)
   if (!SDL_ResumeAudioStreamDevice(stream))
     check_error_audio();
   INFO("Stream resumed");
+}
+
+//
+// Builder
+//
+
+audio::builder &audio::builder::load(types::audio_name_t id, std::string path)
+{
+  this->init_files.push_back(std::make_pair(id, path));
+  return *this;
+}
+
+audio::builder &audio::builder::stream(types::stream_name_t name, float gain)
+{
+  this->init_streams.push_back(std::make_pair(name, gain));
+  return *this;
+}
+
+subsystem &audio::builder::build()
+{
+  audio::init_files = this->init_files;
+  audio::init_streams = this->init_streams;
+  return audio::instance();
 }

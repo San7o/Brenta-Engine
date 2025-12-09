@@ -5,7 +5,10 @@
 
 #pragma once
 
+#include <brenta/subsystem.hpp>
+
 #include <SDL3/SDL_audio.h>
+
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -23,10 +26,11 @@ typedef std::string audio_name_t;
 /**
  * @brief Struct containing information about an audio file
  *
- * This struct contains information about an audio file loaded by the engine.
- * It contains the path to the audio file, the audio buffer, the length of the
- * audio buffer and the audio format. It is autocamatically created by the
- * engine when an audio file is loaded with the LoadAudio function.
+ * This struct contains information about an audio file loaded by the
+ * engine.  It contains the path to the audio file, the audio buffer,
+ * the length of the audio buffer and the audio format. It is
+ * autocamatically created by the engine when an audio file is loaded
+ * with the LoadAudio function.
  */
 struct audio_file_t
 {
@@ -63,24 +67,38 @@ struct audio_file_t
 /**
  * @brief Audio subsystem
  *
- * This class contains the audio subsystem of the engine. It is used to load
- * audio files, create audio streams, play audio files on streams, set the
- * volume of streams, pause, resume and stop streams. The audio system
- * needs to be initialized and destroyed by the engine. Audio files and
- * streamd are stored in maps and are identified by this name.
+ * This class contains the audio subsystem of the engine. It is used
+ * to load audio files, create audio streams, play audio files on
+ * streams, set the volume of streams, pause, resume and stop
+ * streams. The audio system needs to be initialized and destroyed by
+ * the engine. Audio files and streamd are stored in maps and are
+ * identified by this name.
  */
-class audio
+class audio : public subsystem
 {
+protected:
+
+  /**
+   * A list of pairs (id, pathname) of audio files that will be loaded
+   * when the subsystem is initialized.
+   */
+  static std::vector<std::pair<types::audio_name_t, std::string>> init_files;
+  /**
+   * A list of pairs (id, gain) of streams that will be created when
+   * the subsystem is initialized.
+   */  
+  static std::vector<std::pair<types::stream_name_t, float>> init_streams;
+  
 public:
   
   /**
    * @brief Map of audio files
    *
-   * This map contains all the audio files loaded by the engine.
-   * The key is the name of the audio file provided by the user,
-   * the value is the struct AudioFile containing the path to the
-   * audio file, the audio buffer, the length of the audio buffer
-   * and the audio format.
+   * This map contains all the audio files loaded by the engine.  The
+   * key is the name of the audio file provided by the user, the value
+   * is the struct AudioFile containing the path to the audio file,
+   * the audio buffer, the length of the audio buffer and the audio
+   * format.
    */
   static std::unordered_map<types::audio_name_t, types::audio_file_t>
     audio_files;
@@ -92,36 +110,42 @@ public:
    * The key is the name of the stream provided by the user, the value
    * is the SDL_AudioStream pointer. A stream can only play one audio
    * file at a time, so multiple streams need to be created to play
-   * multiple audio files at the same time. The engine creates a default
-   * stream called "default", the handling of the streams is left to the
-   * programmer.
+   * multiple audio files at the same time. The engine creates a
+   * default stream called "default", the handling of the streams is
+   * left to the programmer.
    */
   static std::unordered_map<types::stream_name_t, SDL_AudioStream *> streams;
 
-  audio() = delete;
+  class builder;
+
+  std::string subsystem_name = "audio";
   
+  audio() = default;
+  ~audio() = default;
+
   /**
    * @brief Initialize the audio subsystem
    *
-   * This function initializes the audio subsystem of the engine.  It
-   * is called automatically by the engine when the game is
-   * started. It creates a default stream called "default".
+   * This function initializes the audio subsystem of the engine. It
+   * creates a default stream called "default".
    */
-  static void init();
-  
+  std::expected<void, std::string> initialize() override;
+    
   /**
    * @brief Destroy the audio system
    *
-   * This function frees all audio streams and audio files,
-   * and closes the audio system.
+   * This function frees all audio streams and audio files, and closes
+   * the audio system.
    */
-  static void destroy();
+  std::expected<void, std::string> terminate() override;
+
+  static audio &instance();
 
   /**
    * @brief Get an audio file
    *
-   * This function returns the audio file with the given name.
-   * If the audio file does not exist, it returns an empty AudioFile.
+   * This function returns the audio file with the given name.  If the
+   * audio file does not exist, it returns an empty AudioFile.
    *
    * @param name The name of the audio file
    * @return The audio file
@@ -131,8 +155,8 @@ public:
   /**
    * @brief Get an audio stream
    *
-   * This function returns the audio stream with the given name.
-   * If the audio stream does not exist, it returns nullptr.
+   * This function returns the audio stream with the given name.  If
+   * the audio stream does not exist, it returns nullptr.
    *
    * @param name The name of the audio stream
    * @return The audio stream
@@ -142,19 +166,19 @@ public:
   /**
    * @brief Load an audio file
    *
-   * This function loads an audio file from the given path and
-   * stores it in the audiofiles map with the given name.
+   * This function loads an audio file from the given path and stores
+   * it in the audiofiles map with the given name.
    *
    * @param name The name of the audio file
    * @param path The path to the audio file
    */
-  static void load_audio(types::audio_name_t name, std::string path);
+  static void load(types::audio_name_t name, std::string path);
   
   /**
    * @brief Create an audio stream
    *
-   * This function creates an audio stream with the given name.
-   * If a stream with the same name already exists, it does nothing.
+   * This function creates an audio stream with the given name.  If a
+   * stream with the same name already exists, it does nothing.
    *
    * @param name The name of the stream
    */
@@ -165,8 +189,8 @@ public:
    *
    * This function plays the audio file with the given name on the
    * stream with the given name. If the stream does not exist, it
-   * creates a new stream with the given name. If the audio file
-   * does not exist, it does nothing.
+   * creates a new stream with the given name. If the audio file does
+   * not exist, it does nothing.
    *
    * @param audio_name The name of the audio file
    * @param stream_name The name of the stream
@@ -174,21 +198,22 @@ public:
   static void play_audio(types::audio_name_t, types::stream_name_t = "default");
   
   /**
-   * @brief Set the volume of a stream
+   * @brief Set the volume (gain) of a stream
    *
+   * A gain of 1.0 does not change anything, a gain of 0.0 is silent.
    * This function sets the volume of the stream with the given name.
    * If the stream does not exist, it does nothing.
    *
    * @param name The name of the stream
    * @param volume The volume of the stream
    */
-  static void set_volume(types::stream_name_t name, int volume);
+  static void set_volume(types::stream_name_t name, float gain);
   
   /**
    * @brief Pause a stream
    *
-   * This function pauses the stream with the given name.
-   * If the stream does not exist, it does nothing.
+   * This function pauses the stream with the given name.  If the
+   * stream does not exist, it does nothing.
    *
    * @param name The name of the stream
    */
@@ -197,8 +222,8 @@ public:
   /**
    * @brief Resume a stream
    *
-   * This function resumes the stream with the given name.
-   * If the stream does not exist, it does nothing.
+   * This function resumes the stream with the given name.  If the
+   * stream does not exist, it does nothing.
    *
    * @param name The name of the stream
    */
@@ -207,8 +232,8 @@ public:
   /**
    * @brief Stop a stream
    *
-   * This function stops the stream with the given name.
-   * If the stream does not exist, it does nothing.
+   * This function stops the stream with the given name.  If the
+   * stream does not exist, it does nothing.
    *
    * @param name The name of the stream
    */
@@ -218,4 +243,24 @@ private:
   static void check_error_audio();
 };
 
+class audio::builder : public subsystem::builder
+{
+private:
+  
+  std::vector<std::pair<types::audio_name_t, std::string>> init_files;
+  std::vector<std::pair<types::stream_name_t, float>> init_streams;
+  int volume = 1;
+  
+public:
+
+  builder() = default;
+  ~builder() = default;
+
+  builder &load(types::audio_name_t id, std::string path);
+  builder &stream(types::stream_name_t name, float gain = 1.0);
+  
+  brenta::subsystem &build() override;
+  
+};
+  
 } // namespace brenta

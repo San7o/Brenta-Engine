@@ -17,12 +17,25 @@ types::vao text::text_vao;
 types::buffer text::text_vbo;
 std::map<char, types::character> text::characters;
 
-void text::init()
+std::expected<void, std::string> text::initialize()
 {
   text::text_vbo = types::buffer(GL_ARRAY_BUFFER);
   text::text_vao.init();
 
-  INFO("Text initialized");
+  INFO("text initialized");
+  return {};
+}
+
+std::expected<void, std::string> text::terminate()
+{
+  INFO("text terminated");
+  return {};
+}
+
+text &text::instance()
+{
+  static text _text;
+  return _text;
 }
 
 void text::load(std::string font_path)
@@ -175,4 +188,13 @@ void text::render_text(std::string text, float x, float y, float scale,
   }
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+//
+// Builder
+//
+
+subsystem &text::builder::build()
+{
+  return text::instance();
 }

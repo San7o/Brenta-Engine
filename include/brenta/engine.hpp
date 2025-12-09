@@ -24,6 +24,7 @@
 #include <brenta/translation.hpp>
 #include <brenta/vao.hpp>
 #include <brenta/subsystem.hpp>
+#include <brenta/ecs.hpp>
 
 #include <functional>
 

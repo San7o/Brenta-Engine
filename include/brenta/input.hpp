@@ -24,22 +24,37 @@ typedef std::string mouse_callback_name_t;
 /**
  * @brief Input subsystem
  *
- * This subsystem is used to manage the input system of the engine. It is used
- * to add and remove callbacks for keyboard and mouse events. You can define
- * your own callbacks and register them with the input subsystem.
+ * This subsystem is used to add and remove callbacks for keyboard and
+ * mouse events. You can define your own callbacks and register them
+ * with the input subsystem.
  */
-class input
+class input : public subsystem
 {
 public:
-  input() = delete;
+
+
+  class builder;
+
+  std::string subsystem_name = "input";
+  
+  input() = default;
+  ~input() = default;
+  
   /**
    * @brief Initialize the input system
    *
-   * This function initializes the input system. It should be called before
-   * any other input function is called.
+   * This function initializes the input subsystem. It should be
+   * called before any other input function is called.
    */
-  static void init();
+  std::expected<void, std::string> initialize() override;
 
+  /**
+   * @brief Cleans up resources
+   */
+  std::expected<void, std::string> terminate() override;
+
+  static input &instance();
+  
   /**
    * @brief Add a keyboard callback
    *
@@ -116,4 +131,14 @@ private:
     mouse_callbacks;
 };
 
+class input::builder : public subsystem::builder
+{
+public:
+
+  builder() = default;
+  ~builder() = default;
+  
+  brenta::subsystem &build() override;
+};
+  
 } // namespace brenta

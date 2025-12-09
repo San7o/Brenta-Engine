@@ -41,14 +41,11 @@ int main(int argc, char** argv)
                .multisample()
                .depth_test())
     .subsystem(gui::builder())
+    .subsystem(audio::builder())
+    .subsystem(text::builder())
+    .subsystem(input::builder())
+    .subsystem(ecs::builder())
     .build();
-
-
-  // TODO:
-  // - audio
-  // - input
-  // - text
-  // - ecs
   
   auto ret = engine.initialize();
   if (!ret.has_value())
