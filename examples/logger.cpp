@@ -11,29 +11,59 @@ REGISTER_SYSTEMS()
 
 using namespace brenta;
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .use_logger(true)
-                 .build();
+  //
+  // Setup
+  //
+  
+  const int screen_width = 800;
+  const int screen_height = 600;
 
-  INFO("Hello, World!");
-
-  while (!screen::is_window_closed())
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug))
+    .subsystem(window::builder()
+               .title("logger test")
+               .width(screen_width)
+               .height(screen_height))
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
   {
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
-
-    screen::poll_events();
-    screen::swap_buffers();
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
   }
 
+  INFO("Hello, World!");
+  
+  //
+  // Render loop
+  // 
+
+  while (!window::should_close())
+  {
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
+
+    window::poll_events();
+    window::swap_buffers();
+  }
+
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

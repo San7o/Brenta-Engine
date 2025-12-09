@@ -16,111 +16,83 @@
 #include <brenta/mesh.hpp>
 #include <brenta/model.hpp>
 #include <brenta/particles.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/shader.hpp>
 #include <brenta/text.hpp>
 #include <brenta/texture.hpp>
 #include <brenta/time.hpp>
 #include <brenta/translation.hpp>
 #include <brenta/vao.hpp>
+#include <brenta/subsystem.hpp>
+#include <brenta/ecs.hpp>
+
+#include <functional>
 
 namespace brenta
 {
 
 /**
- * @brief Engine setup
+ * @brief Engine class
  *
- * This class is used to setup every subsystem of the engine. You can
- * use the builder class to set the parameters of the engine: you can set
- * which subsystem to use and configure them.
+ * This class is used to initialize and terminate multiple subsystems
+ * based on the lifetime of the engine object. You can use the builder
+ * class to create the object.
  *
- * It automatically destroys the subsystems when the engine is destroyed.
+ * Note: The subsystems will be initialized in the order as they are
+ * added and terminated in reverse, so make sure that they are ordered
+ * correctly if a subsystem depends on another one.
  */
-class engine
+class engine : public subsystem
 {
+protected:
+
+  static std::vector<std::reference_wrapper<subsystem>> subsystems;
+
 public:
-  bool uses_screen;
-  bool uses_audio;
-  bool uses_input;
-  bool uses_logger;
-  bool uses_text;
-  int screen_width;
-  int screen_height;
-  bool screen_is_mouse_captured;
-  const char *screen_title;
-  bool screen_msaa;
-  bool screen_vsync;
-  oak::level log_level;
-  std::string log_file;
-  std::string text_font;
-  int text_size;
-  bool gl_blending;
-  bool gl_cull_face;
-  bool gl_multisample;
-  bool gl_depth_test;
 
-  engine(bool uses_screen, bool uses_audio, bool uses_input, bool uses_logger,
-         bool uses_text, int screen_width, int screen_height,
-         bool screen_is_mouse_captured, bool screen_msaa, bool screen_vsync,
-         const char *screen_title, oak::level log_level, std::string log_file,
-         std::string text_font, int text_size, bool gl_blending,
-         bool gl_cull_face, bool gl_multisample, bool gl_depth_test);
-  ~engine();
+  std::string subsistem_name = "engine";
+  
+  engine() = default;
+  ~engine() = default;
+  
+  /**
+   * @brief Get a static object instance
+   */
+  static engine &instance();
+  
+  // Subsystem functions
+  std::expected<void, std::string> initialize() override;
+  std::expected<void, std::string> terminate() override;
 
+  /**
+   * @brief Initialize a subsistem and add it to the managed
+   * subsystems
+   */
+  static std::expected<void, std::string> add_subsystem(subsystem::builder &&builder);
+  
   class builder;
 };
 
 /**
  * @brief Engine builder
  *
- * This class is used to build the engine. You can set the parameters of the
- * engine using the methods of this class and then call the build method to
- * create the engine.
+ * This class is used to build the engine.
  */
-class engine::builder
+class engine::builder : public subsystem::builder
 {
+private:
+  
+  std::vector<std::reference_wrapper<brenta::subsystem>> subsystems;
+  
 public:
-  bool uses_screen = false;
-  bool uses_audio = false;
-  bool uses_input = false;
-  bool uses_logger = false;
-  bool uses_text = false;
-  int screen_width = 1280;
-  int screen_height = 720;
-  bool screen_is_mouse_captured = false;
-  bool screen_msaa = false;
-  bool screen_vsync = false;
-  const char *screen_title = "";
-  oak::level log_level = oak::level::info;
-  std::string log_file = "";
-  std::string text_font = "arial.ttf";
-  int text_size = 48;
-  bool gl_blending = true;
-  bool gl_cull_face = true;
-  bool gl_multisample = true;
-  bool gl_depth_test = true;
 
-  builder &use_screen(bool uses_screen);
-  builder &use_audio(bool uses_audio);
-  builder &use_input(bool uses_input);
-  builder &use_logger(bool uses_logger);
-  builder &use_text(bool uses_text);
-  builder &set_screen_width(int screen_width);
-  builder &set_screen_height(int screen_height);
-  builder &set_screen_is_mouse_captured(bool screen_is_mouse_captured);
-  builder &set_screen_title(const char *screen_title);
-  builder &set_screen_msaa(bool screen_msaa);
-  builder &set_screen_vsync(bool screen_vsync);
-  builder &set_log_level(oak::level log_level);
-  builder &set_log_file(std::string log_file);
-  builder &set_text_font(std::string text_font);
-  builder &set_text_size(int text_size);
-  builder &set_gl_blending(bool gl_blending);
-  builder &set_gl_cull_face(bool gl_cull_face);
-  builder &set_gl_multisample(bool gl_multisample);
-  builder &set_gl_depth_test(bool gl_depth_test);
-
-  engine build();
+  builder() = default;
+  ~builder() = default;
+  
+  builder &subsystem(subsystem::builder &builder);
+  builder &subsystem(subsystem::builder &&builder);
+  brenta::subsystem &build() override;
+  
 };
 
 } // namespace brenta

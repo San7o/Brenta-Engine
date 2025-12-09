@@ -13,7 +13,7 @@ void init_camera_mouse_callback()
   auto camera_mouse_callback = [](double xpos, double ypos)
   {
     /* Rotate the camera */
-    if (screen::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
+    if (window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
     {
       if (default_camera.first_mouse)
       {
@@ -43,7 +43,7 @@ void init_camera_mouse_callback()
       default_camera.spherical_to_cartesian();
     }
     /* translate the default_camera center */
-    else if (screen::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
+    else if (window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
     {
       if (default_camera.first_mouse)
       {
@@ -74,7 +74,7 @@ void init_camera_mouse_callback()
       default_camera.spherical_to_cartesian();
     }
     /* zoom the default_camera */
-    else if (screen::is_key_pressed(GLFW_KEY_LEFT_ALT))
+    else if (window::is_key_pressed(GLFW_KEY_LEFT_ALT))
     {
       if (default_camera.first_mouse)
       {

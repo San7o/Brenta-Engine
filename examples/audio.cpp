@@ -3,9 +3,12 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-/**
- * Play a sound
- */
+//
+// audio.cpp
+// =========
+//
+// Play a sound with the spacebar
+//
 
 #include <brenta/engine.hpp>
 #include <filesystem>
@@ -16,40 +19,88 @@ using namespace brenta;
 
 REGISTER_SYSTEMS()
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
-#define ABS(...) std::filesystem::absolute(__VA_ARGS__)
-
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .use_logger(true)
-                 .use_audio(true) // Enable audio
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .build();
+  //
+  // Setup
+  //
 
-  // Load an audio file, assign it the name "guitar"
-  audio::load_audio("guitar", ABS("examples/assets/audio/guitar.wav"));
+  const int screen_width = 800;
+  const int screen_height = 600;
+  
+  // Required: id and path of an audio. The id will be used by the
+  // audio subsystem to identify this particular file.
+  types::audio_name_t audio_guitar_id = "guitar";
+  std::string audio_guitar_path = "examples/assets/audio/guitar.wav";
 
-  while (!screen::is_window_closed())
+  // You can specify additional optional settings like stream and
+  // volume
+  types::stream_name_t audio_guitar_stream = "guitar_stream";
+  float guitar_volume = 0.8f;
+  
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug))
+    .subsystem(window::builder()
+               .title("audio test")
+               .width(screen_width)
+               .height(screen_height))
+    
+    // Enable audio subsystem
+    
+    .subsystem(audio::builder()
+
+               // Load a file
+               
+               .load(audio_guitar_id, audio_guitar_path)
+
+               // Create a stream to play the audio (or just use "default")
+
+               .stream(audio_guitar_stream, guitar_volume))
+    
+    .build();
+
+  auto ret = engine.initialize();
+  if (!ret.has_value())
   {
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
-
-    //
-    // Press space to play the audio "guitar" in the
-    // default audio stream
-    //
-    if (screen::is_key_pressed(GLFW_KEY_SPACE))
-      audio::play_audio("guitar");
-
-    screen::poll_events();
-    screen::swap_buffers();
+    ERROR("Failed to initialize subsystem {}", ret.error());
+    return 1;
   }
 
+  //
+  // You can also load an audio any time with audio::load
+  //
+  // audio::load(audio_guitar_id, audio_guitar_path);
+
+  //
+  // Main loop
+  //
+  
+  while (!window::should_close())
+  {
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
+
+    //
+    // Press space to play the audio "guitar". If the stream is not
+    // specified, it will be used the value "default"
+    //
+    if (window::is_key_pressed(GLFW_KEY_SPACE))
+      audio::play_audio(audio_guitar_id, audio_guitar_stream);
+
+    window::poll_events();
+    window::swap_buffers();
+  }
+
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

@@ -5,15 +5,16 @@
 
 #include <brenta/gl.hpp>
 #include <brenta/gui.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/texture.hpp>
+#include <brenta/logger.hpp>
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
 
 using namespace brenta;
 using namespace brenta::types;
 
-void gui::init()
+std::expected<void, std::string> gui::initialize()
 {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -25,16 +26,29 @@ void gui::init()
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
   // Setup Platform/Renderer backends
-  ImGui_ImplGlfw_InitForOpenGL(screen::get_window(), true);
+  ImGui_ImplGlfw_InitForOpenGL(window::get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
+
+  INFO("GUI initialized");
+  
+  return {};
 }
 
-void gui::destroy()
+std::expected<void, std::string> gui::terminate()
 {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
+
+  INFO("GUI terminated");
+  return {};
+}
+
+gui &gui::instance()
+{
+  static gui _gui;
+  return _gui;
 }
 
 void gui::new_frame(framebuffer *fb)
@@ -68,6 +82,15 @@ void gui::render()
 {
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+//
+// Builder
+//
+
+subsystem &gui::builder::build()
+{
+  return gui::instance();
 }
 
 #endif

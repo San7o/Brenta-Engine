@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/time.hpp>
 
 using namespace brenta;
@@ -14,7 +14,7 @@ float time::last_frame = 0.0f;
 
 float time::get_current_time()
 {
-  return screen::get_time();
+  return window::get_time();
 }
 
 float time::get_delta_time()

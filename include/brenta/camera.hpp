@@ -303,7 +303,7 @@ public:
    * @brief Get the projection matrix
    * @return The projection matrix
    */
-  glm::mat4 get_projection_matrix();
+  glm::mat4 get_projection_matrix(int window_width, int window_height);
   /**
    * @brief Get the front vector
    * @return The front vector

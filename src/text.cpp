@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/logger.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/text.hpp>
 #include <brenta/texture.hpp>
 #include <filesystem>
@@ -12,20 +12,37 @@
 using namespace brenta;
 using namespace brenta::types;
 
+std::string text::font_path;
+int text::font_size;
 types::shader_name_t text::text_shader;
 types::vao text::text_vao;
 types::buffer text::text_vbo;
 std::map<char, types::character> text::characters;
 
-void text::init()
+std::expected<void, std::string> text::initialize()
 {
   text::text_vbo = types::buffer(GL_ARRAY_BUFFER);
   text::text_vao.init();
+  if (text::font_path != "")
+    load(text::font_path, text::font_size);
 
-  INFO("Text initialized");
+  INFO("text initialized");
+  return {};
 }
 
-void text::load(std::string font_path)
+std::expected<void, std::string> text::terminate()
+{
+  INFO("text terminated");
+  return {};
+}
+
+text &text::instance()
+{
+  static text _text;
+  return _text;
+}
+
+void text::load(std::string font_path, int font_size)
 {
   if (text_vao.get_vao() == 0)
   {
@@ -63,7 +80,7 @@ void text::load(std::string font_path)
   else
   {
     // set size to load glyphs as
-    FT_Set_Pixel_Sizes(face, 0, 48);
+    FT_Set_Pixel_Sizes(face, 0, font_size);
 
     // disable byte-alignment restriction
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -129,8 +146,8 @@ void text::render_text(std::string text, float x, float y, float scale,
               color.z);
 
   glm::mat4 projection =
-    glm::ortho(0.0f, static_cast<float>(screen::get_width()), 0.0f,
-               static_cast<float>(screen::get_height()));
+    glm::ortho(0.0f, static_cast<float>(window::get_width()), 0.0f,
+               static_cast<float>(window::get_height()));
   glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1,
                      GL_FALSE, glm::value_ptr(projection));
 
@@ -175,4 +192,27 @@ void text::render_text(std::string text, float x, float y, float scale,
   }
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+//
+// Builder
+//
+
+text::builder &text::builder::font(std::string font_path)
+{
+  this->font_path = font_path;
+  return *this;
+}
+
+text::builder &text::builder::size(int font_size)
+{
+  this->font_size = font_size;
+  return *this;
+}
+
+subsystem &text::builder::build()
+{
+  text::font_path = this->font_path;
+  text::font_size = this->font_size;
+  return text::instance();
 }

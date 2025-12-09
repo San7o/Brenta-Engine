@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['destroy_0',['destroy',['../classbrenta_1_1audio.html#a0dbd75bc5672effd7e93f0553b0d9e6f',1,'brenta::audio::destroy()'],['../classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3',1,'brenta::types::buffer::destroy()'],['../classbrenta_1_1types_1_1framebuffer.html#a29178484271532eaebe3ccfda4e942d0',1,'brenta::types::framebuffer::destroy()'],['../classbrenta_1_1gui.html#a6f70a8c24f76a12344db36e2b2c55914',1,'brenta::gui::destroy()'],['../classbrenta_1_1types_1_1vao.html#af44f22717acc7a55d1a8e77b009d9cfe',1,'brenta::types::vao::destroy()']]],
-  ['draw_1',['draw',['../classbrenta_1_1mesh.html#a617aba2ef008226a4c4641d4eb733b8e',1,'brenta::mesh::draw()'],['../classbrenta_1_1model.html#a6d65603dfd549c0de0b1606753c18dd4',1,'brenta::model::draw()']]],
-  ['draw_5farrays_2',['draw_arrays',['../classbrenta_1_1gl.html#ac80d3d5daaaff64ede199adebc04dc8c',1,'brenta::gl']]],
-  ['draw_5felements_3',['draw_elements',['../classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913',1,'brenta::gl']]]
+  ['camera_0',['camera',['../classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e',1,'brenta::camera::camera()=default'],['../classbrenta_1_1camera.html#a54f38c7bb6568e2011e6d236e56bd66e',1,'brenta::camera::camera(enums::camera_type camera_type, enums::projection_type projection_type, glm::vec3 position, glm::vec3 world_up, glm::vec3 center, float movement_speed, float mouse_sensitivity, float zoom, types::spherical_coordinates spherical_coordinates, types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up, glm::vec3 right)']]],
+  ['clear_1',['clear',['../classbrenta_1_1gl.html#a3e2435d63372b4747cd4f0a5c7cd1f3b',1,'brenta::gl']]],
+  ['clear_5fstream_2',['clear_stream',['../classbrenta_1_1audio.html#a79231d6069f60310cb305bfba97fdb85',1,'brenta::audio']]],
+  ['copy_5fdata_3',['copy_data',['../classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466',1,'brenta::types::buffer']]],
+  ['copy_5findices_4',['copy_indices',['../classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3',1,'brenta::types::buffer']]],
+  ['copy_5fvertices_5',['copy_vertices',['../classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8',1,'brenta::types::buffer']]],
+  ['create_6',['create',['../classbrenta_1_1shader.html#a98f844b96534b21b102db3540bc62937',1,'brenta::shader::create(std::string shader_name, GLenum type, std::string path, Args... args)'],['../classbrenta_1_1shader.html#a7928e34a5b48eb4171a7d29eb5022e75',1,'brenta::shader::create(const GLchar **feedback_varyings, int num_varyings, std::string shader_name, GLenum type, std::string path, Args... args)']]],
+  ['create_5fstream_7',['create_stream',['../classbrenta_1_1audio.html#a85806d79d2556e2ebea46b578edea346',1,'brenta::audio']]]
 ];

@@ -8,10 +8,13 @@
 #include <brenta/buffer.hpp>
 #include <brenta/shader.hpp>
 #include <brenta/vao.hpp>
+#include <brenta/subsystem.hpp>
+
 #include <ft2build.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <map>
 #include <string>
 
@@ -44,13 +47,19 @@ struct character
 /**
  * @brief Text subsystem
  *
- * This class is used to render text on the screen. The text
- * is rendered using the FreeType library to load the font and
- * the characters, and OpenGL to render the text on the screen.
+ * This class is used to render text on the screen. The text is
+ * rendered using the FreeType library to load the font and the
+ * characters, and OpenGL to render the text on the screen.
  */
-class text
+class text : public subsystem
 {
+protected:
+
+  static std::string font_path;
+  static int font_size;
+  
 public:
+  
   /**
    * @brief Map of characters
    *
@@ -58,37 +67,52 @@ public:
    */
   static std::map<char, types::character> characters;
 
-  text() = delete;
+  class builder;
+
+  std::string subsystem_name = "text";
+  
+  text() = default;
+  ~text() = default;
+  
   /**
    * @brief Initialize the text subsystem
    *
-   * This method initializes the text subsystem by loading
-   * the shader, the VAO, and the VBO. The shader is loaded
-   * from the file text.vs and text.fs, and the VAO and VBO
-   * are created using the data from the characters map.
+   * This method initializes the text subsystem by loading the shader,
+   * the VAO, and the VBO. The shader is loaded from the file text.vs
+   * and text.fs, and the VAO and VBO are created using the data from
+   * the characters map.
    *
    * Note: opengl context must be created before calling this
    * method.
    */
-  static void init();
+  std::expected<void, std::string> initialize();
+
+  /**
+   * @brief Cleaup resources
+   */
+  std::expected<void, std::string> terminate();
+
+  static text &instance();
 
   /**
    * @brief Load a font
    *
-   * This method loads a font from the given file and size.
-   * The font is loaded using the FreeType library, and the
-   * characters are stored in the characters map.
+   * This method loads a font from the given file and size.  The font
+   * is loaded using the FreeType library, and the characters are
+   * stored in the characters map.
    *
    * @param font_name Name of the font file
+   * @param font_size The size of the font
    */
-  static void load(std::string font_name);
+  static void load(std::string font_name, int font_size = 48);
+  
   /**
    * @brief Render text
    *
-   * This method renders the given text on the screen at the
-   * given position, with the given scale and color. The text
-   * is rendered using the shader, VAO, and VBO that are
-   * initialized in the Init method.
+   * This method renders the given text on the screen at the given
+   * position, with the given scale and color. The text is rendered
+   * using the shader, VAO, and VBO that are initialized in the Init
+   * method.
    *
    * @param text Text to render
    * @param x X position of the text
@@ -100,9 +124,30 @@ public:
                           glm::vec3 color);
 
 private:
+  
   static types::shader_name_t text_shader;
   static types::vao text_vao;
   static types::buffer text_vbo;
 };
 
+class text::builder : public subsystem::builder
+{
+private:
+
+  std::string font_path = "examples/assets/fonts/arial.ttf";
+  int font_size = 48;
+  
+public:
+
+  builder() = default;
+  ~builder() = default;
+
+  builder &font(std::string font_path);
+  builder &size(int font_size);
+  
+  brenta::subsystem &build() override;
+  
+};
+
+  
 } // namespace brenta

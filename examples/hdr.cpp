@@ -3,6 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+// TODO
+
 #include "engine.hpp"
 #include "viotecs/viotecs.hpp"
 
@@ -138,7 +140,7 @@ int main()
   shader::create("hdr_shader", GL_VERTEX_SHADER, "examples/hdr.vs",
                  GL_FRAGMENT_SHADER, "examples/hdr.fs");
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
 #endif
 
@@ -183,7 +185,7 @@ int main()
     if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
       screen::set_close();
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     gui::new_frame(&fb);
     ImGui::Begin("HDR");
     ImGui::End();
@@ -209,7 +211,7 @@ int main()
     // vao.Unbind();
 
     fb.unbind();
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     gui::render();
 #endif
 

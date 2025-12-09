@@ -1,6 +1,30 @@
 var searchData=
 [
-  ['init_0',['init',['../classbrenta_1_1audio.html#ae1a88f98ff4d261f3184b37824e7baf0',1,'brenta::audio::init()'],['../classbrenta_1_1gui.html#aebb43466de560416eccb0c2a70d7d92d',1,'brenta::gui::init()'],['../classbrenta_1_1input.html#a1afc5d8279ae80b351ea485b9f03c0b4',1,'brenta::input::init()'],['../classbrenta_1_1screen.html#a7f982e20b778c53260175740fb6ecce6',1,'brenta::screen::init()'],['../classbrenta_1_1text.html#a7941bcf8efee652c2bc86ab7bf529a34',1,'brenta::text::init()'],['../classbrenta_1_1types_1_1vao.html#a9d89e1f1525bc301bc9677317bdc0db9',1,'brenta::types::vao::init()']]],
-  ['is_5fkey_5fpressed_1',['is_key_pressed',['../classbrenta_1_1screen.html#af0e156ad266152101aca3f88193890a3',1,'brenta::screen']]],
-  ['is_5fwindow_5fclosed_2',['is_window_closed',['../classbrenta_1_1screen.html#ae52f6a639543520c5e366bcdee9888a5',1,'brenta::screen']]]
+  ['get_5faudio_5ffile_0',['get_audio_file',['../classbrenta_1_1audio.html#a48fef9397e95cfa0b047c15d836a22b3',1,'brenta::audio']]],
+  ['get_5fcamera_5ftype_1',['get_camera_type',['../classbrenta_1_1camera.html#a7d080d1b8161ab9e210d682ccd73bd3a',1,'brenta::camera']]],
+  ['get_5fcenter_2',['get_center',['../classbrenta_1_1camera.html#a0c970443b245e0650538c0c320f07e9e',1,'brenta::camera']]],
+  ['get_5fcurrent_5ftime_3',['get_current_time',['../classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f',1,'brenta::time']]],
+  ['get_5fdelta_5ftime_4',['get_delta_time',['../classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701',1,'brenta::time']]],
+  ['get_5feuler_5fangles_5',['get_euler_angles',['../classbrenta_1_1camera.html#a5ea1e16712a2461400780b6f6bda05fc',1,'brenta::camera']]],
+  ['get_5ffirst_5fmouse_6',['get_first_mouse',['../classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca',1,'brenta::camera']]],
+  ['get_5ffps_7',['get_fps',['../classbrenta_1_1time.html#aa5e1fdab03a11a10d3e872722b36ebab',1,'brenta::time']]],
+  ['get_5ffront_8',['get_front',['../classbrenta_1_1camera.html#a6f51c43a27b1b0a40c8aca2ebe422760',1,'brenta::camera']]],
+  ['get_5fid_9',['get_id',['../classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5',1,'brenta::types::buffer::get_id()'],['../classbrenta_1_1shader.html#aafe538950da3c3bc093553929db8ba7c',1,'brenta::shader::get_id()']]],
+  ['get_5flast_5fx_10',['get_last_x',['../classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c',1,'brenta::camera']]],
+  ['get_5flast_5fy_11',['get_last_y',['../classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a',1,'brenta::camera']]],
+  ['get_5fmouse_5fsensitivity_12',['get_mouse_sensitivity',['../classbrenta_1_1camera.html#aba4542e519548171330c220ba3817e65',1,'brenta::camera']]],
+  ['get_5fmovement_5fspeed_13',['get_movement_speed',['../classbrenta_1_1camera.html#a9e57deb08d04838271e62b37ca121896',1,'brenta::camera']]],
+  ['get_5fposition_14',['get_position',['../classbrenta_1_1camera.html#a1d05d34ae3d66a5c942814e82035243a',1,'brenta::camera']]],
+  ['get_5fproc_5faddress_15',['get_proc_address',['../classbrenta_1_1window.html#ac0cd5936ea304f8d4964dea089a97f61',1,'brenta::window']]],
+  ['get_5fprojection_5fmatrix_16',['get_projection_matrix',['../classbrenta_1_1camera.html#af49703def2f343334bb4f3d1333fb577',1,'brenta::camera']]],
+  ['get_5fprojection_5ftype_17',['get_projection_type',['../classbrenta_1_1camera.html#ace8d42304e9ee830402f2e2a67996c83',1,'brenta::camera']]],
+  ['get_5fright_18',['get_right',['../classbrenta_1_1camera.html#a2c3a151f13844691cc39eb79f88535c5',1,'brenta::camera']]],
+  ['get_5fspherical_5fcoordinates_19',['get_spherical_coordinates',['../classbrenta_1_1camera.html#a2dec820889c0aa97a9c400ec6391fb8d',1,'brenta::camera']]],
+  ['get_5fstream_20',['get_stream',['../classbrenta_1_1audio.html#ae20e4621986bdf594cd6cb1a12f98864',1,'brenta::audio']]],
+  ['get_5ftarget_21',['get_target',['../classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4',1,'brenta::types::buffer']]],
+  ['get_5fup_22',['get_up',['../classbrenta_1_1camera.html#a4517136492bcc46e4dd35b93a1361065',1,'brenta::camera']]],
+  ['get_5fvao_23',['get_vao',['../classbrenta_1_1types_1_1vao.html#a7112a3ff30224a8038c8266405fffc48',1,'brenta::types::vao']]],
+  ['get_5fview_5fmatrix_24',['get_view_matrix',['../classbrenta_1_1camera.html#ab3d4019eb5007e6f84c54f421aa1be34',1,'brenta::camera']]],
+  ['get_5fworld_5fup_25',['get_world_up',['../classbrenta_1_1camera.html#adb2f975cc2f0873e8efae43564a8675d',1,'brenta::camera']]],
+  ['get_5fzoom_26',['get_zoom',['../classbrenta_1_1camera.html#a026961af418acc07e9ee0031921356f8',1,'brenta::camera']]]
 ];

@@ -5,60 +5,67 @@
 
 #include <brenta/gl.hpp>
 #include <brenta/logger.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/text.hpp>
 #include <iostream>
 
 using namespace brenta;
 
-void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
-                     bool gl_depth_test)
+bool gl::enable_blending;
+bool gl::enable_cull_face;
+bool gl::enable_multisample;
+bool gl::enable_depth_test;
+
+std::expected<void, std::string> gl::initialize()
 {
-  GLADloadproc loadproc = (GLADloadproc) screen::get_proc_address();
+  GLADloadproc loadproc = (GLADloadproc) window::get_proc_address();
   if (!gladLoadGLLoader(loadproc))
   {
     ERROR("Failed to initialize GLAD");
-    exit(-1);
+    return std::unexpected(this->subsystem_name);
   }
 
-  int SCR_WIDTH = screen::get_width();
-  int SCR_HEIGHT = screen::get_height();
+  int width = window::get_width();
+  int height = window::get_height();
 
-  glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+  glViewport(0, 0, width, height);
 
-  if (gl_depth_test)
+  if (enable_depth_test)
   {
     glEnable(GL_DEPTH_TEST);
-    INFO("Enabled GL_DEPTH_TEST");
+    INFO("GL_DEPTH_TEST enabled");
   }
 
-  // Enable blending for transparency
-  if (gl_blending)
+  if (enable_blending)
   {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    INFO("Enabled GL_BLEND (transparency)");
+    INFO("GL_BLEND enabled (transparency)");
   }
 
-  // Enable face culling, draw only visible triangles
-  // based on their orientation (defined clockwise or counterclockwise)
-  if (gl_cull_face)
+  if (enable_cull_face)
   {
     glEnable(GL_CULL_FACE);
-    INFO("Enabled GL_CULL_FACE (draw only visible triangles)");
+    INFO("GL_CULL_FACE enabled (draw only visible triangles)");
   }
 
-  // Enable multisampling
-  // Only works for a multisample buffer. */
-  if (gl_multisample)
+  if (enable_multisample)
   {
     glEnable(GL_MULTISAMPLE);
-    INFO("Enabled GL_MULTISAMPLE");
+    INFO("GL_MULTISAMPLE enabled");
   }
 
   GLenum errcode = gl::check_error();
   if (!errcode)
-    INFO("OpenGl loaded");
+    INFO("gl initialized");
+
+  return {};
+}
+
+std::expected<void, std::string> gl::terminate()
+{
+  INFO("gl terminated")
+  return {};
 }
 
 void gl::set_poligon_mode(GLboolean enable)
@@ -75,9 +82,15 @@ void gl::set_poligon_mode(GLboolean enable)
   }
 }
 
-void gl::set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
+gl &gl::instance()
 {
-  glViewport(x, y, SCR_WIDTH, SCR_HEIGHT);
+  static gl _gl;
+  return _gl;
+}
+
+void gl::set_viewport(int x, int y, int width, int height)
+{
+  glViewport(x, y, width, height);
 }
 
 void gl::set_color(float r, float g, float b, float a)
@@ -95,17 +108,17 @@ void gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
   glDrawElements(mode, count, type, indices);
 }
 
-void gl::clear()
-{
-  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-}
-
 void gl::bind_vertex_array(unsigned int n)
 {
   glBindVertexArray(n);
 }
 
-GLenum gl::check_error_(const char *file, int line)
+void gl::clear()
+{
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+GLenum gl::_check_error(const char *file, int line)
 {
   GLenum errorCode;
   while ((errorCode = glGetError()) != GL_NO_ERROR)
@@ -143,4 +156,41 @@ GLenum gl::check_error_(const char *file, int line)
     ERROR(error);
   }
   return errorCode;
+}
+
+//
+// Builder
+//
+
+gl::builder &gl::builder::blending()
+{
+  this->enable_blending = true;
+  return *this;
+}
+
+gl::builder &gl::builder::cull_face()
+{
+  this->enable_cull_face = true;
+  return *this;
+}
+
+gl::builder &gl::builder::multisample()
+{
+  this->enable_multisample = true;
+  return *this;
+}
+
+gl::builder &gl::builder::depth_test()
+{
+  this->enable_depth_test = true;
+  return *this;
+}
+
+brenta::subsystem &gl::builder::build()
+{
+  gl::enable_blending = this->enable_blending;
+  gl::enable_cull_face = this->enable_cull_face;
+  gl::enable_multisample = this->enable_multisample;
+  gl::enable_depth_test = this->enable_depth_test;
+  return gl::instance();
 }

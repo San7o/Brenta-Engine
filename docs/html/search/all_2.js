@@ -1,18 +1,7 @@
 var searchData=
 [
-  ['camera_0',['camera',['../classbrenta_1_1camera.html',1,'brenta::camera'],['../classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e',1,'brenta::camera::camera()=default'],['../classbrenta_1_1camera.html#a54f38c7bb6568e2011e6d236e56bd66e',1,'brenta::camera::camera(enums::camera_type camera_type, enums::projection_type projection_type, glm::vec3 position, glm::vec3 world_up, glm::vec3 center, float movement_speed, float mouse_sensitivity, float zoom, types::spherical_coordinates spherical_coordinates, types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up, glm::vec3 right)']]],
-  ['camera_20type_1',['Camera type',['../classbrenta_1_1camera.html#autotoc_md0',1,'']]],
-  ['camera_5ftype_2',['camera_type',['../classbrenta_1_1camera.html#a804191070243222fec432495e1febe32',1,'brenta::camera']]],
-  ['center_3',['center',['../classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456',1,'brenta::camera']]],
-  ['character_4',['character',['../structbrenta_1_1types_1_1character.html',1,'brenta::types']]],
-  ['characters_5',['characters',['../classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06',1,'brenta::text']]],
-  ['check_5ferror_5f_6',['check_error_',['../classbrenta_1_1gl.html#abad318d324046f5e38657fa16fd8b7ab',1,'brenta::gl']]],
-  ['clear_7',['clear',['../classbrenta_1_1gl.html#a3e2435d63372b4747cd4f0a5c7cd1f3b',1,'brenta::gl']]],
-  ['clear_5fstream_8',['clear_stream',['../classbrenta_1_1audio.html#a79231d6069f60310cb305bfba97fdb85',1,'brenta::audio']]],
-  ['copy_5fdata_9',['copy_data',['../classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466',1,'brenta::types::buffer']]],
-  ['copy_5findices_10',['copy_indices',['../classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3',1,'brenta::types::buffer']]],
-  ['copy_5fvertices_11',['copy_vertices',['../classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8',1,'brenta::types::buffer']]],
-  ['create_12',['create',['../classbrenta_1_1shader.html#a98f844b96534b21b102db3540bc62937',1,'brenta::shader::create(std::string shader_name, GLenum type, std::string path, Args... args)'],['../classbrenta_1_1shader.html#a7928e34a5b48eb4171a7d29eb5022e75',1,'brenta::shader::create(const GLchar **feedback_varyings, int num_varyings, std::string shader_name, GLenum type, std::string path, Args... args)']]],
-  ['create_5fstream_13',['create_stream',['../classbrenta_1_1audio.html#a85806d79d2556e2ebea46b578edea346',1,'brenta::audio']]],
-  ['current_14',['current',['../classbrenta_1_1particle__emitter.html#a03751519c01fb73d62d53e3b35411496',1,'brenta::particle_emitter']]]
+  ['bind_0',['bind',['../classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24',1,'brenta::types::buffer::bind()'],['../classbrenta_1_1types_1_1framebuffer.html#af920ab8bbef71e119459a4445add1b91',1,'brenta::types::framebuffer::bind()'],['../classbrenta_1_1types_1_1vao.html#a1beb018bd21f3f01f54a494c3fe50f6e',1,'brenta::types::vao::bind()']]],
+  ['bind_5ftexture_1',['bind_texture',['../classbrenta_1_1texture.html#aeaf372220a376e21b544f35a7a8fbb1d',1,'brenta::texture']]],
+  ['buffer_2',['buffer',['../classbrenta_1_1types_1_1buffer.html',1,'brenta::types::buffer'],['../classbrenta_1_1types_1_1buffer.html#aafbc9b192c26c6ad9b46a741b3a4667d',1,'brenta::types::buffer::buffer()'],['../classbrenta_1_1types_1_1buffer.html#a8e1ed8cd3651e3e6d900c57284b6f3fd',1,'brenta::types::buffer::buffer(GLenum input_target)']]],
+  ['builder_3',['builder',['../classbrenta_1_1audio_1_1builder.html',1,'brenta::audio::builder'],['../classbrenta_1_1camera_1_1builder.html',1,'brenta::camera::builder'],['../classbrenta_1_1engine_1_1builder.html',1,'brenta::engine::builder'],['../classbrenta_1_1gl_1_1builder.html',1,'brenta::gl::builder'],['../classbrenta_1_1gui_1_1builder.html',1,'brenta::gui::builder'],['../classbrenta_1_1input_1_1builder.html',1,'brenta::input::builder'],['../classbrenta_1_1logger_1_1builder.html',1,'brenta::logger::builder'],['../classbrenta_1_1mesh_1_1builder.html',1,'brenta::mesh::builder'],['../classbrenta_1_1model_1_1builder.html',1,'brenta::model::builder'],['../classbrenta_1_1particle__emitter_1_1builder.html',1,'brenta::particle_emitter::builder'],['../classbrenta_1_1subsystem_1_1builder.html',1,'brenta::subsystem::builder'],['../classbrenta_1_1text_1_1builder.html',1,'brenta::text::builder'],['../classbrenta_1_1window_1_1builder.html',1,'brenta::window::builder']]]
 ];

@@ -99,7 +99,11 @@ $(function(){initNavTree('classbrenta_1_1gl.html',''); initResizable(true); });
 
 <div class="header">
   <div class="summary">
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::gl Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -108,18 +112,39 @@ $(function(){initNavTree('classbrenta_1_1gl.html',''); initResizable(true); });
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="gl_8hpp_source.html">gl.hpp</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for brenta::gl:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classbrenta_1_1gl.png" usemap="#brenta::gl_map" alt=""/>
+  <map id="brenta::gl_map" name="brenta::gl_map">
+<area href="classbrenta_1_1subsystem.html" title="Subsystem interface." alt="brenta::subsystem" shape="rect" coords="0,0,112,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1gl_1_1builder.html">builder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:aa6879a9450a32543d75f502b9e29504b" id="r_aa6879a9450a32543d75f502b9e29504b"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6879a9450a32543d75f502b9e29504b">initialize</a> () override</td></tr>
+<tr class="separator:aa6879a9450a32543d75f502b9e29504b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2881fa14f7a1b33ff9372e5ad6a9ebe7" id="r_a2881fa14f7a1b33ff9372e5ad6a9ebe7"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2881fa14f7a1b33ff9372e5ad6a9ebe7">terminate</a> () override</td></tr>
+<tr class="separator:a2881fa14f7a1b33ff9372e5ad6a9ebe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a90dfdec5fe8131f21a4f1c04e2152cc1" id="r_a90dfdec5fe8131f21a4f1c04e2152cc1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a90dfdec5fe8131f21a4f1c04e2152cc1">load_opengl</a> (bool gl_blending=true, bool gl_cull_face=true, bool gl_multisample=true, bool gl_depth_test=true)</td></tr>
-<tr class="memdesc:a90dfdec5fe8131f21a4f1c04e2152cc1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load OpenGL.  <br /></td></tr>
-<tr class="separator:a90dfdec5fe8131f21a4f1c04e2152cc1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a239ad82f4b0a2d81ebde3eb82eb28f33" id="r_a239ad82f4b0a2d81ebde3eb82eb28f33"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1gl.html">gl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a239ad82f4b0a2d81ebde3eb82eb28f33">instance</a> ()</td></tr>
+<tr class="separator:a239ad82f4b0a2d81ebde3eb82eb28f33"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79c22acbd23e21b06577b5ebf4ae1a13" id="r_a79c22acbd23e21b06577b5ebf4ae1a13"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a79c22acbd23e21b06577b5ebf4ae1a13">set_poligon_mode</a> (GLboolean enable)</td></tr>
 <tr class="memdesc:a79c22acbd23e21b06577b5ebf4ae1a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Poligon Mode.  <br /></td></tr>
 <tr class="separator:a79c22acbd23e21b06577b5ebf4ae1a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a10a5ba7e449675360bf82fc2cfe10b52" id="r_a10a5ba7e449675360bf82fc2cfe10b52"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10a5ba7e449675360bf82fc2cfe10b52">set_viewport</a> (int x, int y, int SCR_WIDTH, int SCR_HEIGHT)</td></tr>
-<tr class="memdesc:a10a5ba7e449675360bf82fc2cfe10b52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Viewport.  <br /></td></tr>
-<tr class="separator:a10a5ba7e449675360bf82fc2cfe10b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa51594c5d0846ea024a95394350adbe3" id="r_aa51594c5d0846ea024a95394350adbe3"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa51594c5d0846ea024a95394350adbe3">set_viewport</a> (int x, int y, int width, int height)</td></tr>
+<tr class="memdesc:aa51594c5d0846ea024a95394350adbe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Viewport.  <br /></td></tr>
+<tr class="separator:aa51594c5d0846ea024a95394350adbe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1b63d2ea12671e7b236f9d7e47103029" id="r_a1b63d2ea12671e7b236f9d7e47103029"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1b63d2ea12671e7b236f9d7e47103029">set_color</a> (float r, float g, float b, float a)</td></tr>
 <tr class="memdesc:a1b63d2ea12671e7b236f9d7e47103029"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set Clear Color.  <br /></td></tr>
 <tr class="separator:a1b63d2ea12671e7b236f9d7e47103029"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -133,18 +158,71 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a3e2435d63372b4747cd4f0a5c7cd1f3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clear.  <br /></td></tr>
 <tr class="separator:a3e2435d63372b4747cd4f0a5c7cd1f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9f1202446652590a46426989a357024f" id="r_a9f1202446652590a46426989a357024f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f1202446652590a46426989a357024f">bind_vertex_array</a> (unsigned int n)</td></tr>
-<tr class="memdesc:a9f1202446652590a46426989a357024f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable Depth Test.  <br /></td></tr>
 <tr class="separator:a9f1202446652590a46426989a357024f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abad318d324046f5e38657fa16fd8b7ab" id="r_abad318d324046f5e38657fa16fd8b7ab"><td class="memItemLeft" align="right" valign="top">static GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abad318d324046f5e38657fa16fd8b7ab">check_error_</a> (const char *file, int line)</td></tr>
-<tr class="memdesc:abad318d324046f5e38657fa16fd8b7ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check OpenGL error.  <br /></td></tr>
-<tr class="separator:abad318d324046f5e38657fa16fd8b7ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ba98d5c7fa474b67f14d3aa8ce459d6" id="r_a2ba98d5c7fa474b67f14d3aa8ce459d6"><td class="memItemLeft" align="right" valign="top">static GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2ba98d5c7fa474b67f14d3aa8ce459d6">_check_error</a> (const char *file, int line)</td></tr>
+<tr class="memdesc:a2ba98d5c7fa474b67f14d3aa8ce459d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check OpenGL error.  <br /></td></tr>
+<tr class="separator:a2ba98d5c7fa474b67f14d3aa8ce459d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+Data Fields</h2></td></tr>
+<tr class="memitem:ac4930e61208a20b01f4208638a8e362b" id="r_ac4930e61208a20b01f4208638a8e362b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4930e61208a20b01f4208638a8e362b">subsystem_name</a> = &quot;gl&quot;</td></tr>
+<tr class="separator:ac4930e61208a20b01f4208638a8e362b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
+<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:ad244d42a0fa1225369996687bef2f1e0" id="r_ad244d42a0fa1225369996687bef2f1e0"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad244d42a0fa1225369996687bef2f1e0">enable_blending</a></td></tr>
+<tr class="separator:ad244d42a0fa1225369996687bef2f1e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa3b227d66e0af90e637a2547215eab" id="r_aeaa3b227d66e0af90e637a2547215eab"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aeaa3b227d66e0af90e637a2547215eab">enable_cull_face</a></td></tr>
+<tr class="separator:aeaa3b227d66e0af90e637a2547215eab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a170f16de6d79261a9ea638baea36f686" id="r_a170f16de6d79261a9ea638baea36f686"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a170f16de6d79261a9ea638baea36f686">enable_multisample</a></td></tr>
+<tr class="separator:a170f16de6d79261a9ea638baea36f686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d932e53a20dbaf04d6b9c07a2d687cc" id="r_a9d932e53a20dbaf04d6b9c07a2d687cc"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d932e53a20dbaf04d6b9c07a2d687cc">enable_depth_test</a></td></tr>
+<tr class="separator:a9d932e53a20dbaf04d6b9c07a2d687cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>OpenGL helper functions. </p>
 <p>This class contains helper functions to interact with OpenGL. </p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00022">22</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00029">29</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2ba98d5c7fa474b67f14d3aa8ce459d6" name="a2ba98d5c7fa474b67f14d3aa8ce459d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ba98d5c7fa474b67f14d3aa8ce459d6">&#9670;&#160;</a></span>_check_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GLenum gl::_check_error </td>
+          <td>(</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check OpenGL error. </p>
+<p>This function checks if there is an OpenGL error.</p>
+<dl class="section return"><dt>Returns</dt><dd>The error code </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00121">121</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a9f1202446652590a46426989a357024f" name="a9f1202446652590a46426989a357024f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9f1202446652590a46426989a357024f">&#9670;&#160;</a></span>bind_vertex_array()</h2>
 
@@ -168,45 +246,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Enable Depth Test. </p>
-<p>This function enables the depth test. </p>
-
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00103">103</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
-
-</div>
-</div>
-<a id="abad318d324046f5e38657fa16fd8b7ab" name="abad318d324046f5e38657fa16fd8b7ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abad318d324046f5e38657fa16fd8b7ab">&#9670;&#160;</a></span>check_error_()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GLenum gl::check_error_ </td>
-          <td>(</td>
-          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>file</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>line</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Check OpenGL error. </p>
-<p>This function checks if there is an OpenGL error.</p>
-<dl class="section return"><dt>Returns</dt><dd>The error code </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00108">108</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00111">111</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -236,7 +276,7 @@ Static Public Member Functions</h2></td></tr>
 <p>Clear. </p>
 <p>This function clears the color and depth buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00098">98</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00116">116</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -283,7 +323,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00088">88</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00101">101</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -336,12 +376,12 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00093">93</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00106">106</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a90dfdec5fe8131f21a4f1c04e2152cc1" name="a90dfdec5fe8131f21a4f1c04e2152cc1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a90dfdec5fe8131f21a4f1c04e2152cc1">&#9670;&#160;</a></span>load_opengl()</h2>
+<a id="aa6879a9450a32543d75f502b9e29504b" name="aa6879a9450a32543d75f502b9e29504b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6879a9450a32543d75f502b9e29504b">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -350,24 +390,39 @@ Static Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void gl::load_opengl </td>
+          <td class="memname">std::expected&lt; void, std::string &gt; gl::initialize </td>
           <td>(</td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>gl_blending</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>gl_cull_face</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
         </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00019">19</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a239ad82f4b0a2d81ebde3eb82eb28f33" name="a239ad82f4b0a2d81ebde3eb82eb28f33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239ad82f4b0a2d81ebde3eb82eb28f33">&#9670;&#160;</a></span>instance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
         <tr>
-          <td class="paramkey"></td>
+          <td class="memname"><a class="el" href="classbrenta_1_1gl.html">gl</a> &amp; gl::instance </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>gl_multisample</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>gl_depth_test</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -377,19 +432,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Load OpenGL. </p>
-<p>This function loads OpenGL and sets some default values.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">gl_blending</td><td>Enable blending </td></tr>
-    <tr><td class="paramname">gl_cull_face</td><td>Enable face culling </td></tr>
-    <tr><td class="paramname">gl_multisample</td><td>Enable multisampling </td></tr>
-    <tr><td class="paramname">gl_depth_test</td><td>Enable depth testing </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00014">14</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00085">85</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -442,7 +485,7 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00083">83</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00096">96</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,12 +520,12 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00064">64</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00071">71</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a10a5ba7e449675360bf82fc2cfe10b52" name="a10a5ba7e449675360bf82fc2cfe10b52"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a10a5ba7e449675360bf82fc2cfe10b52">&#9670;&#160;</a></span>set_viewport()</h2>
+<a id="aa51594c5d0846ea024a95394350adbe3" name="aa51594c5d0846ea024a95394350adbe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa51594c5d0846ea024a95394350adbe3">&#9670;&#160;</a></span>set_viewport()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -503,12 +546,12 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>SCR_WIDTH</em></span>, </td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>width</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>SCR_HEIGHT</em></span>&#160;)</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>height</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -524,13 +567,155 @@ Static Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">x</td><td>X coordinate of the viewport </td></tr>
     <tr><td class="paramname">y</td><td>Y coordinate of the viewport </td></tr>
-    <tr><td class="paramname">SCR_WIDTH</td><td>Width of the viewport </td></tr>
-    <tr><td class="paramname">SCR_HEIGHT</td><td>Height of the viewport </td></tr>
+    <tr><td class="paramname">width</td><td>Width of the viewport </td></tr>
+    <tr><td class="paramname">height</td><td>Height of the viewport </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00078">78</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00091">91</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2881fa14f7a1b33ff9372e5ad6a9ebe7" name="a2881fa14f7a1b33ff9372e5ad6a9ebe7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2881fa14f7a1b33ff9372e5ad6a9ebe7">&#9670;&#160;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, std::string &gt; gl::terminate </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00065">65</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="ad244d42a0fa1225369996687bef2f1e0" name="ad244d42a0fa1225369996687bef2f1e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad244d42a0fa1225369996687bef2f1e0">&#9670;&#160;</a></span>enable_blending</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gl::enable_blending</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00033">33</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aeaa3b227d66e0af90e637a2547215eab" name="aeaa3b227d66e0af90e637a2547215eab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeaa3b227d66e0af90e637a2547215eab">&#9670;&#160;</a></span>enable_cull_face</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gl::enable_cull_face</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00034">34</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a9d932e53a20dbaf04d6b9c07a2d687cc" name="a9d932e53a20dbaf04d6b9c07a2d687cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d932e53a20dbaf04d6b9c07a2d687cc">&#9670;&#160;</a></span>enable_depth_test</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gl::enable_depth_test</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00036">36</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a170f16de6d79261a9ea638baea36f686" name="a170f16de6d79261a9ea638baea36f686"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a170f16de6d79261a9ea638baea36f686">&#9670;&#160;</a></span>enable_multisample</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gl::enable_multisample</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00035">35</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ac4930e61208a20b01f4208638a8e362b" name="ac4930e61208a20b01f4208638a8e362b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4930e61208a20b01f4208638a8e362b">&#9670;&#160;</a></span>subsystem_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string brenta::gl::subsystem_name = &quot;gl&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00042">42</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
 
 </div>
 </div>

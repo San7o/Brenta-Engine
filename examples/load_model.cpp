@@ -16,38 +16,56 @@ REGISTER_SYSTEMS()
 
 using namespace brenta;
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
-#define ABS(...) std::filesystem::absolute(__VA_ARGS__)
-
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .set_gl_blending(true)
-                 .set_gl_cull_face(true)
-                 .set_gl_multisample(true)
-                 .set_gl_depth_test(true)
-                 .set_log_level(oak::level::debug)
-                 .build();
+  //
+  // Setup
+  //
+  
+  const int screen_width = 800;
+  const int screen_height = 600;
 
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug))
+    .subsystem(window::builder()
+               .title("load model test")
+               .width(screen_width)
+               .height(screen_height))
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
+
+  //
+  // Load assets
+  //
+  
   // Load the model
-  model our_model(ABS("examples/assets/models/backpack/backpack.obj"));
+  model our_model("examples/assets/models/backpack/backpack.obj");
 
   // Load the shader
   shader::create("default_shader", GL_VERTEX_SHADER,
-                 ABS("examples/default_shader.vs"), GL_FRAGMENT_SHADER,
-                 ABS("examples/default_shader.fs"));
+                 "examples/default_shader.vs", GL_FRAGMENT_SHADER,
+                 "examples/default_shader.fs");
 
-  while (!screen::is_window_closed())
+  //
+  // Render loop
+  //
+  
+  while (!window::should_close())
   {
     // Input
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
 
     // Clear
     gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
@@ -60,7 +78,8 @@ int main()
     glm::mat4 view = glm::mat4(1.0f); // Camera position
     glm::mat4 projection =
       glm::perspective(glm::radians(45.0f),
-                       (float) SCR_WIDTH / (float) SCR_HEIGHT, 0.1f, 100.0f);
+                       (float) window::get_width() / (float) window::get_height(),
+                       0.1f, 100.0f);
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 
@@ -71,9 +90,19 @@ int main()
     // Draw the model
     our_model.draw("default_shader");
 
-    screen::poll_events();
-    screen::swap_buffers();
+    window::poll_events();
+    window::swap_buffers();
   }
-
+  
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

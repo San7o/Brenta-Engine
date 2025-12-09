@@ -24,22 +24,34 @@ camera default_camera = camera();
 
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .use_logger(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .set_screen_msaa(true)
-                 .set_screen_vsync(true)
-                 .set_screen_title("Game")
-                 .set_log_level(oak::level::info)
-                 .set_log_file("/tmp/log.txt")
-                 .set_gl_blending(true)
-                 .set_gl_cull_face(true)
-                 .set_gl_multisample(true)
-                 .set_gl_depth_test(true)
-                 .build();
+  //
+  // Setup
+  //
+  
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug)
+               .file("/tmp/brenta-logs"))
+    .subsystem(window::builder()
+               .title("particles")
+               .width(SCR_WIDTH)
+               .height(SCR_HEIGHT)
+               .msaa()
+               .vsync())
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .subsystem(gui::builder())
+    .subsystem(input::builder())
+    .build(); 
+  auto ret = engine.initialize();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
 
   default_camera = camera::builder()
                      .set_camera_type(enums::camera_type::SPHERICAL)
@@ -69,11 +81,15 @@ int main()
       .set_atlas_index(3)
       .build();
 
-  time::update(screen::get_time());
-  while (!screen::is_window_closed())
+  //
+  // Render loop
+  //
+  
+  time::update(window::get_time());
+  while (!window::should_close())
   {
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
 
     gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
     gl::clear();
@@ -81,11 +97,21 @@ int main()
     emitter.update_particles(time::get_delta_time());
     emitter.render_particles();
 
-    time::update(screen::get_time());
+    time::update(window::get_time());
 
-    screen::poll_events();
-    screen::swap_buffers();
+    window::poll_events();
+    window::swap_buffers();
   }
 
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }
