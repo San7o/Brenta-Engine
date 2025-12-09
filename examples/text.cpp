@@ -20,25 +20,39 @@ const int SCR_HEIGHT = 600;
 
 int main()
 {
-  engine eng =
-    engine::builder()
-      .use_screen(true)
-      .use_text(true)                                   // Enable text rendering
-      .set_text_font("examples/assets/fonts/arial.ttf") // Set the font
-      .set_text_size(48)                                // Set the font size
-      .set_gl_blending(true)
-      .set_gl_cull_face(true)
-      .set_gl_multisample(true)
-      .set_gl_depth_test(true)
-      .set_screen_width(SCR_WIDTH)
-      .set_screen_height(SCR_HEIGHT)
-      .set_screen_is_mouse_captured(false)
-      .build();
-
-  while (!screen::is_window_closed())
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug)
+               .file("/tmp/brenta-logs"))
+    .subsystem(window::builder()
+               .title("text demo")
+               .width(800)
+               .height(600)
+               .vsync())
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .subsystem(text::builder()
+               .font("examples/assets/fonts/arial.ttf")
+               .size(100))
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
   {
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
+
+  //
+  // Render loop
+  //
+  
+  while (!window::should_close())
+  {
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
 
     gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
     gl::clear();
@@ -46,9 +60,19 @@ int main()
     text::render_text("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
                       glm::vec3(0.5f, 0.8f, 0.2));
 
-    screen::poll_events();
-    screen::swap_buffers();
+    window::poll_events();
+    window::swap_buffers();
   }
 
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

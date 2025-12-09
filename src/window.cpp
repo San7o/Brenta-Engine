@@ -81,6 +81,13 @@ bool window::should_close()
   return glfwWindowShouldClose(window::window_backend);
 }
 
+void window::set_width_height(int width, int height)
+{
+  window::width = width;
+  window::height = height;
+  return;
+}
+
 bool window::is_key_pressed(int key)
 {
   return glfwGetKey(window::window_backend, key) == GLFW_PRESS;

@@ -3,9 +3,12 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-/**
- * Play a sound
- */
+//
+// audio.cpp
+// =========
+//
+// Play a sound with the spacebar
+//
 
 #include <brenta/engine.hpp>
 #include <filesystem>
@@ -16,15 +19,15 @@ using namespace brenta;
 
 REGISTER_SYSTEMS()
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
 int main()
 {
   //
   // Setup
   //
 
+  const int screen_width = 800;
+  const int screen_height = 600;
+  
   // Required: id and path of an audio. The id will be used by the
   // audio subsystem to identify this particular file.
   types::audio_name_t audio_guitar_id = "guitar";
@@ -39,8 +42,9 @@ int main()
     .subsystem(logger::builder()
                .level(oak::level::debug))
     .subsystem(window::builder()
-               .width(SCR_WIDTH)
-               .height(SCR_WIDTH))
+               .title("audio test")
+               .width(screen_width)
+               .height(screen_height))
     
     // Enable audio subsystem
     

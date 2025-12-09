@@ -12,6 +12,8 @@
 using namespace brenta;
 using namespace brenta::types;
 
+std::string text::font_path;
+int text::font_size;
 types::shader_name_t text::text_shader;
 types::vao text::text_vao;
 types::buffer text::text_vbo;
@@ -21,6 +23,8 @@ std::expected<void, std::string> text::initialize()
 {
   text::text_vbo = types::buffer(GL_ARRAY_BUFFER);
   text::text_vao.init();
+  if (text::font_path != "")
+    load(text::font_path, text::font_size);
 
   INFO("text initialized");
   return {};
@@ -38,7 +42,7 @@ text &text::instance()
   return _text;
 }
 
-void text::load(std::string font_path)
+void text::load(std::string font_path, int font_size)
 {
   if (text_vao.get_vao() == 0)
   {
@@ -76,7 +80,7 @@ void text::load(std::string font_path)
   else
   {
     // set size to load glyphs as
-    FT_Set_Pixel_Sizes(face, 0, 48);
+    FT_Set_Pixel_Sizes(face, 0, font_size);
 
     // disable byte-alignment restriction
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -194,7 +198,21 @@ void text::render_text(std::string text, float x, float y, float scale,
 // Builder
 //
 
+text::builder &text::builder::font(std::string font_path)
+{
+  this->font_path = font_path;
+  return *this;
+}
+
+text::builder &text::builder::size(int font_size)
+{
+  this->font_size = font_size;
+  return *this;
+}
+
 subsystem &text::builder::build()
 {
+  text::font_path = this->font_path;
+  text::font_size = this->font_size;
   return text::instance();
 }

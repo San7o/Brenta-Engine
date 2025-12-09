@@ -3,6 +3,13 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+//
+// ecs.cpp
+// =======
+//
+// Some ecs examples
+//
+
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 

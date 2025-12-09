@@ -10,6 +10,7 @@
 #include <demo/components/player_component.hpp>
 #include <demo/components/transform_component.hpp>
 #include <demo/systems/renderer_system.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -43,7 +44,8 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
 
       brenta::types::translation t = brenta::types::translation();
       t.set_view(default_camera.get_view_matrix());
-      t.set_projection(default_camera.get_projection_matrix());
+      t.set_projection(default_camera.get_projection_matrix(window::get_width(),
+                                                            window::get_height()));
 
       t.set_model(glm::mat4(1.0f));
       t.translate(transform_component->position);

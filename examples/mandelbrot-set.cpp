@@ -16,18 +16,35 @@ using namespace brenta::types;
 
 REGISTER_SYSTEMS()
 
-const int SCR_WIDTH = 1280;
-const int SCR_HEIGHT = 720;
-
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .use_logger(true)
-                 .build();
+  //
+  // Setup
+  //
+  
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug)
+               .file("/tmp/brenta-logs"))
+    .subsystem(window::builder()
+               .title("mandelbrot set")
+               .width(800)
+               .height(600)
+               .vsync())
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .subsystem(input::builder())
+    .subsystem(gui::builder())
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
 
   // A square
   float vertices[] = {// First Triangle
@@ -44,7 +61,7 @@ int main()
   shader::create("fractal", GL_VERTEX_SHADER, "examples/mandelbrot.vs",
                  GL_FRAGMENT_SHADER, "examples/mandelbrot.fs");
 
-  framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
+  framebuffer fb(window::get_width(), window::get_height());
 
   float zoom = 1.0f;
   glm::vec3 offset = glm::vec3(-0.11f, -0.11f, 0.0f);
@@ -54,30 +71,30 @@ int main()
   float animation_speed = 0.5;
   int max_iterations = 100;
 
-  while (!screen::is_window_closed())
+  while (!window::should_close())
   {
-    screen::poll_events();
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
+    window::poll_events();
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
     // Use arrows to move the fractal
-    if (screen::is_key_pressed(GLFW_KEY_Z))
+    if (window::is_key_pressed(GLFW_KEY_Z))
       zoom += 0.01f;
-    if (screen::is_key_pressed(GLFW_KEY_X))
+    if (window::is_key_pressed(GLFW_KEY_X))
       zoom -= 0.01f;
-    if (screen::is_key_pressed(GLFW_KEY_LEFT))
+    if (window::is_key_pressed(GLFW_KEY_LEFT))
       offset.x -= 0.005f / pow(zoom, 4.0);
-    if (screen::is_key_pressed(GLFW_KEY_RIGHT))
+    if (window::is_key_pressed(GLFW_KEY_RIGHT))
       offset.x += 0.005f / pow(zoom, 4.0);
-    if (screen::is_key_pressed(GLFW_KEY_UP))
+    if (window::is_key_pressed(GLFW_KEY_UP))
       offset.y += 0.005f / pow(zoom, 4.0);
-    if (screen::is_key_pressed(GLFW_KEY_DOWN))
+    if (window::is_key_pressed(GLFW_KEY_DOWN))
       offset.y -= 0.005f / pow(zoom, 4.0);
 
     // Vary constant over time
     if (animate)
     {
-      constant.x = sin(screen::get_time() * animation_speed);
-      constant.y = cos(screen::get_time() * animation_speed);
+      constant.x = sin(window::get_time() * animation_speed);
+      constant.y = cos(window::get_time() * animation_speed);
     }
 
 #ifdef BRENTA_USE_IMGUI
@@ -102,7 +119,8 @@ int main()
     v.bind();
     shader::use("fractal");
     shader::set_vec3("fractal", "resolution",
-                     glm::vec3(float(SCR_WIDTH), float(SCR_HEIGHT), 0.0f));
+                     glm::vec3(float(window::get_width()),
+                               float(window::get_height()), 0.0f));
     shader::set_vec3("fractal", "offset", offset);
     shader::set_float("fractal", "zoom", zoom);
     shader::set_vec3("fractal", "constant", constant);
@@ -117,8 +135,18 @@ int main()
     gui::render();
 #endif
 
-    screen::swap_buffers();
+    window::swap_buffers();
   }
 
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

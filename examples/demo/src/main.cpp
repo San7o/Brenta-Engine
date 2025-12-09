@@ -12,15 +12,14 @@
 #include <filesystem>
 
 using namespace brenta;
-#ifdef BRENTA_USE_ECS
-using namespace viotecs;
-#endif
 
 // Default resolution
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
 
 #ifdef BRENTA_USE_ECS
+using namespace viotecs;
+
 REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
@@ -33,27 +32,36 @@ camera default_camera = camera();
 
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .use_audio(true)
-                 .use_input(true)
-                 .use_logger(true)
-                 .use_text(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .set_screen_msaa(true)
-                 .set_screen_vsync(true)
-                 .set_screen_title("Game")
-                 .set_log_level(oak::level::debug)
-                 .set_log_file("/tmp/demo-log.txt")
-                 .set_text_font("examples/assets/fonts/arial.ttf")
-                 .set_text_size(24)
-                 .set_gl_blending(true)
-                 .set_gl_cull_face(true)
-                 .set_gl_multisample(true)
-                 .set_gl_depth_test(true)
-                 .build();
+
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug)
+               .file("/tmp/brenta-logs"))
+    .subsystem(window::builder()
+               .title("brenta demo")
+               .width(800)
+               .height(600)
+               .vsync()
+               .msaa())
+    .subsystem(gl::builder()
+               .blending()
+               .cull_face()
+               .multisample()
+               .depth_test())
+    .subsystem(audio::builder())
+    .subsystem(input::builder())
+    .subsystem(ecs::builder())
+    .subsystem(gui::builder())
+    .subsystem(text::builder()
+               .font("examples/assets/fonts/arial.ttf")
+               .size(40))
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
+  {
+    ERROR("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
 
   default_camera = camera::builder()
                      .set_camera_type(enums::camera_type::SPHERICAL)
@@ -82,7 +90,7 @@ int main()
   world::add_resource<WireframeResource>(WireframeResource(false));
 #endif
 
-  audio::load_audio(
+  audio::load(
     "guitar", std::filesystem::absolute("examples/assets/audio/guitar.wav"));
 
   particle_emitter emitter =
@@ -107,10 +115,10 @@ int main()
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
-  time::update(screen::get_time());
-  while (!screen::is_window_closed())
+  time::update(window::get_time());
+  while (!window::should_close())
   {
-    screen::poll_events();
+    window::poll_events();
 
 #ifdef BRENTA_USE_IMGUI
     gui::new_frame(&fb);
@@ -124,7 +132,7 @@ int main()
     emitter.render_particles();
 
 #ifdef BRENTA_USE_ECS
-    time::update(screen::get_time());
+    time::update(window::get_time());
     world::tick();
 #endif
 
@@ -132,8 +140,18 @@ int main()
     fb.unbind();
     gui::render();
 #endif
-    screen::swap_buffers();
+    window::swap_buffers();
   }
 
+  //
+  // Cleanup
+  //
+  
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }

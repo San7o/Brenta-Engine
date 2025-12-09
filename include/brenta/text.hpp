@@ -53,6 +53,11 @@ struct character
  */
 class text : public subsystem
 {
+protected:
+
+  static std::string font_path;
+  static int font_size;
+  
 public:
   
   /**
@@ -97,8 +102,9 @@ public:
    * stored in the characters map.
    *
    * @param font_name Name of the font file
+   * @param font_size The size of the font
    */
-  static void load(std::string font_name);
+  static void load(std::string font_name, int font_size = 48);
   
   /**
    * @brief Render text
@@ -126,10 +132,18 @@ private:
 
 class text::builder : public subsystem::builder
 {
+private:
+
+  std::string font_path = "examples/assets/fonts/arial.ttf";
+  int font_size = 48;
+  
 public:
 
   builder() = default;
   ~builder() = default;
+
+  builder &font(std::string font_path);
+  builder &size(int font_size);
   
   brenta::subsystem &build() override;
   

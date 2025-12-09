@@ -3,9 +3,12 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-/**
- * Examples of various components that can be used in an ECS system.
- */
+//
+// components.cpp
+// ==============
+//
+// Examples of various components in the ECS system.
+//
 
 #include <brenta/engine.hpp>
 #include <glm/glm.hpp>

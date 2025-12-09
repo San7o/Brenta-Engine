@@ -30,9 +30,10 @@ std::expected<void, std::string> logger::initialize()
       ERROR("Failed to open log file: {}", log_file);
       return std::unexpected(this->subsystem_name);
     }
-    INFO("Set log file: {}", log_file);
+    INFO("set log file to {}", log_file);
   }
 
+  INFO("logger initialized");
   return {};
 }
 

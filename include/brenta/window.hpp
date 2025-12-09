@@ -79,6 +79,7 @@ public:
   static void set_mouse_pos_callback(GLFWcursorposfun callback);
   static void set_key_callback(GLFWkeyfun callback);
   static void set_mouse_capture(bool is_captured);
+  static void set_width_height(int width, int height);
   static void close();
 
   //

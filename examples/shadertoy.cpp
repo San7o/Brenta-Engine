@@ -41,10 +41,7 @@ int main(int argc, char** argv)
                .multisample()
                .depth_test())
     .subsystem(gui::builder())
-    .subsystem(audio::builder())
-    .subsystem(text::builder())
     .subsystem(input::builder())
-    .subsystem(ecs::builder())
     .build();
   
   auto ret = engine.initialize();

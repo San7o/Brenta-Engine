@@ -3,9 +3,9 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-/**
- * Just a simple window
- */
+//
+// Just a simple window
+//
 
 #include <brenta/engine.hpp>
 #include <iostream>
@@ -20,21 +20,33 @@ const int SCR_HEIGHT = 600;
 
 int main()
 {
-  engine eng = engine::builder()
-                 .use_screen(true)
-                 .set_screen_width(SCR_WIDTH)
-                 .set_screen_height(SCR_HEIGHT)
-                 .set_screen_is_mouse_captured(false)
-                 .build();
-
-  while (!screen::is_window_closed())
+  auto& engine = engine::builder()
+    .subsystem(window::builder()
+               .title("simple screen")
+               .width(SCR_WIDTH)
+               .height(SCR_HEIGHT))
+    .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
   {
-    if (screen::is_key_pressed(GLFW_KEY_ESCAPE))
-      screen::set_close();
+    oak::error("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
+    
+  while (!window::should_close())
+  {
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
 
-    screen::poll_events();
-    screen::swap_buffers();
+    window::poll_events();
+    window::swap_buffers();
   }
 
+  ret = engine.terminate();
+  if (!ret.has_value())
+  {
+    oak::error("Failed to terminate subsystem {}", ret.error());
+    return 1;
+  }
   return 0;
 }
