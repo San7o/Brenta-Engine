@@ -5,7 +5,7 @@
 
 #include <brenta/camera.hpp>
 #include <brenta/particles.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/shader.hpp>
 #include <brenta/texture.hpp>
 #include <brenta/translation.hpp>
@@ -177,9 +177,11 @@ void particle_emitter::render_particles()
   glEnableVertexAttribArray(1);
 
   // Set uniforms
+  int window_width = window::instance().get_width();
+  int window_height = window::instance().get_height();
   types::translation t = types::translation();
   t.set_view(this->cam->get_view_matrix());
-  t.set_projection(this->cam->get_projection_matrix());
+  t.set_projection(this->cam->get_projection_matrix(window_width, window_height));
   t.set_model(glm::mat4(1.0f));
   t.set_shader("particle_render");
   shader::set_int("particle_render", "atlas_width", this->atlas_width);
@@ -187,7 +189,8 @@ void particle_emitter::render_particles()
   shader::set_int("particle_render", "atlas_index", this->atlas_index);
   shader::set_float("particle_render", "scale", this->scale);
   shader::set_float("particle_render", "aspect_ratio",
-                    (float) screen::get_width() / (float) screen::get_height());
+                    (float) window_width
+                    / (float) window_height);
 
   // Set Textures
   texture::active_texture(GL_TEXTURE0);

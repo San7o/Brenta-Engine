@@ -71,7 +71,8 @@ public:
    * @brief Set the model matrix
    * @param model The model matrix
    */
-  void set_projection(float fov, float near, float far);
+  void set_projection(int window_width, int window_height,
+                      float fov, float near, float far);
   /**
    * @brief Set the model matrix
    * @param model The model matrix

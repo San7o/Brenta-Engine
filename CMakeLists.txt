@@ -53,8 +53,8 @@ endif()
 option(BUILD_SHARED_LIBS "Build shared library" ON)
 option(BRENTA_BUILD_EXAMPLES "Build examples" OFF)
 option(BRENTA_BUILD_TESTS "Build unit tests" OFF)
-option(BRENTA_USE_IMGUI "Enable ImGUI support" ON)
-option(BRENTA_USE_ECS "Enable ECS support" ON)
+option(BRENTA_BRENTA_USE_IMGUI "Enable ImGUI support" ON)
+option(BRENTA_BRENTA_USE_ECS "Enable ECS support" ON)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type (Debug, Release)" FORCE)
@@ -110,9 +110,9 @@ message(STATUS "Using SDL")
 list(APPEND BRENTA_DEPS_LIBS SDL3)
 
 # ImGUI
-if (BRENTA_USE_IMGUI)
+if (BRENTA_BRENTA_USE_IMGUI)
   message(STATUS "Using ImGUI")
-  list(APPEND BRENTA_DEFINES USE_IMGUI)
+  list(APPEND BRENTA_DEFINES BRENTA_USE_IMGUI)
   list(APPEND BRENTA_DEPS_INCLUDES
     ${PROJECT_SOURCE_DIR}/external/imgui
     ${PROJECT_SOURCE_DIR}/external/imgui/backends)
@@ -132,8 +132,8 @@ if (BRENTA_USE_IMGUI)
 endif()
 
 # Viotecs
-if (BRENTA_USE_ECS)
-  list(APPEND BRENTA_DEFINES USE_ECS)
+if (BRENTA_BRENTA_USE_ECS)
+  list(APPEND BRENTA_DEFINES BRENTA_USE_ECS)
   register_dependency(viotecs)
 endif()
 
@@ -230,6 +230,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(mandelbrot-set)
   add_example(particles)
   add_example(text)
+  add_example(shadertoy)
 
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES

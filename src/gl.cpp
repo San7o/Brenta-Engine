@@ -5,7 +5,7 @@
 
 #include <brenta/gl.hpp>
 #include <brenta/logger.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/text.hpp>
 #include <iostream>
 
@@ -14,17 +14,17 @@ using namespace brenta;
 void gl::load_opengl(bool gl_blending, bool gl_cull_face, bool gl_multisample,
                      bool gl_depth_test)
 {
-  GLADloadproc loadproc = (GLADloadproc) screen::get_proc_address();
+  GLADloadproc loadproc = (GLADloadproc) window::instance().get_proc_address();
   if (!gladLoadGLLoader(loadproc))
   {
     ERROR("Failed to initialize GLAD");
     exit(-1);
   }
 
-  int SCR_WIDTH = screen::get_width();
-  int SCR_HEIGHT = screen::get_height();
+  int width = window::instance().get_width();
+  int height = window::instance().get_height();
 
-  glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
+  glViewport(0, 0, width, height);
 
   if (gl_depth_test)
   {
@@ -75,9 +75,9 @@ void gl::set_poligon_mode(GLboolean enable)
   }
 }
 
-void gl::set_viewport(int x, int y, int SCR_WIDTH, int SCR_HEIGHT)
+void gl::set_viewport(int x, int y, int width, int height)
 {
-  glViewport(x, y, SCR_WIDTH, SCR_HEIGHT);
+  glViewport(x, y, width, height);
 }
 
 void gl::set_color(float r, float g, float b, float a)

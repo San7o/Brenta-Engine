@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#ifdef USE_ECS
+#ifdef BRENTA_USE_ECS
 #include <demo/game_ecs.hpp>
 #include <viotecs/viotecs.hpp>
 #endif
@@ -12,7 +12,7 @@
 #include <filesystem>
 
 using namespace brenta;
-#ifdef USE_ECS
+#ifdef BRENTA_USE_ECS
 using namespace viotecs;
 #endif
 
@@ -20,7 +20,7 @@ using namespace viotecs;
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
 
-#ifdef USE_ECS
+#ifdef BRENTA_USE_ECS
 REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
@@ -65,7 +65,7 @@ int main()
                      .set_zoom(45.0f)
                      .build();
 
-#ifdef USE_ECS
+#ifdef BRENTA_USE_ECS
   init_player_entity();
   // init_cube_entity();
   init_floor_entity();
@@ -103,7 +103,7 @@ int main()
       .set_atlas_index(5)
       .build();
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
@@ -112,7 +112,7 @@ int main()
   {
     screen::poll_events();
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     gui::new_frame(&fb);
     fb.bind();
 #endif
@@ -123,12 +123,12 @@ int main()
     emitter.update_particles(time::get_delta_time());
     emitter.render_particles();
 
-#ifdef USE_ECS
+#ifdef BRENTA_USE_ECS
     time::update(screen::get_time());
     world::tick();
 #endif
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     fb.unbind();
     gui::render();
 #endif

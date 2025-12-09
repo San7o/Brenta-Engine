@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #pragma once
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
 
 #include <brenta/frame_buffer.hpp>
 #include <imgui.h>

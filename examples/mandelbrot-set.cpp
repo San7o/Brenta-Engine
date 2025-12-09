@@ -80,7 +80,7 @@ int main()
       constant.y = cos(screen::get_time() * animation_speed);
     }
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     gui::new_frame(&fb);
     ImGui::Begin("Fractal");
     ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);
@@ -113,7 +113,7 @@ int main()
 
     v.unbind();
     fb.unbind();
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
     gui::render();
 #endif
 

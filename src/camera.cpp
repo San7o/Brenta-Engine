@@ -5,7 +5,6 @@
 
 #include <brenta/camera.hpp>
 #include <brenta/logger.hpp>
-#include <brenta/screen.hpp>
 #include <cmath>
 
 using namespace brenta;
@@ -61,20 +60,20 @@ glm::mat4 camera::get_view_matrix()
   }
 }
 
-glm::mat4 camera::get_projection_matrix()
+glm::mat4 camera::get_projection_matrix(int window_width, int window_height)
 {
   switch (this->projection_type)
   {
   case enums::projection_type::PERSPECTIVE:
     return glm::perspective(glm::radians(this->zoom),
-                            (float) screen::get_width()
-                              / (float) screen::get_height(),
+                            (float) window_width
+                            / (float) window_height,
                             0.1f, 1000.0f);
   case enums::projection_type::ORTHOGRAPHIC:
-    return glm::ortho((float) -screen::get_width() / 2.0f,
-                      (float) screen::get_width() / 2.0f,
-                      (float) -screen::get_height() / 2.0f,
-                      (float) screen::get_height() / 2.0f, 0.1f, 100.0f);
+    return glm::ortho((float) -window_width / 2.0f,
+                      (float) window_width / 2.0f,
+                      (float) -window_height / 2.0f,
+                      (float) window_height / 2.0f, 0.1f, 100.0f);
   default:
     return glm::mat4(1.0f);
   }

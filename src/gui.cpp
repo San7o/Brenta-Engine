@@ -5,10 +5,10 @@
 
 #include <brenta/gl.hpp>
 #include <brenta/gui.hpp>
-#include <brenta/screen.hpp>
+#include <brenta/window.hpp>
 #include <brenta/texture.hpp>
 
-#ifdef USE_IMGUI
+#ifdef BRENTA_USE_IMGUI
 
 using namespace brenta;
 using namespace brenta::types;
@@ -25,7 +25,7 @@ void gui::init()
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
   // Setup Platform/Renderer backends
-  ImGui_ImplGlfw_InitForOpenGL(screen::get_window(), true);
+  ImGui_ImplGlfw_InitForOpenGL(window::instance().get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 }

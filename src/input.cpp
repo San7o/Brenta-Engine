@@ -14,8 +14,8 @@ std::unordered_map<std::string, std::function<void(double, double)>>
 
 void input::init()
 {
-  screen::set_key_callback(input::key_callback);
-  screen::set_mouse_pos_callback(input::mouse_pos_callback);
+  window::instance().set_key_callback(input::key_callback);
+  window::instance().set_mouse_pos_callback(input::mouse_pos_callback);
 
   INFO("Input initialized");
 }

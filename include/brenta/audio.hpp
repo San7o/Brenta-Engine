@@ -72,6 +72,7 @@ struct audio_file_t
 class audio
 {
 public:
+  
   /**
    * @brief Map of audio files
    *
@@ -83,6 +84,7 @@ public:
    */
   static std::unordered_map<types::audio_name_t, types::audio_file_t>
     audio_files;
+  
   /**
    * @brief Map of audio streams
    *
@@ -97,14 +99,16 @@ public:
   static std::unordered_map<types::stream_name_t, SDL_AudioStream *> streams;
 
   audio() = delete;
+  
   /**
-   * @brief Initialize the audio system
+   * @brief Initialize the audio subsystem
    *
-   * This function initializes the audio system of the engine.
-   * It is called automatically by the engine when the game is
+   * This function initializes the audio subsystem of the engine.  It
+   * is called automatically by the engine when the game is
    * started. It creates a default stream called "default".
    */
   static void init();
+  
   /**
    * @brief Destroy the audio system
    *
@@ -123,6 +127,7 @@ public:
    * @return The audio file
    */
   static types::audio_file_t get_audio_file(types::audio_name_t name);
+  
   /**
    * @brief Get an audio stream
    *
@@ -144,6 +149,7 @@ public:
    * @param path The path to the audio file
    */
   static void load_audio(types::audio_name_t name, std::string path);
+  
   /**
    * @brief Create an audio stream
    *
@@ -153,6 +159,7 @@ public:
    * @param name The name of the stream
    */
   static void create_stream(types::stream_name_t);
+  
   /**
    * @brief Play an audio file
    *
@@ -165,6 +172,7 @@ public:
    * @param stream_name The name of the stream
    */
   static void play_audio(types::audio_name_t, types::stream_name_t = "default");
+  
   /**
    * @brief Set the volume of a stream
    *
@@ -175,6 +183,7 @@ public:
    * @param volume The volume of the stream
    */
   static void set_volume(types::stream_name_t name, int volume);
+  
   /**
    * @brief Pause a stream
    *
@@ -184,6 +193,7 @@ public:
    * @param name The name of the stream
    */
   static void pause_stream(types::stream_name_t name);
+  
   /**
    * @brief Resume a stream
    *
@@ -193,6 +203,7 @@ public:
    * @param name The name of the stream
    */
   static void resume_stream(types::stream_name_t name);
+  
   /**
    * @brief Stop a stream
    *

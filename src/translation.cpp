@@ -3,7 +3,6 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/screen.hpp>
 #include <brenta/translation.hpp>
 
 using namespace brenta::types;
@@ -27,11 +26,12 @@ void translation::set_view(glm::mat4 view)
   this->view = view;
 }
 
-void translation::set_projection(float fov, float near, float far)
+void translation::set_projection(int window_width, int window_height,
+                                 float fov, float near, float far)
 {
   this->projection = glm::perspective(
     glm::radians(fov),
-    (float) screen::get_width() / (float) screen::get_height(), near, far);
+    (float) window_width / (float) window_height, near, far);
 }
 
 void translation::set_projection(glm::mat4 projection)
