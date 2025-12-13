@@ -24,7 +24,7 @@ glm::vec3 ResolveCollision(glm::vec3 position1, glm::vec3 position2,
 
 struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
 {
-  void run(std::vector<entity_t> matches) const override
+  void run(std::vector<entity_id> matches) const override
   {
     if (matches.empty())
       return;
@@ -35,23 +35,20 @@ struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
       {
         if (i == j)
           continue;
-        auto sphere_component1 =
-          world::entity_to_component<SphereColliderComponent>(matches[i]);
-        auto transform_component1 =
-          world::entity_to_component<TransformComponent>(matches[i]);
-        auto sphere_component2 =
-          world::entity_to_component<SphereColliderComponent>(matches[j]);
-        auto transform_component2 =
-          world::entity_to_component<TransformComponent>(matches[j]);
+
+        entity e1 = matches[i];
+        entity e2 = matches[j];
+        auto sphere_component1 = e1.get_component<SphereColliderComponent>();
+        auto transform_component1 = e1.get_component<TransformComponent>();
+        auto sphere_component2 = e2.get_component<SphereColliderComponent>();
+        auto transform_component2 = e2.get_component<TransformComponent>();
 
         float distance = glm::distance(transform_component1->position,
                                        transform_component2->position);
         if (distance < sphere_component1->radius + sphere_component2->radius)
         {
-          auto physics_component1 =
-            world::entity_to_component<PhysicsComponent>(matches[i]);
-          auto physics_component2 =
-            world::entity_to_component<PhysicsComponent>(matches[j]);
+          auto physics_component1 = e1.get_component<PhysicsComponent>();
+          auto physics_component2 = e2.get_component<PhysicsComponent>();
           if (physics_component1 == nullptr || physics_component2 == nullptr)
           {
             continue;

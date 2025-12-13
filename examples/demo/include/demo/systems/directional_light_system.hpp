@@ -14,7 +14,7 @@ using namespace viotecs;
 
 struct DirectionalLightSystem : system<DirectionalLightComponent>
 {
-  void run(std::vector<entity_t> entities) const override
+  void run(std::vector<entity_id> entities) const override
   {
     if (entities.empty())
       return;

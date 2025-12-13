@@ -15,7 +15,7 @@ using namespace viotecs::types;
 
 struct DebugTextSystem : system<none>
 {
-  void run(std::vector<entity_t> _) const override
+  void run(std::vector<entity_id> _) const override
   {
     auto camera_pos = default_camera.get_position();
 

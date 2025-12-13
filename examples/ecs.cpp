@@ -35,7 +35,7 @@ struct health_component : component
 
 struct poison_system : system<player_component, health_component>
 {
-  void run(std::vector<entity_t> entities) const override
+  void run(std::vector<types::entity_id> entities) const override
   {
     if (entities.empty())
     {
@@ -68,16 +68,15 @@ int main()
   std::cout << "You are poisoned and will lose health every tick" << std::endl;
 
   // New entity as the player
-  entity_t player_entity = world::new_entity();
+  entity player = world::new_entity();
 
   // Add the Player component to the entity
-  world::add_component<player_component>(player_entity, player_component());
+  player.add_component<player_component>(player_component());
 
   // Add a health component to the entity
-  auto health = health_component(100);
-  world::add_component<health_component>(player_entity, health);
+  player.add_component<health_component>(100);
 
-  world::add_resource<global_resource>(global_resource(10));
+  world::add_resource<global_resource>(10);
 
   // Main loop
   for (int i = 0; i < 10; i++)

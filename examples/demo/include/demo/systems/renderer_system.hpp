@@ -23,11 +23,11 @@ using namespace viotecs;
 
 struct RendererSystem : system<ModelComponent, TransformComponent>
 {
-  void run(std::vector<entity_t> matches) const override
+  void run(std::vector<entity_id> matches) const override
   {
     if (matches.empty())
     {
-      INFO("No matches");
+      INFO("RendererSystem: No matches");
       return;
     }
 

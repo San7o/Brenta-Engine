@@ -20,7 +20,7 @@ using namespace viotecs::types;
 
 struct PhysicsSystem : system<PhysicsComponent, TransformComponent>
 {
-  void run(std::vector<entity_t> matches) const override
+  void run(std::vector<entity_id> matches) const override
   {
     if (matches.empty())
       return;

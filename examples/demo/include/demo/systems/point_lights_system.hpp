@@ -16,7 +16,7 @@ using namespace viotecs;
 /* Load the lights on the shaders */
 struct PointLightsSystem : system<TransformComponent, PointLightComponent>
 {
-  void run(std::vector<entity_t> entities) const override
+  void run(std::vector<entity_id> entities) const override
   {
     if (entities.empty())
       return;
