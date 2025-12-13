@@ -48,7 +48,8 @@ int main()
                .cull_face()
                .multisample()
                .depth_test())
-    .subsystem(audio::builder())
+    .subsystem(audio::builder()
+               .load("guitar", "examples/assets/audio/guitar.wav"))
     .subsystem(input::builder())
     .subsystem(ecs::builder())
     .subsystem(gui::builder())
@@ -87,11 +88,8 @@ int main()
   init_camera_mouse_callback();
   init_play_guitar_callback();
 
-  world::add_resource<WireframeResource>(WireframeResource(false));
+  world::add_resource<WireframeResource>(false);
 #endif
-
-  audio::load(
-    "guitar", std::filesystem::absolute("examples/assets/audio/guitar.wav"));
 
   particle_emitter emitter =
     particle_emitter::builder()

@@ -4,10 +4,10 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/player_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/entities/player_entity.hpp>
+#include <demo/components/model.hpp>
+#include <demo/components/player.hpp>
+#include <demo/components/transform.hpp>
+#include <demo/entities/player.hpp>
 
 #include <viotecs/viotecs.hpp>
 

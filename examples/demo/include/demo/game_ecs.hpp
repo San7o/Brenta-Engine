@@ -5,37 +5,37 @@
 
 #pragma once
 
-/* Entities */
-#include <demo/entities/cube_entity.hpp>
-#include <demo/entities/directional_light_entity.hpp>
-#include <demo/entities/floor_entity.hpp>
-#include <demo/entities/player_entity.hpp>
-#include <demo/entities/point_light_entity.hpp>
-#include <demo/entities/robot_entity.hpp>
-#include <demo/entities/sphere_entity.hpp>
+// Entities
+#include <demo/entities/cube.hpp>
+#include <demo/entities/directional_light.hpp>
+#include <demo/entities/floor.hpp>
+#include <demo/entities/player.hpp>
+#include <demo/entities/point_light.hpp>
+#include <demo/entities/robot.hpp>
+#include <demo/entities/sphere.hpp>
 
-/* Components */
-#include <demo/components/directional_light_component.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/physics_component.hpp>
-#include <demo/components/point_light_component.hpp>
-#include <demo/components/sphere_collider_component.hpp>
-#include <demo/components/transform_component.hpp>
+// Components
+#include <demo/components/directional_light.hpp>
+#include <demo/components/model.hpp>
+#include <demo/components/physics.hpp>
+#include <demo/components/point_light.hpp>
+#include <demo/components/sphere_collider.hpp>
+#include <demo/components/transform.hpp>
 
-/* Systems */
-#include <demo/systems/collisions_system.hpp>
-#include <demo/systems/debug_text_system.hpp>
-#include <demo/systems/directional_light_system.hpp>
-#include <demo/systems/fps_system.hpp>
-#include <demo/systems/physics_system.hpp>
-#include <demo/systems/point_lights_system.hpp>
-#include <demo/systems/renderer_system.hpp>
+// Systems
+#include <demo/systems/collisions.hpp>
+#include <demo/systems/debug_text.hpp>
+#include <demo/systems/directional_light.hpp>
+#include <demo/systems/fps.hpp>
+#include <demo/systems/physics.hpp>
+#include <demo/systems/point_lights.hpp>
+#include <demo/systems/renderer.hpp>
 
-/* Resources */
-#include <demo/resources/wireframe_resource.hpp>
+// Resources
+#include <demo/resources/wireframe.hpp>
 
-/* Callbacks */
-#include <demo/callbacks/camera_mouse_callback.hpp>
-#include <demo/callbacks/close_window_callback.hpp>
-#include <demo/callbacks/play_guitar_callback.hpp>
-#include <demo/callbacks/toggle_wireframe_callback.hpp>
+// Callbacks
+#include <demo/callbacks/camera_mouse.hpp>
+#include <demo/callbacks/close_window.hpp>
+#include <demo/callbacks/play_guitar.hpp>
+#include <demo/callbacks/toggle_wireframe.hpp>

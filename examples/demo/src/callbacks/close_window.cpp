@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/callbacks/close_window_callback.hpp>
+#include <demo/callbacks/close_window.hpp>
 
 using namespace brenta;
 

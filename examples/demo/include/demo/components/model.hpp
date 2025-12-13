@@ -11,7 +11,6 @@
 using namespace brenta;
 using namespace viotecs;
 
-/* Model Component */
 struct ModelComponent : component
 {
   model mod;

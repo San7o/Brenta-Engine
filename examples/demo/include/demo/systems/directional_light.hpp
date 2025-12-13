@@ -5,10 +5,11 @@
 
 #pragma once
 
-#include <demo/components/directional_light_component.hpp>
-#include <demo/systems/directional_light_system.hpp>
-#include <vector>
+#include <demo/components/directional_light.hpp>
+
 #include <viotecs/viotecs.hpp>
+
+#include <vector>
 
 using namespace viotecs;
 

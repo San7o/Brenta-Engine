@@ -4,8 +4,8 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/callbacks/toggle_wireframe_callback.hpp>
-#include <demo/resources/wireframe_resource.hpp>
+#include <demo/callbacks/toggle_wireframe.hpp>
+#include <demo/resources/wireframe.hpp>
 #include <viotecs/viotecs.hpp>
 
 using namespace brenta;

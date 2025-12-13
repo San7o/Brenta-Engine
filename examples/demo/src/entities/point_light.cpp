@@ -4,16 +4,18 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/point_light_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/entities/point_light_entity.hpp>
-#include <filesystem>
+#include <demo/components/model.hpp>
+#include <demo/components/point_light.hpp>
+#include <demo/components/transform.hpp>
+#include <demo/entities/point_light.hpp>
+
+#include <viotecs/viotecs.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <vector>
-#include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 using namespace brenta;

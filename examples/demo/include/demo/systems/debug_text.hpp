@@ -6,9 +6,10 @@
 #pragma once
 
 #include <brenta/engine.hpp>
-#include <demo/systems/debug_text_system.hpp>
-#include <vector>
+
 #include <viotecs/viotecs.hpp>
+
+#include <vector>
 
 using namespace viotecs;
 using namespace viotecs::types;

@@ -4,11 +4,12 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/physics_component.hpp>
-#include <demo/components/sphere_collider_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/entities/sphere_entity.hpp>
+#include <demo/components/model.hpp>
+#include <demo/components/physics.hpp>
+#include <demo/components/sphere_collider.hpp>
+#include <demo/components/transform.hpp>
+#include <demo/entities/sphere.hpp>
+
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;

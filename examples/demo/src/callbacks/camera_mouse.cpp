@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/callbacks/camera_mouse_callback.hpp>
+#include <demo/callbacks/camera_mouse.hpp>
 
 using namespace brenta;
 

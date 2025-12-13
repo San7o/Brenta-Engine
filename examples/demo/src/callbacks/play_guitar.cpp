@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/callbacks/play_guitar_callback.hpp>
+#include <demo/callbacks/play_guitar.hpp>
 
 using namespace brenta;
 

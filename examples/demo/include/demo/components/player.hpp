@@ -6,13 +6,12 @@
 #pragma once
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
+#include <demo/components/model.hpp>
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
 
-/* Player Component */
 struct PlayerComponent : component
 {
   PlayerComponent()

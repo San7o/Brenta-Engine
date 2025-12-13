@@ -4,9 +4,9 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/entities/cube_entity.hpp>
+#include <demo/components/model.hpp>
+#include <demo/components/transform.hpp>
+#include <demo/entities/cube.hpp>
 
 #include <viotecs/viotecs.hpp>
 

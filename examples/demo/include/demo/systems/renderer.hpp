@@ -6,16 +6,17 @@
 #pragma once
 
 #include <brenta/engine.hpp>
-#include <demo/components/model_component.hpp>
-#include <demo/components/player_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/systems/renderer_system.hpp>
+#include <demo/components/model.hpp>
+#include <demo/components/player.hpp>
+#include <demo/components/transform.hpp>
+
+#include <viotecs/viotecs.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <vector>
-#include <viotecs/viotecs.hpp>
 
 #define ANIMATION_SPEED 24
 

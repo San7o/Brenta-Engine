@@ -3,11 +3,11 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <demo/components/model_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/entities/floor_entity.hpp>
-
+#include <demo/components/model.hpp>
+#include <demo/components/transform.hpp>
+#include <demo/entities/floor.hpp>
 #include <brenta/engine.hpp>
+
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;

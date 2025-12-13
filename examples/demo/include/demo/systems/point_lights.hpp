@@ -5,11 +5,11 @@
 
 #pragma once
 
-#include <demo/components/point_light_component.hpp>
-#include <demo/components/transform_component.hpp>
-#include <demo/systems/point_lights_system.hpp>
-#include <vector>
+#include <demo/components/transform.hpp>
+
 #include <viotecs/viotecs.hpp>
+
+#include <vector>
 
 using namespace viotecs;
 
