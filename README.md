@@ -106,10 +106,12 @@ way that is more modular and scalable.
 
 ### Entities
 
-Entities are objects in the game, it's just an ID:
+Entities are objects in the game, it's just an ID. The `entity` class
+helps you manage the entity, for example by attaching a component to
+that entity, or removing the entity from the world.
 
 ```c++
-entity entity = world::new_entity();
+entity e = world::new_entity();
 ```
 
 ### Components
@@ -126,7 +128,7 @@ struct physics_component : component {
 };
 
 // Somewhere
-entity.add_component<physics_component>(10.0f);
+e.add_component<physics_component>(10.0f);
 ```
 
 ### Systems
