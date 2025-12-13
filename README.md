@@ -122,12 +122,11 @@ struct physics_component : component {
     float density;
     glm::vec3 velocity;
     glm::vec3 acceleration;
-    physics_component() {}
+    physics_component(float mass) : mass(mass) {}
 };
 
 // Somewhere
-world::add_component<physics_component>(entity, physics_component);
-
+entity.add_component<physics_component>(10.0f);
 ```
 
 ### Systems
@@ -143,7 +142,7 @@ struct fps_system : system<none> {
     }
 };
 
-// Somewhere
+// Somewhere, only once
 REGISTER_SYSTEMS(fps_system);
 ```
 
