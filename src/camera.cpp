@@ -271,91 +271,97 @@ void camera::set_last_y(float last_y)
   this->last_y = last_y;
 }
 
-camera::builder &
-camera::builder::set_camera_type(enums::camera_type camera_type)
-{
-  this->camera_type = camera_type;
-  return *this;
-}
+//
+// Builder
+//
 
 camera::builder &
-camera::builder::set_projection_type(enums::projection_type projection_type)
+camera::builder::camera_type(enums::camera_type camera_type)
 {
-  this->projection_type = projection_type;
+  this->camera_type_val = camera_type;
   return *this;
 }
 
-camera::builder &camera::builder::set_position(glm::vec3 position)
+camera::builder &
+camera::builder::projection_type(enums::projection_type projection_type)
 {
-  this->position = position;
+  this->projection_type_val = projection_type;
   return *this;
 }
 
-camera::builder &camera::builder::set_world_up(glm::vec3 world_up)
+camera::builder &camera::builder::position(glm::vec3 position)
 {
-  this->world_up = world_up;
+  this->position_val = position;
   return *this;
 }
 
-camera::builder &camera::builder::set_center(glm::vec3 center)
+camera::builder &camera::builder::world_up(glm::vec3 world_up)
 {
-  this->center = center;
+  this->world_up_val = world_up;
   return *this;
 }
 
-camera::builder &camera::builder::set_movement_speed(float movement_speed)
+camera::builder &camera::builder::center(glm::vec3 center)
 {
-  this->movement_speed = movement_speed;
+  this->center_val = center;
   return *this;
 }
 
-camera::builder &camera::builder::set_mouse_sensitivity(float mouse_sensitivity)
+camera::builder &camera::builder::movement_speed(float movement_speed)
 {
-  this->mouse_sensitivity = mouse_sensitivity;
+  this->movement_speed_val = movement_speed;
   return *this;
 }
 
-camera::builder &camera::builder::set_zoom(float zoom)
+camera::builder &camera::builder::mouse_sensitivity(float mouse_sensitivity)
 {
-  this->zoom = zoom;
+  this->mouse_sensitivity_val = mouse_sensitivity;
   return *this;
 }
 
-camera::builder &camera::builder::set_spherical_coordinates(
+camera::builder &camera::builder::zoom(float zoom)
+{
+  this->zoom_val = zoom;
+  return *this;
+}
+
+camera::builder &camera::builder::spherical_coordinates(
   types::spherical_coordinates spherical_coordinates)
 {
-  this->spherical_coordinates = spherical_coordinates;
+  this->spherical_coordinates_val = spherical_coordinates;
   return *this;
 }
 
 camera::builder &
-camera::builder::set_euler_angles(types::euler_angles euler_angles)
+camera::builder::euler_angles(types::euler_angles euler_angles)
 {
-  this->euler_angles = euler_angles;
+  this->euler_angles_val = euler_angles;
   return *this;
 }
 
-camera::builder &camera::builder::set_front(glm::vec3 front)
+camera::builder &camera::builder::front(glm::vec3 front)
 {
-  this->front = front;
+  this->front_val = front;
   return *this;
 }
 
-camera::builder &camera::builder::set_up(glm::vec3 up)
+camera::builder &camera::builder::up(glm::vec3 up)
 {
-  this->up = up;
+  this->up_val = up;
   return *this;
 }
 
-camera::builder &camera::builder::set_right(glm::vec3 right)
+camera::builder &camera::builder::right(glm::vec3 right)
 {
-  this->right = right;
+  this->right_val = right;
   return *this;
 }
 
 brenta::camera camera::camera::builder::build()
 {
-  return camera(camera_type, projection_type, position, world_up, center,
-                movement_speed, mouse_sensitivity, zoom, spherical_coordinates,
-                euler_angles, front, up, right);
+  return camera(camera_type_val, projection_type_val, position_val,
+                world_up_val, center_val, movement_speed_val,
+                mouse_sensitivity_val, zoom_val,
+                spherical_coordinates_val, euler_angles_val,
+                front_val, up_val, right_val);
 }

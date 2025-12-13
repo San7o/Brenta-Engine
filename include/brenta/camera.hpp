@@ -447,35 +447,35 @@ public:
 class camera::builder
 {
 private:
-  enums::camera_type camera_type = enums::camera_type::AIRCRAFT;
-  enums::projection_type projection_type = enums::projection_type::PERSPECTIVE;
-  glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 world_up = glm::vec3(0.0f, 1.0f, 0.0f);
-  glm::vec3 center = glm::vec3(0.0f, 0.0f, 0.0f);
-  float movement_speed = 2.5f;
-  float mouse_sensitivity = 0.1f;
-  float zoom = 45.0f;
-  glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
-  glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
-  glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
-  types::spherical_coordinates spherical_coordinates = {0.0f, 0.0f, 10.0f};
-  types::euler_angles euler_angles = {0.0f, 0.0f, 0.0f};
+  enums::camera_type camera_type_val = enums::camera_type::AIRCRAFT;
+  enums::projection_type projection_type_val = enums::projection_type::PERSPECTIVE;
+  glm::vec3 position_val = glm::vec3(0.0f, 0.0f, 0.0f);
+  glm::vec3 world_up_val = glm::vec3(0.0f, 1.0f, 0.0f);
+  glm::vec3 center_val = glm::vec3(0.0f, 0.0f, 0.0f);
+  float movement_speed_val = 2.5f;
+  float mouse_sensitivity_val = 0.1f;
+  float zoom_val = 45.0f;
+  glm::vec3 front_val = glm::vec3(0.0f, 0.0f, -1.0f);
+  glm::vec3 up_val = glm::vec3(0.0f, 1.0f, 0.0f);
+  glm::vec3 right_val = glm::vec3(1.0f, 0.0f, 0.0f);
+  types::spherical_coordinates spherical_coordinates_val = {0.0f, 0.0f, 10.0f};
+  types::euler_angles euler_angles_val = {0.0f, 0.0f, 0.0f};
 
 public:
-  builder &set_camera_type(enums::camera_type camera_type);
-  builder &set_projection_type(enums::projection_type projection_type);
-  builder &set_position(glm::vec3 position);
-  builder &set_world_up(glm::vec3 worldUp);
-  builder &set_center(glm::vec3 center);
-  builder &set_movement_speed(float movement_speed);
-  builder &set_mouse_sensitivity(float mouse_sensitivity);
-  builder &set_zoom(float zoom);
+  builder &camera_type(enums::camera_type camera_type);
+  builder &projection_type(enums::projection_type projection_type);
+  builder &position(glm::vec3 position);
+  builder &world_up(glm::vec3 worldUp);
+  builder &center(glm::vec3 center);
+  builder &movement_speed(float movement_speed);
+  builder &mouse_sensitivity(float mouse_sensitivity);
+  builder &zoom(float zoom);
   builder &
-  set_spherical_coordinates(types::spherical_coordinates spherical_coordinates);
-  builder &set_euler_angles(types::euler_angles euler_angles);
-  builder &set_front(glm::vec3 front);
-  builder &set_up(glm::vec3 up);
-  builder &set_right(glm::vec3 right);
+  spherical_coordinates(types::spherical_coordinates spherical_coordinates);
+  builder &euler_angles(types::euler_angles euler_angles);
+  builder &front(glm::vec3 front);
+  builder &up(glm::vec3 up);
+  builder &right(glm::vec3 right);
 
   camera build();
 };

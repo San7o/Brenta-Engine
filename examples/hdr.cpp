@@ -116,11 +116,11 @@ int main()
 
   camera default_camera =
     camera::builder()
-      .set_camera_type(enums::camera_type::AIRCRAFT)
-      .set_projection_type(enums::projection_type::PERSPECTIVE)
-      .set_position(glm::vec3(0.0f, 5.0f, 20.0f))
-      .set_up(glm::vec3(0.0f, 1.0f, 0.0f))
-      .set_euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
+      .camera_type(enums::camera_type::AIRCRAFT)
+      .projection_type(enums::projection_type::PERSPECTIVE)
+      .position(glm::vec3(0.0f, 5.0f, 20.0f))
+      .up(glm::vec3(0.0f, 1.0f, 0.0f))
+      .euler_angles(euler_angles(-90.0f, 0.0f, 0.0f))
       .build();
 
   // A square

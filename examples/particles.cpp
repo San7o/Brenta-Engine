@@ -54,13 +54,13 @@ int main()
   }
 
   default_camera = camera::builder()
-                     .set_camera_type(enums::camera_type::SPHERICAL)
-                     .set_projection_type(enums::projection_type::PERSPECTIVE)
-                     .set_spherical_coordinates({1.25f, 1.25f, 10.0f})
-                     .set_center(glm::vec3(0.0f, 2.0f, 0.0f))
-                     .set_movement_speed(2.5f)
-                     .set_mouse_sensitivity(0.05f)
-                     .set_zoom(45.0f)
+                     .camera_type(enums::camera_type::SPHERICAL)
+                     .projection_type(enums::projection_type::PERSPECTIVE)
+                     .spherical_coordinates({1.25f, 1.25f, 10.0f})
+                     .center(glm::vec3(0.0f, 2.0f, 0.0f))
+                     .movement_speed(2.5f)
+                     .mouse_sensitivity(0.05f)
+                     .zoom(45.0f)
                      .build();
 
   particle_emitter emitter =
