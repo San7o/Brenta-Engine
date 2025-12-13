@@ -12,9 +12,9 @@ TMP_FILE := /tmp/padoc-out.html
 HIGHLIGHT_STYLE := tango
 PANDOC_FLAGS := --highlight-style ${HIGHLIGHT_STYLE}
 
-html: doxigen ${HTML}
+html: doxygen ${HTML}
 
-doxigen:
+doxygen:
 	doxygen ./utils/doxygen/doxygen.conf
 	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxygen.html
 	cp -r utils/docs-images ${HTML_DIR}/images

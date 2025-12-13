@@ -20,12 +20,12 @@ The engine also features the following sub projects:
 <h1 align=center>  Features </h1>
 
 The engine is composed of many submodules independent from each other, those are:
-- `Screen`: manages the window and the OpenGL context.
-- `Audio`: everything audio.
-- `Input`: manages the screen input using callbacks.
-- `Text`: text rendering.
-- `Engine`: manages the setup of the engine.
-- `Particles`: generate parametrized particles.
+- `screen`: manages the window and the OpenGL context.
+- `audio`: everything audio.
+- `input`: manages the screen input using callbacks.
+- `text`: text rendering.
+- `engine`: manages the setup of the engine.
+- `particles`: generate parametrized particles.
 
 In addition to those, Brenta comes with many utility functions and
 classes, to get a detailed look at the engine, please visit the
@@ -36,18 +36,25 @@ classes, to get a detailed look at the engine, please visit the
 ### Ergonomic APIs
 
 ```c++
-engine game = engine::builder()
-    .use_screen(true)
-    .use_audio(true)
-    .use_input(true)
-    .use_logger(true)
-    .use_text(true)
-    .use_ecs(true)
-    .set_screen_width(SCR_WIDTH)
-    .set_screen_height(SCR_HEIGHT)
-    .set_screen_is_mouse_captured(false)
-    // ...
-    .build();
+auto& engine = engine::builder()
+  .subsystem(logger::builder()
+             .level(oak::level::debug)
+             .file("/tmp/brenta-logs"))
+  .subsystem(window::builder()
+             .title("brenta demo")
+             .width(800)
+             .height(600)
+             .vsync()
+             .msaa())
+  .subsystem(ecs::builder())
+  .build();
+
+auto ret = engine.initialize();
+if (!ret.has_value())
+{
+  ERROR("Failed to initialize subsystem {}", ret.error());
+  return 1;
+}
 ```
 
 ### Model Loading
@@ -64,18 +71,18 @@ model my_model("assets/models/backpack/backpack.obj");
 ```c++
 particle_emitter emitter =
     particle_emitter::builder()
-        .set_camera(&camera)
-        .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
-        .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-        .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-        .set_starting_time_to_live(0.5f)
-        .set_num_particles(1000)
-        .set_spawn_rate(0.01f)
-        .set_scale(1.0f)
-        .set_atlas_path("assets/textures/particle_atlas.png")
-        .set_atlas_width(8)
-        .set_atlas_height(8)
-        .set_atlas_index(3)
+        .with_camera(&camera)
+        .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
+        .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+        .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
+        .starting_time_to_live(0.5f)
+        .num_particles(1000)
+        .spawn_rate(0.01f)
+        .scale(1.0f)
+        .atlas_path("assets/textures/particle_atlas.png")
+        .atlas_width(8)
+        .atlas_height(8)
+        .atlas_index(3)
         .build();
 ```
 
@@ -131,7 +138,7 @@ are called at each game tick by the `World`:
 ```c++
 struct fps_system : system<none> {
     void run(std::vector<entity_t> _) const override {
-        text::render_text("FPS: " + std::to_string(Time::GetFPS()), 25.0f, 25.0f,
+        text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f, 25.0f,
                          0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };

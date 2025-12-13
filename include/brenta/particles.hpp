@@ -150,32 +150,32 @@ private:
 class particle_emitter::builder
 {
 private:
-  glm::vec3 starting_position = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 starting_velocity = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 starting_spread = glm::vec3(0.0f, 0.0f, 0.0f);
-  float starting_time_to_live = 1.0f;
-  int num_particles = MAX_PARTICLES;
-  float spawn_rate = 0.01f;
-  float scale = 1.0f;
-  std::string atlas_path = "";
-  int atlas_width = 8;
-  int atlas_height = 8;
-  int atlas_index = 0;
-  camera *cam = nullptr;
+  glm::vec3 starting_position_val = glm::vec3(0.0f, 0.0f, 0.0f);
+  glm::vec3 starting_velocity_val = glm::vec3(0.0f, 0.0f, 0.0f);
+  glm::vec3 starting_spread_val = glm::vec3(0.0f, 0.0f, 0.0f);
+  float starting_time_to_live_val = 1.0f;
+  int num_particles_val = MAX_PARTICLES;
+  float spawn_rate_val = 0.01f;
+  float scale_val = 1.0f;
+  std::string atlas_path_val = "";
+  int atlas_width_val = 8;
+  int atlas_height_val = 8;
+  int atlas_index_val = 0;
+  camera *cam_val = nullptr;
 
 public:
-  builder &set_starting_position(glm::vec3 starting_position);
-  builder &set_starting_velocity(glm::vec3 starting_velocity);
-  builder &set_starting_spread(glm::vec3 starting_spread);
-  builder &set_starting_time_to_live(float starting_time_to_live);
-  builder &set_num_particles(int num_particles);
-  builder &set_spawn_rate(float spawn_rate);
-  builder &set_scale(float scale);
-  builder &set_atlas_path(std::string atlas_path);
-  builder &set_atlas_width(int atlas_width);
-  builder &set_atlas_height(int atlas_height);
-  builder &set_atlas_index(int atlas_index);
-  builder &set_camera(camera *cam);
+  builder &starting_position(glm::vec3 starting_position);
+  builder &starting_velocity(glm::vec3 starting_velocity);
+  builder &starting_spread(glm::vec3 starting_spread);
+  builder &starting_time_to_live(float starting_time_to_live);
+  builder &num_particles(int num_particles);
+  builder &spawn_rate(float spawn_rate);
+  builder &scale(float scale);
+  builder &atlas_path(std::string atlas_path);
+  builder &atlas_width(int atlas_width);
+  builder &atlas_height(int atlas_height);
+  builder &atlas_index(int atlas_index);
+  builder &with_camera(camera *cam);
 
   particle_emitter build();
 };

@@ -221,93 +221,93 @@ void particle_emitter::check_opengl_error(const std::string &function_name)
 //
 
 particle_emitter::builder &
-particle_emitter::builder::set_starting_position(glm::vec3 starting_position)
+particle_emitter::builder::starting_position(glm::vec3 starting_position)
 {
-  this->starting_position = starting_position;
+  this->starting_position_val = starting_position;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_starting_velocity(glm::vec3 starting_velocity)
+particle_emitter::builder::starting_velocity(glm::vec3 starting_velocity)
 {
-  this->starting_velocity = starting_velocity;
+  this->starting_velocity_val = starting_velocity;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_starting_spread(glm::vec3 starting_spread)
+particle_emitter::builder::starting_spread(glm::vec3 starting_spread)
 {
-  this->starting_spread = starting_spread;
+  this->starting_spread_val = starting_spread;
   return *this;
 }
 
-particle_emitter::builder &particle_emitter::builder::set_starting_time_to_live(
+particle_emitter::builder &particle_emitter::builder::starting_time_to_live(
   float starting_time_to_live)
 {
-  this->starting_time_to_live = starting_time_to_live;
+  this->starting_time_to_live_val = starting_time_to_live;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_num_particles(int num_particles)
+particle_emitter::builder::num_particles(int num_particles)
 {
-  this->num_particles = num_particles;
+  this->num_particles_val = num_particles;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_spawn_rate(float spawn_rate)
+particle_emitter::builder::spawn_rate(float spawn_rate)
 {
-  this->spawn_rate = spawn_rate;
+  this->spawn_rate_val = spawn_rate;
   return *this;
 }
 
-particle_emitter::builder &particle_emitter::builder::set_scale(float scale)
+particle_emitter::builder &particle_emitter::builder::scale(float scale)
 {
-  this->scale = scale;
-  return *this;
-}
-
-particle_emitter::builder &
-particle_emitter::builder::set_atlas_path(std::string atlas_path)
-{
-  this->atlas_path = atlas_path;
+  this->scale_val = scale;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_atlas_width(int atlas_width)
+particle_emitter::builder::atlas_path(std::string atlas_path)
 {
-  this->atlas_width = atlas_width;
+  this->atlas_path_val = atlas_path;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_atlas_height(int atlas_height)
+particle_emitter::builder::atlas_width(int atlas_width)
 {
-  this->atlas_height = atlas_height;
+  this->atlas_width_val = atlas_width;
   return *this;
 }
 
 particle_emitter::builder &
-particle_emitter::builder::set_atlas_index(int atlas_index)
+particle_emitter::builder::atlas_height(int atlas_height)
 {
-  this->atlas_index = atlas_index;
+  this->atlas_height_val = atlas_height;
   return *this;
 }
 
-particle_emitter::builder &particle_emitter::builder::set_camera(camera *cam)
+particle_emitter::builder &
+particle_emitter::builder::atlas_index(int atlas_index)
 {
-  this->cam = cam;
+  this->atlas_index_val = atlas_index;
+  return *this;
+}
+
+particle_emitter::builder &particle_emitter::builder::with_camera(camera *cam)
+{
+  this->cam_val = cam;
   return *this;
 }
 
 particle_emitter particle_emitter::builder::build()
 {
   /* C++17 has RVO (Return Value Optimization) so move is implicit */
-  return particle_emitter(this->starting_position, this->starting_velocity,
-                          this->starting_spread, this->starting_time_to_live,
-                          this->num_particles, this->spawn_rate, this->scale,
-                          this->atlas_path, this->atlas_width,
-                          this->atlas_height, this->atlas_index, this->cam);
+  return particle_emitter(this->starting_position_val, this->starting_velocity_val,
+                          this->starting_spread_val, this->starting_time_to_live_val,
+                          this->num_particles_val, this->spawn_rate_val, this->scale_val,
+                          this->atlas_path_val, this->atlas_width_val,
+                          this->atlas_height_val, this->atlas_index_val, this->cam_val);
 }

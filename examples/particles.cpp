@@ -65,20 +65,20 @@ int main()
 
   particle_emitter emitter =
     particle_emitter::builder()
-      .set_camera(&default_camera)
-      .set_starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
-      .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-      .set_starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-      .set_starting_time_to_live(0.5f)
-      .set_num_particles(1000)
-      .set_spawn_rate(0.01f)
-      .set_scale(1.0f)
-      .set_atlas_path(
+      .with_camera(&default_camera)
+      .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
+      .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+      .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
+      .starting_time_to_live(0.5f)
+      .num_particles(1000)
+      .spawn_rate(0.01f)
+      .scale(1.0f)
+      .atlas_path(
         std::filesystem::absolute("examples/assets/textures/particle_atlas.png")
           .string())
-      .set_atlas_width(8)
-      .set_atlas_height(8)
-      .set_atlas_index(3)
+      .atlas_width(8)
+      .atlas_height(8)
+      .atlas_index(3)
       .build();
 
   //

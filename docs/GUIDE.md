@@ -14,17 +14,46 @@ but the Engine class provides a nice way to do it.
 To create an engine, you can use the Builder class:
 
 ```cpp
-brenta::engine eng = brenta::engine::builder()
-    .use_screen(true)
-    .use_audio(true)
-    .use_input(true)
-    .use_logger(true)
-    .use_text(true)
-    .use_ecs(true)
-    .set_screen_width(1280)
-    .set_screen_height(720)
-    // ...
-    .build();
+auto& engine = engine::builder()
+  .subsystem(logger::builder()
+             .level(oak::level::debug)
+             .file("/tmp/brenta-logs"))
+  .subsystem(window::builder()
+             .title("brenta demo")
+             .width(800)
+             .height(600)
+             .vsync()
+             .msaa())
+  .subsystem(gl::builder()
+             .blending()
+             .cull_face()
+             .multisample()
+             .depth_test())
+  .subsystem(audio::builder())
+  .subsystem(input::builder())
+  .subsystem(ecs::builder())
+  .subsystem(gui::builder())
+  .subsystem(text::builder()
+             .font("examples/assets/fonts/arial.ttf")
+             .size(40))
+  // ...
+  .build();
+
+auto ret = engine.initialize();
+if (!ret.has_value())
+{
+  ERROR("Failed to initialize subsystem {}", ret.error());
+  return 1;
+}
+
+// Game logic...
+
+  ret = engine.terminate();
+if (!ret.has_value())
+{
+  oak::error("Failed to terminate subsystem {}", ret.error());
+  return 1;
+}
 ```
 
 We will now go through some subsystems and explain how to use them.
@@ -99,19 +128,19 @@ quick look on the API:
 
 ```cpp
 particle_emitter emitter = particle_emitter::builder()
-       .set_starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
-       .set_starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-       .set_starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
-       .set_starting_time_to_live(0.5f)
-       .set_num_particles(1000)
-       .set_spawn_rate(0.01f)
-       .set_scale(1.0f)
-       .set_atlas_path(std::filesystem::absolute(
+       .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+       .starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
+       .starting_time_to_live(0.5f)
+       .num_particles(1000)
+       .spawn_rate(0.01f)
+       .scale(1.0f)
+       .atlas_path(std::filesystem::absolute(
            "assets/textures/particle_atlas.png"
        ).string())
-       .set_atlas_width(8)
-       .set_atlas_height(8)
-       .set_atlas_index(45)
+       .atlas_width(8)
+       .atlas_height(8)
+       .atlas_index(45)
        .build();
 
 // Inside the game loop:
@@ -155,7 +184,7 @@ The main loop calls `world::tick()`. At each tick, all the Systems
 will be called in the order they were added in the World.
 
 The engine provides functions to interact with the window in
-`Brenta::Screen`, some OpenGL helper functions in `brenta::gl`, a nice
+`Brenta::window`, some OpenGL helper functions in `brenta::gl`, a nice
 `brenta::logger`, input handling with `brenta::input`, manage time
 with `brenta::time`, display text with `brenta::text` and more!
 
@@ -176,18 +205,25 @@ REGISTER_SYSTEMS(none);
 
 int main() {
 
-  engine eng = engine::builder()
-    .use_screen(true)
-    .use_audio(true)
-    .use_input(true)
-    .use_logger(true)
-    .use_text(true)
-    .use_ecs(true)
-    .set_screen_width(SCR_WIDTH)
-    .set_screen_height(SCR_HEIGHT)
-    .set_screen_is_mouse_captured(false)
-    // ...
+  auto& engine = engine::builder()
+    .subsystem(logger::builder()
+               .level(oak::level::debug)
+               .file("/tmp/brenta-logs"))
+    .subsystem(window::builder()
+               .title("brenta demo")
+               .width(800)
+               .height(600)
+               .vsync()
+               .msaa())
+    .subsystem(input::builder())
+    .subsystem(ecs::builder())
     .build();
+  auto ret = engine.initialize();
+  if (!ret.has_value())
+  {
+    ERROR("Failed to initialize subsystem {}", ret.error());
+    return 1;
+  }
 
   // Your init functions ...
   init_player();
@@ -199,16 +235,16 @@ int main() {
    * so that the first frame will have
    * a delta time of 0.
    */
-  time::update(screen::get_time());
-  while(!screen::is_window_closed()) {
+  time::update(window::get_time());
+  while(!window::should_Close()) {
 
     gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
     gl::clear();
 
     world::tick();
 
-    screen::poll_wvents();
-    screen::swap_buffers();
+    window::poll_wvents();
+    window::swap_buffers();
   }
   
   // The engine will take care of deallocation

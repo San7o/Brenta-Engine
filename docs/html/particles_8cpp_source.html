@@ -334,95 +334,95 @@ $(function(){initNavTree('particles_8cpp_source.html',''); initResizable(true); 
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="comment">//</span></div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>particle_emitter::builder::set_starting_position(glm::vec3 starting_position)</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>particle_emitter::builder::starting_position(glm::vec3 starting_position)</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>{</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  this-&gt;starting_position = starting_position;</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  this-&gt;starting_position_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#aaf609cd26c2411d740afaec1b8435038">starting_position</a>;</div>
 <div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>}</div>
 <div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span> </div>
 <div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>particle_emitter::builder::set_starting_velocity(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf">starting_velocity</a>)</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>particle_emitter::builder::starting_velocity(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf">starting_velocity</a>)</div>
 <div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>{</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  this-&gt;starting_velocity = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf">starting_velocity</a>;</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  this-&gt;starting_velocity_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf">starting_velocity</a>;</div>
 <div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>}</div>
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span> </div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>particle_emitter::builder::set_starting_spread(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a8d11b9e7f2288f0a4ccb8c88d8c6eea8">starting_spread</a>)</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>particle_emitter::builder::starting_spread(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a8d11b9e7f2288f0a4ccb8c88d8c6eea8">starting_spread</a>)</div>
 <div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>{</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  this-&gt;starting_spread = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a8d11b9e7f2288f0a4ccb8c88d8c6eea8">starting_spread</a>;</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>  this-&gt;starting_spread_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a8d11b9e7f2288f0a4ccb8c88d8c6eea8">starting_spread</a>;</div>
 <div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
 <div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::set_starting_time_to_live(</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::starting_time_to_live(</div>
 <div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>  <span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a52cf6b56274f01e5f7a32f093bf1f532">starting_time_to_live</a>)</div>
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>{</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  this-&gt;starting_time_to_live = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a52cf6b56274f01e5f7a32f093bf1f532">starting_time_to_live</a>;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>  this-&gt;starting_time_to_live_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a52cf6b56274f01e5f7a32f093bf1f532">starting_time_to_live</a>;</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>}</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>particle_emitter::builder::set_num_particles(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067">num_particles</a>)</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>particle_emitter::builder::num_particles(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067">num_particles</a>)</div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>{</div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  this-&gt;num_particles = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067">num_particles</a>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>  this-&gt;num_particles_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067">num_particles</a>;</div>
 <div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>}</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span> </div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>particle_emitter::builder::set_spawn_rate(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a7769062d1b1a6083f9e2ca2ab52c296c">spawn_rate</a>)</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>particle_emitter::builder::spawn_rate(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a7769062d1b1a6083f9e2ca2ab52c296c">spawn_rate</a>)</div>
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>{</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  this-&gt;spawn_rate = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a7769062d1b1a6083f9e2ca2ab52c296c">spawn_rate</a>;</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  this-&gt;spawn_rate_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a7769062d1b1a6083f9e2ca2ab52c296c">spawn_rate</a>;</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>}</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::set_scale(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a69b8c8c27fdda01e8a9ddcabb276cbad">scale</a>)</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::scale(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a69b8c8c27fdda01e8a9ddcabb276cbad">scale</a>)</div>
 <div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>{</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  this-&gt;scale = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a69b8c8c27fdda01e8a9ddcabb276cbad">scale</a>;</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>  this-&gt;scale_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a69b8c8c27fdda01e8a9ddcabb276cbad">scale</a>;</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>}</div>
 <div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span> </div>
 <div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>particle_emitter::builder::set_atlas_path(std::string atlas_path)</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>particle_emitter::builder::atlas_path(std::string atlas_path)</div>
 <div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>{</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  this-&gt;atlas_path = atlas_path;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  this-&gt;atlas_path_val = atlas_path;</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>}</div>
 <div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
 <div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>particle_emitter::builder::set_atlas_width(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ad2b8e831457b82c1163c9331ea637185">atlas_width</a>)</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>particle_emitter::builder::atlas_width(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ad2b8e831457b82c1163c9331ea637185">atlas_width</a>)</div>
 <div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>{</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  this-&gt;atlas_width = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ad2b8e831457b82c1163c9331ea637185">atlas_width</a>;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  this-&gt;atlas_width_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ad2b8e831457b82c1163c9331ea637185">atlas_width</a>;</div>
 <div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>}</div>
 <div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>particle_emitter::builder::set_atlas_height(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ae71d83ee58588e89153fc90f75d22053">atlas_height</a>)</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>particle_emitter::builder::atlas_height(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ae71d83ee58588e89153fc90f75d22053">atlas_height</a>)</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>{</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  this-&gt;atlas_height = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ae71d83ee58588e89153fc90f75d22053">atlas_height</a>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  this-&gt;atlas_height_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ae71d83ee58588e89153fc90f75d22053">atlas_height</a>;</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>}</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>particle_emitter::builder::set_atlas_index(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a89afdecfd1db033cc2f2c066120aaa50">atlas_index</a>)</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>particle_emitter::builder::atlas_index(<span class="keywordtype">int</span> <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a89afdecfd1db033cc2f2c066120aaa50">atlas_index</a>)</div>
 <div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>{</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  this-&gt;atlas_index = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a89afdecfd1db033cc2f2c066120aaa50">atlas_index</a>;</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  this-&gt;atlas_index_val = <a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a89afdecfd1db033cc2f2c066120aaa50">atlas_index</a>;</div>
 <div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>}</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::set_camera(<a class="code hl_class" href="classbrenta_1_1camera.html">camera</a> *cam)</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span><a class="code hl_class" href="classbrenta_1_1particle__emitter_1_1builder.html">particle_emitter::builder</a> &amp;particle_emitter::builder::with_camera(<a class="code hl_class" href="classbrenta_1_1camera.html">camera</a> *cam)</div>
 <div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>{</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  this-&gt;cam = cam;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  this-&gt;cam_val = cam;</div>
 <div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>}</div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span><a class="code hl_class" href="classbrenta_1_1particle__emitter.html">particle_emitter</a> particle_emitter::builder::build()</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>{</div>
 <div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="comment">/* C++17 has RVO (Return Value Optimization) so move is implicit */</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classbrenta_1_1particle__emitter.html#a604ee9c4527634b8a715772c65cd8903">particle_emitter</a>(this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#aaf609cd26c2411d740afaec1b8435038">starting_position</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a279def4a372229ad803b5835f12123bf">starting_velocity</a>,</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                          this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a8d11b9e7f2288f0a4ccb8c88d8c6eea8">starting_spread</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a52cf6b56274f01e5f7a32f093bf1f532">starting_time_to_live</a>,</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                          this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067">num_particles</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a7769062d1b1a6083f9e2ca2ab52c296c">spawn_rate</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a69b8c8c27fdda01e8a9ddcabb276cbad">scale</a>,</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                          this-&gt;atlas_path, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ad2b8e831457b82c1163c9331ea637185">atlas_width</a>,</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                          this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#ae71d83ee58588e89153fc90f75d22053">atlas_height</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1particle__emitter.html#a89afdecfd1db033cc2f2c066120aaa50">atlas_index</a>, this-&gt;cam);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classbrenta_1_1particle__emitter.html#a604ee9c4527634b8a715772c65cd8903">particle_emitter</a>(this-&gt;starting_position_val, this-&gt;starting_velocity_val,</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>                          this-&gt;starting_spread_val, this-&gt;starting_time_to_live_val,</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>                          this-&gt;num_particles_val, this-&gt;spawn_rate_val, this-&gt;scale_val,</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>                          this-&gt;atlas_path_val, this-&gt;atlas_width_val,</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>                          this-&gt;atlas_height_val, this-&gt;atlas_index_val, this-&gt;cam_val);</div>
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>}</div>
 <div class="ttc" id="aclassbrenta_1_1camera_html"><div class="ttname"><a href="classbrenta_1_1camera.html">brenta::camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00126">camera.hpp:127</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1camera_html_ab3d4019eb5007e6f84c54f421aa1be34"><div class="ttname"><a href="classbrenta_1_1camera.html#ab3d4019eb5007e6f84c54f421aa1be34">brenta::camera::get_view_matrix</a></div><div class="ttdeci">glm::mat4 get_view_matrix()</div><div class="ttdoc">Get the view matrix.</div><div class="ttdef"><b>Definition</b> <a href="camera_8cpp_source.html#l00050">camera.cpp:50</a></div></div>

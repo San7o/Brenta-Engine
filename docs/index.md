@@ -16,7 +16,7 @@ System
 - **[oak](https://github.com/San7o/oak)**: engine logger
 - **[valfuzz](https://github.com/San7o/valFuzz)**: testing
 framework
-- **brenta::screen**: manages the window and the OpenGL context.
+- **brenta::window**: manages the window and the OpenGL context.
 - **brenta::audio**: everything audio.
 - **brenta::input**: manages the screen input using callbacks.
 - **brenta::text**: text rendering.
