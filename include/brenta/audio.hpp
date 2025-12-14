@@ -7,7 +7,8 @@
 
 #include <brenta/subsystem.hpp>
 
-#include <SDL3/SDL_audio.h>
+// Backend
+#include <miniaudio/miniaudio.h>
 
 #include <string>
 #include <unordered_map>
@@ -195,7 +196,7 @@ public:
    * @param audio_name The name of the audio file
    * @param stream_name The name of the stream
    */
-  static void play_audio(types::audio_name_t, types::stream_name_t = "default");
+  static void play(types::audio_name_t, types::stream_name_t = "default");
   
   /**
    * @brief Set the volume (gain) of a stream
@@ -217,7 +218,7 @@ public:
    *
    * @param name The name of the stream
    */
-  static void pause_stream(types::stream_name_t name);
+  static void pause(types::stream_name_t name);
   
   /**
    * @brief Resume a stream
@@ -227,7 +228,7 @@ public:
    *
    * @param name The name of the stream
    */
-  static void resume_stream(types::stream_name_t name);
+  static void resume(types::stream_name_t name);
   
   /**
    * @brief Stop a stream
@@ -237,7 +238,7 @@ public:
    *
    * @param name The name of the stream
    */
-  static void clear_stream(types::stream_name_t name);
+  static void clear(types::stream_name_t name);
 
 private:
   static void check_error_audio();

@@ -56,15 +56,14 @@ void text::load(std::string font_path, int font_size)
     return;
   }
 
-  shader::create("TextShader", GL_VERTEX_SHADER,
-                 std::filesystem::absolute("src/shaders/text.vs"),
-                 GL_FRAGMENT_SHADER,
-                 std::filesystem::absolute("src/shaders/text.fs"));
+  shader::create("TextShader",
+                 GL_VERTEX_SHADER, "src/shaders/text.vs",
+                 GL_FRAGMENT_SHADER, "src/shaders/text.fs");
   text_shader = "TextShader";
   shader::use(text_shader);
 
   // find path to font
-  std::string font_name = std::filesystem::absolute(font_path);
+  std::string font_name = font_path;
   if (font_name.empty())
   {
     ERROR("Could not find font");

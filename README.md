@@ -19,13 +19,17 @@ The engine also features the following sub projects:
 
 <h1 align=center>  Features </h1>
 
-The engine is composed of many submodules independent from each other, those are:
-- `screen`: manages the window and the OpenGL context.
-- `audio`: everything audio.
-- `input`: manages the screen input using callbacks.
+The engine is composed of many submodules independent from each other,
+those are:
+
+- `window`: manages the window.
+- `input`: manages the user input using callbacks.
+- `ecs`: manage the entity component system.
 - `text`: text rendering.
-- `engine`: manages the setup of the engine.
-- `particles`: generate parametrized particles.
+- `gl`: setup OpenGL configuration.
+- `audio`: everything audio.
+- `logger`: log events and errors.
+- `engine`: manages the setup of the engine and the other subsystems.
 
 In addition to those, Brenta comes with many utility functions and
 classes, to get a detailed look at the engine, please visit the
@@ -33,7 +37,7 @@ classes, to get a detailed look at the engine, please visit the
 [documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
 **every class and function is highly documented.**
 
-### Ergonomic APIs
+### Modular APIs
 
 ```c++
 auto& engine = engine::builder()

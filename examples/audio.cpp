@@ -86,7 +86,7 @@ int main()
     // specified, it will be used the value "default"
     //
     if (window::is_key_pressed(GLFW_KEY_SPACE))
-      audio::play_audio(audio_guitar_id, audio_guitar_stream);
+      audio::play(audio_guitar_id, audio_guitar_stream);
 
     window::poll_events();
     window::swap_buffers();

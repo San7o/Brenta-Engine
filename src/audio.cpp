@@ -78,8 +78,8 @@ void audio::load(types::audio_name_t name, std::string path)
   INFO("Loaded audio at {}", path);
 }
 
-void audio::play_audio(types::audio_name_t audio_name,
-                       types::stream_name_t stream_name)
+void audio::play(types::audio_name_t audio_name,
+                 types::stream_name_t stream_name)
 {
   auto stream = audio::get_stream(stream_name);
   if (stream == nullptr)
@@ -150,7 +150,7 @@ void audio::check_error_audio()
   ERROR("SDL Audio error: {}", error);
 }
 
-void audio::clear_stream(types::stream_name_t name)
+void audio::clear(types::stream_name_t name)
 {
   auto stream = audio::get_stream(name);
   if (stream == nullptr)
@@ -164,7 +164,7 @@ void audio::clear_stream(types::stream_name_t name)
   INFO("Stream cleared");
 }
 
-void audio::pause_stream(types::stream_name_t name)
+void audio::pause(types::stream_name_t name)
 {
   auto stream = audio::get_stream(name);
   if (stream == nullptr)
@@ -178,7 +178,7 @@ void audio::pause_stream(types::stream_name_t name)
   INFO("Stream paused");
 }
 
-void audio::resume_stream(types::stream_name_t name)
+void audio::resume(types::stream_name_t name)
 {
   auto stream = audio::get_stream(name);
   if (stream == nullptr)

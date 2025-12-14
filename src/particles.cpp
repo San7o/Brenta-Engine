@@ -57,15 +57,12 @@ particle_emitter::particle_emitter(
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-  shader::create(varyings, 3, "particle_update", GL_VERTEX_SHADER,
-                 std::filesystem::absolute("src/shaders/particle_update.vs"));
-  shader::create(
-    "particle_render", GL_VERTEX_SHADER,
-    std::filesystem::absolute("src/shaders/particle_render.vs").string(),
-    GL_GEOMETRY_SHADER,
-    std::filesystem::absolute("src/shaders/particle_render.gs").string(),
-    GL_FRAGMENT_SHADER,
-    std::filesystem::absolute("src/shaders/particle_render.fs").string());
+  shader::create(varyings, 3, "particle_update",
+                 GL_VERTEX_SHADER, "src/shaders/particle_update.vs");
+  shader::create("particle_render",
+                 GL_VERTEX_SHADER, "src/shaders/particle_render.vs",
+                 GL_GEOMETRY_SHADER, "src/shaders/particle_render.gs",
+                 GL_FRAGMENT_SHADER, "src/shaders/particle_render.fs");
 
   // This is needed to render points
   glEnable(GL_PROGRAM_POINT_SIZE);
