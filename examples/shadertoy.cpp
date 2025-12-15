@@ -23,7 +23,15 @@ using namespace brenta;
 
 unsigned int update_shader(std::string fragment_source);
 
-std::string fragment_color1 =
+std::string fragment_color_red =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "void main()\n"
+  "{\n"
+  "  FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n"
+  "}\0";
+std::string fragment_color_animation =
   "#version 330 core\n\n"
   "out vec4 FragColor;\n"
   "in vec3 ourColor;\n\n"
@@ -35,18 +43,136 @@ std::string fragment_color1 =
   "  FragColor = vec4(abs(sin(iTime)) * st.x,\n"
   "                   abs(cos(iTime)) * st.y, 0.8, 1.0);\n"
   "}\0";
-std::string fragment_color2 =
+std::string fragment_step =
   "#version 330 core\n\n"
   "out vec4 FragColor;\n"
   "in vec3 ourColor;\n\n"
-  "uniform float iTime;\n"
   "uniform vec2 iResolution;\n\n"
   "void main()\n"
   "{\n"
   "  vec2 st = gl_FragCoord.xy/iResolution;\n"
+  "  st.x = step(0.5, st.x);\n"
   "  FragColor = vec4(st.x, st.y, st.y, 1.0);\n"
   "}\0";
+std::string fragment_smoothstep =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform vec2 iResolution;\n\n"
+  "void main()\n"
+  "{\n"
+  "  vec2 st = gl_FragCoord.xy/iResolution;\n"
+  "  st.x = smoothstep(0.3, 0.7, st.x);\n"
+  "  FragColor = vec4(st.x, st.y, st.y, 1.0);\n"
+  "}\0";
+std::string fragment_mix =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform float iTime;\n\n"
+  "void main()\n"
+  "{\n"
+  "   vec3 colorA = vec3(0.15, 0.14, 0.9);\n"
+  "   vec3 colorB = vec3(1.0, 0.8, 0.2);\n\n"
+  "   float pct = abs(sin(iTime));\n"
+  "   vec3 color = mix(colorA, colorB, pct);\n"
+  "   FragColor = vec4(color, 1.0);\n"
+  "}\0";
 
+std::string fragment_hsb =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform vec2 iResolution;\n\n"
+  "vec3 rgb2hsb(vec3 c)\n"
+  "{\n"
+	"    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);\n"
+  "    vec4 p = mix(vec4(c.bg, K.wz),\n"
+  "                      vec4(c.gb, K.xy),\n"
+  "                      step(c.b, c.g));\n"
+  "    vec4 q = mix(vec4(p.xyw, c.r),\n"
+  "                 vec4(c.r, p.yzx),\n"
+  "                 step(p.x, c.r));\n"
+  "    float d = q.x - min(q.w, q.y);\n"
+  "    float e = 1.0e-10;\n"
+  "    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)),\n"
+  "                d / (q.x + e),\n"
+  "                q.x);\n"
+  "}\n\n"
+  "vec3 hsb2rgb(vec3 c)\n"
+  "{\n"
+  "   vec3 rgb = clamp(abs(mod(c.x*6.0 + vec3(0.0, 4.0, 2.0),\n"
+  "                                           6.0)-3.0)-1.0,\n"
+  "                                           0.0,\n"
+  "                                           1.0);\n"
+  "   rgb = rgb * rgb * (3.0-2.0*rgb);\n"
+  "   return c.z * mix(vec3(1.0), rgb, c.y);\n"
+  "}\n\n"
+  "void main()\n"
+  "{\n"
+  "    vec2 st = gl_FragCoord.xy / iResolution;\n"
+  "    vec3 color = vec3(0.0);\n"
+  "    color = hsb2rgb(vec3(st.x, 1.0, st.y));\n"
+  "    FragColor = vec4(color, 1.0);\n"
+  "}\n";
+std::string fragment_hsb_circle =
+  "#version 330 core\n\n"
+  "#define TWO_PI 6.28318530718\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform vec2 iResolution;\n\n"
+  "vec3 hsb2rgb(vec3 c)\n"
+  "{\n"
+  "   vec3 rgb = clamp(abs(mod(c.x*6.0 + vec3(0.0, 4.0, 2.0),\n"
+  "                                           6.0)-3.0)-1.0,\n"
+  "                                           0.0,\n"
+  "                                           1.0);\n"
+  "   rgb = rgb * rgb * (3.0-2.0*rgb);\n"
+  "   return c.z * mix(vec3(1.0), rgb, c.y);\n"
+  "}\n\n"
+  "void main()\n"
+  "{\n"
+  "    vec2 st = gl_FragCoord.xy / iResolution;\n"
+  "    vec3 color = vec3(0.0);\n\n"
+  "    vec2 toCenter = vec2(0.5) - st;\n"
+  "    float angle = atan(toCenter.y, toCenter.x);\n"
+  "    float radius = length(toCenter)*2.0;\n"
+  "    color = hsb2rgb(vec3((angle / TWO_PI)+0.5, radius, 1.0));\n"
+  "    FragColor = vec4(color, 1.0);\n"
+  "}\n";
+std::string fragment_circle =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform vec2 iResolution;\n"
+  "uniform float iTime;\n\n"
+  "void main()\n"
+  "{\n"
+  "    vec2 st = gl_FragCoord.xy/iResolution;\n\n"
+  "    float pct = 0.0;\n"
+  "    float radius = 0.2 * (abs(sin(iTime)) + abs(cos(iTime)));\n\n"
+  "    pct = distance(st, vec2(0.5));\n"
+  "    vec3 color = 1.0-vec3(step(radius, pct));\n"
+  "    FragColor = vec4(color, 1.0);\n"
+  "}";
+std::string fragment_random =
+  "#version 330 core\n\n"
+  "out vec4 FragColor;\n"
+  "in vec3 ourColor;\n\n"
+  "uniform vec2 iResolution;\n\n"
+  "float random(vec2 st)\n"
+  "{\n"
+  "    return fract(sin(dot(st.xy, vec2(12.9898,78.233)))*43758.5453123);\n"
+  "}\n\n"
+  "void main()\n"
+  "{\n"
+  "    vec2 st = gl_FragCoord.xy / iResolution.xy;\n"
+  "    st *= 20;                          // Scale the coordinate system\n"
+  "    vec2 ipos = floor(st);\n"
+  "    vec2 fpos = fract(st);\n\n"
+  "    vec3 color = vec3(random(ipos));\n"
+  "    FragColor = vec4(color, 1.0);\n"
+  "}\n";
 
 int main(int argc, char** argv)
 {
@@ -101,7 +227,7 @@ int main(int argc, char** argv)
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  std::string fragment_source = fragment_color1;
+  std::string fragment_source = fragment_color_animation;
   std::string prev_source = fragment_source;
   unsigned int shader_program = update_shader(fragment_source);
 
@@ -131,8 +257,18 @@ int main(int argc, char** argv)
     {
       if (ImGui::BeginTabItem("Shaders"))
       {
-        const char* items[] = { "shader_color1", "shader_color2" };
-        static int item_selected_idx = 0;
+        const char* items[] = {
+          "fragment_color_red",
+          "fragment_color_animation",
+          "fragment_step",
+          "fragment_smoothstep",
+          "fragment_mix",
+          "fragment_hsb",
+          "fragment_hsb_circle",
+          "fragment_circle",
+          "fragment_random"
+        };
+        static int item_selected_idx = 1;
 
         static bool item_highlight = true;
         if (ImGui::BeginListBox(""))
@@ -145,12 +281,15 @@ int main(int argc, char** argv)
                     item_selected_idx = n;
                     switch (n)
                     {
-                    case 0:
-                      fragment_source = fragment_color1;
-                      break;
-                    case 1:
-                      fragment_source = fragment_color2;
-                      break;
+                    case 0: fragment_source = fragment_color_red; break;
+                    case 1: fragment_source = fragment_color_animation; break;
+                    case 2: fragment_source = fragment_step; break;
+                    case 3: fragment_source = fragment_smoothstep; break;
+                    case 4: fragment_source = fragment_mix; break;
+                    case 5: fragment_source = fragment_hsb; break;
+                    case 6: fragment_source = fragment_hsb_circle; break;
+                    case 7: fragment_source = fragment_circle; break;
+                    case 8: fragment_source = fragment_random; break;
                     }
                 }
                 if (is_selected)
@@ -183,18 +322,16 @@ int main(int argc, char** argv)
     
     // iTime
     GLint location = glGetUniformLocation(shader_program, "iTime");
-    if (location == -1)
+    if (location != -1)
     {
-      ERROR("Uniform iTime not found in shader");
+      glUniform1f(location, time::get_current_time());
     }
-    glUniform1f(location, time::get_current_time());
     // iResolution
     location = glGetUniformLocation(shader_program, "iResolution");
-    if (location == -1)
+    if (location != -1)
     {
-      ERROR("Uniform iResolution not found in shader");
+      glUniform2f(location, window::get_width(), window::get_height());
     }
-    glUniform2f(location, window::get_width(), window::get_height());
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
