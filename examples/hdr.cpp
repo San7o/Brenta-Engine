@@ -186,7 +186,7 @@ int main()
       screen::set_close();
 
 #ifdef BRENTA_USE_IMGUI
-    gui::new_frame(&fb);
+    gui::new_frame(&fb, "hdr");
     ImGui::Begin("HDR");
     ImGui::End();
 #endif
