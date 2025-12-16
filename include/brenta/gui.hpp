@@ -44,7 +44,7 @@ public:
    * To be called at each frame
    * before rendering.
    */
-  static void new_frame(types::framebuffer *fb);
+  static void new_frame(types::framebuffer *fb, std::string name = "Game");
   /**
    * @brief Render the gui
    * To be called at each frame

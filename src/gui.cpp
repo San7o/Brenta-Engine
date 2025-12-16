@@ -51,7 +51,7 @@ gui &gui::instance()
   return _gui;
 }
 
-void gui::new_frame(framebuffer *fb)
+void gui::new_frame(framebuffer *fb, std::string name)
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
@@ -64,7 +64,7 @@ void gui::new_frame(framebuffer *fb)
   //
 
   ImGui::SetNextWindowSize(ImVec2(500, 500));
-  ImGui::Begin("Game");
+  ImGui::Begin(name.c_str());
 
   float window_width = ImGui::GetContentRegionAvail().x;
   float window_height = ImGui::GetContentRegionAvail().y;

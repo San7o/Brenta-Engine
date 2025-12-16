@@ -98,7 +98,7 @@ int main()
     }
 
 #ifdef BRENTA_USE_IMGUI
-    gui::new_frame(&fb);
+    gui::new_frame(&fb, "Mandlebrot");
     ImGui::Begin("Fractal");
     ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);
     ImGui::SliderInt("Max iterations", &max_iterations, 1, 1000);

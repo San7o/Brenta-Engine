@@ -7,7 +7,6 @@
 #include <brenta/window.hpp>
 #include <brenta/text.hpp>
 #include <brenta/texture.hpp>
-#include <filesystem>
 
 using namespace brenta;
 using namespace brenta::types;

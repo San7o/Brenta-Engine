@@ -119,7 +119,7 @@ int main()
     window::poll_events();
 
 #ifdef BRENTA_USE_IMGUI
-    gui::new_frame(&fb);
+    gui::new_frame(&fb, "demo");
     fb.bind();
 #endif
 
