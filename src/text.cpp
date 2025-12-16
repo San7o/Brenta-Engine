@@ -55,10 +55,9 @@ void text::load(std::string font_path, int font_size)
     return;
   }
 
-  shader::create("TextShader", GL_VERTEX_SHADER,
-                 "src/shaders/text.vs",
-                 GL_FRAGMENT_SHADER,
-                 "src/shaders/text.fs");
+  shader::create("TextShader",
+                 GL_VERTEX_SHADER, "src/shaders/text.vs",
+                 GL_FRAGMENT_SHADER, "src/shaders/text.fs");
   text_shader = "TextShader";
   shader::use(text_shader);
 

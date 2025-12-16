@@ -30,12 +30,12 @@ int main()
   
   // Required: id and path of an audio. The id will be used by the
   // audio subsystem to identify this particular file.
-  types::audio_name_t audio_guitar_id = "guitar";
-  std::string audio_guitar_path = "examples/assets/audio/guitar.wav";
+  types::sound_id_t sound_guitar_id = "guitar";
+  std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
 
   // You can specify additional optional settings like stream and
   // volume
-  types::stream_name_t audio_guitar_stream = "guitar_stream";
+  types::stream_id_t stream_guitar_id = "guitar_stream";
   float guitar_volume = 0.8f;
   
   auto& engine = engine::builder()
@@ -50,13 +50,13 @@ int main()
     
     .subsystem(audio::builder()
 
-               // Load a file
+               // Load a sound from path to stream
                
-               .load(audio_guitar_id, audio_guitar_path)
+               .sound(sound_guitar_id, sound_guitar_path, stream_guitar_id)
 
-               // Create a stream to play the audio (or just use "default")
+               // Optionally set additional settings for the stream
 
-               .stream(audio_guitar_stream, guitar_volume))
+               .stream(stream_guitar_id, guitar_volume))
     
     .build();
 
@@ -68,9 +68,9 @@ int main()
   }
 
   //
-  // You can also load an audio any time with audio::load
+  // You can also load a sound any time with audio::load
   //
-  // audio::load(audio_guitar_id, audio_guitar_path);
+  // audio::load(sound_guitar_id, sound_guitar_path);
 
   //
   // Main loop
@@ -86,7 +86,9 @@ int main()
     // specified, it will be used the value "default"
     //
     if (window::is_key_pressed(GLFW_KEY_SPACE))
-      audio::play_audio(audio_guitar_id, audio_guitar_stream);
+    {
+      audio::play(sound_guitar_id);
+    }
 
     window::poll_events();
     window::swap_buffers();

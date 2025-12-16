@@ -91,9 +91,11 @@ list(APPEND BRENTA_DEPS_INCLUDES
 
 if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   list(APPEND BRENTA_DEPS_SOURCES
-    ${PROJECT_SOURCE_DIR}/external/glad/glad.cpp)
+    ${PROJECT_SOURCE_DIR}/external/glad/glad.cpp
+    ${PROJECT_SOURCE_DIR}/external/miniaudio/miniaudio.c)
   list(APPEND BRENTA_DEPS_HEADERS
-    ${PROJECT_SOURCE_DIR}/external/glad/glad.h)
+    ${PROJECT_SOURCE_DIR}/external/glad/glad.h
+    ${PROJECT_SOURCE_DIR}/external/miniaudio/miniaudio.h)
 endif()
 
 # Assimp
@@ -102,12 +104,6 @@ set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/assimp)
 target_compile_definitions(assimp PRIVATE _GNU_SOURCE)
 list(APPEND BRENTA_DEPS_LIBS assimp::assimp)
-
-# SDL
-# TODO: For now we are depending on SDL3 for audio, this should be
-# changed to miniaudio
-message(STATUS "Using SDL")
-list(APPEND BRENTA_DEPS_LIBS SDL3)
 
 # ImGUI
 if (BRENTA_BRENTA_USE_IMGUI)

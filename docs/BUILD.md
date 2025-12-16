@@ -22,11 +22,6 @@ In order to build the engine, you will need:
 
 - `cmake` >= 3.16
 
-- `SDL3` for audio, make sure it is compiled for your audio driver (it
-  is already configured correctly if you are using the library from
-  your distribution). This dependency will be dropped in favour of
-  [miniaudio](https://github.com/mackron/miniaudio).
-
 The rest of the dependencies, like assimp and glfw, are present in the
 source tree as git submodules under the `external/` directory. These
 will be automatically built by the build system if you want a static
