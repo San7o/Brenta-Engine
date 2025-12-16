@@ -69,11 +69,13 @@ public:
 
   class builder;
 
-  std::string subsystem_name = "text";
-  
+  static const std::string subsystem_name;
+
+  // Constructors / destructors
   text() = default;
   ~text() = default;
-  
+
+  // Subsystem interface
   /**
    * @brief Initialize the text subsystem
    *
@@ -85,13 +87,16 @@ public:
    * Note: opengl context must be created before calling this
    * method.
    */
-  std::expected<void, std::string> initialize();
+  std::expected<void, subsystem::error> initialize() override;
 
   /**
    * @brief Cleaup resources
    */
-  std::expected<void, std::string> terminate();
-
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  
+  // Member functions
+  
   static text &instance();
 
   /**

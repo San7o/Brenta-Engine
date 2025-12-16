@@ -44,18 +44,12 @@ int main()
     .subsystem(window::builder()
                .title("audio test")
                .width(screen_width)
-               .height(screen_height))
-    
+               .height(screen_height))    
     // Enable audio subsystem
-    
     .subsystem(audio::builder()
-
                // Load a sound from path to stream
-               
                .sound(sound_guitar_id, sound_guitar_path, stream_guitar_id)
-
                // Optionally set additional settings for the stream
-
                .stream(stream_guitar_id, guitar_volume))
     
     .build();

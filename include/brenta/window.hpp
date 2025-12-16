@@ -41,14 +41,19 @@ public:
 
   class builder;
   
-  std::string subsystem_name = "window";
-  
+  static const std::string subsystem_name;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+
+  // Constructors destructors
   window() = default;
   ~window() = default;
 
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
+  // Member functions
+  
   /**
    * @brief Get a static instance of the window
    */

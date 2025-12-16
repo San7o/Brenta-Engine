@@ -50,25 +50,29 @@ protected:
 
 public:
 
-  std::string subsistem_name = "engine";
+  static const std::string subsystem_name;
   
+  // Subsystem functions
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+
+  // Constructors / destructors
   engine() = default;
   ~engine() = default;
-  
+
+  // Member functions
   /**
    * @brief Get a static object instance
    */
   static engine &instance();
   
-  // Subsystem functions
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
   /**
    * @brief Initialize a subsistem and add it to the managed
    * subsystems
    */
-  static std::expected<void, std::string> add_subsystem(subsystem::builder &&builder);
+  static std::expected<void, std::string>
+  add_subsystem(subsystem::builder &&builder);
   
   class builder;
 };

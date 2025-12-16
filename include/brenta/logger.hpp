@@ -30,17 +30,21 @@ protected:
   
 public:
 
-  std::string subsystem_name = "logger";
+  class builder;
+  static const std::string subsystem_name;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name();
   
+  // Constructors / destructors
   logger() = default;
   ~logger() = default;
 
-  static logger &instance();
+  // Member functions
   
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
-  class builder;
+  static logger &instance();
 };
 
 class logger::builder : public subsystem::builder

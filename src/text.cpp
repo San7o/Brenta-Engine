@@ -9,7 +9,10 @@
 #include <brenta/texture.hpp>
 
 using namespace brenta;
-using namespace brenta::types;
+
+//
+// Static variables
+//
 
 std::string text::font_path;
 int text::font_size;
@@ -17,8 +20,13 @@ types::shader_name_t text::text_shader;
 types::vao text::text_vao;
 types::buffer text::text_vbo;
 std::map<char, types::character> text::characters;
+const std::string text::subsystem_name = "text";
 
-std::expected<void, std::string> text::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> text::initialize()
 {
   text::text_vbo = types::buffer(GL_ARRAY_BUFFER);
   text::text_vao.init();
@@ -29,11 +37,20 @@ std::expected<void, std::string> text::initialize()
   return {};
 }
 
-std::expected<void, std::string> text::terminate()
+std::expected<void, subsystem::error> text::terminate()
 {
   INFO("text terminated");
   return {};
 }
+
+std::string text::name()
+{
+  return text::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 text &text::instance()
 {
@@ -105,12 +122,12 @@ void text::load(std::string font_path, int font_size)
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       // now store character for later use
-      character character_ = {
+      types::character character_ = {
         texture,
         glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
         glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
         static_cast<unsigned int>(face->glyph->advance.x)};
-      characters.insert(std::pair<char, character>(c, character_));
+      characters.insert(std::pair<char, types::character>(c, character_));
     }
     texture::bind_texture(GL_TEXTURE_2D, 0);
   }
@@ -156,7 +173,7 @@ void text::render_text(std::string text, float x, float y, float scale,
   std::string::const_iterator c;
   for (c = text.begin(); c != text.end(); c++)
   {
-    character ch = characters[*c];
+    types::character ch = characters[*c];
 
     float xpos = x + ch.bearing.x * scale;
     float ypos = y - (ch.size.y - ch.bearing.y) * scale;

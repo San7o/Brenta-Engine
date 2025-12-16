@@ -11,12 +11,21 @@
 
 using namespace brenta;
 
+//
+// Static variables
+//
+
 bool gl::enable_blending;
 bool gl::enable_cull_face;
 bool gl::enable_multisample;
 bool gl::enable_depth_test;
+const std::string gl::subsystem_name = "gl";
 
-std::expected<void, std::string> gl::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> gl::initialize()
 {
   GLADloadproc loadproc = (GLADloadproc) window::get_proc_address();
   if (!gladLoadGLLoader(loadproc))
@@ -62,11 +71,20 @@ std::expected<void, std::string> gl::initialize()
   return {};
 }
 
-std::expected<void, std::string> gl::terminate()
+std::expected<void, subsystem::error> gl::terminate()
 {
   INFO("gl terminated")
   return {};
 }
+
+std::string gl::name()
+{
+  return gl::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 void gl::set_poligon_mode(GLboolean enable)
 {

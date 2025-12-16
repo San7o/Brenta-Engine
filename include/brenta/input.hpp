@@ -5,11 +5,14 @@
 
 #pragma once
 
+#include <brenta/subsystem.hpp>
+
 #include <GLFW/glfw3.h>
 #include <functional>
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <expected>
 
 namespace brenta
 {
@@ -32,27 +35,30 @@ class input : public subsystem
 {
 public:
 
-
   class builder;
 
-  std::string subsystem_name = "input";
-  
-  input() = default;
-  ~input() = default;
-  
+  static const std::string subsystem_name;
+
+  // Subsystem interface
   /**
    * @brief Initialize the input system
    *
    * This function initializes the input subsystem. It should be
    * called before any other input function is called.
    */
-  std::expected<void, std::string> initialize() override;
-
+  std::expected<void, subsystem::error> initialize() override;
   /**
    * @brief Cleans up resources
    */
-  std::expected<void, std::string> terminate() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  
+  // Constructors / destructors
+  input() = default;
+  ~input() = default;
 
+  // Member functions
+  
   static input &instance();
   
   /**

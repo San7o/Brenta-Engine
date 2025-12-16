@@ -3,16 +3,26 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/window.hpp>
+#include <brenta/input.hpp>
+#include <brenta/logger.hpp>
 
 using namespace brenta;
-using namespace brenta::types;
+
+//
+// Static variables
+//
 
 std::unordered_map<int, std::function<void()>> input::keyboard_callbacks;
 std::unordered_map<std::string, std::function<void(double, double)>>
   input::mouse_callbacks;
+const std::string input::subsystem_name = "input";
 
-std::expected<void, std::string> input::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> input::initialize()
 {
   window::set_key_callback(input::key_callback);
   window::set_mouse_pos_callback(input::mouse_pos_callback);
@@ -21,11 +31,20 @@ std::expected<void, std::string> input::initialize()
   return {};
 }
 
-std::expected<void, std::string> input::terminate()
+std::expected<void, subsystem::error> input::terminate()
 {
   INFO("input terminated");
   return {};
 }
+
+std::string input::name()
+{
+  return input::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 input &input::instance()
 {
@@ -65,14 +84,14 @@ void input::key_callback([[maybe_unused]] GLFWwindow *window,
   }
 }
 
-void input::add_mouse_pos_callback(mouse_callback_name_t callback_name,
+void input::add_mouse_pos_callback(types::mouse_callback_name_t callback_name,
                                    std::function<void(double, double)> callback)
 {
   input::mouse_callbacks[callback_name] = callback;
   INFO("Added callback for mouse: {}", callback_name);
 }
 
-void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
+void input::remove_mouse_pos_callback(types::mouse_callback_name_t callback_name)
 {
   if (input::mouse_callbacks.find(callback_name)
       == input::mouse_callbacks.end())
@@ -85,7 +104,8 @@ void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
   INFO("Removed callback for mouse: {}", callback_name);
 }
 
-void input::mouse_pos_callback([[maybe_unused]] GLFWwindow *window, double xpos,
+void input::mouse_pos_callback([[maybe_unused]] GLFWwindow *window,
+                               double xpos,
                                double ypos)
 {
   for (auto &callback : input::mouse_callbacks)

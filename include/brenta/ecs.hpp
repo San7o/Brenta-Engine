@@ -17,17 +17,21 @@ class ecs : public subsystem
 {
 public:
 
-  std::string subsystem_name = "ecs";
+  class builder;
+  static const std::string subsystem_name;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
   
+  // Constructors / destructors
   ecs() = default;
   ~ecs() = default;
 
-  static ecs &instance();
+  // Member functions
   
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
-  class builder;
+  static ecs &instance();
 };
 
 class ecs::builder : public subsystem::builder

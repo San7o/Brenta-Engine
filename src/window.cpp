@@ -12,6 +12,10 @@
 
 using namespace brenta;
 
+//
+// Static variables
+//
+
 int window::width;
 int window::height;
 GLFWwindow *window::window_backend;
@@ -19,8 +23,13 @@ std::string window::title;
 bool window::capture_mouse;
 bool window::msaa;
 bool window::vsync;
+const std::string window::subsystem_name = "window";
 
-std::expected<void, std::string> window::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> window::initialize()
 {
   if (glfwInit() == GLFW_FALSE)
   {
@@ -60,7 +69,7 @@ std::expected<void, std::string> window::initialize()
   return {};
 }
 
-std::expected<void, std::string> window::terminate()
+std::expected<void, subsystem::error> window::terminate()
 {
   INFO("terminating window");
   glfwDestroyWindow(this->window_backend);
@@ -69,6 +78,15 @@ std::expected<void, std::string> window::terminate()
 
   return {};
 }
+
+std::string window::name()
+{
+  return window::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 window &window::instance()
 {

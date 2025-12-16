@@ -14,7 +14,17 @@
 using namespace brenta;
 using namespace brenta::types;
 
-std::expected<void, std::string> gui::initialize()
+//
+// Static variables
+//
+
+const std::string gui::subsystem_name = "gui";
+
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> gui::initialize()
 {
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
@@ -35,7 +45,7 @@ std::expected<void, std::string> gui::initialize()
   return {};
 }
 
-std::expected<void, std::string> gui::terminate()
+std::expected<void, subsystem::error> gui::terminate()
 {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
@@ -44,6 +54,15 @@ std::expected<void, std::string> gui::terminate()
   INFO("GUI terminated");
   return {};
 }
+
+std::string gui::name()
+{
+  return gui::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 gui &gui::instance()
 {

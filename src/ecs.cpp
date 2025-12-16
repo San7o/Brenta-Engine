@@ -8,7 +8,17 @@
 
 using namespace brenta;
 
-std::expected<void, std::string> ecs::initialize()
+//
+// Static variables
+//
+
+const std::string ecs::subsystem_name = "ecs";
+
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> ecs::initialize()
 {
   viotecs::world::init();
 
@@ -16,13 +26,22 @@ std::expected<void, std::string> ecs::initialize()
   return {};
 }
 
-std::expected<void, std::string> ecs::terminate()
+std::expected<void, subsystem::error> ecs::terminate()
 {
   viotecs::world::destroy();
 
   INFO("ecs terminated");
   return {};
 }
+
+std::string ecs::name()
+{
+  return ecs::subsystem_name;
+}
+
+//
+// Member functions
+//
 
 ecs &ecs::instance()
 {

@@ -7,16 +7,19 @@
 
 using namespace brenta;
 
+//
+// Static variables
+//
+
 oak::level logger::log_level;
 std::string logger::log_file;
+const std::string logger::subsystem_name = "logger";
 
-logger &logger::instance()
-{
-  static logger _logger;
-  return _logger;
-}
+//
+// Subsystem interface
+//
 
-std::expected<void, std::string> logger::initialize()
+std::expected<void, subsystem::error> logger::initialize()
 {
   oak::init_writer();
   
@@ -37,10 +40,25 @@ std::expected<void, std::string> logger::initialize()
   return {};
 }
 
-std::expected<void, std::string> logger::terminate()
+std::expected<void, subsystem::error> logger::terminate()
 {
   oak::stop_writer();
   return {};
+}
+
+std::string logger::name()
+{
+  return logger::subsystem_name;
+}
+
+//
+// Member functions
+//
+
+logger &logger::instance()
+{
+  static logger _logger;
+  return _logger;
 }
 
 //

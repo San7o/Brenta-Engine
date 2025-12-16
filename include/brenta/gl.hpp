@@ -37,17 +37,22 @@ protected:
   
 public:
 
-  class builder;
+  static const std::string subsystem_name;
   
-  std::string subsystem_name = "gl";
+  // Subsystem functions
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  
+  class builder;
 
+  // Constructors / destructors
   gl() = default;
   ~gl() = default;
 
+  // Member functions
+  
   static gl &instance();
-
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
   
   /**
    * @brief Set Poligon Mode
