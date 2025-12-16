@@ -3,54 +3,57 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <SDL3/SDL_init.h>
 #include <brenta/audio.hpp>
 #include <brenta/logger.hpp>
 #include <string>
 
 using namespace brenta;
 
-std::vector<std::pair<types::audio_name_t, std::string>> audio::init_files;
-std::vector<std::pair<types::stream_name_t, float>> audio::init_streams;
-std::unordered_map<types::audio_name_t, types::audio_file_t> audio::audio_files;
-std::unordered_map<types::stream_name_t, SDL_AudioStream *> audio::streams;
+std::vector<std::tuple<types::sound_id_t, std::string,
+                       types::stream_id_t>> audio::init_sounds;
+std::vector<std::pair<types::stream_id_t, float>> audio::init_streams;
+std::unordered_map<types::sound_id_t, types::sound_t> audio::sounds;
+std::unordered_map<types::stream_id_t, types::stream_t> audio::streams;
+ma_engine audio::engine;
 
 std::expected<void, std::string> audio::initialize()
 {
-  if (!SDL_Init(SDL_INIT_AUDIO))
+  ma_result result;
+  result = ma_engine_init(NULL, &audio::engine);
+  if (result != MA_SUCCESS)
   {
-    auto error = SDL_GetError();
-    ERROR("SDL Audio failed to initialize: {}", error);
     return std::unexpected(this->subsystem_name);
   }
 
-  for (auto& f : init_files)
+  for (auto& f : audio::init_sounds)
   {
-    load(f.first, f.second);
+    audio::load(std::get<0>(f), std::get<1>(f), std::get<2>(f));
   }
 
-  for (auto& s : init_streams)
+  for (auto& s : audio::init_streams)
   {
-    create_stream(s.first);
-    set_volume(s.first, s.second);
+    audio::create_stream(s.first);
+    audio::stream_set_volume(s.first, s.second);
   }
 
-  create_stream("default");
+  if (!audio::get_stream("default"))
+    audio::create_stream("default");
+  
   INFO("audio initialized");
   return {};
 }
 
 std::expected<void, std::string> audio::terminate()
 {
-  for (auto &stream : audio::streams)
-    SDL_DestroyAudioStream(stream.second);
+  
+  for (auto sound : audio::sounds)
+    ma_sound_uninit(&sound.second);
+  
+  for (auto stream : audio::streams)
+    ma_sound_group_uninit(&stream.second);
 
-  for (auto &audiofile : audio::audio_files)
-  {
-    SDL_free(audiofile.second.audio_buf);
-  }
+  ma_engine_uninit(&audio::engine);
 
-  SDL_Quit();
   INFO("audio termianted");
   return {};
 }
@@ -61,134 +64,121 @@ audio &audio::instance()
   return _audio;
 }
 
-void audio::load(types::audio_name_t name, std::string path)
+void audio::load(types::sound_id_t sound_id, std::string path,
+                 types::stream_id_t stream_id)
 {
-  types::audio_file_t audiofile;
-  audiofile.path = path;
-
-  if (!SDL_LoadWAV(path.c_str(), &audiofile.spec, &audiofile.audio_buf,
-                   &audiofile.audio_len))
+  types::stream_t *stream = audio::get_stream(stream_id);
+  if (!stream)
   {
-    auto error = SDL_GetError();
-    ERROR("SDL Audio failed to load WAV file: {}", error);
+    audio::create_stream(stream_id);
+    stream = audio::get_stream(stream_id);
+    if (!stream)
+    {
+      ERROR("Error creating stream {} for sound {}", stream_id, sound_id);
+      return;
+    }
+  }
+
+  types::sound_t sound = {};
+  audio::sounds.insert({sound_id, sound});
+  if (ma_sound_init_from_file(&audio::engine, path.c_str(), 0, stream, NULL,
+                              &audio::sounds.at(sound_id)) != MA_SUCCESS)
+  {
+    ERROR("Error loading sound {} from path {}", sound_id, path);
     return;
   }
-
-  audio::audio_files.insert({name, audiofile});
-  INFO("Loaded audio at {}", path);
+  
+  INFO("Loaded sound {} from {} in stream {}", sound_id, path, stream_id);
+  return;
 }
 
-void audio::play(types::audio_name_t audio_name,
-                 types::stream_name_t stream_name)
+void audio::play(types::sound_id_t id)
 {
-  auto stream = audio::get_stream(stream_name);
-  if (stream == nullptr)
+  types::sound_t *sound = &audio::sounds.at(id);
+  if (!sound)
   {
-    ERROR("Could not play audio: Audio stream not found");
+    ERROR("Sound with id {} not found", id);
     return;
   }
-
-  clear_stream(stream_name);
-  auto audiofile = audio::get_audio_file(audio_name);
-  if (!SDL_PutAudioStreamData(stream, audiofile.audio_buf, audiofile.audio_len))
-    check_error_audio();
+  ma_sound_start(sound);
+  return;
 }
 
-void audio::create_stream(types::stream_name_t name)
+void audio::create_stream(types::stream_id_t id)
 {
-  SDL_AudioStream *stream = SDL_OpenAudioDeviceStream(
-    SDL_AUDIO_DEVICE_DEFAULT_PLAYBACK, NULL, NULL, NULL);
-  if (stream == NULL)
+  types::stream_t *stream = audio::get_stream(id);
+  if (stream) return;
+
+  types::stream_t s = {};
+  audio::streams.insert({id, s});
+  stream = &audio::streams.at(id);
+  if (ma_sound_group_init(&audio::engine, 0, NULL, stream)
+      != MA_SUCCESS)
   {
-    const char *error = SDL_GetError();
-    ERROR("SDL Audio failed to create stream: {}", error);
+    ERROR("Error creating audio stream {}", id);
     return;
   }
-
-  audio::streams.insert({name, stream});
-  resume_stream(name);
-  INFO("SDL Audio stream created");
+  
+  INFO("Audio stream {} created", id);
 }
 
-types::audio_file_t audio::get_audio_file(types::audio_name_t name)
-{
-  if (audio::audio_files.find(name) == audio::audio_files.end())
-  {
-    ERROR("Audio file not found with name: {}", name);
-    return types::audio_file_t();
-  }
-  return audio::audio_files.at(name);
-}
 
-SDL_AudioStream *audio::get_stream(types::stream_name_t name)
+types::stream_t *audio::get_stream(types::stream_id_t id)
 {
-  if (audio::streams.find(name) == audio::streams.end())
+  if (audio::streams.find(id) == audio::streams.end())
   {
-    ERROR("Audio stream not found with name: {}", name);
     return nullptr;
   }
-  return audio::streams.at(name);
+  return &audio::streams.at(id);
 }
 
-void audio::set_volume(types::stream_name_t name, float gain)
+void audio::stream_set_volume(types::stream_id_t id, float volume)
 {
-  auto stream = audio::get_stream(name);
-  if (stream == nullptr)
+  types::stream_t *stream = audio::get_stream(id);
+  if (!stream)
   {
-    ERROR("Could not set volume: Audio stream not found");
+    ERROR("Could not set volume: Audio stream {} not found", id);
     return;
   }
 
-  if (!SDL_SetAudioStreamGain(stream, gain))
-    check_error_audio();
-  INFO("Volume set to {}", gain);
+  ma_sound_group_set_volume(stream, volume);
+  
+  INFO("Volume for {} set to {}", id, volume);
 }
 
-void audio::check_error_audio()
+void audio::stream_stop(types::stream_id_t id)
 {
-  auto error = SDL_GetError();
-  ERROR("SDL Audio error: {}", error);
-}
-
-void audio::clear(types::stream_name_t name)
-{
-  auto stream = audio::get_stream(name);
+  types::stream_t *stream = audio::get_stream(id);
   if (stream == nullptr)
   {
-    ERROR("Could not clear stream: Audio stream not found");
+    ERROR("Could not pause stream: Audio stream {} not found", id);
+    return;
+  }
+  
+  if (ma_sound_group_stop(stream) != MA_SUCCESS)
+  {
+    ERROR("Error stopping stream {}", id);
+    return;
+  }
+  
+  INFO("Stream {} stopped", id);
+}
+
+void audio::stream_start(types::stream_id_t id)
+{
+  auto stream = audio::get_stream(id);
+  if (stream == nullptr)
+  {
+    ERROR("Could not start stream: Audio stream {} not found", id);
     return;
   }
 
-  if (!SDL_ClearAudioStream(stream))
-    check_error_audio();
-  INFO("Stream cleared");
-}
-
-void audio::pause(types::stream_name_t name)
-{
-  auto stream = audio::get_stream(name);
-  if (stream == nullptr)
+  if (ma_sound_group_stop(stream) != MA_SUCCESS)
   {
-    ERROR("Could not pause stream: Audio stream not found");
+    ERROR("Error starting stream {}", id);
     return;
   }
 
-  if (!SDL_PauseAudioStreamDevice(stream))
-    check_error_audio();
-  INFO("Stream paused");
-}
-
-void audio::resume(types::stream_name_t name)
-{
-  auto stream = audio::get_stream(name);
-  if (stream == nullptr)
-  {
-    ERROR("Could not resume stream: Audio stream not found");
-    return;
-  }
-
-  if (!SDL_ResumeAudioStreamDevice(stream))
-    check_error_audio();
   INFO("Stream resumed");
 }
 
@@ -196,21 +186,22 @@ void audio::resume(types::stream_name_t name)
 // Builder
 //
 
-audio::builder &audio::builder::load(types::audio_name_t id, std::string path)
+audio::builder &audio::builder::sound(types::sound_id_t sound_id, std::string path,
+                                      types::stream_id_t stream_id)
 {
-  this->init_files.push_back(std::make_pair(id, path));
+  this->init_sounds.push_back(std::make_tuple(sound_id, path, stream_id));
   return *this;
 }
 
-audio::builder &audio::builder::stream(types::stream_name_t name, float gain)
+audio::builder &audio::builder::stream(types::stream_id_t id, float volume)
 {
-  this->init_streams.push_back(std::make_pair(name, gain));
+  this->init_streams.push_back(std::make_pair(id, volume));
   return *this;
 }
 
 subsystem &audio::builder::build()
 {
-  audio::init_files = this->init_files;
+  audio::init_sounds = this->init_sounds;
   audio::init_streams = this->init_streams;
   return audio::instance();
 }

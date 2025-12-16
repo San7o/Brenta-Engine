@@ -96,7 +96,7 @@ multiple audio files at the same time.
 You can load an audio file like so:
 
 ```cpp
-audio::load_audio("guitar", "assets/audio/guitar.wav");
+audio::load("guitar", "assets/audio/guitar.wav");
 ```
 
 We are identifying this audio file with the name `guitar`.
@@ -110,13 +110,11 @@ audio::create_stream("music");
 And finally play the `guitar` audio like so:
 
 ```cpp
-sudio::play_audio("guitar", "music");
+sudio::play("guitar");
 ```
-The subsystem will provide you a default stream named `default` if you don't
-want to create a stream.
 
-You can Pause and Resume streams with `brenta::audio::pause_stream` and
-`brenta::audio::resume_stream`, set the volume and stop it. You can find
+You can Pause and Resume streams with `brenta::audio::stream_pause` and
+`brenta::audio::stream_resume`, set the volume and stop it. You can find
 the API in `Brenta::Audio`.
 
 ## Particles
