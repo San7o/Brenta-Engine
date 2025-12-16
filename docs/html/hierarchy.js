@@ -1,6 +1,5 @@
 var hierarchy =
 [
-    [ "brenta::types::audio_file_t", "structbrenta_1_1types_1_1audio__file__t.html", null ],
     [ "brenta::types::buffer", "classbrenta_1_1types_1_1buffer.html", [
       [ "brenta::types::framebuffer", "classbrenta_1_1types_1_1framebuffer.html", null ]
     ] ],

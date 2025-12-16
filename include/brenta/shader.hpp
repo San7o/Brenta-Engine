@@ -31,14 +31,13 @@ typedef std::string shader_name_t;
 /**
  * @brief Shader class
  *
- * This class is used to create and manage shaders. The shaders
- * are created using the New method, which takes the name of the
- * shader, the type of the shader, and the path to the file that
- * contains the shader code. Multile shaders can be compiled and
- * linked together by providing any number of types and paths.
- * The shader can be used with the Use method, and the uniforms
- * can be set using the SetBool, SetInt, SetFloat, SetMat4, SetVec3
- * methods.
+ * This class is used to create and manage shaders. The shaders are
+ * created using the New method, which takes the name of the shader,
+ * the type of the shader, and the path to the file that contains the
+ * shader code. Multile shaders can be compiled and linked together by
+ * providing any number of types and paths.  The shader can be used
+ * with the Use method, and the uniforms can be set using the SetBool,
+ * SetInt, SetFloat, SetMat4, SetVec3 methods.
  */
 class shader
 {
@@ -46,18 +45,18 @@ public:
   /**
    * @brief Map of shaders
    *
-   * This map is used to store the shaders that are created
-   * during the execution of the program. The key is the name
-   * of the shader and the value is the ID of the shader.
+   * This map is used to store the shaders that are created during the
+   * execution of the program. The key is the name of the shader and
+   * the value is the ID of the shader.
    */
   static std::unordered_map<types::shader_name_t, unsigned int> shaders;
 
   /**
    * @brief Create a new shader
    *
-   * This method is used to create a new shader with the given
-   * name, type, and path. The path is the path to the file that
-   * contains the shader code. The type is the type of the shader
+   * This method is used to create a new shader with the given name,
+   * type, and path. The path is the path to the file that contains
+   * the shader code. The type is the type of the shader
    * (GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_GEOMETRY_SHADER).
    *
    * @param shader_name Name of the shader
@@ -65,8 +64,8 @@ public:
    * @param path Path to the file that contains the shader code
    * @return true on success, or false on error
    *
-   * You can provide any number of types and paths, those will be
-   * all compiled and linked in the same program.
+   * You can provide any number of types and paths, those will be all
+   * compiled and linked in the same program.
    */
   template <typename... Args>
   static bool create(std::string shader_name, GLenum type, std::string path,
@@ -208,8 +207,10 @@ public:
    * @brief Use the shader
    *
    * @param shader_name Name of the shader
-   * You need to call this method before rendering anything
-   * with the shader.
+   
+   * You need to call this method before rendering anything with the
+   * shader.
+   
    * @return true on success, or false on error
    */
   static bool use(types::shader_name_t shader_name);

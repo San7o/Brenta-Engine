@@ -18,8 +18,8 @@ namespace types
 /**
  * @brief Spherical coordinates
  *
- * This struct represents the spherical coordinates of a point
- * in 3D space.
+ * This struct represents the spherical coordinates of a point in 3D
+ * space.
  */
 struct spherical_coordinates
 {
@@ -33,8 +33,8 @@ struct spherical_coordinates
   /**
    * @brief Constructor
    *
-   * Full constructor that initializes the spherical coordinates
-   * with the specified values.
+   * Full constructor that initializes the spherical coordinates with
+   * the specified values.
    */
   spherical_coordinates(float theta, float phi, float radius)
       : theta(theta), phi(phi), radius(radius)
@@ -45,8 +45,8 @@ struct spherical_coordinates
 /**
  * @brief Euler angles
  *
- * This struct represents the euler angles of a rigid body
- * in 3D space.
+ * This struct represents the euler angles of a rigid body in 3D
+ * space.
  */
 struct euler_angles
 {
@@ -60,8 +60,8 @@ struct euler_angles
   /**
    * @brief Constructor
    *
-   * Full constructor that initializes the euler angles
-   * with the specified values.
+   * Full constructor that initializes the euler angles with the
+   * specified values.
    */
   euler_angles(float yaw, float pitch, float roll)
       : yaw(yaw), pitch(pitch), roll(roll)
@@ -89,8 +89,8 @@ enum projection_type
 /**
  * @brief Camera movement directions
  *
- * Used to define the direction of the camera movement
- * when reacting to keyboard input.
+ * Used to define the direction of the camera movement when reacting
+ * to keyboard input.
  */
 enum camera_movement
 {
@@ -106,37 +106,30 @@ enum camera_movement
  * @brief The Camera class
  *
  * This class represents a camera in the 3D world. It is used to
- * define the position, orientation and projection of the camera.
- * The class provides a Builder pattern to create a camera object,
- * and it export a default global camera called "camera" that
- * needs to be defined somewhere in the Brenta namespace.
+ * define the position, orientation and projection of the camera.  The
+ * class provides a Builder pattern to create a camera object, and it
+ * export a default global camera called "camera" that needs to be
+ * defined somewhere in the Brenta namespace.
  *
  * ## Camera type
- * The camera can be of two types: AIRCRAFT or SPHERICAL. The
- * AIRCRAFT type is used to represent a camera that moves in the
- * world space, while the SPHERICAL type is used to represent a
- * camera that rotates around a center point. They use respectively
- * euler angles and spherical coordinates to represent the position
- * of the camera.
+ *
+ * The camera can be of two types: AIRCRAFT or SPHERICAL. The AIRCRAFT
+ * type is used to represent a camera that moves in the world space,
+ * while the SPHERICAL type is used to represent a camera that rotates
+ * around a center point. They use respectively euler angles and
+ * spherical coordinates to represent the position of the camera.
  *
  * ## Projection
+ *
  * The camera can have two types of projection: PERSPECTIVE or
  * ORTHOGRAPHIC.
  */
 class camera
 {
 public:
-  /**
-   * @brief Projection type
-   */
+  
   enums::projection_type projection_type;
-  /**
-   * @brief Camera type
-   */
   enums::camera_type camera_type;
-  /**
-   * @brief Camera position
-   */
   glm::vec3 position;
   /**
    * @brief The world up vector
@@ -155,9 +148,6 @@ public:
    * @brief Space translational movement speed
    */
   float movement_speed;
-  /**
-   * @brief Mouse sensitivity
-   */
   float mouse_sensitivity;
   /**
    * @brief Zoom level (field of view)
@@ -175,9 +165,9 @@ public:
   /**
    * @brief Euler angles
    *
-   * If the camera is of type AIRCRAFT, these are the euler angles
-   * of the camera. Euler angles are used to represent the orientation
-   * of a rigid body in 3D space, those are yaw, pitch and roll.
+   * If the camera is of type AIRCRAFT, these are the euler angles of
+   * the camera. Euler angles are used to represent the orientation of
+   * a rigid body in 3D space, those are yaw, pitch and roll.
    */
   types::euler_angles euler_angles;
   /**
@@ -242,82 +232,22 @@ public:
    */
   class builder;
 
-  /* Getters */
+  // Getters
 
-  /**
-   * @brief Get the camera type
-   * @return The camera type
-   */
   enums::camera_type get_camera_type();
-  /**
-   * @brief Get the projection type
-   * @return The projection type
-   */
   enums::projection_type get_projection_type();
-  /**
-   * @brief Get the position of the camera
-   * @return The position of the camera
-   */
   glm::vec3 get_position();
-  /**
-   * @brief Get the world up vector
-   * @return The world up vector
-   */
   glm::vec3 get_world_up();
-  /**
-   * @brief Get the center of the sphere
-   * @return The center of the sphere
-   */
   glm::vec3 get_center();
-  /**
-   * @brief Get the movement speed
-   * @return The movement speed
-   */
   float get_movement_speed();
-  /**
-   * @brief Get the mouse sensitivity
-   * @return The mouse sensitivity
-   */
   float get_mouse_sensitivity();
-  /**
-   * @brief Get the zoom level
-   * @return The zoom level
-   */
   float get_zoom();
-  /**
-   * @brief Get the spherical coordinates of the camera
-   * @return The spherical coordinates of the camera
-   */
   types::spherical_coordinates get_spherical_coordinates();
-  /**
-   * @brief Get the euler angles of the camera
-   * @return The euler angles of the camera
-   */
   types::euler_angles get_euler_angles();
-  /**
-   * @brief Get the view matrix
-   * @return The view matrix
-   */
   glm::mat4 get_view_matrix();
-  /**
-   * @brief Get the projection matrix
-   * @return The projection matrix
-   */
   glm::mat4 get_projection_matrix(int window_width, int window_height);
-  /**
-   * @brief Get the front vector
-   * @return The front vector
-   */
   glm::vec3 get_front();
-  /**
-   * @brief Get the up vector
-   * @return The up vector
-   */
   glm::vec3 get_up();
-  /**
-   * @brief Get the right vector
-   * @return The right vector
-   */
   glm::vec3 get_right();
   /**
    * @brief Get the first mouse flag
@@ -335,78 +265,22 @@ public:
    */
   float get_last_y();
 
-  /* Setters */
+  // Setters
 
-  /**
-   * @brief Set the camera type
-   * @param camera_type The camera type
-   */
   void set_camera_type(enums::camera_type camera_type);
-  /**
-   * @brief Set the projection type
-   * @param projection_type The projection type
-   */
   void set_projection_type(enums::projection_type projection_type);
-  /**
-   * @brief Set the world up vector
-   * @param worldUp The world up vector
-   */
   void set_world_up(glm::vec3 world_up);
-  /**
-   * @brief Set the center of the sphere
-   * @param center The center of the sphere
-   */
   void set_center(glm::vec3 center);
-  /**
-   * @brief Set the movement speed
-   * @param movementSpeed The movement speed
-   */
   void set_movement_speed(float movement_speed);
-  /**
-   * @brief Set the mouse sensitivity
-   * @param mouseSensitivity The mouse sensitivity
-   */
   void set_mouse_sensitivity(float mouse_sensitivity);
-  /**
-   * @brief Set the zoom level
-   * @param zoom The zoom level
-   */
   void set_zoom(float zoom);
-  /**
-   * @brief Set the spherical coordinates of the camera
-   * @param sphericalCoordinates The spherical coordinates of the camera
-   */
   void
   set_spherical_coordinates(types::spherical_coordinates spherical_coordinates);
-  /**
-   * @brief Set the euler angles of the camera
-   * @param eulerAngles The euler angles of the camera
-   */
   void set_euler_angles(types::euler_angles euler_angles);
-  /**
-   * @brief Set the front vector
-   * @param front The front vector
-   */
   void set_front(glm::vec3 front);
-  /**
-   * @brief Set the up vector
-   * @param up The up vector
-   */
   void set_up(glm::vec3 up);
-  /**
-   * @brief Set the right vector
-   * @param right The right vector
-   */
   void set_right(glm::vec3 right);
-  /**
-   * @brief Set the position of the camera
-   * @param position The position of the camera
-   */
   void set_position(glm::vec3 position);
-  /**
-   * @brief Set the first mouse flag
-   * @param firstMouse The first mouse flag
-   */
   void set_first_mouse(bool first_mouse);
   /**
    * @brief Set the last x position of the mouse
@@ -419,7 +293,7 @@ public:
    */
   void set_last_y(float last_y);
 
-  /* Utilities */
+  // Utilities
 
   /**
    * @brief Update the camera euler angles
@@ -447,6 +321,7 @@ public:
 class camera::builder
 {
 private:
+  
   enums::camera_type camera_type_val = enums::camera_type::AIRCRAFT;
   enums::projection_type projection_type_val = enums::projection_type::PERSPECTIVE;
   glm::vec3 position_val = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -462,6 +337,7 @@ private:
   types::euler_angles euler_angles_val = {0.0f, 0.0f, 0.0f};
 
 public:
+  
   builder &camera_type(enums::camera_type camera_type);
   builder &projection_type(enums::projection_type projection_type);
   builder &position(glm::vec3 position);

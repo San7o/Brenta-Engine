@@ -5,7 +5,6 @@ var dir_8be729f266d03cf130ed75096ea9284a =
     [ "camera.hpp", "camera_8hpp_source.html", null ],
     [ "ecs.hpp", "ecs_8hpp_source.html", null ],
     [ "engine.hpp", "engine_8hpp_source.html", null ],
-    [ "error.hpp", "error_8hpp_source.html", null ],
     [ "frame_buffer.hpp", "frame__buffer_8hpp_source.html", null ],
     [ "gl.hpp", "gl_8hpp_source.html", null ],
     [ "gui.hpp", "gui_8hpp_source.html", null ],

@@ -34,9 +34,9 @@ namespace brenta
 /**
  * @brief Engine class
  *
- * This class is used to initialize and terminate multiple subsystems
- * based on the lifetime of the engine object. You can use the builder
- * class to create the object.
+ * This class is used to initialize and terminate multiple
+ * subsystems. You can use the builder class to initialize the engine,
+ * as with any other subsystem.
  *
  * Note: The subsystems will be initialized in the order as they are
  * added and terminated in reverse, so make sure that they are ordered
@@ -52,7 +52,7 @@ public:
 
   static const std::string subsystem_name;
   
-  // Subsystem functions
+  // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
@@ -68,8 +68,8 @@ public:
   static engine &instance();
   
   /**
-   * @brief Initialize a subsistem and add it to the managed
-   * subsystems
+   * @brief Initialize a subsystem and add it to the managed
+   * subsystems (will be terminated with the others).
    */
   static std::expected<void, std::string>
   add_subsystem(subsystem::builder &&builder);

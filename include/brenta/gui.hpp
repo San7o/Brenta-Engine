@@ -46,14 +46,12 @@ public:
   
   /**
    * @brief Start a new frame
-   * To be called at each frame
-   * before rendering.
+   * To be called at each frame before rendering.
    */
   static void new_frame(types::framebuffer *fb, std::string name = "Game");
   /**
    * @brief Render the gui
-   * To be called at each frame
-   * after rendering.
+   * To be called at each frame after rendering.
    */
   static void render();
 };

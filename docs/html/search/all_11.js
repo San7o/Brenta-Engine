@@ -1,7 +1,7 @@
 var searchData=
 [
   ['target_0',['target',['../classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f',1,'brenta::types::buffer']]],
-  ['terminate_1',['terminate',['../classbrenta_1_1audio.html#abcd4ee54c94d12a5144f2d86a5a35414',1,'brenta::audio::terminate()'],['../classbrenta_1_1input.html#a735f577de15ef87e23522e803e8a190b',1,'brenta::input::terminate()'],['../classbrenta_1_1text.html#aed757989a92961ec1a05cee26c0a172b',1,'brenta::text::terminate()']]],
+  ['terminate_1',['terminate',['../classbrenta_1_1audio.html#a1b64fdb23c961b1b87ec6bf9a01f9186',1,'brenta::audio::terminate()'],['../classbrenta_1_1input.html#ae3309d9d5bd4d8c48abc082f25c3b3b7',1,'brenta::input::terminate()'],['../classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122',1,'brenta::text::terminate()']]],
   ['text_2',['text',['../classbrenta_1_1text.html',1,'brenta']]],
   ['texture_3',['texture',['../classbrenta_1_1texture.html',1,'brenta::texture'],['../structbrenta_1_1types_1_1texture.html',1,'brenta::types::texture']]],
   ['texture_5fid_4',['texture_id',['../classbrenta_1_1types_1_1framebuffer.html#a268a988bb67432f5191d4d2da23ff8a3',1,'brenta::types::framebuffer']]],

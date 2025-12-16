@@ -102,7 +102,7 @@ $(function(){initNavTree('classbrenta_1_1logger.html',''); initResizable(true); 
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::logger Class Reference</div></div>
 </div><!--header-->
@@ -124,10 +124,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a53c66579b2effff7ecd3a25a1fc7b30d" id="r_a53c66579b2effff7ecd3a25a1fc7b30d"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53c66579b2effff7ecd3a25a1fc7b30d">initialize</a> () override</td></tr>
-<tr class="separator:a53c66579b2effff7ecd3a25a1fc7b30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb3ef43be655cd15963869cd20d3720" id="r_aaeb3ef43be655cd15963869cd20d3720"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaeb3ef43be655cd15963869cd20d3720">terminate</a> () override</td></tr>
-<tr class="separator:aaeb3ef43be655cd15963869cd20d3720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d33b87292fbcd0f47fa74667c327308" id="r_a3d33b87292fbcd0f47fa74667c327308"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d33b87292fbcd0f47fa74667c327308">initialize</a> () override</td></tr>
+<tr class="separator:a3d33b87292fbcd0f47fa74667c327308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada270a544a86379b375949e329ccd441" id="r_ada270a544a86379b375949e329ccd441"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada270a544a86379b375949e329ccd441">terminate</a> () override</td></tr>
+<tr class="separator:ada270a544a86379b375949e329ccd441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad24e98caade1e572291c0a12941902ee" id="r_ad24e98caade1e572291c0a12941902ee"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad24e98caade1e572291c0a12941902ee">name</a> ()</td></tr>
+<tr class="memdesc:ad24e98caade1e572291c0a12941902ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:ad24e98caade1e572291c0a12941902ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -135,13 +138,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a08622f33c88b3b461c1a705da8878017" id="r_a08622f33c88b3b461c1a705da8878017"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1logger.html">logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08622f33c88b3b461c1a705da8878017">instance</a> ()</td></tr>
 <tr class="separator:a08622f33c88b3b461c1a705da8878017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:ad14423cb09f3c95521fa308c158dcce6" id="r_ad14423cb09f3c95521fa308c158dcce6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad14423cb09f3c95521fa308c158dcce6">subsystem_name</a> = &quot;logger&quot;</td></tr>
-<tr class="separator:ad14423cb09f3c95521fa308c158dcce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a2043a6cc01a22d47062eda2545dfbf48" id="r_a2043a6cc01a22d47062eda2545dfbf48"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2043a6cc01a22d47062eda2545dfbf48">subsystem_name</a> = &quot;logger&quot;</td></tr>
+<tr class="separator:a2043a6cc01a22d47062eda2545dfbf48"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -149,13 +149,19 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:acc490aea8aedd7b4972a9d4b64a14f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5da0aca762821a29928f01805a1e2378" id="r_a5da0aca762821a29928f01805a1e2378"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5da0aca762821a29928f01805a1e2378">log_file</a></td></tr>
 <tr class="separator:a5da0aca762821a29928f01805a1e2378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00024">24</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a53c66579b2effff7ecd3a25a1fc7b30d" name="a53c66579b2effff7ecd3a25a1fc7b30d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53c66579b2effff7ecd3a25a1fc7b30d">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a3d33b87292fbcd0f47fa74667c327308" name="a3d33b87292fbcd0f47fa74667c327308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d33b87292fbcd0f47fa74667c327308">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +170,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; logger::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; logger::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -179,7 +185,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00019">19</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00022">22</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -206,12 +212,12 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00013">13</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00058">58</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aaeb3ef43be655cd15963869cd20d3720" name="aaeb3ef43be655cd15963869cd20d3720"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaeb3ef43be655cd15963869cd20d3720">&#9670;&#160;</a></span>terminate()</h2>
+<a id="ad24e98caade1e572291c0a12941902ee" name="ad24e98caade1e572291c0a12941902ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad24e98caade1e572291c0a12941902ee">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +226,38 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; logger::terminate </td>
+          <td class="memname">std::string logger::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00049">49</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ada270a544a86379b375949e329ccd441" name="ada270a544a86379b375949e329ccd441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada270a544a86379b375949e329ccd441">&#9670;&#160;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; logger::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -235,7 +272,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00040">40</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00043">43</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -288,19 +325,27 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ad14423cb09f3c95521fa308c158dcce6" name="ad14423cb09f3c95521fa308c158dcce6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad14423cb09f3c95521fa308c158dcce6">&#9670;&#160;</a></span>subsystem_name</h2>
+<a id="a2043a6cc01a22d47062eda2545dfbf48" name="a2043a6cc01a22d47062eda2545dfbf48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2043a6cc01a22d47062eda2545dfbf48">&#9670;&#160;</a></span>subsystem_name</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string brenta::logger::subsystem_name = &quot;logger&quot;</td>
+          <td class="memname">const std::string logger::subsystem_name = &quot;logger&quot;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00033">33</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00034">34</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>

@@ -102,7 +102,7 @@ $(function(){initNavTree('classbrenta_1_1gl.html',''); initResizable(true); });
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::gl Class Reference</div></div>
 </div><!--header-->
@@ -129,10 +129,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa6879a9450a32543d75f502b9e29504b" id="r_aa6879a9450a32543d75f502b9e29504b"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa6879a9450a32543d75f502b9e29504b">initialize</a> () override</td></tr>
-<tr class="separator:aa6879a9450a32543d75f502b9e29504b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2881fa14f7a1b33ff9372e5ad6a9ebe7" id="r_a2881fa14f7a1b33ff9372e5ad6a9ebe7"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2881fa14f7a1b33ff9372e5ad6a9ebe7">terminate</a> () override</td></tr>
-<tr class="separator:a2881fa14f7a1b33ff9372e5ad6a9ebe7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ea5172457fcdaa10b90ae896f25317d" id="r_a0ea5172457fcdaa10b90ae896f25317d"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ea5172457fcdaa10b90ae896f25317d">initialize</a> () override</td></tr>
+<tr class="separator:a0ea5172457fcdaa10b90ae896f25317d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab54b53ac83e7f51ec76bbf1e3920048b" id="r_ab54b53ac83e7f51ec76bbf1e3920048b"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab54b53ac83e7f51ec76bbf1e3920048b">terminate</a> () override</td></tr>
+<tr class="separator:ab54b53ac83e7f51ec76bbf1e3920048b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bbd0121e2274465895d5686a269f537" id="r_a4bbd0121e2274465895d5686a269f537"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4bbd0121e2274465895d5686a269f537">name</a> () override</td></tr>
+<tr class="memdesc:a4bbd0121e2274465895d5686a269f537"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:a4bbd0121e2274465895d5686a269f537"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -163,13 +166,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a2ba98d5c7fa474b67f14d3aa8ce459d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check OpenGL error.  <br /></td></tr>
 <tr class="separator:a2ba98d5c7fa474b67f14d3aa8ce459d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:ac4930e61208a20b01f4208638a8e362b" id="r_ac4930e61208a20b01f4208638a8e362b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac4930e61208a20b01f4208638a8e362b">subsystem_name</a> = &quot;gl&quot;</td></tr>
-<tr class="separator:ac4930e61208a20b01f4208638a8e362b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ae4163f5342849720ace27611642b9c03" id="r_ae4163f5342849720ace27611642b9c03"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4163f5342849720ace27611642b9c03">subsystem_name</a> = &quot;gl&quot;</td></tr>
+<tr class="separator:ae4163f5342849720ace27611642b9c03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -181,6 +181,12 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:a170f16de6d79261a9ea638baea36f686"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9d932e53a20dbaf04d6b9c07a2d687cc" id="r_a9d932e53a20dbaf04d6b9c07a2d687cc"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9d932e53a20dbaf04d6b9c07a2d687cc">enable_depth_test</a></td></tr>
 <tr class="separator:a9d932e53a20dbaf04d6b9c07a2d687cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>OpenGL helper functions. </p>
@@ -219,7 +225,7 @@ Static Protected Attributes</h2></td></tr>
 <p>This function checks if there is an OpenGL error.</p>
 <dl class="section return"><dt>Returns</dt><dd>The error code </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00121">121</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00139">139</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -246,7 +252,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00111">111</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00129">129</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -276,7 +282,7 @@ Static Protected Attributes</h2></td></tr>
 <p>Clear. </p>
 <p>This function clears the color and depth buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00116">116</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00134">134</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,7 +329,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00101">101</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00119">119</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -376,12 +382,12 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00106">106</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00124">124</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aa6879a9450a32543d75f502b9e29504b" name="aa6879a9450a32543d75f502b9e29504b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6879a9450a32543d75f502b9e29504b">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a0ea5172457fcdaa10b90ae896f25317d" name="a0ea5172457fcdaa10b90ae896f25317d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ea5172457fcdaa10b90ae896f25317d">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -390,7 +396,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; gl::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; gl::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -405,7 +411,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00019">19</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00028">28</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -432,7 +438,38 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00085">85</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00103">103</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a4bbd0121e2274465895d5686a269f537" name="a4bbd0121e2274465895d5686a269f537"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bbd0121e2274465895d5686a269f537">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string gl::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00080">80</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +522,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00096">96</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00114">114</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +557,7 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00071">71</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00089">89</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -573,12 +610,12 @@ Static Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00091">91</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00109">109</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2881fa14f7a1b33ff9372e5ad6a9ebe7" name="a2881fa14f7a1b33ff9372e5ad6a9ebe7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2881fa14f7a1b33ff9372e5ad6a9ebe7">&#9670;&#160;</a></span>terminate()</h2>
+<a id="ab54b53ac83e7f51ec76bbf1e3920048b" name="ab54b53ac83e7f51ec76bbf1e3920048b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab54b53ac83e7f51ec76bbf1e3920048b">&#9670;&#160;</a></span>terminate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -587,7 +624,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; gl::terminate </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; gl::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -602,7 +639,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00065">65</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00074">74</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -703,19 +740,27 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="ac4930e61208a20b01f4208638a8e362b" name="ac4930e61208a20b01f4208638a8e362b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac4930e61208a20b01f4208638a8e362b">&#9670;&#160;</a></span>subsystem_name</h2>
+<a id="ae4163f5342849720ace27611642b9c03" name="ae4163f5342849720ace27611642b9c03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4163f5342849720ace27611642b9c03">&#9670;&#160;</a></span>subsystem_name</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string brenta::gl::subsystem_name = &quot;gl&quot;</td>
+          <td class="memname">const std::string gl::subsystem_name = &quot;gl&quot;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00042">42</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8hpp_source.html#l00040">40</a> of file <a class="el" href="gl_8hpp_source.html">gl.hpp</a>.</p>
 
 </div>
 </div>

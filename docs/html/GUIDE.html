@@ -98,7 +98,7 @@ stop it, so you need to have multiple streams if you want to play
 multiple audio files at the same time.</p>
 <p>You can load an audio file like so:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>audio<span class="op">::</span>load_audio<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">,</span> <span class="st">&quot;assets/audio/guitar.wav&quot;</span><span class="op">);</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>audio<span class="op">::</span>load<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">,</span> <span class="st">&quot;assets/audio/guitar.wav&quot;</span><span class="op">);</span></span></code></pre></div>
 <p>We are identifying this audio file with the name
 <code>guitar</code>.</p>
 <p>You can create a stream with the name “music” like so:</p>
@@ -106,12 +106,10 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#c
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>audio<span class="op">::</span>create_stream<span class="op">(</span><span class="st">&quot;music&quot;</span><span class="op">);</span></span></code></pre></div>
 <p>And finally play the <code>guitar</code> audio like so:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sudio<span class="op">::</span>play_audio<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">,</span> <span class="st">&quot;music&quot;</span><span class="op">);</span></span></code></pre></div>
-<p>The subsystem will provide you a default stream named
-<code>default</code> if you don’t want to create a stream.</p>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sudio<span class="op">::</span>play<span class="op">(</span><span class="st">&quot;guitar&quot;</span><span class="op">);</span></span></code></pre></div>
 <p>You can Pause and Resume streams with
-<code>brenta::audio::pause_stream</code> and
-<code>brenta::audio::resume_stream</code>, set the volume and stop it.
+<code>brenta::audio::stream_pause</code> and
+<code>brenta::audio::stream_resume</code>, set the volume and stop it.
 You can find the API in <code>Brenta::Audio</code>.</p>
 <h2 id="particles">Particles</h2>
 <p>You can create and customize particles via the

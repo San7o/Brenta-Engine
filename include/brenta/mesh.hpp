@@ -25,8 +25,8 @@ namespace types
 /**
  * @brief The Vertex struct represents a vertex of a 3D model
  *
- * A vertex is a point in 3D space that has a position, a normal
- * and texture coordinates.
+ * A vertex is a point in 3D space that has a position, a normal and
+ * texture coordinates.
  */
 struct vertex
 {
@@ -38,9 +38,9 @@ struct vertex
 /**
  * @brief The Texture struct represents a texture of a 3D model
  *
- * A texture is an image that is applied to a 3D model to give
- * it a more realistic look. A texture can be of different types
- * like diffuse, specular, normal, etc.
+ * A texture is an image that is applied to a 3D model to give it a
+ * more realistic look. A texture can be of different types like
+ * diffuse, specular, normal, etc.
  */
 struct texture
 {
@@ -54,9 +54,9 @@ struct texture
 /**
  * @brief The Mesh class represents a 3D model
  *
- * A mesh is a collection of vertices, indices and textures
- * that represent a 3D model. The mesh can be drawn using
- * a shader and calling the Draw method.
+ * A mesh is a collection of vertices, indices and textures that
+ * represent a 3D model. The mesh can be drawn using a shader and
+ * calling the Draw method.
  */
 class mesh
 {
@@ -68,10 +68,9 @@ public:
   /**
    * @brief indices of the mesh
    *
-   * Indicies are used to reduce the memory footprint
-   * required to represent a 3D model. They are indices
-   * in the vertex array and there can be multiple indices
-   * for a vertex.
+   * Indicies are used to reduce the memory footprint required to
+   * represent a 3D model. They are indices in the vertex array and
+   * there can be multiple indices for a vertex.
    */
   std::vector<unsigned int> indices;
   /**

@@ -160,7 +160,7 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p>Shader class. </p>
 <p>This class is used to create and manage shaders. The shaders are created using the New method, which takes the name of the shader, the type of the shader, and the path to the file that contains the shader code. Multile shaders can be compiled and linked together by providing any number of types and paths. The shader can be used with the Use method, and the uniforms can be set using the SetBool, SetInt, SetFloat, SetMat4, SetVec3 methods. </p>
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00043">43</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00042">42</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1e978371f23503866885b2d8d7117046" name="a1e978371f23503866885b2d8d7117046"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1e978371f23503866885b2d8d7117046">&#9670;&#160;</a></span>compile_shaders() <span class="overload">[1/2]</span></h2>
@@ -185,7 +185,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00152">152</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00151">151</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -228,7 +228,7 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00158">158</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00157">157</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +296,7 @@ template&lt;typename... Args&gt; </div>
 <p>Same as the New method, but adds feedback varyings to the shader, so that the output of the shader can be saved in a buffer object.</p>
 <p>Example feedback_varyings: const GLchar* feedback_varyings[] = {"outValue"}; </p>
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00116">116</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00115">115</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -352,7 +352,7 @@ template&lt;typename... Args&gt; </div>
 <dl class="section return"><dt>Returns</dt><dd>true on success, or false on error</dd></dl>
 <p>You can provide any number of types and paths, those will be all compiled and linked in the same program. </p>
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00072">72</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00071">71</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -712,10 +712,11 @@ template&lt;typename... Args&gt; </div>
 <p>Use the shader. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">shader_name</td><td>Name of the shader You need to call this method before rendering anything with the shader. </td></tr>
+    <tr><td class="paramname">shader_name</td><td>Name of the shader</td></tr>
   </table>
   </dd>
 </dl>
+<p>You need to call this method before rendering anything with the shader.</p>
 <dl class="section return"><dt>Returns</dt><dd>true on success, or false on error </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00022">22</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
@@ -746,7 +747,7 @@ template&lt;typename... Args&gt; </div>
 <p>Map of shaders. </p>
 <p>This map is used to store the shaders that are created during the execution of the program. The key is the name of the shader and the value is the ID of the shader. </p>
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00053">53</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00052">52</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>

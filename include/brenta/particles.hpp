@@ -22,48 +22,27 @@ namespace brenta
 /**
  * @brief ParticleEmitter class
  *
- * This class is used to define a particle emitter,
- * update and render its particles. This class provides
- * a builder pattern to create a ParticleEmitter object.
- * The particles ban be updated and rendered using the
- * updateParticles and renderParticles methods.
+ * This class is used to define a particle emitter, update and render
+ * its particles. This class provides a builder pattern to create a
+ * ParticleEmitter object.  The particles ban be updated and rendered
+ * using the updateParticles and renderParticles methods.
  */
 class particle_emitter
 {
 public:
-  /**
-   * @brief Starting position of a new particle
-   */
+  
   glm::vec3 starting_position;
-  /**
-   * @brief Starting velocity of a new particle
-   */
   glm::vec3 starting_velocity;
-  /**
-   * @brief Starting spread of a new particle
-   */
   glm::vec3 starting_spread;
-  /**
-   * @brief Time to live of a new particle
-   */
   float starting_time_to_live;
-  /**
-   * @brief Number of particles
-   */
   int num_particles;
-  /**
-   * @brief Spawn rate of particles
-   */
   float spawn_rate;
-  /**
-   * @brief Scale of particles
-   */
   float scale;
   /**
    * @brief Feddback buffer objects
    *
-   * These are used to save the new state of updated
-   * particles in the updateParticles method.
+   * These are used to save the new state of updated particles in the
+   * updateParticles method.
    */
   types::buffer fbo[2];
   /**
@@ -74,17 +53,8 @@ public:
    * @brief Atlas texture
    */
   int atlas;
-  /**
-   * @brief Atlas width
-   */
   int atlas_width;
-  /**
-   * @brief Atlas height
-   */
   int atlas_height;
-  /**
-   * @brief Atlas index
-   */
   int atlas_index;
   /**
    * @brief Vertex array object
@@ -150,6 +120,7 @@ private:
 class particle_emitter::builder
 {
 private:
+  
   glm::vec3 starting_position_val = glm::vec3(0.0f, 0.0f, 0.0f);
   glm::vec3 starting_velocity_val = glm::vec3(0.0f, 0.0f, 0.0f);
   glm::vec3 starting_spread_val = glm::vec3(0.0f, 0.0f, 0.0f);

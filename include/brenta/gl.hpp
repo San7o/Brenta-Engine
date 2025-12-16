@@ -39,13 +39,13 @@ public:
 
   static const std::string subsystem_name;
   
-  // Subsystem functions
+  class builder;
+
+  // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
   
-  class builder;
-
   // Constructors / destructors
   gl() = default;
   ~gl() = default;

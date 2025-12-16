@@ -1,19 +1,14 @@
 var classbrenta_1_1audio =
 [
     [ "builder", "classbrenta_1_1audio_1_1builder.html", null ],
-    [ "clear_stream", "classbrenta_1_1audio.html#a79231d6069f60310cb305bfba97fdb85", null ],
-    [ "create_stream", "classbrenta_1_1audio.html#a85806d79d2556e2ebea46b578edea346", null ],
-    [ "get_audio_file", "classbrenta_1_1audio.html#a48fef9397e95cfa0b047c15d836a22b3", null ],
-    [ "get_stream", "classbrenta_1_1audio.html#ae20e4621986bdf594cd6cb1a12f98864", null ],
-    [ "initialize", "classbrenta_1_1audio.html#a496e77dd5a6fec661e6bc286f67507c9", null ],
-    [ "load", "classbrenta_1_1audio.html#a042ea242d50002f9d59329ca6fd31d45", null ],
-    [ "pause_stream", "classbrenta_1_1audio.html#a90d6ff6e9009d8d386e47bf93c3ed6f2", null ],
-    [ "play_audio", "classbrenta_1_1audio.html#a417323e12764d43a833ec0f400e6e01b", null ],
-    [ "resume_stream", "classbrenta_1_1audio.html#a1a2ff75a4c025c1c18af514339166709", null ],
-    [ "set_volume", "classbrenta_1_1audio.html#a6121dd94e2436717f32d383c37a268ee", null ],
-    [ "terminate", "classbrenta_1_1audio.html#abcd4ee54c94d12a5144f2d86a5a35414", null ],
-    [ "audio_files", "classbrenta_1_1audio.html#a1ab79e5e339e1b21b0cf8115cddbd4cc", null ],
-    [ "init_files", "classbrenta_1_1audio.html#a90d5b2f42c775e2f07de7e366fd8fb8b", null ],
-    [ "init_streams", "classbrenta_1_1audio.html#a2d291eb69b20f063ee40d44ffa2e5517", null ],
-    [ "streams", "classbrenta_1_1audio.html#a1123b2568f5aa72f029b7438ec7637a7", null ]
+    [ "initialize", "classbrenta_1_1audio.html#a30e2edbba6c397b30b68386d03af1128", null ],
+    [ "load", "classbrenta_1_1audio.html#a51b1aacbfeb3f2fc9d20ebce54efb331", null ],
+    [ "name", "classbrenta_1_1audio.html#acdfc03090e34e3a4eab2799c771dd75f", null ],
+    [ "play", "classbrenta_1_1audio.html#a8d801893ef7be8cef6984942c5f7b284", null ],
+    [ "stream_set_volume", "classbrenta_1_1audio.html#a85e7bcf54675b76f17de3854e38b1d2b", null ],
+    [ "terminate", "classbrenta_1_1audio.html#a1b64fdb23c961b1b87ec6bf9a01f9186", null ],
+    [ "init_sounds", "classbrenta_1_1audio.html#a297865fa7936dac2004dabf260b5d925", null ],
+    [ "init_streams", "classbrenta_1_1audio.html#a55531aa2d173974e85a9a638eec42b99", null ],
+    [ "sounds", "classbrenta_1_1audio.html#a2da67cfd78a2c35c235744e8ad0b3d67", null ],
+    [ "streams", "classbrenta_1_1audio.html#a84984caf652f7c47f488a052ea1423d1", null ]
 ];

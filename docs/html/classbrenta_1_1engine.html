@@ -102,7 +102,7 @@ $(function(){initNavTree('classbrenta_1_1engine.html',''); initResizable(true); 
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::engine Class Reference</div></div>
 </div><!--header-->
@@ -130,10 +130,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a72c2d51c27bfcb1a328eed57569a6cb5" id="r_a72c2d51c27bfcb1a328eed57569a6cb5"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a72c2d51c27bfcb1a328eed57569a6cb5">initialize</a> () override</td></tr>
-<tr class="separator:a72c2d51c27bfcb1a328eed57569a6cb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a814bbf4967632090273b2d431749667d" id="r_a814bbf4967632090273b2d431749667d"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a814bbf4967632090273b2d431749667d">terminate</a> () override</td></tr>
-<tr class="separator:a814bbf4967632090273b2d431749667d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63b1b5c8049944ed77e75089f7d02173" id="r_a63b1b5c8049944ed77e75089f7d02173"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a63b1b5c8049944ed77e75089f7d02173">initialize</a> () override</td></tr>
+<tr class="separator:a63b1b5c8049944ed77e75089f7d02173"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad15710ee50f335d3a38c1574e8d6f215" id="r_ad15710ee50f335d3a38c1574e8d6f215"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad15710ee50f335d3a38c1574e8d6f215">terminate</a> () override</td></tr>
+<tr class="separator:ad15710ee50f335d3a38c1574e8d6f215"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18b9d0e2c4b1bfbd894b18eee66757fc" id="r_a18b9d0e2c4b1bfbd894b18eee66757fc"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a18b9d0e2c4b1bfbd894b18eee66757fc">name</a> () override</td></tr>
+<tr class="memdesc:a18b9d0e2c4b1bfbd894b18eee66757fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:a18b9d0e2c4b1bfbd894b18eee66757fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -142,25 +145,28 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a4974b640177cf60669d2153ed6b4bcca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get a static object instance.  <br /></td></tr>
 <tr class="separator:a4974b640177cf60669d2153ed6b4bcca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fc7eb64cec72e14c617398c895473fd" id="r_a5fc7eb64cec72e14c617398c895473fd"><td class="memItemLeft" align="right" valign="top">static std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5fc7eb64cec72e14c617398c895473fd">add_subsystem</a> (<a class="el" href="classbrenta_1_1subsystem_1_1builder.html">subsystem::builder</a> &amp;&amp;<a class="el" href="classbrenta_1_1engine_1_1builder.html">builder</a>)</td></tr>
-<tr class="memdesc:a5fc7eb64cec72e14c617398c895473fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a subsistem and add it to the managed subsystems.  <br /></td></tr>
+<tr class="memdesc:a5fc7eb64cec72e14c617398c895473fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize a subsystem and add it to the managed subsystems (will be terminated with the others).  <br /></td></tr>
 <tr class="separator:a5fc7eb64cec72e14c617398c895473fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:ace68e618dae04c3b11d651b8777d265a" id="r_ace68e618dae04c3b11d651b8777d265a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ace68e618dae04c3b11d651b8777d265a">subsistem_name</a> = &quot;engine&quot;</td></tr>
-<tr class="separator:ace68e618dae04c3b11d651b8777d265a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a37a934bd5394b77342980f9374d51834" id="r_a37a934bd5394b77342980f9374d51834"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37a934bd5394b77342980f9374d51834">subsystem_name</a> = &quot;engine&quot;</td></tr>
+<tr class="separator:a37a934bd5394b77342980f9374d51834"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
 <tr class="memitem:aa7932e001b3202b1bacb4880c94bdfea" id="r_aa7932e001b3202b1bacb4880c94bdfea"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; std::reference_wrapper&lt; <a class="el" href="classbrenta_1_1subsystem.html">subsystem</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa7932e001b3202b1bacb4880c94bdfea">subsystems</a></td></tr>
 <tr class="separator:aa7932e001b3202b1bacb4880c94bdfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Engine class. </p>
-<p>This class is used to initialize and terminate multiple subsystems based on the lifetime of the engine object. You can use the builder class to create the object.</p>
+<p>This class is used to initialize and terminate multiple subsystems. You can use the builder class to initialize the engine, as with any other subsystem.</p>
 <p>Note: The subsystems will be initialized in the order as they are added and terminated in reverse, so make sure that they are ordered correctly if a subsystem depends on another one. </p>
 
 <p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00045">45</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>
@@ -188,14 +194,14 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize a subsistem and add it to the managed subsystems. </p>
+<p>Initialize a subsystem and add it to the managed subsystems (will be terminated with the others). </p>
 
-<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00045">45</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00063">63</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a72c2d51c27bfcb1a328eed57569a6cb5" name="a72c2d51c27bfcb1a328eed57569a6cb5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a72c2d51c27bfcb1a328eed57569a6cb5">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a63b1b5c8049944ed77e75089f7d02173" name="a63b1b5c8049944ed77e75089f7d02173"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63b1b5c8049944ed77e75089f7d02173">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -204,7 +210,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; engine::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; engine::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -219,7 +225,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00013">13</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00021">21</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
 </div>
 </div>
@@ -248,12 +254,12 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Get a static object instance. </p>
 
-<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00039">39</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00056">56</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a814bbf4967632090273b2d431749667d" name="a814bbf4967632090273b2d431749667d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a814bbf4967632090273b2d431749667d">&#9670;&#160;</a></span>terminate()</h2>
+<a id="a18b9d0e2c4b1bfbd894b18eee66757fc" name="a18b9d0e2c4b1bfbd894b18eee66757fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a18b9d0e2c4b1bfbd894b18eee66757fc">&#9670;&#160;</a></span>name()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -262,7 +268,38 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; engine::terminate </td>
+          <td class="memname">std::string engine::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00047">47</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad15710ee50f335d3a38c1574e8d6f215" name="ad15710ee50f335d3a38c1574e8d6f215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad15710ee50f335d3a38c1574e8d6f215">&#9670;&#160;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; engine::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -277,21 +314,29 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00025">25</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00033">33</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="ace68e618dae04c3b11d651b8777d265a" name="ace68e618dae04c3b11d651b8777d265a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ace68e618dae04c3b11d651b8777d265a">&#9670;&#160;</a></span>subsistem_name</h2>
+<a id="a37a934bd5394b77342980f9374d51834" name="a37a934bd5394b77342980f9374d51834"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37a934bd5394b77342980f9374d51834">&#9670;&#160;</a></span>subsystem_name</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string brenta::engine::subsistem_name = &quot;engine&quot;</td>
+          <td class="memname">const std::string engine::subsystem_name = &quot;engine&quot;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00053">53</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>

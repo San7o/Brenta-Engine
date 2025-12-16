@@ -16,9 +16,10 @@ namespace types
 /**
  * @brief Buffer wrapper around OpenGL buffer objects
  *
- * This class is a wrapper around OpenGL buffer objects. It provides a simple
- * interface to create, bind, unbind and delete buffer objects. It also provides
- * methods to copy data to the buffer objects.
+ * This class is a wrapper around OpenGL buffer objects. It provides a
+ * simple interface to create, bind, unbind and delete buffer
+ * objects. It also provides methods to copy data to the buffer
+ * objects.
  *
  * This class offers methods to:
  * - create and delete buffer object
@@ -48,10 +49,10 @@ public:
    * @brief Constructor that creates a buffer object
    * @param target Buffer object target
    *
-   * This constructor creates a buffer object with the specified target.
-   * It calls the OpenGL function glGenBuffers to generate a buffer object
-   * id and glBindBuffer to bind the buffer object.
-   * The buffer has a default destructor that deletes the buffer object
+   * This constructor creates a buffer object with the specified
+   * target.  It calls the OpenGL function glGenBuffers to generate a
+   * buffer object id and glBindBuffer to bind the buffer object.  The
+   * buffer has a default destructor that deletes the buffer object
    * when it goes out of scope.
    */
   buffer(GLenum input_target);
@@ -71,7 +72,7 @@ public:
    */
   void destroy();
 
-  /* Getters */
+  // Getters
 
   /**
    * @brief Get the buffer object id
@@ -84,7 +85,7 @@ public:
    */
   GLenum get_target();
 
-  /* Setters */
+  // Setters
 
   /**
    * @brief Set the buffer object id
@@ -97,7 +98,7 @@ public:
    */
   void set_target(GLenum target);
 
-  /* Utilities */
+  // Utilities
 
   /**
    * @brief Copy data to the buffer object
@@ -105,9 +106,9 @@ public:
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
    *
-   * This method copies data to the buffer object. The size of the data
-   * is specified in bytes, the data is a pointer to the data and the usage
-   * is an OpenGL usage hint.
+   * This method copies data to the buffer object. The size of the
+   * data is specified in bytes, the data is a pointer to the data and
+   * the usage is an OpenGL usage hint.
    */
   void copy_data(GLsizeiptr size, const void *data, GLenum usage);
   /**
@@ -116,7 +117,7 @@ public:
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
    *
-   * Same as Copydata but for target GL_ARRAY_BUFFER. The naming is
+   * Same as copy_date() but for target GL_ARRAY_BUFFER. The naming is
    * more specific to the use case.
    */
   void copy_vertices(GLsizeiptr size, const void *data, GLenum usage);
@@ -126,7 +127,7 @@ public:
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
    *
-   * Same as CopyVertices but for target GL_ELEMENT_ARRAY_BUFFER.
+   * Same as copy_vertices() but for target GL_ELEMENT_ARRAY_BUFFER.
    */
   void copy_indices(GLsizeiptr size, const void *data, GLenum usage);
 };

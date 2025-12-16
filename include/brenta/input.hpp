@@ -64,9 +64,10 @@ public:
   /**
    * @brief Add a keyboard callback
    *
-   * This function adds a callback to a key press event. The callback is a
-   * function that takes no arguments and returns void. The key enum is
-   * defined in GLFW. When the key is pressed, the callback is called.
+   * This function adds a callback to a key press event. The callback
+   * is a function that takes no arguments and returns void. The key
+   * enum is defined in GLFW. When the key is pressed, the callback is
+   * called.
    *
    * @param key The key to add the callback to
    * @param callback The callback function
@@ -84,8 +85,8 @@ public:
   /**
    * @brief Keyboard callback
    *
-   * This function is called when a key is pressed. It calls the callback
-   * function associated with the key.
+   * This function is called when a key is pressed. It calls the
+   * callback function associated with the key.
    *
    * @param window The window that received the event
    * @param key The key that was pressed or released
@@ -98,10 +99,10 @@ public:
   /**
    * @brief Add a mouse position callback
    *
-   * This function adds a callback to a mouse position event. The callback is
-   * a function that takes two doubles and returns void. The two doubles are
-   * the x and y position of the mouse. When the mouse is moved, the callback
-   * is called.
+   * This function adds a callback to a mouse position event. The
+   * callback is a function that takes two doubles and returns
+   * void. The two doubles are the x and y position of the mouse. When
+   * the mouse is moved, the callback is called.
    *
    * @param name The name of the callback
    * @param callback The callback function
@@ -112,8 +113,8 @@ public:
   /**
    * @brief Remove a mouse position callback
    *
-   * This function removes a callback from a mouse position event. When the
-   * mouse is moved, the callback is removed.
+   * This function removes a callback from a mouse position
+   * event. When the mouse is moved, the callback is removed.
    *
    * @param callback_name The name of the callback
    */
@@ -122,8 +123,8 @@ public:
   /**
    * @brief Mouse position callback
    *
-   * This function is called when the mouse is moved. It calls the callback
-   * function associated with the mouse position.
+   * This function is called when the mouse is moved. It calls the
+   * callback function associated with the mouse position.
    *
    * @param window The window that received the event
    * @param xpos The new x-coordinate, in screen coordinates, of the cursor

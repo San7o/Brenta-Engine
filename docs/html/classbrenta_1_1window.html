@@ -102,7 +102,7 @@ $(function(){initNavTree('classbrenta_1_1window.html',''); initResizable(true); 
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::window Class Reference</div></div>
 </div><!--header-->
@@ -129,10 +129,13 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a330ced7424d8c2890fc6b53e196f1bb8" id="r_a330ced7424d8c2890fc6b53e196f1bb8"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a330ced7424d8c2890fc6b53e196f1bb8">initialize</a> () override</td></tr>
-<tr class="separator:a330ced7424d8c2890fc6b53e196f1bb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ae2a5082d6a556c491f4ce5e3c319fd" id="r_a3ae2a5082d6a556c491f4ce5e3c319fd"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ae2a5082d6a556c491f4ce5e3c319fd">terminate</a> () override</td></tr>
-<tr class="separator:a3ae2a5082d6a556c491f4ce5e3c319fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8ef8acc30f48e58e70d2962be59881d0" id="r_a8ef8acc30f48e58e70d2962be59881d0"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8ef8acc30f48e58e70d2962be59881d0">initialize</a> () override</td></tr>
+<tr class="separator:a8ef8acc30f48e58e70d2962be59881d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa805e3f8005a8ed31502688cb1b22ee0" id="r_aa805e3f8005a8ed31502688cb1b22ee0"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa805e3f8005a8ed31502688cb1b22ee0">terminate</a> () override</td></tr>
+<tr class="separator:aa805e3f8005a8ed31502688cb1b22ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a47160116166b25946202793a0ccf509b" id="r_a47160116166b25946202793a0ccf509b"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a47160116166b25946202793a0ccf509b">name</a> () override</td></tr>
+<tr class="memdesc:a47160116166b25946202793a0ccf509b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:a47160116166b25946202793a0ccf509b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -176,13 +179,10 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a6ba7ef971245f42c0632e51adbc6b5df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Poll all pending events.  <br /></td></tr>
 <tr class="separator:a6ba7ef971245f42c0632e51adbc6b5df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a876845f0c49ca24edb8c8d5f9deca1f0" id="r_a876845f0c49ca24edb8c8d5f9deca1f0"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a876845f0c49ca24edb8c8d5f9deca1f0">subsystem_name</a> = &quot;window&quot;</td></tr>
-<tr class="separator:a876845f0c49ca24edb8c8d5f9deca1f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a007e29c1600b764c48a04638e0ed4505" id="r_a007e29c1600b764c48a04638e0ed4505"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a007e29c1600b764c48a04638e0ed4505">subsystem_name</a> = &quot;window&quot;</td></tr>
+<tr class="separator:a007e29c1600b764c48a04638e0ed4505"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -200,6 +200,12 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:af8c564cdb643fb2ed401d7a3fa5f0172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aded5347d9d4464c04453ef9347f0b090" id="r_aded5347d9d4464c04453ef9347f0b090"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aded5347d9d4464c04453ef9347f0b090">vsync</a></td></tr>
 <tr class="separator:aded5347d9d4464c04453ef9347f0b090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Window subsystem. </p>
@@ -230,7 +236,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00148">148</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00166">166</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -257,7 +263,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00116">116</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00134">134</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -287,7 +293,7 @@ Static Protected Attributes</h2></td></tr>
 <p>Get the OpenGL function pointer. </p>
 <dl class="section return"><dt>Returns</dt><dd>OpenGL function pointer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00106">106</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00124">124</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -314,7 +320,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00096">96</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00114">114</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +347,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00111">111</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00129">129</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -368,12 +374,12 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00101">101</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00119">119</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a330ced7424d8c2890fc6b53e196f1bb8" name="a330ced7424d8c2890fc6b53e196f1bb8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a330ced7424d8c2890fc6b53e196f1bb8">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a8ef8acc30f48e58e70d2962be59881d0" name="a8ef8acc30f48e58e70d2962be59881d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8ef8acc30f48e58e70d2962be59881d0">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -382,7 +388,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; window::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; window::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -397,7 +403,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00023">23</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00032">32</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +432,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Get a static instance of the window. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00073">73</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00091">91</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -453,7 +459,38 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00091">91</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00109">109</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a47160116166b25946202793a0ccf509b" name="a47160116166b25946202793a0ccf509b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47160116166b25946202793a0ccf509b">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string window::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00082">82</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -482,7 +519,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Poll all pending events. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00158">158</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00176">176</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -509,7 +546,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00171">171</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00189">189</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -536,7 +573,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00121">121</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00139">139</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -563,7 +600,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00133">133</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00151">151</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -590,7 +627,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00176">176</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00194">194</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -617,7 +654,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00126">126</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00144">144</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -648,7 +685,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00084">84</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00102">102</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -675,7 +712,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00079">79</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00097">97</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -705,12 +742,12 @@ Static Protected Attributes</h2></td></tr>
 <p>Swap the front and back buffers. </p>
 <p>Having two buffers is done to avoid flickering. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00153">153</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00171">171</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a3ae2a5082d6a556c491f4ce5e3c319fd" name="a3ae2a5082d6a556c491f4ce5e3c319fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ae2a5082d6a556c491f4ce5e3c319fd">&#9670;&#160;</a></span>terminate()</h2>
+<a id="aa805e3f8005a8ed31502688cb1b22ee0" name="aa805e3f8005a8ed31502688cb1b22ee0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa805e3f8005a8ed31502688cb1b22ee0">&#9670;&#160;</a></span>terminate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -719,7 +756,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; window::terminate </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; window::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -734,7 +771,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00063">63</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00072">72</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,16 +848,24 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a876845f0c49ca24edb8c8d5f9deca1f0" name="a876845f0c49ca24edb8c8d5f9deca1f0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a876845f0c49ca24edb8c8d5f9deca1f0">&#9670;&#160;</a></span>subsystem_name</h2>
+<a id="a007e29c1600b764c48a04638e0ed4505" name="a007e29c1600b764c48a04638e0ed4505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a007e29c1600b764c48a04638e0ed4505">&#9670;&#160;</a></span>subsystem_name</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string brenta::window::subsystem_name = &quot;window&quot;</td>
+          <td class="memname">const std::string window::subsystem_name = &quot;window&quot;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00044">44</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>

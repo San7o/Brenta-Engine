@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['world_5fup_0',['world_up',['../classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6',1,'brenta::camera']]],
-  ['wrapping_1',['wrapping',['../classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc',1,'brenta::mesh::wrapping'],['../classbrenta_1_1model.html#acd0611eac967fbccf13e05366dc120ee',1,'brenta::model::wrapping']]]
+  ['zoom_0',['zoom',['../classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3',1,'brenta::camera']]]
 ];

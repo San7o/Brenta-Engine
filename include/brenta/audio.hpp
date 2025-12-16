@@ -57,6 +57,8 @@ protected:
   static std::vector<std::tuple<types::sound_id_t,
                                 std::string,
                                 types::stream_id_t>> init_sounds;
+    // Backend
+  static ma_engine engine;
   
 public:
   
@@ -82,7 +84,7 @@ public:
   class builder;
   enum class error;
 
-  // Subsystem functions
+  // Subsystem interface
   /**
    * @brief Initialize the audio subsystem
    *
@@ -148,10 +150,6 @@ public:
    */
   static std::expected<void, audio::error>
   stream_set_volume(const types::stream_id_t &id, float volume);
-
-private:
-  // Backend
-  static ma_engine engine;
 };
 
 class audio::builder : public subsystem::builder

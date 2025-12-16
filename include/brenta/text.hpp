@@ -71,10 +71,6 @@ public:
 
   static const std::string subsystem_name;
 
-  // Constructors / destructors
-  text() = default;
-  ~text() = default;
-
   // Subsystem interface
   /**
    * @brief Initialize the text subsystem
@@ -94,6 +90,10 @@ public:
    */
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+
+  // Constructors / destructors
+  text() = default;
+  ~text() = default;
   
   // Member functions
   
