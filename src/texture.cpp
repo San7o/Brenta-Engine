@@ -80,7 +80,7 @@ void texture::read_image(const char *path, bool flip)
   }
   else
   {
-    ERROR("Failed to load texture at location: {}", path);
+    ERROR("texture::read_image: failed to load texture at location: {}", path);
   }
   stbi_image_free(data);
 }

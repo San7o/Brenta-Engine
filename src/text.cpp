@@ -33,13 +33,13 @@ std::expected<void, subsystem::error> text::initialize()
   if (text::font_path != "")
     load(text::font_path, text::font_size);
 
-  INFO("text initialized");
+  INFO("{}: initialized", text::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> text::terminate()
 {
-  INFO("text terminated");
+  INFO("{}: text terminated", text::subsystem_name);
   return {};
 }
 
@@ -62,13 +62,13 @@ void text::load(std::string font_path, int font_size)
 {
   if (text_vao.get_vao() == 0)
   {
-    ERROR("Text not initialized");
+    ERROR("{}: not initialized", text::subsystem_name);
     return;
   }
   FT_Library ft;
   if (FT_Init_FreeType(&ft))
   {
-    ERROR("Could not init FreeType library");
+    ERROR("{}: could not init FreeType library", text::subsystem_name);
     return;
   }
 
@@ -82,14 +82,14 @@ void text::load(std::string font_path, int font_size)
   std::string font_name = font_path;
   if (font_name.empty())
   {
-    ERROR("Could not find font");
+    ERROR("{}: could not find font", text::subsystem_name);
     return;
   }
 
   FT_Face face;
   if (FT_New_Face(ft, font_name.c_str(), 0, &face))
   {
-    ERROR("Could not load font");
+    ERROR("{}: could not load font", text::subsystem_name);
     return;
   }
   else
@@ -106,7 +106,7 @@ void text::load(std::string font_path, int font_size)
       // Load character glyph
       if (FT_Load_Char(face, c, FT_LOAD_RENDER))
       {
-        ERROR("Could not load glyph");
+        ERROR("{}: could not load glyph", text::subsystem_name);
         continue;
       }
       // generate texture
@@ -150,7 +150,7 @@ void text::render_text(std::string text, float x, float y, float scale,
 {
   if (text_vao.get_vao() == 0)
   {
-    ERROR("Text not initialized");
+    ERROR("{}: not initialized", text::subsystem_name);
     return;
   }
 

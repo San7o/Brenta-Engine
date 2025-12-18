@@ -40,7 +40,8 @@ void model::load_model(std::string path)
 
   if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
   {
-    ERROR("Could not load model with assimp: {}", importer.GetErrorString());
+    ERROR("model::load_model: Could not load model with assimp: {}",
+          importer.GetErrorString());
     return;
   }
   directory = path.substr(0, path.find_last_of('/'));

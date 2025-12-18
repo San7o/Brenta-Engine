@@ -22,7 +22,7 @@ std::expected<void, subsystem::error> ecs::initialize()
 {
   viotecs::world::init();
 
-  INFO("ecs initialized");
+  INFO("{}: initialized", ecs::subsystem_name);
   return {};
 }
 
@@ -30,7 +30,7 @@ std::expected<void, subsystem::error> ecs::terminate()
 {
   viotecs::world::destroy();
 
-  INFO("ecs terminated");
+  INFO("{}: terminated", ecs::subsystem_name);
   return {};
 }
 

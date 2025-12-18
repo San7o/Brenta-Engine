@@ -27,13 +27,13 @@ std::expected<void, subsystem::error> input::initialize()
   window::set_key_callback(input::key_callback);
   window::set_mouse_pos_callback(input::mouse_pos_callback);
 
-  INFO("input initialized");
+  INFO("{} initialized", input::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> input::terminate()
 {
-  INFO("input terminated");
+  INFO("{}: terminated", input::subsystem_name);
   return {};
 }
 
@@ -55,19 +55,20 @@ input &input::instance()
 void input::add_keyboard_callback(int key, std::function<void()> callback)
 {
   input::keyboard_callbacks[key] = callback;
-  INFO("Added callback for key: {}", std::to_string(key));
+  DEBUG("{}: aded callback for key: {}",
+       input::subsystem_name, std::to_string(key));
 }
 
 void input::remove_keyboard_callback(int key)
 {
   if (input::keyboard_callbacks.find(key) == input::keyboard_callbacks.end())
   {
-    ERROR("No callback found for key: {}", key);
+    ERROR("{}: no callback found for key: {}", input::subsystem_name, key);
     return;
   }
 
   input::keyboard_callbacks.erase(key);
-  INFO("Removed callback for key: {}", key);
+  DEBUG("{}: removed callback for key: {}", input::subsystem_name, key);
 }
 
 void input::key_callback([[maybe_unused]] GLFWwindow *window,
@@ -88,7 +89,8 @@ void input::add_mouse_pos_callback(types::mouse_callback_name_t callback_name,
                                    std::function<void(double, double)> callback)
 {
   input::mouse_callbacks[callback_name] = callback;
-  INFO("Added callback for mouse: {}", callback_name);
+  DEBUG("{}: added callback for mouse: {}",
+       input::subsystem_name, callback_name);
 }
 
 void input::remove_mouse_pos_callback(types::mouse_callback_name_t callback_name)
@@ -96,12 +98,14 @@ void input::remove_mouse_pos_callback(types::mouse_callback_name_t callback_name
   if (input::mouse_callbacks.find(callback_name)
       == input::mouse_callbacks.end())
   {
-    ERROR("No callback found for mouse: {}", callback_name);
+    ERROR("{}: no callback found for mouse: {}",
+          input::subsystem_name, callback_name);
     return;
   }
 
   input::mouse_callbacks.erase(callback_name);
-  INFO("Removed callback for mouse: {}", callback_name);
+  DEBUG("{}: removed callback for mouse: {}",
+        input::subsystem_name, callback_name);
 }
 
 void input::mouse_pos_callback([[maybe_unused]] GLFWwindow *window,

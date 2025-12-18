@@ -31,7 +31,7 @@ camera::camera(enums::camera_type camera_type,
   this->up = up;
   this->right = right;
 
-  /* Update the camera */
+  // Update the camera
   switch (this->camera_type)
   {
   case enums::camera_type::SPHERICAL:
@@ -43,8 +43,6 @@ camera::camera(enums::camera_type camera_type,
   default:
     break;
   }
-
-  INFO("Camera created");
 }
 
 glm::mat4 camera::get_view_matrix()
@@ -94,10 +92,10 @@ void camera::spherical_to_cartesian()
                      + this->center.z;
 }
 
-/* For aircraft camera */
+// For aircraft camera
 void camera::update_camera_euler()
 {
-  /* calculate the new Front vector */
+  // calculate the new Front vector
   glm::vec3 new_front;
   new_front.x =
     cos(glm::radians(euler_angles.yaw)) * cos(glm::radians(euler_angles.pitch));
@@ -105,7 +103,7 @@ void camera::update_camera_euler()
   new_front.z =
     sin(glm::radians(euler_angles.yaw)) * cos(glm::radians(euler_angles.pitch));
   this->front = glm::normalize(new_front);
-  /* also re-calculate the Right and Up vector */
+  // also re-calculate the Right and Up vector
   this->right = glm::normalize(glm::cross(this->front, this->world_up));
   this->up = glm::normalize(glm::cross(this->right, this->front));
 }

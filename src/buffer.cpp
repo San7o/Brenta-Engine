@@ -41,7 +41,7 @@ void buffer::bind()
 {
   if (this->id == 0)
   {
-    ERROR("Buffer not initialized");
+    ERROR("buffer::bind: not initialized");
     return;
   }
   glBindBuffer(this->target, this->id);
@@ -56,7 +56,7 @@ void buffer::destroy()
 {
   if (this->id == 0)
   {
-    ERROR("Buffer not initialized");
+    ERROR("buffer::destroy: not initialized");
     return;
   }
   glDeleteBuffers(1, &this->id);

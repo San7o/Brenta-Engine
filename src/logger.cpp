@@ -30,13 +30,14 @@ std::expected<void, subsystem::error> logger::initialize()
     auto file = oak::set_file(this->log_file);
     if (!file.has_value())
     {
-      ERROR("Failed to open log file: {}", log_file);
+      ERROR("{}: Failed to open log file: {}",
+            logger::subsystem_name, log_file);
       return std::unexpected(this->subsystem_name);
     }
-    INFO("set log file to {}", log_file);
+    INFO("{}: set log file to {}", logger::subsystem_name, log_file);
   }
 
-  INFO("logger initialized");
+  INFO("{}: initialized", logger::subsystem_name);
   return {};
 }
 

@@ -40,7 +40,7 @@ std::expected<void, subsystem::error> gui::initialize()
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 
-  INFO("GUI initialized");
+  INFO("{} initialized", gui::subsystem_name);
   
   return {};
 }
@@ -51,7 +51,7 @@ std::expected<void, subsystem::error> gui::terminate()
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 
-  INFO("GUI terminated");
+  INFO("{}: terminated", gui::subsystem_name);
   return {};
 }
 

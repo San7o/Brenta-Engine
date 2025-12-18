@@ -30,7 +30,7 @@ std::expected<void, subsystem::error> audio::initialize()
   result = ma_engine_init(NULL, &audio::engine);
   if (result != MA_SUCCESS)
   {
-    ERROR("{}: Error initializing engine", audio::subsystem_name);
+    ERROR("{}: error initializing engine", audio::subsystem_name);
     return std::unexpected(ma_result_description(result));
   }
 
@@ -93,7 +93,7 @@ audio::load(const types::sound_id_t &sound_id,
     stream = audio::get_stream(stream_id);
     if (!stream)
     {
-      ERROR("{}: Error stream {} not found",
+      ERROR("{}: error stream {} not found",
             audio::subsystem_name, stream_id);
       return std::unexpected(audio::error::stream_not_found);
     }
@@ -104,12 +104,12 @@ audio::load(const types::sound_id_t &sound_id,
   if (ma_sound_init_from_file(&audio::engine, path.c_str(), 0, stream, NULL,
                               &audio::sounds.at(sound_id)) != MA_SUCCESS)
   {
-    ERROR("{}: Error loading sound {} from path {}",
+    ERROR("{}: error loading sound {} from path {}",
           audio::subsystem_name, sound_id, path);
     return std::unexpected(audio::error::init_from_file);
   }
   
-  INFO("{}: Loaded sound {} from {} in stream {}",
+  INFO("{}: loaded sound {} from {} in stream {}",
        audio::subsystem_name, sound_id, path, stream_id);
   return {};
 }
@@ -120,7 +120,7 @@ audio::play(const types::sound_id_t &id)
   types::sound_t *sound = &audio::sounds.at(id);
   if (!sound)
   {
-    ERROR("{}: Sound with id {} not found",
+    ERROR("{}: sound with id {} not found",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::sound_not_found);
   }
@@ -140,7 +140,7 @@ audio::create_stream(const types::stream_id_t &id)
   if (ma_sound_group_init(&audio::engine, 0, NULL, stream)
       != MA_SUCCESS)
   {
-    ERROR("{}: Error creating audio stream {}",
+    ERROR("{}: error creating audio stream {}",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_init);
   }
@@ -164,14 +164,14 @@ audio::stream_set_volume(const types::stream_id_t &id, float volume)
   types::stream_t *stream = audio::get_stream(id);
   if (!stream)
   {
-    ERROR("{}: Could not set volume: Audio stream {} not found",
+    ERROR("{}: could not set volume: Audio stream {} not found",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_not_found);
   }
 
   ma_sound_group_set_volume(stream, volume);
   
-  INFO("{}: Volume for stream {} set to {}",
+  INFO("{}: volume for stream {} set to {}",
        audio::subsystem_name, id, volume);
   return {};
 }
@@ -182,19 +182,19 @@ audio::stream_stop(const types::stream_id_t &id)
   types::stream_t *stream = audio::get_stream(id);
   if (stream == nullptr)
   {
-    ERROR("{}: Could not pause stream: stream {} not found",
+    ERROR("{}: could not pause stream: stream {} not found",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_not_found);
   }
   
   if (ma_sound_group_stop(stream) != MA_SUCCESS)
   {
-    ERROR("{}: Error stopping stream {}",
+    ERROR("{}: error stopping stream {}",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_stop);
   }
   
-  INFO("{}: Stream {} stopped", audio::subsystem_name, id);
+  INFO("{}: stream {} stopped", audio::subsystem_name, id);
   return {};
 }
 
@@ -204,18 +204,18 @@ audio::stream_start(const types::stream_id_t &id)
   auto stream = audio::get_stream(id);
   if (stream == nullptr)
   {
-    ERROR("{}: Could not start stream: Audio stream {} not found",
+    ERROR("{}: could not start stream: Audio stream {} not found",
           audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_not_found);
   }
 
   if (ma_sound_group_start(stream) != MA_SUCCESS)
   {
-    ERROR("{}: Error starting stream {}", audio::subsystem_name, id);
+    ERROR("{}: error starting stream {}", audio::subsystem_name, id);
     return std::unexpected(audio::error::stream_start);
   }
 
-  INFO("{}: Stream {} started", audio::subsystem_name, id);
+  INFO("{}: stream {} started", audio::subsystem_name, id);
   return {};
 }
 

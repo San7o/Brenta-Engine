@@ -22,25 +22,30 @@ std::expected<void, subsystem::error> engine::initialize()
 {
   for (auto& s : this->subsystems)
   {
-    if (!s.get().initialize().has_value())
-      return std::unexpected(s.get().name());
+    auto ret = s.get().initialize();
+    if (!ret.has_value())
+      return std::unexpected(engine::subsystem_name + ": failed to initialize"
+                             + s.get().name() + ": " + ret.error());
   }
 
-  INFO("engine initialized")
+  INFO("{}: initialized", engine::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> engine::terminate()
 {
   for (auto it = this->subsystems.rbegin();
-       it != this->subsystems.rend(); ++it) {
+       it != this->subsystems.rend(); ++it)
+  {
     auto& s = *it;
-
-    if (!s.get().terminate().has_value())
-      return std::unexpected(s.get().name());
-
+    
+    auto ret = s.get().terminate();
+    if (!ret.has_value())
+      return std::unexpected(engine::subsystem_name + "failed to terminate"
+                             + s.get().name() + ": " + ret.error());
   }
-  INFO("engine terminated");
+  
+  INFO("{}: engine terminated", engine::subsystem_name);
   return {};
 }
 

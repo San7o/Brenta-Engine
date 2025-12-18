@@ -215,7 +215,8 @@ public:
   /**
    * @brief Constructor
    *
-   * Full constructor that initializes the camera with the specified values.
+   * Full constructor that initializes the camera with the specified
+   * values.
    */
   camera(enums::camera_type camera_type, enums::projection_type projection_type,
          glm::vec3 position, glm::vec3 world_up, glm::vec3 center,
@@ -298,19 +299,17 @@ public:
   /**
    * @brief Update the camera euler angles
    *
-   * This function needs to be called every time the
-   * camera euler angles are updated. It calculates
-   * the correct front, up and right vectors from
-   * the euler angles.
+   * This function needs to be called every time the camera euler
+   * angles are updated. It calculates the correct front, up and right
+   * vectors from the euler angles.
    */
   void update_camera_euler();
   /**
    * @brief Update the camera spherical coordinates
    *
-   * This function needs to be called every time the
-   * camera spherical coordinates are updated. It the
-   * correct position of the camera from the spherical
-   * coordinates.
+   * This function needs to be called every time the camera spherical
+   * coordinates are updated. It sets the correct position of the
+   * camera from the spherical coordinates.
    */
   void spherical_to_cartesian();
 };

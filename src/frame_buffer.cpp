@@ -18,7 +18,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glGenFramebuffers(1, &this->id);
   if (this->id == 0)
   {
-    ERROR("Error creating framebuffer!");
+    ERROR("framebuffer: error generating framebuffer");
     exit(1);
   }
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
@@ -27,7 +27,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glGenTextures(1, &this->texture_id);
   if (this->texture_id == 0)
   {
-    ERROR("Error creating texture!");
+    ERROR("framebuffer: error generating texture");
     exit(1);
   }
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
@@ -49,7 +49,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
 
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-    ERROR("Framebuffer is not complete!");
+    ERROR("framebuffer: not complete");
     exit(1);
   }
 
@@ -87,7 +87,7 @@ void framebuffer::rescale(int width, int height)
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-    ERROR("Framebuffer is not complete!");
+    ERROR("framebuffer: not complete");
     return;
   }
 

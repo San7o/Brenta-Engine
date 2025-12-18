@@ -39,8 +39,8 @@ std::expected<void, subsystem::error> gl::initialize()
   GLADloadproc loadproc = (GLADloadproc) window::get_proc_address();
   if (!gladLoadGLLoader(loadproc))
   {
-    ERROR("Failed to initialize GLAD");
-    return std::unexpected(this->subsystem_name);
+    ERROR("{}: failed to initialize GLAD", gl::subsystem_name);
+    return std::unexpected("Failed to initialize GLAD");
   }
 
   int width = window::get_width();
@@ -51,26 +51,26 @@ std::expected<void, subsystem::error> gl::initialize()
   if (enable_depth_test)
   {
     glEnable(GL_DEPTH_TEST);
-    INFO("GL_DEPTH_TEST enabled");
+    INFO("{}: enabled GL_DEPTH_TEST", gl::subsystem_name);
   }
 
   if (enable_blending)
   {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    INFO("GL_BLEND enabled (transparency)");
+    INFO("{}: enabled GL_BLEND (transparency)", gl::subsystem_name);
   }
 
   if (enable_cull_face)
   {
     glEnable(GL_CULL_FACE);
-    INFO("GL_CULL_FACE enabled (draw only visible triangles)");
+    INFO("{}: enabled GL_CULL_FACE", gl::subsystem_name);
   }
 
   if (enable_multisample)
   {
     glEnable(GL_MULTISAMPLE);
-    INFO("GL_MULTISAMPLE enabled");
+    INFO("{}: enabled GL_MULTISAMPLE", gl::subsystem_name);
   }
 
   int flags;
@@ -83,19 +83,19 @@ std::expected<void, subsystem::error> gl::initialize()
     glDebugMessageCallback(glDebugOutput, nullptr);
     glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,
                           0, nullptr, GL_TRUE);
-    INFO("GL_DEBUG_OUTPUT configured");
+    INFO("{}: configured GL_DEBUG_OUTPUT", gl::subsystem_name);
   }
   
   GLenum errcode = gl::check_error();
   if (!errcode)
-    INFO("gl initialized");
+    INFO("{}: initialized", gl::subsystem_name);
 
   return {};
 }
 
 std::expected<void, subsystem::error> gl::terminate()
 {
-  INFO("gl terminated")
+  INFO("{}: terminated", gl::subsystem_name);
   return {};
 }
 
@@ -113,12 +113,12 @@ void gl::set_poligon_mode(GLboolean enable)
   if (enable)
   {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    INFO("Enabled GL_POLYGON_MODE (wireframe)");
+    INFO("{}: enabled GL_POLYGON_MODE (wireframe)", gl::subsystem_name);
   }
   else
   {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    INFO("Disabled GL_POLYGON_MODE (fill)");
+    INFO("{}: disabled GL_POLYGON_MODE (fill)", gl::subsystem_name);
   }
 }
 

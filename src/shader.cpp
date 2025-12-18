@@ -18,7 +18,7 @@ unsigned int shader::get_id(types::shader_name_t shader_name)
   return shader::shaders.at(shader_name);
 }
 
-/* Use/activate the shader */
+// Use/activate the shader
 bool shader::use(types::shader_name_t shader_name)
 {
   glUseProgram(shader::get_id(shader_name));
@@ -26,7 +26,7 @@ bool shader::use(types::shader_name_t shader_name)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error using shader {}: {}", shader_name, err);
+    ERROR("shader::use: error using shader {}: {}", shader_name, err);
     return false;
   }
   return true;
@@ -41,7 +41,8 @@ bool shader::set_bool(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_bool: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
   
@@ -50,7 +51,7 @@ bool shader::set_bool(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting bool value for shader {} with name {}: {}",
+    ERROR("shader::set_bool: error setting bool value for shader {} with name {}: {}",
           shader_name, name, err);
     return false;
   }
@@ -66,7 +67,8 @@ bool shader::set_int(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_int: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
 
@@ -75,7 +77,7 @@ bool shader::set_int(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting int value for shader '{}' with name '{}'",
+    ERROR("shader::set_int: error setting int value for shader '{}' with name '{}'",
           shader_name, name, err);
     return false;
   }
@@ -90,7 +92,8 @@ bool shader::set_float(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_float: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
 
@@ -99,7 +102,7 @@ bool shader::set_float(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting float value for shader '{}' with name '{}': {}",
+    ERROR("shader::set_float: error setting float value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
@@ -115,7 +118,8 @@ bool shader::set_mat4(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_mat4: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
   
@@ -124,7 +128,7 @@ bool shader::set_mat4(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting mat4 value for shader '{}' with name '{}': {}",
+    ERROR("shader::set_mat4: error setting mat4 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
@@ -140,7 +144,8 @@ bool shader::set_vec3(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_vec3: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
   
@@ -149,7 +154,7 @@ bool shader::set_vec3(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting vec3 value for shader '{}' with name '{}': {}",
+    ERROR("shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
@@ -165,7 +170,8 @@ bool shader::set_vec3(types::shader_name_t shader_name,
 
   if (location == -1)
   {
-    ERROR("Uniform '{}' not found in shader '{}'", name, shader_name);
+    ERROR("shader::set_vec3: uniform '{}' not found in shader '{}'",
+          name, shader_name);
     return false;
   }
   
@@ -174,7 +180,7 @@ bool shader::set_vec3(types::shader_name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Error setting vec3 value for shader '{}' with name '{}': {}",
+    ERROR("shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }

@@ -97,7 +97,6 @@ particle_emitter::~particle_emitter()
 {
   fbo[0].destroy();
   fbo[1].destroy();
-  INFO("Deleted ParticleEmitter");
 }
 
 // Update particles using Transform Feedback
@@ -155,7 +154,7 @@ void particle_emitter::render_particles()
 {
   if (this->cam == nullptr)
   {
-    ERROR("Camera not set or null for ParticleEmitter");
+    ERROR("particle_emitter::render_particles: Camera not set or null for emitter");
     return;
   }
 

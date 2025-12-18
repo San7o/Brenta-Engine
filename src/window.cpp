@@ -36,7 +36,8 @@ std::expected<void, subsystem::error> window::initialize()
 {
   if (glfwInit() == GLFW_FALSE)
   {
-    return std::unexpected("window: Failed to initialize GLFW on init");
+    return std::unexpected(window::subsystem_name +
+                           ": failed to initialize GLFW");
   }
 
   set_context_version(3, 3);
@@ -45,23 +46,23 @@ std::expected<void, subsystem::error> window::initialize()
   if (this->msaa)
   {
     glfwWindowHint(GLFW_SAMPLES, 4);
-    INFO("MSAA is enabled");
+    INFO("{}: enabled MSAA", window::subsystem_name);
   } else {
-    INFO("MSAA is disabled");
+    INFO("{}: disabled MSAA", window::subsystem_name);
   }
 
   if (!this->vsync)
   {
     glfwSwapInterval(0);
-    INFO("VSync is disabled");
+    INFO("{}: disabled VSync", window::subsystem_name);
   } else {
-    INFO("VSync is enabled");
+    INFO("{}: enabled VSync", window::subsystem_name);
   }
 
   if (this->debug)
   {
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-    INFO("OPENGL_DEBUG_CONTEXT enabled");
+    INFO("{}: enabled OPENGL_DEBUG_CONTEXT", window::subsystem_name);
   }
 
 #ifdef __APPLE__
@@ -74,16 +75,15 @@ std::expected<void, subsystem::error> window::initialize()
 
   set_size_callback(framebuffer_size_callback);
   
-  INFO("window initialized")
+  INFO("{}: initialized", window::subsystem_name)
   return {};
 }
 
 std::expected<void, subsystem::error> window::terminate()
 {
-  INFO("terminating window");
   glfwDestroyWindow(this->window_backend);
   glfwTerminate();
-  INFO("window terminated");
+  INFO("{}: terminated", window::subsystem_name);
 
   return {};
 }
@@ -154,7 +154,7 @@ void window::set_size_callback(GLFWframebuffersizefun callback)
 {
   glfwSetFramebufferSizeCallback(window::window_backend, callback);
 
-  INFO("set framebuffer size callback");
+  DEBUG("{}: set framebuffer size callback", window::subsystem_name);
 }
 
 void window::set_mouse_capture(bool is_captured)
@@ -163,12 +163,12 @@ void window::set_mouse_capture(bool is_captured)
   if (is_captured)
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("mouse capture enabled");
+    INFO("{}: mouse capture enabled", window::subsystem_name);
   }
   else
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("mouse capture disabled");
+    INFO("{}: mouse capture disabled", window::subsystem_name);
   }
 }
 

@@ -35,7 +35,7 @@ void mesh::draw(types::shader_name_t shader_name)
 {
   if (this->vao.get_vao() == 0)
   {
-    ERROR("Mesh not initialized");
+    ERROR("mesh::draw: not initialized");
     return;
   }
 
