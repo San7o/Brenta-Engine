@@ -10,6 +10,8 @@
 #include <brenta/window.hpp>
 #include <cstdio>
 
+#include <glad/glad.h>
+
 using namespace brenta;
 
 //
@@ -23,6 +25,7 @@ std::string window::title;
 bool window::capture_mouse;
 bool window::msaa;
 bool window::vsync;
+bool window::debug;
 const std::string window::subsystem_name = "window";
 
 //
@@ -55,6 +58,12 @@ std::expected<void, subsystem::error> window::initialize()
     INFO("VSync is enabled");
   }
 
+  if (this->debug)
+  {
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+    INFO("OPENGL_DEBUG_CONTEXT enabled");
+  }
+
 #ifdef __APPLE__
   set_hints_apple();
 #endif
@@ -64,7 +73,7 @@ std::expected<void, subsystem::error> window::initialize()
   set_mouse_capture(this->capture_mouse);
 
   set_size_callback(framebuffer_size_callback);
-
+  
   INFO("window initialized")
   return {};
 }
@@ -269,6 +278,12 @@ window::builder &window::builder::msaa()
   return *this;
 }
 
+window::builder &window::builder::debug()
+{
+  this->_debug = true;
+  return *this;
+}
+
 window::builder &window::builder::vsync()
 {
   this->_vsync = true;
@@ -283,5 +298,6 @@ subsystem &window::builder::build()
   window::capture_mouse = this->_capture_mouse;
   window::msaa = this->_msaa;
   window::vsync = this->_vsync;
+  window::debug = this->_debug;
   return window::instance();
 }

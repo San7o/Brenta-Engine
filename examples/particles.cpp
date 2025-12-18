@@ -5,7 +5,6 @@
 
 #include <bitset>
 #include <brenta/engine.hpp>
-#include <filesystem>
 #include <viotecs/viotecs.hpp>
 
 REGISTER_SYSTEMS()
@@ -73,9 +72,7 @@ int main()
       .num_particles(1000)
       .spawn_rate(0.01f)
       .scale(1.0f)
-      .atlas_path(
-        std::filesystem::absolute("examples/assets/textures/particle_atlas.png")
-          .string())
+      .atlas_path("examples/assets/textures/particle_atlas.png")
       .atlas_width(8)
       .atlas_height(8)
       .atlas_index(3)

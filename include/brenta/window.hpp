@@ -36,6 +36,7 @@ protected:
   static bool capture_mouse;
   static bool msaa;
   static bool vsync;
+  static bool debug;
   
 public:
 
@@ -123,6 +124,7 @@ private:
   bool _capture_mouse = false;
   bool _msaa = false;
   bool _vsync = false;
+  bool _debug = false;
   
 public:
 
@@ -135,6 +137,7 @@ public:
   builder &capture_mouse();
   builder &msaa();
   builder &vsync();
+  builder &debug(); // opengl debug errors, set this during development
   
   subsystem &build() override;
 };

@@ -9,7 +9,6 @@
 #include <viotecs/viotecs.hpp>
 #endif
 #include <bitset>
-#include <filesystem>
 
 using namespace brenta;
 
@@ -42,7 +41,8 @@ int main()
                .width(800)
                .height(600)
                .vsync()
-               .msaa())
+               .msaa()
+               .debug())
     .subsystem(gl::builder()
                .blending()
                .cull_face()
@@ -101,9 +101,7 @@ int main()
       .num_particles(1000)
       .spawn_rate(0.01f)
       .scale(1.0f)
-      .atlas_path(
-        std::filesystem::absolute("examples/assets/textures/particle_atlas.png")
-          .string())
+      .atlas_path("examples/assets/textures/particle_atlas.png")
       .atlas_width(8)
       .atlas_height(8)
       .atlas_index(5)
@@ -122,7 +120,7 @@ int main()
     gui::new_frame(&fb, "demo");
     fb.bind();
 #endif
-
+    
     gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
     gl::clear();
 
