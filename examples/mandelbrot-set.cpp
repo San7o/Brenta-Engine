@@ -30,7 +30,8 @@ int main()
           .title("mandelbrot set")
           .width(800)
           .height(600)
-          .vsync())
+          .vsync()
+          .debug())
     .with(gl::builder()
           .blending()
           .cull_face()
@@ -49,7 +50,9 @@ int main()
                       -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f};
   vao v;
   v.init();
+  v.bind();
   buffer vbo = buffer(GL_ARRAY_BUFFER);
+  vbo.bind();
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 

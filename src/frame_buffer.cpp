@@ -8,6 +8,8 @@
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
 
+#include <stdexcept>
+
 using namespace brenta;
 using namespace brenta::types;
 
@@ -19,7 +21,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   if (this->id == 0)
   {
     ERROR("framebuffer: error generating framebuffer");
-    exit(1);
+    throw std::runtime_error("framebuffer: error generating framebuffer");
   }
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   check_error();

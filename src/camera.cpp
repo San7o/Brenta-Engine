@@ -9,27 +9,21 @@
 
 using namespace brenta;
 
-camera::camera(camera_type cam_type,
-               projection_type proj_type, glm::vec3 position,
-               glm::vec3 world_up, glm::vec3 center, float movement_speed,
-               float mouse_sensitivity, float zoom,
-               types::spherical_coordinates spherical_coordinates,
-               types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
-               glm::vec3 right)
+camera::camera(config conf)
 {
-  this->cam_type = cam_type;
-  this->proj_type = proj_type;
-  this->position = position;
-  this->world_up = world_up;
-  this->center = center;
-  this->movement_speed = movement_speed;
-  this->mouse_sensitivity = mouse_sensitivity;
-  this->zoom = zoom;
-  this->spherical_coordinates = spherical_coordinates;
-  this->euler_angles = euler_angles;
-  this->front = front;
-  this->up = up;
-  this->right = right;
+  this->cam_type = conf.cam_type;
+  this->proj_type = conf.proj_type;
+  this->position = conf.position;
+  this->world_up = conf.world_up;
+  this->center = conf.center;
+  this->movement_speed = conf.movement_speed;
+  this->mouse_sensitivity = conf.mouse_sensitivity;
+  this->zoom = conf.zoom;
+  this->spherical_coordinates = conf.spherical_coordinates;
+  this->euler_angles = conf.euler_angles;
+  this->front = conf.front;
+  this->up = conf.up;
+  this->right = conf.right;
 
   // Update the camera
   switch (this->cam_type)
@@ -276,90 +270,86 @@ void camera::set_last_y(float last_y)
 camera::builder &
 camera::builder::camera_type(camera::camera_type camera_type)
 {
-  this->camera_type_val = camera_type;
+  this->conf.cam_type = camera_type;
   return *this;
 }
 
 camera::builder &
 camera::builder::projection_type(camera::projection_type projection_type)
 {
-  this->projection_type_val = projection_type;
+  this->conf.proj_type = projection_type;
   return *this;
 }
 
 camera::builder &camera::builder::position(glm::vec3 position)
 {
-  this->position_val = position;
+  this->conf.position = position;
   return *this;
 }
 
 camera::builder &camera::builder::world_up(glm::vec3 world_up)
 {
-  this->world_up_val = world_up;
+  this->conf.world_up = world_up;
   return *this;
 }
 
 camera::builder &camera::builder::center(glm::vec3 center)
 {
-  this->center_val = center;
+  this->conf.center = center;
   return *this;
 }
 
 camera::builder &camera::builder::movement_speed(float movement_speed)
 {
-  this->movement_speed_val = movement_speed;
+  this->conf.movement_speed = movement_speed;
   return *this;
 }
 
 camera::builder &camera::builder::mouse_sensitivity(float mouse_sensitivity)
 {
-  this->mouse_sensitivity_val = mouse_sensitivity;
+  this->conf.mouse_sensitivity = mouse_sensitivity;
   return *this;
 }
 
 camera::builder &camera::builder::zoom(float zoom)
 {
-  this->zoom_val = zoom;
+  this->conf.zoom = zoom;
   return *this;
 }
 
 camera::builder &camera::builder::spherical_coordinates(
   types::spherical_coordinates spherical_coordinates)
 {
-  this->spherical_coordinates_val = spherical_coordinates;
+  this->conf.spherical_coordinates = spherical_coordinates;
   return *this;
 }
 
 camera::builder &
 camera::builder::euler_angles(types::euler_angles euler_angles)
 {
-  this->euler_angles_val = euler_angles;
+  this->conf.euler_angles = euler_angles;
   return *this;
 }
 
 camera::builder &camera::builder::front(glm::vec3 front)
 {
-  this->front_val = front;
+  this->conf.front = front;
   return *this;
 }
 
 camera::builder &camera::builder::up(glm::vec3 up)
 {
-  this->up_val = up;
+  this->conf.up = up;
   return *this;
 }
 
 camera::builder &camera::builder::right(glm::vec3 right)
 {
-  this->right_val = right;
+  this->conf.right = right;
   return *this;
 }
 
 brenta::camera camera::camera::builder::build()
 {
-  return camera(camera_type_val, projection_type_val, position_val,
-                world_up_val, center_val, movement_speed_val,
-                mouse_sensitivity_val, zoom_val,
-                spherical_coordinates_val, euler_angles_val,
-                front_val, up_val, right_val);
+  return camera(this->conf);
 }

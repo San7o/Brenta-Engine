@@ -93,7 +93,9 @@ void gui::new_frame(framebuffer *fb, std::string name)
   // Game window
   //
 
-  ImGui::SetNextWindowSize(ImVec2(500, 500));
+  ImGui::SetNextWindowSize(ImVec2(window::get_width() * 0.8,
+                                  window::get_width() * 0.8),
+                           ImGuiCond_FirstUseEver);
   ImGui::Begin(name.c_str());
 
   float window_width = ImGui::GetContentRegionAvail().x;

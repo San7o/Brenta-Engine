@@ -199,6 +199,8 @@ public:
    */
   float last_y;
 
+  class config;
+  
   // Constructors
 
   /**
@@ -213,12 +215,7 @@ public:
    * Full constructor that initializes the camera with the specified
    * values.
    */
-  camera(camera_type cam_type, projection_type proj_type,
-         glm::vec3 position, glm::vec3 world_up, glm::vec3 center,
-         float movement_speed, float mouse_sensitivity, float zoom,
-         types::spherical_coordinates spherical_coordinates,
-         types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
-         glm::vec3 right);
+  camera(config conf);
 
   /**
    * @brief Builder pattern
@@ -309,26 +306,45 @@ public:
   void spherical_to_cartesian();
 };
 
+struct camera::config
+{
+  camera_type cam_type;
+  projection_type proj_type;
+  glm::vec3 position;
+  glm::vec3 world_up;
+  glm::vec3 center;
+  float movement_speed;
+  float mouse_sensitivity;
+  float zoom;
+  types::spherical_coordinates spherical_coordinates;
+  types::euler_angles euler_angles;
+  glm::vec3 front;
+  glm::vec3 up;
+  glm::vec3 right;
+};
+  
 /**
  * @brief Builder pattern for the Camera class
  */
 class camera::builder
 {
 private:
-  
-  camera::camera_type camera_type_val = camera::camera_type::aircraft;
-  camera::projection_type projection_type_val = camera::projection_type::perspective;
-  glm::vec3 position_val = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 world_up_val = glm::vec3(0.0f, 1.0f, 0.0f);
-  glm::vec3 center_val = glm::vec3(0.0f, 0.0f, 0.0f);
-  float movement_speed_val = 2.5f;
-  float mouse_sensitivity_val = 0.1f;
-  float zoom_val = 45.0f;
-  glm::vec3 front_val = glm::vec3(0.0f, 0.0f, -1.0f);
-  glm::vec3 up_val = glm::vec3(0.0f, 1.0f, 0.0f);
-  glm::vec3 right_val = glm::vec3(1.0f, 0.0f, 0.0f);
-  types::spherical_coordinates spherical_coordinates_val = {0.0f, 0.0f, 10.0f};
-  types::euler_angles euler_angles_val = {0.0f, 0.0f, 0.0f};
+
+  camera::config conf = {
+    camera::camera_type::aircraft,
+    camera::projection_type::perspective,
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    glm::vec3(0.0f, 1.0f, 0.0f),
+    glm::vec3(0.0f, 0.0f, 0.0f),
+    2.5f,
+    0.1f,
+    45.0f,
+    {0.0f, 0.0f, 10.0f},
+    {0.0f, 0.0f, 0.0f},
+    glm::vec3(0.0f, 0.0f, -1.0f),
+    glm::vec3(0.0f, 1.0f, 0.0f),
+    glm::vec3(1.0f, 0.0f, 0.0f),
+  };
 
 public:
   

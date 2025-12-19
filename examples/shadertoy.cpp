@@ -188,7 +188,8 @@ int main(int argc, char** argv)
           .title("shadertoy")
           .width(800)
           .height(600)
-          .vsync())
+          .vsync()
+          .debug())
     .with(gl::builder()
           .blending()
           .cull_face()
@@ -210,7 +211,7 @@ int main(int argc, char** argv)
   // Game loop
   //
 
-    // A square
+  // A square
   float vertices[] = {// First Triangle
                       -1.0f, 1.0f, 0.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 0.0f,
 
@@ -218,7 +219,9 @@ int main(int argc, char** argv)
                       -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f};
   types::vao v;
   v.init();
+  v.bind();
   types::buffer vbo = types::buffer(GL_ARRAY_BUFFER);
+  vbo.bind();
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
