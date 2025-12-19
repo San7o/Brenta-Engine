@@ -9,18 +9,27 @@
 
 using namespace brenta;
 
-model::model(std::string const &path, GLint wrapping, GLint filtering_min,
-             GLint filtering_mag, GLboolean has_mipmap, GLint mipmap_min,
-             GLint mipmap_mag, bool flip)
+const model::config model::default_config = {
+  "",
+  GL_REPEAT,
+  GL_NEAREST,
+  GL_LINEAR,
+  GL_TRUE,
+  GL_LINEAR_MIPMAP_LINEAR,
+  GL_LINEAR,
+  true,
+};
+
+model::model(config conf)
 {
-  this->wrapping = wrapping;
-  this->filtering_min = filtering_min;
-  this->filtering_mag = filtering_mag;
-  this->has_mipmap = has_mipmap;
-  this->mipmap_min = mipmap_min;
-  this->mipmap_mag = mipmap_mag;
-  this->flip = flip;
-  load_model(path);
+  this->wrapping = conf.wrapping;
+  this->filtering_min = conf.filtering_min;
+  this->filtering_mag = conf.filtering_mag;
+  this->has_mipmap = conf.has_mipmap;
+  this->mipmap_min = conf.mipmap_min;
+  this->mipmap_mag = conf.mipmap_mag;
+  this->flip = conf.flip;
+  load_model(conf.path);
 }
 
 void model::draw(types::shader_name_t shader)
@@ -110,9 +119,9 @@ mesh model::process_mesh(aiMesh *m, const aiScene *scene)
     material, aiTextureType_SPECULAR, "texture_specular");
   textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
-  return mesh(vertices, indices, textures, this->wrapping, this->filtering_min,
+  return mesh({vertices, indices, textures, this->wrapping, this->filtering_min,
               this->filtering_mag, this->has_mipmap, this->mipmap_min,
-              this->mipmap_mag);
+              this->mipmap_mag});
 }
 
 std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
@@ -152,57 +161,55 @@ std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
 // Builder functions
 //
 
-model::builder &model::builder::set_path(std::string path)
+model::builder &model::builder::path(std::string path)
 {
-  this->path = path;
+  this->conf.path = path;
   return *this;
 }
 
-model::builder &model::builder::set_wrapping(GLint wrapping)
+model::builder &model::builder::wrapping(GLint wrapping)
 {
-  this->wrapping = wrapping;
+  this->conf.wrapping = wrapping;
   return *this;
 }
 
-model::builder &model::builder::set_filtering_min(GLint filtering_min)
+model::builder &model::builder::filtering_min(GLint filtering_min)
 {
-  this->filtering_min = filtering_min;
+  this->conf.filtering_min = filtering_min;
   return *this;
 }
 
-model::builder &model::builder::set_filtering_mag(GLint filtering_mag)
+model::builder &model::builder::filtering_mag(GLint filtering_mag)
 {
-  this->filtering_mag = filtering_mag;
+  this->conf.filtering_mag = filtering_mag;
   return *this;
 }
 
-model::builder &model::builder::set_has_mipmap(GLboolean has_mipmap)
+model::builder &model::builder::has_mipmap(GLboolean has_mipmap)
 {
-  this->has_mipmap = has_mipmap;
+  this->conf.has_mipmap = has_mipmap;
   return *this;
 }
 
-model::builder &model::builder::set_mipmap_min(GLint mipmap_min)
+model::builder &model::builder::mipmap_min(GLint mipmap_min)
 {
-  this->mipmap_min = mipmap_min;
+  this->conf.mipmap_min = mipmap_min;
   return *this;
 }
 
-model::builder &model::builder::set_mipmap_mag(GLint mipmap_mag)
+model::builder &model::builder::mipmap_mag(GLint mipmap_mag)
 {
-  this->mipmap_mag = mipmap_mag;
+  this->conf.mipmap_mag = mipmap_mag;
   return *this;
 }
 
-model::builder &model::builder::set_flip(bool flip)
+model::builder &model::builder::flip(bool flip)
 {
-  this->flip = flip;
+  this->conf.flip = flip;
   return *this;
 }
 
 model model::builder::build()
 {
-  return model(this->path, this->wrapping, this->filtering_min,
-               this->filtering_mag, this->has_mipmap, this->mipmap_min,
-               this->mipmap_mag, this->flip);
+  return model(this->conf);
 }

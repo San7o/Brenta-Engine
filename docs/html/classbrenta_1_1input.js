@@ -4,6 +4,7 @@ var classbrenta_1_1input =
     [ "add_keyboard_callback", "classbrenta_1_1input.html#af3455ee40caa0c21dcf34cf91d44aba4", null ],
     [ "add_mouse_pos_callback", "classbrenta_1_1input.html#a9dc853cbe929e55637e9b7b2f8d672ab", null ],
     [ "initialize", "classbrenta_1_1input.html#a27bf400972a8864cdbf9dd97c51733f0", null ],
+    [ "is_initialized", "classbrenta_1_1input.html#a1e1dbacdbfdc1003bd6a0fa3fd814291", null ],
     [ "key_callback", "classbrenta_1_1input.html#aefe960ab616175431b0227ef0f34db00", null ],
     [ "mouse_pos_callback", "classbrenta_1_1input.html#a846ebb1fa9007564d44b215a7b9089b7", null ],
     [ "name", "classbrenta_1_1input.html#a2a8b495cda279773ce239457623a39c5", null ],

@@ -1,8 +1,15 @@
 var classbrenta_1_1camera =
 [
     [ "builder", "classbrenta_1_1camera_1_1builder.html", null ],
+    [ "config", "structbrenta_1_1camera_1_1config.html", null ],
+    [ "camera_movement", "classbrenta_1_1camera.html#a382a97039ba9e46befdb79b375fceaa3", [
+      [ "forward", "classbrenta_1_1camera.html#a382a97039ba9e46befdb79b375fceaa3a965dbaac085fc891bfbbd4f9d145bbc8", null ],
+      [ "backward", "classbrenta_1_1camera.html#a382a97039ba9e46befdb79b375fceaa3a195fe59b6f103787a914aead0f3db502", null ],
+      [ "left", "classbrenta_1_1camera.html#a382a97039ba9e46befdb79b375fceaa3a811882fecd5c7618d7099ebbd39ea254", null ],
+      [ "right", "classbrenta_1_1camera.html#a382a97039ba9e46befdb79b375fceaa3a7c4f29407893c334a6cb7a87bf045c0d", null ]
+    ] ],
     [ "camera", "classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e", null ],
-    [ "camera", "classbrenta_1_1camera.html#a54f38c7bb6568e2011e6d236e56bd66e", null ],
+    [ "camera", "classbrenta_1_1camera.html#a690220805975bb68c046a652a09581cc", null ],
     [ "get_first_mouse", "classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca", null ],
     [ "get_last_x", "classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c", null ],
     [ "get_last_y", "classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a", null ],

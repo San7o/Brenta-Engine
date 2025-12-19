@@ -32,12 +32,12 @@ typedef std::string shader_name_t;
  * @brief Shader class
  *
  * This class is used to create and manage shaders. The shaders are
- * created using the New method, which takes the name of the shader,
+ * created using the new method, which takes the name of the shader,
  * the type of the shader, and the path to the file that contains the
  * shader code. Multile shaders can be compiled and linked together by
- * providing any number of types and paths.  The shader can be used
- * with the Use method, and the uniforms can be set using the SetBool,
- * SetInt, SetFloat, SetMat4, SetVec3 methods.
+ * providing any number of types and paths paired.  The shader can be
+ * used with the Use method, and the uniforms can be set using the
+ * set_bool, set_int, set_float, set_mat4, set_vec3 methods.
  */
 class shader
 {
@@ -74,7 +74,7 @@ public:
     std::vector<unsigned int> compiled_shaders = {};
     if (!compile_shaders(compiled_shaders, type, path, args...))
     {
-      ERROR("Error compiling shader {}", path);
+      ERROR("shader: error compiling shader {}", path);
       return false;
     }
 
@@ -119,7 +119,7 @@ public:
     std::vector<unsigned int> compiled_shaders = {};
     if (!compile_shaders(compiled_shaders, type, path, args...))
     {
-      ERROR("Error compiling shader {}", path)
+      ERROR("shader: error compiling shader {}", path)
       return false;
     }
 
@@ -172,13 +172,13 @@ public:
     }
     catch (std::ifstream::failure &e)
     {
-      ERROR("Error reading shader file: {}", path);
+      ERROR("shader: error reading shader file: {}", path);
       return false;
     }
 
     if (code.empty())
     {
-      ERROR("Shader file is empty: {}", path);
+      ERROR("shader: file is empty: {}", path);
       return false;
     }
 
@@ -215,7 +215,7 @@ public:
    */
   static bool use(types::shader_name_t shader_name);
 
-  /* Utility uniform functions */
+  // Utility uniform functions
 
   /**
    * @brief Set a boolean in the shader
@@ -281,7 +281,9 @@ public:
                        glm::vec3 value);
 
 private:
+  
   static bool check_compile_errors(unsigned int shader, std::string type);
+  
 };
 
 } // namespace brenta

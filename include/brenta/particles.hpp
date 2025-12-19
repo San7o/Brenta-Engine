@@ -61,37 +61,12 @@ public:
    */
   types::vao vao;
 
-  class config;
+  struct config;
   class builder;
 
-  /**
-   * @brief Empty constructor
-   *
-   * Sets default values
-   */
-  particle_emitter();
-  /**
-   * @brief Construct a new ParticleEmitter object
-   *
-   * @param starting_position Starting position of a new particle
-   * @param starting_velocity Starting velocity of a new particle
-   * @param starting_spread Starting spread of a new particle
-   * @param starting_timeToLive Time to live of a new particle
-   * @param num_particles Number of particles
-   * @param spawn_rate Spawn rate of particles
-   * @param scale Scale of particles
-   * @param atlas_path Atlas texture path
-   * @param atlas_width Atlas width
-   * @param atlas_height Atlas height
-   * @param atlas_index Atlas index
-   * @param camera Camera
-   */
-  particle_emitter(glm::vec3 starting_position, glm::vec3 starting_velocity,
-                   glm::vec3 starting_spread, float starting_timeToLive,
-                   int num_particles, float spawn_rate, float scale,
-                   std::string atlas_path, int atlas_width, int atlas_height,
-                   int atlas_index, camera *cam);
-  particle_emitter(particle_emitter::config conf); // TODO
+  static const config default_config;
+
+  particle_emitter(config conf);
   ~particle_emitter();
 
   /**
@@ -107,25 +82,30 @@ private:
   void check_opengl_error(const std::string &functionName);
 };
 
+struct particle_emitter::config
+{
+  glm::vec3 starting_position;
+  glm::vec3 starting_velocity;
+  glm::vec3 starting_spread;
+  float starting_time_to_live;
+  int num_particles;
+  float spawn_rate;
+  float scale;
+  std::string atlas_path;
+  int atlas_width;
+  int atlas_height;
+  int atlas_index;
+  camera *cam;
+};
+  
 /**
  * @brief Builder pattern for ParticleEmitter
  */
 class particle_emitter::builder
 {
 private:
-  
-  glm::vec3 starting_position_val = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 starting_velocity_val = glm::vec3(0.0f, 0.0f, 0.0f);
-  glm::vec3 starting_spread_val = glm::vec3(0.0f, 0.0f, 0.0f);
-  float starting_time_to_live_val = 1.0f;
-  int num_particles_val = MAX_PARTICLES;
-  float spawn_rate_val = 0.01f;
-  float scale_val = 1.0f;
-  std::string atlas_path_val = "";
-  int atlas_width_val = 8;
-  int atlas_height_val = 8;
-  int atlas_index_val = 0;
-  camera *cam_val = nullptr;
+
+  particle_emitter::config conf = particle_emitter::default_config;
 
 public:
   builder &starting_position(glm::vec3 starting_position);

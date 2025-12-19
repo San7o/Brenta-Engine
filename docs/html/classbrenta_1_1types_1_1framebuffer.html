@@ -190,13 +190,11 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a268a988bb67432f5191d4d2da23ff8a3" id="r_a268a988bb67432f5191d4d2da23ff8a3"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a268a988bb67432f5191d4d2da23ff8a3">texture_id</a></td></tr>
-<tr class="memdesc:a268a988bb67432f5191d4d2da23ff8a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Itexture ID.  <br /></td></tr>
 <tr class="separator:a268a988bb67432f5191d4d2da23ff8a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a673ea374da202b426c08558929a57e" id="r_a3a673ea374da202b426c08558929a57e"><td class="memItemLeft" align="right" valign="top">GLuint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a673ea374da202b426c08558929a57e">render_buffer_id</a></td></tr>
-<tr class="memdesc:a3a673ea374da202b426c08558929a57e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Render Buffer ID.  <br /></td></tr>
 <tr class="separator:a3a673ea374da202b426c08558929a57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac838fe0aba3b26b2cf9e5a76e07dc8b4" id="r_ac838fe0aba3b26b2cf9e5a76e07dc8b4"><td class="memItemLeft" align="right" valign="top">GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac838fe0aba3b26b2cf9e5a76e07dc8b4">format</a></td></tr>
-<tr class="memdesc:ac838fe0aba3b26b2cf9e5a76e07dc8b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Format of the framebuffer Default is GL_RGBA.  <br /></td></tr>
+<tr class="memdesc:ac838fe0aba3b26b2cf9e5a76e07dc8b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Color format of the frame buffer Default is GL_RGBA.  <br /></td></tr>
 <tr class="separator:ac838fe0aba3b26b2cf9e5a76e07dc8b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classbrenta_1_1types_1_1buffer"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1types_1_1buffer')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1types_1_1buffer.html">brenta::types::buffer</a></td></tr>
 <tr class="memitem:ac8b1673619c84a5521720a506fd71c32 inherit pub_attribs_classbrenta_1_1types_1_1buffer" id="r_ac8b1673619c84a5521720a506fd71c32"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">id</a></td></tr>
@@ -208,7 +206,7 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>FrameBuffer class. </p>
-<p>This class contains the FrameBuffer functions, It's a wrapper around OpenGL FrameBuffers, providing functions to create, bind, unbind, delete and rescale the FrameBuffer. </p>
+<p>This class is a wrapper around OpenGL frame buffers, providing functions to create, bind, unbind, delete and rescale the frame buffer. </p>
 
 <p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00024">24</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -237,7 +235,7 @@ Data Fields</h2></td></tr>
 
 <p>Empty constructor Does nothing. </p>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00044">44</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00038">38</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -274,7 +272,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00014">14</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00016">16</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -295,7 +293,7 @@ Data Fields</h2></td></tr>
 
 <p>Destructor Deletes the framebuffer and its texture. </p>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00061">61</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00063">63</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -315,7 +313,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00067">67</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00069">69</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +349,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00066">66</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00060">60</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -387,7 +385,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00079">79</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00073">73</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -423,7 +421,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00073">73</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00067">67</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -444,7 +442,7 @@ Data Fields</h2></td></tr>
 
 <p>Delete the framebuffer and its texture. </p>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00079">79</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00081">81</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -476,7 +474,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00085">85</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00087">87</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +501,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00114">114</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00116">116</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -522,7 +520,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00073">73</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8cpp_source.html#l00075">75</a> of file <a class="el" href="frame__buffer_8cpp_source.html">frame_buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -539,9 +537,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Format of the framebuffer Default is GL_RGBA. </p>
+<p>Color format of the frame buffer Default is GL_RGBA. </p>
 
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00039">39</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00033">33</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -557,9 +555,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Render Buffer ID. </p>
-
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00034">34</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00028">28</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -575,9 +571,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Itexture ID. </p>
-
-<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00030">30</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="frame__buffer_8hpp_source.html#l00027">27</a> of file <a class="el" href="frame__buffer_8hpp_source.html">frame_buffer.hpp</a>.</p>
 
 </div>
 </div>

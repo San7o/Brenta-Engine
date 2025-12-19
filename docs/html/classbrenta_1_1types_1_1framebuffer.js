@@ -6,7 +6,5 @@ var classbrenta_1_1types_1_1framebuffer =
     [ "destroy", "classbrenta_1_1types_1_1framebuffer.html#a29178484271532eaebe3ccfda4e942d0", null ],
     [ "rescale", "classbrenta_1_1types_1_1framebuffer.html#aee79e8a45b7c0f966bb439b7f5b4e2be", null ],
     [ "set_format", "classbrenta_1_1types_1_1framebuffer.html#a6c1ccd08d16eb483931dd07e1219a21d", null ],
-    [ "format", "classbrenta_1_1types_1_1framebuffer.html#ac838fe0aba3b26b2cf9e5a76e07dc8b4", null ],
-    [ "render_buffer_id", "classbrenta_1_1types_1_1framebuffer.html#a3a673ea374da202b426c08558929a57e", null ],
-    [ "texture_id", "classbrenta_1_1types_1_1framebuffer.html#a268a988bb67432f5191d4d2da23ff8a3", null ]
+    [ "format", "classbrenta_1_1types_1_1framebuffer.html#ac838fe0aba3b26b2cf9e5a76e07dc8b4", null ]
 ];

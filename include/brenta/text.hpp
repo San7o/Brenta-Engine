@@ -146,7 +146,7 @@ class text::builder : public subsystem::builder
 {
 private:
 
-  text::config conf;
+  text::config conf = text::default_config;
   
 public:
 

@@ -25,8 +25,12 @@ class logger : public subsystem
 {
 public:
 
+  struct config;
   class builder;
+  
   static const std::string subsystem_name;
+  static const config default_config;
+  static config init_config;
 
   // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
@@ -50,12 +54,17 @@ private:
   
 };
 
+struct logger::config
+{
+  oak::level log_level;
+  std::string log_file;
+};
+
 class logger::builder : public subsystem::builder
 {
 private:
 
-  oak::level log_level = oak::level::info;;
-  std::string log_file = "/tmp/brenta_logs";
+  logger::config conf = logger::default_config;
   
 public:
 

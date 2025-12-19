@@ -61,7 +61,9 @@ engine::builder()
 ### Model Loading
 
 ```c++
-model my_model("assets/models/backpack/backpack.obj");
+model my_model = model::builder()
+    .path("assets/models/backpack/backpack.obj")
+    .build();
 ```
 
 ![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)

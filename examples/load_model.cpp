@@ -44,7 +44,9 @@ int main()
   //
   
   // Load the model
-  model our_model("examples/assets/models/backpack/backpack.obj");
+  model our_model = model::builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .build();
 
   // Load the shader
   shader::create("default_shader", GL_VERTEX_SHADER,

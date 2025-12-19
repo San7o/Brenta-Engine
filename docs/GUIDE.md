@@ -122,9 +122,7 @@ particle_emitter emitter = particle_emitter::builder()
        .num_particles(1000)
        .spawn_rate(0.01f)
        .scale(1.0f)
-       .atlas_path(std::filesystem::absolute(
-           "assets/textures/particle_atlas.png"
-       ).string())
+       .atlas_path"assets/textures/particle_atlas.png")
        .atlas_width(8)
        .atlas_height(8)
        .atlas_index(45)
@@ -190,28 +188,23 @@ namespace brenta
 
 REGISTER_SYSTEMS(none);
 
-int main() {
-
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("brenta demo")
-               .width(800)
-               .height(600)
-               .vsync()
-               .msaa())
-    .subsystem(input::builder())
-    .subsystem(ecs::builder())
+int main()
+{
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("brenta demo")
+          .width(800)
+          .height(600)
+          .vsync()
+          .msaa())
+    .with(input::builder())
+    .with(ecs::builder())
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    ERROR("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
-
+  auto engine = engine::managed();
+  
   // Your init functions ...
   init_player();
   init_renderer();

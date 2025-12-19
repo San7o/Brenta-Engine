@@ -5,6 +5,8 @@
 
 #include <brenta/shader.hpp>
 
+#include <sstream>
+
 using namespace brenta;
 
 std::unordered_map<types::shader_name_t, unsigned int> shader::shaders;
@@ -196,9 +198,11 @@ bool shader::check_compile_errors(unsigned int shader, std::string type)
     glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
     if (!success)
     {
+      std::stringstream out;
       glGetShaderInfoLog(shader, 1024, NULL, infoLog);
-      std::cout << "ERROR::SHADER_COMPILATION_ERROR of type: " << type << "\n"
-                << infoLog << std::endl;
+      out << "shader: compilation error of type: " << type << "\n"
+          << infoLog;
+      ERROR("{}", out.str());
       return false;
     }
   }
@@ -207,9 +211,11 @@ bool shader::check_compile_errors(unsigned int shader, std::string type)
     glGetProgramiv(shader, GL_LINK_STATUS, &success);
     if (!success)
     {
+      std::stringstream out;
       glGetProgramInfoLog(shader, 1024, NULL, infoLog);
-      std::cout << "ERROR::PROGRAM_LINKING_ERROR of type: " << type << "\n"
-                << infoLog << std::endl;
+      out << "shader: program linking error of type: " << type << "\n"
+          << infoLog;
+      ERROR("{}", out.str());
       return false;
     }
   }

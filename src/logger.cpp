@@ -14,6 +14,11 @@ using namespace brenta;
 oak::level logger::log_level;
 std::string logger::log_file;
 const std::string logger::subsystem_name = "logger";
+const logger::config logger::default_config = {
+  oak::level::info,
+  "/tmp/brenta_logs",
+};
+logger::config logger::init_config = default_config;
 bool logger::initialized = false;
 
 //
@@ -82,19 +87,18 @@ logger &logger::instance()
 
 logger::builder &logger::builder::level(oak::level log_level)
 {
-  this->log_level = log_level;
+  this->conf.log_level = log_level;
   return *this;
 }
 
 logger::builder &logger::builder::file(std::string log_file)
 {
-  this->log_file = log_file;
+  this->conf.log_file = log_file;
   return *this;
 }
 
 subsystem &logger::builder::build()
 {
-  logger::log_level = this->log_level;
-  logger::log_file = this->log_file;
+  logger::init_config = this->conf;
   return logger::instance();
 }

@@ -101,7 +101,8 @@ $(function(){initNavTree('classbrenta_1_1mesh.html',''); initResizable(true); })
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::mesh Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -116,14 +117,14 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1mesh_1_1builder.html">builder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Builder class is used to build a Mesh object.  <a href="classbrenta_1_1mesh_1_1builder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1mesh_1_1config.html">config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af4db5f427802a7d6a23c8611e4dedab6" id="r_af4db5f427802a7d6a23c8611e4dedab6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af4db5f427802a7d6a23c8611e4dedab6">mesh</a> (std::vector&lt; <a class="el" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a> &gt; <a class="el" href="#aa44562f195fdd97fc2473aef1fc38d16">vertices</a>, std::vector&lt; unsigned int &gt; <a class="el" href="#a9991822785185a303b3f5c5cd23095c5">indices</a>, std::vector&lt; <a class="el" href="structbrenta_1_1types_1_1texture.html">types::texture</a> &gt; <a class="el" href="#a10e37cca25f95b016defadf80bdc7206">textures</a>, GLint <a class="el" href="#a6833190f04027bb6c7ff0396322c08fc">wrapping</a>=GL_REPEAT, GLint <a class="el" href="#a2095331e9f3c01b00367074c61e8da5f">filtering_min</a>=GL_NEAREST, GLint <a class="el" href="#ae9314538cf2c0a2a0b7510110384553f">filtering_mag</a>=GL_LINEAR, GLboolean hasMipmap=GL_TRUE, GLint <a class="el" href="#acb6397f1f0cca5124b571cb2d2d0d258">mipmap_min</a>=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_max=GL_LINEAR)</td></tr>
-<tr class="memdesc:af4db5f427802a7d6a23c8611e4dedab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Mesh object.  <br /></td></tr>
-<tr class="separator:af4db5f427802a7d6a23c8611e4dedab6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a668990aa80816cfd52bfacacaf8a479e" id="r_a668990aa80816cfd52bfacacaf8a479e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a668990aa80816cfd52bfacacaf8a479e">mesh</a> (<a class="el" href="structbrenta_1_1mesh_1_1config.html">config</a> conf)</td></tr>
+<tr class="separator:a668990aa80816cfd52bfacacaf8a479e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a617aba2ef008226a4c4641d4eb733b8e" id="r_a617aba2ef008226a4c4641d4eb733b8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a617aba2ef008226a4c4641d4eb733b8e">draw</a> (types::shader_name_t shader_name)</td></tr>
-<tr class="memdesc:a617aba2ef008226a4c4641d4eb733b8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the mesh.  <br /></td></tr>
 <tr class="separator:a617aba2ef008226a4c4641d4eb733b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -155,15 +156,20 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a55ab3d027a03a76b974e425e1f30e778" id="r_a55ab3d027a03a76b974e425e1f30e778"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a55ab3d027a03a76b974e425e1f30e778">mipmap_mag</a></td></tr>
 <tr class="memdesc:a55ab3d027a03a76b974e425e1f30e778"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of mipmap magnifying texture filtering.  <br /></td></tr>
 <tr class="separator:a55ab3d027a03a76b974e425e1f30e778"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:ab7a7630e967f9f46161c5ee111f1f760" id="r_ab7a7630e967f9f46161c5ee111f1f760"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structbrenta_1_1mesh_1_1config.html">config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a7630e967f9f46161c5ee111f1f760">default_config</a></td></tr>
+<tr class="separator:ab7a7630e967f9f46161c5ee111f1f760"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The Mesh class represents a 3D model. </p>
-<p>A mesh is a collection of vertices, indices and textures that represent a 3D model. The mesh can be drawn using a shader and calling the Draw method. </p>
+<p>A mesh is a collection of vertices, indices and textures that represent a 3D model. The mesh can be drawn using a shader and calling the draw() method. </p>
 
 <p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00061">61</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="af4db5f427802a7d6a23c8611e4dedab6" name="af4db5f427802a7d6a23c8611e4dedab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af4db5f427802a7d6a23c8611e4dedab6">&#9670;&#160;</a></span>mesh()</h2>
+<a id="a668990aa80816cfd52bfacacaf8a479e" name="a668990aa80816cfd52bfacacaf8a479e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a668990aa80816cfd52bfacacaf8a479e">&#9670;&#160;</a></span>mesh()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,68 +177,13 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">mesh::mesh </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>vertices</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structbrenta_1_1mesh_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>conf</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">std::vector&lt; unsigned int &gt;</td>          <td class="paramname"><span class="paramname"><em>indices</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="structbrenta_1_1types_1_1texture.html">types::texture</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>textures</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>wrapping</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_REPEAT</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>filtering_min</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_NEAREST</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>filtering_mag</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLboolean</td>          <td class="paramname"><span class="paramname"><em>hasMipmap</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_TRUE</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>mipmap_min</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR_MIPMAP_LINEAR</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>mipmap_max</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Construct a new Mesh object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vertices</td><td>Vertices of the mesh </td></tr>
-    <tr><td class="paramname">indices</td><td>Indices of the mesh </td></tr>
-    <tr><td class="paramname">textures</td><td>Textures of the mesh </td></tr>
-    <tr><td class="paramname">wrapping</td><td>Type of texture wrapping </td></tr>
-    <tr><td class="paramname">filtering_min</td><td>Minifying texture filtering </td></tr>
-    <tr><td class="paramname">filtering_mag</td><td>Magnifying texture filtering </td></tr>
-    <tr><td class="paramname">hasMipmap</td><td>Should the texture have a mipmap? </td></tr>
-    <tr><td class="paramname">mipmap_min</td><td>Type of mipmap minifying texture filtering </td></tr>
-    <tr><td class="paramname">mipmap_mag</td><td>Type of mipmap magnifying texture filtering </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00012">12</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00024">24</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
 
 </div>
 </div>
@@ -252,19 +203,46 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Draw the mesh. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader_name</td><td>Shader to use to draw the mesh </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00034">34</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00043">43</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
+<a id="ab7a7630e967f9f46161c5ee111f1f760" name="ab7a7630e967f9f46161c5ee111f1f760"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a7630e967f9f46161c5ee111f1f760">&#9670;&#160;</a></span>default_config</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structbrenta_1_1mesh_1_1config.html">mesh::config</a> mesh::default_config</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  {},</div>
+<div class="line">  {},</div>
+<div class="line">  {},</div>
+<div class="line">  GL_REPEAT,</div>
+<div class="line">  GL_NEAREST,</div>
+<div class="line">  GL_LINEAR,</div>
+<div class="line">  GL_TRUE,</div>
+<div class="line">  GL_LINEAR_MIPMAP_LINEAR,</div>
+<div class="line">  GL_LINEAR,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00187">187</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ae9314538cf2c0a2a0b7510110384553f" name="ae9314538cf2c0a2a0b7510110384553f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae9314538cf2c0a2a0b7510110384553f">&#9670;&#160;</a></span>filtering_mag</h2>
 

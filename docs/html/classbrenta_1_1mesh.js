@@ -1,8 +1,7 @@
 var classbrenta_1_1mesh =
 [
     [ "builder", "classbrenta_1_1mesh_1_1builder.html", null ],
-    [ "mesh", "classbrenta_1_1mesh.html#af4db5f427802a7d6a23c8611e4dedab6", null ],
-    [ "draw", "classbrenta_1_1mesh.html#a617aba2ef008226a4c4641d4eb733b8e", null ],
+    [ "config", "structbrenta_1_1mesh_1_1config.html", null ],
     [ "filtering_mag", "classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f", null ],
     [ "filtering_min", "classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f", null ],
     [ "has_mipmap", "classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e", null ],

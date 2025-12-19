@@ -24,7 +24,9 @@ void init_player_entity()
                    GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
   }
 
-  model m("examples/assets/models/backpack/backpack.obj");
+  model m = model::builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .build();
 
   auto player = world::new_entity()
     .add_component<PlayerComponent>()

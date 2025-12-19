@@ -32,7 +32,8 @@ var NAVTREE =
       [ "Data Fields", "functions.html", [
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "Variables", "functions_vars.html", null ],
+        [ "Enumerations", "functions_enum.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -44,7 +45,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"translation_8hpp_source.html"
+"text_8cpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

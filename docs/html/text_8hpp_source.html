@@ -144,81 +144,92 @@ $(function(){initNavTree('text_8hpp_source.html',''); initResizable(true); });
 <div class="foldopen" id="foldopen00054" data-start="{" data-end="};">
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classbrenta_1_1text.html">   54</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1text.html">text</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1subsystem.html">subsystem</a></div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">protected</span>:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">static</span> std::string font_path;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keyword">static</span> <span class="keywordtype">int</span> font_size;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  </div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">   68</a></span>  <span class="keyword">static</span> std::map&lt;char, types::character&gt; <a class="code hl_variable" href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">characters</a>;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">   63</a></span>  <span class="keyword">static</span> std::map&lt;char, types::character&gt; <a class="code hl_variable" href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">characters</a>;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">class </span><a class="code hl_struct" href="structbrenta_1_1text_1_1config.html">config</a>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::string subsystem_name;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">static</span> <span class="keyword">const</span> <a class="code hl_struct" href="structbrenta_1_1text_1_1config.html">text::config</a> default_config;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">static</span> <a class="code hl_struct" href="structbrenta_1_1text_1_1config.html">text::config</a> init_config;</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span> </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::string subsystem_name;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="comment">// Subsystem interface</span></div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  std::expected&lt;void, subsystem::error&gt; <a class="code hl_function" href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">initialize</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  std::expected&lt;void, subsystem::error&gt; <a class="code hl_function" href="classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122">terminate</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  std::string <a class="code hl_function" href="classbrenta_1_1text.html#a6ab00cf6eb193899dba457be43349b14">name</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <span class="comment">// Constructors / destructors</span></div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <a class="code hl_class" href="classbrenta_1_1text.html">text</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <a class="code hl_class" href="classbrenta_1_1text.html">~text</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  </div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <span class="comment">// Member functions</span></div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  </div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1text.html">text</a> &amp;instance();</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1text.html#ade6acf5dedb4fa2fa32a37b110beeb7a">load</a>(std::string font_name, <span class="keywordtype">int</span> font_size = 48);</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1text.html#a46a471d4f68297808a50361a4c61fb9a">render_text</a>(std::string <a class="code hl_class" href="classbrenta_1_1text.html">text</a>, <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y, <span class="keywordtype">float</span> scale,</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>                          glm::vec3 color);</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  </div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keyword">static</span> types::shader_name_t text_shader;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1types_1_1vao.html">types::vao</a> text_vao;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1types_1_1buffer.html">types::buffer</a> text_vbo;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="comment">// Subsystem interface</span></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  std::expected&lt;void, subsystem::error&gt; <a class="code hl_function" href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">initialize</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  std::expected&lt;void, subsystem::error&gt; <a class="code hl_function" href="classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122">terminate</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  std::string <a class="code hl_function" href="classbrenta_1_1text.html#a6ab00cf6eb193899dba457be43349b14">name</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1text.html#a4535aa2ac1be464b2ed54bb2098e0bee">is_initialized</a>() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span> </div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="comment">// Constructors / destructors</span></div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_class" href="classbrenta_1_1text.html">text</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <a class="code hl_class" href="classbrenta_1_1text.html">~text</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  <span class="comment">// Member functions</span></div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  </div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1text.html">text</a> &amp;instance();</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1text.html#ade6acf5dedb4fa2fa32a37b110beeb7a">load</a>(std::string font_name, <span class="keywordtype">int</span> font_size = 48);</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  </div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1text.html#a46a471d4f68297808a50361a4c61fb9a">render_text</a>(std::string <a class="code hl_class" href="classbrenta_1_1text.html">text</a>, <span class="keywordtype">float</span> x, <span class="keywordtype">float</span> y,</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                          <span class="keywordtype">float</span> scale, glm::vec3 color);</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  </div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keyword">static</span> types::shader_name_t <a class="code hl_class" href="classbrenta_1_1shader.html">shader</a>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1types_1_1vao.html">types::vao</a> vao;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1types_1_1buffer.html">types::buffer</a> vbo;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> initialized;</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  </div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>};</div>
 </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="foldopen" id="foldopen00138" data-start="{" data-end="};">
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classbrenta_1_1text_1_1builder.html">  138</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">text::builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1subsystem_1_1builder.html">subsystem::builder</a></div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  std::string font_path = <span class="stringliteral">&quot;examples/assets/fonts/arial.ttf&quot;</span>;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  <span class="keywordtype">int</span> font_size = 48;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
+<div class="foldopen" id="foldopen00139" data-start="{" data-end="};">
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno"><a class="line" href="structbrenta_1_1text_1_1config.html">  139</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1text_1_1config.html">text::config</a></div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  std::string font_path;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  <span class="keywordtype">int</span> font_size;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>};</div>
+</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  </div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">~builder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a> &amp;font(std::string font_path);</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a> &amp;size(<span class="keywordtype">int</span> font_size);</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <a class="code hl_class" href="classbrenta_1_1subsystem.html">brenta::subsystem</a> &amp;build() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  </div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>};</div>
+<div class="foldopen" id="foldopen00145" data-start="{" data-end="};">
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno"><a class="line" href="classbrenta_1_1text_1_1builder.html">  145</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">text::builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1subsystem_1_1builder.html">subsystem::builder</a></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>{</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span> </div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  <a class="code hl_struct" href="structbrenta_1_1text_1_1config.html">text::config</a> conf = text::default_config;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  </div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">~builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a> &amp;font(<span class="keyword">const</span> std::string &amp;font_path);</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <a class="code hl_class" href="classbrenta_1_1text_1_1builder.html">builder</a> &amp;size(<span class="keywordtype">int</span> font_size);</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  <a class="code hl_class" href="classbrenta_1_1subsystem.html">brenta::subsystem</a> &amp;build() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  </div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>};</div>
 </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span> </div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>} <span class="comment">// namespace brenta</span></div>
-<div class="ttc" id="aclassbrenta_1_1subsystem_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1subsystem_1_1builder.html">brenta::subsystem::builder</a></div><div class="ttdoc">Builder interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00044">subsystem.hpp:45</a></div></div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  </div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>} <span class="comment">// namespace brenta</span></div>
+<div class="ttc" id="aclassbrenta_1_1shader_html"><div class="ttname"><a href="classbrenta_1_1shader.html">brenta::shader</a></div><div class="ttdoc">Shader class.</div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00042">shader.hpp:43</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1subsystem_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1subsystem_1_1builder.html">brenta::subsystem::builder</a></div><div class="ttdoc">Builder interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00048">subsystem.hpp:49</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1subsystem_html"><div class="ttname"><a href="classbrenta_1_1subsystem.html">brenta::subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1text_1_1builder.html">brenta::text::builder</a></div><div class="ttdef"><b>Definition</b> <a href="#l00138">text.hpp:139</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1text_1_1builder.html">brenta::text::builder</a></div><div class="ttdef"><b>Definition</b> <a href="#l00145">text.hpp:146</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1text_html"><div class="ttname"><a href="classbrenta_1_1text.html">brenta::text</a></div><div class="ttdoc">Text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="#l00054">text.hpp:55</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_a0845da9752dcee76b8d69d74a30c9122"><div class="ttname"><a href="classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122">brenta::text::terminate</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; terminate() override</div><div class="ttdoc">Cleaup resources.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00040">text.cpp:40</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_a46a471d4f68297808a50361a4c61fb9a"><div class="ttname"><a href="classbrenta_1_1text.html#a46a471d4f68297808a50361a4c61fb9a">brenta::text::render_text</a></div><div class="ttdeci">static void render_text(std::string text, float x, float y, float scale, glm::vec3 color)</div><div class="ttdoc">Render text.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00148">text.cpp:148</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_a6ab00cf6eb193899dba457be43349b14"><div class="ttname"><a href="classbrenta_1_1text.html#a6ab00cf6eb193899dba457be43349b14">brenta::text::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00046">text.cpp:46</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_ade6acf5dedb4fa2fa32a37b110beeb7a"><div class="ttname"><a href="classbrenta_1_1text.html#ade6acf5dedb4fa2fa32a37b110beeb7a">brenta::text::load</a></div><div class="ttdeci">static void load(std::string font_name, int font_size=48)</div><div class="ttdoc">Load a font.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00061">text.cpp:61</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_af7a50940292a66b3692e0cedc7f77f06"><div class="ttname"><a href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">brenta::text::characters</a></div><div class="ttdeci">static std::map&lt; char, types::character &gt; characters</div><div class="ttdoc">Map of characters.</div><div class="ttdef"><b>Definition</b> <a href="#l00068">text.hpp:68</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1text_html_afae0b1a38f820d1debc7732b78840352"><div class="ttname"><a href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">brenta::text::initialize</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; initialize() override</div><div class="ttdoc">Initialize the text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00029">text.cpp:29</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_a0845da9752dcee76b8d69d74a30c9122"><div class="ttname"><a href="classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122">brenta::text::terminate</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; terminate() override</div><div class="ttdoc">Cleaup resources.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00048">text.cpp:48</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_a4535aa2ac1be464b2ed54bb2098e0bee"><div class="ttname"><a href="classbrenta_1_1text.html#a4535aa2ac1be464b2ed54bb2098e0bee">brenta::text::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00062">text.cpp:62</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_a46a471d4f68297808a50361a4c61fb9a"><div class="ttname"><a href="classbrenta_1_1text.html#a46a471d4f68297808a50361a4c61fb9a">brenta::text::render_text</a></div><div class="ttdeci">static void render_text(std::string text, float x, float y, float scale, glm::vec3 color)</div><div class="ttdoc">Render text.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00164">text.cpp:164</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_a6ab00cf6eb193899dba457be43349b14"><div class="ttname"><a href="classbrenta_1_1text.html#a6ab00cf6eb193899dba457be43349b14">brenta::text::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00057">text.cpp:57</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_ade6acf5dedb4fa2fa32a37b110beeb7a"><div class="ttname"><a href="classbrenta_1_1text.html#ade6acf5dedb4fa2fa32a37b110beeb7a">brenta::text::load</a></div><div class="ttdeci">static void load(std::string font_name, int font_size=48)</div><div class="ttdoc">Load a font.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00077">text.cpp:77</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_af7a50940292a66b3692e0cedc7f77f06"><div class="ttname"><a href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">brenta::text::characters</a></div><div class="ttdeci">static std::map&lt; char, types::character &gt; characters</div><div class="ttdoc">Map of characters.</div><div class="ttdef"><b>Definition</b> <a href="#l00063">text.hpp:63</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1text_html_afae0b1a38f820d1debc7732b78840352"><div class="ttname"><a href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">brenta::text::initialize</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; initialize() override</div><div class="ttdoc">Initialize the text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00033">text.cpp:33</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html">brenta::types::buffer</a></div><div class="ttdoc">Buffer wrapper around OpenGL buffer objects.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00029">buffer.hpp:30</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1vao_html"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html">brenta::types::vao</a></div><div class="ttdoc">Vertex Array Object (VAO)</div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00022">vao.hpp:23</a></div></div>
+<div class="ttc" id="astructbrenta_1_1text_1_1config_html"><div class="ttname"><a href="structbrenta_1_1text_1_1config.html">brenta::text::config</a></div><div class="ttdef"><b>Definition</b> <a href="#l00139">text.hpp:140</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1character_html"><div class="ttname"><a href="structbrenta_1_1types_1_1character.html">brenta::types::character</a></div><div class="ttdoc">Character struct.</div><div class="ttdef"><b>Definition</b> <a href="#l00037">text.hpp:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

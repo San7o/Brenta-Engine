@@ -27,46 +27,35 @@ subsystems manually, but the Engine class provides a nice way to do
 it.</p>
 <p>To create an engine, you can use the Builder class:</p>
 <div class="sourceCode" id="cb1"><pre
-class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span><span class="op">&amp;</span> engine <span class="op">=</span> engine<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>logger<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>file<span class="op">(</span><span class="st">&quot;/tmp/brenta-logs&quot;</span><span class="op">))</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>window<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;brenta demo&quot;</span><span class="op">)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>width<span class="op">(</span><span class="dv">800</span><span class="op">)</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>height<span class="op">(</span><span class="dv">600</span><span class="op">)</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>vsync<span class="op">()</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>msaa<span class="op">())</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>gl<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>blending<span class="op">()</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>cull_face<span class="op">()</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>multisample<span class="op">()</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>depth_test<span class="op">())</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>audio<span class="op">::</span>builder<span class="op">())</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>input<span class="op">::</span>builder<span class="op">())</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>ecs<span class="op">::</span>builder<span class="op">())</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>gui<span class="op">::</span>builder<span class="op">())</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>subsystem<span class="op">(</span>text<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>font<span class="op">(</span><span class="st">&quot;examples/assets/fonts/arial.ttf&quot;</span><span class="op">)</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>             <span class="op">.</span>size<span class="op">(</span><span class="dv">40</span><span class="op">))</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ...</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span>build<span class="op">();</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> ret <span class="op">=</span> engine<span class="op">.</span>initialize<span class="op">();</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>ret<span class="op">.</span>has_value<span class="op">())</span></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  ERROR<span class="op">(</span><span class="st">&quot;Failed to initialize subsystem </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> ret<span class="op">.</span>error<span class="op">());</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co">// Game logic...</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  ret <span class="op">=</span> engine<span class="op">.</span>terminate<span class="op">();</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(!</span>ret<span class="op">.</span>has_value<span class="op">())</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  oak<span class="op">::</span>error<span class="op">(</span><span class="st">&quot;Failed to terminate subsystem </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> ret<span class="op">.</span>error<span class="op">());</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;brenta/engine.hpp&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  engine<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>logger<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">))</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>window<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;load opengl test&quot;</span><span class="op">)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span>screen_width<span class="op">)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>height<span class="op">(</span>screen_height<span class="op">))</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> engine <span class="op">=</span> engine<span class="op">::</span>managed<span class="op">();</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(!</span>window<span class="op">::</span>should_close<span class="op">())</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Handle input...</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>window<span class="op">::</span>is_key_pressed<span class="op">(</span>GLFW_KEY_ESCAPE<span class="op">))</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      window<span class="op">::</span>close<span class="op">();</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update logic...</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Draw...</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>clear<span class="op">();</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>poll_events<span class="op">();</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>We will now go through some subsystems and explain how to use
 them.</p>
 <h2 id="input">Input</h2>
@@ -125,17 +114,15 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb6-1"><a href="#c
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>num_particles<span class="op">(</span><span class="dv">1000</span><span class="op">)</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>spawn_rate<span class="op">(</span><span class="fl">0.01</span><span class="bu">f</span><span class="op">)</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>scale<span class="op">(</span><span class="fl">1.0</span><span class="bu">f</span><span class="op">)</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_path<span class="op">(</span><span class="bu">std::</span>filesystem::absolute<span class="op">(</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>           <span class="st">&quot;assets/textures/particle_atlas.png&quot;</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="op">).</span>string<span class="op">())</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_width<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_height<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_index<span class="op">(</span><span class="dv">45</span><span class="op">)</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>build<span class="op">();</span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Inside the game loop:</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>update_particles<span class="op">(</span>time<span class="op">::</span>get_delta_time<span class="op">());</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>render_particles<span class="op">();</span></span></code></pre></div>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_path<span class="st">&quot;assets/textures/particle_atlas.png&quot;</span><span class="op">)</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_width<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_height<span class="op">(</span><span class="dv">8</span><span class="op">)</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>atlas_index<span class="op">(</span><span class="dv">45</span><span class="op">)</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">// Inside the game loop:</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>update_particles<span class="op">(</span>time<span class="op">::</span>get_delta_time<span class="op">());</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>emitter<span class="op">.</span>render_particles<span class="op">();</span></span></code></pre></div>
 <h2 id="logger">Logger</h2>
 <p>Check out <a href="https://github.com/San7o/oak">oak</a>! The engine
 uses oak as the logger, you can set the log level and the log file in
@@ -184,54 +171,49 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>REGISTER_SYSTEMS<span class="op">(</span>none<span class="op">);</span></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span><span class="op">&amp;</span> engine <span class="op">=</span> engine<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>subsystem<span class="op">(</span>logger<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">)</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>file<span class="op">(</span><span class="st">&quot;/tmp/brenta-logs&quot;</span><span class="op">))</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>subsystem<span class="op">(</span>window<span class="op">::</span>builder<span class="op">()</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;brenta demo&quot;</span><span class="op">)</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>width<span class="op">(</span><span class="dv">800</span><span class="op">)</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>height<span class="op">(</span><span class="dv">600</span><span class="op">)</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>vsync<span class="op">()</span></span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>               <span class="op">.</span>msaa<span class="op">())</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>subsystem<span class="op">(</span>input<span class="op">::</span>builder<span class="op">())</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>subsystem<span class="op">(</span>ecs<span class="op">::</span>builder<span class="op">())</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  engine<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>logger<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">)</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>file<span class="op">(</span><span class="st">&quot;/tmp/brenta-logs&quot;</span><span class="op">))</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>window<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;brenta demo&quot;</span><span class="op">)</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span><span class="dv">800</span><span class="op">)</span></span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>height<span class="op">(</span><span class="dv">600</span><span class="op">)</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>vsync<span class="op">()</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>msaa<span class="op">())</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>input<span class="op">::</span>builder<span class="op">())</span></span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>ecs<span class="op">::</span>builder<span class="op">())</span></span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> ret <span class="op">=</span> engine<span class="op">.</span>initialize<span class="op">();</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> <span class="op">(!</span>ret<span class="op">.</span>has_value<span class="op">())</span></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    ERROR<span class="op">(</span><span class="st">&quot;Failed to initialize subsystem </span><span class="sc">{}</span><span class="st">&quot;</span><span class="op">,</span> ret<span class="op">.</span>error<span class="op">());</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Your init functions ...</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>  init_player<span class="op">();</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  init_renderer<span class="op">();</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* </span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">   * It is nice to reset the time</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">   * before starting the game loop</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">   * so that the first frame will have</span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">   * a delta time of 0.</span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a>  time<span class="op">::</span>update<span class="op">(</span>window<span class="op">::</span>get_time<span class="op">());</span></span>
-<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>window<span class="op">::</span>should_Close<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> engine <span class="op">=</span> engine<span class="op">::</span>managed<span class="op">();</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Your init functions ...</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  init_player<span class="op">();</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  init_renderer<span class="op">();</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* </span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">   * It is nice to reset the time</span></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">   * before starting the game loop</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">   * so that the first frame will have</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">   * a delta time of 0.</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">   */</span></span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  time<span class="op">::</span>update<span class="op">(</span>window<span class="op">::</span>get_time<span class="op">());</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>window<span class="op">::</span>should_Close<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>clear<span class="op">();</span></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>    world<span class="op">::</span>tick<span class="op">();</span></span>
 <span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
-<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>clear<span class="op">();</span></span>
-<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>    world<span class="op">::</span>tick<span class="op">();</span></span>
-<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>poll_wvents<span class="op">();</span></span>
-<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
-<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-58"><a href="#cb9-58" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-59"><a href="#cb9-59" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The engine will take care of deallocation</span></span>
-<span id="cb9-60"><a href="#cb9-60" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the submodules</span></span>
-<span id="cb9-61"><a href="#cb9-61" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-62"><a href="#cb9-62" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>poll_wvents<span class="op">();</span></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-54"><a href="#cb9-54" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The engine will take care of deallocation</span></span>
+<span id="cb9-55"><a href="#cb9-55" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the submodules</span></span>
+<span id="cb9-56"><a href="#cb9-56" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-57"><a href="#cb9-57" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h3 id="component">Component</h3>
 <p>A Component is a piece of data (more precisely, a struct) that gets
 assigned to an Entity.</p>

@@ -101,7 +101,8 @@ $(function(){initNavTree('classbrenta_1_1model.html',''); initResizable(true); }
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#pub-attribs">Data Fields</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::model Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -116,42 +117,40 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1model_1_1builder.html">builder</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builder class for Model.  <a href="classbrenta_1_1model_1_1builder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1model_1_1config.html">config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a59a5402b6c491a12681c08776cd275d0" id="r_a59a5402b6c491a12681c08776cd275d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59a5402b6c491a12681c08776cd275d0">model</a> ()</td></tr>
 <tr class="memdesc:a59a5402b6c491a12681c08776cd275d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Empty constructor.  <br /></td></tr>
 <tr class="separator:a59a5402b6c491a12681c08776cd275d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4eb11278c55ebd56a6c788440f774097" id="r_a4eb11278c55ebd56a6c788440f774097"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4eb11278c55ebd56a6c788440f774097">model</a> (std::string const &amp;path, GLint <a class="el" href="#acd0611eac967fbccf13e05366dc120ee">wrapping</a>=GL_REPEAT, GLint <a class="el" href="#ae9ae985a4226849d79d46372ae0da320">filtering_min</a>=GL_NEAREST, GLint <a class="el" href="#ab3abb891f53aa97b2009a2546f13dbff">filtering_mag</a>=GL_LINEAR, GLboolean <a class="el" href="#acc85f005827ac81715695d7db5fa432a">has_mipmap</a>=GL_TRUE, GLint <a class="el" href="#aec26e544c90caa8d7fefe32149bf0ea4">mipmap_min</a>=GL_LINEAR_MIPMAP_LINEAR, GLint <a class="el" href="#ad95541ce31e23707e5259477ac450ec7">mipmap_mag</a>=GL_LINEAR, bool <a class="el" href="#a8f621519613deddb5f5057525f3a51bc">flip</a>=true)</td></tr>
-<tr class="memdesc:a4eb11278c55ebd56a6c788440f774097"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new Model object.  <br /></td></tr>
-<tr class="separator:a4eb11278c55ebd56a6c788440f774097"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab854b20262329847c836d35d52b692a4" id="r_ab854b20262329847c836d35d52b692a4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab854b20262329847c836d35d52b692a4">model</a> (<a class="el" href="structbrenta_1_1model_1_1config.html">config</a> conf)</td></tr>
+<tr class="separator:ab854b20262329847c836d35d52b692a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d65603dfd549c0de0b1606753c18dd4" id="r_a6d65603dfd549c0de0b1606753c18dd4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d65603dfd549c0de0b1606753c18dd4">draw</a> (types::shader_name_t <a class="el" href="classbrenta_1_1shader.html">shader</a>)</td></tr>
-<tr class="memdesc:a6d65603dfd549c0de0b1606753c18dd4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw the model.  <br /></td></tr>
 <tr class="separator:a6d65603dfd549c0de0b1606753c18dd4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:acd0611eac967fbccf13e05366dc120ee" id="r_acd0611eac967fbccf13e05366dc120ee"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd0611eac967fbccf13e05366dc120ee">wrapping</a></td></tr>
-<tr class="memdesc:acd0611eac967fbccf13e05366dc120ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Texture wrapping mode.  <br /></td></tr>
 <tr class="separator:acd0611eac967fbccf13e05366dc120ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9ae985a4226849d79d46372ae0da320" id="r_ae9ae985a4226849d79d46372ae0da320"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae9ae985a4226849d79d46372ae0da320">filtering_min</a></td></tr>
-<tr class="memdesc:ae9ae985a4226849d79d46372ae0da320"><td class="mdescLeft">&#160;</td><td class="mdescRight">Texture filtering mode.  <br /></td></tr>
 <tr class="separator:ae9ae985a4226849d79d46372ae0da320"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3abb891f53aa97b2009a2546f13dbff" id="r_ab3abb891f53aa97b2009a2546f13dbff"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab3abb891f53aa97b2009a2546f13dbff">filtering_mag</a></td></tr>
-<tr class="memdesc:ab3abb891f53aa97b2009a2546f13dbff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Texture filtering mode.  <br /></td></tr>
 <tr class="separator:ab3abb891f53aa97b2009a2546f13dbff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acc85f005827ac81715695d7db5fa432a" id="r_acc85f005827ac81715695d7db5fa432a"><td class="memItemLeft" align="right" valign="top">GLboolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc85f005827ac81715695d7db5fa432a">has_mipmap</a></td></tr>
-<tr class="memdesc:acc85f005827ac81715695d7db5fa432a"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the texture has a mipmap.  <br /></td></tr>
 <tr class="separator:acc85f005827ac81715695d7db5fa432a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec26e544c90caa8d7fefe32149bf0ea4" id="r_aec26e544c90caa8d7fefe32149bf0ea4"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aec26e544c90caa8d7fefe32149bf0ea4">mipmap_min</a></td></tr>
-<tr class="memdesc:aec26e544c90caa8d7fefe32149bf0ea4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mipmap filtering mode.  <br /></td></tr>
 <tr class="separator:aec26e544c90caa8d7fefe32149bf0ea4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad95541ce31e23707e5259477ac450ec7" id="r_ad95541ce31e23707e5259477ac450ec7"><td class="memItemLeft" align="right" valign="top">GLint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad95541ce31e23707e5259477ac450ec7">mipmap_mag</a></td></tr>
-<tr class="memdesc:ad95541ce31e23707e5259477ac450ec7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mipmap filtering mode.  <br /></td></tr>
 <tr class="separator:ad95541ce31e23707e5259477ac450ec7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f621519613deddb5f5057525f3a51bc" id="r_a8f621519613deddb5f5057525f3a51bc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8f621519613deddb5f5057525f3a51bc">flip</a></td></tr>
-<tr class="memdesc:a8f621519613deddb5f5057525f3a51bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the texture should be flipped.  <br /></td></tr>
 <tr class="separator:a8f621519613deddb5f5057525f3a51bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a25bcecbeff0dd76ffb66ea0c94e405fd" id="r_a25bcecbeff0dd76ffb66ea0c94e405fd"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structbrenta_1_1model_1_1config.html">config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a25bcecbeff0dd76ffb66ea0c94e405fd">default_config</a></td></tr>
+<tr class="separator:a25bcecbeff0dd76ffb66ea0c94e405fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Model class. </p>
@@ -185,12 +184,12 @@ Data Fields</h2></td></tr>
 <p>Empty constructor. </p>
 <p>Does nothing </p>
 
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00074">74</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00047">47</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a4eb11278c55ebd56a6c788440f774097" name="a4eb11278c55ebd56a6c788440f774097"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4eb11278c55ebd56a6c788440f774097">&#9670;&#160;</a></span>model() <span class="overload">[2/2]</span></h2>
+<a id="ab854b20262329847c836d35d52b692a4" name="ab854b20262329847c836d35d52b692a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab854b20262329847c836d35d52b692a4">&#9670;&#160;</a></span>model() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -198,62 +197,13 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">model::model </td>
           <td>(</td>
-          <td class="paramtype">std::string const &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype"><a class="el" href="structbrenta_1_1model_1_1config.html">config</a></td>          <td class="paramname"><span class="paramname"><em>conf</em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>wrapping</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_REPEAT</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>filtering_min</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_NEAREST</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>filtering_mag</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLboolean</td>          <td class="paramname"><span class="paramname"><em>has_mipmap</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_TRUE</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>mipmap_min</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR_MIPMAP_LINEAR</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint</td>          <td class="paramname"><span class="paramname"><em>mipmap_mag</em></span><span class="paramdefsep"> = </span><span class="paramdefval">GL_LINEAR</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>flip</em></span><span class="paramdefsep"> = </span><span class="paramdefval">true</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Construct a new Model object. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>Path to the model </td></tr>
-    <tr><td class="paramname">wrapping</td><td>Texture wrapping mode </td></tr>
-    <tr><td class="paramname">filtering_min</td><td>Texture filtering mode </td></tr>
-    <tr><td class="paramname">filtering_mag</td><td>Texture filtering mode </td></tr>
-    <tr><td class="paramname">hasMipmap</td><td>If the texture has a mipmap </td></tr>
-    <tr><td class="paramname">mipmap_min</td><td>Mipmap filtering mode </td></tr>
-    <tr><td class="paramname">mipmap_mag</td><td>Mipmap filtering mode </td></tr>
-    <tr><td class="paramname">flip</td><td>If the texture should be flipped </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="model_8cpp_source.html#l00012">12</a> of file <a class="el" href="model_8cpp_source.html">model.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8cpp_source.html#l00023">23</a> of file <a class="el" href="model_8cpp_source.html">model.cpp</a>.</p>
 
 </div>
 </div>
@@ -273,19 +223,45 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Draw the model. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader</td><td>Shader to use </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p class="definition">Definition at line <a class="el" href="model_8cpp_source.html#l00026">26</a> of file <a class="el" href="model_8cpp_source.html">model.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8cpp_source.html#l00035">35</a> of file <a class="el" href="model_8cpp_source.html">model.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
+<a id="a25bcecbeff0dd76ffb66ea0c94e405fd" name="a25bcecbeff0dd76ffb66ea0c94e405fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a25bcecbeff0dd76ffb66ea0c94e405fd">&#9670;&#160;</a></span>default_config</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structbrenta_1_1model_1_1config.html">model::config</a> model::default_config</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  <span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line">  GL_REPEAT,</div>
+<div class="line">  GL_NEAREST,</div>
+<div class="line">  GL_LINEAR,</div>
+<div class="line">  GL_TRUE,</div>
+<div class="line">  GL_LINEAR_MIPMAP_LINEAR,</div>
+<div class="line">  GL_LINEAR,</div>
+<div class="line">  <span class="keyword">true</span>,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00040">40</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ab3abb891f53aa97b2009a2546f13dbff" name="ab3abb891f53aa97b2009a2546f13dbff"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3abb891f53aa97b2009a2546f13dbff">&#9670;&#160;</a></span>filtering_mag</h2>
 
@@ -298,10 +274,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Texture filtering mode. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00045">45</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00031">31</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -317,10 +290,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Texture filtering mode. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00039">39</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00030">30</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -336,9 +306,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>If the texture should be flipped. </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00067">67</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00035">35</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -354,10 +322,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>If the texture has a mipmap. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00051">51</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00032">32</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -373,10 +338,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mipmap filtering mode. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00063">63</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00034">34</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -392,10 +354,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mipmap filtering mode. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00057">57</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00033">33</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>
@@ -411,10 +370,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Texture wrapping mode. </p>
-<p>Check Mesh for more information </p>
-
-<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00033">33</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="model_8hpp_source.html#l00029">29</a> of file <a class="el" href="model_8hpp_source.html">model.hpp</a>.</p>
 
 </div>
 </div>

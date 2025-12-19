@@ -143,7 +143,7 @@ class gl::builder : public subsystem::builder
 {
 private:
 
-  gl::config conf;
+  gl::config conf = gl::default_config;
   
 public:
 
