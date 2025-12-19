@@ -71,65 +71,60 @@ struct euler_angles
 
 } // namespace types
 
-namespace enums
-{
-
-enum camera_type
-{
-  AIRCRAFT,
-  SPHERICAL
-};
-
-enum projection_type
-{
-  PERSPECTIVE,
-  ORTHOGRAPHIC
-};
-
-/**
- * @brief Camera movement directions
- *
- * Used to define the direction of the camera movement when reacting
- * to keyboard input.
- */
-enum camera_movement
-{
-  FORWARD,
-  BACKWARD,
-  LEFT,
-  RIGHT
-};
-
-} // namespace enums
-
 /**
  * @brief The Camera class
  *
  * This class represents a camera in the 3D world. It is used to
  * define the position, orientation and projection of the camera.  The
- * class provides a Builder pattern to create a camera object, and it
+ * class provides a builder pattern to create a camera object, and it
  * export a default global camera called "camera" that needs to be
  * defined somewhere in the Brenta namespace.
  *
  * ## Camera type
  *
- * The camera can be of two types: AIRCRAFT or SPHERICAL. The AIRCRAFT
+ * The camera can be of two types: aircraft or spherical. The aircraft
  * type is used to represent a camera that moves in the world space,
- * while the SPHERICAL type is used to represent a camera that rotates
+ * while the spherical type is used to represent a camera that rotates
  * around a center point. They use respectively euler angles and
  * spherical coordinates to represent the position of the camera.
  *
  * ## Projection
  *
- * The camera can have two types of projection: PERSPECTIVE or
- * ORTHOGRAPHIC.
+ * The camera can have two types of projection: perspective or
+ * prthographic.
  */
 class camera
 {
 public:
   
-  enums::projection_type projection_type;
-  enums::camera_type camera_type;
+  enum class camera_type
+  {
+    aircraft,
+    spherical
+  };
+
+  enum class projection_type
+  {
+    perspective,
+    orthographic
+  };
+
+  /**
+   * @brief Camera movement directions
+   *
+   * Used to store the direction of the camera movement when reacting
+   * to keyboard input.
+   */
+  enum class camera_movement
+  {
+    forward,
+    backward,
+    left,
+    right
+  };
+  
+  projection_type proj_type;
+  camera_type cam_type;
   glm::vec3 position;
   /**
    * @brief The world up vector
@@ -204,7 +199,7 @@ public:
    */
   float last_y;
 
-  /* Constructors */
+  // Constructors
 
   /**
    * @brief Default constructor
@@ -218,7 +213,7 @@ public:
    * Full constructor that initializes the camera with the specified
    * values.
    */
-  camera(enums::camera_type camera_type, enums::projection_type projection_type,
+  camera(camera_type cam_type, projection_type proj_type,
          glm::vec3 position, glm::vec3 world_up, glm::vec3 center,
          float movement_speed, float mouse_sensitivity, float zoom,
          types::spherical_coordinates spherical_coordinates,
@@ -235,8 +230,8 @@ public:
 
   // Getters
 
-  enums::camera_type get_camera_type();
-  enums::projection_type get_projection_type();
+  camera::camera_type get_camera_type();
+  camera::projection_type get_projection_type();
   glm::vec3 get_position();
   glm::vec3 get_world_up();
   glm::vec3 get_center();
@@ -268,8 +263,8 @@ public:
 
   // Setters
 
-  void set_camera_type(enums::camera_type camera_type);
-  void set_projection_type(enums::projection_type projection_type);
+  void set_camera_type(camera::camera_type camera_type);
+  void set_projection_type(camera::projection_type projection_type);
   void set_world_up(glm::vec3 world_up);
   void set_center(glm::vec3 center);
   void set_movement_speed(float movement_speed);
@@ -321,8 +316,8 @@ class camera::builder
 {
 private:
   
-  enums::camera_type camera_type_val = enums::camera_type::AIRCRAFT;
-  enums::projection_type projection_type_val = enums::projection_type::PERSPECTIVE;
+  camera::camera_type camera_type_val = camera::camera_type::aircraft;
+  camera::projection_type projection_type_val = camera::projection_type::perspective;
   glm::vec3 position_val = glm::vec3(0.0f, 0.0f, 0.0f);
   glm::vec3 world_up_val = glm::vec3(0.0f, 1.0f, 0.0f);
   glm::vec3 center_val = glm::vec3(0.0f, 0.0f, 0.0f);
@@ -337,8 +332,8 @@ private:
 
 public:
   
-  builder &camera_type(enums::camera_type camera_type);
-  builder &projection_type(enums::projection_type projection_type);
+  builder &camera_type(camera::camera_type camera_type);
+  builder &projection_type(camera::projection_type projection_type);
   builder &position(glm::vec3 position);
   builder &world_up(glm::vec3 worldUp);
   builder &center(glm::vec3 center);
@@ -354,12 +349,5 @@ public:
 
   camera build();
 };
-
-/**
- * @brief A default camera
- *
- * This is a default camera provided by the engine.
- */
-extern camera default_camera;
 
 } // namespace brenta

@@ -23,12 +23,6 @@ REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
 
-// default camera
-namespace brenta
-{
-camera default_camera = camera();
-}
-
 int main()
 {
   engine::builder()
@@ -59,16 +53,16 @@ int main()
   
   auto engine = engine::managed();
   
-  default_camera = camera::builder()
-                     .camera_type(enums::camera_type::SPHERICAL)
-                     .projection_type(enums::projection_type::PERSPECTIVE)
-                     .spherical_coordinates({1.25f, 1.25f, 30.0f})
-                     .center(glm::vec3(0.0f, 2.0f, 0.0f))
-                     .movement_speed(2.5f)
-                     .mouse_sensitivity(0.05f)
-                     .zoom(45.0f)
-                     .build();
-
+  auto camera = camera::builder()
+    .camera_type(camera::camera_type::spherical)
+    .projection_type(camera::projection_type::perspective)
+    .spherical_coordinates({1.25f, 1.25f, 30.0f})
+    .center(glm::vec3(0.0f, 2.0f, 0.0f))
+    .movement_speed(2.5f)
+    .mouse_sensitivity(0.05f)
+    .zoom(45.0f)
+    .build();
+  
 #ifdef BRENTA_USE_ECS
   init_player_entity();
   // init_cube_entity();
@@ -80,27 +74,27 @@ int main()
 
   init_toggle_wireframe_callback();
   init_close_window_callback();
-  init_camera_mouse_callback();
+  init_camera_mouse_callback(&camera);
   init_play_guitar_callback();
 
   world::add_resource<WireframeResource>(false);
+  world::add_resource<CameraResource>(&camera);
 #endif
 
-  particle_emitter emitter =
-    particle_emitter::builder()
-      .with_camera(&default_camera)
-      .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
-      .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-      .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-      .starting_time_to_live(0.5f)
-      .num_particles(1000)
-      .spawn_rate(0.01f)
-      .scale(1.0f)
-      .atlas_path("examples/assets/textures/particle_atlas.png")
-      .atlas_width(8)
-      .atlas_height(8)
-      .atlas_index(5)
-      .build();
+  auto emitter = particle_emitter::builder()
+    .with_camera(&camera)
+    .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+    .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+    .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
+    .starting_time_to_live(0.5f)
+    .num_particles(1000)
+    .spawn_rate(0.01f)
+    .scale(1.0f)
+    .atlas_path("examples/assets/textures/particle_atlas.png")
+    .atlas_width(8)
+    .atlas_height(8)
+    .atlas_index(5)
+    .build();
 
 #ifdef BRENTA_USE_IMGUI
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);

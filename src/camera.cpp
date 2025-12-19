@@ -9,16 +9,16 @@
 
 using namespace brenta;
 
-camera::camera(enums::camera_type camera_type,
-               enums::projection_type projection_type, glm::vec3 position,
+camera::camera(camera_type cam_type,
+               projection_type proj_type, glm::vec3 position,
                glm::vec3 world_up, glm::vec3 center, float movement_speed,
                float mouse_sensitivity, float zoom,
                types::spherical_coordinates spherical_coordinates,
                types::euler_angles euler_angles, glm::vec3 front, glm::vec3 up,
                glm::vec3 right)
 {
-  this->camera_type = camera_type;
-  this->projection_type = projection_type;
+  this->cam_type = cam_type;
+  this->proj_type = proj_type;
   this->position = position;
   this->world_up = world_up;
   this->center = center;
@@ -32,12 +32,12 @@ camera::camera(enums::camera_type camera_type,
   this->right = right;
 
   // Update the camera
-  switch (this->camera_type)
+  switch (this->cam_type)
   {
-  case enums::camera_type::SPHERICAL:
+  case camera_type::spherical:
     spherical_to_cartesian();
     break;
-  case enums::camera_type::AIRCRAFT:
+  case camera_type::aircraft:
     update_camera_euler();
     break;
   default:
@@ -47,11 +47,11 @@ camera::camera(enums::camera_type camera_type,
 
 glm::mat4 camera::get_view_matrix()
 {
-  switch (camera_type)
+  switch (this->cam_type)
   {
-  case enums::camera_type::SPHERICAL:
+  case camera_type::spherical:
     return glm::lookAt(this->position, this->center, this->world_up);
-  case enums::camera_type::AIRCRAFT:
+  case camera_type::aircraft:
     return glm::lookAt(this->position, this->position + this->front, this->up);
   default:
     return glm::mat4(1.0f);
@@ -60,14 +60,14 @@ glm::mat4 camera::get_view_matrix()
 
 glm::mat4 camera::get_projection_matrix(int window_width, int window_height)
 {
-  switch (this->projection_type)
+  switch (this->proj_type)
   {
-  case enums::projection_type::PERSPECTIVE:
+  case projection_type::perspective:
     return glm::perspective(glm::radians(this->zoom),
                             (float) window_width
                             / (float) window_height,
                             0.1f, 1000.0f);
-  case enums::projection_type::ORTHOGRAPHIC:
+  case projection_type::orthographic:
     return glm::ortho((float) -window_width / 2.0f,
                       (float) window_width / 2.0f,
                       (float) -window_height / 2.0f,
@@ -108,24 +108,24 @@ void camera::update_camera_euler()
   this->up = glm::normalize(glm::cross(this->right, this->front));
 }
 
-enums::camera_type camera::get_camera_type()
+camera::camera_type camera::get_camera_type()
 {
-  return this->camera_type;
+  return this->cam_type;
 }
 
-void camera::set_camera_type(enums::camera_type camera_type)
+void camera::set_camera_type(camera::camera_type camera_type)
 {
-  this->camera_type = camera_type;
+  this->cam_type = camera_type;
 }
 
-enums::projection_type camera::get_projection_type()
+camera::projection_type camera::get_projection_type()
 {
-  return this->projection_type;
+  return this->proj_type;
 }
 
-void camera::set_projection_type(enums::projection_type projection_type)
+void camera::set_projection_type(projection_type projection_type)
 {
-  this->projection_type = projection_type;
+  this->proj_type = projection_type;
 }
 
 glm::vec3 camera::get_position()
@@ -206,7 +206,7 @@ types::euler_angles camera::get_euler_angles()
 
 void camera::set_euler_angles(types::euler_angles euler_angles)
 {
-  camera::euler_angles = euler_angles;
+  this->euler_angles = euler_angles;
 }
 
 glm::vec3 camera::get_front()
@@ -274,14 +274,14 @@ void camera::set_last_y(float last_y)
 //
 
 camera::builder &
-camera::builder::camera_type(enums::camera_type camera_type)
+camera::builder::camera_type(camera::camera_type camera_type)
 {
   this->camera_type_val = camera_type;
   return *this;
 }
 
 camera::builder &
-camera::builder::projection_type(enums::projection_type projection_type)
+camera::builder::projection_type(camera::projection_type projection_type)
 {
   this->projection_type_val = projection_type;
   return *this;

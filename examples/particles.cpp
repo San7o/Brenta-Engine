@@ -11,15 +11,8 @@ REGISTER_SYSTEMS()
 
 using namespace brenta;
 
-// Default resolution
 const int SCR_WIDTH = 1280;
 const int SCR_HEIGHT = 720;
-
-/* default camera */
-namespace brenta
-{
-camera default_camera = camera();
-}
 
 int main()
 {
@@ -47,19 +40,19 @@ int main()
     .build(); 
   auto engine = engine::manager();
 
-  default_camera = camera::builder()
-                     .camera_type(enums::camera_type::SPHERICAL)
-                     .projection_type(enums::projection_type::PERSPECTIVE)
-                     .spherical_coordinates({1.25f, 1.25f, 10.0f})
-                     .center(glm::vec3(0.0f, 2.0f, 0.0f))
-                     .movement_speed(2.5f)
-                     .mouse_sensitivity(0.05f)
-                     .zoom(45.0f)
-                     .build();
+  auto camera = camera::builder()
+    .camera_type(camera::camera_type::spherical)
+    .projection_type(camera::projection_type::perspective)
+    .spherical_coordinates({1.25f, 1.25f, 10.0f})
+    .center(glm::vec3(0.0f, 2.0f, 0.0f))
+    .movement_speed(2.5f)
+    .mouse_sensitivity(0.05f)
+    .zoom(45.0f)
+    .build();
 
-  particle_emitter emitter =
+  auto emitter =
     particle_emitter::builder()
-      .with_camera(&default_camera)
+      .with_camera(&camera)
       .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
       .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))

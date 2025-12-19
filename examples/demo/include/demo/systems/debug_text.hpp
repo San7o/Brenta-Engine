@@ -5,7 +5,9 @@
 
 #pragma once
 
-#include <brenta/engine.hpp>
+#include <brenta/camera.hpp>
+#include <brenta/text.hpp>
+#include <demo/resources/camera.hpp>
 
 #include <viotecs/viotecs.hpp>
 
@@ -18,7 +20,10 @@ struct DebugTextSystem : system<none>
 {
   void run(std::vector<entity_id> _) const override
   {
-    auto camera_pos = default_camera.get_position();
+
+    brenta::camera *cam = world::get_resource<CameraResource>()->cam;
+    
+    auto camera_pos = cam->get_position();
 
     const float offset = 20.0f;
 
@@ -36,28 +41,28 @@ struct DebugTextSystem : system<none>
     text::render_text("CameraZ: " + std::to_string(camera_pos.z), 25.0f,
                       window::get_height() - 30.0f - offset * 3, 0.35f, color);
 
-    text::render_text("CenterX: " + std::to_string(default_camera.center.x),
+    text::render_text("CenterX: " + std::to_string(cam->center.x),
                       25.0f, window::get_height() - 30.0f - offset * 4, 0.35f,
                       color);
 
-    text::render_text("CenterY: " + std::to_string(default_camera.center.y),
+    text::render_text("CenterY: " + std::to_string(cam->center.y),
                       25.0f, window::get_height() - 30.0f - offset * 5, 0.35f,
                       color);
 
-    text::render_text("CenterZ: " + std::to_string(default_camera.center.z),
+    text::render_text("CenterZ: " + std::to_string(cam->center.z),
                       25.0f, window::get_height() - 30.0f - offset * 6, 0.35f,
                       color);
 
     text::render_text(
-      "Theta: " + std::to_string(default_camera.spherical_coordinates.theta),
+      "Theta: " + std::to_string(cam->spherical_coordinates.theta),
       25.0f, window::get_height() - 30.0f - offset * 7, 0.35f, color);
 
     text::render_text(
-      "Phi: " + std::to_string(default_camera.spherical_coordinates.phi), 25.0f,
+      "Phi: " + std::to_string(cam->spherical_coordinates.phi), 25.0f,
       window::get_height() - 30.0f - offset * 8, 0.35f, color);
 
     text::render_text(
-      "Radius: " + std::to_string(default_camera.spherical_coordinates.radius),
+      "Radius: " + std::to_string(cam->spherical_coordinates.radius),
       25.0f, window::get_height() - 30.0f - offset * 9, 0.35f, color);
   }
 };

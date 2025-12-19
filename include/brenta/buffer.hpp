@@ -102,6 +102,7 @@ public:
 
   /**
    * @brief Copy data to the buffer object
+   *
    * @param size Size of the data in bytes
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
@@ -113,6 +114,7 @@ public:
   void copy_data(GLsizeiptr size, const void *data, GLenum usage);
   /**
    * @brief Copy data to the buffer object
+   *
    * @param size Size of the data in bytes
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
@@ -123,6 +125,7 @@ public:
   void copy_vertices(GLsizeiptr size, const void *data, GLenum usage);
   /**
    * @brief Copy data to the buffer object
+   *
    * @param size Size of the data in bytes
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)

@@ -5,4 +5,6 @@
 
 #pragma once
 
-void init_camera_mouse_callback();
+#include <brenta/camera.hpp>
+
+void init_camera_mouse_callback(brenta::camera *cam);
