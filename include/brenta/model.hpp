@@ -33,6 +33,7 @@ public:
   GLint mipmap_min;
   GLint mipmap_mag;
   bool flip;
+  std::string path;
 
   struct config;
   class builder;
@@ -49,7 +50,10 @@ public:
   }
   
   model(config conf);
-  
+  ~model() = default;
+
+  constexpr model(model &&m) noexcept = default;
+
   void draw(types::shader_name_t shader);
 
 private:
@@ -58,12 +62,12 @@ private:
   std::vector<types::texture> textures_loaded;
   std::string directory;
 
-  void load_model(std::string path);
   void process_node(aiNode *node, const aiScene *scene);
   mesh process_mesh(aiMesh *mesh, const aiScene *scene);
   std::vector<types::texture> load_material_textures(aiMaterial *mat,
                                                      aiTextureType type,
                                                      std::string type_name);
+  void init();
 };
 
 struct model::config

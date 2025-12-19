@@ -17,14 +17,7 @@ namespace types
  * @brief Buffer wrapper around OpenGL buffer objects
  *
  * This class is a wrapper around OpenGL buffer objects. It provides a
- * simple interface to create, bind, unbind and delete buffer
- * objects. It also provides methods to copy data to the buffer
- * objects.
- *
- * This class offers methods to:
- * - create and delete buffer object
- * - bind and unbind buffer object
- * - copy data to the buffer object
+ * simple interface to create, bind, unbind and delete buffer objects.
  */
 class buffer
 {
@@ -45,57 +38,30 @@ public:
   buffer()
   {
   }
-  /**
-   * @brief Constructor that creates a buffer object
-   * @param target Buffer object target
-   *
-   * This constructor creates a buffer object with the specified
-   * target.  It calls the OpenGL function glGenBuffers to generate a
-   * buffer object id and glBindBuffer to bind the buffer object.  The
-   * buffer has a default destructor that deletes the buffer object
-   * when it goes out of scope.
-   */
-  buffer(GLenum input_target);
 
-  /**
-   * @brief Bind the buffer object
-   *
-   * Buffers must be bound before they can be used!
-   */
-  void bind();
-  /**
-   * @brief Unbind the buffer object
-   */
-  void unbind();
-  /**
-   * @brief Delete the buffer object
-   */
+  buffer(GLenum input_target);
+  constexpr buffer(buffer&& other) noexcept
+  {
+    this->id = other.id;
+    this->target = other.target;
+    other.id = 0;
+  }
+
+  ~buffer();
+  
+  void init(GLenum input_target);
   void destroy();
+  void bind();
+  void unbind();
 
   // Getters
 
-  /**
-   * @brief Get the buffer object id
-   * @return Buffer object id
-   */
   int get_id();
-  /**
-   * @brief Get the buffer object target
-   * @return Buffer object target
-   */
   GLenum get_target();
 
   // Setters
 
-  /**
-   * @brief Set the buffer object id
-   * @param id Buffer object id
-   */
   void set_id(unsigned int id);
-  /**
-   * @brief Set the buffer object target
-   * @param target Buffer object target
-   */
   void set_target(GLenum target);
 
   // Utilities
@@ -106,10 +72,6 @@ public:
    * @param size Size of the data in bytes
    * @param data Pointer to the data
    * @param usage OpenGL usage hint (like GL_STATIC_DRAW)
-   *
-   * This method copies data to the buffer object. The size of the
-   * data is specified in bytes, the data is a pointer to the data and
-   * the usage is an OpenGL usage hint.
    */
   void copy_data(GLsizeiptr size, const void *data, GLenum usage);
   /**

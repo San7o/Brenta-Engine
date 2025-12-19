@@ -22,9 +22,7 @@ namespace types
 {
 
 typedef std::string stream_id_t;
-
 typedef std::string sound_id_t;
-
 typedef ma_sound sound_t;
 typedef ma_sound_group stream_t;
 
@@ -121,6 +119,7 @@ public:
   
   static std::expected<void, audio::error>
   stream_stop(const types::stream_id_t &id);
+  
   static std::expected<void, audio::error>
   stream_start(const types::stream_id_t &id);
   /**

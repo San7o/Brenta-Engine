@@ -187,6 +187,8 @@ public:
   static const config default_config;
   
   mesh(config conf);
+  constexpr mesh(mesh&& other) noexcept = default;
+  ~mesh() = default;
 
   void draw(types::shader_name_t shader_name);
 
@@ -195,7 +197,8 @@ private:
   types::vao vao;
   types::buffer vbo;
   types::buffer ebo;
-  void setup_mesh();
+
+  void init();
 };
 
 struct mesh::config

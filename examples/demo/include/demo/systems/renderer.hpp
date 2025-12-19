@@ -42,13 +42,13 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       auto transform_component =
         world::entity_to_component<TransformComponent>(match);
 
-      auto myModel = model_component->mod;
+      model *m = &model_component->mod;
       auto default_shader = model_component->shader;
 
       brenta::types::translation t = brenta::types::translation();
       t.set_view(cam->get_view_matrix());
       t.set_projection(cam->get_projection_matrix(window::get_width(),
-                                                            window::get_height()));
+                                                  window::get_height()));
 
       t.set_model(glm::mat4(1.0f));
       t.translate(transform_component->position);
@@ -88,7 +88,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
         shader::set_int(default_shader, "atlasIndex", 0);
       }
 
-      myModel.draw(default_shader);
+      m->draw(default_shader);
     }
   }
 };

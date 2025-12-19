@@ -20,8 +20,8 @@ namespace types
  * @brief Translation util class
  *
  * This class is used to store the view, projection, and model
- * matrices of an object. The matrices can be set using the setView,
- * setProjection, and setModel methods.
+ * matrices of an object. The matrices can be set using the
+ * set_view(), set_projection(), and set_model() methods.
  */
 class translation
 {

@@ -34,7 +34,7 @@ std::expected<void, subsystem::error> text::initialize()
 {
   if (this->is_initialized()) return {};
   
-  text::vbo = types::buffer(GL_ARRAY_BUFFER);
+  text::vbo.init(GL_ARRAY_BUFFER);
   text::vao.init();
   text::vao.bind();
   if (text::init_config.font_path != "")
@@ -76,7 +76,7 @@ text &text::instance()
 
 void text::load(std::string font_path, int font_size)
 {
-  if (text::vao.get_vao() == 0)
+  if (text::vao.get_id() == 0)
   {
     ERROR("{}: not initialized", text::subsystem_name);
     return;
@@ -164,7 +164,7 @@ void text::load(std::string font_path, int font_size)
 void text::render_text(std::string text, float x, float y, float scale,
                        glm::vec3 color)
 {
-  if (text::vao.get_vao() == 0)
+  if (text::vao.get_id() == 0)
   {
     ERROR("{}: not initialized", text::subsystem_name);
     return;

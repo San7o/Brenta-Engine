@@ -48,8 +48,6 @@ public:
   
 private:
   
-  static oak::level log_level;
-  static std::string log_file;
   static bool initialized;
   
 };

@@ -51,7 +51,8 @@ int main()
   vao v;
   v.init();
   v.bind();
-  buffer vbo = buffer(GL_ARRAY_BUFFER);
+  buffer vbo;
+  vbo.init(GL_ARRAY_BUFFER);
   vbo.bind();
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);

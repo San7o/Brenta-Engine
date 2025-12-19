@@ -22,43 +22,28 @@ namespace types
 class vao
 {
 public:
-  /**
-   * @brief Vertex Array Object (VAO)
-   */
+  
   unsigned int vao_id;
 
   /**
-   * @brief Empty Constructor
-   *
-   * Does nothing
+   * @brief Default constructor, does nothing
    */
-  vao()
+  vao();
+  constexpr vao(vao&& other) noexcept
   {
+    this->vao_id = other.vao_id;
+    other.vao_id = 0;
   }
-  /**
-   * @brief Init Constructor
-   *
-   * Creates a new VAO
-   */
-  void init();
 
-  /**
-   * @brief Get the VAO
-   * @return The VAO
-   */
-  unsigned int get_vao();
-  /**
-   * @brief Bind the VAO
-   */
-  void bind();
-  /**
-   * @brief Unbind the VAO
-   */
-  void unbind();
-  /**
-   * @brief Delete the VAO
-   */
+  ~vao();
+  
+  void init();
   void destroy();
+  void bind();
+  void unbind();
+  
+  unsigned int get_id();
+
   /**
    * @brief Set the vertex data
    *
@@ -72,7 +57,7 @@ public:
    * @param pointer The offset of the first component of the first generic
    * vertex attribute in the array
    */
-  void set_vertex_data(buffer buffer, unsigned int index, GLint size,
+  void set_vertex_data(buffer &buffer, unsigned int index, GLint size,
                        GLenum type, GLboolean is_normalized, GLsizei stride,
                        const void *pointer);
 };

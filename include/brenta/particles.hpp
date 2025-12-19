@@ -67,8 +67,7 @@ public:
   static const config default_config;
 
   particle_emitter(config conf);
-  ~particle_emitter();
-
+  
   /**
    * @brief Update the particles
    *
@@ -76,6 +75,7 @@ public:
    */
   void update_particles(float deltaTime);
   void render_particles();
+  void destroy();
 
 private:
   camera *cam;

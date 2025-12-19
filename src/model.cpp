@@ -29,7 +29,27 @@ model::model(config conf)
   this->mipmap_min = conf.mipmap_min;
   this->mipmap_mag = conf.mipmap_mag;
   this->flip = conf.flip;
-  load_model(conf.path);
+  this->path = conf.path;
+
+  this->init();
+}
+
+void model::init()
+{
+  // Load with assimp
+  Assimp::Importer importer;
+  const aiScene *scene =
+    importer.ReadFile(this->path, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+  if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+  {
+    ERROR("model::load_model: Could not load model with assimp: {}",
+          importer.GetErrorString());
+    return;
+  }
+  directory = this->path.substr(0, this->path.find_last_of('/'));
+
+  process_node(scene->mRootNode, scene);
 }
 
 void model::draw(types::shader_name_t shader)
@@ -40,30 +60,13 @@ void model::draw(types::shader_name_t shader)
   }
 }
 
-void model::load_model(std::string path)
-{
-  // Load with assimp
-  Assimp::Importer importer;
-  const aiScene *scene =
-    importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
-  if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-  {
-    ERROR("model::load_model: Could not load model with assimp: {}",
-          importer.GetErrorString());
-    return;
-  }
-  directory = path.substr(0, path.find_last_of('/'));
-
-  process_node(scene->mRootNode, scene);
-}
-
 void model::process_node(aiNode *node, const aiScene *scene)
 {
   for (unsigned int i = 0; i < node->mNumMeshes; i++)
   {
     aiMesh *m = scene->mMeshes[node->mMeshes[i]];
-    meshes.push_back(process_mesh(m, scene));
+    auto mesh = process_mesh(m, scene);
+    meshes.push_back(std::move(mesh));
   }
   for (unsigned int i = 0; i < node->mNumChildren; i++)
   {
@@ -76,7 +79,7 @@ mesh model::process_mesh(aiMesh *m, const aiScene *scene)
   std::vector<types::vertex> vertices;
   std::vector<unsigned int> indices;
   std::vector<types::texture> textures;
-
+  
   for (unsigned int i = 0; i < m->mNumVertices; i++)
   {
     types::vertex vertex;
@@ -119,9 +122,9 @@ mesh model::process_mesh(aiMesh *m, const aiScene *scene)
     material, aiTextureType_SPECULAR, "texture_specular");
   textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 
-  return mesh({vertices, indices, textures, this->wrapping, this->filtering_min,
-              this->filtering_mag, this->has_mipmap, this->mipmap_min,
-              this->mipmap_mag});
+  return mesh({vertices, indices, textures, this->wrapping,
+        this->filtering_min, this->filtering_mag, this->has_mipmap,
+        this->mipmap_min, this->mipmap_mag});
 }
 
 std::vector<types::texture> model::load_material_textures(aiMaterial *mat,

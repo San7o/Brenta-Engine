@@ -8,29 +8,37 @@
 
 using namespace brenta::types;
 
+vao::vao()
+{
+}
+
+vao::~vao()
+{
+  this->destroy();
+}
+
 void vao::init()
 {
   glGenVertexArrays(1, &this->vao_id);
+  DEBUG("vao: initialized");
 }
 
-unsigned int vao::get_vao()
+void vao::destroy()
 {
-  if (vao_id == 0)
-  {
-    ERROR("vao: not initialized");
-    return 0;
-  }
-  return vao_id;
+  if (this->get_id() == 0) return;
+
+  glDeleteVertexArrays(1, &this->vao_id);
+  DEBUG("vao: destroyed");
 }
 
 void vao::bind()
 {
-  if (this->get_vao() == 0)
+  if (this->get_id() == 0)
   {
-    ERROR("vao: not initialized");
+    ERROR("vao::bind: not initialized");
     return;
   }
-  glBindVertexArray(this->get_vao());
+  glBindVertexArray(this->get_id());
 }
 
 void vao::unbind()
@@ -38,24 +46,21 @@ void vao::unbind()
   glBindVertexArray(0);
 }
 
-void vao::set_vertex_data(buffer buffer, unsigned int index, GLint size,
+unsigned int vao::get_id()
+{
+  if (vao_id == 0)
+    return 0;
+  return vao_id;
+}
+
+void vao::set_vertex_data(buffer &buffer, unsigned int index, GLint size,
                           GLenum type, GLboolean normalized, GLsizei stride,
                           const void *pointer)
 {
-  bind();
+  this->bind();
   buffer.bind();
   glVertexAttribPointer(index, size, type, normalized, stride, pointer);
   glEnableVertexAttribArray(index);
   buffer.unbind();
-  unbind();
-}
-
-void vao::destroy()
-{
-  if (this->get_vao() == 0)
-  {
-    ERROR("vao: not initialized");
-    return;
-  }
-  glDeleteVertexArrays(1, &this->vao_id);
+  this->unbind();
 }

@@ -36,5 +36,5 @@ void init_robot_entity()
   auto cube_entity = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(0.0f, 5.0f, 0.0f),
                                        glm::vec3(0.0f, -90.0f, 0.0f), 5.0f)
-    .add_component<ModelComponent>(m, 32.0f, "default_shader", true, 4, 0);
+    .add_component<ModelComponent>(std::move(m), 32.0f, "default_shader", true, 4, 0);
 }

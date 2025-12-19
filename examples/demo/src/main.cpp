@@ -27,7 +27,7 @@ int main()
 {
   engine::builder()
     .with(logger::builder()
-          .level(oak::level::debug)
+          .level(oak::level::info)
           .file("/tmp/brenta-logs"))
     .with(window::builder()
           .title("brenta demo")

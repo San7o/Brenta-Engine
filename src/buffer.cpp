@@ -11,8 +11,12 @@ using namespace brenta::types;
 
 buffer::buffer(GLenum input_target)
 {
-  this->target = input_target;
-  glGenBuffers(1, &id);
+  this->init(input_target);
+}
+
+buffer::~buffer()
+{
+  this->destroy();
 }
 
 void buffer::copy_data(GLsizeiptr size, const void *data, GLenum usage)
@@ -24,7 +28,8 @@ void buffer::copy_indices(GLsizeiptr size, const void *data, GLenum usage)
 {
   if (this->target != GL_ELEMENT_ARRAY_BUFFER)
     return;
-  bind();
+  
+  this->bind();
   glBufferData(this->target, size, data, usage);
 }
 
@@ -32,8 +37,27 @@ void buffer::copy_vertices(GLsizeiptr size, const void *data, GLenum usage)
 {
   if (this->target == GL_ELEMENT_ARRAY_BUFFER)
     return;
-  bind();
+  
+  this->bind();
   glBufferData(this->target, size, data, usage);
+}
+
+void buffer::init(GLenum input_target)
+{
+  this->target = input_target;
+  glGenBuffers(1, &id);
+  
+  DEBUG("buffer: initialized");
+}
+
+void buffer::destroy()
+{
+  if (this->id == 0) return;
+
+  glDeleteBuffers(1, &this->id);
+  this->id = 0;
+
+  DEBUG("buffer: destroyed");
 }
 
 void buffer::bind()
@@ -49,16 +73,6 @@ void buffer::bind()
 void buffer::unbind()
 {
   glBindBuffer(this->target, 0);
-}
-
-void buffer::destroy()
-{
-  if (this->id == 0)
-  {
-    ERROR("buffer::destroy: not initialized");
-    return;
-  }
-  glDeleteBuffers(1, &this->id);
 }
 
 int buffer::get_id()

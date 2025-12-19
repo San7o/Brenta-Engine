@@ -66,8 +66,8 @@ particle_emitter::particle_emitter(config conf)
   check_opengl_error("vao bind");
 
   // Create fbos
-  this->fbo[0] = types::buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
-  this->fbo[1] = types::buffer(GL_TRANSFORM_FEEDBACK_BUFFER);
+  this->fbo[0].init(GL_TRANSFORM_FEEDBACK_BUFFER);
+  this->fbo[1].init(GL_TRANSFORM_FEEDBACK_BUFFER);
 
   glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0].id);
   glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
@@ -87,7 +87,7 @@ particle_emitter::particle_emitter(config conf)
   this->vao.unbind();
 }
 
-particle_emitter::~particle_emitter()
+void particle_emitter::destroy()
 {
   fbo[0].destroy();
   fbo[1].destroy();

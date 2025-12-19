@@ -11,8 +11,6 @@ using namespace brenta;
 // Static variables
 //
 
-oak::level logger::log_level;
-std::string logger::log_file;
 const std::string logger::subsystem_name = "logger";
 const logger::config logger::default_config = {
   oak::level::info,
@@ -31,18 +29,19 @@ std::expected<void, subsystem::error> logger::initialize()
   
   oak::init_writer();
   
-  oak::set_level(this->log_level);
-  
-  if (this->log_file != "")
+  oak::set_level(logger::init_config.log_level);
+
+  auto file_name = logger::init_config.log_file;
+  if (file_name != "")
   {
-    auto file = oak::set_file(this->log_file);
+    auto file = oak::set_file(file_name);
     if (!file.has_value())
     {
       ERROR("{}: Failed to open log file: {}",
-            logger::subsystem_name, log_file);
+            logger::subsystem_name, file_name);
       return std::unexpected(this->subsystem_name);
     }
-    INFO("{}: set log file to {}", logger::subsystem_name, log_file);
+    INFO("{}: set log file to {}", logger::subsystem_name, file_name);
   }
 
   logger::initialized = true;
