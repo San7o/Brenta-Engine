@@ -23,7 +23,7 @@ REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
 
-/* default camera */
+// default camera
 namespace brenta
 {
 camera default_camera = camera();
@@ -31,39 +31,34 @@ camera default_camera = camera();
 
 int main()
 {
-
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("brenta demo")
-               .width(800)
-               .height(600)
-               .vsync()
-               .msaa()
-               .debug())
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
-    .subsystem(audio::builder()
-               .sound("guitar", "examples/assets/audio/guitar.wav"))
-    .subsystem(input::builder())
-    .subsystem(ecs::builder())
-    .subsystem(gui::builder())
-    .subsystem(text::builder()
-               .font("examples/assets/fonts/arial.ttf")
-               .size(40))
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("brenta demo")
+          .width(800)
+          .height(600)
+          .vsync()
+          .msaa()
+          .debug())
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
+    .with(audio::builder()
+          .sound("guitar", "examples/assets/audio/guitar.wav"))
+    .with(input::builder())
+    .with(ecs::builder())
+    .with(gui::builder())
+    .with(text::builder()
+          .font("examples/assets/fonts/arial.ttf")
+          .size(40))
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    ERROR("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
-
+  
+  auto engine = engine::managed();
+  
   default_camera = camera::builder()
                      .camera_type(enums::camera_type::SPHERICAL)
                      .projection_type(enums::projection_type::PERSPECTIVE)
@@ -139,15 +134,5 @@ int main()
     window::swap_buffers();
   }
 
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
-  }
   return 0;
 }

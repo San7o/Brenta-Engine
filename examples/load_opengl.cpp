@@ -14,35 +14,30 @@
 REGISTER_SYSTEMS()
 
 using namespace brenta;
+  
+const int screen_width = 800;
+const int screen_height = 600;
 
 int main()
 {
   //
   // Setup
   //
-  
-  const int screen_width = 800;
-  const int screen_height = 600;
 
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug))
-    .subsystem(window::builder()
-               .title("load opengl test")
-               .width(screen_width)
-               .height(screen_height))
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug))
+    .with(window::builder()
+          .title("load opengl test")
+          .width(screen_width)
+          .height(screen_height))
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::managed();
   
   //
   // Render loop
@@ -50,11 +45,11 @@ int main()
   
   while (!window::should_close())
   {
-    /* Input */
+    // Input
     if (window::is_key_pressed(GLFW_KEY_ESCAPE))
       window::close();
 
-    /* Clear */
+    // Draw
     // If you see a black window, it means that the OpenGL options are not
     // set correctly.
     gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
@@ -62,17 +57,6 @@ int main()
 
     window::poll_events();
     window::swap_buffers();
-  }
- 
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

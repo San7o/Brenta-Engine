@@ -11,7 +11,6 @@ using namespace brenta::types;
 void vao::init()
 {
   glGenVertexArrays(1, &this->vao_id);
-  bind();
 }
 
 unsigned int vao::get_vao()

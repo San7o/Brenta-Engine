@@ -18,47 +18,41 @@ using namespace brenta;
 
 REGISTER_SYSTEMS()
 
+const int screen_width = 800;
+const int screen_height = 600;
+  
+// Required: id and path of an audio. The id will be used by the
+// audio subsystem to identify this particular file.
+const types::sound_id_t sound_guitar_id = "guitar";
+const std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
+
+// You can specify additional optional settings like stream and
+// volume
+const types::stream_id_t stream_guitar_id = "guitar_stream";
+const float guitar_volume = 0.8f;
+  
 int main()
 {
   //
   // Setup
   //
 
-  const int screen_width = 800;
-  const int screen_height = 600;
-  
-  // Required: id and path of an audio. The id will be used by the
-  // audio subsystem to identify this particular file.
-  types::sound_id_t sound_guitar_id = "guitar";
-  std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
-
-  // You can specify additional optional settings like stream and
-  // volume
-  types::stream_id_t stream_guitar_id = "guitar_stream";
-  float guitar_volume = 0.8f;
-  
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug))
-    .subsystem(window::builder()
-               .title("audio test")
-               .width(screen_width)
-               .height(screen_height))    
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug))
+    .with(window::builder()
+          .title("audio test")
+          .width(screen_width)
+          .height(screen_height))    
     // Enable audio subsystem
-    .subsystem(audio::builder()
-               // Load a sound from path to stream
-               .sound(sound_guitar_id, sound_guitar_path, stream_guitar_id)
-               // Optionally set additional settings for the stream
-               .stream(stream_guitar_id, guitar_volume))
-    
+    .with(audio::builder()
+          // Load a sound from path to stream
+          .sound(sound_guitar_id, sound_guitar_path, stream_guitar_id)
+          // Optionally set additional settings for the stream
+          .stream(stream_guitar_id, guitar_volume))
     .build();
 
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    ERROR("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::managed();
 
   //
   // You can also load a sound any time with audio::load
@@ -85,17 +79,6 @@ int main()
 
     window::poll_events();
     window::swap_buffers();
-  }
-
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

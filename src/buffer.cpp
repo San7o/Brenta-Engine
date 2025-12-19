@@ -13,7 +13,6 @@ buffer::buffer(GLenum input_target)
 {
   this->target = input_target;
   glGenBuffers(1, &id);
-  bind();
 }
 
 void buffer::copy_data(GLsizeiptr size, const void *data, GLenum usage)

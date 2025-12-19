@@ -27,19 +27,15 @@ namespace brenta
  * This class contains helper functions to interact with OpenGL.
  */
 class gl : public subsystem
-{
-protected:
-
-  static bool enable_blending;
-  static bool enable_cull_face;
-  static bool enable_multisample;
-  static bool enable_depth_test;
-  
+{ 
 public:
 
-  static const std::string subsystem_name;
-  
+  class config;
   class builder;
+
+  static const std::string subsystem_name;
+  static const gl::config default_config;
+  static gl::config init_config;
 
   // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
@@ -128,15 +124,21 @@ public:
   static GLenum _check_error(const char *file, int line);
 };
 
+struct gl::config
+{
+public:
+  bool enable_blending;
+  bool enable_cull_face;
+  bool enable_multisample;
+  bool enable_depth_test;
+};
+  
 class gl::builder : public subsystem::builder
 {
 private:
 
-  bool enable_blending = false;
-  bool enable_cull_face = false;
-  bool enable_multisample = false;
-  bool enable_depth_test = false;
-
+  gl::config conf;
+  
 public:
 
   builder() = default;

@@ -20,30 +20,25 @@ const int SCR_HEIGHT = 600;
 
 int main()
 {
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("text demo")
-               .width(800)
-               .height(600)
-               .vsync())
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
-    .subsystem(text::builder()
-               .font("examples/assets/fonts/arial.ttf")
-               .size(100))
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("text demo")
+          .width(800)
+          .height(600)
+          .vsync())
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
+    .with(text::builder()
+          .font("examples/assets/fonts/arial.ttf")
+          .size(100))
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::managed();
 
   //
   // Render loop
@@ -62,17 +57,6 @@ int main()
 
     window::poll_events();
     window::swap_buffers();
-  }
-
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

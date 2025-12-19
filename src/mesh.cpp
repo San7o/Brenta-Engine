@@ -16,6 +16,7 @@ mesh::mesh(std::vector<types::vertex> vertices,
            GLint mipmap_min, GLint mipmap_max)
 {
   this->vao.init();
+  this->vao.bind();
   this->vertices = vertices;
   this->indices = indices;
   this->textures = textures;

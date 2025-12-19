@@ -40,25 +40,22 @@ classes, to get a detailed look at the engine, please visit the
 ### Modular APIs
 
 ```c++
-auto& engine = engine::builder()
-  .subsystem(logger::builder()
-             .level(oak::level::debug)
-             .file("/tmp/brenta-logs"))
-  .subsystem(window::builder()
-             .title("brenta demo")
-             .width(800)
-             .height(600)
-             .vsync()
-             .msaa())
-  .subsystem(ecs::builder())
+engine::builder()
+  .with(logger::builder()
+        .level(oak::level::debug)
+        .file("/tmp/brenta-logs"))
+  .with(window::builder()
+        .title("brenta demo")
+        .width(800)
+        .height(600)
+        .vsync()
+        .msaa())
+  .with(gl::builder()
+        .blending()
+        .cull_face()
+        .multisample()
+        .depth_test())
   .build();
-
-auto ret = engine.initialize();
-if (!ret.has_value())
-{
-  ERROR("Failed to initialize subsystem {}", ret.error());
-  return 1;
-}
 ```
 
 ### Model Loading

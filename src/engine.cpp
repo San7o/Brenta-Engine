@@ -64,8 +64,13 @@ engine &engine::instance()
   return _instance;
 }
 
+engine::manager engine::managed()
+{
+  return engine::manager();
+}
+
 std::expected<void, std::string>
-engine::add_subsystem(subsystem::builder &&builder)
+engine::with(subsystem::builder &&builder)
 {
   std::reference_wrapper<brenta::subsystem> s = builder.build();
   if (!s.get().initialize().has_value())
@@ -74,19 +79,37 @@ engine::add_subsystem(subsystem::builder &&builder)
   return {};
 }
 
+engine::manager::manager()
+{
+  auto ret = engine::instance().initialize();
+  if (!ret.has_value())
+  {
+    ERROR("engine::manager: failed to initialize subsystem {}", ret.error());
+  }
+}
+
+engine::manager::~manager()
+{
+  auto ret = engine::instance().terminate();
+  if (!ret.has_value())
+  {
+    ERROR("engine::manager: failed to terminate subsystem {}", ret.error());
+  }
+}
+
 //
 // Builder
 //
 
 brenta::engine::builder&
-engine::builder::subsystem(subsystem::builder &builder)
+engine::builder::with(subsystem::builder &builder)
 {
   this->subsystems.push_back(builder.build());
   return *this;
 }
 
 brenta::engine::builder&
-engine::builder::subsystem(subsystem::builder &&builder)
+engine::builder::with(subsystem::builder &&builder)
 {
   this->subsystems.push_back(builder.build());
   return *this;

@@ -61,6 +61,9 @@ public:
    */
   types::vao vao;
 
+  class config;
+  class builder;
+
   /**
    * @brief Empty constructor
    *
@@ -88,15 +91,8 @@ public:
                    int num_particles, float spawn_rate, float scale,
                    std::string atlas_path, int atlas_width, int atlas_height,
                    int atlas_index, camera *cam);
-  /**
-   * @brief Destroy the ParticleEmitter object
-   */
+  particle_emitter(particle_emitter::config conf); // TODO
   ~particle_emitter();
-
-  /**
-   * @brief The builder pattern for ParticleEmitter
-   */
-  class builder;
 
   /**
    * @brief Update the particles
@@ -104,9 +100,6 @@ public:
    * @param deltaTime Time passed since last frame
    */
   void update_particles(float deltaTime);
-  /**
-   * @brief Render the particles
-   */
   void render_particles();
 
 private:

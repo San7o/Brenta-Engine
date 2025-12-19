@@ -27,30 +27,25 @@ int main()
   // Setup
   //
   
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("particles")
-               .width(SCR_WIDTH)
-               .height(SCR_HEIGHT)
-               .msaa()
-               .vsync())
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
-    .subsystem(gui::builder())
-    .subsystem(input::builder())
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("particles")
+          .width(SCR_WIDTH)
+          .height(SCR_HEIGHT)
+          .msaa()
+          .vsync())
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
+    .with(gui::builder())
+    .with(input::builder())
     .build(); 
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::manager();
 
   default_camera = camera::builder()
                      .camera_type(enums::camera_type::SPHERICAL)
@@ -98,17 +93,6 @@ int main()
 
     window::poll_events();
     window::swap_buffers();
-  }
-
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

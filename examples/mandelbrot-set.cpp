@@ -22,29 +22,24 @@ int main()
   // Setup
   //
   
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("mandelbrot set")
-               .width(800)
-               .height(600)
-               .vsync())
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
-    .subsystem(input::builder())
-    .subsystem(gui::builder())
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("mandelbrot set")
+          .width(800)
+          .height(600)
+          .vsync())
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
+    .with(input::builder())
+    .with(gui::builder())
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::managed();
 
   // A square
   float vertices[] = {// First Triangle
@@ -136,17 +131,6 @@ int main()
 #endif
 
     window::swap_buffers();
-  }
-
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

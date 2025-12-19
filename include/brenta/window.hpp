@@ -33,16 +33,15 @@ protected:
   static int height;
   static GLFWwindow *window_backend;
   static std::string title;
-  static bool capture_mouse;
-  static bool msaa;
-  static bool vsync;
-  static bool debug;
   
 public:
 
+  struct config;
   class builder;
   
   static const std::string subsystem_name;
+  static const window::config default_config;
+  static window::config init_config;
 
   // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
@@ -114,17 +113,23 @@ private:
                                         int height);
 };
 
+struct window::config
+{
+public:
+  int width;
+  int height;
+  std::string title;
+  bool capture_mouse;
+  bool msaa;
+  bool vsync;
+  bool debug;
+};
+  
 class window::builder : public subsystem::builder
 {
 private:
-  
-  int _width = 800;
-  int _height = 600;
-  std::string _title = "Brenta Engine";
-  bool _capture_mouse = false;
-  bool _msaa = false;
-  bool _vsync = false;
-  bool _debug = false;
+
+  window::config conf = window::default_config;
   
 public:
 
@@ -133,7 +138,7 @@ public:
   
   builder &width(int width);
   builder &height(int height);
-  builder &title(std::string title);
+  builder &title(const std::string &title);
   builder &capture_mouse();
   builder &msaa();
   builder &vsync();

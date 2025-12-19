@@ -15,11 +15,14 @@ using namespace brenta;
 // Static variables
 //
 
-bool gl::enable_blending;
-bool gl::enable_cull_face;
-bool gl::enable_multisample;
-bool gl::enable_depth_test;
 const std::string gl::subsystem_name = "gl";
+const gl::config gl::default_config = {
+  false,
+  false,
+  false,
+  false,
+};
+gl::config gl::init_config = default_config;
 
 // Forward declaration
 void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
@@ -48,26 +51,26 @@ std::expected<void, subsystem::error> gl::initialize()
 
   glViewport(0, 0, width, height);
 
-  if (enable_depth_test)
+  if (gl::init_config.enable_depth_test)
   {
     glEnable(GL_DEPTH_TEST);
     INFO("{}: enabled GL_DEPTH_TEST", gl::subsystem_name);
   }
 
-  if (enable_blending)
+  if (gl::init_config.enable_blending)
   {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     INFO("{}: enabled GL_BLEND (transparency)", gl::subsystem_name);
   }
 
-  if (enable_cull_face)
+  if (gl::init_config.enable_cull_face)
   {
     glEnable(GL_CULL_FACE);
     INFO("{}: enabled GL_CULL_FACE", gl::subsystem_name);
   }
 
-  if (enable_multisample)
+  if (gl::init_config.enable_multisample)
   {
     glEnable(GL_MULTISAMPLE);
     INFO("{}: enabled GL_MULTISAMPLE", gl::subsystem_name);
@@ -274,33 +277,30 @@ void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
 
 gl::builder &gl::builder::blending()
 {
-  this->enable_blending = true;
+  this->conf.enable_blending = true;
   return *this;
 }
 
 gl::builder &gl::builder::cull_face()
 {
-  this->enable_cull_face = true;
+  this->conf.enable_cull_face = true;
   return *this;
 }
 
 gl::builder &gl::builder::multisample()
 {
-  this->enable_multisample = true;
+  this->conf.enable_multisample = true;
   return *this;
 }
 
 gl::builder &gl::builder::depth_test()
 {
-  this->enable_depth_test = true;
+  this->conf.enable_depth_test = true;
   return *this;
 }
 
 brenta::subsystem &gl::builder::build()
 {
-  gl::enable_blending = this->enable_blending;
-  gl::enable_cull_face = this->enable_cull_face;
-  gl::enable_multisample = this->enable_multisample;
-  gl::enable_depth_test = this->enable_depth_test;
+  gl::init_config = this->conf;
   return gl::instance();
 }

@@ -14,35 +14,30 @@
 REGISTER_SYSTEMS()
 
 using namespace brenta;
+  
+const int screen_width = 800;
+const int screen_height = 600;
 
 int main()
 {
   //
   // Setup
   //
-  
-  const int screen_width = 800;
-  const int screen_height = 600;
 
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug))
-    .subsystem(window::builder()
-               .title("load model test")
-               .width(screen_width)
-               .height(screen_height))
-    .subsystem(gl::builder()
-               .blending()
-               .cull_face()
-               .multisample()
-               .depth_test())
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug))
+    .with(window::builder()
+          .title("load model test")
+          .width(screen_width)
+          .height(screen_height))
+    .with(gl::builder()
+          .blending()
+          .cull_face()
+          .multisample()
+          .depth_test())
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
+  auto engine = engine::managed();
 
   //
   // Load assets
@@ -91,17 +86,6 @@ int main()
 
     window::poll_events();
     window::swap_buffers();
-  }
-  
-  //
-  // Cleanup
-  //
-  
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
   }
   return 0;
 }

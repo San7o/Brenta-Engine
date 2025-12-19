@@ -50,6 +50,9 @@ protected:
 
 public:
 
+  class manager;
+  class builder;
+  
   static const std::string subsystem_name;
   
   // Subsystem interface
@@ -66,17 +69,26 @@ public:
    * @brief Get a static object instance
    */
   static engine &instance();
+  static engine::manager managed();
   
   /**
    * @brief Initialize a subsystem and add it to the managed
    * subsystems (will be terminated with the others).
    */
   static std::expected<void, std::string>
-  add_subsystem(subsystem::builder &&builder);
-  
-  class builder;
+  with(subsystem::builder &&builder);
 };
 
+/**
+ * @brief Automatically initialize and terminate engine with RAII
+ */
+class engine::manager
+{
+public:
+  manager();
+  ~manager();
+};
+  
 /**
  * @brief Engine builder
  *
@@ -93,8 +105,8 @@ public:
   builder() = default;
   ~builder() = default;
   
-  builder &subsystem(subsystem::builder &builder);
-  builder &subsystem(subsystem::builder &&builder);
+  builder &with(subsystem::builder &builder);
+  builder &with(subsystem::builder &&builder);
   brenta::subsystem &build() override;
   
 };

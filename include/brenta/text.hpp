@@ -53,11 +53,6 @@ struct character
  */
 class text : public subsystem
 {
-protected:
-
-  static std::string font_path;
-  static int font_size;
-  
 public:
   
   /**
@@ -67,9 +62,12 @@ public:
    */
   static std::map<char, types::character> characters;
 
+  class config;
   class builder;
 
   static const std::string subsystem_name;
+  static const text::config default_config;
+  static text::config init_config;
 
   // Subsystem interface
   /**
@@ -130,24 +128,29 @@ public:
 
 private:
   
-  static types::shader_name_t text_shader;
-  static types::vao text_vao;
-  static types::buffer text_vbo;
+  static types::shader_name_t shader;
+  static types::vao vao;
+  static types::buffer vbo;
 };
 
+struct text::config
+{
+  std::string font_path;
+  int font_size;
+};
+  
 class text::builder : public subsystem::builder
 {
 private:
 
-  std::string font_path = "examples/assets/fonts/arial.ttf";
-  int font_size = 48;
+  text::config conf;
   
 public:
 
   builder() = default;
   ~builder() = default;
 
-  builder &font(std::string font_path);
+  builder &font(const std::string &font_path);
   builder &size(int font_size);
   
   brenta::subsystem &build() override;
