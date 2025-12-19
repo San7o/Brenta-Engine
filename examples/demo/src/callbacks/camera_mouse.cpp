@@ -8,97 +8,97 @@
 
 using namespace brenta;
 
-void init_camera_mouse_callback()
+void init_camera_mouse_callback(camera *cam)
 {
-  auto camera_mouse_callback = [](double xpos, double ypos)
+  auto camera_mouse_callback = [cam](double xpos, double ypos)
   {
-    /* Rotate the camera */
+    // Rotate the camera
     if (window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
     {
-      if (default_camera.first_mouse)
+      if (cam->first_mouse)
       {
-        default_camera.last_x = xpos;
-        default_camera.last_y = ypos;
-        default_camera.first_mouse = false;
+        cam->last_x = xpos;
+        cam->last_y = ypos;
+        cam->first_mouse = false;
       }
 
-      float xoffset = xpos - default_camera.last_x;
-      float yoffset = default_camera.last_y - ypos;
-      default_camera.last_x = xpos;
-      default_camera.last_y = ypos;
+      float xoffset = xpos - cam->last_x;
+      float yoffset = cam->last_y - ypos;
+      cam->last_x = xpos;
+      cam->last_y = ypos;
 
-      xoffset *= default_camera.mouse_sensitivity;
-      yoffset *= default_camera.mouse_sensitivity;
+      xoffset *= cam->mouse_sensitivity;
+      yoffset *= cam->mouse_sensitivity;
 
-      default_camera.spherical_coordinates.theta +=
-        yoffset * default_camera.mouse_sensitivity;
-      default_camera.spherical_coordinates.phi +=
-        xoffset * default_camera.mouse_sensitivity;
+      cam->spherical_coordinates.theta +=
+        yoffset * cam->mouse_sensitivity;
+      cam->spherical_coordinates.phi +=
+        xoffset * cam->mouse_sensitivity;
 
-      if (default_camera.spherical_coordinates.theta <= 0.01f)
-        default_camera.spherical_coordinates.theta = 0.01f;
-      if (default_camera.spherical_coordinates.theta >= 3.13f)
-        default_camera.spherical_coordinates.theta = 3.13f;
+      if (cam->spherical_coordinates.theta <= 0.01f)
+        cam->spherical_coordinates.theta = 0.01f;
+      if (cam->spherical_coordinates.theta >= 3.13f)
+        cam->spherical_coordinates.theta = 3.13f;
 
-      default_camera.spherical_to_cartesian();
+      cam->spherical_to_cartesian();
     }
-    /* translate the default_camera center */
+    /* translate the cam center */
     else if (window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
     {
-      if (default_camera.first_mouse)
+      if (cam->first_mouse)
       {
-        default_camera.last_x = xpos;
-        default_camera.last_y = ypos;
-        default_camera.first_mouse = false;
+        cam->last_x = xpos;
+        cam->last_y = ypos;
+        cam->first_mouse = false;
       }
 
-      float xoffset = xpos - default_camera.last_x;
-      float yoffset = default_camera.last_y - ypos;
-      default_camera.last_x = xpos;
-      default_camera.last_y = ypos;
+      float xoffset = xpos - cam->last_x;
+      float yoffset = cam->last_y - ypos;
+      cam->last_x = xpos;
+      cam->last_y = ypos;
 
-      xoffset *= default_camera.mouse_sensitivity * 0.3f;
-      yoffset *= default_camera.mouse_sensitivity * 0.3f;
+      xoffset *= cam->mouse_sensitivity * 0.3f;
+      yoffset *= cam->mouse_sensitivity * 0.3f;
 
       // Local coordinate system
       glm::vec3 fixed_center =
-        glm::vec3(default_camera.center.x, default_camera.position.y,
-                  default_camera.center.z);
+        glm::vec3(cam->center.x, cam->position.y,
+                  cam->center.z);
       glm::vec3 front =
-        glm::normalize(default_camera.position - fixed_center); // Versor
+        glm::normalize(cam->position - fixed_center); // Versor
       glm::vec3 right =
-        glm::normalize(glm::cross(front, default_camera.world_up)); // Versor
+        glm::normalize(glm::cross(front, cam->world_up)); // Versor
 
-      default_camera.center += right * glm::vec3(xoffset);
-      default_camera.center -= default_camera.world_up * glm::vec3(yoffset);
-      default_camera.spherical_to_cartesian();
+      cam->center += right * glm::vec3(xoffset);
+      cam->center -= cam->world_up * glm::vec3(yoffset);
+      cam->spherical_to_cartesian();
     }
-    /* zoom the default_camera */
+    /* zoom the camera */
     else if (window::is_key_pressed(GLFW_KEY_LEFT_ALT))
     {
-      if (default_camera.first_mouse)
+      if (cam->first_mouse)
       {
-        default_camera.last_x = xpos;
-        default_camera.last_y = ypos;
-        default_camera.first_mouse = false;
+        cam->last_x = xpos;
+        cam->last_y = ypos;
+        cam->first_mouse = false;
       }
 
-      float xoffset = xpos - default_camera.last_x;
-      float yoffset = default_camera.last_y - ypos;
-      default_camera.last_x = xpos;
-      default_camera.last_y = ypos;
+      float xoffset = xpos - cam->last_x;
+      float yoffset = cam->last_y - ypos;
+      cam->last_x = xpos;
+      cam->last_y = ypos;
 
-      xoffset *= default_camera.mouse_sensitivity;
-      yoffset *= default_camera.mouse_sensitivity;
+      xoffset *= cam->mouse_sensitivity;
+      yoffset *= cam->mouse_sensitivity;
 
-      default_camera.spherical_coordinates.radius -= yoffset;
-      if (default_camera.spherical_coordinates.radius <= 0.1f)
-        default_camera.spherical_coordinates.radius = 0.1f;
-      default_camera.spherical_to_cartesian();
+      cam->spherical_coordinates.radius -= yoffset;
+      if (cam->spherical_coordinates.radius <= 0.1f)
+        cam->spherical_coordinates.radius = 0.1f;
+      cam->spherical_to_cartesian();
     }
     else
     {
-      default_camera.first_mouse = true;
+      cam->first_mouse = true;
     }
   };
   input::add_mouse_pos_callback("CameraCallback", camera_mouse_callback);

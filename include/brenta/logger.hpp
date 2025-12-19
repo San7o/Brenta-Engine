@@ -23,32 +23,48 @@ namespace brenta
 
 class logger : public subsystem
 {
-protected:
-  
-  static oak::level log_level;
-  static std::string log_file;
-  
 public:
 
-  std::string subsystem_name = "logger";
+  struct config;
+  class builder;
   
+  static const std::string subsystem_name;
+  static const config default_config;
+  static config init_config;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
+  
+  // Constructors / destructors
   logger() = default;
   ~logger() = default;
 
+  // Member functions
+  
   static logger &instance();
   
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
+private:
+  
+  static oak::level log_level;
+  static std::string log_file;
+  static bool initialized;
+  
+};
 
-  class builder;
+struct logger::config
+{
+  oak::level log_level;
+  std::string log_file;
 };
 
 class logger::builder : public subsystem::builder
 {
 private:
 
-  oak::level log_level = oak::level::info;;
-  std::string log_file = "/tmp/brenta_logs";
+  logger::config conf = logger::default_config;
   
 public:
 

@@ -29,28 +29,37 @@ public:
 
   class builder;
 
-  std::string subsystem_name = "gui";
-  
+  static const std::string subsystem_name;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
+
+  // Costructors / destructors
   gui() = default;
   ~gui() = default;
-  
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
 
+  // Member functions
+  
   static gui &instance();
   
   /**
    * @brief Start a new frame
-   * To be called at each frame
-   * before rendering.
+   * To be called at each frame before rendering.
    */
   static void new_frame(types::framebuffer *fb, std::string name = "Game");
   /**
    * @brief Render the gui
-   * To be called at each frame
-   * after rendering.
+   * To be called at each frame after rendering.
    */
   static void render();
+
+private:
+  
+  static bool initialized;
+  
 };
 
 class gui::builder : public subsystem::builder

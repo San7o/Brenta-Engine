@@ -19,12 +19,12 @@ namespace brenta
 class texture
 {
 public:
+  
   /**
    * @brief Load a texture from a file
    *
-   * This method loads a texture from a file and returns
-   * the texture ID. The texture is loaded using the stb_image
-   * library.
+   * This method loads a texture from a file and returns the texture
+   * ID. The texture is loaded using the stb_image library.
    *
    * @param path Path to the texture file
    * @return The texture ID
@@ -39,8 +39,8 @@ public:
   /**
    * @brief Bind a texture
    *
-   * This method binds a texture to a target. The texture
-   * is bound with the specified wrapping and filtering modes.
+   * This method binds a texture to a target. The texture is bound
+   * with the specified wrapping and filtering modes.
    *
    * You need to bind the texture before using it in the shader.
    */
@@ -53,6 +53,7 @@ public:
                            GLint mipmap_mag = GL_LINEAR);
 
 private:
+  
   static void set_texture_wrapping(GLint wrapping);
   static void set_texture_filtering(GLint filtering_min, GLint filtering_mag);
   static void set_mipmap(GLboolean has_mipmap, GLint mipmap_min,

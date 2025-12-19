@@ -49,7 +49,7 @@ void translation::translate(glm::vec3 translation)
   this->model = glm::translate(this->model, translation);
 }
 
-/* Note: the order of rotations is important */
+// Note: the order of rotations is important
 void translation::rotate(glm::vec3 rotation)
 {
   this->model = glm::rotate(this->model, glm::radians(rotation.x),

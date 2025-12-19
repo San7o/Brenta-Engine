@@ -32,6 +32,8 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       return;
     }
 
+    brenta::camera *cam = world::get_resource<CameraResource>()->cam;
+
     for (auto match : matches)
     {
       /* Get the model component */
@@ -44,8 +46,8 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       auto default_shader = model_component->shader;
 
       brenta::types::translation t = brenta::types::translation();
-      t.set_view(default_camera.get_view_matrix());
-      t.set_projection(default_camera.get_projection_matrix(window::get_width(),
+      t.set_view(cam->get_view_matrix());
+      t.set_projection(cam->get_projection_matrix(window::get_width(),
                                                             window::get_height()));
 
       t.set_model(glm::mat4(1.0f));
@@ -56,7 +58,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       t.set_shader(default_shader);
 
       shader::set_vec3(default_shader, "viewPos",
-                       default_camera.get_position());
+                       cam->get_position());
       shader::set_float(default_shader, "material.shininess",
                         model_component->shininess);
 

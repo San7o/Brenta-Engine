@@ -20,19 +20,15 @@ const int SCR_HEIGHT = 600;
 
 int main()
 {
-  auto& engine = engine::builder()
-    .subsystem(window::builder()
-               .title("simple screen")
-               .width(SCR_WIDTH)
-               .height(SCR_HEIGHT))
+  engine::builder()
+    .with(window::builder()
+          .title("simple screen")
+          .width(SCR_WIDTH)
+          .height(SCR_HEIGHT))
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
-    
+  
+  auto engine = engine::managed();
+  
   while (!window::should_close())
   {
     if (window::is_key_pressed(GLFW_KEY_ESCAPE))
@@ -42,11 +38,5 @@ int main()
     window::swap_buffers();
   }
 
-  ret = engine.terminate();
-  if (!ret.has_value())
-  {
-    oak::error("Failed to terminate subsystem {}", ret.error());
-    return 1;
-  }
   return 0;
 }

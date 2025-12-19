@@ -9,24 +9,33 @@
 
 using namespace brenta;
 
-mesh::mesh(std::vector<types::vertex> vertices,
-           std::vector<unsigned int> indices,
-           std::vector<types::texture> textures, GLint wrapping,
-           GLint filtering_min, GLint filtering_mag, GLboolean has_mipmap,
-           GLint mipmap_min, GLint mipmap_max)
+const mesh::config mesh::default_config = {
+  {},
+  {},
+  {},
+  GL_REPEAT,
+  GL_NEAREST,
+  GL_LINEAR,
+  GL_TRUE,
+  GL_LINEAR_MIPMAP_LINEAR,
+  GL_LINEAR,
+};
+
+mesh::mesh(config conf)
 {
   this->vao.init();
-  this->vertices = vertices;
-  this->indices = indices;
-  this->textures = textures;
+  this->vao.bind();
+  this->vertices = conf.vertices;
+  this->indices = conf.indices;
+  this->textures = conf.textures;
   this->vbo = types::buffer(GL_ARRAY_BUFFER);
   this->ebo = types::buffer(GL_ELEMENT_ARRAY_BUFFER);
-  this->wrapping = wrapping;
-  this->filtering_min = filtering_min;
-  this->filtering_mag = filtering_mag;
-  this->has_mipmap = has_mipmap;
-  this->mipmap_min = mipmap_min;
-  this->mipmap_mag = mipmap_max;
+  this->wrapping = conf.wrapping;
+  this->filtering_min = conf.filtering_min;
+  this->filtering_mag = conf.filtering_mag;
+  this->has_mipmap = conf.has_mipmap;
+  this->mipmap_min = conf.mipmap_min;
+  this->mipmap_mag = conf.mipmap_max;
 
   setup_mesh();
 }
@@ -35,7 +44,7 @@ void mesh::draw(types::shader_name_t shader_name)
 {
   if (this->vao.get_vao() == 0)
   {
-    ERROR("Mesh not initialized");
+    ERROR("mesh::draw: not initialized");
     return;
   }
 
@@ -87,57 +96,55 @@ void mesh::setup_mesh()
 // Builder functions
 //
 
-mesh::builder &mesh::builder::set_vertices(std::vector<types::vertex> vertices)
+mesh::builder &mesh::builder::vertices(std::vector<types::vertex> vertices)
 {
-  this->vertices = vertices;
+  this->conf.vertices = vertices;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_indices(std::vector<unsigned int> indices)
+mesh::builder &mesh::builder::indices(std::vector<unsigned int> indices)
 {
-  this->indices = indices;
+  this->conf.indices = indices;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_textures(std::vector<types::texture> textures)
+mesh::builder &mesh::builder::textures(std::vector<types::texture> textures)
 {
-  this->textures = textures;
+  this->conf.textures = textures;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_wrapping(GLint wrapping)
+mesh::builder &mesh::builder::wrapping(GLint wrapping)
 {
-  this->wrapping = wrapping;
+  this->conf.wrapping = wrapping;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_filtering_min(GLint filtering_min)
+mesh::builder &mesh::builder::filtering_min(GLint filtering_min)
 {
-  this->filtering_min = filtering_min;
+  this->conf.filtering_min = filtering_min;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_filtering_mag(GLint filtering_mag)
+mesh::builder &mesh::builder::filtering_mag(GLint filtering_mag)
 {
-  this->filtering_mag = filtering_mag;
+  this->conf.filtering_mag = filtering_mag;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_has_mipmap(GLboolean has_mipmap)
+mesh::builder &mesh::builder::has_mipmap(GLboolean has_mipmap)
 {
-  this->has_mipmap = has_mipmap;
+  this->conf.has_mipmap = has_mipmap;
   return *this;
 }
 
-mesh::builder &mesh::builder::set_mipmap_min(GLint mipmap_min)
+mesh::builder &mesh::builder::mipmap_min(GLint mipmap_min)
 {
-  this->mipmap_min = mipmap_min;
+  this->conf.mipmap_min = mipmap_min;
   return *this;
 }
 
 mesh mesh::builder::build()
 {
-  return mesh(this->vertices, this->indices, this->textures, this->wrapping,
-              this->filtering_min, this->filtering_mag, this->has_mipmap,
-              this->mipmap_min, this->mipmap_mag);
+  return mesh(this->conf);
 }

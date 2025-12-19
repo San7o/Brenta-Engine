@@ -53,11 +53,6 @@ struct character
  */
 class text : public subsystem
 {
-protected:
-
-  static std::string font_path;
-  static int font_size;
-  
 public:
   
   /**
@@ -67,13 +62,14 @@ public:
    */
   static std::map<char, types::character> characters;
 
+  class config;
   class builder;
 
-  std::string subsystem_name = "text";
-  
-  text() = default;
-  ~text() = default;
-  
+  static const std::string subsystem_name;
+  static const text::config default_config;
+  static text::config init_config;
+
+  // Subsystem interface
   /**
    * @brief Initialize the text subsystem
    *
@@ -85,13 +81,21 @@ public:
    * Note: opengl context must be created before calling this
    * method.
    */
-  std::expected<void, std::string> initialize();
+  std::expected<void, subsystem::error> initialize() override;
 
   /**
    * @brief Cleaup resources
    */
-  std::expected<void, std::string> terminate();
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
 
+  // Constructors / destructors
+  text() = default;
+  ~text() = default;
+  
+  // Member functions
+  
   static text &instance();
 
   /**
@@ -120,29 +124,36 @@ public:
    * @param scale Scale of the text
    * @param color Color of the text
    */
-  static void render_text(std::string text, float x, float y, float scale,
-                          glm::vec3 color);
+  static void render_text(std::string text, float x, float y,
+                          float scale, glm::vec3 color);
 
 private:
   
-  static types::shader_name_t text_shader;
-  static types::vao text_vao;
-  static types::buffer text_vbo;
+  static types::shader_name_t shader;
+  static types::vao vao;
+  static types::buffer vbo;
+  static bool initialized;
+  
 };
 
+struct text::config
+{
+  std::string font_path;
+  int font_size;
+};
+  
 class text::builder : public subsystem::builder
 {
 private:
 
-  std::string font_path = "examples/assets/fonts/arial.ttf";
-  int font_size = 48;
+  text::config conf = text::default_config;
   
 public:
 
   builder() = default;
   ~builder() = default;
 
-  builder &font(std::string font_path);
+  builder &font(const std::string &font_path);
   builder &size(int font_size);
   
   brenta::subsystem &build() override;

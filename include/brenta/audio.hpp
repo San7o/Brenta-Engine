@@ -41,22 +41,7 @@ typedef ma_sound_group stream_t;
  * identified by a string id.
  */
 class audio : public subsystem
-{
-protected:
-  
-  /**
-   * A list of pairs (stream_id, volume) of streams that will be
-   * created when the subsystem is initialized.
-   */  
-  static std::vector<std::pair<types::stream_id_t, float>> init_streams;
-
-  /**
-   * A list of pairs (sound_id, pathname, stream_id) of sounds that
-   * will be loaded when the subsystem is initialized.
-   */
-  static std::vector<std::tuple<types::sound_id_t, std::string,
-                                types::stream_id_t>> init_sounds;
-  
+{  
 public:
   
   /**
@@ -75,21 +60,20 @@ public:
    * engine creates a default stream called "default".
    */
   static std::unordered_map<types::stream_id_t, types::stream_t> streams;
-
-  class builder;
-
-  std::string subsystem_name = "audio";
   
-  audio() = default;
-  ~audio() = default;
+  static const std::string subsystem_name;
+  
+  class builder;
+  enum class error;
 
+  // Subsystem interface
   /**
    * @brief Initialize the audio subsystem
    *
    * This function initializes the audio subsystem of the engine. It
    * creates a default stream called "default".
    */
-  std::expected<void, std::string> initialize() override;
+  std::expected<void, subsystem::error> initialize() override;
     
   /**
    * @brief Terminate the audio system
@@ -97,8 +81,18 @@ public:
    * This function frees all audio streams and sound files, and closes
    * the audio subsystem.
    */
-  std::expected<void, std::string> terminate() override;
+  std::expected<void, subsystem::error> terminate() override;
 
+  std::string name() override;
+  bool is_initialized() override;
+  
+  // Constructors / destructors
+  
+  audio() = default;
+  ~audio() = default;
+
+  // Member functions
+  
   static audio &instance();
 
   /**
@@ -106,33 +100,58 @@ public:
    *
    * Automatically creates the stream if it does not exist.
    */
-  static void load(types::sound_id_t sound_id, std::string path,
-                   types::stream_id_t stream_id = "default");
+  static std::expected<void, audio::error>
+  load(const types::sound_id_t &sound_id,
+       const std::string &path,
+       const types::stream_id_t &stream_id = "default");
 
   /**
    * @brief Play a sound on its stream
    */
-  static void play(types::sound_id_t);
+  static std::expected<void, audio::error>
+  play(const types::sound_id_t &id);
 
   //
   // Stream functions
   //
   
-  static void create_stream(types::stream_id_t);
-  static types::stream_t *get_stream(types::stream_id_t id);
+  static std::expected<void, audio::error>
+  create_stream(const types::stream_id_t &id);
+  static types::stream_t *get_stream(const types::stream_id_t &id);
   
-  static void stream_stop(types::stream_id_t id);
-  static void stream_start(types::stream_id_t id);
+  static std::expected<void, audio::error>
+  stream_stop(const types::stream_id_t &id);
+  static std::expected<void, audio::error>
+  stream_start(const types::stream_id_t &id);
   /**
    * @brief Set the volume of a stream.
    *
    * 1.0 is default, 2.0 is double, 0.5 is half.
    */
-  static void stream_set_volume(types::stream_id_t id, float volume);
+  static std::expected<void, audio::error>
+  stream_set_volume(const types::stream_id_t &id, float volume);
 
 private:
+  
+  /**
+   * A list of pairs (stream_id, volume) of streams that will be
+   * created when the subsystem is initialized.
+   */  
+  static std::vector<std::pair<types::stream_id_t, float>> init_streams;
+
+  /**
+   * A list of pairs (sound_id, pathname, stream_id) of sounds that
+   * will be loaded when the subsystem is initialized.
+   */
+  static std::vector<std::tuple<types::sound_id_t,
+                                std::string,
+                                types::stream_id_t>> init_sounds;
+
+  static bool initialized;
+  
   // Backend
   static ma_engine engine;
+
 };
 
 class audio::builder : public subsystem::builder
@@ -149,12 +168,24 @@ public:
   builder() = default;
   ~builder() = default;
 
-  builder &sound(types::sound_id_t sound_id, std::string path,
-                 types::stream_id_t stream_id = "default");
-  builder &stream(types::stream_id_t id, float volume = 1.0);
+  builder &sound(const types::sound_id_t &sound_id,
+                 const std::string &path,
+                 const types::stream_id_t &stream_id = "default");
+  builder &stream(const types::stream_id_t &id,
+                  float volume = 1.0);
   
   brenta::subsystem &build() override;
   
+};
+
+enum class audio::error : int
+{
+  init_from_file,
+  stream_not_found,
+  sound_not_found,
+  stream_init,
+  stream_stop,
+  stream_start,
 };
   
 } // namespace brenta

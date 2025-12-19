@@ -23,7 +23,9 @@ void init_cube_entity()
                    GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
   }
 
-  model m("examples/assets/models/simple_cube/simple_cube.obj");
+  model m = model::builder()
+    .path("examples/assets/models/simple_cube/simple_cube.obj")
+    .build();
 
   auto cube = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(0.0f), glm::vec3(0.0f), 1.0f)

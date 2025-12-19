@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['num_5fparticles_0',['num_particles',['../classbrenta_1_1particle__emitter.html#ab9141be43d10cfd74dc60fded0e54067',1,'brenta::particle_emitter']]]
+  ['projection_0',['projection',['../classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551',1,'brenta::types::translation']]]
 ];

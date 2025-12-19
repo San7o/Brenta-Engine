@@ -28,26 +28,28 @@ namespace brenta
  */
 class gl : public subsystem
 {
-protected:
-
-  static bool enable_blending;
-  static bool enable_cull_face;
-  static bool enable_multisample;
-  static bool enable_depth_test;
-  
 public:
 
+  class config;
   class builder;
-  
-  std::string subsystem_name = "gl";
 
+  static const std::string subsystem_name;
+  static const gl::config default_config;
+  static gl::config init_config;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
+  
+  // Constructors / destructors
   gl() = default;
   ~gl() = default;
 
+  // Member functions
+  
   static gl &instance();
-
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
   
   /**
    * @brief Set Poligon Mode
@@ -121,17 +123,28 @@ public:
    * @return The error code
    */
   static GLenum _check_error(const char *file, int line);
+
+private:
+  
+  static bool initialized;
+  
 };
 
+struct gl::config
+{
+public:
+  bool enable_blending;
+  bool enable_cull_face;
+  bool enable_multisample;
+  bool enable_depth_test;
+};
+  
 class gl::builder : public subsystem::builder
 {
 private:
 
-  bool enable_blending = false;
-  bool enable_cull_face = false;
-  bool enable_multisample = false;
-  bool enable_depth_test = false;
-
+  gl::config conf = gl::default_config;
+  
 public:
 
   builder() = default;

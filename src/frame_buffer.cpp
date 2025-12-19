@@ -8,6 +8,8 @@
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
 
+#include <stdexcept>
+
 using namespace brenta;
 using namespace brenta::types;
 
@@ -18,8 +20,8 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glGenFramebuffers(1, &this->id);
   if (this->id == 0)
   {
-    ERROR("Error creating framebuffer!");
-    exit(1);
+    ERROR("framebuffer: error generating framebuffer");
+    throw std::runtime_error("framebuffer: error generating framebuffer");
   }
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   check_error();
@@ -27,7 +29,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glGenTextures(1, &this->texture_id);
   if (this->texture_id == 0)
   {
-    ERROR("Error creating texture!");
+    ERROR("framebuffer: error generating texture");
     exit(1);
   }
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
@@ -49,7 +51,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
 
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-    ERROR("Framebuffer is not complete!");
+    ERROR("framebuffer: not complete");
     exit(1);
   }
 
@@ -87,7 +89,7 @@ void framebuffer::rescale(int width, int height)
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
-    ERROR("Framebuffer is not complete!");
+    ERROR("framebuffer: not complete");
     return;
   }
 

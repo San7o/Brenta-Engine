@@ -34,9 +34,9 @@ namespace brenta
 /**
  * @brief Engine class
  *
- * This class is used to initialize and terminate multiple subsystems
- * based on the lifetime of the engine object. You can use the builder
- * class to create the object.
+ * This class is used to initialize and terminate multiple
+ * subsystems. You can use the builder class to initialize the engine,
+ * as with any other subsystem.
  *
  * Note: The subsystems will be initialized in the order as they are
  * added and terminated in reverse, so make sure that they are ordered
@@ -44,35 +44,60 @@ namespace brenta
  */
 class engine : public subsystem
 {
-protected:
-
-  static std::vector<std::reference_wrapper<subsystem>> subsystems;
-
 public:
 
-  std::string subsistem_name = "engine";
+  class manager;
+  class builder;
   
+  static const std::string subsystem_name;
+  
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
+
+  // Constructors / destructors
   engine() = default;
   ~engine() = default;
-  
+
+  // Member functions
   /**
    * @brief Get a static object instance
    */
   static engine &instance();
+  static engine::manager managed();
   
-  // Subsystem functions
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
   /**
-   * @brief Initialize a subsistem and add it to the managed
-   * subsystems
+   * @brief Initialize a subsystem and add it to the managed
+   * subsystems (will be terminated with the others).
    */
-  static std::expected<void, std::string> add_subsystem(subsystem::builder &&builder);
-  
-  class builder;
+  static std::expected<void, std::string>
+  with(subsystem::builder &&builder);
+
+private:
+
+  static std::vector<std::reference_wrapper<subsystem>> subsystems;
+  static bool initialized;
+
 };
 
+/**
+ * @brief Automatically initialize and terminate engine with RAII
+ */
+class engine::manager
+{
+public:
+  /**
+   * @brief Initializes all subsystems, throws and exeption in case of failure
+   */
+  manager();
+  /**
+   * @brief Terminates all subsystems
+   */
+  ~manager();
+};
+  
 /**
  * @brief Engine builder
  *
@@ -89,8 +114,8 @@ public:
   builder() = default;
   ~builder() = default;
   
-  builder &subsystem(subsystem::builder &builder);
-  builder &subsystem(subsystem::builder &&builder);
+  builder &with(subsystem::builder &builder);
+  builder &with(subsystem::builder &&builder);
   brenta::subsystem &build() override;
   
 };

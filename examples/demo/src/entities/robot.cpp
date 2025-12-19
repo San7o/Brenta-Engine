@@ -22,9 +22,16 @@ void init_robot_entity()
                    GL_FRAGMENT_SHADER,"examples/demo/shader.fs");
   }
 
-  model m("examples/assets/models/robot_sprite/robot_sprite.obj",
-          GL_REPEAT, GL_NEAREST, GL_NEAREST, GL_TRUE, GL_LINEAR_MIPMAP_NEAREST,
-          GL_NEAREST, false);
+  model m = model::builder()
+    .path("examples/assets/models/robot_sprite/robot_sprite.obj")
+    .wrapping(GL_REPEAT)
+    .filtering_min(GL_NEAREST)
+    .filtering_mag(GL_NEAREST)
+    .has_mipmap(GL_TRUE)
+    .mipmap_min(GL_LINEAR_MIPMAP_NEAREST)
+    .mipmap_mag(GL_NEAREST)
+    .flip(false)
+    .build();
 
   auto cube_entity = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(0.0f, 5.0f, 0.0f),

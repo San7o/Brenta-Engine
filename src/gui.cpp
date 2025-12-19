@@ -14,8 +14,21 @@
 using namespace brenta;
 using namespace brenta::types;
 
-std::expected<void, std::string> gui::initialize()
+//
+// Static variables
+//
+
+const std::string gui::subsystem_name = "gui";
+bool gui::initialized = false;
+
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> gui::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
@@ -30,20 +43,37 @@ std::expected<void, std::string> gui::initialize()
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 
-  INFO("GUI initialized");
-  
+  gui::initialized = true;
+  INFO("{} initialized", gui::subsystem_name);
   return {};
 }
 
-std::expected<void, std::string> gui::terminate()
+std::expected<void, subsystem::error> gui::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 
-  INFO("GUI terminated");
+  gui::initialized = false;
+  INFO("{}: terminated", gui::subsystem_name);
   return {};
 }
+
+std::string gui::name()
+{
+  return gui::subsystem_name;
+}
+
+bool gui::is_initialized()
+{
+  return gui::initialized;
+}
+
+//
+// Member functions
+//
 
 gui &gui::instance()
 {
@@ -63,7 +93,9 @@ void gui::new_frame(framebuffer *fb, std::string name)
   // Game window
   //
 
-  ImGui::SetNextWindowSize(ImVec2(500, 500));
+  ImGui::SetNextWindowSize(ImVec2(window::get_width() * 0.8,
+                                  window::get_width() * 0.8),
+                           ImGuiCond_FirstUseEver);
   ImGui::Begin(name.c_str());
 
   float window_width = ImGui::GetContentRegionAvail().x;

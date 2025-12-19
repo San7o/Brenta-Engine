@@ -11,9 +11,9 @@ namespace brenta
 /**
  * @brief Time subsystem
  *
- * This subsystem is used to manage the time of the engine. It is used to
- * get the current time, the time since the last frame and the frames per
- * second of the program.
+ * This subsystem is used to manage the time of the engine. It is used
+ * to get the current time, the time since the last frame and the
+ * frames per second of the program.
  */
 class time
 {
@@ -23,8 +23,8 @@ public:
   /**
    * @brief Get the current time
    *
-   * This function returns the current time in seconds since the start of the
-   * program.
+   * This function returns the current time in seconds since the start
+   * of the program.
    *
    * @return The current time in seconds
    */
@@ -48,8 +48,8 @@ public:
   /**
    * @brief Update the time
    *
-   * This function updates the time of the program. It's intended
-   * use is to be called at each tick of the game loop.
+   * This function updates the time of the program. It's intended use
+   * is to be called at each tick of the game loop.
    *
    * @param newTime The new time of the program
    */

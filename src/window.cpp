@@ -10,65 +10,111 @@
 #include <brenta/window.hpp>
 #include <cstdio>
 
+#include <glad/glad.h>
+
 using namespace brenta;
+
+//
+// Static variables
+//
 
 int window::width;
 int window::height;
 GLFWwindow *window::window_backend;
 std::string window::title;
-bool window::capture_mouse;
-bool window::msaa;
-bool window::vsync;
+const std::string window::subsystem_name = "window";
+const window::config window::default_config = {
+  800,
+  600,
+  "Brenta Engine",
+  false,
+  false,
+  false,
+  false,
+};
+window::config window::init_config = window::default_config;
+bool window::initialized = false;
 
-std::expected<void, std::string> window::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> window::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   if (glfwInit() == GLFW_FALSE)
   {
-    return std::unexpected("window: Failed to initialize GLFW on init");
+    return std::unexpected(window::subsystem_name +
+                           ": failed to initialize GLFW");
   }
 
   set_context_version(3, 3);
   use_core_profile();
 
-  if (this->msaa)
+  if (window::init_config.msaa)
   {
     glfwWindowHint(GLFW_SAMPLES, 4);
-    INFO("MSAA is enabled");
+    INFO("{}: enabled MSAA", window::subsystem_name);
   } else {
-    INFO("MSAA is disabled");
+    INFO("{}: disabled MSAA", window::subsystem_name);
   }
 
-  if (!this->vsync)
+  if (!window::init_config.vsync)
   {
     glfwSwapInterval(0);
-    INFO("VSync is disabled");
+    INFO("{}: disabled VSync", window::subsystem_name);
   } else {
-    INFO("VSync is enabled");
+    INFO("{}: enabled VSync", window::subsystem_name);
+  }
+
+  if (window::init_config.debug)
+  {
+    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
+    INFO("{}: enabled OPENGL_DEBUG_CONTEXT", window::subsystem_name);
   }
 
 #ifdef __APPLE__
   set_hints_apple();
 #endif
 
-  create_window(this->width, this->height, title);
+  create_window(window::init_config.width,
+                window::init_config.height, title);
   make_context_current();
-  set_mouse_capture(this->capture_mouse);
+  set_mouse_capture(window::init_config.capture_mouse);
 
   set_size_callback(framebuffer_size_callback);
 
-  INFO("window initialized")
+  window::initialized = true;
+  INFO("{}: initialized", window::subsystem_name)
   return {};
 }
 
-std::expected<void, std::string> window::terminate()
+std::expected<void, subsystem::error> window::terminate()
 {
-  INFO("terminating window");
-  glfwDestroyWindow(this->window_backend);
+  if (!this->is_initialized()) return {};
+  
+  glfwDestroyWindow(window::window_backend);
   glfwTerminate();
-  INFO("window terminated");
 
+  window::initialized = false;
+  INFO("{}: terminated", window::subsystem_name);
   return {};
 }
+
+std::string window::name()
+{
+  return window::subsystem_name;
+}
+
+bool window::is_initialized()
+{
+  return window::initialized;
+}
+
+//
+// Member functions
+//
 
 window &window::instance()
 {
@@ -127,21 +173,20 @@ void window::set_size_callback(GLFWframebuffersizefun callback)
 {
   glfwSetFramebufferSizeCallback(window::window_backend, callback);
 
-  INFO("set framebuffer size callback");
+  DEBUG("{}: set framebuffer size callback", window::subsystem_name);
 }
 
 void window::set_mouse_capture(bool is_captured)
 {
-  window::capture_mouse = is_captured;
   if (is_captured)
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("mouse capture enabled");
+    INFO("{}: mouse capture enabled", window::subsystem_name);
   }
   else
   {
     glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("mouse capture disabled");
+    INFO("{}: mouse capture disabled", window::subsystem_name);
   }
 }
 
@@ -165,7 +210,8 @@ void window::set_context_version(int major, int minor)
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
-  INFO("set context to OpenGL version: {}.{}", major, minor);
+  INFO("{}: set context to OpenGL version: {}.{}",
+       window::subsystem_name, major, minor);
 }
 
 void window::set_key_callback(GLFWkeyfun callback)
@@ -182,7 +228,7 @@ void window::use_core_profile()
 {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  INFO("set OpenGL profile to core");
+  INFO("{}: set OpenGL profile to core", window::subsystem_name);
 }
 
 void window::set_hints_apple()
@@ -193,12 +239,15 @@ void window::set_hints_apple()
 void window::create_window(int width, int height, std::string title)
 {
   window::window_backend = glfwCreateWindow(width, height, title.c_str(),
-                                          NULL, NULL);
+                                            NULL, NULL);
   if (window::window_backend == NULL)
   {
-    ERROR("Failed to create GLFW window");
+    ERROR("{}: failed to create GLFW window", window::subsystem_name);
     window::instance().terminate();
   }
+  window::width = width;
+  window::height = height;
+  window::title = title;
 }
 
 void window::make_context_current()
@@ -223,47 +272,48 @@ void window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
 
 window::builder &window::builder::width(int width)
 {
-  this->_width = width;
+  this->conf.width = width;
   return *this;
 }
 
 window::builder &window::builder::height(int height)
 {
-  this->_height = height;
+  this->conf.height = height;
   return *this;
 }
 
-window::builder &window::builder::title(std::string title)
+window::builder &window::builder::title(const std::string &title)
 {
-  this->_title = title;
+  this->conf.title = title;
   return *this;
 }
 
 window::builder &window::builder::capture_mouse()
 {
-  this->_capture_mouse = true;
+  this->conf.capture_mouse = true;
   return *this;
 }
 
 window::builder &window::builder::msaa()
 {
-  this->_msaa = true;
+  this->conf.msaa = true;
+  return *this;
+}
+
+window::builder &window::builder::debug()
+{
+  this->conf.debug = true;
   return *this;
 }
 
 window::builder &window::builder::vsync()
 {
-  this->_vsync = true;
+  this->conf.vsync = true;
   return *this;
 }
 
 subsystem &window::builder::build()
 {
-  window::width = this->_width;
-  window::height = this->_height;
-  window::title = this->_title;
-  window::capture_mouse = this->_capture_mouse;
-  window::msaa = this->_msaa;
-  window::vsync = this->_vsync;
+  window::init_config = this->conf;
   return window::instance();
 }

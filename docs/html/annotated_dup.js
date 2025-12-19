@@ -2,7 +2,6 @@ var annotated_dup =
 [
     [ "brenta", null, [
       [ "types", null, [
-        [ "audio_file_t", "structbrenta_1_1types_1_1audio__file__t.html", "structbrenta_1_1types_1_1audio__file__t" ],
         [ "buffer", "classbrenta_1_1types_1_1buffer.html", "classbrenta_1_1types_1_1buffer" ],
         [ "character", "structbrenta_1_1types_1_1character.html", null ],
         [ "euler_angles", "structbrenta_1_1types_1_1euler__angles.html", "structbrenta_1_1types_1_1euler__angles" ],

@@ -22,14 +22,22 @@ class subsystem
 {
 public:
 
-  std::string subsystem_name;
+  using error = std::string;
+  
+  class builder;
   
   virtual ~subsystem() = default;
   
-  virtual std::expected<void, std::string> initialize() = 0;
-  virtual std::expected<void, std::string> terminate() = 0;
-
-  class builder;
+  virtual std::expected<void, subsystem::error> initialize() = 0;
+  virtual std::expected<void, subsystem::error> terminate() = 0;
+  /**
+   * @brief Returns the name of the sybsystem
+   */
+  virtual std::string name() = 0;
+  /**
+   * @brief Returns true if the subsystem is initialized
+   */
+  virtual bool is_initialized() = 0;
 };
 
 /**

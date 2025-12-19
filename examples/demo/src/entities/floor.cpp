@@ -23,7 +23,9 @@ void init_floor_entity()
       GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
   }
 
-  model m("examples/assets/models/pane/pane.obj");
+  model m = model::builder()
+    .path("examples/assets/models/pane/pane.obj")
+    .build();
 
   auto floor = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(0.0f, 0.0f, 0.0f),

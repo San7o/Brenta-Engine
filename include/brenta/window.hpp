@@ -27,28 +27,27 @@ namespace brenta
  */
 class window : public subsystem
 {
-protected:
-
-  static int width;
-  static int height;
-  static GLFWwindow *window_backend;
-  static std::string title;
-  static bool capture_mouse;
-  static bool msaa;
-  static bool vsync;
-  
 public:
 
+  struct config;
   class builder;
   
-  std::string subsystem_name = "window";
-  
+  static const std::string subsystem_name;
+  static const window::config default_config;
+  static window::config init_config;
+
+  // Subsystem interface
+  std::expected<void, subsystem::error> initialize() override;
+  std::expected<void, subsystem::error> terminate() override;
+  std::string name() override;
+  bool is_initialized() override;
+
+  // Constructors destructors
   window() = default;
   ~window() = default;
 
-  std::expected<void, std::string> initialize() override;
-  std::expected<void, std::string> terminate() override;
-
+  // Member functions
+  
   /**
    * @brief Get a static instance of the window
    */
@@ -98,6 +97,12 @@ public:
   static void poll_events();
 
 private:
+
+  static int width;
+  static int height;
+  static GLFWwindow *window_backend;
+  static std::string title;
+  static bool initialized;
   
   static void set_context_version(int major, int minor);
   static void use_core_profile();
@@ -108,16 +113,23 @@ private:
                                         int height);
 };
 
+struct window::config
+{
+public:
+  int width;
+  int height;
+  std::string title;
+  bool capture_mouse;
+  bool msaa;
+  bool vsync;
+  bool debug;
+};
+  
 class window::builder : public subsystem::builder
 {
 private:
-  
-  int _width = 800;
-  int _height = 600;
-  std::string _title = "Brenta Engine";
-  bool _capture_mouse = false;
-  bool _msaa = false;
-  bool _vsync = false;
+
+  window::config conf = window::default_config;
   
 public:
 
@@ -126,10 +138,11 @@ public:
   
   builder &width(int width);
   builder &height(int height);
-  builder &title(std::string title);
+  builder &title(const std::string &title);
   builder &capture_mouse();
   builder &msaa();
   builder &vsync();
+  builder &debug(); // opengl debug errors, set this during development
   
   subsystem &build() override;
 };

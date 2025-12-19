@@ -102,7 +102,7 @@ $(function(){initNavTree('classbrenta_1_1input.html',''); initResizable(true); }
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::input Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -128,12 +128,18 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afff73f0f2b2188bcf4c2bdd52db26277" id="r_afff73f0f2b2188bcf4c2bdd52db26277"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afff73f0f2b2188bcf4c2bdd52db26277">initialize</a> () override</td></tr>
-<tr class="memdesc:afff73f0f2b2188bcf4c2bdd52db26277"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the input system.  <br /></td></tr>
-<tr class="separator:afff73f0f2b2188bcf4c2bdd52db26277"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a735f577de15ef87e23522e803e8a190b" id="r_a735f577de15ef87e23522e803e8a190b"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a735f577de15ef87e23522e803e8a190b">terminate</a> () override</td></tr>
-<tr class="memdesc:a735f577de15ef87e23522e803e8a190b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up resources.  <br /></td></tr>
-<tr class="separator:a735f577de15ef87e23522e803e8a190b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27bf400972a8864cdbf9dd97c51733f0" id="r_a27bf400972a8864cdbf9dd97c51733f0"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27bf400972a8864cdbf9dd97c51733f0">initialize</a> () override</td></tr>
+<tr class="memdesc:a27bf400972a8864cdbf9dd97c51733f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the input system.  <br /></td></tr>
+<tr class="separator:a27bf400972a8864cdbf9dd97c51733f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3309d9d5bd4d8c48abc082f25c3b3b7" id="r_ae3309d9d5bd4d8c48abc082f25c3b3b7"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae3309d9d5bd4d8c48abc082f25c3b3b7">terminate</a> () override</td></tr>
+<tr class="memdesc:ae3309d9d5bd4d8c48abc082f25c3b3b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up resources.  <br /></td></tr>
+<tr class="separator:ae3309d9d5bd4d8c48abc082f25c3b3b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a8b495cda279773ce239457623a39c5" id="r_a2a8b495cda279773ce239457623a39c5"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2a8b495cda279773ce239457623a39c5">name</a> () override</td></tr>
+<tr class="memdesc:a2a8b495cda279773ce239457623a39c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:a2a8b495cda279773ce239457623a39c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e1dbacdbfdc1003bd6a0fa3fd814291" id="r_a1e1dbacdbfdc1003bd6a0fa3fd814291"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1e1dbacdbfdc1003bd6a0fa3fd814291">is_initialized</a> () override</td></tr>
+<tr class="memdesc:a1e1dbacdbfdc1003bd6a0fa3fd814291"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the subsystem is initialized.  <br /></td></tr>
+<tr class="separator:a1e1dbacdbfdc1003bd6a0fa3fd814291"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -149,7 +155,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:aefe960ab616175431b0227ef0f34db00" id="r_aefe960ab616175431b0227ef0f34db00"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefe960ab616175431b0227ef0f34db00">key_callback</a> (GLFWwindow *<a class="el" href="classbrenta_1_1window.html">window</a>, int key, int scancode, int action, int mods)</td></tr>
 <tr class="memdesc:aefe960ab616175431b0227ef0f34db00"><td class="mdescLeft">&#160;</td><td class="mdescRight">Keyboard callback.  <br /></td></tr>
 <tr class="separator:aefe960ab616175431b0227ef0f34db00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9dc853cbe929e55637e9b7b2f8d672ab" id="r_a9dc853cbe929e55637e9b7b2f8d672ab"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dc853cbe929e55637e9b7b2f8d672ab">add_mouse_pos_callback</a> (types::mouse_callback_name_t name, std::function&lt; void(double, double)&gt; callback)</td></tr>
+<tr class="memitem:a9dc853cbe929e55637e9b7b2f8d672ab" id="r_a9dc853cbe929e55637e9b7b2f8d672ab"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9dc853cbe929e55637e9b7b2f8d672ab">add_mouse_pos_callback</a> (types::mouse_callback_name_t <a class="el" href="#a2a8b495cda279773ce239457623a39c5">name</a>, std::function&lt; void(double, double)&gt; callback)</td></tr>
 <tr class="memdesc:a9dc853cbe929e55637e9b7b2f8d672ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a mouse position callback.  <br /></td></tr>
 <tr class="separator:a9dc853cbe929e55637e9b7b2f8d672ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64309f098c874a72c466b2518c30e3c9" id="r_a64309f098c874a72c466b2518c30e3c9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a64309f098c874a72c466b2518c30e3c9">remove_mouse_pos_callback</a> (types::mouse_callback_name_t callback_name)</td></tr>
@@ -159,19 +165,22 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memdesc:a846ebb1fa9007564d44b215a7b9089b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mouse position callback.  <br /></td></tr>
 <tr class="separator:a846ebb1fa9007564d44b215a7b9089b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a030e5180ba49f3c91566abe8c43e63ba" id="r_a030e5180ba49f3c91566abe8c43e63ba"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a030e5180ba49f3c91566abe8c43e63ba">subsystem_name</a> = &quot;input&quot;</td></tr>
-<tr class="separator:a030e5180ba49f3c91566abe8c43e63ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a84ac3ae68472353264a7f27f6c8bf714" id="r_a84ac3ae68472353264a7f27f6c8bf714"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84ac3ae68472353264a7f27f6c8bf714">subsystem_name</a> = &quot;input&quot;</td></tr>
+<tr class="separator:a84ac3ae68472353264a7f27f6c8bf714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Input subsystem. </p>
 <p>This subsystem is used to add and remove callbacks for keyboard and mouse events. You can define your own callbacks and register them with the input subsystem. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00031">31</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00034">34</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af3455ee40caa0c21dcf34cf91d44aba4" name="af3455ee40caa0c21dcf34cf91d44aba4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af3455ee40caa0c21dcf34cf91d44aba4">&#9670;&#160;</a></span>add_keyboard_callback()</h2>
@@ -210,7 +219,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00036">36</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00067">67</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -251,12 +260,12 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00068">68</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00100">100</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
-<a id="afff73f0f2b2188bcf4c2bdd52db26277" name="afff73f0f2b2188bcf4c2bdd52db26277"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afff73f0f2b2188bcf4c2bdd52db26277">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a27bf400972a8864cdbf9dd97c51733f0" name="a27bf400972a8864cdbf9dd97c51733f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27bf400972a8864cdbf9dd97c51733f0">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +274,7 @@ Data Fields</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; input::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; input::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -283,7 +292,7 @@ Data Fields</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00015">15</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00026">26</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -310,7 +319,38 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00030">30</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00061">61</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a1e1dbacdbfdc1003bd6a0fa3fd814291" name="a1e1dbacdbfdc1003bd6a0fa3fd814291"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e1dbacdbfdc1003bd6a0fa3fd814291">&#9670;&#160;</a></span>is_initialized()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool input::is_initialized </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the subsystem is initialized. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#ab24d44e73bb673bd4e4f2fa01391d019">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00052">52</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -369,7 +409,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00054">54</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00086">86</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -416,7 +456,38 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00088">88</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00123">123</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2a8b495cda279773ce239457623a39c5" name="a2a8b495cda279773ce239457623a39c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a8b495cda279773ce239457623a39c5">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string input::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00047">47</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -452,7 +523,7 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00042">42</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00074">74</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,12 +559,12 @@ Data Fields</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00075">75</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00108">108</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a735f577de15ef87e23522e803e8a190b" name="a735f577de15ef87e23522e803e8a190b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a735f577de15ef87e23522e803e8a190b">&#9670;&#160;</a></span>terminate()</h2>
+<a id="ae3309d9d5bd4d8c48abc082f25c3b3b7" name="ae3309d9d5bd4d8c48abc082f25c3b3b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3309d9d5bd4d8c48abc082f25c3b3b7">&#9670;&#160;</a></span>terminate()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -502,7 +573,7 @@ Data Fields</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; input::terminate </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; input::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -519,24 +590,32 @@ Data Fields</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00024">24</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00038">38</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a030e5180ba49f3c91566abe8c43e63ba" name="a030e5180ba49f3c91566abe8c43e63ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a030e5180ba49f3c91566abe8c43e63ba">&#9670;&#160;</a></span>subsystem_name</h2>
+<a id="a84ac3ae68472353264a7f27f6c8bf714" name="a84ac3ae68472353264a7f27f6c8bf714"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84ac3ae68472353264a7f27f6c8bf714">&#9670;&#160;</a></span>subsystem_name</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string brenta::input::subsystem_name = &quot;input&quot;</td>
+          <td class="memname">const std::string input::subsystem_name = &quot;input&quot;</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00038">38</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00040">40</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
 
 </div>
 </div>

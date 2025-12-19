@@ -25,8 +25,8 @@ namespace types
 /**
  * @brief The Vertex struct represents a vertex of a 3D model
  *
- * A vertex is a point in 3D space that has a position, a normal
- * and texture coordinates.
+ * A vertex is a point in 3D space that has a position, a normal and
+ * texture coordinates.
  */
 struct vertex
 {
@@ -38,9 +38,9 @@ struct vertex
 /**
  * @brief The Texture struct represents a texture of a 3D model
  *
- * A texture is an image that is applied to a 3D model to give
- * it a more realistic look. A texture can be of different types
- * like diffuse, specular, normal, etc.
+ * A texture is an image that is applied to a 3D model to give it a
+ * more realistic look. A texture can be of different types like
+ * diffuse, specular, normal, etc.
  */
 struct texture
 {
@@ -54,9 +54,9 @@ struct texture
 /**
  * @brief The Mesh class represents a 3D model
  *
- * A mesh is a collection of vertices, indices and textures
- * that represent a 3D model. The mesh can be drawn using
- * a shader and calling the Draw method.
+ * A mesh is a collection of vertices, indices and textures that
+ * represent a 3D model. The mesh can be drawn using a shader and
+ * calling the draw() method.
  */
 class mesh
 {
@@ -68,10 +68,9 @@ public:
   /**
    * @brief indices of the mesh
    *
-   * Indicies are used to reduce the memory footprint
-   * required to represent a 3D model. They are indices
-   * in the vertex array and there can be multiple indices
-   * for a vertex.
+   * Indicies are used to reduce the memory footprint required to
+   * represent a 3D model. They are indices in the vertex array and
+   * there can be multiple indices for a vertex.
    */
   std::vector<unsigned int> indices;
   /**
@@ -183,43 +182,33 @@ public:
    */
   GLint mipmap_mag;
 
-  /**
-   * @brief Construct a new Mesh object
-   *
-   * @param vertices Vertices of the mesh
-   * @param indices Indices of the mesh
-   * @param textures Textures of the mesh
-   * @param wrapping Type of texture wrapping
-   * @param filtering_min Minifying texture filtering
-   * @param filtering_mag Magnifying texture filtering
-   * @param hasMipmap Should the texture have a mipmap?
-   * @param mipmap_min Type of mipmap minifying texture filtering
-   * @param mipmap_mag Type of mipmap magnifying texture filtering
-   */
-  mesh(std::vector<types::vertex> vertices, std::vector<unsigned int> indices,
-       std::vector<types::texture> textures, GLint wrapping = GL_REPEAT,
-       GLint filtering_min = GL_NEAREST, GLint filtering_mag = GL_LINEAR,
-       GLboolean hasMipmap = GL_TRUE,
-       GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-       GLint mipmap_max = GL_LINEAR);
-  /**
-   * @brief The Builder class is used to build a Mesh object
-   */
+  struct config;
   class builder;
+  static const config default_config;
+  
+  mesh(config conf);
 
-  /**
-   * @brief Draw the mesh
-   *
-   * @param shader_name Shader to use to draw the mesh
-   */
   void draw(types::shader_name_t shader_name);
 
 private:
-  // render data
+
   types::vao vao;
   types::buffer vbo;
   types::buffer ebo;
   void setup_mesh();
+};
+
+struct mesh::config
+{
+  std::vector<types::vertex> vertices;
+  std::vector<unsigned int> indices;
+  std::vector<types::texture> textures;
+  GLint wrapping;
+  GLint filtering_min;
+  GLint filtering_mag;
+  GLboolean has_mipmap;
+  GLint mipmap_min;
+  GLint mipmap_max;
 };
 
 /**
@@ -228,26 +217,19 @@ private:
 class mesh::builder
 {
 private:
-  std::vector<types::vertex> vertices = {};
-  std::vector<unsigned int> indices = {};
-  std::vector<types::texture> textures = {};
-  GLint wrapping = GL_REPEAT;
-  GLint filtering_min = GL_NEAREST;
-  GLint filtering_mag = GL_LINEAR;
-  GLboolean has_mipmap = GL_TRUE;
-  GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR;
-  GLint mipmap_mag = GL_LINEAR;
 
+  mesh::config conf = mesh::default_config;
+  
 public:
-  builder &set_vertices(std::vector<types::vertex> vertices);
-  builder &set_indices(std::vector<unsigned int> indices);
-  builder &set_textures(std::vector<types::texture> textures);
-  builder &set_wrapping(GLint wrapping);
-  builder &set_filtering_min(GLint filtering_min);
-  builder &set_filtering_mag(GLint filtering_mag);
-  builder &set_has_mipmap(GLboolean has_mipmap);
-  builder &set_mipmap_min(GLint mipmap_min);
-  builder &set_mipmap_mag(GLint mipmap_mag);
+  builder &vertices(std::vector<types::vertex> vertices);
+  builder &indices(std::vector<unsigned int> indices);
+  builder &textures(std::vector<types::texture> textures);
+  builder &wrapping(GLint wrapping);
+  builder &filtering_min(GLint filtering_min);
+  builder &filtering_mag(GLint filtering_mag);
+  builder &has_mipmap(GLboolean has_mipmap);
+  builder &mipmap_min(GLint mipmap_min);
+  builder &mipmap_mag(GLint mipmap_mag);
 
   mesh build();
 };

@@ -11,14 +11,13 @@ using namespace brenta::types;
 void vao::init()
 {
   glGenVertexArrays(1, &this->vao_id);
-  bind();
 }
 
 unsigned int vao::get_vao()
 {
   if (vao_id == 0)
   {
-    ERROR("VAO not initialized");
+    ERROR("vao: not initialized");
     return 0;
   }
   return vao_id;
@@ -28,7 +27,7 @@ void vao::bind()
 {
   if (this->get_vao() == 0)
   {
-    ERROR("VAO not initialized");
+    ERROR("vao: not initialized");
     return;
   }
   glBindVertexArray(this->get_vao());
@@ -55,7 +54,7 @@ void vao::destroy()
 {
   if (this->get_vao() == 0)
   {
-    ERROR("VAO not initialized");
+    ERROR("vao: not initialized");
     return;
   }
   glDeleteVertexArrays(1, &this->vao_id);

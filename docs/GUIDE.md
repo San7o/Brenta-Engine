@@ -14,45 +14,34 @@ but the Engine class provides a nice way to do it.
 To create an engine, you can use the Builder class:
 
 ```cpp
-auto& engine = engine::builder()
-  .subsystem(logger::builder()
-             .level(oak::level::debug)
-             .file("/tmp/brenta-logs"))
-  .subsystem(window::builder()
-             .title("brenta demo")
-             .width(800)
-             .height(600)
-             .vsync()
-             .msaa())
-  .subsystem(gl::builder()
-             .blending()
-             .cull_face()
-             .multisample()
-             .depth_test())
-  .subsystem(audio::builder())
-  .subsystem(input::builder())
-  .subsystem(ecs::builder())
-  .subsystem(gui::builder())
-  .subsystem(text::builder()
-             .font("examples/assets/fonts/arial.ttf")
-             .size(40))
-  // ...
-  .build();
+#include <brenta/engine.hpp>
 
-auto ret = engine.initialize();
-if (!ret.has_value())
-{
-  ERROR("Failed to initialize subsystem {}", ret.error());
-  return 1;
-}
+int main() {
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug))
+    .with(window::builder()
+          .title("load opengl test")
+          .width(screen_width)
+          .height(screen_height))
+    .build();
+  auto engine = engine::managed();
 
-// Game logic...
+  while (!window::should_close())
+  {
+    // Handle input...
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
+    
+    // Update logic...
+    // Draw...
+    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    gl::clear();
 
-  ret = engine.terminate();
-if (!ret.has_value())
-{
-  oak::error("Failed to terminate subsystem {}", ret.error());
-  return 1;
+    window::poll_events();
+    window::swap_buffers();
+  }
+  return 0;
 }
 ```
 
@@ -133,9 +122,7 @@ particle_emitter emitter = particle_emitter::builder()
        .num_particles(1000)
        .spawn_rate(0.01f)
        .scale(1.0f)
-       .atlas_path(std::filesystem::absolute(
-           "assets/textures/particle_atlas.png"
-       ).string())
+       .atlas_path"assets/textures/particle_atlas.png")
        .atlas_width(8)
        .atlas_height(8)
        .atlas_index(45)
@@ -201,28 +188,23 @@ namespace brenta
 
 REGISTER_SYSTEMS(none);
 
-int main() {
-
-  auto& engine = engine::builder()
-    .subsystem(logger::builder()
-               .level(oak::level::debug)
-               .file("/tmp/brenta-logs"))
-    .subsystem(window::builder()
-               .title("brenta demo")
-               .width(800)
-               .height(600)
-               .vsync()
-               .msaa())
-    .subsystem(input::builder())
-    .subsystem(ecs::builder())
+int main()
+{
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug)
+          .file("/tmp/brenta-logs"))
+    .with(window::builder()
+          .title("brenta demo")
+          .width(800)
+          .height(600)
+          .vsync()
+          .msaa())
+    .with(input::builder())
+    .with(ecs::builder())
     .build();
-  auto ret = engine.initialize();
-  if (!ret.has_value())
-  {
-    ERROR("Failed to initialize subsystem {}", ret.error());
-    return 1;
-  }
-
+  auto engine = engine::managed();
+  
   // Your init functions ...
   init_player();
   init_renderer();

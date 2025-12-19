@@ -28,7 +28,9 @@ void init_sphere_entity()
       GL_VERTEX_SHADER, "examples/demo/shaders/shader.vs",
       GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
   }
-  model m1("examples/assets/models/sphere/sphere.obj");
+  model m1 = model::builder()
+    .path("examples/assets/models/sphere/sphere.obj")
+    .build();
 
   auto sphere1 = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(2.0f, 1.0f, 0.0f),
@@ -52,7 +54,9 @@ void init_sphere_entity()
       GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
   }
 
-  model m2("examples/assets/models/sphere/sphere.obj");
+  model m2 = model::builder()
+    .path("examples/assets/models/sphere/sphere.obj")
+    .build();
   
   auto sphere2 = world::new_entity()
     .add_component<TransformComponent>(glm::vec3(-2.0f, 1.0f, 0.0f),

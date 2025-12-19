@@ -113,490 +113,388 @@ $(function(){initNavTree('camera_8cpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>brenta;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="foldopen" id="foldopen00012" data-start="{" data-end="}">
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a54f38c7bb6568e2011e6d236e56bd66e">   12</a></span><a class="code hl_function" href="classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e">camera::camera</a>(enums::camera_type camera_type,</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>               enums::projection_type projection_type, glm::vec3 position,</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>               glm::vec3 world_up, glm::vec3 center, <span class="keywordtype">float</span> movement_speed,</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>               <span class="keywordtype">float</span> mouse_sensitivity, <span class="keywordtype">float</span> zoom,</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>               <a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> spherical_coordinates,</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>               <a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> euler_angles, glm::vec3 front, glm::vec3 up,</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>               glm::vec3 right)</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  this-&gt;camera_type = <a class="code hl_variable" href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">camera_type</a>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  this-&gt;projection_type = <a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  this-&gt;position = <a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>;</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  this-&gt;world_up = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  this-&gt;center = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  this-&gt;movement_speed = <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  this-&gt;mouse_sensitivity = <a class="code hl_variable" href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">mouse_sensitivity</a>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  this-&gt;zoom = <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  this-&gt;spherical_coordinates = <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  this-&gt;euler_angles = <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  this-&gt;front = <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  this-&gt;up = <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  this-&gt;right = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="comment">/* Update the camera */</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">switch</span> (this-&gt;camera_type)</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  {</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordflow">case</span> enums::camera_type::SPHERICAL:</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <a class="code hl_function" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">spherical_to_cartesian</a>();</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">case</span> enums::camera_type::AIRCRAFT:</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <a class="code hl_function" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">update_camera_euler</a>();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">break</span>;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  INFO(<span class="stringliteral">&quot;Camera created&quot;</span>);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a690220805975bb68c046a652a09581cc">   12</a></span><a class="code hl_function" href="classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e">camera::camera</a>(<a class="code hl_struct" href="structbrenta_1_1camera_1_1config.html">config</a> conf)</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  this-&gt;cam_type = conf.cam_type;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  this-&gt;proj_type = conf.proj_type;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  this-&gt;position = conf.position;</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a> = conf.world_up;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a> = conf.center;</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a> = conf.movement_speed;</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  this-&gt;mouse_sensitivity = conf.mouse_sensitivity;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a> = conf.zoom;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a> = conf.spherical_coordinates;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a> = conf.euler_angles;</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a> = conf.front;</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a> = conf.up;</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a> = conf.right;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="comment">// Update the camera</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">switch</span> (this-&gt;cam_type)</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  {</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keywordflow">case</span> camera_type::spherical:</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <a class="code hl_function" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">spherical_to_cartesian</a>();</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">case</span> camera_type::aircraft:</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_function" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">update_camera_euler</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  }</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ab3d4019eb5007e6f84c54f421aa1be34">   50</a></span>glm::mat4 <a class="code hl_function" href="classbrenta_1_1camera.html#ab3d4019eb5007e6f84c54f421aa1be34">camera::get_view_matrix</a>()</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keywordflow">switch</span> (<a class="code hl_variable" href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">camera_type</a>)</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  {</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">case</span> enums::camera_type::SPHERICAL:</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordflow">return</span> glm::lookAt(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>);</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordflow">case</span> enums::camera_type::AIRCRAFT:</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordflow">return</span> glm::lookAt(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a> + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>);</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span> glm::mat4(1.0f);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>glm::mat4 camera::get_view_matrix()</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordflow">switch</span> (this-&gt;cam_type)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">case</span> camera_type::spherical:</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    <span class="keywordflow">return</span> glm::lookAt(this-&gt;position, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordflow">case</span> camera_type::aircraft:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> glm::lookAt(this-&gt;position, this-&gt;position + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordflow">return</span> glm::mat4(1.0f);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  }</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>glm::mat4 camera::get_projection_matrix(<span class="keywordtype">int</span> window_width, <span class="keywordtype">int</span> window_height)</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>{</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">switch</span> (this-&gt;proj_type)</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  {</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordflow">case</span> projection_type::perspective:</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span> glm::perspective(glm::radians(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                            (<span class="keywordtype">float</span>) window_width</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                            / (<span class="keywordtype">float</span>) window_height,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                            0.1f, 1000.0f);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">case</span> projection_type::orthographic:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> glm::ortho((<span class="keywordtype">float</span>) -window_width / 2.0f,</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                      (<span class="keywordtype">float</span>) window_width / 2.0f,</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                      (<span class="keywordtype">float</span>) -window_height / 2.0f,</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>                      (<span class="keywordtype">float</span>) window_height / 2.0f, 0.1f, 100.0f);</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordflow">return</span> glm::mat4(1.0f);</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  }</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">   74</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">camera::spherical_to_cartesian</a>()</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>{</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  this-&gt;position.x = sin(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>                       * cos(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.phi)</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>                       * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>                     + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.x;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  this-&gt;position.y =</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    cos(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta) * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.y;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  this-&gt;position.z = sin(<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta)</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>                       * sin(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.phi)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                       * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                     + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.z;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>}</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#af49703def2f343334bb4f3d1333fb577">   63</a></span>glm::mat4 <a class="code hl_function" href="classbrenta_1_1camera.html#af49703def2f343334bb4f3d1333fb577">camera::get_projection_matrix</a>(<span class="keywordtype">int</span> window_width, <span class="keywordtype">int</span> window_height)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordflow">switch</span> (this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">case</span> enums::projection_type::PERSPECTIVE:</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    <span class="keywordflow">return</span> glm::perspective(glm::radians(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>),</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>                            (<span class="keywordtype">float</span>) window_width</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                            / (<span class="keywordtype">float</span>) window_height,</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                            0.1f, 1000.0f);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">case</span> enums::projection_type::ORTHOGRAPHIC:</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keywordflow">return</span> glm::ortho((<span class="keywordtype">float</span>) -window_width / 2.0f,</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>                      (<span class="keywordtype">float</span>) window_width / 2.0f,</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>                      (<span class="keywordtype">float</span>) -window_height / 2.0f,</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>                      (<span class="keywordtype">float</span>) window_height / 2.0f, 0.1f, 100.0f);</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordflow">default</span>:</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>    <span class="keywordflow">return</span> glm::mat4(1.0f);</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  }</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>}</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span><span class="comment">// For aircraft camera</span></div>
+<div class="foldopen" id="foldopen00090" data-start="{" data-end="}">
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">   90</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">camera::update_camera_euler</a>()</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>{</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="comment">// calculate the new Front vector</span></div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  glm::vec3 new_front;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  new_front.x =</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.yaw)) * cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  new_front.y = sin(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  new_front.z =</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    sin(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.yaw)) * cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a> = glm::normalize(new_front);</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="comment">// also re-calculate the Right and Up vector</span></div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a> = glm::normalize(glm::cross(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>));</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a> = glm::normalize(glm::cross(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>));</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>}</div>
 </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="foldopen" id="foldopen00082" data-start="{" data-end="}">
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">   82</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">camera::spherical_to_cartesian</a>()</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>{</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>.x = sin(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta)</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>                       * cos(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.phi)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>                       * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>                     + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.x;</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>.y =</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    cos(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta) * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.y;</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>.z = sin(<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.theta)</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                       * sin(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.phi)</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                       * this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>.radius</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>                     + this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>.z;</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>}</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span> </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>camera::camera_type camera::get_camera_type()</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>{</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  <span class="keywordflow">return</span> this-&gt;cam_type;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>}</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span><span class="keywordtype">void</span> camera::set_camera_type(camera::camera_type camera_type)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>{</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  this-&gt;cam_type = camera_type;</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>}</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>camera::projection_type camera::get_projection_type()</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>{</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordflow">return</span> this-&gt;proj_type;</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="keywordtype">void</span> camera::set_projection_type(projection_type projection_type)</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  this-&gt;proj_type = projection_type;</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>}</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span> </div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>glm::vec3 camera::get_position()</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>{</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>  <span class="keywordflow">return</span> this-&gt;position;</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>}</div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span><span class="keywordtype">void</span> camera::set_position(glm::vec3 position)</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>{</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  this-&gt;position = position;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>glm::vec3 camera::get_world_up()</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>{</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>}</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span> </div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span><span class="keywordtype">void</span> camera::set_world_up(glm::vec3 world_up)</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>{</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>  this-&gt;world_up = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>}</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span> </div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>glm::vec3 camera::get_center()</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>{</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><span class="keywordtype">void</span> camera::set_center(glm::vec3 center)</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>{</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  this-&gt;center = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>}</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span> </div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span><span class="keywordtype">float</span> camera::get_movement_speed()</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>{</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>}</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span> </div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span><span class="keywordtype">void</span> camera::set_movement_speed(<span class="keywordtype">float</span> movement_speed)</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>{</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  this-&gt;movement_speed = <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><span class="keywordtype">float</span> camera::get_mouse_sensitivity()</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>{</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <span class="keywordflow">return</span> this-&gt;mouse_sensitivity;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>}</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="keywordtype">void</span> camera::set_mouse_sensitivity(<span class="keywordtype">float</span> mouse_sensitivity)</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>{</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>  this-&gt;mouse_sensitivity = mouse_sensitivity;</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>}</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
+<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span><span class="keywordtype">float</span> camera::get_zoom()</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>{</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>}</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span> </div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span><span class="keywordtype">void</span> camera::set_zoom(<span class="keywordtype">float</span> zoom)</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>{</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  this-&gt;zoom = <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>}</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span> </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> camera::get_spherical_coordinates()</div>
+<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>{</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>}</div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span> </div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span><span class="keywordtype">void</span> camera::set_spherical_coordinates(</div>
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> spherical_coordinates)</div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  this-&gt;spherical_coordinates = <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>}</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span> </div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span><a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> camera::get_euler_angles()</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>{</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>}</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span><span class="keywordtype">void</span> camera::set_euler_angles(<a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> euler_angles)</div>
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>{</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>  this-&gt;euler_angles = <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>}</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>glm::vec3 camera::get_front()</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>{</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>}</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span> </div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span><span class="keywordtype">void</span> camera::set_front(glm::vec3 front)</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>{</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  this-&gt;front = <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>}</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span> </div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>glm::vec3 camera::get_up()</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>{</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>}</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span><span class="keywordtype">void</span> camera::set_up(glm::vec3 up)</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>{</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>  this-&gt;up = <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>}</div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span> </div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>glm::vec3 camera::get_right()</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>{</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>}</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span><span class="keywordtype">void</span> camera::set_right(glm::vec3 right)</div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>{</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>  this-&gt;right = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>}</div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span> </div>
+<div class="foldopen" id="foldopen00236" data-start="{" data-end="}">
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">  236</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">camera::get_first_mouse</a>()</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>{</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">first_mouse</a>;</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>}</div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span><span class="comment">/* For aircraft camera */</span></div>
-<div class="foldopen" id="foldopen00098" data-start="{" data-end="}">
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">   98</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">camera::update_camera_euler</a>()</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>{</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="comment">/* calculate the new Front vector */</span></div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  glm::vec3 new_front;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  new_front.x =</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.yaw)) * cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  new_front.y = sin(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  new_front.z =</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    sin(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.yaw)) * cos(glm::radians(<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>.pitch));</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a> = glm::normalize(new_front);</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  <span class="comment">/* also re-calculate the Right and Up vector */</span></div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a> = glm::normalize(glm::cross(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>));</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a> = glm::normalize(glm::cross(this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>));</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>}</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span><span class="keywordtype">void</span> camera::set_first_mouse(<span class="keywordtype">bool</span> first_mouse)</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>{</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>  this-&gt;first_mouse = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">first_mouse</a>;</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>}</div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span> </div>
+<div class="foldopen" id="foldopen00246" data-start="{" data-end="}">
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">  246</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">camera::get_last_x</a>()</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>{</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">last_x</a>;</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>}</div>
 </div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="foldopen" id="foldopen00113" data-start="{" data-end="}">
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a7d080d1b8161ab9e210d682ccd73bd3a">  113</a></span>enums::camera_type <a class="code hl_function" href="classbrenta_1_1camera.html#a7d080d1b8161ab9e210d682ccd73bd3a">camera::get_camera_type</a>()</div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>{</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">camera_type</a>;</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>}</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span> </div>
+<div class="foldopen" id="foldopen00251" data-start="{" data-end="}">
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">  251</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">camera::set_last_x</a>(<span class="keywordtype">float</span> last_x)</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>{</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>  this-&gt;last_x = <a class="code hl_variable" href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">last_x</a>;</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>}</div>
 </div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span> </div>
-<div class="foldopen" id="foldopen00118" data-start="{" data-end="}">
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a506714eeafdfea90b00651e6762fd8c5">  118</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a506714eeafdfea90b00651e6762fd8c5">camera::set_camera_type</a>(enums::camera_type camera_type)</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>{</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  this-&gt;camera_type = <a class="code hl_variable" href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">camera_type</a>;</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>}</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span> </div>
+<div class="foldopen" id="foldopen00256" data-start="{" data-end="}">
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">  256</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">camera::get_last_y</a>()</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>{</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">last_y</a>;</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>}</div>
 </div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
-<div class="foldopen" id="foldopen00123" data-start="{" data-end="}">
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ace8d42304e9ee830402f2e2a67996c83">  123</a></span>enums::projection_type <a class="code hl_function" href="classbrenta_1_1camera.html#ace8d42304e9ee830402f2e2a67996c83">camera::get_projection_type</a>()</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>{</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span> </div>
+<div class="foldopen" id="foldopen00261" data-start="{" data-end="}">
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">  261</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">camera::set_last_y</a>(<span class="keywordtype">float</span> last_y)</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>{</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>  this-&gt;last_y = <a class="code hl_variable" href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">last_y</a>;</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>}</div>
 </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
-<div class="foldopen" id="foldopen00128" data-start="{" data-end="}">
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a7f8cef79eb9cb523842b070fd088bf7e">  128</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a7f8cef79eb9cb523842b070fd088bf7e">camera::set_projection_type</a>(enums::projection_type projection_type)</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>{</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  this-&gt;projection_type = <a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>;</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>}</div>
-</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span> </div>
-<div class="foldopen" id="foldopen00133" data-start="{" data-end="}">
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a1d05d34ae3d66a5c942814e82035243a">  133</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#a1d05d34ae3d66a5c942814e82035243a">camera::get_position</a>()</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>{</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
-</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="foldopen" id="foldopen00138" data-start="{" data-end="}">
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#af87d7fde519e4eb98c19175687dc719c">  138</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#af87d7fde519e4eb98c19175687dc719c">camera::set_position</a>(glm::vec3 position)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  this-&gt;position = <a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>}</div>
-</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span> </div>
-<div class="foldopen" id="foldopen00143" data-start="{" data-end="}">
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#adb2f975cc2f0873e8efae43564a8675d">  143</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#adb2f975cc2f0873e8efae43564a8675d">camera::get_world_up</a>()</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>{</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
-</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span> </div>
-<div class="foldopen" id="foldopen00148" data-start="{" data-end="}">
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a5a30e76323f47f986eb64c368cf0a12b">  148</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a5a30e76323f47f986eb64c368cf0a12b">camera::set_world_up</a>(glm::vec3 world_up)</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>{</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  this-&gt;world_up = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
-</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
-<div class="foldopen" id="foldopen00153" data-start="{" data-end="}">
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a0c970443b245e0650538c0c320f07e9e">  153</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#a0c970443b245e0650538c0c320f07e9e">camera::get_center</a>()</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>}</div>
-</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="foldopen" id="foldopen00158" data-start="{" data-end="}">
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ab6c3ac60045f12aaeb1eec8eeb87dd31">  158</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#ab6c3ac60045f12aaeb1eec8eeb87dd31">camera::set_center</a>(glm::vec3 center)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>{</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  this-&gt;center = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
-<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>}</div>
-</div>
-<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span> </div>
-<div class="foldopen" id="foldopen00163" data-start="{" data-end="}">
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a9e57deb08d04838271e62b37ca121896">  163</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a9e57deb08d04838271e62b37ca121896">camera::get_movement_speed</a>()</div>
-<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>{</div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
-<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>}</div>
-</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
-<div class="foldopen" id="foldopen00168" data-start="{" data-end="}">
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a9fabeaa5b8cfcbbffb23c703ce922349">  168</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a9fabeaa5b8cfcbbffb23c703ce922349">camera::set_movement_speed</a>(<span class="keywordtype">float</span> movement_speed)</div>
-<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>{</div>
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>  this-&gt;movement_speed = <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>}</div>
-</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span> </div>
-<div class="foldopen" id="foldopen00173" data-start="{" data-end="}">
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#aba4542e519548171330c220ba3817e65">  173</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#aba4542e519548171330c220ba3817e65">camera::get_mouse_sensitivity</a>()</div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>{</div>
-<div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">mouse_sensitivity</a>;</div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>}</div>
-</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
-<div class="foldopen" id="foldopen00178" data-start="{" data-end="}">
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a54ad83fd480bad081ef881a129c79703">  178</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a54ad83fd480bad081ef881a129c79703">camera::set_mouse_sensitivity</a>(<span class="keywordtype">float</span> mouse_sensitivity)</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>{</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  this-&gt;mouse_sensitivity = <a class="code hl_variable" href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">mouse_sensitivity</a>;</div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>}</div>
-</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
-<div class="foldopen" id="foldopen00183" data-start="{" data-end="}">
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a026961af418acc07e9ee0031921356f8">  183</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a026961af418acc07e9ee0031921356f8">camera::get_zoom</a>()</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>{</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
-<div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>}</div>
-</div>
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span> </div>
-<div class="foldopen" id="foldopen00188" data-start="{" data-end="}">
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a28924ef1388a949a93ee82a2ff5fdf1a">  188</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a28924ef1388a949a93ee82a2ff5fdf1a">camera::set_zoom</a>(<span class="keywordtype">float</span> zoom)</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>{</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  this-&gt;zoom = <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>}</div>
-</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span> </div>
-<div class="foldopen" id="foldopen00193" data-start="{" data-end="}">
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a2dec820889c0aa97a9c400ec6391fb8d">  193</a></span><a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> <a class="code hl_function" href="classbrenta_1_1camera.html#a2dec820889c0aa97a9c400ec6391fb8d">camera::get_spherical_coordinates</a>()</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>{</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>}</div>
-</div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span> </div>
-<div class="foldopen" id="foldopen00198" data-start="{" data-end="}">
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#aa3c0b6c1ece6a3d86c624dcf6782c0e3">  198</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#aa3c0b6c1ece6a3d86c624dcf6782c0e3">camera::set_spherical_coordinates</a>(</div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  <a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> spherical_coordinates)</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>{</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  this-&gt;spherical_coordinates = <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
-</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="foldopen" id="foldopen00204" data-start="{" data-end="}">
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a5ea1e16712a2461400780b6f6bda05fc">  204</a></span><a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> <a class="code hl_function" href="classbrenta_1_1camera.html#a5ea1e16712a2461400780b6f6bda05fc">camera::get_euler_angles</a>()</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>{</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>}</div>
-</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span> </div>
-<div class="foldopen" id="foldopen00209" data-start="{" data-end="}">
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#aa74c5660a1b6a8c7234cc151844cdae0">  209</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#aa74c5660a1b6a8c7234cc151844cdae0">camera::set_euler_angles</a>(<a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> euler_angles)</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>{</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">camera::euler_angles</a> = <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>}</div>
-</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span> </div>
-<div class="foldopen" id="foldopen00214" data-start="{" data-end="}">
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a6f51c43a27b1b0a40c8aca2ebe422760">  214</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#a6f51c43a27b1b0a40c8aca2ebe422760">camera::get_front</a>()</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>{</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>}</div>
-</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span> </div>
-<div class="foldopen" id="foldopen00219" data-start="{" data-end="}">
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ac4dc7be833472a2bcb27cfce3d1a8876">  219</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#ac4dc7be833472a2bcb27cfce3d1a8876">camera::set_front</a>(glm::vec3 front)</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>{</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>  this-&gt;front = <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>}</div>
-</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="foldopen" id="foldopen00224" data-start="{" data-end="}">
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a4517136492bcc46e4dd35b93a1361065">  224</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#a4517136492bcc46e4dd35b93a1361065">camera::get_up</a>()</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>{</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>}</div>
-</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span> </div>
-<div class="foldopen" id="foldopen00229" data-start="{" data-end="}">
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a53319a27058ea6b985a94738302e6115">  229</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a53319a27058ea6b985a94738302e6115">camera::set_up</a>(glm::vec3 up)</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>{</div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>  this-&gt;up = <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>}</div>
-</div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
-<div class="foldopen" id="foldopen00234" data-start="{" data-end="}">
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a2c3a151f13844691cc39eb79f88535c5">  234</a></span>glm::vec3 <a class="code hl_function" href="classbrenta_1_1camera.html#a2c3a151f13844691cc39eb79f88535c5">camera::get_right</a>()</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>{</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>}</div>
-</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span> </div>
-<div class="foldopen" id="foldopen00239" data-start="{" data-end="}">
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#aa0eb8f9b9620635020c36a302df9d19c">  239</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#aa0eb8f9b9620635020c36a302df9d19c">camera::set_right</a>(glm::vec3 right)</div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>{</div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>  this-&gt;right = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>}</div>
-</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="foldopen" id="foldopen00244" data-start="{" data-end="}">
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">  244</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">camera::get_first_mouse</a>()</div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>{</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">first_mouse</a>;</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>}</div>
-</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span> </div>
-<div class="foldopen" id="foldopen00249" data-start="{" data-end="}">
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a4a4a87f0ef75634b9214a9c349c29522">  249</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a4a4a87f0ef75634b9214a9c349c29522">camera::set_first_mouse</a>(<span class="keywordtype">bool</span> first_mouse)</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>{</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>  this-&gt;first_mouse = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">first_mouse</a>;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>}</div>
-</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="foldopen" id="foldopen00254" data-start="{" data-end="}">
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">  254</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">camera::get_last_x</a>()</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>{</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">last_x</a>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>}</div>
-</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span> </div>
-<div class="foldopen" id="foldopen00259" data-start="{" data-end="}">
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">  259</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">camera::set_last_x</a>(<span class="keywordtype">float</span> last_x)</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>{</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>  this-&gt;last_x = <a class="code hl_variable" href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">last_x</a>;</div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>}</div>
-</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span> </div>
-<div class="foldopen" id="foldopen00264" data-start="{" data-end="}">
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">  264</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">camera::get_last_y</a>()</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>{</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">last_y</a>;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>}</div>
-</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="foldopen" id="foldopen00269" data-start="{" data-end="}">
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno"><a class="line" href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">  269</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">camera::set_last_y</a>(<span class="keywordtype">float</span> last_y)</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>{</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>  this-&gt;last_y = <a class="code hl_variable" href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">last_y</a>;</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>}</div>
-</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span> </div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span><span class="comment">//</span></div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span><span class="comment">// Builder</span></div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span><span class="comment">//</span></div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>camera::builder::camera_type(enums::camera_type camera_type)</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>{</div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  this-&gt;camera_type_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">camera_type</a>;</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>}</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>camera::builder::projection_type(enums::projection_type <a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>)</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>{</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>  this-&gt;projection_type_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">projection_type</a>;</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>}</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span> </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::position(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>)</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>{</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>  this-&gt;position_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">position</a>;</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>}</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span> </div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::world_up(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>)</div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>{</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>  this-&gt;world_up_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>}</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::center(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>)</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>{</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>  this-&gt;center_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>}</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span> </div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::movement_speed(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>)</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>{</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>  this-&gt;movement_speed_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>}</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::mouse_sensitivity(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">mouse_sensitivity</a>)</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>{</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>  this-&gt;mouse_sensitivity_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">mouse_sensitivity</a>;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>}</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span> </div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::zoom(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>)</div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>{</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  this-&gt;zoom_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>}</div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span> </div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::spherical_coordinates(</div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>  <a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>)</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>{</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  this-&gt;spherical_coordinates_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>}</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>camera::builder::euler_angles(<a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>)</div>
-<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>{</div>
-<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>  this-&gt;euler_angles_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
-<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span>}</div>
-<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span> </div>
-<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::front(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>)</div>
-<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>{</div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>  this-&gt;front_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
-<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>}</div>
-<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span> </div>
-<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::up(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>)</div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>{</div>
-<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>  this-&gt;up_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>}</div>
-<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
-<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::right(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>)</div>
-<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>{</div>
-<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>  this-&gt;right_val = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>}</div>
-<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
-<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span><a class="code hl_class" href="classbrenta_1_1camera.html">brenta::camera</a> camera::camera::builder::build()</div>
-<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>{</div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e">camera</a>(camera_type_val, projection_type_val, position_val,</div>
-<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span>                world_up_val, center_val, movement_speed_val,</div>
-<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>                mouse_sensitivity_val, zoom_val,</div>
-<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>                spherical_coordinates_val, euler_angles_val,</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>                front_val, up_val, right_val);</div>
-<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1camera_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1camera_1_1builder.html">brenta::camera::builder</a></div><div class="ttdoc">Builder pattern for the Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00447">camera.hpp:448</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html"><div class="ttname"><a href="classbrenta_1_1camera.html">brenta::camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00126">camera.hpp:127</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a0120afee03d14279a88e9d65eccee290"><div class="ttname"><a href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">brenta::camera::spherical_coordinates</a></div><div class="ttdeci">types::spherical_coordinates spherical_coordinates</div><div class="ttdoc">Spherical coordinates.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00174">camera.hpp:174</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a026961af418acc07e9ee0031921356f8"><div class="ttname"><a href="classbrenta_1_1camera.html#a026961af418acc07e9ee0031921356f8">brenta::camera::get_zoom</a></div><div class="ttdeci">float get_zoom()</div><div class="ttdoc">Get the zoom level.</div><div class="ttdef"><b>Definition</b> <a href="#l00183">camera.cpp:183</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a0c970443b245e0650538c0c320f07e9e"><div class="ttname"><a href="classbrenta_1_1camera.html#a0c970443b245e0650538c0c320f07e9e">brenta::camera::get_center</a></div><div class="ttdeci">glm::vec3 get_center()</div><div class="ttdoc">Get the center of the sphere.</div><div class="ttdef"><b>Definition</b> <a href="#l00153">camera.cpp:153</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a11d287471e054bf04d507b083079ec81"><div class="ttname"><a href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">brenta::camera::front</a></div><div class="ttdeci">glm::vec3 front</div><div class="ttdoc">Front vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00188">camera.hpp:188</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a160ee40be8911db482b22d950d4ce4fa"><div class="ttname"><a href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">brenta::camera::set_last_y</a></div><div class="ttdeci">void set_last_y(float last_y)</div><div class="ttdoc">Set the last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00269">camera.cpp:269</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a1d05d34ae3d66a5c942814e82035243a"><div class="ttname"><a href="classbrenta_1_1camera.html#a1d05d34ae3d66a5c942814e82035243a">brenta::camera::get_position</a></div><div class="ttdeci">glm::vec3 get_position()</div><div class="ttdoc">Get the position of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00133">camera.cpp:133</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a281e8a61bde08e66ea5fdf449aec0bd6"><div class="ttname"><a href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">brenta::camera::last_x</a></div><div class="ttdeci">float last_x</div><div class="ttdoc">Last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00211">camera.hpp:211</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a28924ef1388a949a93ee82a2ff5fdf1a"><div class="ttname"><a href="classbrenta_1_1camera.html#a28924ef1388a949a93ee82a2ff5fdf1a">brenta::camera::set_zoom</a></div><div class="ttdeci">void set_zoom(float zoom)</div><div class="ttdoc">Set the zoom level.</div><div class="ttdef"><b>Definition</b> <a href="#l00188">camera.cpp:188</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a2c3a151f13844691cc39eb79f88535c5"><div class="ttname"><a href="classbrenta_1_1camera.html#a2c3a151f13844691cc39eb79f88535c5">brenta::camera::get_right</a></div><div class="ttdeci">glm::vec3 get_right()</div><div class="ttdoc">Get the right vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00234">camera.cpp:234</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a2dec820889c0aa97a9c400ec6391fb8d"><div class="ttname"><a href="classbrenta_1_1camera.html#a2dec820889c0aa97a9c400ec6391fb8d">brenta::camera::get_spherical_coordinates</a></div><div class="ttdeci">types::spherical_coordinates get_spherical_coordinates()</div><div class="ttdoc">Get the spherical coordinates of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00193">camera.cpp:193</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a4517136492bcc46e4dd35b93a1361065"><div class="ttname"><a href="classbrenta_1_1camera.html#a4517136492bcc46e4dd35b93a1361065">brenta::camera::get_up</a></div><div class="ttdeci">glm::vec3 get_up()</div><div class="ttdoc">Get the up vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00224">camera.cpp:224</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a4a4a87f0ef75634b9214a9c349c29522"><div class="ttname"><a href="classbrenta_1_1camera.html#a4a4a87f0ef75634b9214a9c349c29522">brenta::camera::set_first_mouse</a></div><div class="ttdeci">void set_first_mouse(bool first_mouse)</div><div class="ttdoc">Set the first mouse flag.</div><div class="ttdef"><b>Definition</b> <a href="#l00249">camera.cpp:249</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a4aa4c82c33771d30b2ab8154a069718f"><div class="ttname"><a href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">brenta::camera::set_last_x</a></div><div class="ttdeci">void set_last_x(float last_x)</div><div class="ttdoc">Set the last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00259">camera.cpp:259</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a506714eeafdfea90b00651e6762fd8c5"><div class="ttname"><a href="classbrenta_1_1camera.html#a506714eeafdfea90b00651e6762fd8c5">brenta::camera::set_camera_type</a></div><div class="ttdeci">void set_camera_type(enums::camera_type camera_type)</div><div class="ttdoc">Set the camera type.</div><div class="ttdef"><b>Definition</b> <a href="#l00118">camera.cpp:118</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a53319a27058ea6b985a94738302e6115"><div class="ttname"><a href="classbrenta_1_1camera.html#a53319a27058ea6b985a94738302e6115">brenta::camera::set_up</a></div><div class="ttdeci">void set_up(glm::vec3 up)</div><div class="ttdoc">Set the up vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00229">camera.cpp:229</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a54ad83fd480bad081ef881a129c79703"><div class="ttname"><a href="classbrenta_1_1camera.html#a54ad83fd480bad081ef881a129c79703">brenta::camera::set_mouse_sensitivity</a></div><div class="ttdeci">void set_mouse_sensitivity(float mouse_sensitivity)</div><div class="ttdoc">Set the mouse sensitivity.</div><div class="ttdef"><b>Definition</b> <a href="#l00178">camera.cpp:178</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a5a30e76323f47f986eb64c368cf0a12b"><div class="ttname"><a href="classbrenta_1_1camera.html#a5a30e76323f47f986eb64c368cf0a12b">brenta::camera::set_world_up</a></div><div class="ttdeci">void set_world_up(glm::vec3 world_up)</div><div class="ttdoc">Set the world up vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00148">camera.cpp:148</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a5ccc6966c8ab1f1eaebea011436b77d1"><div class="ttname"><a href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">brenta::camera::right</a></div><div class="ttdeci">glm::vec3 right</div><div class="ttdoc">Right vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00200">camera.hpp:200</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a5e09b8dbdc270163cc15a519601a9ec6"><div class="ttname"><a href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">brenta::camera::world_up</a></div><div class="ttdeci">glm::vec3 world_up</div><div class="ttdoc">The world up vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00146">camera.hpp:146</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a5ea1e16712a2461400780b6f6bda05fc"><div class="ttname"><a href="classbrenta_1_1camera.html#a5ea1e16712a2461400780b6f6bda05fc">brenta::camera::get_euler_angles</a></div><div class="ttdeci">types::euler_angles get_euler_angles()</div><div class="ttdoc">Get the euler angles of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00204">camera.cpp:204</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a6f51c43a27b1b0a40c8aca2ebe422760"><div class="ttname"><a href="classbrenta_1_1camera.html#a6f51c43a27b1b0a40c8aca2ebe422760">brenta::camera::get_front</a></div><div class="ttdeci">glm::vec3 get_front()</div><div class="ttdoc">Get the front vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00214">camera.cpp:214</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a7557d28e2272ad0cb1f527d0a1cf5c6c"><div class="ttname"><a href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">brenta::camera::get_last_x</a></div><div class="ttdeci">float get_last_x()</div><div class="ttdoc">Get the last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00254">camera.cpp:254</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a762c5f1465e2753228c4010d90c4185a"><div class="ttname"><a href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">brenta::camera::update_camera_euler</a></div><div class="ttdeci">void update_camera_euler()</div><div class="ttdoc">Update the camera euler angles.</div><div class="ttdef"><b>Definition</b> <a href="#l00098">camera.cpp:98</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a7d080d1b8161ab9e210d682ccd73bd3a"><div class="ttname"><a href="classbrenta_1_1camera.html#a7d080d1b8161ab9e210d682ccd73bd3a">brenta::camera::get_camera_type</a></div><div class="ttdeci">enums::camera_type get_camera_type()</div><div class="ttdoc">Get the camera type.</div><div class="ttdef"><b>Definition</b> <a href="#l00113">camera.cpp:113</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a7f8cef79eb9cb523842b070fd088bf7e"><div class="ttname"><a href="classbrenta_1_1camera.html#a7f8cef79eb9cb523842b070fd088bf7e">brenta::camera::set_projection_type</a></div><div class="ttdeci">void set_projection_type(enums::projection_type projection_type)</div><div class="ttdoc">Set the projection type.</div><div class="ttdef"><b>Definition</b> <a href="#l00128">camera.cpp:128</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a804191070243222fec432495e1febe32"><div class="ttname"><a href="classbrenta_1_1camera.html#a804191070243222fec432495e1febe32">brenta::camera::camera_type</a></div><div class="ttdeci">enums::camera_type camera_type</div><div class="ttdoc">Camera type.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00136">camera.hpp:136</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a82e04b5e6b90d31d792161821d0ce69f"><div class="ttname"><a href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">brenta::camera::movement_speed</a></div><div class="ttdeci">float movement_speed</div><div class="ttdoc">Space translational movement speed.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00157">camera.hpp:157</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a899f13fdac68be47742541576d4a2436"><div class="ttname"><a href="classbrenta_1_1camera.html#a899f13fdac68be47742541576d4a2436">brenta::camera::mouse_sensitivity</a></div><div class="ttdeci">float mouse_sensitivity</div><div class="ttdoc">Mouse sensitivity.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00161">camera.hpp:161</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a8ca43296b9278a3796e16e813f648fca"><div class="ttname"><a href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">brenta::camera::get_first_mouse</a></div><div class="ttdeci">bool get_first_mouse()</div><div class="ttdoc">Get the first mouse flag.</div><div class="ttdef"><b>Definition</b> <a href="#l00244">camera.cpp:244</a></div></div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span><span class="comment">//</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span><span class="comment">// Builder</span></div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span><span class="comment">//</span></div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>camera::builder::camera_type(camera::camera_type camera_type)</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>{</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>  this-&gt;conf.cam_type = camera_type;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>}</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>camera::builder::projection_type(camera::projection_type projection_type)</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>{</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>  this-&gt;conf.proj_type = projection_type;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>}</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span> </div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::position(glm::vec3 position)</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>{</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>  this-&gt;conf.position = position;</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>}</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::world_up(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>)</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>{</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>  this-&gt;conf.world_up = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">world_up</a>;</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>}</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span> </div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::center(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>)</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>{</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>  this-&gt;conf.center = <a class="code hl_variable" href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">center</a>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>}</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span> </div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::movement_speed(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>)</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>{</div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>  this-&gt;conf.movement_speed = <a class="code hl_variable" href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">movement_speed</a>;</div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>}</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span> </div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::mouse_sensitivity(<span class="keywordtype">float</span> mouse_sensitivity)</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>{</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>  this-&gt;conf.mouse_sensitivity = mouse_sensitivity;</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>}</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::zoom(<span class="keywordtype">float</span> <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>)</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>{</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>  this-&gt;conf.zoom = <a class="code hl_variable" href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">zoom</a>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>}</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span> </div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::spherical_coordinates(</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>  <a class="code hl_struct" href="structbrenta_1_1types_1_1spherical__coordinates.html">types::spherical_coordinates</a> <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>)</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>{</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>  this-&gt;conf.spherical_coordinates = <a class="code hl_variable" href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">spherical_coordinates</a>;</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>}</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span> </div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>camera::builder::euler_angles(<a class="code hl_struct" href="structbrenta_1_1types_1_1euler__angles.html">types::euler_angles</a> <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>)</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>{</div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>  this-&gt;conf.euler_angles = <a class="code hl_variable" href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">euler_angles</a>;</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>}</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::front(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>)</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>{</div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>  this-&gt;conf.front = <a class="code hl_variable" href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">front</a>;</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>}</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span> </div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::up(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>)</div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>{</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span>  this-&gt;conf.up = <a class="code hl_variable" href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">up</a>;</div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>}</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span> </div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span><a class="code hl_class" href="classbrenta_1_1camera_1_1builder.html">camera::builder</a> &amp;camera::builder::right(glm::vec3 <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>)</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>{</div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>  this-&gt;conf.right = <a class="code hl_variable" href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">right</a>;</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>}</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span> </div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span><a class="code hl_class" href="classbrenta_1_1camera.html">brenta::camera</a> camera::camera::builder::build()</div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>{</div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>  <span class="keywordflow">return</span> <a class="code hl_function" href="classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e">camera</a>(this-&gt;conf);</div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>}</div>
+<div class="ttc" id="aclassbrenta_1_1camera_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1camera_1_1builder.html">brenta::camera::builder</a></div><div class="ttdoc">Builder pattern for the Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00329">camera.hpp:330</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html"><div class="ttname"><a href="classbrenta_1_1camera.html">brenta::camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00096">camera.hpp:97</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a0120afee03d14279a88e9d65eccee290"><div class="ttname"><a href="classbrenta_1_1camera.html#a0120afee03d14279a88e9d65eccee290">brenta::camera::spherical_coordinates</a></div><div class="ttdeci">types::spherical_coordinates spherical_coordinates</div><div class="ttdoc">Spherical coordinates.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00159">camera.hpp:159</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a11d287471e054bf04d507b083079ec81"><div class="ttname"><a href="classbrenta_1_1camera.html#a11d287471e054bf04d507b083079ec81">brenta::camera::front</a></div><div class="ttdeci">glm::vec3 front</div><div class="ttdoc">Front vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00173">camera.hpp:173</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a160ee40be8911db482b22d950d4ce4fa"><div class="ttname"><a href="classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa">brenta::camera::set_last_y</a></div><div class="ttdeci">void set_last_y(float last_y)</div><div class="ttdoc">Set the last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00261">camera.cpp:261</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a281e8a61bde08e66ea5fdf449aec0bd6"><div class="ttname"><a href="classbrenta_1_1camera.html#a281e8a61bde08e66ea5fdf449aec0bd6">brenta::camera::last_x</a></div><div class="ttdeci">float last_x</div><div class="ttdoc">Last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00196">camera.hpp:196</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a4aa4c82c33771d30b2ab8154a069718f"><div class="ttname"><a href="classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f">brenta::camera::set_last_x</a></div><div class="ttdeci">void set_last_x(float last_x)</div><div class="ttdoc">Set the last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00251">camera.cpp:251</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a5ccc6966c8ab1f1eaebea011436b77d1"><div class="ttname"><a href="classbrenta_1_1camera.html#a5ccc6966c8ab1f1eaebea011436b77d1">brenta::camera::right</a></div><div class="ttdeci">glm::vec3 right</div><div class="ttdoc">Right vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00185">camera.hpp:185</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a5e09b8dbdc270163cc15a519601a9ec6"><div class="ttname"><a href="classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6">brenta::camera::world_up</a></div><div class="ttdeci">glm::vec3 world_up</div><div class="ttdoc">The world up vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00134">camera.hpp:134</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a7557d28e2272ad0cb1f527d0a1cf5c6c"><div class="ttname"><a href="classbrenta_1_1camera.html#a7557d28e2272ad0cb1f527d0a1cf5c6c">brenta::camera::get_last_x</a></div><div class="ttdeci">float get_last_x()</div><div class="ttdoc">Get the last x position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00246">camera.cpp:246</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a762c5f1465e2753228c4010d90c4185a"><div class="ttname"><a href="classbrenta_1_1camera.html#a762c5f1465e2753228c4010d90c4185a">brenta::camera::update_camera_euler</a></div><div class="ttdeci">void update_camera_euler()</div><div class="ttdoc">Update the camera euler angles.</div><div class="ttdef"><b>Definition</b> <a href="#l00090">camera.cpp:90</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a82e04b5e6b90d31d792161821d0ce69f"><div class="ttname"><a href="classbrenta_1_1camera.html#a82e04b5e6b90d31d792161821d0ce69f">brenta::camera::movement_speed</a></div><div class="ttdeci">float movement_speed</div><div class="ttdoc">Space translational movement speed.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00145">camera.hpp:145</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a8ca43296b9278a3796e16e813f648fca"><div class="ttname"><a href="classbrenta_1_1camera.html#a8ca43296b9278a3796e16e813f648fca">brenta::camera::get_first_mouse</a></div><div class="ttdeci">bool get_first_mouse()</div><div class="ttdoc">Get the first mouse flag.</div><div class="ttdef"><b>Definition</b> <a href="#l00236">camera.cpp:236</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1camera_html_a8fd7d72378ee32fe1e7a727bbf42257e"><div class="ttname"><a href="classbrenta_1_1camera.html#a8fd7d72378ee32fe1e7a727bbf42257e">brenta::camera::camera</a></div><div class="ttdeci">camera()=default</div><div class="ttdoc">Default constructor.</div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a910365fe99e2b49fb4ef7c05067ae1f5"><div class="ttname"><a href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">brenta::camera::euler_angles</a></div><div class="ttdeci">types::euler_angles euler_angles</div><div class="ttdoc">Euler angles.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00182">camera.hpp:182</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a91f772d19ee61485958f2c6ef69fbe82"><div class="ttname"><a href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">brenta::camera::spherical_to_cartesian</a></div><div class="ttdeci">void spherical_to_cartesian()</div><div class="ttdoc">Update the camera spherical coordinates.</div><div class="ttdef"><b>Definition</b> <a href="#l00082">camera.cpp:82</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a9e57deb08d04838271e62b37ca121896"><div class="ttname"><a href="classbrenta_1_1camera.html#a9e57deb08d04838271e62b37ca121896">brenta::camera::get_movement_speed</a></div><div class="ttdeci">float get_movement_speed()</div><div class="ttdoc">Get the movement speed.</div><div class="ttdef"><b>Definition</b> <a href="#l00163">camera.cpp:163</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a9fabeaa5b8cfcbbffb23c703ce922349"><div class="ttname"><a href="classbrenta_1_1camera.html#a9fabeaa5b8cfcbbffb23c703ce922349">brenta::camera::set_movement_speed</a></div><div class="ttdeci">void set_movement_speed(float movement_speed)</div><div class="ttdoc">Set the movement speed.</div><div class="ttdef"><b>Definition</b> <a href="#l00168">camera.cpp:168</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_a9fcf90ef17ae3881ccaea6a8252dfeab"><div class="ttname"><a href="classbrenta_1_1camera.html#a9fcf90ef17ae3881ccaea6a8252dfeab">brenta::camera::projection_type</a></div><div class="ttdeci">enums::projection_type projection_type</div><div class="ttdoc">Projection type.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00132">camera.hpp:132</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_aa0eb8f9b9620635020c36a302df9d19c"><div class="ttname"><a href="classbrenta_1_1camera.html#aa0eb8f9b9620635020c36a302df9d19c">brenta::camera::set_right</a></div><div class="ttdeci">void set_right(glm::vec3 right)</div><div class="ttdoc">Set the right vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00239">camera.cpp:239</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_aa3c0b6c1ece6a3d86c624dcf6782c0e3"><div class="ttname"><a href="classbrenta_1_1camera.html#aa3c0b6c1ece6a3d86c624dcf6782c0e3">brenta::camera::set_spherical_coordinates</a></div><div class="ttdeci">void set_spherical_coordinates(types::spherical_coordinates spherical_coordinates)</div><div class="ttdoc">Set the spherical coordinates of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00198">camera.cpp:198</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_aa74c5660a1b6a8c7234cc151844cdae0"><div class="ttname"><a href="classbrenta_1_1camera.html#aa74c5660a1b6a8c7234cc151844cdae0">brenta::camera::set_euler_angles</a></div><div class="ttdeci">void set_euler_angles(types::euler_angles euler_angles)</div><div class="ttdoc">Set the euler angles of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00209">camera.cpp:209</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_aaa2206c1cb5b48106e059cf2622882a3"><div class="ttname"><a href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">brenta::camera::zoom</a></div><div class="ttdeci">float zoom</div><div class="ttdoc">Zoom level (field of view)</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00165">camera.hpp:165</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ab3d4019eb5007e6f84c54f421aa1be34"><div class="ttname"><a href="classbrenta_1_1camera.html#ab3d4019eb5007e6f84c54f421aa1be34">brenta::camera::get_view_matrix</a></div><div class="ttdeci">glm::mat4 get_view_matrix()</div><div class="ttdoc">Get the view matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00050">camera.cpp:50</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ab6c3ac60045f12aaeb1eec8eeb87dd31"><div class="ttname"><a href="classbrenta_1_1camera.html#ab6c3ac60045f12aaeb1eec8eeb87dd31">brenta::camera::set_center</a></div><div class="ttdeci">void set_center(glm::vec3 center)</div><div class="ttdoc">Set the center of the sphere.</div><div class="ttdef"><b>Definition</b> <a href="#l00158">camera.cpp:158</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_aba4542e519548171330c220ba3817e65"><div class="ttname"><a href="classbrenta_1_1camera.html#aba4542e519548171330c220ba3817e65">brenta::camera::get_mouse_sensitivity</a></div><div class="ttdeci">float get_mouse_sensitivity()</div><div class="ttdoc">Get the mouse sensitivity.</div><div class="ttdef"><b>Definition</b> <a href="#l00173">camera.cpp:173</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ac0cdbbe8fef67800143d8ae10491e3f8"><div class="ttname"><a href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">brenta::camera::first_mouse</a></div><div class="ttdeci">bool first_mouse</div><div class="ttdoc">Is the first mouse movement?</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00207">camera.hpp:207</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ac273568d1dacba8a53ecc515221a9456"><div class="ttname"><a href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">brenta::camera::center</a></div><div class="ttdeci">glm::vec3 center</div><div class="ttdoc">The center of the spehere.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00153">camera.hpp:153</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ac4dc7be833472a2bcb27cfce3d1a8876"><div class="ttname"><a href="classbrenta_1_1camera.html#ac4dc7be833472a2bcb27cfce3d1a8876">brenta::camera::set_front</a></div><div class="ttdeci">void set_front(glm::vec3 front)</div><div class="ttdoc">Set the front vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00219">camera.cpp:219</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ace8d42304e9ee830402f2e2a67996c83"><div class="ttname"><a href="classbrenta_1_1camera.html#ace8d42304e9ee830402f2e2a67996c83">brenta::camera::get_projection_type</a></div><div class="ttdeci">enums::projection_type get_projection_type()</div><div class="ttdoc">Get the projection type.</div><div class="ttdef"><b>Definition</b> <a href="#l00123">camera.cpp:123</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_acf83a08aadebd707b4c6277e5f1cab1f"><div class="ttname"><a href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">brenta::camera::up</a></div><div class="ttdeci">glm::vec3 up</div><div class="ttdoc">Up vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00194">camera.hpp:194</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_adb2f975cc2f0873e8efae43564a8675d"><div class="ttname"><a href="classbrenta_1_1camera.html#adb2f975cc2f0873e8efae43564a8675d">brenta::camera::get_world_up</a></div><div class="ttdeci">glm::vec3 get_world_up()</div><div class="ttdoc">Get the world up vector.</div><div class="ttdef"><b>Definition</b> <a href="#l00143">camera.cpp:143</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_adf7021961bc777f80e54afcee330cdb8"><div class="ttname"><a href="classbrenta_1_1camera.html#adf7021961bc777f80e54afcee330cdb8">brenta::camera::position</a></div><div class="ttdeci">glm::vec3 position</div><div class="ttdoc">Camera position.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00140">camera.hpp:140</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_ae031d45a919fb4f223840715e1dfb49a"><div class="ttname"><a href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">brenta::camera::get_last_y</a></div><div class="ttdeci">float get_last_y()</div><div class="ttdoc">Get the last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00264">camera.cpp:264</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_af09e5b0fabb73303bc1816709de33e6d"><div class="ttname"><a href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">brenta::camera::last_y</a></div><div class="ttdeci">float last_y</div><div class="ttdoc">Last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00215">camera.hpp:215</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_af49703def2f343334bb4f3d1333fb577"><div class="ttname"><a href="classbrenta_1_1camera.html#af49703def2f343334bb4f3d1333fb577">brenta::camera::get_projection_matrix</a></div><div class="ttdeci">glm::mat4 get_projection_matrix(int window_width, int window_height)</div><div class="ttdoc">Get the projection matrix.</div><div class="ttdef"><b>Definition</b> <a href="#l00063">camera.cpp:63</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1camera_html_af87d7fde519e4eb98c19175687dc719c"><div class="ttname"><a href="classbrenta_1_1camera.html#af87d7fde519e4eb98c19175687dc719c">brenta::camera::set_position</a></div><div class="ttdeci">void set_position(glm::vec3 position)</div><div class="ttdoc">Set the position of the camera.</div><div class="ttdef"><b>Definition</b> <a href="#l00138">camera.cpp:138</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a910365fe99e2b49fb4ef7c05067ae1f5"><div class="ttname"><a href="classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5">brenta::camera::euler_angles</a></div><div class="ttdeci">types::euler_angles euler_angles</div><div class="ttdoc">Euler angles.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00167">camera.hpp:167</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_a91f772d19ee61485958f2c6ef69fbe82"><div class="ttname"><a href="classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82">brenta::camera::spherical_to_cartesian</a></div><div class="ttdeci">void spherical_to_cartesian()</div><div class="ttdoc">Update the camera spherical coordinates.</div><div class="ttdef"><b>Definition</b> <a href="#l00074">camera.cpp:74</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_aaa2206c1cb5b48106e059cf2622882a3"><div class="ttname"><a href="classbrenta_1_1camera.html#aaa2206c1cb5b48106e059cf2622882a3">brenta::camera::zoom</a></div><div class="ttdeci">float zoom</div><div class="ttdoc">Zoom level (field of view)</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00150">camera.hpp:150</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_ac0cdbbe8fef67800143d8ae10491e3f8"><div class="ttname"><a href="classbrenta_1_1camera.html#ac0cdbbe8fef67800143d8ae10491e3f8">brenta::camera::first_mouse</a></div><div class="ttdeci">bool first_mouse</div><div class="ttdoc">Is the first mouse movement?</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00192">camera.hpp:192</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_ac273568d1dacba8a53ecc515221a9456"><div class="ttname"><a href="classbrenta_1_1camera.html#ac273568d1dacba8a53ecc515221a9456">brenta::camera::center</a></div><div class="ttdeci">glm::vec3 center</div><div class="ttdoc">The center of the spehere.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00141">camera.hpp:141</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_acf83a08aadebd707b4c6277e5f1cab1f"><div class="ttname"><a href="classbrenta_1_1camera.html#acf83a08aadebd707b4c6277e5f1cab1f">brenta::camera::up</a></div><div class="ttdeci">glm::vec3 up</div><div class="ttdoc">Up vector.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00179">camera.hpp:179</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_ae031d45a919fb4f223840715e1dfb49a"><div class="ttname"><a href="classbrenta_1_1camera.html#ae031d45a919fb4f223840715e1dfb49a">brenta::camera::get_last_y</a></div><div class="ttdeci">float get_last_y()</div><div class="ttdoc">Get the last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="#l00256">camera.cpp:256</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1camera_html_af09e5b0fabb73303bc1816709de33e6d"><div class="ttname"><a href="classbrenta_1_1camera.html#af09e5b0fabb73303bc1816709de33e6d">brenta::camera::last_y</a></div><div class="ttdeci">float last_y</div><div class="ttdoc">Last y position of the mouse.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00200">camera.hpp:200</a></div></div>
+<div class="ttc" id="astructbrenta_1_1camera_1_1config_html"><div class="ttname"><a href="structbrenta_1_1camera_1_1config.html">brenta::camera::config</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00309">camera.hpp:310</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1euler__angles_html"><div class="ttname"><a href="structbrenta_1_1types_1_1euler__angles.html">brenta::types::euler_angles</a></div><div class="ttdoc">Euler angles.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00051">camera.hpp:52</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1spherical__coordinates_html"><div class="ttname"><a href="structbrenta_1_1types_1_1spherical__coordinates.html">brenta::types::spherical_coordinates</a></div><div class="ttdoc">Spherical coordinates.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00024">camera.hpp:25</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

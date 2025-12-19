@@ -5,7 +5,6 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "camera.cpp", "camera_8cpp_source.html", null ],
     [ "ecs.cpp", "ecs_8cpp_source.html", null ],
     [ "engine.cpp", "engine_8cpp_source.html", null ],
-    [ "error.cpp", "error_8cpp_source.html", null ],
     [ "frame_buffer.cpp", "frame__buffer_8cpp_source.html", null ],
     [ "gl.cpp", "gl_8cpp_source.html", null ],
     [ "gui.cpp", "gui_8cpp_source.html", null ],

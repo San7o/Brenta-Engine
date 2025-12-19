@@ -3,29 +3,60 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/window.hpp>
+#include <brenta/input.hpp>
+#include <brenta/logger.hpp>
 
 using namespace brenta;
-using namespace brenta::types;
+
+//
+// Static variables
+//
 
 std::unordered_map<int, std::function<void()>> input::keyboard_callbacks;
 std::unordered_map<std::string, std::function<void(double, double)>>
   input::mouse_callbacks;
+const std::string input::subsystem_name = "input";
+bool input::initialized = false;
 
-std::expected<void, std::string> input::initialize()
+//
+// Subsystem interface
+//
+
+std::expected<void, subsystem::error> input::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   window::set_key_callback(input::key_callback);
   window::set_mouse_pos_callback(input::mouse_pos_callback);
 
-  INFO("input initialized");
+  input::initialized = true;
+  INFO("{} initialized", input::subsystem_name);
   return {};
 }
 
-std::expected<void, std::string> input::terminate()
+std::expected<void, subsystem::error> input::terminate()
 {
-  INFO("input terminated");
+  if (!this->is_initialized()) return {};
+
+  input::initialized = false;
+  INFO("{}: terminated", input::subsystem_name);
   return {};
 }
+
+std::string input::name()
+{
+  return input::subsystem_name;
+}
+
+bool input::is_initialized()
+{
+  return input::initialized;
+}
+
+//
+// Member functions
+//
 
 input &input::instance()
 {
@@ -36,19 +67,20 @@ input &input::instance()
 void input::add_keyboard_callback(int key, std::function<void()> callback)
 {
   input::keyboard_callbacks[key] = callback;
-  INFO("Added callback for key: {}", std::to_string(key));
+  DEBUG("{}: aded callback for key: {}",
+       input::subsystem_name, std::to_string(key));
 }
 
 void input::remove_keyboard_callback(int key)
 {
   if (input::keyboard_callbacks.find(key) == input::keyboard_callbacks.end())
   {
-    ERROR("No callback found for key: {}", key);
+    ERROR("{}: no callback found for key: {}", input::subsystem_name, key);
     return;
   }
 
   input::keyboard_callbacks.erase(key);
-  INFO("Removed callback for key: {}", key);
+  DEBUG("{}: removed callback for key: {}", input::subsystem_name, key);
 }
 
 void input::key_callback([[maybe_unused]] GLFWwindow *window,
@@ -65,27 +97,31 @@ void input::key_callback([[maybe_unused]] GLFWwindow *window,
   }
 }
 
-void input::add_mouse_pos_callback(mouse_callback_name_t callback_name,
+void input::add_mouse_pos_callback(types::mouse_callback_name_t callback_name,
                                    std::function<void(double, double)> callback)
 {
   input::mouse_callbacks[callback_name] = callback;
-  INFO("Added callback for mouse: {}", callback_name);
+  DEBUG("{}: added callback for mouse: {}",
+       input::subsystem_name, callback_name);
 }
 
-void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
+void input::remove_mouse_pos_callback(types::mouse_callback_name_t callback_name)
 {
   if (input::mouse_callbacks.find(callback_name)
       == input::mouse_callbacks.end())
   {
-    ERROR("No callback found for mouse: {}", callback_name);
+    ERROR("{}: no callback found for mouse: {}",
+          input::subsystem_name, callback_name);
     return;
   }
 
   input::mouse_callbacks.erase(callback_name);
-  INFO("Removed callback for mouse: {}", callback_name);
+  DEBUG("{}: removed callback for mouse: {}",
+        input::subsystem_name, callback_name);
 }
 
-void input::mouse_pos_callback([[maybe_unused]] GLFWwindow *window, double xpos,
+void input::mouse_pos_callback([[maybe_unused]] GLFWwindow *window,
+                               double xpos,
                                double ypos)
 {
   for (auto &callback : input::mouse_callbacks)

@@ -102,8 +102,7 @@ $(function(){initNavTree('classbrenta_1_1logger.html',''); initResizable(true); 
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a> &#124;
-<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
+<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::logger Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -121,13 +120,21 @@ Inheritance diagram for brenta::logger:</div>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1logger_1_1builder.html">builder</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1logger_1_1config.html">config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a53c66579b2effff7ecd3a25a1fc7b30d" id="r_a53c66579b2effff7ecd3a25a1fc7b30d"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a53c66579b2effff7ecd3a25a1fc7b30d">initialize</a> () override</td></tr>
-<tr class="separator:a53c66579b2effff7ecd3a25a1fc7b30d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaeb3ef43be655cd15963869cd20d3720" id="r_aaeb3ef43be655cd15963869cd20d3720"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaeb3ef43be655cd15963869cd20d3720">terminate</a> () override</td></tr>
-<tr class="separator:aaeb3ef43be655cd15963869cd20d3720"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d33b87292fbcd0f47fa74667c327308" id="r_a3d33b87292fbcd0f47fa74667c327308"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3d33b87292fbcd0f47fa74667c327308">initialize</a> () override</td></tr>
+<tr class="separator:a3d33b87292fbcd0f47fa74667c327308"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada270a544a86379b375949e329ccd441" id="r_ada270a544a86379b375949e329ccd441"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, subsystem::error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ada270a544a86379b375949e329ccd441">terminate</a> () override</td></tr>
+<tr class="separator:ada270a544a86379b375949e329ccd441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ae0cbc6b0019bfac30fa162347bccd" id="r_a46ae0cbc6b0019bfac30fa162347bccd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46ae0cbc6b0019bfac30fa162347bccd">name</a> () override</td></tr>
+<tr class="memdesc:a46ae0cbc6b0019bfac30fa162347bccd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="separator:a46ae0cbc6b0019bfac30fa162347bccd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a867f89633dc50d99ffe3193fb3f0b712" id="r_a867f89633dc50d99ffe3193fb3f0b712"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a867f89633dc50d99ffe3193fb3f0b712">is_initialized</a> () override</td></tr>
+<tr class="memdesc:a867f89633dc50d99ffe3193fb3f0b712"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the subsystem is initialized.  <br /></td></tr>
+<tr class="separator:a867f89633dc50d99ffe3193fb3f0b712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -135,27 +142,27 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a08622f33c88b3b461c1a705da8878017" id="r_a08622f33c88b3b461c1a705da8878017"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1logger.html">logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a08622f33c88b3b461c1a705da8878017">instance</a> ()</td></tr>
 <tr class="separator:a08622f33c88b3b461c1a705da8878017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:ad14423cb09f3c95521fa308c158dcce6" id="r_ad14423cb09f3c95521fa308c158dcce6"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad14423cb09f3c95521fa308c158dcce6">subsystem_name</a> = &quot;logger&quot;</td></tr>
-<tr class="separator:ad14423cb09f3c95521fa308c158dcce6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_attribs_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_attribs_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Data Fields inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
-<tr class="memitem:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem" id="r_a22db4c06b6e4ec1161085ef0b72a700a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#a22db4c06b6e4ec1161085ef0b72a700a">subsystem_name</a></td></tr>
-<tr class="separator:a22db4c06b6e4ec1161085ef0b72a700a inherit pub_attribs_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a2043a6cc01a22d47062eda2545dfbf48" id="r_a2043a6cc01a22d47062eda2545dfbf48"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2043a6cc01a22d47062eda2545dfbf48">subsystem_name</a> = &quot;logger&quot;</td></tr>
+<tr class="separator:a2043a6cc01a22d47062eda2545dfbf48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37fde6c3a4b38e5a9e37cd513e144b1b" id="r_a37fde6c3a4b38e5a9e37cd513e144b1b"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="structbrenta_1_1logger_1_1config.html">config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37fde6c3a4b38e5a9e37cd513e144b1b">default_config</a></td></tr>
+<tr class="separator:a37fde6c3a4b38e5a9e37cd513e144b1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a174aacec0ebc3d5f6beee7e99fd9b8f8" id="r_a174aacec0ebc3d5f6beee7e99fd9b8f8"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structbrenta_1_1logger_1_1config.html">config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a174aacec0ebc3d5f6beee7e99fd9b8f8">init_config</a> = default_config</td></tr>
+<tr class="separator:a174aacec0ebc3d5f6beee7e99fd9b8f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
-Static Protected Attributes</h2></td></tr>
-<tr class="memitem:acc490aea8aedd7b4972a9d4b64a14f18" id="r_acc490aea8aedd7b4972a9d4b64a14f18"><td class="memItemLeft" align="right" valign="top">static oak::level&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acc490aea8aedd7b4972a9d4b64a14f18">log_level</a></td></tr>
-<tr class="separator:acc490aea8aedd7b4972a9d4b64a14f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5da0aca762821a29928f01805a1e2378" id="r_a5da0aca762821a29928f01805a1e2378"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5da0aca762821a29928f01805a1e2378">log_file</a></td></tr>
-<tr class="separator:a5da0aca762821a29928f01805a1e2378"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
+Additional Inherited Members</h2></td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1subsystem"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_types_classbrenta_1_1subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a></td></tr>
+<tr class="memitem:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem" id="r_aaf7e9141401116dc6cf81c9c3f645b2e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1subsystem.html#aaf7e9141401116dc6cf81c9c3f645b2e">error</a> = std::string</td></tr>
+<tr class="separator:aaf7e9141401116dc6cf81c9c3f645b2e inherit pub_types_classbrenta_1_1subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00024">24</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a53c66579b2effff7ecd3a25a1fc7b30d" name="a53c66579b2effff7ecd3a25a1fc7b30d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a53c66579b2effff7ecd3a25a1fc7b30d">&#9670;&#160;</a></span>initialize()</h2>
+<a id="a3d33b87292fbcd0f47fa74667c327308" name="a3d33b87292fbcd0f47fa74667c327308"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d33b87292fbcd0f47fa74667c327308">&#9670;&#160;</a></span>initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -164,7 +171,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; logger::initialize </td>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; logger::initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -179,7 +186,7 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00019">19</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00028">28</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -206,12 +213,12 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00013">13</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00078">78</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aaeb3ef43be655cd15963869cd20d3720" name="aaeb3ef43be655cd15963869cd20d3720"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aaeb3ef43be655cd15963869cd20d3720">&#9670;&#160;</a></span>terminate()</h2>
+<a id="a867f89633dc50d99ffe3193fb3f0b712" name="a867f89633dc50d99ffe3193fb3f0b712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a867f89633dc50d99ffe3193fb3f0b712">&#9670;&#160;</a></span>is_initialized()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -220,7 +227,69 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; void, std::string &gt; logger::terminate </td>
+          <td class="memname">bool logger::is_initialized </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns true if the subsystem is initialized. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#ab24d44e73bb673bd4e4f2fa01391d019">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00069">69</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a46ae0cbc6b0019bfac30fa162347bccd" name="a46ae0cbc6b0019bfac30fa162347bccd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ae0cbc6b0019bfac30fa162347bccd">&#9670;&#160;</a></span>name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string logger::name </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Returns the name of the sybsystem. </p>
+
+<p>Implements <a class="el" href="classbrenta_1_1subsystem.html#af6069c3c0c56db52b9a94cdf07985ed5">brenta::subsystem</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00064">64</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ada270a544a86379b375949e329ccd441" name="ada270a544a86379b375949e329ccd441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada270a544a86379b375949e329ccd441">&#9670;&#160;</a></span>terminate()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::expected&lt; void, subsystem::error &gt; logger::terminate </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -235,13 +304,13 @@ Static Protected Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1subsystem.html">brenta::subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00040">40</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00053">53</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a5da0aca762821a29928f01805a1e2378" name="a5da0aca762821a29928f01805a1e2378"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5da0aca762821a29928f01805a1e2378">&#9670;&#160;</a></span>log_file</h2>
+<a id="a37fde6c3a4b38e5a9e37cd513e144b1b" name="a37fde6c3a4b38e5a9e37cd513e144b1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37fde6c3a4b38e5a9e37cd513e144b1b">&#9670;&#160;</a></span>default_config</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -250,22 +319,26 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string logger::log_file</td>
+          <td class="memname">const <a class="el" href="structbrenta_1_1logger_1_1config.html">logger::config</a> logger::default_config</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00029">29</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<b>Initial value:</b><div class="fragment"><div class="line">= {</div>
+<div class="line">  oak::level::info,</div>
+<div class="line">  <span class="stringliteral">&quot;/tmp/brenta_logs&quot;</span>,</div>
+<div class="line">}</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00032">32</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>
-<a id="acc490aea8aedd7b4972a9d4b64a14f18" name="acc490aea8aedd7b4972a9d4b64a14f18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acc490aea8aedd7b4972a9d4b64a14f18">&#9670;&#160;</a></span>log_level</h2>
+<a id="a174aacec0ebc3d5f6beee7e99fd9b8f8" name="a174aacec0ebc3d5f6beee7e99fd9b8f8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a174aacec0ebc3d5f6beee7e99fd9b8f8">&#9670;&#160;</a></span>init_config</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,33 +347,41 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">oak::level logger::log_level</td>
+          <td class="memname"><a class="el" href="structbrenta_1_1logger_1_1config.html">logger::config</a> logger::init_config = default_config</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00028">28</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ad14423cb09f3c95521fa308c158dcce6" name="ad14423cb09f3c95521fa308c158dcce6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad14423cb09f3c95521fa308c158dcce6">&#9670;&#160;</a></span>subsystem_name</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string brenta::logger::subsystem_name = &quot;logger&quot;</td>
-        </tr>
-      </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00033">33</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a2043a6cc01a22d47062eda2545dfbf48" name="a2043a6cc01a22d47062eda2545dfbf48"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2043a6cc01a22d47062eda2545dfbf48">&#9670;&#160;</a></span>subsystem_name</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string logger::subsystem_name = &quot;logger&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00031">31</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>

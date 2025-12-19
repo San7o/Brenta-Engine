@@ -17,24 +17,17 @@ namespace types
 /**
  * @brief FrameBuffer class
  *
- * This class contains the FrameBuffer functions,
- * It's a wrapper around OpenGL FrameBuffers, providing
- * functions to create, bind, unbind, delete and rescale
- * the FrameBuffer.
+ * This class is a wrapper around OpenGL frame buffers, providing
+ * functions to create, bind, unbind, delete and rescale the frame
+ * buffer.
  */
 class framebuffer : public buffer
 {
 public:
-  /**
-   * @brief Itexture ID
-   */
   GLuint texture_id;
-  /**
-   * @brief Render Buffer ID
-   */
   GLuint render_buffer_id;
   /**
-   * @brief Format of the framebuffer
+   * @brief Color format of the frame buffer
    * Default is GL_RGBA
    */
   GLenum format;
@@ -57,13 +50,8 @@ public:
    * Deletes the framebuffer and its texture
    */
   ~framebuffer();
-  /**
-   * @brief Bind the framebuffer
-   */
+  
   void bind();
-  /**
-   * @brief Unbind the framebuffer
-   */
   void unbind();
   /**
    * @brief Delete the framebuffer and its texture

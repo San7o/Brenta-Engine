@@ -117,108 +117,107 @@ $(function(){initNavTree('buffer_8cpp_source.html',''); initResizable(true); });
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a> = input_target;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  glGenBuffers(1, &amp;<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">bind</a>();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>}</div>
 </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="foldopen" id="foldopen00019" data-start="{" data-end="}">
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">   19</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">buffer::copy_data</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="foldopen" id="foldopen00018" data-start="{" data-end="}">
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">   18</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">buffer::copy_data</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>}</div>
 </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">buffer::copy_indices</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a> != GL_ELEMENT_ARRAY_BUFFER)</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">bind</a>();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
+<div class="foldopen" id="foldopen00023" data-start="{" data-end="}">
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">   23</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">buffer::copy_indices</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>{</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a> != GL_ELEMENT_ARRAY_BUFFER)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">bind</a>();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
 </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">   32</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">buffer::copy_vertices</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a> == GL_ELEMENT_ARRAY_BUFFER)</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">bind</a>();</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="foldopen" id="foldopen00031" data-start="{" data-end="}">
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">   31</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">buffer::copy_vertices</a>(GLsizeiptr size, <span class="keyword">const</span> <span class="keywordtype">void</span> *data, GLenum usage)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a> == GL_ELEMENT_ARRAY_BUFFER)</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">bind</a>();</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  glBufferData(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, size, data, usage);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>}</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">   40</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">buffer::bind</a>()</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keywordflow">if</span> (this-&gt;<span class="keywordtype">id</span> == 0)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  {</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    ERROR(<span class="stringliteral">&quot;Buffer not initialized&quot;</span>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  glBindBuffer(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, this-&gt;<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>}</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
+<div class="foldopen" id="foldopen00039" data-start="{" data-end="}">
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">   39</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">buffer::bind</a>()</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>{</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keywordflow">if</span> (this-&gt;<span class="keywordtype">id</span> == 0)</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    ERROR(<span class="stringliteral">&quot;buffer::bind: not initialized&quot;</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  }</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  glBindBuffer(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, this-&gt;<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>}</div>
 </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">   50</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">buffer::unbind</a>()</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  glBindBuffer(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, 0);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>}</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="foldopen" id="foldopen00049" data-start="{" data-end="}">
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">   49</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">buffer::unbind</a>()</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>{</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  glBindBuffer(this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>, 0);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
-<div class="foldopen" id="foldopen00055" data-start="{" data-end="}">
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">   55</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">buffer::destroy</a>()</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>{</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordflow">if</span> (this-&gt;<span class="keywordtype">id</span> == 0)</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  {</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    ERROR(<span class="stringliteral">&quot;Buffer not initialized&quot;</span>);</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  }</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  glDeleteBuffers(1, &amp;this-&gt;<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="foldopen" id="foldopen00054" data-start="{" data-end="}">
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">   54</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">buffer::destroy</a>()</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordflow">if</span> (this-&gt;<span class="keywordtype">id</span> == 0)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    ERROR(<span class="stringliteral">&quot;buffer::destroy: not initialized&quot;</span>);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  }</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  glDeleteBuffers(1, &amp;this-&gt;<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>}</div>
 </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="foldopen" id="foldopen00065" data-start="{" data-end="}">
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">   65</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">buffer::get_id</a>()</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">id</a>;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="foldopen" id="foldopen00064" data-start="{" data-end="}">
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">   64</a></span><span class="keywordtype">int</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">buffer::get_id</a>()</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>{</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">id</a>;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>}</div>
 </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="foldopen" id="foldopen00070" data-start="{" data-end="}">
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">   70</a></span>GLenum <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">buffer::get_target</a>()</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>{</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="foldopen" id="foldopen00069" data-start="{" data-end="}">
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">   69</a></span>GLenum <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">buffer::get_target</a>()</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>{</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordflow">return</span> this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>}</div>
 </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="foldopen" id="foldopen00075" data-start="{" data-end="}">
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">   75</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">buffer::set_id</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  this-&gt;<span class="keywordtype">id</span> = <a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">id</a>;</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>}</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
+<div class="foldopen" id="foldopen00074" data-start="{" data-end="}">
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">   74</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">buffer::set_id</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>{</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  this-&gt;<span class="keywordtype">id</span> = <a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">id</a>;</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>}</div>
 </div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
-<div class="foldopen" id="foldopen00080" data-start="{" data-end="}">
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">   80</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">buffer::set_target</a>(GLenum target)</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>{</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  this-&gt;target = <a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>}</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="foldopen" id="foldopen00079" data-start="{" data-end="}">
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">   79</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">buffer::set_target</a>(GLenum target)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>{</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  this-&gt;target = <a class="code hl_variable" href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">target</a>;</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>}</div>
 </div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a43a2fddc74c1b19b181927fa317579c3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">brenta::types::buffer::copy_indices</a></div><div class="ttdeci">void copy_indices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00024">buffer.cpp:24</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a453a141d8cfec2bca7e8d76f12546a1d"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">brenta::types::buffer::unbind</a></div><div class="ttdeci">void unbind()</div><div class="ttdoc">Unbind the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00050">buffer.cpp:50</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a53ed07c1b9ca1e89d6cb093bed801c78"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">brenta::types::buffer::set_target</a></div><div class="ttdeci">void set_target(GLenum target)</div><div class="ttdoc">Set the buffer object target.</div><div class="ttdef"><b>Definition</b> <a href="#l00080">buffer.cpp:80</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a73903ee02552276debabe25ea13d74f3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">brenta::types::buffer::destroy</a></div><div class="ttdeci">void destroy()</div><div class="ttdoc">Delete the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00055">buffer.cpp:55</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a758d2305258bd6f6ba913a10f39ccb48"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">brenta::types::buffer::set_id</a></div><div class="ttdeci">void set_id(unsigned int id)</div><div class="ttdoc">Set the buffer object id.</div><div class="ttdef"><b>Definition</b> <a href="#l00075">buffer.cpp:75</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a7c575aaa505051e25c1074fdc30449e8"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">brenta::types::buffer::copy_vertices</a></div><div class="ttdeci">void copy_vertices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00032">buffer.cpp:32</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a8fe52b061bce150b9399bc2e9e4a1466"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">brenta::types::buffer::copy_data</a></div><div class="ttdeci">void copy_data(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00019">buffer.cpp:19</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_aa7995b26d20427529fa7b5033e8c23d4"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">brenta::types::buffer::get_target</a></div><div class="ttdeci">GLenum get_target()</div><div class="ttdoc">Get the buffer object target.</div><div class="ttdef"><b>Definition</b> <a href="#l00070">buffer.cpp:70</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_aafbc9b192c26c6ad9b46a741b3a4667d"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#aafbc9b192c26c6ad9b46a741b3a4667d">brenta::types::buffer::buffer</a></div><div class="ttdeci">buffer()</div><div class="ttdoc">Default constructor, does nothing.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00044">buffer.hpp:44</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_ac8b1673619c84a5521720a506fd71c32"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">brenta::types::buffer::id</a></div><div class="ttdeci">unsigned int id</div><div class="ttdoc">Buffer object id, generated by OpenGL.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00034">buffer.hpp:34</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_ad00fce5d68dacca42e4f5ad2b568c43f"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">brenta::types::buffer::target</a></div><div class="ttdeci">GLenum target</div><div class="ttdoc">Buffer object target (like GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER...)</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00039">buffer.hpp:39</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_adae591039c742e6233eb9b5adcc9e0b5"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">brenta::types::buffer::get_id</a></div><div class="ttdeci">int get_id()</div><div class="ttdoc">Get the buffer object id.</div><div class="ttdef"><b>Definition</b> <a href="#l00065">buffer.cpp:65</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_afd4dbbfdd473eb5e85e84c26e02a5f24"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">brenta::types::buffer::bind</a></div><div class="ttdeci">void bind()</div><div class="ttdoc">Bind the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00040">buffer.cpp:40</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a43a2fddc74c1b19b181927fa317579c3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">brenta::types::buffer::copy_indices</a></div><div class="ttdeci">void copy_indices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">buffer.cpp:23</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a453a141d8cfec2bca7e8d76f12546a1d"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a453a141d8cfec2bca7e8d76f12546a1d">brenta::types::buffer::unbind</a></div><div class="ttdeci">void unbind()</div><div class="ttdoc">Unbind the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00049">buffer.cpp:49</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a53ed07c1b9ca1e89d6cb093bed801c78"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78">brenta::types::buffer::set_target</a></div><div class="ttdeci">void set_target(GLenum target)</div><div class="ttdoc">Set the buffer object target.</div><div class="ttdef"><b>Definition</b> <a href="#l00079">buffer.cpp:79</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a73903ee02552276debabe25ea13d74f3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a73903ee02552276debabe25ea13d74f3">brenta::types::buffer::destroy</a></div><div class="ttdeci">void destroy()</div><div class="ttdoc">Delete the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00054">buffer.cpp:54</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a758d2305258bd6f6ba913a10f39ccb48"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48">brenta::types::buffer::set_id</a></div><div class="ttdeci">void set_id(unsigned int id)</div><div class="ttdoc">Set the buffer object id.</div><div class="ttdef"><b>Definition</b> <a href="#l00074">buffer.cpp:74</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a7c575aaa505051e25c1074fdc30449e8"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">brenta::types::buffer::copy_vertices</a></div><div class="ttdeci">void copy_vertices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00031">buffer.cpp:31</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a8fe52b061bce150b9399bc2e9e4a1466"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a8fe52b061bce150b9399bc2e9e4a1466">brenta::types::buffer::copy_data</a></div><div class="ttdeci">void copy_data(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00018">buffer.cpp:18</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_aa7995b26d20427529fa7b5033e8c23d4"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#aa7995b26d20427529fa7b5033e8c23d4">brenta::types::buffer::get_target</a></div><div class="ttdeci">GLenum get_target()</div><div class="ttdoc">Get the buffer object target.</div><div class="ttdef"><b>Definition</b> <a href="#l00069">buffer.cpp:69</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_aafbc9b192c26c6ad9b46a741b3a4667d"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#aafbc9b192c26c6ad9b46a741b3a4667d">brenta::types::buffer::buffer</a></div><div class="ttdeci">buffer()</div><div class="ttdoc">Default constructor, does nothing.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00045">buffer.hpp:45</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_ac8b1673619c84a5521720a506fd71c32"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32">brenta::types::buffer::id</a></div><div class="ttdeci">unsigned int id</div><div class="ttdoc">Buffer object id, generated by OpenGL.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00035">buffer.hpp:35</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_ad00fce5d68dacca42e4f5ad2b568c43f"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#ad00fce5d68dacca42e4f5ad2b568c43f">brenta::types::buffer::target</a></div><div class="ttdeci">GLenum target</div><div class="ttdoc">Buffer object target (like GL_ARRAY_BUFFER, GL_ELEMENT_ARRAY_BUFFER...)</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00040">buffer.hpp:40</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_adae591039c742e6233eb9b5adcc9e0b5"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#adae591039c742e6233eb9b5adcc9e0b5">brenta::types::buffer::get_id</a></div><div class="ttdeci">int get_id()</div><div class="ttdoc">Get the buffer object id.</div><div class="ttdef"><b>Definition</b> <a href="#l00064">buffer.cpp:64</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_afd4dbbfdd473eb5e85e84c26e02a5f24"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#afd4dbbfdd473eb5e85e84c26e02a5f24">brenta::types::buffer::bind</a></div><div class="ttdeci">void bind()</div><div class="ttdoc">Bind the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="#l00039">buffer.cpp:39</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
