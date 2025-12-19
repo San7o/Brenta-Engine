@@ -13,6 +13,7 @@ using namespace brenta;
 //
 
 const std::string ecs::subsystem_name = "ecs";
+bool ecs::initialized = false;
 
 //
 // Subsystem interface
@@ -20,16 +21,22 @@ const std::string ecs::subsystem_name = "ecs";
 
 std::expected<void, subsystem::error> ecs::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   viotecs::world::init();
 
+  ecs::initialized = true;
   INFO("{}: initialized", ecs::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> ecs::terminate()
 {
+  if (!this->is_initialized()) return {};
+
   viotecs::world::destroy();
 
+  ecs::initialized = true;
   INFO("{}: terminated", ecs::subsystem_name);
   return {};
 }
@@ -37,6 +44,11 @@ std::expected<void, subsystem::error> ecs::terminate()
 std::string ecs::name()
 {
   return ecs::subsystem_name;
+}
+
+bool ecs::is_initialized()
+{
+  return ecs::initialized;
 }
 
 //

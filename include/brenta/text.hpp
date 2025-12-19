@@ -88,6 +88,7 @@ public:
    */
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
 
   // Constructors / destructors
   text() = default;
@@ -123,14 +124,16 @@ public:
    * @param scale Scale of the text
    * @param color Color of the text
    */
-  static void render_text(std::string text, float x, float y, float scale,
-                          glm::vec3 color);
+  static void render_text(std::string text, float x, float y,
+                          float scale, glm::vec3 color);
 
 private:
   
   static types::shader_name_t shader;
   static types::vao vao;
   static types::buffer vbo;
+  static bool initialized;
+  
 };
 
 struct text::config

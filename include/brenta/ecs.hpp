@@ -24,6 +24,7 @@ public:
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
   
   // Constructors / destructors
   ecs() = default;
@@ -32,6 +33,11 @@ public:
   // Member functions
   
   static ecs &instance();
+
+private:
+
+  static bool initialized;
+
 };
 
 class ecs::builder : public subsystem::builder

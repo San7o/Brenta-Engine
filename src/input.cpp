@@ -17,6 +17,7 @@ std::unordered_map<int, std::function<void()>> input::keyboard_callbacks;
 std::unordered_map<std::string, std::function<void(double, double)>>
   input::mouse_callbacks;
 const std::string input::subsystem_name = "input";
+bool input::initialized = false;
 
 //
 // Subsystem interface
@@ -24,15 +25,21 @@ const std::string input::subsystem_name = "input";
 
 std::expected<void, subsystem::error> input::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   window::set_key_callback(input::key_callback);
   window::set_mouse_pos_callback(input::mouse_pos_callback);
 
+  input::initialized = true;
   INFO("{} initialized", input::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> input::terminate()
 {
+  if (!this->is_initialized()) return {};
+
+  input::initialized = false;
   INFO("{}: terminated", input::subsystem_name);
   return {};
 }
@@ -40,6 +47,11 @@ std::expected<void, subsystem::error> input::terminate()
 std::string input::name()
 {
   return input::subsystem_name;
+}
+
+bool input::is_initialized()
+{
+  return input::initialized;
 }
 
 //

@@ -35,6 +35,7 @@ public:
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
 
   // Costructors / destructors
   gui() = default;
@@ -54,6 +55,11 @@ public:
    * To be called at each frame after rendering.
    */
   static void render();
+
+private:
+  
+  static bool initialized;
+  
 };
 
 class gui::builder : public subsystem::builder

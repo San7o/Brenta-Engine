@@ -34,6 +34,10 @@ public:
    * @brief Returns the name of the sybsystem
    */
   virtual std::string name() = 0;
+  /**
+   * @brief Returns true if the subsystem is initialized
+   */
+  virtual bool is_initialized() = 0;
 };
 
 /**

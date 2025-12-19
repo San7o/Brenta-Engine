@@ -14,6 +14,7 @@ using namespace brenta;
 oak::level logger::log_level;
 std::string logger::log_file;
 const std::string logger::subsystem_name = "logger";
+bool logger::initialized = false;
 
 //
 // Subsystem interface
@@ -21,6 +22,8 @@ const std::string logger::subsystem_name = "logger";
 
 std::expected<void, subsystem::error> logger::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   oak::init_writer();
   
   oak::set_level(this->log_level);
@@ -37,19 +40,30 @@ std::expected<void, subsystem::error> logger::initialize()
     INFO("{}: set log file to {}", logger::subsystem_name, log_file);
   }
 
+  logger::initialized = true;
   INFO("{}: initialized", logger::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> logger::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   oak::stop_writer();
+
+  logger::initialized = false;
+  INFO("{}: terminated", logger::subsystem_name);
   return {};
 }
 
 std::string logger::name()
 {
   return logger::subsystem_name;
+}
+
+bool logger::is_initialized()
+{
+  return logger::initialized;
 }
 
 //

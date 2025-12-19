@@ -33,6 +33,7 @@ const window::config window::default_config = {
   false,
 };
 window::config window::init_config = window::default_config;
+bool window::initialized = false;
 
 //
 // Subsystem interface
@@ -40,6 +41,8 @@ window::config window::init_config = window::default_config;
 
 std::expected<void, subsystem::error> window::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   if (glfwInit() == GLFW_FALSE)
   {
     return std::unexpected(window::subsystem_name +
@@ -81,23 +84,32 @@ std::expected<void, subsystem::error> window::initialize()
   set_mouse_capture(window::init_config.capture_mouse);
 
   set_size_callback(framebuffer_size_callback);
-  
+
+  window::initialized = true;
   INFO("{}: initialized", window::subsystem_name)
   return {};
 }
 
 std::expected<void, subsystem::error> window::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   glfwDestroyWindow(window::window_backend);
   glfwTerminate();
-  INFO("{}: terminated", window::subsystem_name);
 
+  window::initialized = false;
+  INFO("{}: terminated", window::subsystem_name);
   return {};
 }
 
 std::string window::name()
 {
   return window::subsystem_name;
+}
+
+bool window::is_initialized()
+{
+  return window::initialized;
 }
 
 //

@@ -23,11 +23,6 @@ namespace brenta
 
 class logger : public subsystem
 {
-protected:
-  
-  static oak::level log_level;
-  static std::string log_file;
-  
 public:
 
   class builder;
@@ -36,7 +31,8 @@ public:
   // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
-  std::string name();
+  std::string name() override;
+  bool is_initialized() override;
   
   // Constructors / destructors
   logger() = default;
@@ -45,6 +41,13 @@ public:
   // Member functions
   
   static logger &instance();
+  
+private:
+  
+  static oak::level log_level;
+  static std::string log_file;
+  static bool initialized;
+  
 };
 
 class logger::builder : public subsystem::builder

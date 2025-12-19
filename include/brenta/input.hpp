@@ -52,6 +52,7 @@ public:
    */
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
   
   // Constructors / destructors
   input() = default;
@@ -133,9 +134,12 @@ public:
   static void mouse_pos_callback(GLFWwindow *window, double xpos, double ypos);
 
 private:
+  
   static std::unordered_map<int, std::function<void()>> keyboard_callbacks;
   static std::unordered_map<std::string, std::function<void(double, double)>>
     mouse_callbacks;
+  static bool initialized;
+  
 };
 
 class input::builder : public subsystem::builder

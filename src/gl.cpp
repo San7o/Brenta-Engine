@@ -23,6 +23,7 @@ const gl::config gl::default_config = {
   false,
 };
 gl::config gl::init_config = default_config;
+bool gl::initialized = false;
 
 // Forward declaration
 void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
@@ -39,6 +40,8 @@ void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
 
 std::expected<void, subsystem::error> gl::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   GLADloadproc loadproc = (GLADloadproc) window::get_proc_address();
   if (!gladLoadGLLoader(loadproc))
   {
@@ -90,14 +93,21 @@ std::expected<void, subsystem::error> gl::initialize()
   }
   
   GLenum errcode = gl::check_error();
-  if (!errcode)
-    INFO("{}: initialized", gl::subsystem_name);
+  if (errcode != GL_NO_ERROR)
+  {
+    return std::unexpected("GL error");
+  }
 
+  gl::initialized = true;
+  INFO("{}: initialized", gl::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> gl::terminate()
 {
+  if (!this->is_initialized()) return {};
+
+  gl::initialized = false;
   INFO("{}: terminated", gl::subsystem_name);
   return {};
 }
@@ -105,6 +115,11 @@ std::expected<void, subsystem::error> gl::terminate()
 std::string gl::name()
 {
   return gl::subsystem_name;
+}
+
+bool gl::is_initialized()
+{
+  return gl::initialized;
 }
 
 //

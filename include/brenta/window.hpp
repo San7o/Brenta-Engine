@@ -27,13 +27,6 @@ namespace brenta
  */
 class window : public subsystem
 {
-protected:
-
-  static int width;
-  static int height;
-  static GLFWwindow *window_backend;
-  static std::string title;
-  
 public:
 
   struct config;
@@ -47,6 +40,7 @@ public:
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
 
   // Constructors destructors
   window() = default;
@@ -103,6 +97,12 @@ public:
   static void poll_events();
 
 private:
+
+  static int width;
+  static int height;
+  static GLFWwindow *window_backend;
+  static std::string title;
+  static bool initialized;
   
   static void set_context_version(int major, int minor);
   static void use_core_profile();

@@ -24,6 +24,7 @@ const text::config text::default_config = {
   48,
 };
 text::config text::init_config = default_config;
+bool text::initialized = false;
 
 //
 // Subsystem interface
@@ -31,18 +32,24 @@ text::config text::init_config = default_config;
 
 std::expected<void, subsystem::error> text::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   text::vbo = types::buffer(GL_ARRAY_BUFFER);
   text::vao.init();
   text::vao.bind();
   if (text::init_config.font_path != "")
     load(text::init_config.font_path, text::init_config.font_size);
 
+  text::initialized = true;
   INFO("{}: initialized", text::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> text::terminate()
 {
+  if (!this->is_initialized()) return {};
+
+  text::initialized = false;
   INFO("{}: text terminated", text::subsystem_name);
   return {};
 }
@@ -50,6 +57,11 @@ std::expected<void, subsystem::error> text::terminate()
 std::string text::name()
 {
   return text::subsystem_name;
+}
+
+bool text::is_initialized()
+{
+  return text::initialized;
 }
 
 //

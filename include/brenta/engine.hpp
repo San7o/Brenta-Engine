@@ -44,10 +44,6 @@ namespace brenta
  */
 class engine : public subsystem
 {
-protected:
-
-  static std::vector<std::reference_wrapper<subsystem>> subsystems;
-
 public:
 
   class manager;
@@ -59,6 +55,7 @@ public:
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
 
   // Constructors / destructors
   engine() = default;
@@ -77,6 +74,12 @@ public:
    */
   static std::expected<void, std::string>
   with(subsystem::builder &&builder);
+
+private:
+
+  static std::vector<std::reference_wrapper<subsystem>> subsystems;
+  static bool initialized;
+
 };
 
 /**
@@ -85,7 +88,13 @@ public:
 class engine::manager
 {
 public:
+  /**
+   * @brief Initializes all subsystems, throws and exeption in case of failure
+   */
   manager();
+  /**
+   * @brief Terminates all subsystems
+   */
   ~manager();
 };
   

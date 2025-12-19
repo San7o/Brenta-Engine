@@ -5,6 +5,8 @@
 
 #include <brenta/engine.hpp>
 
+#include <stdexcept>
+
 using namespace brenta;
 
 //
@@ -13,6 +15,7 @@ using namespace brenta;
 
 std::vector<std::reference_wrapper<subsystem>> engine::subsystems;
 const std::string engine::subsystem_name = "engine";
+bool engine::initialized = false;
 
 //
 // Subsystem interface
@@ -20,20 +23,25 @@ const std::string engine::subsystem_name = "engine";
 
 std::expected<void, subsystem::error> engine::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   for (auto& s : this->subsystems)
   {
     auto ret = s.get().initialize();
     if (!ret.has_value())
-      return std::unexpected(engine::subsystem_name + ": failed to initialize"
+      return std::unexpected(engine::subsystem_name + ": failed to initialize "
                              + s.get().name() + ": " + ret.error());
   }
 
+  engine::initialized = true;
   INFO("{}: initialized", engine::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> engine::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   for (auto it = this->subsystems.rbegin();
        it != this->subsystems.rend(); ++it)
   {
@@ -41,17 +49,23 @@ std::expected<void, subsystem::error> engine::terminate()
     
     auto ret = s.get().terminate();
     if (!ret.has_value())
-      return std::unexpected(engine::subsystem_name + "failed to terminate"
+      return std::unexpected(engine::subsystem_name + "failed to terminate "
                              + s.get().name() + ": " + ret.error());
   }
-  
-  INFO("{}: engine terminated", engine::subsystem_name);
+
+  engine::initialized = false;
+  INFO("{}: terminated", engine::subsystem_name);
   return {};
 }
 
 std::string engine::name()
 {
   return engine::subsystem_name;
+}
+
+bool engine::is_initialized()
+{
+  return engine::initialized;
 }
 
 //
@@ -84,7 +98,9 @@ engine::manager::manager()
   auto ret = engine::instance().initialize();
   if (!ret.has_value())
   {
-    ERROR("engine::manager: failed to initialize subsystem {}", ret.error());
+    ERROR("engine::manager: failed to initialize subsystem, {}", ret.error());
+    throw std::runtime_error("engine::manager: failed to initialize subsystem,"
+                             + ret.error());
   }
 }
 
@@ -93,7 +109,7 @@ engine::manager::~manager()
   auto ret = engine::instance().terminate();
   if (!ret.has_value())
   {
-    ERROR("engine::manager: failed to terminate subsystem {}", ret.error());
+    ERROR("engine::manager: failed to terminate subsystem, {}", ret.error());
   }
 }
 

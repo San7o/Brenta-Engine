@@ -27,7 +27,7 @@ namespace brenta
  * This class contains helper functions to interact with OpenGL.
  */
 class gl : public subsystem
-{ 
+{
 public:
 
   class config;
@@ -41,6 +41,7 @@ public:
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
+  bool is_initialized() override;
   
   // Constructors / destructors
   gl() = default;
@@ -122,6 +123,11 @@ public:
    * @return The error code
    */
   static GLenum _check_error(const char *file, int line);
+
+private:
+  
+  static bool initialized;
+  
 };
 
 struct gl::config

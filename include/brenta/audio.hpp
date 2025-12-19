@@ -41,25 +41,7 @@ typedef ma_sound_group stream_t;
  * identified by a string id.
  */
 class audio : public subsystem
-{
-protected:
-  
-  /**
-   * A list of pairs (stream_id, volume) of streams that will be
-   * created when the subsystem is initialized.
-   */  
-  static std::vector<std::pair<types::stream_id_t, float>> init_streams;
-
-  /**
-   * A list of pairs (sound_id, pathname, stream_id) of sounds that
-   * will be loaded when the subsystem is initialized.
-   */
-  static std::vector<std::tuple<types::sound_id_t,
-                                std::string,
-                                types::stream_id_t>> init_sounds;
-    // Backend
-  static ma_engine engine;
-  
+{  
 public:
   
   /**
@@ -101,10 +83,8 @@ public:
    */
   std::expected<void, subsystem::error> terminate() override;
 
-  /**
-   * @brief Returns the name of the sybsystem
-   */
   std::string name() override;
+  bool is_initialized() override;
   
   // Constructors / destructors
   
@@ -150,6 +130,28 @@ public:
    */
   static std::expected<void, audio::error>
   stream_set_volume(const types::stream_id_t &id, float volume);
+
+private:
+  
+  /**
+   * A list of pairs (stream_id, volume) of streams that will be
+   * created when the subsystem is initialized.
+   */  
+  static std::vector<std::pair<types::stream_id_t, float>> init_streams;
+
+  /**
+   * A list of pairs (sound_id, pathname, stream_id) of sounds that
+   * will be loaded when the subsystem is initialized.
+   */
+  static std::vector<std::tuple<types::sound_id_t,
+                                std::string,
+                                types::stream_id_t>> init_sounds;
+
+  static bool initialized;
+  
+  // Backend
+  static ma_engine engine;
+
 };
 
 class audio::builder : public subsystem::builder

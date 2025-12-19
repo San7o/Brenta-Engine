@@ -19,6 +19,7 @@ using namespace brenta::types;
 //
 
 const std::string gui::subsystem_name = "gui";
+bool gui::initialized = false;
 
 //
 // Subsystem interface
@@ -26,6 +27,8 @@ const std::string gui::subsystem_name = "gui";
 
 std::expected<void, subsystem::error> gui::initialize()
 {
+  if (this->is_initialized()) return {};
+  
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
@@ -40,17 +43,20 @@ std::expected<void, subsystem::error> gui::initialize()
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 
+  gui::initialized = true;
   INFO("{} initialized", gui::subsystem_name);
-  
   return {};
 }
 
 std::expected<void, subsystem::error> gui::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 
+  gui::initialized = false;
   INFO("{}: terminated", gui::subsystem_name);
   return {};
 }
@@ -58,6 +64,11 @@ std::expected<void, subsystem::error> gui::terminate()
 std::string gui::name()
 {
   return gui::subsystem_name;
+}
+
+bool gui::is_initialized()
+{
+  return gui::initialized;
 }
 
 //

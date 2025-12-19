@@ -18,6 +18,7 @@ std::vector<std::pair<types::stream_id_t, float>> audio::init_streams;
 std::unordered_map<types::sound_id_t, types::sound_t> audio::sounds;
 std::unordered_map<types::stream_id_t, types::stream_t> audio::streams;
 ma_engine audio::engine;
+bool audio::initialized = false;
 const std::string audio::subsystem_name = "audio";
 
 //
@@ -26,34 +27,45 @@ const std::string audio::subsystem_name = "audio";
 
 std::expected<void, subsystem::error> audio::initialize()
 {
+  if (this->is_initialized()) return {};
   ma_result result;
   result = ma_engine_init(NULL, &audio::engine);
   if (result != MA_SUCCESS)
   {
-    ERROR("{}: error initializing engine", audio::subsystem_name);
-    return std::unexpected(ma_result_description(result));
+    ERROR("{}: error initializing engine: {}",
+          audio::subsystem_name, ma_result_description(result));
+    return std::unexpected("Initializing audio backend");
   }
 
   for (auto& f : audio::init_sounds)
   {
-    audio::load(std::get<0>(f), std::get<1>(f), std::get<2>(f));
+    if (!audio::load(std::get<0>(f), std::get<1>(f), std::get<2>(f)).has_value())
+      return std::unexpected("Loading audio " + get<0>(f));
   }
 
   for (auto& s : audio::init_streams)
   {
-    audio::create_stream(s.first);
-    audio::stream_set_volume(s.first, s.second);
+    if (!audio::create_stream(s.first).has_value())
+      return std::unexpected("Creating stream " + s.first);
+    if (!audio::stream_set_volume(s.first, s.second).has_value())
+      return std::unexpected("Setting volume for stream " + s.first);
   }
 
   if (!audio::get_stream("default"))
-    audio::create_stream("default");
-  
+  {
+    if (!audio::create_stream("default").has_value())
+      return std::unexpected("Creating stream default");
+  }
+
+  audio::initialized = true;
   INFO("{}: initialized", audio::subsystem_name);
   return {};
 }
 
 std::expected<void, subsystem::error> audio::terminate()
 {
+  if (!this->is_initialized()) return {};
+  
   for (auto sound : audio::sounds)
     ma_sound_uninit(&sound.second);
   
@@ -62,6 +74,7 @@ std::expected<void, subsystem::error> audio::terminate()
 
   ma_engine_uninit(&audio::engine);
 
+  audio::initialized = false;
   INFO("{}: termianted", audio::subsystem_name);
   return {};
 }
@@ -69,6 +82,11 @@ std::expected<void, subsystem::error> audio::terminate()
 std::string audio::name()
 {
   return audio::subsystem_name;
+}
+
+bool audio::is_initialized()
+{
+  return audio::initialized;
 }
 
 //
