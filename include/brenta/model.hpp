@@ -8,11 +8,14 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/scene.h>
+#include <glad/glad.h>
+
 #include <brenta/mesh.hpp>
 #include <brenta/shader.hpp>
-#include <glad/glad.h>
+
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace brenta
 {
@@ -50,23 +53,28 @@ public:
   }
   
   model(config conf);
-  ~model() = default;
+  ~model();
+  
+  constexpr model(const model&) = delete;
+  constexpr model& operator=(const model&) = delete;
 
-  constexpr model(model &&m) noexcept = default;
+  constexpr model(model&&) noexcept = default;
+  constexpr model& operator=(model&&) noexcept = default;;
 
   void draw(types::shader_name_t shader);
 
 private:
 
   std::vector<mesh> meshes;
-  std::vector<types::texture> textures_loaded;
+  std::vector<std::shared_ptr<texture>> textures_loaded;
   std::string directory;
 
   void process_node(aiNode *node, const aiScene *scene);
-  mesh process_mesh(aiMesh *mesh, const aiScene *scene);
-  std::vector<types::texture> load_material_textures(aiMaterial *mat,
-                                                     aiTextureType type,
-                                                     std::string type_name);
+  void process_mesh(aiMesh *mesh, const aiScene *scene);
+  std::vector<std::shared_ptr<texture>>
+  load_material_textures(aiMaterial *mat,
+                         aiTextureType type,
+                         const std::string &type_name);
   void init();
 };
 

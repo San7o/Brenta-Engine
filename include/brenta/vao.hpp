@@ -29,10 +29,21 @@ public:
    * @brief Default constructor, does nothing
    */
   vao();
+
+  constexpr vao(const vao&) = delete;
+  constexpr vao& operator=(const vao&) = delete;
+
+  
   constexpr vao(vao&& other) noexcept
   {
     this->vao_id = other.vao_id;
     other.vao_id = 0;
+  }
+  constexpr vao& operator=(vao&& other) noexcept
+  {
+    this->vao_id = other.vao_id;
+    other.vao_id = 0;
+    return *this;
   }
 
   ~vao();

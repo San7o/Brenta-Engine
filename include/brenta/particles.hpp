@@ -8,6 +8,7 @@
 #define MAX_PARTICLES 1000
 
 #include <brenta/camera.hpp>
+#include <brenta/texture.hpp>
 #include <brenta/vao.hpp>
 #include <glad/glad.h>
 #include <glm/glm.hpp>
@@ -20,7 +21,7 @@ namespace brenta
 {
 
 /**
- * @brief ParticleEmitter class
+ * @brief Particle Emitter class
  *
  * This class is used to define a particle emitter, update and render
  * its particles. This class provides a builder pattern to create a
@@ -52,7 +53,7 @@ public:
   /**
    * @brief Atlas texture
    */
-  int atlas;
+  texture atlas;
   int atlas_width;
   int atlas_height;
   int atlas_index;
@@ -73,13 +74,11 @@ public:
    *
    * @param deltaTime Time passed since last frame
    */
-  void update_particles(float deltaTime);
+  void update_particles(float delta_time);
   void render_particles();
-  void destroy();
 
 private:
   camera *cam;
-  void check_opengl_error(const std::string &functionName);
 };
 
 struct particle_emitter::config

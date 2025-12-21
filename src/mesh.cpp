@@ -21,11 +21,11 @@ const mesh::config mesh::default_config = {
   GL_LINEAR,
 };
 
-mesh::mesh(config conf)
+mesh::mesh(config&& conf)
 {
   this->vertices = conf.vertices;
   this->indices = conf.indices;
-  this->textures = conf.textures;
+  this->textures = std::move(conf.textures);
   this->wrapping = conf.wrapping;
   this->filtering_min = conf.filtering_min;
   this->filtering_mag = conf.filtering_mag;
@@ -34,6 +34,12 @@ mesh::mesh(config conf)
   this->mipmap_mag = conf.mipmap_max;
 
   this->init();
+  DEBUG("mesh: created");
+}
+
+mesh::~mesh()
+{
+  DEBUG("mesh: deleted");
 }
 
 void mesh::init()
@@ -71,17 +77,20 @@ void mesh::draw(types::shader_name_t shader_name)
   for (unsigned int i = 0; i < this->textures.size(); i++)
   {
     texture::active_texture(GL_TEXTURE0 + i);
+
     std::string number;
-    std::string name = textures[i].type;
+    std::string name = textures[i]->type;
     if (name == "texture_diffuse")
       number = std::to_string(diffuseNr++);
     else if (name == "texture_specular")
       number = std::to_string(specularNr++);
+    
     shader::set_int(shader_name, ("material." + name + number).c_str(), i);
-    texture::bind_texture(GL_TEXTURE_2D, textures[i].id, this->wrapping,
-                          this->filtering_min, this->filtering_mag,
-                          this->has_mipmap, this->mipmap_min, this->mipmap_mag);
+    textures[i]->bind(GL_TEXTURE_2D, this->wrapping,
+                     this->filtering_min, this->filtering_mag,
+                     this->has_mipmap, this->mipmap_min, this->mipmap_mag);
   }
+  
   texture::active_texture(GL_TEXTURE0);
 
   // draw mesh
@@ -108,9 +117,9 @@ mesh::builder &mesh::builder::indices(std::vector<unsigned int> indices)
   return *this;
 }
 
-mesh::builder &mesh::builder::textures(std::vector<types::texture> textures)
+mesh::builder &mesh::builder::textures(std::vector<std::shared_ptr<texture>> textures)
 {
-  this->conf.textures = textures;
+  this->conf.textures = std::move(textures);
   return *this;
 }
 
@@ -146,5 +155,5 @@ mesh::builder &mesh::builder::mipmap_min(GLint mipmap_min)
 
 mesh mesh::builder::build()
 {
-  return mesh(this->conf);
+  return mesh(std::move(this->conf));
 }

@@ -10,11 +10,14 @@
 #include <brenta/shader.hpp>
 #include <brenta/texture.hpp>
 #include <brenta/vao.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace brenta
 {
@@ -35,20 +38,6 @@ struct vertex
   glm::vec2 tex_coords;
 };
 
-/**
- * @brief The Texture struct represents a texture of a 3D model
- *
- * A texture is an image that is applied to a 3D model to give it a
- * more realistic look. A texture can be of different types like
- * diffuse, specular, normal, etc.
- */
-struct texture
-{
-  unsigned int id;
-  std::string type;
-  std::string path;
-};
-
 } // namespace types
 
 /**
@@ -61,9 +50,7 @@ struct texture
 class mesh
 {
 public:
-  /**
-   * @brief vertices of the mesh
-   */
+  
   std::vector<types::vertex> vertices;
   /**
    * @brief indices of the mesh
@@ -73,10 +60,7 @@ public:
    * there can be multiple indices for a vertex.
    */
   std::vector<unsigned int> indices;
-  /**
-   * @brief textures of the mesh
-   */
-  std::vector<types::texture> textures;
+  std::vector<std::shared_ptr<texture>> textures;
   /**
    * @brief Type of texture wrapping
    *
@@ -186,9 +170,14 @@ public:
   class builder;
   static const config default_config;
   
-  mesh(config conf);
-  constexpr mesh(mesh&& other) noexcept = default;
-  ~mesh() = default;
+  mesh(config&& conf);
+  
+  constexpr mesh(const mesh&) = delete;
+  constexpr mesh& operator=(const mesh&) = delete;
+
+  constexpr mesh(mesh&&) noexcept = default;
+  constexpr mesh& operator=(mesh&&) noexcept = default;
+  ~mesh();
 
   void draw(types::shader_name_t shader_name);
 
@@ -205,7 +194,7 @@ struct mesh::config
 {
   std::vector<types::vertex> vertices;
   std::vector<unsigned int> indices;
-  std::vector<types::texture> textures;
+  std::vector<std::shared_ptr<texture>> textures;
   GLint wrapping;
   GLint filtering_min;
   GLint filtering_mag;
@@ -226,7 +215,7 @@ private:
 public:
   builder &vertices(std::vector<types::vertex> vertices);
   builder &indices(std::vector<unsigned int> indices);
-  builder &textures(std::vector<types::texture> textures);
+  builder &textures(std::vector<std::shared_ptr<texture>> textures);
   builder &wrapping(GLint wrapping);
   builder &filtering_min(GLint filtering_min);
   builder &filtering_mag(GLint filtering_mag);

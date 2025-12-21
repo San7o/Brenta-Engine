@@ -19,7 +19,18 @@ namespace brenta
 class texture
 {
 public:
+
+  unsigned int id;
+  std::string type;
+  std::string path;
   
+  /**
+   * @brief Activate a texture unit
+   *
+   * This method activates a texture unit. Arg is GL_TEXTURE0 + x
+   */
+  static void active_texture(GLenum texture);
+
   /**
    * @brief Load a texture from a file
    *
@@ -29,13 +40,8 @@ public:
    * @param path Path to the texture file
    * @return The texture ID
    */
-  static unsigned int load_texture(std::string path, bool flip = true);
-  /**
-   * @brief Activate a texture unit
-   *
-   * This method activates a texture unit.
-   */
-  static void active_texture(GLenum texture);
+  static unsigned int load(const std::string &path, bool flip = true);
+  
   /**
    * @brief Bind a texture
    *
@@ -44,13 +50,56 @@ public:
    *
    * You need to bind the texture before using it in the shader.
    */
-  static void bind_texture(GLenum target, unsigned int texture,
-                           GLint wrapping = GL_REPEAT,
-                           GLint filtering_min = GL_NEAREST,
-                           GLint filtering_mag = GL_NEAREST,
-                           GLboolean hasMipmap = GL_TRUE,
-                           GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                           GLint mipmap_mag = GL_LINEAR);
+  static void bind_id(GLenum target, unsigned int id,
+                      GLint wrapping = GL_REPEAT,
+                      GLint filtering_min = GL_NEAREST,
+                      GLint filtering_mag = GL_NEAREST,
+                      GLboolean has_mipmap = GL_TRUE,
+                      GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+                      GLint mipmap_mag = GL_LINEAR);
+
+  /**
+   * @brief Empty constructor, does nothing
+   */
+  texture() {}
+  /**
+   * @brief Creates a new tecture
+   *
+   * @param path Path to the texture file
+   * @param flip Whether the texture sould be flipped or not
+   * @param type An optional string that may be used by other systems
+   */
+  texture(const std::string &path,
+          bool flip = true,
+          const std::string &type = "texture_diffuse");
+  constexpr texture(texture&& other) noexcept
+  {
+    this->id = other.id;
+    this->path = other.path;
+    this->type = other.type;
+    other.id = 0;
+  }
+
+  constexpr texture& operator=(texture&&other) noexcept
+  {
+    this->id = other.id;
+    this->type = other.type;
+    this->path = other.path;
+    other.id = 0;
+    return *this;
+  }
+
+  ~texture();
+
+  unsigned int get_id() const;
+  
+  void bind(GLenum target,
+            GLint wrapping = GL_REPEAT,
+            GLint filtering_min = GL_NEAREST,
+            GLint filtering_mag = GL_NEAREST,
+            GLboolean has_mpmap = GL_TRUE,
+            GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
+            GLint mipmap_mag = GL_LINEAR);
 
 private:
   
@@ -59,6 +108,7 @@ private:
   static void set_mipmap(GLboolean has_mipmap, GLint mipmap_min,
                          GLint mipmap_mag);
   static void read_image(const char *path, bool flip);
+  
 };
 
 } // namespace brenta

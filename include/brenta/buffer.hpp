@@ -40,11 +40,22 @@ public:
   }
 
   buffer(GLenum input_target);
+
+  constexpr buffer(const buffer&) = delete;
+  constexpr buffer& operator=(const buffer&) = delete;
+  
   constexpr buffer(buffer&& other) noexcept
   {
     this->id = other.id;
     this->target = other.target;
     other.id = 0;
+  }
+  constexpr buffer& operator=(buffer&& other) noexcept
+  {
+    this->id = other.id;
+    this->target = other.target;
+    other.id = 0;
+    return *this;
   }
 
   ~buffer();

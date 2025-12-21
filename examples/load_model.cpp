@@ -58,7 +58,7 @@ int main()
   //
   
   while (!window::should_close())
-  {
+  { 
     // Input
     if (window::is_key_pressed(GLFW_KEY_ESCAPE))
       window::close();

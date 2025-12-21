@@ -12,7 +12,36 @@
 
 using namespace brenta;
 
-unsigned int texture::load_texture(std::string path, bool flip)
+texture::texture(const std::string &path,
+                 bool flip,
+                 const std::string &type)
+{
+  this->type = type;
+  this->path = path;
+  this->id = this->load(path, flip);
+  DEBUG("texture: created");
+}
+
+texture::~texture()
+{
+  if (this->id == 0) return;
+
+  glDeleteTextures(1, &this->id);
+  this->id = 0;
+  DEBUG("texture: deleted");
+}
+
+unsigned int texture::get_id() const
+{
+  return this->id;
+}
+
+void texture::active_texture(GLenum texture)
+{
+  glActiveTexture(texture);
+}
+
+unsigned int texture::load(const std::string &path, bool flip)
 {
   unsigned int texture;
   glGenTextures(1, &texture);
@@ -21,20 +50,24 @@ unsigned int texture::load_texture(std::string path, bool flip)
   return texture;
 }
 
-void texture::active_texture(GLenum texture)
+void texture::bind_id(GLenum target, unsigned int id, GLint wrapping,
+                      GLint filtering_min, GLint filtering_mag,
+                      GLboolean has_mipmap, GLint mipmap_min,
+                      GLint mipmap_mag)
 {
-  glActiveTexture(texture);
-}
-
-void texture::bind_texture(GLenum target, unsigned int texture, GLint wrapping,
-                           GLint filtering_min, GLint filtering_mag,
-                           GLboolean hasMipmap, GLint mipmap_min,
-                           GLint mipmap_mag)
-{
-  glBindTexture(target, texture);
+  glBindTexture(target, id);
   set_texture_wrapping(wrapping);
   set_texture_filtering(filtering_min, filtering_mag);
-  set_mipmap(hasMipmap, mipmap_min, mipmap_mag);
+  set_mipmap(has_mipmap, mipmap_min, mipmap_mag);
+}
+
+void texture::bind(GLenum target, GLint wrapping,
+                   GLint filtering_min, GLint filtering_mag,
+                   GLboolean has_mipmap, GLint mipmap_min,
+                   GLint mipmap_mag)
+{
+  texture::bind_id(target, this->id, wrapping, filtering_min,
+                   filtering_mag, has_mipmap, mipmap_min, mipmap_mag);
 }
 
 void texture::set_texture_wrapping(GLint wrapping)
@@ -52,11 +85,10 @@ void texture::set_texture_filtering(GLint filtering_min, GLint filtering_mag)
 void texture::set_mipmap(GLboolean hasMipmap, GLint mipmap_min,
                          GLint mipmap_mag)
 {
-  if (hasMipmap)
-  {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmap_min);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mipmap_mag);
-  }
+  if (!hasMipmap) return;
+
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmap_min);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mipmap_mag);
 }
 
 void texture::read_image(const char *path, bool flip)

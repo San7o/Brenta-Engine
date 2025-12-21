@@ -32,6 +32,12 @@ model::model(config conf)
   this->path = conf.path;
 
   this->init();
+  DEBUG("model: initialized");
+}
+
+model::~model()
+{
+  DEBUG("model: destroyed");
 }
 
 void model::init()
@@ -65,8 +71,7 @@ void model::process_node(aiNode *node, const aiScene *scene)
   for (unsigned int i = 0; i < node->mNumMeshes; i++)
   {
     aiMesh *m = scene->mMeshes[node->mMeshes[i]];
-    auto mesh = process_mesh(m, scene);
-    meshes.push_back(std::move(mesh));
+    process_mesh(m, scene);
   }
   for (unsigned int i = 0; i < node->mNumChildren; i++)
   {
@@ -74,11 +79,11 @@ void model::process_node(aiNode *node, const aiScene *scene)
   }
 }
 
-mesh model::process_mesh(aiMesh *m, const aiScene *scene)
+void model::process_mesh(aiMesh *m, const aiScene *scene)
 {
   std::vector<types::vertex> vertices;
   std::vector<unsigned int> indices;
-  std::vector<types::texture> textures;
+  std::vector<std::shared_ptr<texture>> textures;
   
   for (unsigned int i = 0; i < m->mNumVertices; i++)
   {
@@ -115,31 +120,44 @@ mesh model::process_mesh(aiMesh *m, const aiScene *scene)
   }
 
   aiMaterial *material = scene->mMaterials[m->mMaterialIndex];
-  std::vector<types::texture> diffuseMaps =
-    load_material_textures(material, aiTextureType_DIFFUSE, "texture_diffuse");
-  textures.insert(textures.end(), diffuseMaps.begin(), diffuseMaps.end());
-  std::vector<types::texture> specularMaps = load_material_textures(
-    material, aiTextureType_SPECULAR, "texture_specular");
-  textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
+  std::vector<std::shared_ptr<texture>> diffuse =
+    load_material_textures(material,
+                           aiTextureType_DIFFUSE,
+                           "texture_diffuse");
+  textures.insert(textures.end(),
+                  diffuse.begin(),
+                  diffuse.end());
+  
+  std::vector<std::shared_ptr<texture>> specular =
+    load_material_textures(material,
+                           aiTextureType_SPECULAR,
+                           "texture_specular");
+  textures.insert(textures.end(),
+                  specular.begin(),
+                  specular.end());
 
-  return mesh({vertices, indices, textures, this->wrapping,
-        this->filtering_min, this->filtering_mag, this->has_mipmap,
-        this->mipmap_min, this->mipmap_mag});
+  mesh me = mesh({vertices, indices, textures, this->wrapping,
+      this->filtering_min, this->filtering_mag, this->has_mipmap,
+      this->mipmap_min, this->mipmap_mag});
+  meshes.push_back(std::move(me));
 }
 
-std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
-                                                          aiTextureType type,
-                                                          std::string typeName)
+std::vector<std::shared_ptr<texture>> model::load_material_textures(aiMaterial *mat,
+                                                                    aiTextureType type,
+                                                                    const std::string &typeName)
 {
-  std::vector<types::texture> textures;
+  std::vector<std::shared_ptr<texture>> textures;
   for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
   {
     aiString str;
     mat->GetTexture(type, i, &str);
     bool skip = false;
+    std::string path = directory + "/" + std::string(str.C_Str());
+    
     for (unsigned int j = 0; j < textures_loaded.size(); j++)
     {
-      if (std::strcmp(textures_loaded[j].path.c_str(), str.C_Str()) == 0)
+      // Do not load the same texture again
+      if (textures_loaded[j]->path == path)
       {
         textures.push_back(textures_loaded[j]);
         skip = true;
@@ -148,13 +166,10 @@ std::vector<types::texture> model::load_material_textures(aiMaterial *mat,
     }
     if (!skip)
     {
-      types::texture texture;
-      std::string path = directory + "/" + std::string(str.C_Str());
-      texture.id = texture::load_texture(path, this->flip);
-      texture.type = typeName;
-      texture.path = str.C_Str();
-      textures.push_back(texture);
-      textures_loaded.push_back(texture);
+      texture t = texture(path, this->flip, typeName);
+      std::shared_ptr<texture> t_ptr = std::make_shared<texture>(std::move(t));
+      textures_loaded.push_back(t_ptr);
+      textures.push_back(t_ptr);
     }
   }
   return textures;

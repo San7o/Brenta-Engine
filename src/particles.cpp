@@ -3,6 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/gl.hpp>
 #include <brenta/camera.hpp>
 #include <brenta/particles.hpp>
 #include <brenta/window.hpp>
@@ -39,7 +40,6 @@ particle_emitter::particle_emitter(config conf)
   this->num_particles = conf.num_particles;
   this->spawn_rate = conf.spawn_rate;
   this->scale = conf.scale;
-  this->atlas = 0;
   this->atlas_width = conf.atlas_width;
   this->atlas_height = conf.atlas_height;
   this->atlas_index = conf.atlas_index;
@@ -47,7 +47,7 @@ particle_emitter::particle_emitter(config conf)
   this->cam = conf.cam;
 
   // Load Texture Atlas
-  this->atlas = texture::load_texture(conf.atlas_path, false);
+  this->atlas = std::move(texture(conf.atlas_path, false));
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
@@ -63,7 +63,7 @@ particle_emitter::particle_emitter(config conf)
 
   this->vao.init();
   this->vao.bind();
-  check_opengl_error("vao bind");
+  gl::check_error();
 
   // Create fbos
   this->fbo[0].init(GL_TRANSFORM_FEEDBACK_BUFFER);
@@ -79,18 +79,12 @@ particle_emitter::particle_emitter(config conf)
                this->num_particles * 2 * sizeof(glm::vec3)
                  + this->num_particles * sizeof(float),
                NULL, GL_DYNAMIC_COPY);
-  check_opengl_error("glBindBufferBase A");
+  gl::check_error();
 
   // Unbind buffers
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
   this->vao.unbind();
-}
-
-void particle_emitter::destroy()
-{
-  fbo[0].destroy();
-  fbo[1].destroy();
 }
 
 // Update particles using Transform Feedback
@@ -105,12 +99,12 @@ void particle_emitter::update_particles(float delta_time)
   shader::set_vec3("particle_update", "emitterVel", this->starting_velocity);
   shader::set_float("particle_update", "emitterTTL",
                     this->starting_time_to_live);
-  check_opengl_error("settin update shader");
+  gl::check_error();
 
   this->vao.bind();
 
   glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current].id);
-  check_opengl_error("glBindBufferBase B");
+  gl::check_error();
 
   glBindBuffer(GL_ARRAY_BUFFER, fbo[!current].id);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
@@ -128,10 +122,10 @@ void particle_emitter::update_particles(float delta_time)
   // Start transform feedback
   glEnable(GL_RASTERIZER_DISCARD);     // Disable rasterization
   glBeginTransformFeedback(GL_POINTS); // Enter transform feedback mode
-  check_opengl_error("glBeginTransformFeedback");
+  gl::check_error();
 
   glDrawArrays(GL_POINTS, 0, num_particles);
-  check_opengl_error("glDrawTransformFeedback");
+  gl::check_error();
 
   glEndTransformFeedback();         // Exit transform feedback mode
   glDisable(GL_RASTERIZER_DISCARD); // Enable rasterization
@@ -163,7 +157,7 @@ void particle_emitter::render_particles()
   glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) (2 * sizeof(glm::vec3)));
-  check_opengl_error("glVertexAttribPointer");
+  gl::check_error();
   glEnableVertexAttribArray(1);
 
   // Set uniforms
@@ -184,26 +178,16 @@ void particle_emitter::render_particles()
 
   // Set Textures
   texture::active_texture(GL_TEXTURE0);
-  texture::bind_texture(GL_TEXTURE_2D, this->atlas, GL_REPEAT, GL_NEAREST,
-                        GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
-                        GL_NEAREST);
+  this->atlas.bind(GL_TEXTURE_2D, GL_REPEAT, GL_NEAREST,
+                   GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
+                   GL_NEAREST);
 
   glDrawArrays(GL_POINTS, 0, num_particles);
-  check_opengl_error("glDrawArrays");
+  gl::check_error();
 
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
   vao.unbind();
-}
-
-void particle_emitter::check_opengl_error(const std::string &function_name)
-{
-  GLenum error;
-  while ((error = glGetError()) != GL_NO_ERROR)
-  {
-    std::cerr << "OpenGL Error after " << function_name << ": " << error
-              << std::endl;
-  }
 }
 
 //
