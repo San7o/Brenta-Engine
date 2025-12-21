@@ -97,6 +97,18 @@ particle_emitter emitter =
 
 ### 3D Camera
 
+```cpp
+auto camera = camera::builder()
+  .camera_type(camera::camera_type::spherical)
+  .projection_type(camera::projection_type::perspective)
+  .spherical_coordinates({1.25f, 1.25f, 30.0f})
+  .center(glm::vec3(0.0f, 2.0f, 0.0f))
+  .movement_speed(2.5f)
+  .mouse_sensitivity(0.05f)
+  .zoom(45.0f)
+  .build();
+```
+
 https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
 
 Also collisions, lighting, text and audio!
