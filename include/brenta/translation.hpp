@@ -97,7 +97,7 @@ public:
    * @brief Set the shader
    * @param shader_name The shader name
    */
-  bool set_shader(types::shader_name_t shader_name);
+  bool set_shader(shader::name_t shader_name);
 };
 
 } // namespace types

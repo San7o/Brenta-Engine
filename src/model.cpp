@@ -58,7 +58,7 @@ void model::init()
   process_node(scene->mRootNode, scene);
 }
 
-void model::draw(types::shader_name_t shader)
+void model::draw(shader::name_t shader) const
 {
   for (unsigned int i = 0; i < meshes.size(); i++)
   {

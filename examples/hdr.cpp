@@ -38,7 +38,7 @@ struct model_component : component
 {
   model mod;
   float shininess;
-  brenta::types::shader_name_t shader;
+  brenta::shader::name_t shader;
   bool hasAtlas;
   int atlasSize;
   int atlasIndex;
@@ -50,7 +50,7 @@ struct model_component : component
   {
   }
   model_component(model mod, float shininess,
-                  brenta::types::shader_name_t shader)
+                  brenta::shader::name_t shader)
       : mod(mod), shininess(shininess), shader(shader), hasAtlas(false),
         atlasSize(0), atlasIndex(0)
   {
@@ -137,8 +137,9 @@ int main()
   vbo.unbind();
   v.unbind();
 
-  shader::create("hdr_shader", GL_VERTEX_SHADER, "examples/hdr.vs",
-                 GL_FRAGMENT_SHADER, "examples/hdr.fs");
+  shader::create("hdr_shader",
+                 shader::type::vertex, "examples/hdr.vs",
+                 shader::type::fragment, "examples/hdr.fs");
 
 #ifdef BRENTA_USE_IMGUI
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT, GL_RGBA16F);
@@ -167,12 +168,11 @@ int main()
   world::add_component<transform_component>(room_entity, transform_component());
   if (shader::get_id("default_shader") == 0)
   {
-    shader::create("default_shader", GL_VERTEX_SHADER,
-                   std::filesystem::absolute("examples/default_shader.vs"),
-                   GL_FRAGMENT_SHADER,
-                   std::filesystem::absolute("examples/default_shader.fs"));
+    shader::create("default_shader",
+                   shader::type::vertex, "examples/default_shader.vs",
+                   shader::type::fragment, "examples/default_shader.fs");
   }
-  model mod(std::filesystem::absolute("assets/models/sphere/sphere.obj"));
+  model mod("assets/models/sphere/sphere.obj");
   auto model_c = model_component(mod, 32.0f, "default_shader");
   world::add_component<model_component>(room_entity, std::move(model_c));
   INFO("Room entity created");

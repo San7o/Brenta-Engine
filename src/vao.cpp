@@ -31,7 +31,7 @@ void vao::destroy()
   DEBUG("vao: destroyed");
 }
 
-void vao::bind()
+void vao::bind() const
 {
   if (this->get_id() == 0)
   {
@@ -41,12 +41,12 @@ void vao::bind()
   glBindVertexArray(this->get_id());
 }
 
-void vao::unbind()
+void vao::unbind() const
 {
   glBindVertexArray(0);
 }
 
-unsigned int vao::get_id()
+unsigned int vao::get_id() const
 {
   if (vao_id == 0)
     return 0;

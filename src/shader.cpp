@@ -9,9 +9,9 @@
 
 using namespace brenta;
 
-std::unordered_map<types::shader_name_t, unsigned int> shader::shaders;
+std::unordered_map<shader::name_t, unsigned int> shader::shaders;
 
-unsigned int shader::get_id(types::shader_name_t shader_name)
+unsigned int shader::get_id(shader::name_t shader_name)
 {
   if (shader::shaders.find(shader_name) == shader::shaders.end())
   {
@@ -21,7 +21,7 @@ unsigned int shader::get_id(types::shader_name_t shader_name)
 }
 
 // Use/activate the shader
-bool shader::use(types::shader_name_t shader_name)
+bool shader::use(shader::name_t shader_name)
 {
   glUseProgram(shader::get_id(shader_name));
   
@@ -34,7 +34,7 @@ bool shader::use(types::shader_name_t shader_name)
   return true;
 }
 
-bool shader::set_bool(types::shader_name_t shader_name,
+bool shader::set_bool(shader::name_t shader_name,
                       const GLchar *name,
                       bool value)
 {
@@ -60,7 +60,7 @@ bool shader::set_bool(types::shader_name_t shader_name,
   return true;
 }
 
-bool shader::set_int(types::shader_name_t shader_name,
+bool shader::set_int(shader::name_t shader_name,
                      const GLchar *name,
                      int value)
 {
@@ -86,7 +86,7 @@ bool shader::set_int(types::shader_name_t shader_name,
   return true;
 }
 
-bool shader::set_float(types::shader_name_t shader_name,
+bool shader::set_float(shader::name_t shader_name,
                        const GLchar *name, float value)
 {
   GLuint program = shader::get_id(shader_name);
@@ -111,7 +111,7 @@ bool shader::set_float(types::shader_name_t shader_name,
   return true;
 }
 
-bool shader::set_mat4(types::shader_name_t shader_name,
+bool shader::set_mat4(shader::name_t shader_name,
                       const GLchar *name,
                       glm::mat4 value)
 {
@@ -137,7 +137,7 @@ bool shader::set_mat4(types::shader_name_t shader_name,
   return true;
 }
 
-bool shader::set_vec3(types::shader_name_t shader_name,
+bool shader::set_vec3(shader::name_t shader_name,
                       const GLchar *name,
                       float x, float y, float z)
 {
@@ -163,7 +163,7 @@ bool shader::set_vec3(types::shader_name_t shader_name,
   return true;
 }
 
-bool shader::set_vec3(types::shader_name_t shader_name,
+bool shader::set_vec3(shader::name_t shader_name,
                       const GLchar *name,
                       glm::vec3 value)
 {

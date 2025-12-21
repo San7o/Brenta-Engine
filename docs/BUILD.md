@@ -73,9 +73,9 @@ cmake --build build -j$(nproc)
 ```
 
 Additionally, you can decide to compile with support for
-[ImGUI](https://github.com/ocornut/imgui) with `BRENTA_BRENTA_USE_IMGUI` and
+[ImGUI](https://github.com/ocornut/imgui) with `BRENTA_USE_IMGUI` and
 for the [ECS](https://github.com/San7o/viotecs) library with
-`BRENTA_BRENTA_USE_ECS`.
+`BRENTA_USE_ECS`.
 
 All binaries will be generated in `build/` directory.
 
@@ -87,7 +87,7 @@ You can build the website and `doxigen` documentation with:
 make html
 ```
 
-The index will be located in `docs/html/index.html`.
+The index will be located in `docs / html / index.html`.
 
 ## Format code
 

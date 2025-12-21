@@ -26,16 +26,8 @@ struct spherical_coordinates
   float theta;
   float phi;
   float radius;
-  /**
-   * @brief Default constructor
-   */
+  
   spherical_coordinates() = default;
-  /**
-   * @brief Constructor
-   *
-   * Full constructor that initializes the spherical coordinates with
-   * the specified values.
-   */
   spherical_coordinates(float theta, float phi, float radius)
       : theta(theta), phi(phi), radius(radius)
   {
@@ -53,16 +45,8 @@ struct euler_angles
   float yaw;
   float pitch;
   float roll;
-  /**
-   * @brief Default constructor
-   */
+  
   euler_angles() = default;
-  /**
-   * @brief Constructor
-   *
-   * Full constructor that initializes the euler angles with the
-   * specified values.
-   */
   euler_angles(float yaw, float pitch, float roll)
       : yaw(yaw), pitch(pitch), roll(roll)
   {
@@ -227,36 +211,36 @@ public:
 
   // Getters
 
-  camera::camera_type get_camera_type();
-  camera::projection_type get_projection_type();
-  glm::vec3 get_position();
-  glm::vec3 get_world_up();
-  glm::vec3 get_center();
-  float get_movement_speed();
-  float get_mouse_sensitivity();
-  float get_zoom();
-  types::spherical_coordinates get_spherical_coordinates();
-  types::euler_angles get_euler_angles();
-  glm::mat4 get_view_matrix();
-  glm::mat4 get_projection_matrix(int window_width, int window_height);
-  glm::vec3 get_front();
-  glm::vec3 get_up();
-  glm::vec3 get_right();
+  camera::camera_type get_camera_type() const;
+  camera::projection_type get_projection_type() const;
+  glm::vec3 get_position() const;
+  glm::vec3 get_world_up() const;
+  glm::vec3 get_center() const;
+  float get_movement_speed() const;
+  float get_mouse_sensitivity() const;
+  float get_zoom() const;
+  types::spherical_coordinates get_spherical_coordinates() const;
+  types::euler_angles get_euler_angles() const;
+  glm::mat4 get_view_matrix() const;
+  glm::mat4 get_projection_matrix(int window_width, int window_height) const;
+  glm::vec3 get_front() const;
+  glm::vec3 get_up() const;
+  glm::vec3 get_right() const;
   /**
    * @brief Get the first mouse flag
    * @return boolean flag
    */
-  bool get_first_mouse();
+  bool get_first_mouse() const;
   /**
    * @brief Get the last x position of the mouse
    * @return The last x position of the mouse
    */
-  float get_last_x();
+  float get_last_x() const;
   /**
    * @brief Get the last y position of the mouse
    * @return The last y position of the mouse
    */
-  float get_last_y();
+  float get_last_y() const;
 
   // Setters
 

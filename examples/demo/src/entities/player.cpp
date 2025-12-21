@@ -20,8 +20,8 @@ void init_player_entity()
   if (shader::get_id("default_shader") == 0)
   {
     shader::create("default_shader",
-                   GL_VERTEX_SHADER, "examples/demo/shaders/shader.vs",
-                   GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
+                   shader::type::vertex, "examples/demo/shaders/shader.vs",
+                   shader::type::fragment, "examples/demo/shaders/shader.fs");
   }
 
   model m = model::builder()

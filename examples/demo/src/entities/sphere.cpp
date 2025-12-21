@@ -25,8 +25,8 @@ void init_sphere_entity()
   if (shader::get_id("default_shader") == 0)
   {
     shader::create("default_shader",
-      GL_VERTEX_SHADER, "examples/demo/shaders/shader.vs",
-      GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
+                   shader::type::vertex, "examples/demo/shaders/shader.vs",
+                   shader::type::fragment, "examples/demo/shaders/shader.fs");
   }
   model m1 = model::builder()
     .path("examples/assets/models/sphere/sphere.obj")
@@ -50,8 +50,8 @@ void init_sphere_entity()
   if (shader::get_id("default_shader") == 0)
   {
     shader::create("default_shader",
-      GL_VERTEX_SHADER, "examples/demo/shaders/shader.vs",
-      GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
+                   shader::type::vertex, "examples/demo/shaders/shader.vs",
+                   shader::type::fragment, "examples/demo/shaders/shader.fs");
   }
 
   model m2 = model::builder()

@@ -64,7 +64,7 @@ void mesh::init()
   gl::bind_vertex_array(0);
 }
 
-void mesh::draw(types::shader_name_t shader_name)
+void mesh::draw(shader::name_t shader_name) const
 {
   if (this->vao.get_id() == 0)
   {

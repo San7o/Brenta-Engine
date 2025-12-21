@@ -25,7 +25,7 @@ struct PointLightComponent : component
   float linear;
   float quadratic;
   float strength;
-  std::vector<brenta::types::shader_name_t> shaders;
+  std::vector<brenta::shader::name_t> shaders;
 
   PointLightComponent()
       : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
@@ -36,7 +36,7 @@ struct PointLightComponent : component
   PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular,
                       float constant, float linear, float quadratic,
                       float strength,
-                      std::vector<brenta::types::shader_name_t> shaders)
+                      std::vector<brenta::shader::name_t> shaders)
       : ambient(ambient), diffuse(diffuse), specular(specular),
         constant(constant), linear(linear), quadratic(quadratic),
         strength(strength), shaders(shaders)

@@ -39,7 +39,7 @@ camera::camera(config conf)
   }
 }
 
-glm::mat4 camera::get_view_matrix()
+glm::mat4 camera::get_view_matrix() const
 {
   switch (this->cam_type)
   {
@@ -52,7 +52,7 @@ glm::mat4 camera::get_view_matrix()
   }
 }
 
-glm::mat4 camera::get_projection_matrix(int window_width, int window_height)
+glm::mat4 camera::get_projection_matrix(int window_width, int window_height) const
 {
   switch (this->proj_type)
   {
@@ -102,7 +102,7 @@ void camera::update_camera_euler()
   this->up = glm::normalize(glm::cross(this->right, this->front));
 }
 
-camera::camera_type camera::get_camera_type()
+camera::camera_type camera::get_camera_type() const
 {
   return this->cam_type;
 }
@@ -112,7 +112,7 @@ void camera::set_camera_type(camera::camera_type camera_type)
   this->cam_type = camera_type;
 }
 
-camera::projection_type camera::get_projection_type()
+camera::projection_type camera::get_projection_type() const
 {
   return this->proj_type;
 }
@@ -122,7 +122,7 @@ void camera::set_projection_type(projection_type projection_type)
   this->proj_type = projection_type;
 }
 
-glm::vec3 camera::get_position()
+glm::vec3 camera::get_position() const
 {
   return this->position;
 }
@@ -132,7 +132,7 @@ void camera::set_position(glm::vec3 position)
   this->position = position;
 }
 
-glm::vec3 camera::get_world_up()
+glm::vec3 camera::get_world_up() const
 {
   return this->world_up;
 }
@@ -142,7 +142,7 @@ void camera::set_world_up(glm::vec3 world_up)
   this->world_up = world_up;
 }
 
-glm::vec3 camera::get_center()
+glm::vec3 camera::get_center() const
 {
   return this->center;
 }
@@ -152,7 +152,7 @@ void camera::set_center(glm::vec3 center)
   this->center = center;
 }
 
-float camera::get_movement_speed()
+float camera::get_movement_speed() const
 {
   return this->movement_speed;
 }
@@ -162,7 +162,7 @@ void camera::set_movement_speed(float movement_speed)
   this->movement_speed = movement_speed;
 }
 
-float camera::get_mouse_sensitivity()
+float camera::get_mouse_sensitivity() const
 {
   return this->mouse_sensitivity;
 }
@@ -172,7 +172,7 @@ void camera::set_mouse_sensitivity(float mouse_sensitivity)
   this->mouse_sensitivity = mouse_sensitivity;
 }
 
-float camera::get_zoom()
+float camera::get_zoom() const
 {
   return this->zoom;
 }
@@ -182,7 +182,7 @@ void camera::set_zoom(float zoom)
   this->zoom = zoom;
 }
 
-types::spherical_coordinates camera::get_spherical_coordinates()
+types::spherical_coordinates camera::get_spherical_coordinates() const
 {
   return this->spherical_coordinates;
 }
@@ -193,7 +193,7 @@ void camera::set_spherical_coordinates(
   this->spherical_coordinates = spherical_coordinates;
 }
 
-types::euler_angles camera::get_euler_angles()
+types::euler_angles camera::get_euler_angles() const
 {
   return this->euler_angles;
 }
@@ -203,7 +203,7 @@ void camera::set_euler_angles(types::euler_angles euler_angles)
   this->euler_angles = euler_angles;
 }
 
-glm::vec3 camera::get_front()
+glm::vec3 camera::get_front() const
 {
   return this->front;
 }
@@ -213,7 +213,7 @@ void camera::set_front(glm::vec3 front)
   this->front = front;
 }
 
-glm::vec3 camera::get_up()
+glm::vec3 camera::get_up() const
 {
   return this->up;
 }
@@ -223,7 +223,7 @@ void camera::set_up(glm::vec3 up)
   this->up = up;
 }
 
-glm::vec3 camera::get_right()
+glm::vec3 camera::get_right() const
 {
   return this->right;
 }
@@ -233,7 +233,7 @@ void camera::set_right(glm::vec3 right)
   this->right = right;
 }
 
-bool camera::get_first_mouse()
+bool camera::get_first_mouse() const
 {
   return this->first_mouse;
 }
@@ -243,7 +243,7 @@ void camera::set_first_mouse(bool first_mouse)
   this->first_mouse = first_mouse;
 }
 
-float camera::get_last_x()
+float camera::get_last_x() const
 {
   return this->last_x;
 }
@@ -253,7 +253,7 @@ void camera::set_last_x(float last_x)
   this->last_x = last_x;
 }
 
-float camera::get_last_y()
+float camera::get_last_y() const
 {
   return this->last_y;
 }

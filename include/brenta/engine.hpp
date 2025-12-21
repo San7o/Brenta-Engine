@@ -25,6 +25,7 @@
 #include <brenta/vao.hpp>
 #include <brenta/subsystem.hpp>
 #include <brenta/ecs.hpp>
+#include <brenta/renderer.hpp>
 
 #include <functional>
 

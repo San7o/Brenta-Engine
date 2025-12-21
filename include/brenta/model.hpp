@@ -61,7 +61,7 @@ public:
   constexpr model(model&&) noexcept = default;
   constexpr model& operator=(model&&) noexcept = default;;
 
-  void draw(types::shader_name_t shader);
+  void draw(shader::name_t shader) const;
 
 private:
 

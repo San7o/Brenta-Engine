@@ -179,7 +179,7 @@ public:
   constexpr mesh& operator=(mesh&&) noexcept = default;
   ~mesh();
 
-  void draw(types::shader_name_t shader_name);
+  void draw(shader::name_t shader_name) const;
 
 private:
 

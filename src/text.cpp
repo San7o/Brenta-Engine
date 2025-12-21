@@ -14,7 +14,7 @@ using namespace brenta;
 // Static variables
 //
 
-types::shader_name_t text::shader;
+shader::name_t text::shader_name;
 types::vao text::vao;
 types::buffer text::vbo;
 std::map<char, types::character> text::characters;
@@ -89,10 +89,10 @@ void text::load(std::string font_path, int font_size)
   }
 
   shader::create("TextShader",
-                 GL_VERTEX_SHADER, "src/shaders/text.vs",
-                 GL_FRAGMENT_SHADER, "src/shaders/text.fs");
-  text::shader = "TextShader";
-  shader::use(text::shader);
+                 shader::type::vertex, "src/shaders/text.vs",
+                 shader::type::fragment, "src/shaders/text.fs");
+  text::shader_name = "TextShader";
+  shader::use(text::shader_name);
 
   // find path to font
   std::string font_name = font_path;
@@ -170,8 +170,8 @@ void text::render_text(std::string text, float x, float y, float scale,
     return;
   }
 
-  shader::use(text::shader);
-  unsigned int textShaderId = shader::get_id(text::shader);
+  shader::use(text::shader_name);
+  unsigned int textShaderId = shader::get_id(text::shader_name);
 
   glUniform3f(glGetUniformLocation(textShaderId, "textColor"), color.x, color.y,
               color.z);

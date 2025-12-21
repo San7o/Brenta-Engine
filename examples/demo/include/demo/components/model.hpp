@@ -15,7 +15,7 @@ struct ModelComponent : component
 {
   model mod;
   float shininess;
-  brenta::types::shader_name_t shader;
+  brenta::shader::name_t shader;
   bool hasAtlas;
   int atlasSize;
   int atlasIndex;
@@ -27,7 +27,7 @@ struct ModelComponent : component
   {
   }
   ModelComponent(model &&mod, float shininess,
-                 brenta::types::shader_name_t shader, bool hasAtlas = false,
+                 brenta::shader::name_t shader, bool hasAtlas = false,
                  int atlasSize = 0, int atlasIndex = 0)
     : mod(std::move(mod)), shininess(shininess), shader(shader),
       hasAtlas(hasAtlas), atlasSize(atlasSize), atlasIndex(atlasIndex)

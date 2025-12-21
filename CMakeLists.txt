@@ -229,6 +229,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(particles)
   add_example(text)
   add_example(shadertoy)
+  add_example(renderer)
 
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES

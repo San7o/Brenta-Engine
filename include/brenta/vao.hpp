@@ -50,10 +50,10 @@ public:
   
   void init();
   void destroy();
-  void bind();
-  void unbind();
+  void bind() const;
+  void unbind() const;
   
-  unsigned int get_id();
+  unsigned int get_id() const;
 
   /**
    * @brief Set the vertex data

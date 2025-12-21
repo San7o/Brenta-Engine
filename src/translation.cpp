@@ -65,7 +65,7 @@ void translation::scale(float scale)
   this->model = glm::scale(this->model, glm::vec3(scale));
 }
 
-bool translation::set_shader(types::shader_name_t shader_name)
+bool translation::set_shader(shader::name_t shader_name)
 {
   if (!shader::use(shader_name))
     return false;

@@ -129,7 +129,7 @@ public:
 
 private:
   
-  static types::shader_name_t shader;
+  static shader::name_t shader_name;
   static types::vao vao;
   static types::buffer vbo;
   static bool initialized;

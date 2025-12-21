@@ -21,13 +21,6 @@
 namespace brenta
 {
 
-namespace types
-{
-
-typedef std::string shader_name_t;
-
-} // namespace types
-
 /**
  * @brief Shader class
  *
@@ -42,6 +35,17 @@ typedef std::string shader_name_t;
 class shader
 {
 public:
+
+  using name_t = std::string;
+
+  enum type
+  {
+    vertex,
+    fragment,
+    geometry,
+    compute,
+  };
+  
   /**
    * @brief Map of shaders
    *
@@ -49,7 +53,7 @@ public:
    * execution of the program. The key is the name of the shader and
    * the value is the ID of the shader.
    */
-  static std::unordered_map<types::shader_name_t, unsigned int> shaders;
+  static std::unordered_map<shader::name_t, unsigned int> shaders;
 
   /**
    * @brief Create a new shader
@@ -68,7 +72,8 @@ public:
    * compiled and linked in the same program.
    */
   template <typename... Args>
-  static bool create(std::string shader_name, GLenum type, std::string path,
+  static bool create(const std::string &shader_name,
+                     shader::type type, const std::string &path,
                      Args... args)
   {
     std::vector<unsigned int> compiled_shaders = {};
@@ -113,7 +118,8 @@ public:
    */
   template <typename... Args>
   static bool create(const GLchar **feedback_varyings, int num_varyings,
-                     std::string shader_name, GLenum type, std::string path,
+                     const std::string &shader_name,
+                     shader::type type, const std::string &path,
                      Args... args)
   {
     std::vector<unsigned int> compiled_shaders = {};
@@ -154,8 +160,9 @@ public:
   }
 
   template <typename... Args>
-  static bool compile_shaders(std::vector<unsigned int> &compiled, GLenum type,
-                              std::string path, Args... args)
+  static bool compile_shaders(std::vector<unsigned int> &compiled,
+                              shader::type type, const std::string &path,
+                              Args... args)
   {
     std::string code;
     std::ifstream file;
@@ -183,7 +190,18 @@ public:
     }
 
     const char *shader_code = code.c_str();
-    unsigned int shader = glCreateShader(type);
+    
+    GLenum shader_type_gl;
+    switch(type)
+    {
+    case fragment: shader_type_gl = GL_FRAGMENT_SHADER; break;
+    case vertex: shader_type_gl = GL_VERTEX_SHADER; break;
+    case geometry: shader_type_gl = GL_GEOMETRY_SHADER; break;
+    case compute: shader_type_gl = GL_COMPUTE_SHADER; break;
+    default: shader_type_gl = 0; break;
+    }
+    
+    unsigned int shader = glCreateShader(shader_type_gl);
     glShaderSource(shader, 1, &shader_code, NULL);
     glCompileShader(shader);
     if (!shader::check_compile_errors(shader, "SHADER"))
@@ -201,7 +219,7 @@ public:
    * @param shader_name Name of the shader
    * @return ID of the shader
    */
-  static unsigned int get_id(types::shader_name_t shader_name);
+  static unsigned int get_id(shader::name_t shader_name);
 
   /**
    * @brief Use the shader
@@ -213,7 +231,7 @@ public:
    
    * @return true on success, or false on error
    */
-  static bool use(types::shader_name_t shader_name);
+  static bool use(shader::name_t shader_name);
 
   // Utility uniform functions
 
@@ -225,7 +243,7 @@ public:
    * @param value Value of the boolean
    * @return true on success, or false on error
    */
-  static bool set_bool(types::shader_name_t shader_name,
+  static bool set_bool(shader::name_t shader_name,
                        const GLchar *name, bool value);
   /**
    * @brief Set an integer in the shader
@@ -235,7 +253,7 @@ public:
    * @param value Value of the integer
    * @return true on success, or false on error
    */
-  static bool set_int(types::shader_name_t shader_name, const GLchar *name,
+  static bool set_int(shader::name_t shader_name, const GLchar *name,
                       int value);
   /**
    * @brief Set a float in the shader
@@ -245,7 +263,7 @@ public:
    * @param value Value of the float
    * @return true on success, or false on error
    */
-  static bool set_float(types::shader_name_t shader_name,
+  static bool set_float(shader::name_t shader_name,
                         const GLchar *name, float value);
   /**
    * @brief Set a 4x4 matrix in the shader
@@ -255,7 +273,7 @@ public:
    * @param value Value of the matrix
    * @return true on success, or false on error
    */
-  static bool set_mat4(types::shader_name_t shader_name, const GLchar *name,
+  static bool set_mat4(shader::name_t shader_name, const GLchar *name,
                        glm::mat4 value);
   /**
    * @brief Set a 3D vector in the shader
@@ -267,7 +285,7 @@ public:
    * @param z Z value of the vector
    * @return true on success, or false on error
    */
-  static bool set_vec3(types::shader_name_t shader_name, const GLchar *name,
+  static bool set_vec3(shader::name_t shader_name, const GLchar *name,
                        float x, float y, float z);
   /**
    * @brief Set a 3D vector in the shader
@@ -277,7 +295,7 @@ public:
    * @param value Value of the vector
    * @return true on success, or false on error
    */
-  static bool set_vec3(types::shader_name_t shader_name, const GLchar *name,
+  static bool set_vec3(shader::name_t shader_name, const GLchar *name,
                        glm::vec3 value);
 
 private:

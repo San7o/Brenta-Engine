@@ -57,8 +57,9 @@ int main()
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  shader::create("fractal", GL_VERTEX_SHADER, "examples/mandelbrot.vs",
-                 GL_FRAGMENT_SHADER, "examples/mandelbrot.fs");
+  shader::create("fractal",
+                 shader::type::vertex, "examples/mandelbrot.vs",
+                 shader::type::fragment, "examples/mandelbrot.fs");
 
   framebuffer fb(window::get_width(), window::get_height());
 

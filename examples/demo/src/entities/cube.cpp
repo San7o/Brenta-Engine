@@ -19,8 +19,8 @@ void init_cube_entity()
   if (shader::get_id("cube_shader") == 0)
   {
     shader::create("cube_shader",
-                   GL_VERTEX_SHADER, "examples/demo/shaders/shader.vs",
-                   GL_FRAGMENT_SHADER, "examples/demo/shaders/shader.fs");
+                   shader::type::vertex, "examples/demo/shaders/shader.vs",
+                   shader::type::fragment, "examples/demo/shaders/shader.fs");
   }
 
   model m = model::builder()
