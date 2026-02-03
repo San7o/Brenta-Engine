@@ -1,26 +1,7 @@
 var searchData=
 [
-  ['scale_0',['scale',['../classbrenta_1_1types_1_1translation.html#aefbf3fd757116bc606426d856b3c8f32',1,'brenta::types::translation']]],
-  ['set_5fbool_1',['set_bool',['../classbrenta_1_1shader.html#a46d7c4bbc91313bb3439a005a5c77771',1,'brenta::shader']]],
-  ['set_5fcolor_2',['set_color',['../classbrenta_1_1gl.html#a1b63d2ea12671e7b236f9d7e47103029',1,'brenta::gl']]],
-  ['set_5ffloat_3',['set_float',['../classbrenta_1_1shader.html#ae7e9d8397484ff5bea482571e1ce934d',1,'brenta::shader']]],
-  ['set_5fformat_4',['set_format',['../classbrenta_1_1types_1_1framebuffer.html#a6c1ccd08d16eb483931dd07e1219a21d',1,'brenta::types::framebuffer']]],
-  ['set_5fid_5',['set_id',['../classbrenta_1_1types_1_1buffer.html#a758d2305258bd6f6ba913a10f39ccb48',1,'brenta::types::buffer']]],
-  ['set_5fint_6',['set_int',['../classbrenta_1_1shader.html#ab941ba83b8b5942c578e85ae79d91917',1,'brenta::shader']]],
-  ['set_5flast_5fx_7',['set_last_x',['../classbrenta_1_1camera.html#a4aa4c82c33771d30b2ab8154a069718f',1,'brenta::camera']]],
-  ['set_5flast_5fy_8',['set_last_y',['../classbrenta_1_1camera.html#a160ee40be8911db482b22d950d4ce4fa',1,'brenta::camera']]],
-  ['set_5fmat4_9',['set_mat4',['../classbrenta_1_1shader.html#a3072b517124866da0df3d949f78c4749',1,'brenta::shader']]],
-  ['set_5fmodel_10',['set_model',['../classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b',1,'brenta::types::translation']]],
-  ['set_5fpoligon_5fmode_11',['set_poligon_mode',['../classbrenta_1_1gl.html#a79c22acbd23e21b06577b5ebf4ae1a13',1,'brenta::gl']]],
-  ['set_5fprojection_12',['set_projection',['../classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8',1,'brenta::types::translation::set_projection(glm::mat4 projection)'],['../classbrenta_1_1types_1_1translation.html#acbb926632cc226b46f15c1dc64613c9c',1,'brenta::types::translation::set_projection(int window_width, int window_height, float fov, float near, float far)']]],
-  ['set_5fshader_13',['set_shader',['../classbrenta_1_1types_1_1translation.html#adb7582eb746bf9c5cca6a9eca697ac15',1,'brenta::types::translation']]],
-  ['set_5ftarget_14',['set_target',['../classbrenta_1_1types_1_1buffer.html#a53ed07c1b9ca1e89d6cb093bed801c78',1,'brenta::types::buffer']]],
-  ['set_5fvec3_15',['set_vec3',['../classbrenta_1_1shader.html#a93062cb13e98d25ab73f2b70cae94055',1,'brenta::shader::set_vec3(types::shader_name_t shader_name, const GLchar *name, float x, float y, float z)'],['../classbrenta_1_1shader.html#a142a9ee0d0f8c4628487846a45ead7da',1,'brenta::shader::set_vec3(types::shader_name_t shader_name, const GLchar *name, glm::vec3 value)']]],
-  ['set_5fvertex_5fdata_16',['set_vertex_data',['../classbrenta_1_1types_1_1vao.html#a309e672d25ede6aab965108f30600573',1,'brenta::types::vao']]],
-  ['set_5fview_17',['set_view',['../classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783',1,'brenta::types::translation']]],
-  ['set_5fviewport_18',['set_viewport',['../classbrenta_1_1gl.html#aa51594c5d0846ea024a95394350adbe3',1,'brenta::gl']]],
-  ['spherical_5fcoordinates_19',['spherical_coordinates',['../structbrenta_1_1types_1_1spherical__coordinates.html#add104d6fe38666bb2daf2ccbb10d6cc9',1,'brenta::types::spherical_coordinates::spherical_coordinates()=default'],['../structbrenta_1_1types_1_1spherical__coordinates.html#a348c6e2a6a6a768c794b362e33164c9a',1,'brenta::types::spherical_coordinates::spherical_coordinates(float theta, float phi, float radius)']]],
-  ['spherical_5fto_5fcartesian_20',['spherical_to_cartesian',['../classbrenta_1_1camera.html#a91f772d19ee61485958f2c6ef69fbe82',1,'brenta::camera']]],
-  ['stream_5fset_5fvolume_21',['stream_set_volume',['../classbrenta_1_1audio.html#a85e7bcf54675b76f17de3854e38b1d2b',1,'brenta::audio']]],
-  ['swap_5fbuffers_22',['swap_buffers',['../classbrenta_1_1window.html#aa70b4984e3f969e65be372aa2b4f27a5',1,'brenta::window']]]
+  ['terminate_0',['terminate',['../classbrenta_1_1audio.html#a1b64fdb23c961b1b87ec6bf9a01f9186',1,'brenta::audio::terminate()'],['../classbrenta_1_1input.html#ae3309d9d5bd4d8c48abc082f25c3b3b7',1,'brenta::input::terminate()'],['../classbrenta_1_1text.html#a0845da9752dcee76b8d69d74a30c9122',1,'brenta::text::terminate()']]],
+  ['texture_1',['texture',['../classbrenta_1_1texture.html#a5d715e918fc2e083940c42653d39b8cb',1,'brenta::texture::texture()'],['../classbrenta_1_1texture.html#a65eb438d2a15c1d64c1b4f4eea088dc0',1,'brenta::texture::texture(const std::string &amp;path, bool flip=true, const std::string &amp;type=&quot;texture_diffuse&quot;)']]],
+  ['translate_2',['translate',['../classbrenta_1_1types_1_1translation.html#ae01bf699306b8387b78d195944e705b1',1,'brenta::types::translation']]],
+  ['translation_3',['translation',['../classbrenta_1_1types_1_1translation.html#afecb68e967e5cb9f92439525c27d1aab',1,'brenta::types::translation::translation()'],['../classbrenta_1_1types_1_1translation.html#ade39e929cc08e02c2ffda513682b32c9',1,'brenta::types::translation::translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model)']]]
 ];

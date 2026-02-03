@@ -4,10 +4,9 @@ var annotated_dup =
       [ "types", null, [
         [ "buffer", "classbrenta_1_1types_1_1buffer.html", "classbrenta_1_1types_1_1buffer" ],
         [ "character", "structbrenta_1_1types_1_1character.html", null ],
-        [ "euler_angles", "structbrenta_1_1types_1_1euler__angles.html", "structbrenta_1_1types_1_1euler__angles" ],
+        [ "euler_angles", "structbrenta_1_1types_1_1euler__angles.html", null ],
         [ "framebuffer", "classbrenta_1_1types_1_1framebuffer.html", "classbrenta_1_1types_1_1framebuffer" ],
-        [ "spherical_coordinates", "structbrenta_1_1types_1_1spherical__coordinates.html", "structbrenta_1_1types_1_1spherical__coordinates" ],
-        [ "texture", "structbrenta_1_1types_1_1texture.html", null ],
+        [ "spherical_coordinates", "structbrenta_1_1types_1_1spherical__coordinates.html", null ],
         [ "translation", "classbrenta_1_1types_1_1translation.html", "classbrenta_1_1types_1_1translation" ],
         [ "vao", "classbrenta_1_1types_1_1vao.html", "classbrenta_1_1types_1_1vao" ],
         [ "vertex", "structbrenta_1_1types_1_1vertex.html", null ]
@@ -22,6 +21,7 @@ var annotated_dup =
       [ "mesh", "classbrenta_1_1mesh.html", "classbrenta_1_1mesh" ],
       [ "model", "classbrenta_1_1model.html", "classbrenta_1_1model" ],
       [ "particle_emitter", "classbrenta_1_1particle__emitter.html", "classbrenta_1_1particle__emitter" ],
+      [ "renderer", "classbrenta_1_1renderer.html", "classbrenta_1_1renderer" ],
       [ "shader", "classbrenta_1_1shader.html", "classbrenta_1_1shader" ],
       [ "subsystem", "classbrenta_1_1subsystem.html", "classbrenta_1_1subsystem" ],
       [ "text", "classbrenta_1_1text.html", "classbrenta_1_1text" ],

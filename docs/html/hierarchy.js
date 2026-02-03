@@ -28,10 +28,12 @@ var hierarchy =
     [ "brenta::text::config", "structbrenta_1_1text_1_1config.html", null ],
     [ "brenta::window::config", "structbrenta_1_1window_1_1config.html", null ],
     [ "brenta::types::euler_angles", "structbrenta_1_1types_1_1euler__angles.html", null ],
+    [ "brenta::renderer::item", "classbrenta_1_1renderer_1_1item.html", null ],
     [ "brenta::engine::manager", "classbrenta_1_1engine_1_1manager.html", null ],
     [ "brenta::mesh", "classbrenta_1_1mesh.html", null ],
     [ "brenta::model", "classbrenta_1_1model.html", null ],
     [ "brenta::particle_emitter", "classbrenta_1_1particle__emitter.html", null ],
+    [ "brenta::renderer", "classbrenta_1_1renderer.html", null ],
     [ "brenta::shader", "classbrenta_1_1shader.html", null ],
     [ "brenta::types::spherical_coordinates", "structbrenta_1_1types_1_1spherical__coordinates.html", null ],
     [ "brenta::subsystem", "classbrenta_1_1subsystem.html", [
@@ -45,7 +47,6 @@ var hierarchy =
       [ "brenta::window", "classbrenta_1_1window.html", null ]
     ] ],
     [ "brenta::texture", "classbrenta_1_1texture.html", null ],
-    [ "brenta::types::texture", "structbrenta_1_1types_1_1texture.html", null ],
     [ "brenta::time", "classbrenta_1_1time.html", null ],
     [ "brenta::types::translation", "classbrenta_1_1types_1_1translation.html", null ],
     [ "brenta::types::vao", "classbrenta_1_1types_1_1vao.html", null ],

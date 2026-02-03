@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['vao_0',['vao',['../classbrenta_1_1types_1_1vao.html',1,'brenta::types']]],
-  ['vertex_1',['vertex',['../structbrenta_1_1types_1_1vertex.html',1,'brenta::types']]]
+  ['text_0',['text',['../classbrenta_1_1text.html',1,'brenta']]],
+  ['texture_1',['texture',['../classbrenta_1_1texture.html',1,'brenta']]],
+  ['time_2',['time',['../classbrenta_1_1time.html',1,'brenta']]],
+  ['translation_3',['translation',['../classbrenta_1_1types_1_1translation.html',1,'brenta::types']]]
 ];

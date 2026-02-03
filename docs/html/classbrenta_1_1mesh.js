@@ -8,7 +8,5 @@ var classbrenta_1_1mesh =
     [ "indices", "classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5", null ],
     [ "mipmap_mag", "classbrenta_1_1mesh.html#a55ab3d027a03a76b974e425e1f30e778", null ],
     [ "mipmap_min", "classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258", null ],
-    [ "textures", "classbrenta_1_1mesh.html#a10e37cca25f95b016defadf80bdc7206", null ],
-    [ "vertices", "classbrenta_1_1mesh.html#aa44562f195fdd97fc2473aef1fc38d16", null ],
     [ "wrapping", "classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc", null ]
 ];

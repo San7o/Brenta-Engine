@@ -1,10 +1,84 @@
 ![](./html/images/brenta-engine-banner.png)
 
-Hi and welcome to the **Brenta Engine** website! Brenta Engine is a
-simple 3D engine written in modern C++/OpenGL using the Entity
-Component System architecture. The engine was created by Giovanni
-Santini in the summer of 2024, the name is inspired by the Brenta
-Dolimites in the Italian Alps.
+Brenta Engine is a simple 3D engine written in modern C++/OpenGL using
+the Entity Component System architecture. The engine was created by
+Giovanni Santini in the summer of 2024, the name is inspired by the
+Brenta Dolimites in the Italian Alps.
+
+```c++
+#include <brenta/engine.hpp>
+
+int main()
+{
+
+  // Setup
+  
+  engine::builder()
+    .with(logger::builder()
+          .level(oak::level::debug))
+    .with(window::builder()
+          .title("load opengl test")
+          .width(screen_width)
+          .height(screen_height))
+    .build();
+  auto engine = engine::managed();
+
+  // Loop
+  
+  while (!window::should_close())
+  {
+    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
+      window::close();
+    
+    // Update logic...
+    // Draw...
+    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    gl::clear();
+
+    window::poll_events();
+    window::swap_buffers();
+  }
+  return 0;
+}
+```
+
+## Demos
+
+examples/shadertoy.cpp:
+
+![shadertoy-demo.gif](./html/images/shadertoy-demo.gif)
+
+examples/mandelbrot-set.cpp:
+
+![mandlebrot-demo.gif](./html/images/mandelbrot-demo.gif)
+
+examples/logger.cpp:
+
+```plaintext
+$ ./build/logger 
+[ level=info ] logger: set log file to /tmp/brenta_logs
+[ level=info ] logger: initialized
+[ level=info ] window: set context to OpenGL version: 3.3
+[ level=info ] window: set OpenGL profile to core
+[ level=info ] window: disabled MSAA
+[ level=info ] window: disabled VSync
+[ level=info ] window: mouse capture disabled
+[ level=debug ] window: set framebuffer size callback
+[ level=info ] window: initialized
+[ level=info ] gl: enabled GL_DEPTH_TEST
+[ level=info ] gl: enabled GL_BLEND (transparency)
+[ level=info ] gl: enabled GL_CULL_FACE
+[ level=info ] gl: enabled GL_MULTISAMPLE
+[ level=info ] gl: initialized
+[ level=info ] engine: initialized
+[ level=info ] Hello, World!
+[ level=info ] gl: terminated
+[ level=info ] window: terminated
+```
+
+examples/demo/src/main.cpp:
+
+![demo.gif](./html/images/demo.gif)
 
 ## The Submodules
 
@@ -27,66 +101,6 @@ functionalities such as wrappers around opengl primitives, or managing
 the camera or the time. Classes often provide a `Builder` to initalize
 them nicely.
 
-The classes are:
-
-- **brenta::gl**: provides some useful OpenGL functions.
-- **brenta::mesh**: a 3D openGL mesh.
-- **brenta::model**: a 3D openGL model.
-- **brenta::particle_emitter**: create and customize particles.
-- **brenta::shader**: manages the shaders.
-- **brenta::texture**: manages the textures.
-- **brenta::types::translation**: manages the translations.
-- **brenta::types::vao**: wrapper around the Vertex Array Objects.
-- **brenta::types::buffer**: wrapper around the Buffers.
-- **brenta::types::framebuffer**: framebuffer wrapper.
-- **brenta::time**: manages the time.
-- **brenta::camera**: manages the camera.
-- **brenta::gui**: provides helper functions to ImGUI.
-
-## Graphics
-
-The engine uses OpenGL for the graphics and provides classes to
-interact with opengl. The following features are already implemented:
-
-- **Color Blending**
-- **Cull Face**
-- **Multisample**
-- **Depth Test**
-- **MSAA**
-- **Vsync**
-- **obj model loading**
-- **Text rendering**
-- **Lighting**: Ambient, Diffuse and Specular lighting.
-- **Texture atlas**: texture atlas support.
-- **GPU Particles**: particle system in the GPU.
-
-Although the engine currently implements only basic graphics features,
-it provides all the building blocks to create more complex
-graphics. If you want to contribute additional features, check out the
-[Contributing](./CONTRIBUTING.md)
-page. [This](https://github.com/San7o/Brenta-Engine/issues/10) issue
-tracks future features that would be nice to have.
-
-## Directory structure
-
-- `CMakeLists.txt`: build system with cmake
-- `docs/`: markdown documentation
-  - `html/`: html website hosted with GH pages
-- `examples/`: several example programs
-- `external/`: dependencies
-- `include`
-  - `brenta/`: engine headers
-- `LICENSE`
-- `Makefile`: provides useful make commands
-- `README.md`
-- `src/`: engine Sources
-- `tests/`: engine Tests
-- `utils/`
-  - `docs-images`: images
-  - `doxygen`: doxigen configuration files
-  - `website`: files for website generation
-
 ## License
 
-The engine is released under the MIT license. You can find the license
-in the repository.
+The engine is released under the MIT license.

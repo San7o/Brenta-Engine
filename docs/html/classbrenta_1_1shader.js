@@ -1,14 +1,14 @@
 var classbrenta_1_1shader =
 [
-    [ "create", "classbrenta_1_1shader.html#a7928e34a5b48eb4171a7d29eb5022e75", null ],
-    [ "create", "classbrenta_1_1shader.html#a98f844b96534b21b102db3540bc62937", null ],
-    [ "get_id", "classbrenta_1_1shader.html#aafe538950da3c3bc093553929db8ba7c", null ],
-    [ "set_bool", "classbrenta_1_1shader.html#a46d7c4bbc91313bb3439a005a5c77771", null ],
-    [ "set_float", "classbrenta_1_1shader.html#ae7e9d8397484ff5bea482571e1ce934d", null ],
-    [ "set_int", "classbrenta_1_1shader.html#ab941ba83b8b5942c578e85ae79d91917", null ],
-    [ "set_mat4", "classbrenta_1_1shader.html#a3072b517124866da0df3d949f78c4749", null ],
-    [ "set_vec3", "classbrenta_1_1shader.html#a93062cb13e98d25ab73f2b70cae94055", null ],
-    [ "set_vec3", "classbrenta_1_1shader.html#a142a9ee0d0f8c4628487846a45ead7da", null ],
-    [ "use", "classbrenta_1_1shader.html#ae45a83968c5f31e1b4fcf70c29979731", null ],
-    [ "shaders", "classbrenta_1_1shader.html#a336716c94495e7a86bd87ef6447bd8e0", null ]
+    [ "create", "classbrenta_1_1shader.html#ad3e39356add87cef62b02a9a0e125011", null ],
+    [ "create", "classbrenta_1_1shader.html#aa2327e4cb9530d74a012476c88bcade4", null ],
+    [ "get_id", "classbrenta_1_1shader.html#a9bee403efe6b175995c4227f7a74f1f8", null ],
+    [ "set_bool", "classbrenta_1_1shader.html#ac05f71f1f1aeb39a2160f34792d6596e", null ],
+    [ "set_float", "classbrenta_1_1shader.html#a37ec484e2629cf84d435267521bf4aea", null ],
+    [ "set_int", "classbrenta_1_1shader.html#adddfbef6f18bd52f54c2bf056660b751", null ],
+    [ "set_mat4", "classbrenta_1_1shader.html#a3200f77426c6298f37396dfb75626a40", null ],
+    [ "set_vec3", "classbrenta_1_1shader.html#a60ce9887aa2abd5288c784b4c1ce7c5b", null ],
+    [ "set_vec3", "classbrenta_1_1shader.html#a097211f054bc2af19f2ac6eab0dc5fe7", null ],
+    [ "use", "classbrenta_1_1shader.html#a11f7e52dcdc3a92ea8e9f2bbcdc3bffe", null ],
+    [ "shaders", "classbrenta_1_1shader.html#a3d2558932526f115c056ab3474c58d90", null ]
 ];

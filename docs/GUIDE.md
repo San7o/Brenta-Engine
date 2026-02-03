@@ -336,3 +336,22 @@ Here is an high lievel simplified view of those objects:
 
 There are many other examples in the `examples` directory and in the
 `demo` which is guaranteed to be updated to the lastest APIs.
+
+## Directory structure
+
+- `CMakeLists.txt`: build system with cmake
+- `docs/`: markdown documentation
+  - `html/`: html website hosted with GH pages
+- `examples/`: several example programs
+- `external/`: dependencies
+- `include`
+  - `brenta/`: engine headers
+- `LICENSE`
+- `Makefile`: provides useful make commands
+- `README.md`
+- `src/`: engine Sources
+- `tests/`: engine Tests
+- `utils/`
+  - `docs-images`: images
+  - `doxygen`: doxigen configuration files
+  - `website`: files for website generation

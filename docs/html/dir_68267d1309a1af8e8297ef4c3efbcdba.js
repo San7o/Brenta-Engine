@@ -13,6 +13,7 @@ var dir_68267d1309a1af8e8297ef4c3efbcdba =
     [ "mesh.cpp", "mesh_8cpp_source.html", null ],
     [ "model.cpp", "model_8cpp_source.html", null ],
     [ "particles.cpp", "particles_8cpp_source.html", null ],
+    [ "renderer.cpp", "renderer_8cpp_source.html", null ],
     [ "shader.cpp", "shader_8cpp_source.html", null ],
     [ "stb_image.cpp", "stb__image_8cpp_source.html", null ],
     [ "text.cpp", "text_8cpp_source.html", null ],

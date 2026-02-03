@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['with_0',['with',['../classbrenta_1_1engine.html#a39418c00a6ea987abe474783125be29c',1,'brenta::engine']]]
+  ['_7eframebuffer_0',['~framebuffer',['../classbrenta_1_1types_1_1framebuffer.html#a2024adae5e43d9c21ccbd110b2099f73',1,'brenta::types::framebuffer']]],
+  ['_7emanager_1',['~manager',['../classbrenta_1_1engine_1_1manager.html#a6cb22992c3c6681f83b31f6e9c7dde71',1,'brenta::engine::manager']]]
 ];

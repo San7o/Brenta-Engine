@@ -15,11 +15,82 @@
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
     </div>
 <p><img src=".//images/brenta-engine-banner.png" /></p>
-<p>Hi and welcome to the <strong>Brenta Engine</strong> website! Brenta
-Engine is a simple 3D engine written in modern C++/OpenGL using the
-Entity Component System architecture. The engine was created by Giovanni
-Santini in the summer of 2024, the name is inspired by the Brenta
-Dolimites in the Italian Alps.</p>
+<p>Brenta Engine is a simple 3D engine written in modern C++/OpenGL
+using the Entity Component System architecture. The engine was created
+by Giovanni Santini in the summer of 2024, the name is inspired by the
+Brenta Dolimites in the Italian Alps.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;brenta/engine.hpp&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Setup</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  engine<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>logger<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">))</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>window<span class="op">::</span>builder<span class="op">()</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;load opengl test&quot;</span><span class="op">)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span>screen_width<span class="op">)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>height<span class="op">(</span>screen_height<span class="op">))</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> engine <span class="op">=</span> engine<span class="op">::</span>managed<span class="op">();</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Loop</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(!</span>window<span class="op">::</span>should_close<span class="op">())</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>window<span class="op">::</span>is_key_pressed<span class="op">(</span>GLFW_KEY_ESCAPE<span class="op">))</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>      window<span class="op">::</span>close<span class="op">();</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update logic...</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Draw...</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    gl<span class="op">::</span>clear<span class="op">();</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>poll_events<span class="op">();</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="demos">Demos</h2>
+<p>examples/shadertoy.cpp:</p>
+<figure>
+<img src=".//images/shadertoy-demo.gif" alt="shadertoy-demo.gif" />
+<figcaption aria-hidden="true">shadertoy-demo.gif</figcaption>
+</figure>
+<p>examples/mandelbrot-set.cpp:</p>
+<figure>
+<img src=".//images/mandelbrot-demo.gif"
+alt="mandlebrot-demo.gif" />
+<figcaption aria-hidden="true">mandlebrot-demo.gif</figcaption>
+</figure>
+<p>examples/logger.cpp:</p>
+<pre class="plaintext"><code>$ ./build/logger 
+[ level=info ] logger: set log file to /tmp/brenta_logs
+[ level=info ] logger: initialized
+[ level=info ] window: set context to OpenGL version: 3.3
+[ level=info ] window: set OpenGL profile to core
+[ level=info ] window: disabled MSAA
+[ level=info ] window: disabled VSync
+[ level=info ] window: mouse capture disabled
+[ level=debug ] window: set framebuffer size callback
+[ level=info ] window: initialized
+[ level=info ] gl: enabled GL_DEPTH_TEST
+[ level=info ] gl: enabled GL_BLEND (transparency)
+[ level=info ] gl: enabled GL_CULL_FACE
+[ level=info ] gl: enabled GL_MULTISAMPLE
+[ level=info ] gl: initialized
+[ level=info ] engine: initialized
+[ level=info ] Hello, World!
+[ level=info ] gl: terminated
+[ level=info ] window: terminated</code></pre>
+<p>examples/demo/src/main.cpp:</p>
+<figure>
+<img src=".//images/demo.gif" alt="demo.gif" />
+<figcaption aria-hidden="true">demo.gif</figcaption>
+</figure>
 <h2 id="the-submodules">The Submodules</h2>
 <p>The Engine is composed of several submodules, which are mostly
 independent from each other:</p>
@@ -45,81 +116,8 @@ engine.</li>
 functionalities such as wrappers around opengl primitives, or managing
 the camera or the time. Classes often provide a <code>Builder</code> to
 initalize them nicely.</p>
-<p>The classes are:</p>
-<ul>
-<li><strong>brenta::gl</strong>: provides some useful OpenGL
-functions.</li>
-<li><strong>brenta::mesh</strong>: a 3D openGL mesh.</li>
-<li><strong>brenta::model</strong>: a 3D openGL model.</li>
-<li><strong>brenta::particle_emitter</strong>: create and customize
-particles.</li>
-<li><strong>brenta::shader</strong>: manages the shaders.</li>
-<li><strong>brenta::texture</strong>: manages the textures.</li>
-<li><strong>brenta::types::translation</strong>: manages the
-translations.</li>
-<li><strong>brenta::types::vao</strong>: wrapper around the Vertex Array
-Objects.</li>
-<li><strong>brenta::types::buffer</strong>: wrapper around the
-Buffers.</li>
-<li><strong>brenta::types::framebuffer</strong>: framebuffer
-wrapper.</li>
-<li><strong>brenta::time</strong>: manages the time.</li>
-<li><strong>brenta::camera</strong>: manages the camera.</li>
-<li><strong>brenta::gui</strong>: provides helper functions to
-ImGUI.</li>
-</ul>
-<h2 id="graphics">Graphics</h2>
-<p>The engine uses OpenGL for the graphics and provides classes to
-interact with opengl. The following features are already
-implemented:</p>
-<ul>
-<li><strong>Color Blending</strong></li>
-<li><strong>Cull Face</strong></li>
-<li><strong>Multisample</strong></li>
-<li><strong>Depth Test</strong></li>
-<li><strong>MSAA</strong></li>
-<li><strong>Vsync</strong></li>
-<li><strong>obj model loading</strong></li>
-<li><strong>Text rendering</strong></li>
-<li><strong>Lighting</strong>: Ambient, Diffuse and Specular
-lighting.</li>
-<li><strong>Texture atlas</strong>: texture atlas support.</li>
-<li><strong>GPU Particles</strong>: particle system in the GPU.</li>
-</ul>
-<p>Although the engine currently implements only basic graphics
-features, it provides all the building blocks to create more complex
-graphics. If you want to contribute additional features, check out the
-<a href="./CONTRIBUTING.html">Contributing</a> page. <a
-href="https://github.com/San7o/Brenta-Engine/issues/10">This</a> issue
-tracks future features that would be nice to have.</p>
-<h2 id="directory-structure">Directory structure</h2>
-<ul>
-<li><code>CMakeLists.txt</code>: build system with cmake</li>
-<li><code>docs/</code>: markdown documentation
-<ul>
-<li><code>html/</code>: html website hosted with GH pages</li>
-</ul></li>
-<li><code>examples/</code>: several example programs</li>
-<li><code>external/</code>: dependencies</li>
-<li><code>include</code>
-<ul>
-<li><code>brenta/</code>: engine headers</li>
-</ul></li>
-<li><code>LICENSE</code></li>
-<li><code>Makefile</code>: provides useful make commands</li>
-<li><code>README.html</code></li>
-<li><code>src/</code>: engine Sources</li>
-<li><code>tests/</code>: engine Tests</li>
-<li><code>utils/</code>
-<ul>
-<li><code>docs-images</code>: images</li>
-<li><code>doxygen</code>: doxigen configuration files</li>
-<li><code>website</code>: files for website generation</li>
-</ul></li>
-</ul>
 <h2 id="license">License</h2>
-<p>The engine is released under the MIT license. You can find the
-license in the repository.</p>
+<p>The engine is released under the MIT license.</p>
 
 <footer>
   

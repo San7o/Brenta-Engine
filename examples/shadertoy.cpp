@@ -233,7 +233,7 @@ int main(int argc, char** argv)
   // Load font
   ImGuiIO& io = ImGui::GetIO();
   ImFont* arial = io.Fonts->AddFontFromFileTTF("examples/assets/fonts/arial.ttf",
-                                               25.0f);
+                                               30.0f);
   
   while(!window::should_close())
   {
