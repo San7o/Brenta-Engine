@@ -8,6 +8,8 @@
 //
 
 #include <brenta/engine.hpp>
+#include <brenta/window.hpp>
+
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 

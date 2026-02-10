@@ -3,11 +3,11 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-/**
- * Just a simple window
- */
-
 #include <brenta/engine.hpp>
+#include <brenta/logger.hpp>
+#include <brenta/window.hpp>
+#include <brenta/gui/text.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 

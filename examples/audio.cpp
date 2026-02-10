@@ -10,29 +10,34 @@
 // Play a sound with the spacebar
 //
 
+
 #include <brenta/engine.hpp>
+#include <brenta/audio.hpp>
+#include <brenta/window.hpp>
+#include <brenta/logger.hpp>
+
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 
-using namespace brenta;
-
 REGISTER_SYSTEMS()
 
-const int screen_width = 800;
-const int screen_height = 600;
-  
-// Required: id and path of an audio. The id will be used by the
-// audio subsystem to identify this particular file.
-const audio::sound_id_t sound_guitar_id = "guitar";
-const std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
-
-// You can specify additional optional settings like stream and
-// volume
-const audio::stream_id_t stream_guitar_id = "guitar_stream";
-const float guitar_volume = 0.8f;
+using namespace brenta;
   
 int main()
 {
+  const int screen_width = 800;
+  const int screen_height = 600;
+  
+  // Required: id and path of an audio. The id will be used by the
+  // audio subsystem to identify this particular file.
+  const audio::sound_id_t sound_guitar_id = "guitar";
+  const std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
+
+  // You can specify additional optional settings like stream and
+  // volume
+  const audio::stream_id_t stream_guitar_id = "guitar_stream";
+  const float guitar_volume = 0.8f;
+  
   //
   // Setup
   //

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: src/text.cpp Source File</title>
+<title>Brenta Engine: src/gui/text.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,8 +106,8 @@ $(document).ready(function(){initNavTree('text_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/logger.hpp&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/text.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/texture.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/gui/text.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/texture.hpp&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using namespace </span>brenta;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
@@ -199,8 +199,8 @@ $(document).ready(function(){initNavTree('text_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  }</div>
 <div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_function" href="classbrenta_1_1shader.html#aa2327e4cb9530d74a012476c88bcade4">shader::create</a>(<span class="stringliteral">&quot;TextShader&quot;</span>,</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                 shader::type::vertex, <span class="stringliteral">&quot;src/shaders/text.vs&quot;</span>,</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                 shader::type::fragment, <span class="stringliteral">&quot;src/shaders/text.fs&quot;</span>);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                 shader::type::vertex, <span class="stringliteral">&quot;src/renderer/shaders/text.vs&quot;</span>,</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                 shader::type::fragment, <span class="stringliteral">&quot;src/renderer/shaders/text.fs&quot;</span>);</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  text::shader_name = <span class="stringliteral">&quot;TextShader&quot;</span>;</div>
 <div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  <a class="code hl_function" href="classbrenta_1_1shader.html#a11f7e52dcdc3a92ea8e9f2bbcdc3bffe">shader::use</a>(text::shader_name);</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
@@ -361,7 +361,7 @@ $(document).ready(function(){initNavTree('text_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>}</div>
 <div class="ttc" id="aclassbrenta_1_1shader_html_a11f7e52dcdc3a92ea8e9f2bbcdc3bffe"><div class="ttname"><a href="classbrenta_1_1shader.html#a11f7e52dcdc3a92ea8e9f2bbcdc3bffe">brenta::shader::use</a></div><div class="ttdeci">static bool use(shader::name_t shader_name)</div><div class="ttdoc">Use the shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8cpp_source.html#l00024">shader.cpp:24</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1shader_html_a9bee403efe6b175995c4227f7a74f1f8"><div class="ttname"><a href="classbrenta_1_1shader.html#a9bee403efe6b175995c4227f7a74f1f8">brenta::shader::get_id</a></div><div class="ttdeci">static unsigned int get_id(shader::name_t shader_name)</div><div class="ttdoc">Get the ID of a shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8cpp_source.html#l00014">shader.cpp:14</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1shader_html_aa2327e4cb9530d74a012476c88bcade4"><div class="ttname"><a href="classbrenta_1_1shader.html#aa2327e4cb9530d74a012476c88bcade4">brenta::shader::create</a></div><div class="ttdeci">static bool create(const std::string &amp;shader_name, shader::type type, const std::string &amp;path, Args... args)</div><div class="ttdoc">Create a new shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00075">shader.hpp:75</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1shader_html_aa2327e4cb9530d74a012476c88bcade4"><div class="ttname"><a href="classbrenta_1_1shader.html#aa2327e4cb9530d74a012476c88bcade4">brenta::shader::create</a></div><div class="ttdeci">static bool create(const std::string &amp;shader_name, shader::type type, const std::string &amp;path, Args... args)</div><div class="ttdoc">Create a new shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00077">shader.hpp:77</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1subsystem_html"><div class="ttname"><a href="classbrenta_1_1subsystem.html">brenta::subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1text_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1text_1_1builder.html">brenta::text::builder</a></div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00145">text.hpp:146</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1text_html"><div class="ttname"><a href="classbrenta_1_1text.html">brenta::text</a></div><div class="ttdoc">Text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00054">text.hpp:55</a></div></div>
@@ -373,9 +373,9 @@ $(document).ready(function(){initNavTree('text_8cpp_source.html',''); initResiza
 <div class="ttc" id="aclassbrenta_1_1text_html_af7a50940292a66b3692e0cedc7f77f06"><div class="ttname"><a href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">brenta::text::characters</a></div><div class="ttdeci">static std::map&lt; char, types::character &gt; characters</div><div class="ttdoc">Map of characters.</div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00063">text.hpp:63</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1text_html_afae0b1a38f820d1debc7732b78840352"><div class="ttname"><a href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">brenta::text::initialize</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; initialize() override</div><div class="ttdoc">Initialize the text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00033">text.cpp:33</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1texture_html"><div class="ttname"><a href="classbrenta_1_1texture.html">brenta::texture</a></div><div class="ttdoc">Texture class.</div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00019">texture.hpp:20</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_ae9252280569013e13f01441a036c9a2e"><div class="ttname"><a href="classbrenta_1_1texture.html#ae9252280569013e13f01441a036c9a2e">brenta::texture::bind_id</a></div><div class="ttdeci">static void bind_id(GLenum target, unsigned int id, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mipmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</div><div class="ttdoc">Bind a texture.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00053">texture.cpp:53</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1texture_html_ae9252280569013e13f01441a036c9a2e"><div class="ttname"><a href="classbrenta_1_1texture.html#ae9252280569013e13f01441a036c9a2e">brenta::texture::bind_id</a></div><div class="ttdeci">static void bind_id(GLenum target, unsigned int id, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mipmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</div><div class="ttdoc">Bind a texture.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00055">texture.cpp:55</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html">brenta::types::buffer</a></div><div class="ttdoc">Buffer wrapper around OpenGL buffer objects.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00022">buffer.hpp:23</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1vao_html"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html">brenta::types::vao</a></div><div class="ttdoc">Vertex Array Object (VAO)</div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00022">vao.hpp:23</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1vao_html"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html">brenta::types::vao</a></div><div class="ttdoc">Vertex Array Object (VAO)</div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00023">vao.hpp:24</a></div></div>
 <div class="ttc" id="astructbrenta_1_1text_1_1config_html"><div class="ttname"><a href="structbrenta_1_1text_1_1config.html">brenta::text::config</a></div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00139">text.hpp:140</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1character_html"><div class="ttname"><a href="structbrenta_1_1types_1_1character.html">brenta::types::character</a></div><div class="ttdoc">Character struct.</div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00037">text.hpp:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -383,7 +383,7 @@ $(document).ready(function(){initNavTree('text_8cpp_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>text.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_99d0482cf009f9d97a0877749b817f19.html">gui</a></li><li class="navelem"><b>text.cpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

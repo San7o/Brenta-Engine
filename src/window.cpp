@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/audio.hpp>
-#include <brenta/camera.hpp>
+#include <brenta/renderer/camera.hpp>
 #include <brenta/input.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>

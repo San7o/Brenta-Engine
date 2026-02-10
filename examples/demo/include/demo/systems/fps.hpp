@@ -5,7 +5,8 @@
 
 #pragma once
 
-#include <brenta/engine.hpp>
+#include <brenta/gui/text.hpp>
+#include <brenta/time.hpp>
 #include <viotecs/viotecs.hpp>
 
 #include <vector>

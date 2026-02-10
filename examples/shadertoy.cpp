@@ -11,7 +11,8 @@
 
 #ifdef BRENTA_USE_IMGUI
 
-#include <brenta/engine.hpp>
+#include <brenta/brenta.hpp>
+
 #include <imgui_stdlib.h>
 
 #include <iostream>

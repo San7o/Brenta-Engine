@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/engine.hpp>
+#include <brenta/logger.hpp>
 
 #include <stdexcept>
 

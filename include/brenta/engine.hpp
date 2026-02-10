@@ -5,28 +5,7 @@
 
 #pragma once
 
-#include <brenta/audio.hpp>
-#include <brenta/buffer.hpp>
-#include <brenta/camera.hpp>
-#include <brenta/mouse.hpp>
-#include <brenta/frame_buffer.hpp>
-#include <brenta/gl.hpp>
-#include <brenta/gui.hpp>
-#include <brenta/input.hpp>
-#include <brenta/logger.hpp>
-#include <brenta/mesh.hpp>
-#include <brenta/model.hpp>
-#include <brenta/particles.hpp>
-#include <brenta/window.hpp>
-#include <brenta/shader.hpp>
-#include <brenta/text.hpp>
-#include <brenta/texture.hpp>
-#include <brenta/time.hpp>
-#include <brenta/translation.hpp>
-#include <brenta/vao.hpp>
 #include <brenta/subsystem.hpp>
-#include <brenta/ecs.hpp>
-#include <brenta/renderer.hpp>
 
 #include <functional>
 

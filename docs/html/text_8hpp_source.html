@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: include/brenta/text.hpp Source File</title>
+<title>Brenta Engine: include/brenta/gui/text.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,9 +106,9 @@ $(document).ready(function(){initNavTree('text_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/buffer.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/shader.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/vao.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/buffer.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/shader.hpp&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/vao.hpp&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/subsystem.hpp&gt;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;ft2build.h&gt;</span></div>
@@ -225,7 +225,7 @@ $(document).ready(function(){initNavTree('text_8hpp_source.html',''); initResiza
 <div class="ttc" id="aclassbrenta_1_1text_html_af7a50940292a66b3692e0cedc7f77f06"><div class="ttname"><a href="classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06">brenta::text::characters</a></div><div class="ttdeci">static std::map&lt; char, types::character &gt; characters</div><div class="ttdoc">Map of characters.</div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00063">text.hpp:63</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1text_html_afae0b1a38f820d1debc7732b78840352"><div class="ttname"><a href="classbrenta_1_1text.html#afae0b1a38f820d1debc7732b78840352">brenta::text::initialize</a></div><div class="ttdeci">std::expected&lt; void, subsystem::error &gt; initialize() override</div><div class="ttdoc">Initialize the text subsystem.</div><div class="ttdef"><b>Definition</b> <a href="text_8cpp_source.html#l00033">text.cpp:33</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html">brenta::types::buffer</a></div><div class="ttdoc">Buffer wrapper around OpenGL buffer objects.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00022">buffer.hpp:23</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1vao_html"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html">brenta::types::vao</a></div><div class="ttdoc">Vertex Array Object (VAO)</div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00022">vao.hpp:23</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1vao_html"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html">brenta::types::vao</a></div><div class="ttdoc">Vertex Array Object (VAO)</div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00023">vao.hpp:24</a></div></div>
 <div class="ttc" id="astructbrenta_1_1text_1_1config_html"><div class="ttname"><a href="structbrenta_1_1text_1_1config.html">brenta::text::config</a></div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00139">text.hpp:140</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1character_html"><div class="ttname"><a href="structbrenta_1_1types_1_1character.html">brenta::types::character</a></div><div class="ttdoc">Character struct.</div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00037">text.hpp:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -233,7 +233,7 @@ $(document).ready(function(){initNavTree('text_8hpp_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><b>text.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><a class="el" href="dir_9c9ed36f3f971f92ca1e98cb741044d0.html">gui</a></li><li class="navelem"><b>text.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

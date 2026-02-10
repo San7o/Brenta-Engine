@@ -10,8 +10,9 @@
 // Some ecs examples
 //
 
-#include <iostream>
 #include <viotecs/viotecs.hpp>
+
+#include <iostream>
 
 using namespace viotecs;
 

@@ -6,7 +6,8 @@
 #include <demo/components/model.hpp>
 #include <demo/components/transform.hpp>
 #include <demo/entities/floor.hpp>
-#include <brenta/engine.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/model.hpp>
 
 #include <viotecs/viotecs.hpp>
 

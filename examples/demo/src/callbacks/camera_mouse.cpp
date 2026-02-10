@@ -3,7 +3,10 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/renderer/camera.hpp>
+#include <brenta/mouse.hpp>
+#include <brenta/input.hpp>
+#include <brenta/window.hpp>
 #include <demo/callbacks/camera_mouse.hpp>
 
 using namespace brenta;

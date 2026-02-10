@@ -5,7 +5,8 @@
 
 #pragma once
 
-#include <brenta/engine.hpp>
+#include <brenta/renderer/model.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
 #include <viotecs/viotecs.hpp>
 
 using namespace brenta;

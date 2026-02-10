@@ -5,8 +5,8 @@
 
 #pragma once
 
-#include <brenta/camera.hpp>
-#include <brenta/text.hpp>
+#include <brenta/renderer/camera.hpp>
+#include <brenta/gui/text.hpp>
 #include <demo/resources/camera.hpp>
 
 #include <viotecs/viotecs.hpp>

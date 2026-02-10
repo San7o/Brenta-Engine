@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/brenta.hpp>
 #ifdef BRENTA_USE_ECS
 #include <demo/game_ecs.hpp>
 #include <viotecs/viotecs.hpp>

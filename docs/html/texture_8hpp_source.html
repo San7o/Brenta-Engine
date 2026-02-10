@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: include/brenta/texture.hpp Source File</title>
+<title>Brenta Engine: include/brenta/renderer/opengl/texture.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -179,16 +179,16 @@ $(document).ready(function(){initNavTree('texture_8hpp_source.html',''); initRes
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>} <span class="comment">// namespace brenta</span></div>
 <div class="ttc" id="aclassbrenta_1_1texture_html"><div class="ttname"><a href="classbrenta_1_1texture.html">brenta::texture</a></div><div class="ttdoc">Texture class.</div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00019">texture.hpp:20</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_a0fced9fc65404ec7a70064d4cfc77e79"><div class="ttname"><a href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">brenta::texture::active_texture</a></div><div class="ttdeci">static void active_texture(GLenum texture)</div><div class="ttdoc">Activate a texture unit.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00039">texture.cpp:39</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1texture_html_a0fced9fc65404ec7a70064d4cfc77e79"><div class="ttname"><a href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">brenta::texture::active_texture</a></div><div class="ttdeci">static void active_texture(GLenum texture)</div><div class="ttdoc">Activate a texture unit.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00041">texture.cpp:41</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1texture_html_a5d715e918fc2e083940c42653d39b8cb"><div class="ttname"><a href="classbrenta_1_1texture.html#a5d715e918fc2e083940c42653d39b8cb">brenta::texture::texture</a></div><div class="ttdeci">texture()</div><div class="ttdoc">Empty constructor, does nothing.</div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00064">texture.hpp:64</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_ae7a23595bf3cb8f4158734c44eec30e2"><div class="ttname"><a href="classbrenta_1_1texture.html#ae7a23595bf3cb8f4158734c44eec30e2">brenta::texture::load</a></div><div class="ttdeci">static unsigned int load(const std::string &amp;path, bool flip=true)</div><div class="ttdoc">Load a texture from a file.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00044">texture.cpp:44</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_ae9252280569013e13f01441a036c9a2e"><div class="ttname"><a href="classbrenta_1_1texture.html#ae9252280569013e13f01441a036c9a2e">brenta::texture::bind_id</a></div><div class="ttdeci">static void bind_id(GLenum target, unsigned int id, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mipmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</div><div class="ttdoc">Bind a texture.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00053">texture.cpp:53</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1texture_html_ae7a23595bf3cb8f4158734c44eec30e2"><div class="ttname"><a href="classbrenta_1_1texture.html#ae7a23595bf3cb8f4158734c44eec30e2">brenta::texture::load</a></div><div class="ttdeci">static unsigned int load(const std::string &amp;path, bool flip=true)</div><div class="ttdoc">Load a texture from a file.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00046">texture.cpp:46</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1texture_html_ae9252280569013e13f01441a036c9a2e"><div class="ttname"><a href="classbrenta_1_1texture.html#ae9252280569013e13f01441a036c9a2e">brenta::texture::bind_id</a></div><div class="ttdeci">static void bind_id(GLenum target, unsigned int id, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mipmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</div><div class="ttdoc">Bind a texture.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00055">texture.cpp:55</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><b>texture.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><a class="el" href="dir_e378ba2053768d6a9544b8026eb92071.html">renderer</a></li><li class="navelem"><a class="el" href="dir_80f59b562976ef29102acc9066e818e7.html">opengl</a></li><li class="navelem"><b>texture.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

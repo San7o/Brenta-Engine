@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: include/brenta/mesh.hpp Source File</title>
+<title>Brenta Engine: include/brenta/renderer/mesh.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,11 +106,11 @@ $(document).ready(function(){initNavTree('mesh_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#pragma once</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/buffer.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/gl.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/shader.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/texture.hpp&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;brenta/vao.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/buffer.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/gl.hpp&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/shader.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/texture.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/vao.hpp&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;glm/gtc/matrix_transform.hpp&gt;</span></div>
@@ -224,7 +224,7 @@ $(document).ready(function(){initNavTree('mesh_8hpp_source.html',''); initResiza
 <div class="ttc" id="aclassbrenta_1_1mesh_html_a9991822785185a303b3f5c5cd23095c5"><div class="ttname"><a href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">brenta::mesh::indices</a></div><div class="ttdeci">std::vector&lt; unsigned int &gt; indices</div><div class="ttdoc">indices of the mesh</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00062">mesh.hpp:62</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html_acb6397f1f0cca5124b571cb2d2d0d258"><div class="ttname"><a href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">brenta::mesh::mipmap_min</a></div><div class="ttdeci">GLint mipmap_min</div><div class="ttdoc">Type of mipmap minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00135">mesh.hpp:135</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html_ae9314538cf2c0a2a0b7510110384553f"><div class="ttname"><a href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">brenta::mesh::filtering_mag</a></div><div class="ttdeci">GLint filtering_mag</div><div class="ttdoc">Magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00099">mesh.hpp:99</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1shader_html"><div class="ttname"><a href="classbrenta_1_1shader.html">brenta::shader</a></div><div class="ttdoc">Shader class.</div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00035">shader.hpp:36</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1shader_html"><div class="ttname"><a href="classbrenta_1_1shader.html">brenta::shader</a></div><div class="ttdoc">Shader class.</div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00037">shader.hpp:38</a></div></div>
 <div class="ttc" id="astructbrenta_1_1mesh_1_1config_html"><div class="ttname"><a href="structbrenta_1_1mesh_1_1config.html">brenta::mesh::config</a></div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00193">mesh.hpp:194</a></div></div>
 <div class="ttc" id="astructbrenta_1_1types_1_1vertex_html"><div class="ttname"><a href="structbrenta_1_1types_1_1vertex.html">brenta::types::vertex</a></div><div class="ttdoc">The Vertex struct represents a vertex of a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00034">mesh.hpp:35</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
@@ -232,7 +232,7 @@ $(document).ready(function(){initNavTree('mesh_8hpp_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><b>mesh.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><a class="el" href="dir_e378ba2053768d6a9544b8026eb92071.html">renderer</a></li><li class="navelem"><b>mesh.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

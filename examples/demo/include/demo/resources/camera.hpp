@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/camera.hpp>
+#include <brenta/renderer/camera.hpp>
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;

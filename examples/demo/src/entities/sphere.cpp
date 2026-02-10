@@ -3,7 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/model.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/physics.hpp>
 #include <demo/components/sphere_collider.hpp>

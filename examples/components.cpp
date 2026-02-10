@@ -10,16 +10,16 @@
 // Examples of various components in the ECS system.
 //
 
-#include <brenta/engine.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <viotecs/viotecs.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
-#include <viotecs/viotecs.hpp>
 
 REGISTER_SYSTEMS()
 
-using namespace brenta;
 using namespace viotecs;
 
 struct PhysicsComponent : component

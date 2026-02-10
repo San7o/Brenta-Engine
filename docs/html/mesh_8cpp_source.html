@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: src/mesh.cpp Source File</title>
+<title>Brenta Engine: src/renderer/mesh.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,8 +104,8 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Mail:    giovanni.santini@proton.me</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/logger.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/mesh.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/renderer/mesh.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/logger.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>brenta;</div>
@@ -258,7 +258,7 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>{</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classbrenta_1_1mesh.html">mesh</a>(std::move(this-&gt;conf));</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1gl_html_a7c3eda21806ec4c51a843617cb542913"><div class="ttname"><a href="classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913">brenta::gl::draw_elements</a></div><div class="ttdeci">static void draw_elements(GLenum mode, int count, GLenum type, const void *indices)</div><div class="ttdoc">Draw Elements.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00165">gl.cpp:165</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gl_html_a7c3eda21806ec4c51a843617cb542913"><div class="ttname"><a href="classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913">brenta::gl::draw_elements</a></div><div class="ttdeci">static void draw_elements(GLenum mode, int count, GLenum type, const void *indices)</div><div class="ttdoc">Draw Elements.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00164">gl.cpp:164</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1mesh_1_1builder.html">brenta::mesh::builder</a></div><div class="ttdoc">The Builder class is used to build a Mesh object.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00209">mesh.hpp:210</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html"><div class="ttname"><a href="classbrenta_1_1mesh.html">brenta::mesh</a></div><div class="ttdoc">The Mesh class represents a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00050">mesh.hpp:51</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html_a2095331e9f3c01b00367074c61e8da5f"><div class="ttname"><a href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">brenta::mesh::filtering_min</a></div><div class="ttdeci">GLint filtering_min</div><div class="ttdoc">Minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00089">mesh.hpp:89</a></div></div>
@@ -268,7 +268,7 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <div class="ttc" id="aclassbrenta_1_1mesh_html_a9991822785185a303b3f5c5cd23095c5"><div class="ttname"><a href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">brenta::mesh::indices</a></div><div class="ttdeci">std::vector&lt; unsigned int &gt; indices</div><div class="ttdoc">indices of the mesh</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00062">mesh.hpp:62</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html_acb6397f1f0cca5124b571cb2d2d0d258"><div class="ttname"><a href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">brenta::mesh::mipmap_min</a></div><div class="ttdeci">GLint mipmap_min</div><div class="ttdoc">Type of mipmap minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00135">mesh.hpp:135</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1mesh_html_ae9314538cf2c0a2a0b7510110384553f"><div class="ttname"><a href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">brenta::mesh::filtering_mag</a></div><div class="ttdeci">GLint filtering_mag</div><div class="ttdoc">Magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00099">mesh.hpp:99</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_a0fced9fc65404ec7a70064d4cfc77e79"><div class="ttname"><a href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">brenta::texture::active_texture</a></div><div class="ttdeci">static void active_texture(GLenum texture)</div><div class="ttdoc">Activate a texture unit.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00039">texture.cpp:39</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1texture_html_a0fced9fc65404ec7a70064d4cfc77e79"><div class="ttname"><a href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">brenta::texture::active_texture</a></div><div class="ttdeci">static void active_texture(GLenum texture)</div><div class="ttdoc">Activate a texture unit.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00041">texture.cpp:41</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a43a2fddc74c1b19b181927fa317579c3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">brenta::types::buffer::copy_indices</a></div><div class="ttdeci">void copy_indices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8cpp_source.html#l00027">buffer.cpp:27</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a7c575aaa505051e25c1074fdc30449e8"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">brenta::types::buffer::copy_vertices</a></div><div class="ttdeci">void copy_vertices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8cpp_source.html#l00036">buffer.cpp:36</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1vao_html_aaa06cdf080864f1e6ace3f5b984f3d3b"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html#aaa06cdf080864f1e6ace3f5b984f3d3b">brenta::types::vao::set_vertex_data</a></div><div class="ttdeci">void set_vertex_data(buffer &amp;buffer, unsigned int index, GLint size, GLenum type, GLboolean is_normalized, GLsizei stride, const void *pointer)</div><div class="ttdoc">Set the vertex data.</div><div class="ttdef"><b>Definition</b> <a href="vao_8cpp_source.html#l00056">vao.cpp:56</a></div></div>
@@ -279,7 +279,7 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>mesh.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7bc5e25958a2fb25a8561f3aa0def6c5.html">renderer</a></li><li class="navelem"><b>mesh.cpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

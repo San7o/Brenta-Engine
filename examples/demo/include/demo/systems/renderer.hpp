@@ -5,7 +5,10 @@
 
 #pragma once
 
-#include <brenta/engine.hpp>
+#include <brenta/renderer/camera.hpp>
+#include <brenta/renderer/model.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/translation.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/player.hpp>
 #include <demo/components/transform.hpp>
@@ -36,7 +39,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
 
     for (auto match : matches)
     {
-      /* Get the model component */
+      // Get the model component
       auto model_component = world::entity_to_component<ModelComponent>(match);
 
       auto transform_component =
@@ -62,7 +65,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       shader::set_float(default_shader, "material.shininess",
                         model_component->shininess);
 
-      /* Animation control */
+      // Animation control
       if (model_component->hasAtlas)
       {
         if (model_component->elapsedFrames > ANIMATION_SPEED)

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: src/renderer.cpp Source File</title>
+<title>Brenta Engine: src/renderer/renderer.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,9 +104,9 @@ $(document).ready(function(){initNavTree('renderer_8cpp_source.html',''); initRe
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Mail:    giovanni.santini@proton.me</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/renderer.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/translation.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/renderer/renderer.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/renderer/translation.hpp&gt;</span></div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>brenta;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
@@ -191,7 +191,7 @@ $(document).ready(function(){initNavTree('renderer_8cpp_source.html',''); initRe
 <div class="ttc" id="aclassbrenta_1_1camera_html"><div class="ttname"><a href="classbrenta_1_1camera.html">brenta::camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00039">camera.hpp:40</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1renderer_1_1item_html"><div class="ttname"><a href="classbrenta_1_1renderer_1_1item.html">brenta::renderer::item</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00042">renderer.hpp:43</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1renderer_html"><div class="ttname"><a href="classbrenta_1_1renderer.html">brenta::renderer</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00018">renderer.hpp:19</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html">brenta::types::translation</a></div><div class="ttdoc">Translation util class.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00026">translation.hpp:27</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html">brenta::types::translation</a></div><div class="ttdoc">Translation util class.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00027">translation.hpp:28</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a13e05614c6b1442dd070659978548de8"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8">brenta::types::translation::set_projection</a></div><div class="ttdeci">void set_projection(glm::mat4 projection)</div><div class="ttdoc">Set the projection matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00037">translation.cpp:37</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a642930c13558b86b7110dcdf81456b2b"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b">brenta::types::translation::set_model</a></div><div class="ttdeci">void set_model(glm::mat4 model)</div><div class="ttdoc">Set the model matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00042">translation.cpp:42</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a8a667a1751bb36beb4b73d11655a2783"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783">brenta::types::translation::set_view</a></div><div class="ttdeci">void set_view(glm::mat4 view)</div><div class="ttdoc">Set the view matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00024">translation.cpp:24</a></div></div>
@@ -201,7 +201,7 @@ $(document).ready(function(){initNavTree('renderer_8cpp_source.html',''); initRe
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>renderer.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_7bc5e25958a2fb25a8561f3aa0def6c5.html">renderer</a></li><li class="navelem"><b>renderer.cpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

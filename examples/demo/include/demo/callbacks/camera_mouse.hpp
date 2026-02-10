@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/camera.hpp>
+#include <brenta/renderer/camera.hpp>
 #include <brenta/mouse.hpp>
 
 void init_camera_mouse_callback(brenta::camera *cam, brenta::mouse *mouse);

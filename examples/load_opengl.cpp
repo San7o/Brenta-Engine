@@ -8,6 +8,10 @@
  */
 
 #include <brenta/engine.hpp>
+#include <brenta/logger.hpp>
+#include <brenta/window.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
+
 #include <iostream>
 #include <viotecs/viotecs.hpp>
 

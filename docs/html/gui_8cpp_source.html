@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: src/gui.cpp Source File</title>
+<title>Brenta Engine: src/gui/gui.cpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -104,10 +104,10 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Mail:    giovanni.santini@proton.me</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/gl.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/gui.hpp&gt;</span></div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/gl.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/gui/gui.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/texture.hpp&gt;</span></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/texture.hpp&gt;</span></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/logger.hpp&gt;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#ifdef BRENTA_USE_IMGUI</span></div>
@@ -235,7 +235,7 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span> </div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassbrenta_1_1gl_html_aa51594c5d0846ea024a95394350adbe3"><div class="ttname"><a href="classbrenta_1_1gl.html#aa51594c5d0846ea024a95394350adbe3">brenta::gl::set_viewport</a></div><div class="ttdeci">static void set_viewport(int x, int y, int width, int height)</div><div class="ttdoc">Set Viewport.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00150">gl.cpp:150</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1gl_html_aa51594c5d0846ea024a95394350adbe3"><div class="ttname"><a href="classbrenta_1_1gl.html#aa51594c5d0846ea024a95394350adbe3">brenta::gl::set_viewport</a></div><div class="ttdeci">static void set_viewport(int x, int y, int width, int height)</div><div class="ttdoc">Set Viewport.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00149">gl.cpp:149</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1gui_html"><div class="ttname"><a href="classbrenta_1_1gui.html">brenta::gui</a></div><div class="ttdoc">Gui class.</div><div class="ttdef"><b>Definition</b> <a href="gui_8hpp_source.html#l00026">gui.hpp:27</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1gui_html_a62289b1777e5c9000db351434fbcd27f"><div class="ttname"><a href="classbrenta_1_1gui.html#a62289b1777e5c9000db351434fbcd27f">brenta::gui::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00064">gui.cpp:64</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1gui_html_a822a3004d1fe1c9d9e7933e26caebf99"><div class="ttname"><a href="classbrenta_1_1gui.html#a822a3004d1fe1c9d9e7933e26caebf99">brenta::gui::render</a></div><div class="ttdeci">static void render()</div><div class="ttdoc">Render the gui To be called at each frame after rendering.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00113">gui.cpp:113</a></div></div>
@@ -249,7 +249,7 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><b>gui.cpp</b></li>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_99d0482cf009f9d97a0877749b817f19.html">gui</a></li><li class="navelem"><b>gui.cpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>
