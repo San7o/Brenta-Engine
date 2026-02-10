@@ -8,97 +8,117 @@
 
 using namespace brenta;
 
-void init_camera_mouse_callback(camera *cam)
+void init_camera_mouse_callback(camera *cam, mouse *mouse)
 {
-  auto camera_mouse_callback = [cam](double xpos, double ypos)
+  auto camera_mouse_callback = [cam, mouse](double xpos, double ypos)
   {
     // Rotate the camera
     if (window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
     {
-      if (cam->first_mouse)
+      if (mouse->get_first())
       {
-        cam->last_x = xpos;
-        cam->last_y = ypos;
-        cam->first_mouse = false;
+        mouse->set_x(xpos);
+        mouse->set_y(ypos);
+        mouse->set_first(false);
       }
 
-      float xoffset = xpos - cam->last_x;
-      float yoffset = cam->last_y - ypos;
-      cam->last_x = xpos;
-      cam->last_y = ypos;
+      float xoffset = xpos - mouse->get_x();
+      float yoffset = mouse->get_y() - ypos;
+      mouse->set_x(xpos);
+      mouse->set_y(ypos);
 
-      xoffset *= cam->mouse_sensitivity;
-      yoffset *= cam->mouse_sensitivity;
+      auto sensitivity = mouse->get_sensitivity();
+      xoffset *= sensitivity;
+      yoffset *= sensitivity;
 
-      cam->spherical_coordinates.theta +=
-        yoffset * cam->mouse_sensitivity;
-      cam->spherical_coordinates.phi +=
-        xoffset * cam->mouse_sensitivity;
+      auto new_cam = cam->get_pos();
+      try {
+        camera::spherical scam = std::get<camera::spherical>(new_cam);
+        scam.theta += yoffset * sensitivity;
+        scam.phi += xoffset * sensitivity;
 
-      if (cam->spherical_coordinates.theta <= 0.01f)
-        cam->spherical_coordinates.theta = 0.01f;
-      if (cam->spherical_coordinates.theta >= 3.13f)
-        cam->spherical_coordinates.theta = 3.13f;
+        if (scam.theta <= 0.01f) scam.theta = 0.01f;
+        if (scam.theta >= 3.13f) scam.theta = 3.13f;
 
-      cam->spherical_to_cartesian();
+        cam->set_pos(scam);
+        
+      } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
+        return;
+      }
     }
-    /* translate the cam center */
+    // translate the cam center
     else if (window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
     {
-      if (cam->first_mouse)
+      if (mouse->get_first())
       {
-        cam->last_x = xpos;
-        cam->last_y = ypos;
-        cam->first_mouse = false;
+        mouse->set_x(xpos);
+        mouse->set_y(ypos);
+        mouse->set_first(false);
       }
 
-      float xoffset = xpos - cam->last_x;
-      float yoffset = cam->last_y - ypos;
-      cam->last_x = xpos;
-      cam->last_y = ypos;
+      float xoffset = xpos - mouse->get_x();
+      float yoffset = mouse->get_y() - ypos;
+      mouse->set_x(xpos);
+      mouse->set_y(ypos);
 
-      xoffset *= cam->mouse_sensitivity * 0.3f;
-      yoffset *= cam->mouse_sensitivity * 0.3f;
+      auto sensitivity = mouse->get_sensitivity();
+      xoffset *= sensitivity * 0.3f;
+      yoffset *= sensitivity * 0.3f;
 
-      // Local coordinate system
-      glm::vec3 fixed_center =
-        glm::vec3(cam->center.x, cam->position.y,
-                  cam->center.z);
-      glm::vec3 front =
-        glm::normalize(cam->position - fixed_center); // Versor
-      glm::vec3 right =
-        glm::normalize(glm::cross(front, cam->world_up)); // Versor
+      auto new_cam = cam->get_pos();
+      try {
+        camera::spherical scam = std::get<camera::spherical>(new_cam);
+        glm::vec3 world_pos = cam->get_world_pos();
+        // Local coordinate system
+        glm::vec3 fixed_center =
+          glm::vec3(scam.center.x, world_pos.y, scam.center.z);
+        // Unit vectors
+        glm::vec3 front =
+          glm::normalize(world_pos - fixed_center);
+        glm::vec3 right =
+          glm::normalize(glm::cross(front, cam->get_world_up()));
 
-      cam->center += right * glm::vec3(xoffset);
-      cam->center -= cam->world_up * glm::vec3(yoffset);
-      cam->spherical_to_cartesian();
+        scam.center += right * glm::vec3(xoffset);
+        scam.center -= cam->get_world_up() * glm::vec3(yoffset);
+
+        cam->set_pos(scam);
+      } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
+        return;
+      }
     }
-    /* zoom the camera */
+    // zoom the camera
     else if (window::is_key_pressed(GLFW_KEY_LEFT_ALT))
     {
-      if (cam->first_mouse)
+      if (mouse->get_first())
       {
-        cam->last_x = xpos;
-        cam->last_y = ypos;
-        cam->first_mouse = false;
+        mouse->set_x(xpos);
+        mouse->set_y(ypos);
+        mouse->set_first(false);
       }
 
-      float xoffset = xpos - cam->last_x;
-      float yoffset = cam->last_y - ypos;
-      cam->last_x = xpos;
-      cam->last_y = ypos;
+      float xoffset = xpos - mouse->get_x();
+      float yoffset = mouse->get_y() - ypos;
+      mouse->set_x(xpos);
+      mouse->set_y(ypos);
 
-      xoffset *= cam->mouse_sensitivity;
-      yoffset *= cam->mouse_sensitivity;
+      xoffset *= mouse->get_sensitivity();
+      yoffset *= mouse->get_sensitivity();
+      
+      auto new_cam = cam->get_pos();
+      try {
+        camera::spherical scam = std::get<camera::spherical>(new_cam);
 
-      cam->spherical_coordinates.radius -= yoffset;
-      if (cam->spherical_coordinates.radius <= 0.1f)
-        cam->spherical_coordinates.radius = 0.1f;
-      cam->spherical_to_cartesian();
+        scam.radius -= yoffset;
+        if (scam.radius <= 0.1f) scam.radius = 0.1f;
+
+        cam->set_pos(scam);
+      } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
+        return;
+      }
     }
     else
     {
-      cam->first_mouse = true;
+      mouse->set_first(true);
     }
   };
   input::add_mouse_pos_callback("CameraCallback", camera_mouse_callback);

@@ -1,9 +1,12 @@
 var hierarchy =
 [
+    [ "brenta::camera::aircraft", "classbrenta_1_1camera_1_1aircraft.html", null ],
     [ "brenta::types::buffer", "classbrenta_1_1types_1_1buffer.html", [
       [ "brenta::types::framebuffer", "classbrenta_1_1types_1_1framebuffer.html", null ]
     ] ],
+    [ "brenta::camera::aircraft::builder", "classbrenta_1_1camera_1_1aircraft_1_1builder.html", null ],
     [ "brenta::camera::builder", "classbrenta_1_1camera_1_1builder.html", null ],
+    [ "brenta::camera::spherical::builder", "classbrenta_1_1camera_1_1spherical_1_1builder.html", null ],
     [ "brenta::mesh::builder", "classbrenta_1_1mesh_1_1builder.html", null ],
     [ "brenta::model::builder", "classbrenta_1_1model_1_1builder.html", null ],
     [ "brenta::particle_emitter::builder", "classbrenta_1_1particle__emitter_1_1builder.html", null ],
@@ -27,15 +30,15 @@ var hierarchy =
     [ "brenta::particle_emitter::config", "structbrenta_1_1particle__emitter_1_1config.html", null ],
     [ "brenta::text::config", "structbrenta_1_1text_1_1config.html", null ],
     [ "brenta::window::config", "structbrenta_1_1window_1_1config.html", null ],
-    [ "brenta::types::euler_angles", "structbrenta_1_1types_1_1euler__angles.html", null ],
     [ "brenta::renderer::item", "classbrenta_1_1renderer_1_1item.html", null ],
     [ "brenta::engine::manager", "classbrenta_1_1engine_1_1manager.html", null ],
     [ "brenta::mesh", "classbrenta_1_1mesh.html", null ],
     [ "brenta::model", "classbrenta_1_1model.html", null ],
+    [ "brenta::mouse", "classbrenta_1_1mouse.html", null ],
     [ "brenta::particle_emitter", "classbrenta_1_1particle__emitter.html", null ],
     [ "brenta::renderer", "classbrenta_1_1renderer.html", null ],
     [ "brenta::shader", "classbrenta_1_1shader.html", null ],
-    [ "brenta::types::spherical_coordinates", "structbrenta_1_1types_1_1spherical__coordinates.html", null ],
+    [ "brenta::camera::spherical", "classbrenta_1_1camera_1_1spherical.html", null ],
     [ "brenta::subsystem", "classbrenta_1_1subsystem.html", [
       [ "brenta::audio", "classbrenta_1_1audio.html", null ],
       [ "brenta::engine", "classbrenta_1_1engine.html", null ],

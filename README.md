@@ -40,7 +40,7 @@ classes, to get a detailed look at the engine, please visit the
 ### Modular APIs
 
 ```c++
-engine::builder()
+auto engine = engine::builder()
   .with(logger::builder()
         .level(oak::level::debug)
         .file("/tmp/brenta-logs"))
@@ -61,7 +61,7 @@ engine::builder()
 ### Model Loading
 
 ```c++
-model my_model = model::builder()
+audo my_model = model::builder()
     .path("assets/models/backpack/backpack.obj")
     .build();
 ```
@@ -72,8 +72,7 @@ model my_model = model::builder()
 ### Particles
 
 ```c++
-particle_emitter emitter =
-    particle_emitter::builder()
+auto emitter = particle_emitter::builder()
         .with_camera(&camera)
         .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
         .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
@@ -99,13 +98,14 @@ particle_emitter emitter =
 
 ```cpp
 auto camera = camera::builder()
-  .camera_type(camera::camera_type::spherical)
   .projection_type(camera::projection_type::perspective)
-  .spherical_coordinates({1.25f, 1.25f, 30.0f})
-  .center(glm::vec3(0.0f, 2.0f, 0.0f))
-  .movement_speed(2.5f)
-  .mouse_sensitivity(0.05f)
-  .zoom(45.0f)
+  .position(camera::spherical::builder()
+            .center({0.0f, 2.0f, 0.0f})
+            .phi(1.25f)
+            .theta(1.25f)
+            .radius(30.0f)
+            .build())
+  .fov(45.0f)
   .build();
 ```
 

@@ -42,13 +42,14 @@ int main()
   auto engine = engine::manager();
 
   auto camera = camera::builder()
-    .camera_type(camera::camera_type::spherical)
+    .position(camera::spherical::builder()
+              .center({0.0f, 2.0f, 0.0f})
+              .theta(1.25f)
+              .phi(1.25f)
+              .radius(10.0f)
+              .build())
     .projection_type(camera::projection_type::perspective)
-    .spherical_coordinates({1.25f, 1.25f, 10.0f})
-    .center(glm::vec3(0.0f, 2.0f, 0.0f))
-    .movement_speed(2.5f)
-    .mouse_sensitivity(0.05f)
-    .zoom(45.0f)
+    .fov(45.0f)
     .build();
 
   auto emitter =

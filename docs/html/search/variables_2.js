@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['euler_5fangles_0',['euler_angles',['../classbrenta_1_1camera.html#a910365fe99e2b49fb4ef7c05067ae1f5',1,'brenta::camera']]]
+  ['has_5fmipmap_0',['has_mipmap',['../classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e',1,'brenta::mesh']]]
 ];

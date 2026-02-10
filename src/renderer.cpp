@@ -29,7 +29,7 @@ void renderer::begin_frame(const camera& cam)
     cam.get_projection_matrix(window::get_width(),
                               window::get_height());
   renderer::view = cam.get_view_matrix();
-  renderer::cam_position = cam.get_position();
+  renderer::cam_position = cam.get_world_pos();
 }
 
 void renderer::submit(const renderer::item& it)

@@ -32,10 +32,11 @@ int main()
   auto engine = engine::managed();
   
   auto cam = camera::builder()
-    .camera_type(camera::camera_type::aircraft)
     .projection_type(camera::projection_type::perspective)
-    .position({0.0f, 0.0f, 0.0f})
-    .zoom(45.0f)
+    .position(camera::aircraft::builder()
+              .pos({0.0f, 0.0f, 0.0f})
+              .build())
+    .fov(45.0f)
     .build();
   
   model m = model::builder()

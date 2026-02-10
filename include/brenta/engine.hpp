@@ -8,6 +8,7 @@
 #include <brenta/audio.hpp>
 #include <brenta/buffer.hpp>
 #include <brenta/camera.hpp>
+#include <brenta/mouse.hpp>
 #include <brenta/frame_buffer.hpp>
 #include <brenta/gl.hpp>
 #include <brenta/gui.hpp>
