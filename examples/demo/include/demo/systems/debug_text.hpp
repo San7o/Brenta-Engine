@@ -21,48 +21,73 @@ struct DebugTextSystem : system<none>
   void run(std::vector<entity_id> _) const override
   {
 
-    brenta::camera *cam = world::get_resource<CameraResource>()->cam;
-    
-    auto camera_pos = cam->get_position();
-
-    const float offset = 20.0f;
-
     auto color = glm::vec3(1.0f, 0.9f, 0.0f);
+    const float offset = 20.0f;
+    brenta::camera *cam = world::get_resource<CameraResource>()->cam;
+    auto camera_world_pos = cam->get_world_pos();
 
     text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f,
                       window::get_height() - 30.0f, 0.35f, color);
 
-    text::render_text("CameraX: " + std::to_string(camera_pos.x), 25.0f,
+    text::render_text("CameraX: " + std::to_string(camera_world_pos.x), 25.0f,
                       window::get_height() - 30.0f - offset, 0.35f, color);
 
-    text::render_text("CameraY: " + std::to_string(camera_pos.y), 25.0f,
+    text::render_text("CameraY: " + std::to_string(camera_world_pos.y), 25.0f,
                       window::get_height() - 30.0f - offset * 2, 0.35f, color);
 
-    text::render_text("CameraZ: " + std::to_string(camera_pos.z), 25.0f,
+    text::render_text("CameraZ: " + std::to_string(camera_world_pos.z), 25.0f,
                       window::get_height() - 30.0f - offset * 3, 0.35f, color);
 
-    text::render_text("CenterX: " + std::to_string(cam->center.x),
-                      25.0f, window::get_height() - 30.0f - offset * 4, 0.35f,
-                      color);
 
-    text::render_text("CenterY: " + std::to_string(cam->center.y),
-                      25.0f, window::get_height() - 30.0f - offset * 5, 0.35f,
-                      color);
+    auto camera_pos = cam->get_pos();
+    try
+    {
+      camera::spherical scam = std::get<camera::spherical>(camera_pos);
+        
+      text::render_text("CenterX: " + std::to_string(scam.center.x),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 4, 0.35f,
+                        color);
 
-    text::render_text("CenterZ: " + std::to_string(cam->center.z),
-                      25.0f, window::get_height() - 30.0f - offset * 6, 0.35f,
-                      color);
+      text::render_text("CenterY: " + std::to_string(scam.center.y),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 5, 0.35f,
+                        color);
 
-    text::render_text(
-      "Theta: " + std::to_string(cam->spherical_coordinates.theta),
-      25.0f, window::get_height() - 30.0f - offset * 7, 0.35f, color);
+      text::render_text("CenterZ: " + std::to_string(scam.center.z),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 6, 0.35f,
+                        color);
+      
+      text::render_text("Theta: " + std::to_string(scam.theta),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 7, 0.35f, color);
 
-    text::render_text(
-      "Phi: " + std::to_string(cam->spherical_coordinates.phi), 25.0f,
-      window::get_height() - 30.0f - offset * 8, 0.35f, color);
+      text::render_text("Phi: " + std::to_string(scam.phi), 25.0f,
+                        window::get_height() - 30.0f
+                        - offset * 8, 0.35f, color);
 
-    text::render_text(
-      "Radius: " + std::to_string(cam->spherical_coordinates.radius),
-      25.0f, window::get_height() - 30.0f - offset * 9, 0.35f, color);
+      text::render_text("Radius: " + std::to_string(scam.radius),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 9, 0.35f, color);
+    }
+    catch ([[maybe_unused]] const std::bad_variant_access& ex)
+    {
+      camera::aircraft acam = std::get<camera::aircraft>(camera_pos);
+    
+      text::render_text("Yaw: " + std::to_string(acam.yaw),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 4, 0.35f, color);
+
+      text::render_text("Pitch: " + std::to_string(acam.pitch), 25.0f,
+                        window::get_height() - 30.0f
+                        - offset * 6, 0.35f, color);
+
+      text::render_text("Roll: " + std::to_string(acam.roll),
+                        25.0f, window::get_height() - 30.0f
+                        - offset * 6, 0.35f, color);
+
+    }
+
   }
 };

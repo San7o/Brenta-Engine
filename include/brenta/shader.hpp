@@ -235,66 +235,16 @@ public:
 
   // Utility uniform functions
 
-  /**
-   * @brief Set a boolean in the shader
-   *
-   * @param shader_name Name of the shader
-   * @param name Name of the uniform boolean
-   * @param value Value of the boolean
-   * @return true on success, or false on error
-   */
   static bool set_bool(shader::name_t shader_name,
                        const GLchar *name, bool value);
-  /**
-   * @brief Set an integer in the shader
-   *
-   * @param shader_name Name of the shader
-   * @param name Name of the uniform integer
-   * @param value Value of the integer
-   * @return true on success, or false on error
-   */
   static bool set_int(shader::name_t shader_name, const GLchar *name,
                       int value);
-  /**
-   * @brief Set a float in the shader
-   *
-   * @param shader_name Name of the shader
-   * @param name Name of the uniform float
-   * @param value Value of the float
-   * @return true on success, or false on error
-   */
   static bool set_float(shader::name_t shader_name,
                         const GLchar *name, float value);
-  /**
-   * @brief Set a 4x4 matrix in the shader
-   *
-   * @param shader_name Name of the shader
-   * @param name Name of the uniform matrix
-   * @param value Value of the matrix
-   * @return true on success, or false on error
-   */
   static bool set_mat4(shader::name_t shader_name, const GLchar *name,
                        glm::mat4 value);
-  /**
-   * @brief Set a 3D vector in the shader
-   *
-   * @param shader_name Name of uniform the shader
-   * @param name Name of the vector
-   * @param x X value of the vector
-   * @param y Y value of the vector
-   * @param z Z value of the vector
-   * @return true on success, or false on error
-   */
   static bool set_vec3(shader::name_t shader_name, const GLchar *name,
                        float x, float y, float z);
-  /**
-   * @brief Set a 3D vector in the shader
-   *
-   * @param shader_name Name of the shader
-   * @param name Name of the uniform vector
-   * @param value Value of the vector
-   * @return true on success, or false on error
-   */
   static bool set_vec3(shader::name_t shader_name, const GLchar *name,
                        glm::vec3 value);
 

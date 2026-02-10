@@ -32,38 +32,31 @@ class particle_emitter
 {
 public:
   
+  struct config;
+  class builder;
+  
   glm::vec3 starting_position;
   glm::vec3 starting_velocity;
   glm::vec3 starting_spread;
-  float starting_time_to_live;
-  int num_particles;
-  float spawn_rate;
-  float scale;
-  /**
-   * @brief Feddback buffer objects
-   *
-   * These are used to save the new state of updated particles in the
-   * updateParticles method.
-   */
-  types::buffer fbo[2];
-  /**
-   * @brief Current fbo index
-   */
-  int current;
-  /**
-   * @brief Atlas texture
-   */
-  texture atlas;
-  int atlas_width;
-  int atlas_height;
-  int atlas_index;
-  /**
-   * @brief Vertex array object
-   */
-  types::vao vao;
+  float     starting_time_to_live;
+  int       num_particles;
+  float     spawn_rate;
+  float     scale;
 
-  struct config;
-  class builder;
+  //
+  // Feddback buffer objects
+  // ------------------------
+  //
+  // These are used to save the new state of updated particles in the
+  // update_particles method.
+  types::buffer fbo[2];
+  int           current;   // current fbo index
+  
+  texture atlas;
+  int     atlas_width;
+  int     atlas_height;
+  int     atlas_index;
+  types::vao vao;
 
   static const config default_config;
 
@@ -83,23 +76,20 @@ private:
 
 struct particle_emitter::config
 {
-  glm::vec3 starting_position;
-  glm::vec3 starting_velocity;
-  glm::vec3 starting_spread;
-  float starting_time_to_live;
-  int num_particles;
-  float spawn_rate;
-  float scale;
-  std::string atlas_path;
-  int atlas_width;
-  int atlas_height;
-  int atlas_index;
-  camera *cam;
+  glm::vec3    starting_position;
+  glm::vec3    starting_velocity;
+  glm::vec3    starting_spread;
+  float        starting_time_to_live;
+  int          num_particles;
+  float        spawn_rate;
+  float        scale;
+  std::string  atlas_path;
+  int          atlas_width;
+  int          atlas_height;
+  int          atlas_index;
+  camera      *cam;
 };
   
-/**
- * @brief Builder pattern for ParticleEmitter
- */
 class particle_emitter::builder
 {
 private:

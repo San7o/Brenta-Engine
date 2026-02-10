@@ -12,6 +12,7 @@ var dir_8be729f266d03cf130ed75096ea9284a =
     [ "logger.hpp", "logger_8hpp_source.html", null ],
     [ "mesh.hpp", "mesh_8hpp_source.html", null ],
     [ "model.hpp", "model_8hpp_source.html", null ],
+    [ "mouse.hpp", "mouse_8hpp_source.html", null ],
     [ "particles.hpp", "particles_8hpp_source.html", null ],
     [ "renderer.hpp", "renderer_8hpp_source.html", null ],
     [ "shader.hpp", "shader_8hpp_source.html", null ],

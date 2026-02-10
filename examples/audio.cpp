@@ -23,12 +23,12 @@ const int screen_height = 600;
   
 // Required: id and path of an audio. The id will be used by the
 // audio subsystem to identify this particular file.
-const types::sound_id_t sound_guitar_id = "guitar";
+const audio::sound_id_t sound_guitar_id = "guitar";
 const std::string sound_guitar_path = "examples/assets/audio/guitar.wav";
 
 // You can specify additional optional settings like stream and
 // volume
-const types::stream_id_t stream_guitar_id = "guitar_stream";
+const audio::stream_id_t stream_guitar_id = "guitar_stream";
 const float guitar_volume = 0.8f;
   
 int main()

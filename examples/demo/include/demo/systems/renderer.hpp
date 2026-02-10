@@ -58,7 +58,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       t.set_shader(default_shader);
 
       shader::set_vec3(default_shader, "viewPos",
-                       cam->get_position());
+                       cam->get_world_pos());
       shader::set_float(default_shader, "material.shininess",
                         model_component->shininess);
 

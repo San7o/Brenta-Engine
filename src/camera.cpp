@@ -11,53 +11,38 @@ using namespace brenta;
 
 camera::camera(config conf)
 {
-  this->cam_type = conf.cam_type;
   this->proj_type = conf.proj_type;
-  this->position = conf.position;
+  this->fov = conf.fov;
   this->world_up = conf.world_up;
-  this->center = conf.center;
-  this->movement_speed = conf.movement_speed;
-  this->mouse_sensitivity = conf.mouse_sensitivity;
-  this->zoom = conf.zoom;
-  this->spherical_coordinates = conf.spherical_coordinates;
-  this->euler_angles = conf.euler_angles;
   this->front = conf.front;
   this->up = conf.up;
   this->right = conf.right;
 
-  // Update the camera
-  switch (this->cam_type)
-  {
-  case camera_type::spherical:
-    spherical_to_cartesian();
-    break;
-  case camera_type::aircraft:
-    update_camera_euler();
-    break;
-  default:
-    break;
-  }
+  this->set_pos(conf.pos);   // updates world_pos and other members
+  return;
 }
 
 glm::mat4 camera::get_view_matrix() const
 {
-  switch (this->cam_type)
+  try
   {
-  case camera_type::spherical:
-    return glm::lookAt(this->position, this->center, this->world_up);
-  case camera_type::aircraft:
-    return glm::lookAt(this->position, this->position + this->front, this->up);
-  default:
-    return glm::mat4(1.0f);
+    spherical spos = std::get<spherical>(this->pos);
+    return glm::lookAt(this->world_pos, spos.center, this->world_up);
+
+  }
+  catch ([[maybe_unused]] const std::bad_variant_access& ex)
+  {
+    return glm::lookAt(this->world_pos, this->world_pos + this->front, this->up);
   }
 }
 
-glm::mat4 camera::get_projection_matrix(int window_width, int window_height) const
+glm::mat4 camera::get_projection_matrix(int window_width,
+                                        int window_height) const
 {
   switch (this->proj_type)
   {
   case projection_type::perspective:
-    return glm::perspective(glm::radians(this->zoom),
+    return glm::perspective(glm::radians(this->fov),
                             (float) window_width
                             / (float) window_height,
                             0.1f, 1000.0f);
@@ -71,65 +56,92 @@ glm::mat4 camera::get_projection_matrix(int window_width, int window_height) con
   }
 }
 
-void camera::spherical_to_cartesian()
+void camera::update_spherical(spherical pos)
 {
-  this->position.x = sin(this->spherical_coordinates.theta)
-                       * cos(this->spherical_coordinates.phi)
-                       * this->spherical_coordinates.radius
-                     + this->center.x;
-  this->position.y =
-    cos(this->spherical_coordinates.theta) * this->spherical_coordinates.radius
-    + this->center.y;
-  this->position.z = sin(spherical_coordinates.theta)
-                       * sin(this->spherical_coordinates.phi)
-                       * this->spherical_coordinates.radius
-                     + this->center.z;
+  this->world_pos.x = sin(pos.theta) * cos(pos.phi) * pos.radius
+    + pos.center.x;
+  this->world_pos.y = cos(pos.theta) * pos.radius + pos.center.y;
+  this->world_pos.z = sin(pos.theta) * sin(pos.phi) * pos.radius
+    + pos.center.z;
 }
 
-// For aircraft camera
-void camera::update_camera_euler()
+void camera::update_aircraft(aircraft pos)
 {
   // calculate the new Front vector
   glm::vec3 new_front;
   new_front.x =
-    cos(glm::radians(euler_angles.yaw)) * cos(glm::radians(euler_angles.pitch));
-  new_front.y = sin(glm::radians(euler_angles.pitch));
+    cos(glm::radians(pos.yaw)) * cos(glm::radians(pos.pitch));
+  new_front.y = sin(glm::radians(pos.pitch));
   new_front.z =
-    sin(glm::radians(euler_angles.yaw)) * cos(glm::radians(euler_angles.pitch));
+    sin(glm::radians(pos.yaw)) * cos(glm::radians(pos.pitch));
   this->front = glm::normalize(new_front);
   // also re-calculate the Right and Up vector
   this->right = glm::normalize(glm::cross(this->front, this->world_up));
   this->up = glm::normalize(glm::cross(this->right, this->front));
 }
 
-camera::camera_type camera::get_camera_type() const
-{
-  return this->cam_type;
-}
-
-void camera::set_camera_type(camera::camera_type camera_type)
-{
-  this->cam_type = camera_type;
-}
+//
+// Getters
+//
 
 camera::projection_type camera::get_projection_type() const
 {
   return this->proj_type;
 }
 
+std::variant<camera::spherical, camera::aircraft> camera::get_pos() const
+{
+  return this->pos;
+}
+
+glm::vec3 camera::get_world_pos() const
+{
+  return this->world_pos;
+}
+
+float camera::get_fov() const
+{
+  return this->fov;
+}
+
+glm::vec3 camera::get_front() const
+{
+  return this->front;
+}
+
+glm::vec3 camera::get_up() const
+{
+  return this->up;
+}
+
+glm::vec3 camera::get_right() const
+{
+  return this->right;
+}
+
+//
+// Setters
+//
+
 void camera::set_projection_type(projection_type projection_type)
 {
   this->proj_type = projection_type;
 }
 
-glm::vec3 camera::get_position() const
+void camera::set_pos(std::variant<spherical, aircraft> new_pos)
 {
-  return this->position;
-}
+  this->pos = new_pos;
 
-void camera::set_position(glm::vec3 position)
-{
-  this->position = position;
+  try
+  {
+    this->update_spherical(std::get<spherical>(this->pos));
+  }
+  catch ([[maybe_unused]] const std::bad_variant_access& ex)
+  {
+    this->update_aircraft(std::get<aircraft>(this->pos));
+  }
+  
+  return;
 }
 
 glm::vec3 camera::get_world_up() const
@@ -142,70 +154,9 @@ void camera::set_world_up(glm::vec3 world_up)
   this->world_up = world_up;
 }
 
-glm::vec3 camera::get_center() const
+void camera::set_fov(float fov)
 {
-  return this->center;
-}
-
-void camera::set_center(glm::vec3 center)
-{
-  this->center = center;
-}
-
-float camera::get_movement_speed() const
-{
-  return this->movement_speed;
-}
-
-void camera::set_movement_speed(float movement_speed)
-{
-  this->movement_speed = movement_speed;
-}
-
-float camera::get_mouse_sensitivity() const
-{
-  return this->mouse_sensitivity;
-}
-
-void camera::set_mouse_sensitivity(float mouse_sensitivity)
-{
-  this->mouse_sensitivity = mouse_sensitivity;
-}
-
-float camera::get_zoom() const
-{
-  return this->zoom;
-}
-
-void camera::set_zoom(float zoom)
-{
-  this->zoom = zoom;
-}
-
-types::spherical_coordinates camera::get_spherical_coordinates() const
-{
-  return this->spherical_coordinates;
-}
-
-void camera::set_spherical_coordinates(
-  types::spherical_coordinates spherical_coordinates)
-{
-  this->spherical_coordinates = spherical_coordinates;
-}
-
-types::euler_angles camera::get_euler_angles() const
-{
-  return this->euler_angles;
-}
-
-void camera::set_euler_angles(types::euler_angles euler_angles)
-{
-  this->euler_angles = euler_angles;
-}
-
-glm::vec3 camera::get_front() const
-{
-  return this->front;
+  this->fov = fov;
 }
 
 void camera::set_front(glm::vec3 front)
@@ -213,19 +164,9 @@ void camera::set_front(glm::vec3 front)
   this->front = front;
 }
 
-glm::vec3 camera::get_up() const
-{
-  return this->up;
-}
-
 void camera::set_up(glm::vec3 up)
 {
   this->up = up;
-}
-
-glm::vec3 camera::get_right() const
-{
-  return this->right;
 }
 
 void camera::set_right(glm::vec3 right)
@@ -233,46 +174,81 @@ void camera::set_right(glm::vec3 right)
   this->right = right;
 }
 
-bool camera::get_first_mouse() const
-{
-  return this->first_mouse;
-}
-
-void camera::set_first_mouse(bool first_mouse)
-{
-  this->first_mouse = first_mouse;
-}
-
-float camera::get_last_x() const
-{
-  return this->last_x;
-}
-
-void camera::set_last_x(float last_x)
-{
-  this->last_x = last_x;
-}
-
-float camera::get_last_y() const
-{
-  return this->last_y;
-}
-
-void camera::set_last_y(float last_y)
-{
-  this->last_y = last_y;
-}
-
 //
 // Builder
 //
 
-camera::builder &
-camera::builder::camera_type(camera::camera_type camera_type)
+// camera::spherical builder
+
+camera::spherical::builder &
+camera::spherical::builder::center(glm::vec3 center)
 {
-  this->conf.cam_type = camera_type;
+  this->scam.center = center;
   return *this;
 }
+
+camera::spherical::builder &
+camera::spherical::builder::theta(float theta)
+{
+  this->scam.theta = theta;
+  return *this;
+}
+
+camera::spherical::builder &
+camera::spherical::builder::phi(float phi)
+{
+  this->scam.phi = phi;
+  return *this;
+}
+
+camera::spherical::builder &
+camera::spherical::builder::radius(float radius)
+{
+  this->scam.radius = radius;
+  return *this;
+}
+
+camera::spherical camera::spherical::builder::build()
+{
+  return this->scam;
+}
+
+// camera::aircraft builder
+
+camera::aircraft::builder &
+camera::aircraft::builder::pos(glm::vec3 pos)
+{
+  this->acam.pos = pos;
+  return *this;
+}
+
+camera::aircraft::builder &
+camera::aircraft::builder::yaw(float yaw)
+{
+  this->acam.yaw = yaw;
+  return *this;
+}
+
+camera::aircraft::builder &
+camera::aircraft::builder::pitch(float pitch)
+{
+  this->acam.pitch = pitch;
+  return *this;
+}
+
+camera::aircraft::builder &
+camera::aircraft::builder::roll(float roll)
+{
+  this->acam.roll = roll;
+  return *this;
+}
+
+camera::aircraft camera::aircraft::builder::build()
+{
+  return this->acam;
+}
+
+// Camera builder
 
 camera::builder &
 camera::builder::projection_type(camera::projection_type projection_type)
@@ -281,53 +257,22 @@ camera::builder::projection_type(camera::projection_type projection_type)
   return *this;
 }
 
-camera::builder &camera::builder::position(glm::vec3 position)
+camera::builder &camera::builder::position(std::variant<camera::spherical,
+                                           camera::aircraft> pos)
 {
-  this->conf.position = position;
+  this->conf.pos = pos;
+  return *this;
+}
+
+camera::builder &camera::builder::fov(float fov)
+{
+  this->conf.fov = fov;
   return *this;
 }
 
 camera::builder &camera::builder::world_up(glm::vec3 world_up)
 {
   this->conf.world_up = world_up;
-  return *this;
-}
-
-camera::builder &camera::builder::center(glm::vec3 center)
-{
-  this->conf.center = center;
-  return *this;
-}
-
-camera::builder &camera::builder::movement_speed(float movement_speed)
-{
-  this->conf.movement_speed = movement_speed;
-  return *this;
-}
-
-camera::builder &camera::builder::mouse_sensitivity(float mouse_sensitivity)
-{
-  this->conf.mouse_sensitivity = mouse_sensitivity;
-  return *this;
-}
-
-camera::builder &camera::builder::zoom(float zoom)
-{
-  this->conf.zoom = zoom;
-  return *this;
-}
-
-camera::builder &camera::builder::spherical_coordinates(
-  types::spherical_coordinates spherical_coordinates)
-{
-  this->conf.spherical_coordinates = spherical_coordinates;
-  return *this;
-}
-
-camera::builder &
-camera::builder::euler_angles(types::euler_angles euler_angles)
-{
-  this->conf.euler_angles = euler_angles;
   return *this;
 }
 

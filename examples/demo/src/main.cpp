@@ -54,14 +54,18 @@ int main()
   auto engine = engine::managed();
   
   auto camera = camera::builder()
-    .camera_type(camera::camera_type::spherical)
     .projection_type(camera::projection_type::perspective)
-    .spherical_coordinates({1.25f, 1.25f, 30.0f})
-    .center(glm::vec3(0.0f, 2.0f, 0.0f))
-    .movement_speed(2.5f)
-    .mouse_sensitivity(0.05f)
-    .zoom(45.0f)
+    .position(camera::spherical::builder()
+              .center({0.0f, 2.0f, 0.0f})
+              .phi(1.25f)
+              .theta(1.25f)
+              .radius(30.0f)
+              .build())
+    .fov(45.0f)
     .build();
+
+  mouse mouse = {};
+  mouse.set_sensitivity(0.05f);
   
 #ifdef BRENTA_USE_ECS
   init_player_entity();
@@ -74,7 +78,7 @@ int main()
 
   init_toggle_wireframe_callback();
   init_close_window_callback();
-  init_camera_mouse_callback(&camera);
+  init_camera_mouse_callback(&camera, &mouse);
   init_play_guitar_callback();
 
   world::add_resource<WireframeResource>(false);

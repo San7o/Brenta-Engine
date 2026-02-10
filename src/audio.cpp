@@ -12,11 +12,11 @@ using namespace brenta;
 // Static variables
 //
 
-std::vector<std::tuple<types::sound_id_t, std::string,
-                       types::stream_id_t>> audio::init_sounds;
-std::vector<std::pair<types::stream_id_t, float>> audio::init_streams;
-std::unordered_map<types::sound_id_t, types::sound_t> audio::sounds;
-std::unordered_map<types::stream_id_t, types::stream_t> audio::streams;
+std::vector<std::tuple<audio::sound_id_t, std::string,
+                       audio::stream_id_t>> audio::init_sounds;
+std::vector<std::pair<audio::stream_id_t, float>> audio::init_streams;
+std::unordered_map<audio::sound_id_t, audio::sound_t> audio::sounds;
+std::unordered_map<audio::stream_id_t, audio::stream_t> audio::streams;
 ma_engine audio::engine;
 bool audio::initialized = false;
 const std::string audio::subsystem_name = "audio";
@@ -100,11 +100,11 @@ audio &audio::instance()
 }
 
 std::expected<void, audio::error>
-audio::load(const types::sound_id_t &sound_id,
+audio::load(const audio::sound_id_t &sound_id,
             const std::string &path,
-            const types::stream_id_t &stream_id)
+            const audio::stream_id_t &stream_id)
 {
-  types::stream_t *stream = audio::get_stream(stream_id);
+  audio::stream_t *stream = audio::get_stream(stream_id);
   if (!stream)
   {
     audio::create_stream(stream_id);
@@ -117,7 +117,7 @@ audio::load(const types::sound_id_t &sound_id,
     }
   }
 
-  types::sound_t sound = {};
+  audio::sound_t sound = {};
   audio::sounds.insert({sound_id, sound});
   if (ma_sound_init_from_file(&audio::engine, path.c_str(), 0, stream, NULL,
                               &audio::sounds.at(sound_id)) != MA_SUCCESS)
@@ -133,9 +133,9 @@ audio::load(const types::sound_id_t &sound_id,
 }
 
 std::expected<void, audio::error>
-audio::play(const types::sound_id_t &id)
+audio::play(const audio::sound_id_t &id)
 {
-  types::sound_t *sound = &audio::sounds.at(id);
+  audio::sound_t *sound = &audio::sounds.at(id);
   if (!sound)
   {
     ERROR("{}: sound with id {} not found",
@@ -147,12 +147,12 @@ audio::play(const types::sound_id_t &id)
 }
 
 std::expected<void, audio::error>
-audio::create_stream(const types::stream_id_t &id)
+audio::create_stream(const audio::stream_id_t &id)
 {
-  types::stream_t *stream = audio::get_stream(id);
+  audio::stream_t *stream = audio::get_stream(id);
   if (stream) return {};
 
-  types::stream_t s = {};
+  audio::stream_t s = {};
   audio::streams.insert({id, s});
   stream = &audio::streams.at(id);
   if (ma_sound_group_init(&audio::engine, 0, NULL, stream)
@@ -167,7 +167,7 @@ audio::create_stream(const types::stream_id_t &id)
   return {};
 }
 
-types::stream_t *audio::get_stream(const types::stream_id_t &id)
+audio::stream_t *audio::get_stream(const audio::stream_id_t &id)
 {
   if (audio::streams.find(id) == audio::streams.end())
   {
@@ -177,9 +177,9 @@ types::stream_t *audio::get_stream(const types::stream_id_t &id)
 }
 
 std::expected<void, audio::error>
-audio::stream_set_volume(const types::stream_id_t &id, float volume)
+audio::stream_set_volume(const audio::stream_id_t &id, float volume)
 {
-  types::stream_t *stream = audio::get_stream(id);
+  audio::stream_t *stream = audio::get_stream(id);
   if (!stream)
   {
     ERROR("{}: could not set volume: Audio stream {} not found",
@@ -195,9 +195,9 @@ audio::stream_set_volume(const types::stream_id_t &id, float volume)
 }
 
 std::expected<void, audio::error>
-audio::stream_stop(const types::stream_id_t &id)
+audio::stream_stop(const audio::stream_id_t &id)
 {
-  types::stream_t *stream = audio::get_stream(id);
+  audio::stream_t *stream = audio::get_stream(id);
   if (stream == nullptr)
   {
     ERROR("{}: could not pause stream: stream {} not found",
@@ -217,7 +217,7 @@ audio::stream_stop(const types::stream_id_t &id)
 }
 
 std::expected<void, audio::error>
-audio::stream_start(const types::stream_id_t &id)
+audio::stream_start(const audio::stream_id_t &id)
 {
   auto stream = audio::get_stream(id);
   if (stream == nullptr)
@@ -242,16 +242,16 @@ audio::stream_start(const types::stream_id_t &id)
 //
 
 audio::builder&
-audio::builder::sound(const types::sound_id_t &sound_id,
-                       const std::string &path,
-                       const types::stream_id_t &stream_id)
+audio::builder::sound(const audio::sound_id_t &sound_id,
+                      const std::string &path,
+                      const audio::stream_id_t &stream_id)
 {
   this->init_sounds.push_back(std::make_tuple(sound_id, path, stream_id));
   return *this;
 }
 
 audio::builder&
-audio::builder::stream(const types::stream_id_t &id,
+audio::builder::stream(const audio::stream_id_t &id,
                        float volume)
 {
   this->init_streams.push_back(std::make_pair(id, volume));

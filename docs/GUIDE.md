@@ -241,15 +241,15 @@ assigned to an Entity.
 You can define your own component like so:
 
 ```c++
-/* This is a component */
+// This is a component
 struct model_component : component {
   model mod;
   types::shader_name_t shader;
 
-  /* You need to provide a default constructor */
+  // You need to provide a default constructor
   model_component() {};
 
-  /* Any other construtor is optional */
+  // Any other construtor is optional
   model_component(model mod, types::shader_name_t shader)
         : model(model), shader(shader) {}
 };
@@ -267,19 +267,19 @@ all the components you specified.
 Here is an example:
 
 ```c++
-/* Specify ModelComponent and TransformComponent query */
+// Specify ModelComponent and TransformComponent query
 struct renderer_system : system<model_component, transform_component> {
 
-  /* You need to define this function */
+  // You need to define this function
   void run(std::vector<entity_t> matches) const override {
     if (matches.empty()) return;
 
     for (auto match : matches) {
-      /* Get the model component */
+      // Get the model component
       auto model_c = world::entity_to_component<model_component>(match);
       auto my_model = model_c->mod;
 
-      /* Translate the model */
+      // Translate the model
       // ...
 
       my_model.draw(default_shader);
@@ -287,10 +287,8 @@ struct renderer_system : system<model_component, transform_component> {
   }
 };
 
-/* 
- * Somewhere in your code you need to
- * have one (and only one) call on this macro
- */
+// Somewhere in your code you need to
+// have one (and only one) call on this macro
 REGISTER_SYSTEMS(render_system);
 ```
 
@@ -299,17 +297,17 @@ REGISTER_SYSTEMS(render_system);
 You can create Entities and assign Components to them like so:
 
 ```c++
-/* Create the player entity */
+// Create the player entity
 auto player_entity = world::new_entity();
 
 
-/* Add the player component to the player entity */
+// Add the player component to the player entity
 world::add_component<player_component>(player_entity, player_component());
 
-/* Load model and shader */
+// Load model and shader
 // ...
 
-/* Add the model component to the player entity */
+// Add the model component to the player entity
 auto model_c = model_component(mod, "default_shader");
 world::add_component<model_component>(player_entity, model_c);
 ```
@@ -320,7 +318,7 @@ Resources hold global data accessible via `world::get_resource<name>()`.
 You can define a Resource like so:
 
 ```c++
-/* This is a resource */
+// This is a resource
 struct wireframe_resource : resource {
   bool enabled;
   wireframe_resource(bool e) : enabled(e) {}
