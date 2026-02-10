@@ -14,7 +14,7 @@ but the Engine class provides a nice way to do it.
 To create an engine, you can use the Builder class:
 
 ```cpp
-#include <brenta/engine.hpp>
+#include <brenta/brenta.hpp>
 
 int main() {
   engine::builder()
@@ -174,7 +174,7 @@ The engine provides functions to interact with the window in
 with `brenta::time`, display text with `brenta::text` and more!
 
 ```c++
-#include <brenta/engine.hpp>
+#include <brenta/brenta.hpp>
 #include <viotecs/viotecs.hpp>
 
 using namespace brenta;
