@@ -19,13 +19,12 @@ class Renderer
 {
 public:
 
-  class Target;
-
+  class Command;
   Renderer() = delete;
   ~Renderer() = delete;
   
   static void begin_frame(const Camera& cam);
-  static void submit(const Renderer::Target& it);
+  static void submit(const Renderer::Command& it);
   static void end_frame();
 
 private:
@@ -33,13 +32,13 @@ private:
   static glm::mat4 projection;
   static glm::mat4 view;
   static glm::vec3 cam_position;
-  static std::vector<Target> render_queue;
+  static std::vector<Command> render_queue;
   
   static void flush();
 
 };
 
-class Renderer::Target
+class Renderer::Command
 {
 public:
   
@@ -47,15 +46,15 @@ public:
   const Shader::Name   material;
   glm::mat4            transform;
 
-  Target() = default;
-  Target(const Model* m,
-         const Shader::Name material,
-         const glm::mat4 transform = glm::mat4(1.0))
+  Command() = default;
+  Command(const Model* m,
+          const Shader::Name material,
+          const glm::mat4 transform = glm::mat4(1.0))
     : m(m), material(material), transform(transform) {}
 
-  Renderer::Target& translate(glm::vec3 translation);
-  Renderer::Target& rotate(glm::vec3 rotation);
-  Renderer::Target& scale(float scale);
+  Renderer::Command& translate(glm::vec3 translation);
+  Renderer::Command& rotate(glm::vec3 rotation);
+  Renderer::Command& scale(float scale);
 
 };
   

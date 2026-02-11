@@ -13,7 +13,7 @@ using namespace brenta;
 // Static variables
 //
 
-std::vector<Renderer::Target> Renderer::render_queue = {};
+std::vector<Renderer::Command> Renderer::render_queue = {};
 glm::mat4 Renderer::view;
 glm::mat4 Renderer::projection;
 glm::vec3 Renderer::cam_position;
@@ -34,7 +34,7 @@ void Renderer::begin_frame(const Camera& cam)
   return;
 }
 
-void Renderer::submit(const Renderer::Target& it)
+void Renderer::submit(const Renderer::Command& it)
 {
   Renderer::render_queue.push_back(it);
 }
@@ -77,17 +77,17 @@ void Renderer::flush()
 }
 
 //
-// Target
+// Command
 //
 
-Renderer::Target& Renderer::Target::translate(glm::vec3 translation)
+Renderer::Command& Renderer::Command::translate(glm::vec3 translation)
 {
   this->transform = glm::translate(this->transform, translation);
   return *this;
 }
 
 // Note: the order of rotations is important
-Renderer::Target& Renderer::Target::rotate(glm::vec3 rotation)
+Renderer::Command& Renderer::Command::rotate(glm::vec3 rotation)
 {
   this->transform = glm::rotate(this->transform, glm::radians(rotation.x),
                                 glm::vec3(1.0f, 0.0f, 0.0f));
@@ -98,7 +98,7 @@ Renderer::Target& Renderer::Target::rotate(glm::vec3 rotation)
   return *this;
 }
 
-Renderer::Target& Renderer::Target::scale(float scale)
+Renderer::Command& Renderer::Command::scale(float scale)
 {
   this->transform = glm::scale(this->transform, glm::vec3(scale));
   return *this;

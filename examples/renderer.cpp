@@ -64,7 +64,7 @@ int main()
     Gl::clear();
     
     Renderer::begin_frame(cam);
-    Renderer::submit(Renderer::Target(&m, s)
+    Renderer::submit(Renderer::Command(&m, s)
                      .translate(glm::vec3(5.0f, 0.0f, 0.0f))
                      .rotate(glm::vec3(0.0, -90.0, 0.0))
                      .scale(1.0));
