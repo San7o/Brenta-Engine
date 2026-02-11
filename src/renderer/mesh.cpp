@@ -69,6 +69,10 @@ void Mesh::init()
 
 void Mesh::draw(Shader::Name shader_name) const
 {
+  auto shader = Shader::get_shader(shader_name);
+  if (!shader) return;
+  shader->use();
+
   if (this->vao.get_id() == 0)
   {
     ERROR("Mesh::draw: not initialized");
@@ -98,8 +102,8 @@ void Mesh::draw(Shader::Name shader_name) const
       number = "0";
       break;
     }
-    
-    Shader::set_int(shader_name, ("material." + name + number).c_str(), i);
+
+    shader->set_int(("material." + name + number).c_str(), i);
     textures[i]->bind(GL_TEXTURE_2D, this->wrapping,
                      this->filtering_min, this->filtering_mag,
                      this->has_mipmap, this->mipmap_min, this->mipmap_mag);

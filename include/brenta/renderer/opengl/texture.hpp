@@ -27,7 +27,7 @@ public:
   
   Texture::Id   id;
   Texture::Type type;
-  std::filesystem::path path;
+  std::string   path;
   
   // This method activates a texture unit. Arg is GL_TEXTURE0 + x
   static void active_texture(GLenum texture);

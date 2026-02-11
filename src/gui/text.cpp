@@ -88,11 +88,13 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
     return;
   }
 
-  Shader::create("TextShader",
-                 Shader::Type::Vertex,   "src/renderer/shaders/text.vs",
-                 Shader::Type::Fragment, "src/renderer/shaders/text.fs");
+  auto shader = Shader::create("TextShader",
+                               Shader::Type::Vertex,   "src/renderer/shaders/text.vs",
+                               Shader::Type::Fragment, "src/renderer/shaders/text.fs");
+  if (!shader) return;
+  
   Text::shader_name = "TextShader";
-  Shader::use(Text::shader_name);
+  shader->use();
 
   // find path to font
   if (font_path.empty())
@@ -171,11 +173,12 @@ void Text::render_text(std::string text, float x, float y, float scale,
     return;
   }
 
-  Shader::use(Text::shader_name);
-  unsigned int textShaderId = Shader::get_id(Text::shader_name);
-
-  glUniform3f(glGetUniformLocation(textShaderId, "textColor"), color.x, color.y,
-              color.z);
+  auto shader = Shader::get_shader(Text::shader_name);
+  if (!shader) return;
+  
+  unsigned int textShaderId = shader->get_id();
+  shader->use();
+  shader->set_float3("textColor", color.x, color.y, color.z);
 
   glm::mat4 projection =
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,

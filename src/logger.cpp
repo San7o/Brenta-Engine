@@ -56,7 +56,6 @@ std::expected<void, Subsystem::Error> Logger::terminate()
   oak::stop_writer();
 
   Logger::initialized = false;
-  INFO("{}: terminated", Logger::subsystem_name);
   return {};
 }
 

@@ -53,9 +53,14 @@ int main()
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  Shader::create("fractal",
-                 Shader::Type::Vertex, "examples/mandelbrot.vs",
-                 Shader::Type::Fragment, "examples/mandelbrot.fs");
+  auto shader = Shader::create("fractal",
+          Shader::Type::Vertex, "examples/mandelbrot.vs",
+          Shader::Type::Fragment, "examples/mandelbrot.fs");
+  if (!shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
 
   FrameBuffer fb(Window::get_width(), Window::get_height());
 
@@ -113,15 +118,16 @@ int main()
 
     // Render here
     v.bind();
-    Shader::use("fractal");
-    Shader::set_vec3("fractal", "resolution",
+
+    shader->use();
+    shader->set_vec3("resolution",
                      glm::vec3(float(Window::get_width()),
                                float(Window::get_height()), 0.0f));
-    Shader::set_vec3("fractal", "offset", offset);
-    Shader::set_float("fractal", "zoom", zoom);
-    Shader::set_vec3("fractal", "constant", constant);
-    Shader::set_bool("fractal", "juliaSet", julia);
-    Shader::set_int("fractal", "maxIterations", max_iterations);
+    shader->set_vec3("offset",       offset);
+    shader->set_float("zoom",        zoom);
+    shader->set_vec3("constant",     constant);
+    shader->set_bool("juliaSet",     julia);
+    shader->set_int("maxIterations", max_iterations);
     glDrawArrays(GL_TRIANGLES, 0, 6);
     Gl::check_error();
 

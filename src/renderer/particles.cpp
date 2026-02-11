@@ -51,12 +51,15 @@ ParticleEmitter::ParticleEmitter(Config conf)
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-  Shader::create(varyings, 3, "particle_update",
-                 Shader::Type::Vertex, "src/renderer/shaders/particle_update.vs");
-  Shader::create("particle_render",
+  auto shader_update = Shader::create(varyings, 3, "particle_update",
+          Shader::Type::Vertex, "src/renderer/shaders/particle_update.vs");
+  if (!shader_update) return;
+  
+  auto shader_render = Shader::create("particle_render",
                  Shader::Type::Vertex,   "src/renderer/shaders/particle_render.vs",
                  Shader::Type::Geometry, "src/renderer/shaders/particle_render.gs",
                  Shader::Type::Fragment, "src/renderer/shaders/particle_render.fs");
+  if (!shader_render) return;
 
   // This is needed to render points
   glEnable(GL_PROGRAM_POINT_SIZE);
@@ -90,14 +93,16 @@ ParticleEmitter::ParticleEmitter(Config conf)
 // Update particles using Transform Feedback
 void ParticleEmitter::update(float delta_time)
 {
-  Shader::use("particle_update");
-  Shader::set_float("particle_update", "deltaTime",        delta_time);
-  Shader::set_vec3("particle_update",  "emitterPos",       this->starting_position);
-  Shader::set_vec3("particle_update",  "emitterSpread",    this->starting_spread);
-  Shader::set_float("particle_update", "spawnProbability", this->spawn_rate);
-  Shader::set_vec3("particle_update",  "emitterVel",       this->starting_velocity);
-  Shader::set_float("particle_update", "emitterTTL",
-                    this->starting_time_to_live);
+  auto shader = Shader::get_shader("particle_update");
+  if (!shader) return;
+
+  shader->use();
+  shader->set_float("deltaTime",        delta_time);
+  shader->set_vec3("emitterPos",        this->starting_position);
+  shader->set_vec3("emitterSpread",     this->starting_spread);
+  shader->set_float("spawnProbability", this->spawn_rate);
+  shader->set_vec3("emitterVel",        this->starting_velocity);
+  shader->set_float("emitterTTL",       this->starting_time_to_live);
   Gl::check_error();
 
   this->vao.bind();
@@ -144,8 +149,10 @@ void ParticleEmitter::render()
     return;
   }
 
-  Shader::use("particle_render");
+  auto shader = Shader::get_shader("particle_render");
+  if (!shader) return;
 
+  shader->use();
   this->vao.bind();
 
   glBindBuffer(GL_ARRAY_BUFFER, fbo[current].id);
@@ -166,13 +173,13 @@ void ParticleEmitter::render()
   t.set_projection(this->cam->get_projection_matrix(window_width, window_height));
   t.set_model(glm::mat4(1.0f));
   t.set_shader("particle_render");
-  Shader::set_int("particle_render", "atlas_width", this->atlas_width);
-  Shader::set_int("particle_render", "atlas_height", this->atlas_height);
-  Shader::set_int("particle_render", "atlas_index", this->atlas_index);
-  Shader::set_float("particle_render", "scale", this->scale);
-  Shader::set_float("particle_render", "aspect_ratio",
-                    (float) window_width
-                    / (float) window_height);
+  
+  shader->set_int("atlas_width",  this->atlas_width);
+  shader->set_int("atlas_height", this->atlas_height);
+  shader->set_int("atlas_index",  this->atlas_index);
+  shader->set_float("scale",      this->scale);
+  shader->set_float("aspect_ratio",
+                           (float) window_width  / (float) window_height);
 
   // Set Textures
   Texture::active_texture(GL_TEXTURE0);

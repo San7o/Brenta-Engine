@@ -46,7 +46,9 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
         world::entity_to_component<TransformComponent>(match);
 
       Model *m = &model_component->mod;
-      auto default_shader = model_component->shader;
+      auto shader_name = model_component->shader;
+      auto shader = Shader::get_shader(shader_name);
+      if (!shader) continue;
 
       brenta::Translation t = brenta::Translation();
       t.set_view(cam->get_view_matrix());
@@ -58,12 +60,10 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       t.rotate(transform_component->rotation);
       t.scale(transform_component->scale);
 
-      t.set_shader(default_shader);
+      t.set_shader(shader_name);
 
-      Shader::set_vec3(default_shader, "viewPos",
-                       cam->get_world_pos());
-      Shader::set_float(default_shader, "material.shininess",
-                        model_component->shininess);
+      shader->set_vec3("viewPos", cam->get_world_pos());
+      shader->set_float("material.shininess", model_component->shininess);
 
       // Animation control
       if (model_component->hasAtlas)
@@ -81,17 +81,15 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
         {
           model_component->elapsedFrames++;
         }
-        Shader::set_int(default_shader, "atlasSize",
-                        model_component->atlasSize);
-        Shader::set_int(default_shader, "atlasIndex",
-                        model_component->atlasIndex);
+        shader->set_int("atlasSize", model_component->atlasSize);
+        shader->set_int("atlasIndex", model_component->atlasIndex);
       }
       else
       {
-        Shader::set_int(default_shader, "atlasIndex", 0);
+        shader->set_int("atlasIndex", 0);
       }
 
-      m->draw(default_shader);
+      m->draw(shader_name);
     }
   }
 };

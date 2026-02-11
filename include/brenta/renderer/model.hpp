@@ -32,28 +32,20 @@ public:
   GLint     mipmap_min;
   GLint     mipmap_mag;
   bool      flip;
-  std::filesystem::path path;
+  std::string path;
 
   class Config;
   class Builder;
 
-  Model() = default;
+  Model() {}
   Model(Config conf);
   ~Model();
 
-  /*
   constexpr Model(const Model&)            = delete;
   constexpr Model& operator=(const Model&) = delete;
 
   constexpr Model(Model&&) noexcept            = default;
   constexpr Model& operator=(Model&&) noexcept = default;
-  */
-  
-  Model(const Model&)            = delete;
-  Model& operator=(const Model&) = delete;
-
-  Model(Model&&) noexcept            = default;
-  Model& operator=(Model&&) noexcept = default;
 
   void draw(Shader::Name shader) const;
 
@@ -61,7 +53,7 @@ private:
 
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
-  std::filesystem::path                 directory;
+  std::string                           directory;
 
   void process_node(aiNode *node, const aiScene *scene);
   void process_mesh(aiMesh *mesh, const aiScene *scene);
@@ -77,7 +69,7 @@ private:
 
 struct Model::Config
 {
-  std::filesystem::path path;
+  std::string path;
   GLint     wrapping;
   GLint     filtering_min;
   GLint     filtering_mag;

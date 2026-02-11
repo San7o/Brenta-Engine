@@ -33,33 +33,29 @@ struct PointLightsSystem : system<TransformComponent, PointLightComponent>
 
       auto light = world::entity_to_component<PointLightComponent>(entity);
 
-      for (auto shader : light->shaders)
+      for (auto shader_name : light->shaders)
       {
-        if (Shader::get_id(shader) == (unsigned int) 0)
+        auto shader = Shader::get_shader(shader_name);
+        if (!shader)
         {
-          ERROR("Light shader not found with name: {}", shader);
+          ERROR("Light shader not found with name: {}",
+                shader->get_name());
           continue;
         }
-        Shader::use(shader);
+        shader->use();
 
-        /* Set the light properties */
+        // Set the light properties
         std::string lightn = "pointLights[" + std::to_string(counter) + "]";
-        Shader::set_vec3(shader, (lightn + ".ambient").c_str(), light->ambient);
-        Shader::set_vec3(shader, (lightn + ".diffuse").c_str(), light->diffuse);
-        Shader::set_vec3(shader, (lightn + ".specular").c_str(),
-                         light->specular);
-        Shader::set_float(shader, (lightn + ".constant").c_str(),
-                          light->constant);
-        Shader::set_float(shader, (lightn + ".linear").c_str(), light->linear);
-        Shader::set_float(shader, (lightn + ".quadratic").c_str(),
-                          light->quadratic);
-        Shader::set_float(shader, (lightn + ".strength").c_str(),
-                          light->strength);
-        Shader::set_vec3(shader, (lightn + ".position").c_str(),
-                         transform->position);
-        Shader::set_float(shader, (lightn + ".strength").c_str(),
-                          light->strength);
-        Shader::set_int(shader, "nPointLights", entities.size());
+        shader->set_vec3((lightn + ".ambient").c_str(),    light->ambient);
+        shader->set_vec3((lightn + ".diffuse").c_str(),    light->diffuse);
+        shader->set_vec3((lightn + ".specular").c_str(),   light->specular);
+        shader->set_float((lightn + ".constant").c_str(),  light->constant);
+        shader->set_float((lightn + ".linear").c_str(),    light->linear);
+        shader->set_float((lightn + ".quadratic").c_str(), light->quadratic);
+        shader->set_float((lightn + ".strength").c_str(),  light->strength);
+        shader->set_vec3((lightn + ".position").c_str(),   transform->position);
+        shader->set_float((lightn + ".strength").c_str(),  light->strength);
+        shader->set_int("nPointLights",                    entities.size());
       }
       counter++;
     }

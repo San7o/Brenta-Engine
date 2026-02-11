@@ -28,7 +28,7 @@ public:
 
   constexpr Buffer(const Buffer&)            = delete;
   constexpr Buffer& operator=(const Buffer&) = delete;
-  
+
   constexpr Buffer(Buffer&& other) noexcept
   {
     this->id = other.id;

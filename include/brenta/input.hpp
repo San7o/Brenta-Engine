@@ -17,12 +17,6 @@
 namespace brenta
 {
 
-namespace types
-{
-
-
-} // namespace types
-
 /**
  * @brief Input subsystem
  *

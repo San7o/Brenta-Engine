@@ -25,22 +25,25 @@ struct DirectionalLightSystem : system<DirectionalLightComponent>
       auto light =
         world::entity_to_component<DirectionalLightComponent>(entity);
 
-      for (auto shader : light->shaders)
+      for (auto shader_name : light->shaders)
       {
-        if (Shader::get_id(shader) == (unsigned int) 0)
+        auto shader = Shader::get_shader(shader_name);
+        if (!shader)
         {
-          ERROR("Light shader not found with name: {}", shader);
+          ERROR("Light shader not found with name: {}",
+                shader->get_name());
           continue;
         }
-        Shader::use(shader);
 
-        /* Set the light properties */
-        Shader::set_vec3(shader, "dirLight.direction", light->direction);
-        Shader::set_vec3(shader, "dirLight.ambient", light->ambient);
-        Shader::set_vec3(shader, "dirLight.diffuse", light->diffuse);
-        Shader::set_vec3(shader, "dirLight.specular", light->specular);
-        Shader::set_float(shader, "dirLight.strength", light->strength);
-        Shader::set_bool(shader, "useDirLight", true);
+        shader->use();
+
+        // Set the light properties
+        shader->set_vec3("dirLight.direction", light->direction);
+        shader->set_vec3("dirLight.ambient",   light->ambient);
+        shader->set_vec3("dirLight.diffuse",   light->diffuse);
+        shader->set_vec3("dirLight.specular",  light->specular);
+        shader->set_float("dirLight.strength", light->strength);
+        shader->set_bool("useDirLight",        true);
       }
     }
   }

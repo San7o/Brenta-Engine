@@ -22,8 +22,9 @@ void init_sphere_entity()
   //
   // Spere 1
   //
-  
-  if (Shader::get_id("default_shader") == 0)
+
+  auto shader = Shader::get_shader("default_shader");
+  if (!shader)
   {
     Shader::create("default_shader",
                    Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
@@ -47,13 +48,6 @@ void init_sphere_entity()
   //
   // Spehere 2
   //
-  
-  if (Shader::get_id("default_shader") == 0)
-  {
-    Shader::create("default_shader",
-                   Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
-                   Shader::Type::Fragment, "examples/demo/shaders/shader.fs");
-  }
 
   Model m2 = Model::Builder()
     .path("examples/assets/models/sphere/sphere.obj")

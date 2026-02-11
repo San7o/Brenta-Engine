@@ -4,15 +4,16 @@
 // Github:  @San7o
 
 template <typename... Args>
-bool Shader::create(const Shader::Name &shader_name,
-                    Shader::Type type, const std::filesystem::path &path,
-                    Args... args)
+std::optional<Shader>
+Shader::create(const Shader::Name &shader_name,
+               Shader::Type type, const std::filesystem::path &path,
+               Args... args)
 {
   std::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, type, path, args...))
   {
     ERROR("shader: error compiling shader {}", path.c_str());
-    return false;
+    return {};
   }
 
   // shader Program
@@ -23,26 +24,28 @@ bool Shader::create(const Shader::Name &shader_name,
   glLinkProgram(id);
   if (!Shader::check_link_errors(id))
   {
-    return false;
+    return {};
   }
 
   Shader::shaders.insert({shader_name, id});
   std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                 [](auto shader) { glDeleteShader(shader); });
-  return true;
+  
+  return Shader(id, shader_name);
 }
 
 template <typename... Args>
-bool Shader::create(const GLchar **feedback_varyings, int num_varyings,
-                    const Shader::Name &shader_name,
-                    Shader::Type type, const std::filesystem::path &path,
-                    Args... args)
+std::optional<Shader>
+Shader::create(const GLchar **feedback_varyings, int num_varyings,
+               const Shader::Name &shader_name,
+               Shader::Type type, const std::filesystem::path &path,
+               Args... args)
 {
   std::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, type, path, args...))
   {
     ERROR("shader: error compiling shader {}", path.c_str())
-      return false;
+      return {};
   }
 
   // shader Program
@@ -59,14 +62,14 @@ bool Shader::create(const GLchar **feedback_varyings, int num_varyings,
   glLinkProgram(id);
   if (!Shader::check_link_errors(id))
   {
-    return false;
+    return {};
   }
 
   Shader::shaders.insert({shader_name, id});
   std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                 [](auto shader) { glDeleteShader(shader); });
 
-  return true;
+  return Shader(id, shader_name);
 }
 
 template <typename... Args>

@@ -16,7 +16,8 @@ using namespace viotecs;
 
 void init_robot_entity()
 {
-  if (Shader::get_id("default_shader") == 0)
+  auto shader = Shader::get_shader("default_shader");
+  if (!shader)
   {
     Shader::create("default_shader",
                    Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",

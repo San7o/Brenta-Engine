@@ -55,9 +55,14 @@ int main()
     .build();
 
   // Load the shader
-  Shader::create("default_shader",
-                 Shader::Type::Vertex,   "examples/default_shader.vs",
-                 Shader::Type::Fragment, "examples/default_shader.fs");
+  auto shader = Shader::create("default_shader",
+          Shader::Type::Vertex,   "examples/default_shader.vs",
+          Shader::Type::Fragment, "examples/default_shader.fs");
+  if (!shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
 
   //
   // Render loop
@@ -74,7 +79,7 @@ int main()
     Gl::clear();
 
     // Draw
-    Shader::use("default_shader");
+    shader->use();
 
     // Make transformations (you can also use brenta::translation)
     glm::mat4 view = glm::mat4(1.0f); // Camera position
@@ -85,9 +90,9 @@ int main()
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 
-    Shader::set_mat4("default_shader", "view", view);
-    Shader::set_mat4("default_shader", "projection", projection);
-    Shader::set_mat4("default_shader", "model", model);
+    shader->set_mat4("view", view);
+    shader->set_mat4("projection", projection);
+    shader->set_mat4("model", model);
 
     // Draw the model
     our_model.draw("default_shader");

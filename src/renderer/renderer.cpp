@@ -52,11 +52,24 @@ void Renderer::flush()
     t.set_view(Renderer::view);
     t.set_projection(Renderer::projection);
     t.set_model(i.transform);
-    t.set_shader(i.material);
+    if (!t.set_shader(i.material))
+    {
+      ERROR("Renderer::flust: error setting translation");
+      continue;
+    }
 
-    Shader::set_vec3(i.material, "viewPos", Renderer::cam_position);
-    Shader::set_float(i.material, "material.shininess", 32.0f); // TODO
-    //shader::set_int(i.material, "atlasIndex", 0); // TODO
+    auto shader = Shader::get_shader(i.material);
+    if (!shader)
+    {
+      ERROR("Renderer::flush: error accessing shader named {}",
+            i.material);
+      continue;
+    }
+    
+    shader->use();
+    shader->set_vec3("viewPos", Renderer::cam_position);
+    shader->set_float("material.shininess", 32.0f); // TODO
+    // shader->set_int("atlasIndex", 0); // TODO
 
     i.m->draw(i.material);
   }

@@ -55,7 +55,7 @@ void Model::init()
           importer.GetErrorString());
     return;
   }
-  this->directory = this->path.parent_path();
+  this->directory = this->path.substr(0, this->path.find_last_of('/'));
 
   process_node(scene->mRootNode, scene);
   return;

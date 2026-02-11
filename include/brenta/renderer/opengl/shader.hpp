@@ -20,6 +20,7 @@
 #include <unordered_map>
 #include <vector>
 #include <filesystem>
+#include <optional>
 
 namespace brenta
 {
@@ -33,10 +34,14 @@ namespace brenta
 // the GPU understands. OpenGL uses the GLSL language which is similar
 // to C in syntax.
 //
-// To create a program, you need to compile the varous GLSL source
-// files of the shader, then link them together. This class provides
-// a simple API to create shaders, load them and set uniforms.
+// Therefore shaders can be compiled into a program, loaded and
+// configured via special variables called "uniforms". They are
+// special variables you can create in the shader that can be set
+// from "outside" the shader, usually to pass som kind of state or
+// configuration.
 //
+// This class provides a simple API to create shaders, load them and
+// set uniforms.
 class Shader
 {
 public:
@@ -52,39 +57,46 @@ public:
     Compute,
   };
 
-  Shader()  = delete;
-  ~Shader() = delete;
-
+  // Static API
+  
   // Creates and compiles several shaders (into a shader "program")
   template <typename... Args>
-  static bool create(const Shader::Name &shader_name,
-                     Shader::Type type, const std::filesystem::path &path,
-                     Args... args);
+  static std::optional<Shader>
+  create(const Shader::Name &shader_name,
+         Shader::Type type, const std::filesystem::path &path,
+         Args... args);
+  
   template <typename... Args>
-  static bool create(const GLchar **feedback_varyings, int num_varyings,
-                     const Shader::Name &shader_name,
-                     Shader::Type type, const std::filesystem::path &path,
-                     Args... args);
+  static std::optional<Shader>
+  create(const GLchar **feedback_varyings, int num_varyings,
+         const Shader::Name &shader_name,
+         Shader::Type type, const std::filesystem::path &path,
+         Args... args);
+  
+  static std::optional<Shader> get_shader(Shader::Name shader_name);
 
-  static Shader::Id get_id(Shader::Name shader_name);
-  static bool use(Shader::Name shader_name);
-
-  // Utility uniform functions
-
-  static bool set_bool(Shader::Name shader_name,
-                       const GLchar *unif_name, bool value);
-  static bool set_int(Shader::Name shader_name,
-                      const GLchar *unif_name, int value);
-  static bool set_float(Shader::Name shader_name,
-                        const GLchar *unif_name, float value);
-  static bool set_mat4(Shader::Name shader_name,
-                       const GLchar *unif_name, glm::mat4 value);
-  static bool set_vec3(Shader::Name shader_name,
-                       const GLchar *name, float x, float y, float z);
-  static bool set_vec3(Shader::Name shader_name,
-                       const GLchar *unif_name, glm::vec3 value);
+  // Non static API
+  
+  Shader()  = delete;
+  Shader(Shader::Id id, Shader::Name name) : id(id), name(name) {}
+  
+  Shader::Id        get_id();
+  Shader::Name      get_name();
+  bool              use();
+  
+  bool set_bool(const GLchar *unif_name, bool value);
+  bool set_int(const GLchar *unif_name, int value);
+  bool set_float(const GLchar *unif_name, float value);
+  bool set_float2(const GLchar *unif_name, float v1, float v2);
+  bool set_float3(const GLchar *unif_name, float v1, float v2, float v3);
+  bool set_mat4(const GLchar *unif_name, glm::mat4 value);
+  bool set_vec3(const GLchar *name, float x, float y, float z);
+  bool set_vec3(const GLchar *unif_name, glm::vec3 value);
 
 private:
+
+  Shader::Id   id;
+  Shader::Name name;
   
   static bool
   compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);

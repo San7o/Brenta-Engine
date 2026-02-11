@@ -17,7 +17,8 @@ using namespace brenta;
 
 void init_cube_entity()
 {
-  if (Shader::get_id("cube_shader") == 0)
+  auto shader = Shader::get_shader("cube_shader");
+  if (!shader)
   {
     Shader::create("cube_shader",
                    Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",

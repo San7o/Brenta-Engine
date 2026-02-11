@@ -58,12 +58,13 @@ void Translation::scale(float scale)
 
 bool Translation::set_shader(Shader::Name shader_name)
 {
-  if (!Shader::use(shader_name))
-    return false;
-
-  if (!Shader::set_mat4(shader_name, "view", this->view) ||
-      !Shader::set_mat4(shader_name, "projection", this->projection) ||
-      !Shader::set_mat4(shader_name, "model", this->model))
+  auto shader = Shader::get_shader(shader_name);
+  if (!shader) return false;
+  shader->use();
+  
+  if (!shader->set_mat4("view",       this->view) ||
+      !shader->set_mat4("projection", this->projection) ||
+      !shader->set_mat4("model",      this->model))
     return false;
 
   return true;
