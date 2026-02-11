@@ -11,12 +11,12 @@
 
 using namespace brenta;
 
-void init_camera_mouse_callback(camera *cam, mouse *mouse)
+void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
 {
   auto camera_mouse_callback = [cam, mouse](double xpos, double ypos)
   {
     // Rotate the camera
-    if (window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
+    if (Window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
     {
       if (mouse->get_first())
       {
@@ -36,7 +36,7 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
 
       auto new_cam = cam->get_pos();
       try {
-        camera::spherical scam = std::get<camera::spherical>(new_cam);
+        Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
         scam.theta += yoffset * sensitivity;
         scam.phi += xoffset * sensitivity;
 
@@ -50,7 +50,7 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
       }
     }
     // translate the cam center
-    else if (window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
+    else if (Window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
     {
       if (mouse->get_first())
       {
@@ -70,7 +70,7 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
 
       auto new_cam = cam->get_pos();
       try {
-        camera::spherical scam = std::get<camera::spherical>(new_cam);
+        Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
         glm::vec3 world_pos = cam->get_world_pos();
         // Local coordinate system
         glm::vec3 fixed_center =
@@ -90,7 +90,7 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
       }
     }
     // zoom the camera
-    else if (window::is_key_pressed(GLFW_KEY_LEFT_ALT))
+    else if (Window::is_key_pressed(GLFW_KEY_LEFT_ALT))
     {
       if (mouse->get_first())
       {
@@ -109,7 +109,7 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
       
       auto new_cam = cam->get_pos();
       try {
-        camera::spherical scam = std::get<camera::spherical>(new_cam);
+        Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
 
         scam.radius -= yoffset;
         if (scam.radius <= 0.1f) scam.radius = 0.1f;
@@ -124,5 +124,5 @@ void init_camera_mouse_callback(camera *cam, mouse *mouse)
       mouse->set_first(true);
     }
   };
-  input::add_mouse_pos_callback("CameraCallback", camera_mouse_callback);
+  Input::add_mouse_callback("CameraCallback", camera_mouse_callback);
 }

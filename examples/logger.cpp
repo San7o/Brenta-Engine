@@ -8,36 +8,36 @@
 #include <brenta/window.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <iostream>
 #include <viotecs/viotecs.hpp>
-
 REGISTER_SYSTEMS()
 
+#include <iostream>
+
 using namespace brenta;
-  
-const int screen_width = 800;
-const int screen_height = 600;
 
 int main()
-{
+{  
+  const int screen_width = 800;
+  const int screen_height = 600;
+
   //
   // Setup
   //
 
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("logger test")
           .width(screen_width)
           .height(screen_height))
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
   
   INFO("Hello, World!");
   
@@ -45,13 +45,13 @@ int main()
   // Render loop
   // 
 
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

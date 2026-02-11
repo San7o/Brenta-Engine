@@ -12,20 +12,19 @@
 #ifdef BRENTA_USE_IMGUI
 
 using namespace brenta;
-using namespace brenta::types;
 
 //
 // Static variables
 //
 
-const std::string gui::subsystem_name = "gui";
-bool gui::initialized = false;
+const std::string Gui::subsystem_name = "gui";
+bool              Gui::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> gui::initialize()
+std::expected<void, Subsystem::Error> Gui::initialize()
 {
   if (this->is_initialized()) return {};
   
@@ -39,16 +38,16 @@ std::expected<void, subsystem::error> gui::initialize()
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
   // Setup Platform/Renderer backends
-  ImGui_ImplGlfw_InitForOpenGL(window::get_window(), true);
+  ImGui_ImplGlfw_InitForOpenGL(Window::get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 
-  gui::initialized = true;
-  INFO("{} initialized", gui::subsystem_name);
+  Gui::initialized = true;
+  INFO("{} initialized", Gui::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> gui::terminate()
+std::expected<void, Subsystem::Error> Gui::terminate()
 {
   if (!this->is_initialized()) return {};
   
@@ -56,32 +55,32 @@ std::expected<void, subsystem::error> gui::terminate()
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
 
-  gui::initialized = false;
-  INFO("{}: terminated", gui::subsystem_name);
+  Gui::initialized = false;
+  INFO("{}: terminated", Gui::subsystem_name);
   return {};
 }
 
-std::string gui::name()
+std::string Gui::name()
 {
-  return gui::subsystem_name;
+  return Gui::subsystem_name;
 }
 
-bool gui::is_initialized()
+bool Gui::is_initialized()
 {
-  return gui::initialized;
+  return Gui::initialized;
 }
 
 //
 // Member functions
 //
 
-gui &gui::instance()
+Gui &Gui::instance()
 {
-  static gui _gui;
+  static Gui _gui;
   return _gui;
 }
 
-void gui::new_frame(framebuffer *fb, std::string name)
+void Gui::new_frame(FrameBuffer *fb, std::string name)
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
@@ -93,8 +92,8 @@ void gui::new_frame(framebuffer *fb, std::string name)
   // Game window
   //
 
-  ImGui::SetNextWindowSize(ImVec2(window::get_width() * 0.8,
-                                  window::get_width() * 0.8),
+  ImGui::SetNextWindowSize(ImVec2(Window::get_width() * 0.8,
+                                  Window::get_width() * 0.8),
                            ImGuiCond_FirstUseEver);
   ImGui::Begin(name.c_str());
 
@@ -102,27 +101,29 @@ void gui::new_frame(framebuffer *fb, std::string name)
   float window_height = ImGui::GetContentRegionAvail().y;
 
   fb->rescale(window_width, window_height);
-  gl::set_viewport(0, 0, window_width, window_height);
+  Gl::set_viewport(0, 0, window_width, window_height);
 
   ImGui::Image((void *) (intptr_t) fb->texture_id,
                ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));
 
   ImGui::End();
+  return;
 }
 
-void gui::render()
+void Gui::render()
 {
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+  return;
 }
 
 //
 // Builder
 //
 
-subsystem &gui::builder::build()
+Subsystem &Gui::Builder::build()
 {
-  return gui::instance();
+  return Gui::instance();
 }
 
 #endif

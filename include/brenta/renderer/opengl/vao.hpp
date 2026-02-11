@@ -12,48 +12,36 @@
 namespace brenta
 {
 
-namespace types
-{
-
 /**
  * @brief Vertex Array Object (VAO)
  *
  * Wrapper for OpenGL Vertex Array Objects
  */
-class vao
+class Vao
 {
 public:
-  
-  unsigned int vao_id;
 
-  /**
-   * @brief Default constructor, does nothing
-   */
-  vao();
-
-  constexpr vao(const vao&) = delete;
-  constexpr vao& operator=(const vao&) = delete;
-
-  
-  constexpr vao(vao&& other) noexcept
+  Vao() {}
+  constexpr Vao(const Vao& other)            = delete;
+  constexpr Vao& operator=(const Vao& other) = delete;
+  constexpr Vao(Vao&& other) noexcept
   {
-    this->vao_id = other.vao_id;
-    other.vao_id = 0;
+    this->id = other.id;
+    other.id = 0;
   }
-  constexpr vao& operator=(vao&& other) noexcept
+  constexpr Vao& operator=(Vao&& other) noexcept
   {
-    this->vao_id = other.vao_id;
-    other.vao_id = 0;
+    this->id = other.id;
+    other.id = 0;
     return *this;
   }
 
-  ~vao();
+  ~Vao();
   
   void init();
   void destroy();
   void bind() const;
   void unbind() const;
-  
   unsigned int get_id() const;
 
   /**
@@ -69,11 +57,14 @@ public:
    * @param pointer The offset of the first component of the first generic
    * vertex attribute in the array
    */
-  void set_vertex_data(buffer &buffer, unsigned int index, GLint size,
+  void set_vertex_data(Buffer &buffer, unsigned int index, GLint size,
                        GLenum type, GLboolean is_normalized, GLsizei stride,
                        const void *pointer);
-};
 
-} // namespace types
+private:
+
+  unsigned int id;
+
+};
 
 } // namespace brenta

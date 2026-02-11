@@ -12,10 +12,6 @@
 
 using namespace brenta;
 
-// Default resolution
-const int SCR_WIDTH = 1280;
-const int SCR_HEIGHT = 720;
-
 #ifdef BRENTA_USE_ECS
 using namespace viotecs;
 
@@ -25,37 +21,40 @@ REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
 
 int main()
 {
-  engine::builder()
-    .with(logger::builder()
+  const int SCR_WIDTH = 1280;
+  const int SCR_HEIGHT = 720;
+
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::info)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("brenta demo")
           .width(800)
           .height(600)
           .vsync()
           .msaa()
           .debug())
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(audio::builder()
+    .with(Audio::Builder()
           .sound("guitar", "examples/assets/audio/guitar.wav"))
-    .with(input::builder())
-    .with(ecs::builder())
-    .with(gui::builder())
-    .with(text::builder()
+    .with(Input::Builder())
+    .with(Ecs::Builder())
+    .with(Gui::Builder())
+    .with(Text::Builder()
           .font("examples/assets/fonts/arial.ttf")
           .size(40))
     .build();
   
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
   
-  auto camera = camera::builder()
-    .projection_type(camera::projection_type::perspective)
-    .position(camera::spherical::builder()
+  auto camera = Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Spherical::Builder()
               .center({0.0f, 2.0f, 0.0f})
               .phi(1.25f)
               .theta(1.25f)
@@ -64,7 +63,7 @@ int main()
     .fov(45.0f)
     .build();
 
-  mouse mouse = {};
+  Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
   
 #ifdef BRENTA_USE_ECS
@@ -85,7 +84,7 @@ int main()
   world::add_resource<CameraResource>(&camera);
 #endif
 
-  auto emitter = particle_emitter::builder()
+  auto emitter = ParticleEmitter::Builder()
     .with_camera(&camera)
     .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
     .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
@@ -101,23 +100,23 @@ int main()
     .build();
 
 #ifdef BRENTA_USE_IMGUI
-  brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
+  FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    window::poll_events();
+    Window::poll_events();
 
 #ifdef BRENTA_USE_IMGUI
-    gui::new_frame(&fb, "demo");
+    Gui::new_frame(&fb, "demo");
     fb.bind();
 #endif
     
-    gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::clear();
 
-    emitter.update_particles(window::get_time().get_delta());
-    emitter.render_particles();
+    emitter.update(Window::get_time().get_delta());
+    emitter.render();
 
 #ifdef BRENTA_USE_ECS
     world::tick();
@@ -125,9 +124,9 @@ int main()
 
 #ifdef BRENTA_USE_IMGUI
     fb.unbind();
-    gui::render();
+    Gui::render();
 #endif
-    window::swap_buffers();
+    Window::swap_buffers();
   }
 
   return 0;

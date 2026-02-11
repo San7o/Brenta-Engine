@@ -18,13 +18,13 @@ using namespace brenta;
 // Static variables
 //
 
-int window::width;
-int window::height;
-GLFWwindow *window::window_backend;
-std::string window::title;
-Time window::time;
-const std::string window::subsystem_name = "window";
-const window::config window::default_config = {
+int                Window::width;
+int                Window::height;
+GLFWwindow        *Window::window_backend;
+std::string        Window::title;
+Time               Window::time;
+const std::string  Window::subsystem_name = "window";
+const Window::Config Window::default_config = {
   800,
   600,
   "Brenta Engine",
@@ -33,289 +33,302 @@ const window::config window::default_config = {
   false,
   false,
 };
-window::config window::init_config = window::default_config;
-bool window::initialized = false;
+Window::Config Window::init_config = Window::default_config;
+bool Window::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> window::initialize()
+std::expected<void, Subsystem::Error> Window::initialize()
 {
   if (this->is_initialized()) return {};
   
   if (glfwInit() == GLFW_FALSE)
   {
-    return std::unexpected(window::subsystem_name +
+    return std::unexpected(Window::subsystem_name +
                            ": failed to initialize GLFW");
   }
 
   set_context_version(3, 3);
   use_core_profile();
 
-  if (window::init_config.msaa)
+  if (Window::init_config.msaa)
   {
     glfwWindowHint(GLFW_SAMPLES, 4);
-    INFO("{}: enabled MSAA", window::subsystem_name);
+    INFO("{}: enabled MSAA", Window::subsystem_name);
   } else {
-    INFO("{}: disabled MSAA", window::subsystem_name);
+    INFO("{}: disabled MSAA", Window::subsystem_name);
   }
 
-  if (!window::init_config.vsync)
+  if (!Window::init_config.vsync)
   {
     glfwSwapInterval(0);
-    INFO("{}: disabled VSync", window::subsystem_name);
+    INFO("{}: disabled VSync", Window::subsystem_name);
   } else {
-    INFO("{}: enabled VSync", window::subsystem_name);
+    INFO("{}: enabled VSync", Window::subsystem_name);
   }
 
-  if (window::init_config.debug)
+  if (Window::init_config.debug)
   {
     glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-    INFO("{}: enabled OPENGL_DEBUG_CONTEXT", window::subsystem_name);
+    INFO("{}: enabled OPENGL_DEBUG_CONTEXT", Window::subsystem_name);
   }
 
 #ifdef __APPLE__
   set_hints_apple();
 #endif
 
-  create_window(window::init_config.width,
-                window::init_config.height, title);
+  create_window(Window::init_config.width,
+                Window::init_config.height, title);
   make_context_current();
-  set_mouse_capture(window::init_config.capture_mouse);
+  set_mouse_capture(Window::init_config.capture_mouse);
 
   set_size_callback(framebuffer_size_callback);
 
-  window::initialized = true;
-  INFO("{}: initialized", window::subsystem_name)
+  Window::initialized = true;
+  INFO("{}: initialized", Window::subsystem_name)
   return {};
 }
 
-std::expected<void, subsystem::error> window::terminate()
+std::expected<void, Subsystem::Error> Window::terminate()
 {
   if (!this->is_initialized()) return {};
   
-  glfwDestroyWindow(window::window_backend);
+  glfwDestroyWindow(Window::window_backend);
   glfwTerminate();
 
-  window::initialized = false;
-  INFO("{}: terminated", window::subsystem_name);
+  Window::initialized = false;
+  INFO("{}: terminated", Window::subsystem_name);
   return {};
 }
 
-std::string window::name()
+std::string Window::name()
 {
-  return window::subsystem_name;
+  return Window::subsystem_name;
 }
 
-bool window::is_initialized()
+bool Window::is_initialized()
 {
-  return window::initialized;
+  return Window::initialized;
 }
 
 //
 // Member functions
 //
 
-window &window::instance()
+Window &Window::instance()
 {
-  static window _instance;
+  static Window _instance;
   return _instance;
 }
 
-bool window::should_close()
+bool Window::should_close()
 {
-  return glfwWindowShouldClose(window::window_backend);
+  return glfwWindowShouldClose(Window::window_backend);
 }
 
-void window::set_width_height(int width, int height)
+void Window::set_width_height(int width, int height)
 {
-  window::width = width;
-  window::height = height;
+  Window::width = width;
+  Window::height = height;
   return;
 }
 
-bool window::is_key_pressed(int key)
+bool Window::is_key_pressed(int key)
 {
-  return glfwGetKey(window::window_backend, key) == GLFW_PRESS;
+  return glfwGetKey(Window::window_backend, key) == GLFW_PRESS;
 }
 
-Time window::get_time()
+Time Window::get_time()
 {
-  return window::time;
+  return Window::time;
 }
 
-GLFWwindow *window::get_window()
+GLFWwindow *Window::get_window()
 {
-  return window::window_backend;
+  return Window::window_backend;
 }
 
-GLFWglproc window::get_proc_address()
+GLFWglproc Window::get_proc_address()
 {
   return reinterpret_cast<void (*)()>(glfwGetProcAddress);
 }
 
-int window::get_width()
+int Window::get_width()
 {
-  return window::width;
+  return Window::width;
 }
 
-int window::get_height()
+int Window::get_height()
 {
-  return window::height;
+  return Window::height;
 }
 
-void window::set_mouse_callback(GLFWcursorposfun callback)
+void Window::set_mouse_callback(GLFWcursorposfun callback)
 {
-  glfwSetCursorPosCallback(window::window_backend, callback);
+  glfwSetCursorPosCallback(Window::window_backend, callback);
+  return;
 }
 
-void window::set_size_callback(GLFWframebuffersizefun callback)
+void Window::set_size_callback(GLFWframebuffersizefun callback)
 {
-  glfwSetFramebufferSizeCallback(window::window_backend, callback);
+  glfwSetFramebufferSizeCallback(Window::window_backend, callback);
 
-  DEBUG("{}: set framebuffer size callback", window::subsystem_name);
+  DEBUG("{}: set framebuffer size callback", Window::subsystem_name);
+  return;
 }
 
-void window::set_mouse_capture(bool is_captured)
+void Window::set_mouse_capture(bool is_captured)
 {
   if (is_captured)
   {
-    glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("{}: mouse capture enabled", window::subsystem_name);
+    glfwSetInputMode(Window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    INFO("{}: mouse capture enabled", Window::subsystem_name);
   }
   else
   {
-    glfwSetInputMode(window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("{}: mouse capture disabled", window::subsystem_name);
+    glfwSetInputMode(Window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+    INFO("{}: mouse capture disabled", Window::subsystem_name);
   }
+  return;
 }
 
-void window::close()
+void Window::close()
 {
-  glfwSetWindowShouldClose(window::window_backend, GLFW_TRUE);
+  glfwSetWindowShouldClose(Window::window_backend, GLFW_TRUE);
+  return;
 }
 
-void window::swap_buffers()
+void Window::swap_buffers()
 {
-  window::time.update(glfwGetTime());
-  glfwSwapBuffers(window::window_backend);
+  Window::time.update(glfwGetTime());
+  glfwSwapBuffers(Window::window_backend);
+  return;
 }
 
-void window::poll_events()
+void Window::poll_events()
 {
   glfwPollEvents();
+  return;
 }
 
-void window::set_context_version(int major, int minor)
+void Window::set_context_version(int major, int minor)
 {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
 
   INFO("{}: set context to OpenGL version: {}.{}",
-       window::subsystem_name, major, minor);
+       Window::subsystem_name, major, minor);
 }
 
-void window::set_key_callback(GLFWkeyfun callback)
+void Window::set_key_callback(GLFWkeyfun callback)
 {
-  glfwSetKeyCallback(window::window_backend, callback);
+  glfwSetKeyCallback(Window::window_backend, callback);
+  return;
 }
 
-void window::set_mouse_pos_callback(GLFWcursorposfun callback)
+void Window::set_mouse_pos_callback(GLFWcursorposfun callback)
 {
-  glfwSetCursorPosCallback(window::get_window(), callback);
+  glfwSetCursorPosCallback(Window::get_window(), callback);
+  return;
 }
 
-void window::use_core_profile()
+void Window::use_core_profile()
 {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  INFO("{}: set OpenGL profile to core", window::subsystem_name);
+  INFO("{}: set OpenGL profile to core", Window::subsystem_name);
+  return;
 }
 
-void window::set_hints_apple()
+void Window::set_hints_apple()
 {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+  return;
 }
 
-void window::create_window(int width, int height, std::string title)
+void Window::create_window(int width, int height, std::string title)
 {
-  window::window_backend = glfwCreateWindow(width, height, title.c_str(),
+  Window::window_backend = glfwCreateWindow(width, height, title.c_str(),
                                             NULL, NULL);
-  if (window::window_backend == NULL)
+  if (Window::window_backend == NULL)
   {
-    ERROR("{}: failed to create GLFW window", window::subsystem_name);
-    window::instance().terminate();
+    ERROR("{}: failed to create GLFW window", Window::subsystem_name);
+    Window::instance().terminate();
   }
-  window::width = width;
-  window::height = height;
-  window::title = title;
+  Window::width = width;
+  Window::height = height;
+  Window::title = title;
+  return;
 }
 
-void window::make_context_current()
+void Window::make_context_current()
 {
-  glfwMakeContextCurrent(window::window_backend);
+  glfwMakeContextCurrent(Window::window_backend);
+  return;
 }
 
-void window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
+void Window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
                                        [[maybe_unused]] int width,
                                        [[maybe_unused]] int height)
 {
 #ifndef BRENTA_USE_IMGUI
   glViewport(0, 0, width, height);
-  window::width = width;
-  window::height = height;
+  Window::width = width;
+  Window::height = height;
 #endif
+  return;
 }
 
 //
 // Builder
 //
 
-window::builder &window::builder::width(int width)
+Window::Builder &Window::Builder::width(int width)
 {
   this->conf.width = width;
   return *this;
 }
 
-window::builder &window::builder::height(int height)
+Window::Builder &Window::Builder::height(int height)
 {
   this->conf.height = height;
   return *this;
 }
 
-window::builder &window::builder::title(const std::string &title)
+Window::Builder &Window::Builder::title(const std::string &title)
 {
   this->conf.title = title;
   return *this;
 }
 
-window::builder &window::builder::capture_mouse()
+Window::Builder &Window::Builder::capture_mouse()
 {
   this->conf.capture_mouse = true;
   return *this;
 }
 
-window::builder &window::builder::msaa()
+Window::Builder &Window::Builder::msaa()
 {
   this->conf.msaa = true;
   return *this;
 }
 
-window::builder &window::builder::debug()
+Window::Builder &Window::Builder::debug()
 {
   this->conf.debug = true;
   return *this;
 }
 
-window::builder &window::builder::vsync()
+Window::Builder &Window::Builder::vsync()
 {
   this->conf.vsync = true;
   return *this;
 }
 
-subsystem &window::builder::build()
+Subsystem &Window::Builder::build()
 {
-  window::init_config = this->conf;
-  return window::instance();
+  Window::init_config = this->conf;
+  return Window::instance();
 }

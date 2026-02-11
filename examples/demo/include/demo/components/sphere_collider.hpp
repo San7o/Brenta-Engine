@@ -12,6 +12,7 @@ using namespace viotecs;
 struct SphereColliderComponent : component
 {
   float radius;
+  
   SphereColliderComponent() : radius(1.0f)
   {
   }

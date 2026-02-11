@@ -11,72 +11,72 @@ using namespace brenta;
 // Static variables
 //
 
-const std::string logger::subsystem_name = "logger";
-const logger::config logger::default_config = {
+const std::string Logger::subsystem_name = "logger";
+const Logger::Config Logger::default_config = {
   oak::level::info,
   "/tmp/brenta_logs",
 };
-logger::config logger::init_config = default_config;
-bool logger::initialized = false;
+Logger::Config Logger::init_config = default_config;
+bool Logger::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> logger::initialize()
+std::expected<void, Subsystem::Error> Logger::initialize()
 {
   if (this->is_initialized()) return {};
   
   oak::init_writer();
   
-  oak::set_level(logger::init_config.log_level);
+  oak::set_level(Logger::init_config.log_level);
 
-  auto file_name = logger::init_config.log_file;
+  auto file_name = Logger::init_config.log_file;
   if (file_name != "")
   {
     auto file = oak::set_file(file_name);
     if (!file.has_value())
     {
       ERROR("{}: Failed to open log file: {}",
-            logger::subsystem_name, file_name);
+            Logger::subsystem_name, file_name.c_str());
       return std::unexpected(this->subsystem_name);
     }
-    INFO("{}: set log file to {}", logger::subsystem_name, file_name);
+    INFO("{}: set log file to {}", Logger::subsystem_name, file_name.c_str());
   }
 
-  logger::initialized = true;
-  INFO("{}: initialized", logger::subsystem_name);
+  Logger::initialized = true;
+  INFO("{}: initialized", Logger::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> logger::terminate()
+std::expected<void, Subsystem::Error> Logger::terminate()
 {
   if (!this->is_initialized()) return {};
   
   oak::stop_writer();
 
-  logger::initialized = false;
-  INFO("{}: terminated", logger::subsystem_name);
+  Logger::initialized = false;
+  INFO("{}: terminated", Logger::subsystem_name);
   return {};
 }
 
-std::string logger::name()
+std::string Logger::name()
 {
-  return logger::subsystem_name;
+  return Logger::subsystem_name;
 }
 
-bool logger::is_initialized()
+bool Logger::is_initialized()
 {
-  return logger::initialized;
+  return Logger::initialized;
 }
 
 //
 // Member functions
 //
 
-logger &logger::instance()
+Logger &Logger::instance()
 {
-  static logger _logger;
+  static Logger _logger;
   return _logger;
 }
 
@@ -84,20 +84,20 @@ logger &logger::instance()
 // Builder
 //
 
-logger::builder &logger::builder::level(oak::level log_level)
+Logger::Builder &Logger::Builder::level(oak::level log_level)
 {
   this->conf.log_level = log_level;
   return *this;
 }
 
-logger::builder &logger::builder::file(std::string log_file)
+Logger::Builder &Logger::Builder::file(std::filesystem::path log_file)
 {
   this->conf.log_file = log_file;
   return *this;
 }
 
-subsystem &logger::builder::build()
+Subsystem &Logger::Builder::build()
 {
-  logger::init_config = this->conf;
-  return logger::instance();
+  Logger::init_config = this->conf;
+  return Logger::instance();
 }

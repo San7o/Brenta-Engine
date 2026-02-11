@@ -16,14 +16,14 @@ using namespace viotecs;
 
 void init_robot_entity()
 {
-  if (shader::get_id("default_shader") == 0)
+  if (Shader::get_id("default_shader") == 0)
   {
-    shader::create("default_shader",
-                   shader::type::vertex, "examples/demo/shaders/shader.vs",
-                   shader::type::fragment, "examples/demo/shader.fs");
+    Shader::create("default_shader",
+                   Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
+                   Shader::Type::Fragment, "examples/demo/shader.fs");
   }
 
-  model m = model::builder()
+  Model m = Model::Builder()
     .path("examples/assets/models/robot_sprite/robot_sprite.obj")
     .wrapping(GL_REPEAT)
     .filtering_min(GL_NEAREST)

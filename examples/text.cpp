@@ -8,55 +8,56 @@
 #include <brenta/window.hpp>
 #include <brenta/gui/text.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <iostream>
-#include <viotecs/viotecs.hpp>
 
+#include <viotecs/viotecs.hpp>
 REGISTER_SYSTEMS()
+
+#include <iostream>
 
 using namespace brenta;
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
 int main()
 {
-  engine::builder()
-    .with(logger::builder()
+  const int SCR_WIDTH = 800;
+  const int SCR_HEIGHT = 600;
+
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("text demo")
           .width(800)
           .height(600)
           .vsync())
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(text::builder()
+    .with(Text::Builder()
           .font("examples/assets/fonts/arial.ttf")
           .size(100))
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
 
   //
   // Render loop
   //
   
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
-    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::clear();
 
-    text::render_text("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
+    Text::render_text("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
                       glm::vec3(0.5f, 0.8f, 0.2));
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

@@ -21,49 +21,48 @@ REGISTER_SYSTEMS()
 
 using namespace brenta;
 
-const int SCR_WIDTH = 1280;
-const int SCR_HEIGHT = 720;
-
 int main()
 {
+  const int SCR_WIDTH = 1280;
+  const int SCR_HEIGHT = 720;
+
   //
   // Setup
   //
   
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("particles")
           .width(SCR_WIDTH)
           .height(SCR_HEIGHT)
           .msaa()
           .vsync()
           .debug())
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(gui::builder())
-    .with(input::builder())
+    .with(Gui::Builder())
+    .with(Input::Builder())
     .build(); 
-  auto engine = engine::manager();
+  auto engine = Engine::managed();
 
-  auto camera = camera::builder()
-    .position(camera::spherical::builder()
+  auto camera = Camera::Builder()
+    .position(Camera::Spherical::Builder()
               .center({0.0f, 2.0f, 0.0f})
               .theta(1.25f)
               .phi(1.25f)
               .radius(10.0f)
               .build())
-    .projection_type(camera::projection_type::perspective)
+    .projection_type(Camera::ProjectionType::Perspective)
     .fov(45.0f)
     .build();
 
-  auto emitter =
-    particle_emitter::builder()
+  auto emitter = ParticleEmitter::Builder()
       .with_camera(&camera)
       .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
@@ -82,19 +81,19 @@ int main()
   // Render loop
   //
   
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
-    gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::clear();
 
-    emitter.update_particles(window::get_time().get_delta());
-    emitter.render_particles();
+    emitter.update(Window::get_time().get_delta());
+    emitter.render();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

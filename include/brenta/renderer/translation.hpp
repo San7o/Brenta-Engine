@@ -14,9 +14,6 @@
 namespace brenta
 {
 
-namespace types
-{
-
 /**
  * @brief Translation util class
  *
@@ -24,83 +21,28 @@ namespace types
  * matrices of an object. The matrices can be set using the
  * set_view(), set_projection(), and set_model() methods.
  */
-class translation
+class Translation
 {
 public:
-  /**
-   * @brief Camera view matrix
-   */
-  glm::mat4 view;
-  /**
-   * @brief Camera projection matrix
-   */
-  glm::mat4 projection;
-  /**
-   * @brief Object position matrix
-   */
-  glm::mat4 model;
 
-  /**
-   * @brief Translation constructor
-   *
-   * This constructor initializes the view, projection, and model
-   * matrices to the identity matrix.
-   */
-  translation();
-  /**
-   * @brief Translation constructor
-   *
-   * This constructor initializes the view, projection, and model
-   * matrices to the given matrices.
-   * @param view The view matrix
-   * @param projection The projection matrix
-   * @param model The model matrix
-   */
-  translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model);
+  glm::mat4 view        = glm::mat4(1.0f);
+  glm::mat4 projection  = glm::mat4(1.0f);
+  glm::mat4 model       = glm::mat4(1.0f);
 
-  /**
-   * @brief Set the view matrix
-   * @param view The view matrix
-   */
+  Translation() = default;
+  Translation(glm::mat4 view, glm::mat4 projection, glm::mat4 model)
+    : view(view), projection(projection), model(model) {}
+
   void set_view(glm::mat4 view);
-  /**
-   * @brief Set the projection matrix
-   * @param projection The projection matrix
-   */
   void set_projection(glm::mat4 projection);
-  /**
-   * @brief Set the model matrix
-   * @param model The model matrix
-   */
   void set_projection(int window_width, int window_height,
                       float fov, float near, float far);
-  /**
-   * @brief Set the model matrix
-   * @param model The model matrix
-   */
   void set_model(glm::mat4 model);
-  /**
-   * @brief Translate the object
-   * @param translation The translation vector
-   */
+  bool set_shader(Shader::Name shader_name);
+  
   void translate(glm::vec3 translation);
-  /**
-   * @brief Rotate the object
-   * @param rotation The rotation vector
-   */
   void rotate(glm::vec3 rotation);
-  /**
-   * @brief Scale the object
-   * @param scale The scale factor
-   */
   void scale(float scale);
-  /**
-   * @brief Set the shader
-   * @param shader_name The shader name
-   */
-  bool set_shader(shader::name_t shader_name);
 };
-
-} // namespace types
 
 } // namespace brenta

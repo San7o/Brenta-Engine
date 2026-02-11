@@ -36,31 +36,31 @@ namespace brenta
  * The camera can have two types of projection: perspective or
  * orthographic.
  */
-class camera
+class Camera
 {
 public:
 
-  class spherical;
-  class aircraft;
-  class position;
-  enum class projection_type;
-  enum class movement;
+  class Spherical;
+  class Aircraft;
+  class Position;
+  enum class ProjectionType;
+  enum class Movement;
   
-  class config;
-  class builder;
+  class Config;
+  class Builder;
   
   // Constructors
 
-  camera() = default;
-  camera(config conf);
+  Camera() = default;
+  Camera(Config conf);
 
   // Getters
 
-  std::variant<spherical, aircraft> get_pos() const;
+  std::variant<Spherical, Aircraft> get_pos() const;
   glm::vec3        get_world_pos() const;
   float            get_fov() const;
   glm::mat4        get_view_matrix() const;
-  projection_type  get_projection_type() const;
+  ProjectionType   get_projection_type() const;
   glm::mat4        get_projection_matrix(int window_width,
                                          int window_height) const;
   glm::vec3        get_world_up() const;
@@ -70,55 +70,55 @@ public:
 
   // Setters
 
-  void set_pos(std::variant<spherical, aircraft> pos);
-  void set_projection_type(projection_type proj_type);
+  void set_pos(std::variant<Spherical, Aircraft> pos);
+  void set_projection_type(ProjectionType proj_type);
   void set_fov(float fov);
   void set_world_up(glm::vec3 world_up);
   void set_front(glm::vec3 front);
   void set_up(glm::vec3 up);
   void set_right(glm::vec3 right);
 
-  class spherical
+  class Spherical
   {
   public:
 
-    class builder;
+    class Builder;
     
     glm::vec3 center;
     float     theta;
     float     phi;
     float     radius;
   
-    spherical() = default;
-    spherical(glm::vec3 center, float theta,
+    Spherical() = default;
+    Spherical(glm::vec3 center, float theta,
               float phi, float radius)
       : center(center), theta(theta), phi(phi), radius(radius) {}
   };
   
-  class aircraft
+  class Aircraft
   {
   public:
 
-    class builder;
+    class Builder;
     
     glm::vec3 pos;
     float     yaw;
     float     pitch;
     float     roll;
 
-    aircraft() = default;
-    aircraft(glm::vec3 pos)
+    Aircraft() = default;
+    Aircraft(glm::vec3 pos)
       : pos(pos) {}
-    aircraft(glm::vec3 pos, float yaw, float pitch, float roll)
+    Aircraft(glm::vec3 pos, float yaw, float pitch, float roll)
       : pos(pos), yaw(yaw), pitch(pitch), roll(roll) {}
-    aircraft(const builder &builder);
+    Aircraft(const Builder &builder);
     
   };
   
 private:
 
-  std::variant<spherical, aircraft> pos;
-  projection_type proj_type;
+  std::variant<Spherical, Aircraft> pos;
+  ProjectionType  proj_type;
   float           fov;                 // field of view / zoom
 
   glm::vec3   front;
@@ -130,62 +130,62 @@ private:
   // never modify this value manually
   glm::vec3   world_pos;
 
-  void update_spherical(spherical pos);
-  void update_aircraft(aircraft pos);
+  void update_spherical(Spherical pos);
+  void update_aircraft(Aircraft pos);
 };
 
-enum class camera::projection_type
+enum class Camera::ProjectionType
 {
-  perspective,
-  orthographic
+  Perspective,
+  Orthographic
 };
 
-enum class camera::movement
+enum class Camera::Movement
 {
-  forward,
-  backward,
-  left,
-  right
+  Forward,
+  Backward,
+  Left,
+  Right
 };
 
-class camera::spherical::builder
-{
-public:
-
-  builder() = default;
-  
-  camera::spherical::builder &center(glm::vec3 center);
-  camera::spherical::builder &theta(float theta);
-  camera::spherical::builder &phi(float phi);
-  camera::spherical::builder &radius(float radius);
-
-  camera::spherical build();
-  
-private:
-  camera::spherical scam;
-};
-
-class camera::aircraft::builder
+class Camera::Spherical::Builder
 {
 public:
 
-  builder() = default;
+  Builder() = default;
+  
+  Builder &center(glm::vec3 center);
+  Builder &theta(float theta);
+  Builder &phi(float phi);
+  Builder &radius(float radius);
 
-  camera::aircraft::builder& pos(glm::vec3 pos);
-  camera::aircraft::builder& yaw(float yaw);
-  camera::aircraft::builder& pitch(float pitch);
-  camera::aircraft::builder& roll(float roll);
-
-  camera::aircraft build();
+  Camera::Spherical build();
   
 private:
-  camera::aircraft acam;
+  Camera::Spherical scam;
+};
+
+class Camera::Aircraft::Builder
+{
+public:
+
+  Builder() = default;
+
+  Camera::Aircraft::Builder& pos(glm::vec3 pos);
+  Camera::Aircraft::Builder& yaw(float yaw);
+  Camera::Aircraft::Builder& pitch(float pitch);
+  Camera::Aircraft::Builder& roll(float roll);
+
+  Camera::Aircraft build();
+  
+private:
+  Camera::Aircraft acam;
 };
   
-struct camera::config
+struct Camera::Config
 {
-  std::variant<spherical, aircraft> pos;
-  projection_type proj_type;
+  std::variant<Spherical, Aircraft> pos;
+  ProjectionType  proj_type;
   float           fov;
   glm::vec3       world_up;
   glm::vec3       front;
@@ -193,13 +193,13 @@ struct camera::config
   glm::vec3       right;
 };
   
-class camera::builder
+class Camera::Builder
 {
 private:
 
-  camera::config conf = {
-    camera::aircraft(glm::vec3(0.0)),
-    camera::projection_type::perspective,
+  Camera::Config conf = {
+    Camera::Aircraft(glm::vec3(0.0)),
+    Camera::ProjectionType::Perspective,
     45.0f,
     glm::vec3(0.0f, 1.0f, 0.0f),
     glm::vec3(0.0f, 0.0f, -1.0f),
@@ -209,15 +209,15 @@ private:
 
 public:
   
-  builder &projection_type(projection_type proj_type);
-  builder &position(std::variant<spherical, aircraft> pos);
-  builder &fov(float fov);
-  builder &world_up(glm::vec3 worldUp);
-  builder &front(glm::vec3 front);
-  builder &up(glm::vec3 up);
-  builder &right(glm::vec3 right);
+  Builder &projection_type(ProjectionType proj_type);
+  Builder &position(std::variant<Spherical, Aircraft> pos);
+  Builder &fov(float fov);
+  Builder &world_up(glm::vec3 worldUp);
+  Builder &front(glm::vec3 front);
+  Builder &up(glm::vec3 up);
+  Builder &right(glm::vec3 right);
 
-  camera build();
+  Camera build();
 };
 
 } // namespace brenta

@@ -6,73 +6,46 @@
 #pragma once
 
 #include <glad/glad.h>
+
 #include <string>
+#include <filesystem>
 
 namespace brenta
 {
 
-/**
- * @brief Texture class
- *
- * This class is used to load and manage textures.
- */
-class texture
+class Texture
 {
 public:
 
-  unsigned int id;
-  std::string type;
-  std::string path;
+  using Id = unsigned int;
+
+  enum class Type {
+    None,
+    Diffuse,
+    Specular,
+  };
   
-  /**
-   * @brief Activate a texture unit
-   *
-   * This method activates a texture unit. Arg is GL_TEXTURE0 + x
-   */
+  Texture::Id   id;
+  Texture::Type type;
+  std::filesystem::path path;
+  
+  // This method activates a texture unit. Arg is GL_TEXTURE0 + x
   static void active_texture(GLenum texture);
+  static Texture::Id load(const std::filesystem::path &path, bool flip = true);
+  static void bind_id(GLenum    target, Texture::Id id,
+                      GLint     wrapping      = GL_REPEAT,
+                      GLint     filtering_min = GL_NEAREST,
+                      GLint     filtering_mag = GL_NEAREST,
+                      GLboolean has_mipmap    = GL_TRUE,
+                      GLint     mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
+                      GLint     mipmap_mag    = GL_LINEAR);
 
-  /**
-   * @brief Load a texture from a file
-   *
-   * This method loads a texture from a file and returns the texture
-   * ID. The texture is loaded using the stb_image library.
-   *
-   * @param path Path to the texture file
-   * @return The texture ID
-   */
-  static unsigned int load(const std::string &path, bool flip = true);
-  
-  /**
-   * @brief Bind a texture
-   *
-   * This method binds a texture to a target. The texture is bound
-   * with the specified wrapping and filtering modes.
-   *
-   * You need to bind the texture before using it in the shader.
-   */
-  static void bind_id(GLenum target, unsigned int id,
-                      GLint wrapping = GL_REPEAT,
-                      GLint filtering_min = GL_NEAREST,
-                      GLint filtering_mag = GL_NEAREST,
-                      GLboolean has_mipmap = GL_TRUE,
-                      GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-                      GLint mipmap_mag = GL_LINEAR);
 
-  /**
-   * @brief Empty constructor, does nothing
-   */
-  texture() {}
-  /**
-   * @brief Creates a new tecture
-   *
-   * @param path Path to the texture file
-   * @param flip Whether the texture sould be flipped or not
-   * @param type An optional string that may be used by other systems
-   */
-  texture(const std::string &path,
+  Texture() {}
+  Texture(const std::filesystem::path &path,
           bool flip = true,
-          const std::string &type = "texture_diffuse");
-  constexpr texture(texture&& other) noexcept
+          Texture::Type type = Texture::Type::None);
+  constexpr Texture(Texture&& other) noexcept
   {
     this->id = other.id;
     this->path = other.path;
@@ -80,7 +53,7 @@ public:
     other.id = 0;
   }
 
-  constexpr texture& operator=(texture&&other) noexcept
+  constexpr Texture& operator=(Texture&& other) noexcept
   {
     this->id = other.id;
     this->type = other.type;
@@ -89,17 +62,17 @@ public:
     return *this;
   }
 
-  ~texture();
+  ~Texture();
 
-  unsigned int get_id() const;
+  Texture::Id get_id() const;
   
-  void bind(GLenum target,
-            GLint wrapping = GL_REPEAT,
-            GLint filtering_min = GL_NEAREST,
-            GLint filtering_mag = GL_NEAREST,
-            GLboolean has_mpmap = GL_TRUE,
-            GLint mipmap_min = GL_LINEAR_MIPMAP_LINEAR,
-            GLint mipmap_mag = GL_LINEAR);
+  void bind(GLenum    target,
+            GLint     wrapping      = GL_REPEAT,
+            GLint     filtering_min = GL_NEAREST,
+            GLint     filtering_mag = GL_NEAREST,
+            GLboolean has_mpmap     = GL_TRUE,
+            GLint     mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
+            GLint     mipmap_mag    = GL_LINEAR);
 
 private:
   

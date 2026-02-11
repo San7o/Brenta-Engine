@@ -16,7 +16,7 @@
 #include <expected>
 #include <string>
 
-#define check_error() gl::_check_error(__FILE__, __LINE__)
+#define check_error() Gl::_check_error(__FILE__, __LINE__)
 
 namespace brenta
 {
@@ -26,109 +26,47 @@ namespace brenta
  *
  * This class contains helper functions to interact with OpenGL.
  */
-class gl : public subsystem
+class Gl : public Subsystem
 {
 public:
 
-  class config;
-  class builder;
+  class Config;
+  class Builder;
 
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate()  override;
   std::string name() override;
   bool is_initialized() override;
   
-  // Constructors / destructors
-  gl() = default;
-  ~gl() = default;
+  Gl()  = default;
+  ~Gl() = default;
 
   // Member functions
   
-  static gl &instance();
+  static Gl &instance();
   
-  /**
-   * @brief Set Poligon Mode
-   * @param enable Enable or disable poligon mode
-   */
   static void set_poligon_mode(GLboolean enable);
-  
-  /**
-   * @brief Set Viewport
-   *
-   * This function sets the viewport of the window.
-   *
-   * @param x          X coordinate of the viewport
-   * @param y          Y coordinate of the viewport
-   * @param width      Width of the viewport
-   * @param height     Height of the viewport
-   */
   static void set_viewport(int x, int y, int width, int height);
-  
-  /**
-   * @brief Set Clear Color
-   *
-   * This function sets the clear color of the window.
-   *
-   * @param r Red component of the clear color
-   * @param g Green component of the clear color
-   * @param b Blue component of the clear color
-   * @param a Alpha component of the clear color
-   */
   static void set_color(float r, float g, float b, float a);
-  
-  /**
-   * @brief Draw Arrays
-   *
-   * This function draws primitives from the array data.
-   *
-   * @param mode  Specifies what kind of primitives to render
-   * @param first Specifies the starting index in the enabled arrays
-   * @param count Specifies the number of indices to be rendered
-   */
   static void draw_arrays(GLenum mode, int first, int count);
-  
-  /**
-   * @brief Draw Elements
-   *
-   * This function draws primitives from the array data.
-   *
-   * @param mode    Specifies what kind of primitives to render
-   * @param count   Specifies the number of elements to be rendered
-   * @param type    Specifies the type of the values in indices
-   * @param indices Specifies a pointer to the location where the indices are
-   * stored
-   */
   static void draw_elements(GLenum mode, int count, GLenum type,
                             const void *indices);
-  
-  /**
-   * @brief Clear
-   *
-   * This function clears the color and depth buffer.
-   */
   static void clear();
-  
   static void bind_vertex_array(unsigned int n);
   
-  /**
-   * @brief Check OpenGL error
-   *
-   * This function checks if there is an OpenGL error.
-   *
-   * @return The error code
-   */
   static GLenum _check_error(const char *file, int line);
 
 private:
+  
   static bool initialized;
   
-  static const gl::config  default_config;
-  static gl::config        init_config;
+  static const Gl::Config  default_config;
+  static Gl::Config        init_config;
 };
 
-struct gl::config
+struct Gl::Config
 {
 public:
   bool enable_blending;
@@ -137,23 +75,23 @@ public:
   bool enable_depth_test;
 };
   
-class gl::builder : public subsystem::builder
+class Gl::Builder : public Subsystem::Builder
 {
 private:
 
-  gl::config conf = gl::default_config;
+  Gl::Config conf = Gl::default_config;
   
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder() = default;
+  ~Builder() = default;
 
-  builder &blending();
-  builder &cull_face();
-  builder &multisample();
-  builder &depth_test();
+  Builder &blending();
+  Builder &cull_face();
+  Builder &multisample();
+  Builder &depth_test();
 
-  subsystem &build() override;
+  Subsystem &build() override;
   
 };
   

@@ -11,6 +11,6 @@ using namespace brenta;
 
 void init_close_window_callback()
 {
-  auto close_window_callback = []() { window::close(); };
-  input::add_keyboard_callback(GLFW_KEY_ESCAPE, close_window_callback);
+  auto close_window_callback = []() { Window::close(); };
+  Input::add_keyboard_callback(GLFW_KEY_ESCAPE, close_window_callback);
 }

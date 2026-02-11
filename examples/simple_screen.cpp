@@ -10,34 +10,33 @@
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
 
-#include <iostream>
 #include <viotecs/viotecs.hpp>
-
 REGISTER_SYSTEMS()
+
+#include <iostream>
 
 using namespace brenta;
 
-const int SCR_WIDTH = 800;
-const int SCR_HEIGHT = 600;
-
 int main()
 {
-  engine::builder()
-    .with(window::builder()
+  const int SCR_WIDTH = 800;
+  const int SCR_HEIGHT = 600;
+
+  Engine::Builder()
+    .with(Window::Builder()
           .title("simple screen")
           .width(SCR_WIDTH)
           .height(SCR_HEIGHT))
     .build();
+  auto engine = Engine::managed();
   
-  auto engine = engine::managed();
-  
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
 
   return 0;

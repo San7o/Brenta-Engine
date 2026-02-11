@@ -15,11 +15,11 @@ using namespace viotecs;
 
 struct PhysicsComponent : component
 {
-  float mass;
-  float density;
+  float     mass;
+  float     density;
   glm::vec3 velocity;
   glm::vec3 acceleration;
-  bool isElastic;
+  bool      isElastic;
 
   PhysicsComponent()
       : mass(0.0f), density(0.0f), velocity(glm::vec3(0.0f)),

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['get_5fcurrent_5ftime_0',['get_current_time',['../classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f',1,'brenta::time']]],
-  ['get_5fdelta_5ftime_1',['get_delta_time',['../classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701',1,'brenta::time']]],
-  ['get_5ffps_2',['get_fps',['../classbrenta_1_1time.html#aa5e1fdab03a11a10d3e872722b36ebab',1,'brenta::time']]],
-  ['get_5fid_3',['get_id',['../classbrenta_1_1shader.html#a9bee403efe6b175995c4227f7a74f1f8',1,'brenta::shader']]],
-  ['get_5fproc_5faddress_4',['get_proc_address',['../classbrenta_1_1window.html#ac0cd5936ea304f8d4964dea089a97f61',1,'brenta::window']]],
-  ['gl_5',['gl',['../classbrenta_1_1gl.html',1,'brenta']]],
-  ['gui_6',['gui',['../classbrenta_1_1gui.html',1,'brenta']]]
+  ['indices_0',['indices',['../classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4',1,'brenta::Mesh']]],
+  ['input_1',['Input',['../classbrenta_1_1Input.html',1,'brenta']]],
+  ['is_5finitialized_2',['is_initialized',['../classbrenta_1_1Audio.html#a4209513d7e827b9d5ceeeb3d5ca7af12',1,'brenta::Audio::is_initialized()'],['../classbrenta_1_1Engine.html#a274109934294fcd0dc8aebcae61ff493',1,'brenta::Engine::is_initialized()'],['../classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182',1,'brenta::Gui::is_initialized()'],['../classbrenta_1_1Text.html#a8e99c97568efa46dcc344fed386ded32',1,'brenta::Text::is_initialized()'],['../classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed',1,'brenta::Input::is_initialized()'],['../classbrenta_1_1Logger.html#ab6349bd0374c0f079623bf83fdb43cb3',1,'brenta::Logger::is_initialized()'],['../classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3',1,'brenta::Gl::is_initialized()'],['../classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b',1,'brenta::Subsystem::is_initialized()'],['../classbrenta_1_1Window.html#a4ebba078cfbe573cb0c5ce0a763fc61b',1,'brenta::Window::is_initialized()']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['characters_0',['characters',['../classbrenta_1_1text.html#af7a50940292a66b3692e0cedc7f77f06',1,'brenta::text']]]
+  ['filtering_5fmag_0',['filtering_mag',['../classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab',1,'brenta::Mesh']]],
+  ['filtering_5fmin_1',['filtering_min',['../classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748',1,'brenta::Mesh']]]
 ];

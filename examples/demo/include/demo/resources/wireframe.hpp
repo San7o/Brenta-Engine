@@ -12,6 +12,7 @@ using namespace viotecs;
 struct WireframeResource : resource
 {
   bool enabled;
+  
   WireframeResource(bool e) : enabled(e)
   {
   }

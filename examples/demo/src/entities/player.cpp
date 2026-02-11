@@ -18,14 +18,14 @@ using namespace brenta;
 
 void init_player_entity()
 {
-  if (shader::get_id("default_shader") == 0)
+  if (Shader::get_id("default_shader") == 0)
   {
-    shader::create("default_shader",
-                   shader::type::vertex, "examples/demo/shaders/shader.vs",
-                   shader::type::fragment, "examples/demo/shaders/shader.fs");
+    Shader::create("default_shader",
+                   Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
+                   Shader::Type::Fragment, "examples/demo/shaders/shader.fs");
   }
 
-  model m = model::builder()
+  Model m = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .build();
 

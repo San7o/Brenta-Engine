@@ -104,48 +104,31 @@ $(document).ready(function(){initNavTree('time_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="comment">// Mail:    giovanni.santini@proton.me</span></div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">// Github:  @San7o</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/window.hpp&gt;</span></div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/time.hpp&gt;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">using namespace </span>brenta;</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keywordtype">float</span> time::current_time = 0.0f;</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keywordtype">float</span> time::delta_time = 0.0f;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keywordtype">float</span> time::last_frame = 0.0f;</div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/time.hpp&gt;</span></div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span>brenta;</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">float</span> Time::get_elapsed()</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  <span class="keywordflow">return</span> this-&gt;elapsed;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>}</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="foldopen" id="foldopen00015" data-start="{" data-end="}">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">   15</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">time::get_current_time</a>()</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keywordtype">float</span> Time::get_delta()</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> window::get_time();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  <span class="keywordflow">return</span> this-&gt;delta;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>}</div>
-</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="foldopen" id="foldopen00020" data-start="{" data-end="}">
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno"><a class="line" href="classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701">   20</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701">time::get_delta_time</a>()</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keywordtype">float</span> Time::get_fps()</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>{</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">return</span> time::delta_time;</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">return</span> 1.0f / this-&gt;delta;</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
-</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
-<div class="foldopen" id="foldopen00025" data-start="{" data-end="}">
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno"><a class="line" href="classbrenta_1_1time.html#aa5e1fdab03a11a10d3e872722b36ebab">   25</a></span><span class="keywordtype">float</span> <a class="code hl_function" href="classbrenta_1_1time.html#aa5e1fdab03a11a10d3e872722b36ebab">time::get_fps</a>()</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> Time::update(<span class="keywordtype">float</span> new_time)</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordflow">return</span> 1.0f / time::delta_time;</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>}</div>
-</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classbrenta_1_1time.html#a506678831ff67ca3e194da45c2c9c9f7">   30</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1time.html#a506678831ff67ca3e194da45c2c9c9f7">time::update</a>(<span class="keywordtype">float</span> new_time)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  time::current_time = new_time;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  time::delta_time = time::current_time - time::last_frame;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  time::last_frame = time::current_time;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
-</div>
-<div class="ttc" id="aclassbrenta_1_1time_html_a35621abc39ae9c6b06683abbf4837c1f"><div class="ttname"><a href="classbrenta_1_1time.html#a35621abc39ae9c6b06683abbf4837c1f">brenta::time::get_current_time</a></div><div class="ttdeci">static float get_current_time()</div><div class="ttdoc">Get the current time.</div><div class="ttdef"><b>Definition</b> <a href="time_8cpp_source.html#l00015">time.cpp:15</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1time_html_a506678831ff67ca3e194da45c2c9c9f7"><div class="ttname"><a href="classbrenta_1_1time.html#a506678831ff67ca3e194da45c2c9c9f7">brenta::time::update</a></div><div class="ttdeci">static void update(float new_time)</div><div class="ttdoc">Update the time.</div><div class="ttdef"><b>Definition</b> <a href="time_8cpp_source.html#l00030">time.cpp:30</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1time_html_a7da826481e6cc1db2a724ff6d6673701"><div class="ttname"><a href="classbrenta_1_1time.html#a7da826481e6cc1db2a724ff6d6673701">brenta::time::get_delta_time</a></div><div class="ttdeci">static float get_delta_time()</div><div class="ttdoc">Get the time since the last frame.</div><div class="ttdef"><b>Definition</b> <a href="time_8cpp_source.html#l00020">time.cpp:20</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1time_html_aa5e1fdab03a11a10d3e872722b36ebab"><div class="ttname"><a href="classbrenta_1_1time.html#aa5e1fdab03a11a10d3e872722b36ebab">brenta::time::get_fps</a></div><div class="ttdeci">static float get_fps()</div><div class="ttdoc">Get the frames per second.</div><div class="ttdef"><b>Definition</b> <a href="time_8cpp_source.html#l00025">time.cpp:25</a></div></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  this-&gt;elapsed = new_time;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  this-&gt;delta = this-&gt;elapsed - this-&gt;last_frame;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  this-&gt;last_frame = this-&gt;elapsed;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

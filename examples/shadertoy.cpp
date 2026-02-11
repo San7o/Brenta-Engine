@@ -181,32 +181,32 @@ int main(int argc, char** argv)
   // Setup
   //
   
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("shadertoy")
           .width(800)
           .height(600)
           .vsync()
           .debug())
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(input::builder())
-    .with(gui::builder())
+    .with(Input::Builder())
+    .with(Gui::Builder())
     .build();
 
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
 
   //
   // Variables
   //
   
-  types::framebuffer fb(window::get_width(), window::get_height());
+  FrameBuffer fb(Window::get_width(), Window::get_height());
   
   //
   // Game loop
@@ -218,28 +218,28 @@ int main(int argc, char** argv)
 
                       // Second Triangle
                       -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f};
-  types::vao v;
+  Vao v;
   v.init();
   v.bind();
-  types::buffer vbo;
+  Buffer vbo;
   vbo.init(GL_ARRAY_BUFFER);
   vbo.bind();
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  std::string fragment_source = fragment_color_animation;
-  std::string prev_source = fragment_source;
-  unsigned int shader_program = update_shader(fragment_source);
+  std::string  fragment_source = fragment_color_animation;
+  std::string  prev_source     = fragment_source;
+  unsigned int shader_program  = update_shader(fragment_source);
 
   // Load font
   ImGuiIO& io = ImGui::GetIO();
   ImFont* arial = io.Fonts->AddFontFromFileTTF("examples/assets/fonts/arial.ttf",
                                                30.0f);
   
-  while(!window::should_close())
+  while(!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
     if (prev_source != fragment_source)
     {
@@ -249,7 +249,7 @@ int main(int argc, char** argv)
         shader_program = ret;
     }
     
-    gui::new_frame(&fb, "shadertoy");
+    Gui::new_frame(&fb, "shadertoy");
     ImGui::PushFont(arial);
     ImGui::Begin("Settings");
     
@@ -315,7 +315,7 @@ int main(int argc, char** argv)
 
     fb.bind();
     
-    gl::clear();
+    Gl::clear();
     v.bind();
 
     glUseProgram(shader_program);
@@ -324,23 +324,23 @@ int main(int argc, char** argv)
     GLint location = glGetUniformLocation(shader_program, "iTime");
     if (location != -1)
     {
-      glUniform1f(location, window::get_time().get_elapsed());
+      glUniform1f(location, Window::get_time().get_elapsed());
     }
     // iResolution
     location = glGetUniformLocation(shader_program, "iResolution");
     if (location != -1)
     {
-      glUniform2f(location, window::get_width(), window::get_height());
+      glUniform2f(location, Window::get_width(), Window::get_height());
     }
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
     v.unbind();
     fb.unbind();
-    gui::render();
+    Gui::render();
     
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

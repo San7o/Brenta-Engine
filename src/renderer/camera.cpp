@@ -9,7 +9,7 @@
 
 using namespace brenta;
 
-camera::camera(config conf)
+Camera::Camera(Config conf)
 {
   this->proj_type = conf.proj_type;
   this->fov = conf.fov;
@@ -22,11 +22,11 @@ camera::camera(config conf)
   return;
 }
 
-glm::mat4 camera::get_view_matrix() const
+glm::mat4 Camera::get_view_matrix() const
 {
   try
   {
-    spherical spos = std::get<spherical>(this->pos);
+    Spherical spos = std::get<Spherical>(this->pos);
     return glm::lookAt(this->world_pos, spos.center, this->world_up);
 
   }
@@ -36,17 +36,17 @@ glm::mat4 camera::get_view_matrix() const
   }
 }
 
-glm::mat4 camera::get_projection_matrix(int window_width,
+glm::mat4 Camera::get_projection_matrix(int window_width,
                                         int window_height) const
 {
   switch (this->proj_type)
   {
-  case projection_type::perspective:
+  case ProjectionType::Perspective:
     return glm::perspective(glm::radians(this->fov),
                             (float) window_width
                             / (float) window_height,
                             0.1f, 1000.0f);
-  case projection_type::orthographic:
+  case ProjectionType::Orthographic:
     return glm::ortho((float) -window_width / 2.0f,
                       (float) window_width / 2.0f,
                       (float) -window_height / 2.0f,
@@ -56,16 +56,18 @@ glm::mat4 camera::get_projection_matrix(int window_width,
   }
 }
 
-void camera::update_spherical(spherical pos)
+void Camera::update_spherical(Spherical pos)
 {
-  this->world_pos.x = sin(pos.theta) * cos(pos.phi) * pos.radius
-    + pos.center.x;
+  this->world_pos.x =
+    sin(pos.theta) * cos(pos.phi) * pos.radius + pos.center.x;
   this->world_pos.y = cos(pos.theta) * pos.radius + pos.center.y;
-  this->world_pos.z = sin(pos.theta) * sin(pos.phi) * pos.radius
-    + pos.center.z;
+  this->world_pos.z =
+    sin(pos.theta) * sin(pos.phi) * pos.radius + pos.center.z;
+  
+  return;
 }
 
-void camera::update_aircraft(aircraft pos)
+void Camera::update_aircraft(Aircraft pos)
 {
   // calculate the new Front vector
   glm::vec3 new_front;
@@ -77,44 +79,46 @@ void camera::update_aircraft(aircraft pos)
   this->front = glm::normalize(new_front);
   // also re-calculate the Right and Up vector
   this->right = glm::normalize(glm::cross(this->front, this->world_up));
-  this->up = glm::normalize(glm::cross(this->right, this->front));
+  this->up    = glm::normalize(glm::cross(this->right, this->front));
+  
+  return;
 }
 
 //
 // Getters
 //
 
-camera::projection_type camera::get_projection_type() const
+Camera::ProjectionType Camera::get_projection_type() const
 {
   return this->proj_type;
 }
 
-std::variant<camera::spherical, camera::aircraft> camera::get_pos() const
+std::variant<Camera::Spherical, Camera::Aircraft> Camera::get_pos() const
 {
   return this->pos;
 }
 
-glm::vec3 camera::get_world_pos() const
+glm::vec3 Camera::get_world_pos() const
 {
   return this->world_pos;
 }
 
-float camera::get_fov() const
+float Camera::get_fov() const
 {
   return this->fov;
 }
 
-glm::vec3 camera::get_front() const
+glm::vec3 Camera::get_front() const
 {
   return this->front;
 }
 
-glm::vec3 camera::get_up() const
+glm::vec3 Camera::get_up() const
 {
   return this->up;
 }
 
-glm::vec3 camera::get_right() const
+glm::vec3 Camera::get_right() const
 {
   return this->right;
 }
@@ -123,53 +127,53 @@ glm::vec3 camera::get_right() const
 // Setters
 //
 
-void camera::set_projection_type(projection_type projection_type)
+void Camera::set_projection_type(ProjectionType projection_type)
 {
   this->proj_type = projection_type;
 }
 
-void camera::set_pos(std::variant<spherical, aircraft> new_pos)
+void Camera::set_pos(std::variant<Spherical, Aircraft> new_pos)
 {
   this->pos = new_pos;
 
   try
   {
-    this->update_spherical(std::get<spherical>(this->pos));
+    this->update_spherical(std::get<Spherical>(this->pos));
   }
   catch ([[maybe_unused]] const std::bad_variant_access& ex)
   {
-    this->update_aircraft(std::get<aircraft>(this->pos));
+    this->update_aircraft(std::get<Aircraft>(this->pos));
   }
   
   return;
 }
 
-glm::vec3 camera::get_world_up() const
+glm::vec3 Camera::get_world_up() const
 {
   return this->world_up;
 }
 
-void camera::set_world_up(glm::vec3 world_up)
+void Camera::set_world_up(glm::vec3 world_up)
 {
   this->world_up = world_up;
 }
 
-void camera::set_fov(float fov)
+void Camera::set_fov(float fov)
 {
   this->fov = fov;
 }
 
-void camera::set_front(glm::vec3 front)
+void Camera::set_front(glm::vec3 front)
 {
   this->front = front;
 }
 
-void camera::set_up(glm::vec3 up)
+void Camera::set_up(glm::vec3 up)
 {
   this->up = up;
 }
 
-void camera::set_right(glm::vec3 right)
+void Camera::set_right(glm::vec3 right)
 {
   this->right = right;
 }
@@ -178,123 +182,123 @@ void camera::set_right(glm::vec3 right)
 // Builder
 //
 
-// camera::spherical builder
+// Camera::Spherical builder
 
-camera::spherical::builder &
-camera::spherical::builder::center(glm::vec3 center)
+Camera::Spherical::Builder &
+Camera::Spherical::Builder::center(glm::vec3 center)
 {
   this->scam.center = center;
   return *this;
 }
 
-camera::spherical::builder &
-camera::spherical::builder::theta(float theta)
+Camera::Spherical::Builder &
+Camera::Spherical::Builder::theta(float theta)
 {
   this->scam.theta = theta;
   return *this;
 }
 
-camera::spherical::builder &
-camera::spherical::builder::phi(float phi)
+Camera::Spherical::Builder &
+Camera::Spherical::Builder::phi(float phi)
 {
   this->scam.phi = phi;
   return *this;
 }
 
-camera::spherical::builder &
-camera::spherical::builder::radius(float radius)
+Camera::Spherical::Builder &
+Camera::Spherical::Builder::radius(float radius)
 {
   this->scam.radius = radius;
   return *this;
 }
 
-camera::spherical camera::spherical::builder::build()
+Camera::Spherical Camera::Spherical::Builder::build()
 {
   return this->scam;
 }
 
-// camera::aircraft builder
+// Camera::aircraft Builder
 
-camera::aircraft::builder &
-camera::aircraft::builder::pos(glm::vec3 pos)
+Camera::Aircraft::Builder &
+Camera::Aircraft::Builder::pos(glm::vec3 pos)
 {
   this->acam.pos = pos;
   return *this;
 }
 
-camera::aircraft::builder &
-camera::aircraft::builder::yaw(float yaw)
+Camera::Aircraft::Builder &
+Camera::Aircraft::Builder::yaw(float yaw)
 {
   this->acam.yaw = yaw;
   return *this;
 }
 
-camera::aircraft::builder &
-camera::aircraft::builder::pitch(float pitch)
+Camera::Aircraft::Builder &
+Camera::Aircraft::Builder::pitch(float pitch)
 {
   this->acam.pitch = pitch;
   return *this;
 }
 
-camera::aircraft::builder &
-camera::aircraft::builder::roll(float roll)
+Camera::Aircraft::Builder &
+Camera::Aircraft::Builder::roll(float roll)
 {
   this->acam.roll = roll;
   return *this;
 }
 
-camera::aircraft camera::aircraft::builder::build()
+Camera::Aircraft Camera::Aircraft::Builder::build()
 {
   return this->acam;
 }
 
-// Camera builder
+// Camera Builder
 
-camera::builder &
-camera::builder::projection_type(camera::projection_type projection_type)
+Camera::Builder &
+Camera::Builder::projection_type(Camera::ProjectionType projection_type)
 {
   this->conf.proj_type = projection_type;
   return *this;
 }
 
-camera::builder &camera::builder::position(std::variant<camera::spherical,
-                                           camera::aircraft> pos)
+Camera::Builder &Camera::Builder::position(std::variant<Camera::Spherical,
+                                           Camera::Aircraft> pos)
 {
   this->conf.pos = pos;
   return *this;
 }
 
-camera::builder &camera::builder::fov(float fov)
+Camera::Builder &Camera::Builder::fov(float fov)
 {
   this->conf.fov = fov;
   return *this;
 }
 
-camera::builder &camera::builder::world_up(glm::vec3 world_up)
+Camera::Builder &Camera::Builder::world_up(glm::vec3 world_up)
 {
   this->conf.world_up = world_up;
   return *this;
 }
 
-camera::builder &camera::builder::front(glm::vec3 front)
+Camera::Builder &Camera::Builder::front(glm::vec3 front)
 {
   this->conf.front = front;
   return *this;
 }
 
-camera::builder &camera::builder::up(glm::vec3 up)
+Camera::Builder &Camera::Builder::up(glm::vec3 up)
 {
   this->conf.up = up;
   return *this;
 }
 
-camera::builder &camera::builder::right(glm::vec3 right)
+Camera::Builder &Camera::Builder::right(glm::vec3 right)
 {
   this->conf.right = right;
   return *this;
 }
 
-brenta::camera camera::camera::builder::build()
+brenta::Camera Camera::Builder::build()
 {
-  return camera(this->conf);
+  return Camera(this->conf);
 }

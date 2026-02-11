@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['destroy_0',['destroy',['../classbrenta_1_1types_1_1framebuffer.html#a29178484271532eaebe3ccfda4e942d0',1,'brenta::types::framebuffer']]],
-  ['draw_5farrays_1',['draw_arrays',['../classbrenta_1_1gl.html#ac80d3d5daaaff64ede199adebc04dc8c',1,'brenta::gl']]],
-  ['draw_5felements_2',['draw_elements',['../classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913',1,'brenta::gl']]]
+  ['filtering_5fmag_0',['filtering_mag',['../classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab',1,'brenta::Mesh']]],
+  ['filtering_5fmin_1',['filtering_min',['../classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748',1,'brenta::Mesh']]],
+  ['framebuffer_2',['FrameBuffer',['../classbrenta_1_1FrameBuffer.html',1,'brenta']]]
 ];

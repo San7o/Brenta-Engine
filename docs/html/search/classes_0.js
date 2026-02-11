@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['aircraft_0',['aircraft',['../classbrenta_1_1camera_1_1aircraft.html',1,'brenta::camera']]],
-  ['audio_1',['audio',['../classbrenta_1_1audio.html',1,'brenta']]]
+  ['aircraft_0',['Aircraft',['../classbrenta_1_1Camera_1_1Aircraft.html',1,'brenta::Camera']]],
+  ['audio_1',['Audio',['../classbrenta_1_1Audio.html',1,'brenta']]]
 ];

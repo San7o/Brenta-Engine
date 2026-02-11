@@ -23,37 +23,28 @@ namespace brenta
  * This class contains the GUI functions, It's a wrapper around imgui,
  * providing functions to initialize, update and delete the gui.
  */
-class gui : public subsystem
+class Gui : public Subsystem
 {
 public:
 
-  class builder;
-
-  static const std::string subsystem_name;
+  class Builder;
 
   // Subsystem interface
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  static const std::string subsystem_name;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
 
   // Costructors / destructors
-  gui() = default;
-  ~gui() = default;
+  Gui() = default;
+  ~Gui() = default;
 
   // Member functions
   
-  static gui &instance();
+  static Gui &instance();
   
-  /**
-   * @brief Start a new frame
-   * To be called at each frame before rendering.
-   */
-  static void new_frame(types::framebuffer *fb, std::string name = "Game");
-  /**
-   * @brief Render the gui
-   * To be called at each frame after rendering.
-   */
+  static void new_frame(FrameBuffer *fb, std::string name = "Game");
   static void render();
 
 private:
@@ -62,14 +53,14 @@ private:
   
 };
 
-class gui::builder : public subsystem::builder
+class Gui::Builder : public Subsystem::Builder
 {
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder() = default;
+  ~Builder() = default;
   
-  brenta::subsystem &build() override;
+  brenta::Subsystem &build() override;
   
 };
   

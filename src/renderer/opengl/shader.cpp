@@ -9,41 +9,41 @@
 
 using namespace brenta;
 
-std::unordered_map<shader::name_t, unsigned int> shader::shaders;
+std::unordered_map<Shader::Name, Shader::Id> Shader::shaders;
 
-unsigned int shader::get_id(shader::name_t shader_name)
+Shader::Id Shader::get_id(Shader::Name shader_name)
 {
-  if (shader::shaders.find(shader_name) == shader::shaders.end())
+  if (Shader::shaders.find(shader_name) == Shader::shaders.end())
   {
     return 0;
   }
-  return shader::shaders.at(shader_name);
+  return Shader::shaders.at(shader_name);
 }
 
 // Use/activate the shader
-bool shader::use(shader::name_t shader_name)
+bool Shader::use(Shader::Name shader_name)
 {
-  glUseProgram(shader::get_id(shader_name));
+  glUseProgram(Shader::get_id(shader_name));
   
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::use: error using shader {}: {}", shader_name, err);
+    ERROR("Shader::use: error using shader {}: {}", shader_name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_bool(shader::name_t shader_name,
+bool Shader::set_bool(Shader::Name shader_name,
                       const GLchar *name,
                       bool value)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_bool: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_bool: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -53,23 +53,23 @@ bool shader::set_bool(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_bool: error setting bool value for shader {} with name {}: {}",
+    ERROR("Shader::set_bool: error setting bool value for shader {} with name {}: {}",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_int(shader::name_t shader_name,
+bool Shader::set_int(Shader::Name shader_name,
                      const GLchar *name,
                      int value)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_int: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_int: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -79,22 +79,22 @@ bool shader::set_int(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_int: error setting int value for shader '{}' with name '{}'",
+    ERROR("Shader::set_int: error setting int value for shader '{}' with name '{}'",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_float(shader::name_t shader_name,
+bool Shader::set_float(Shader::Name shader_name,
                        const GLchar *name, float value)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_float: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_float: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -104,23 +104,23 @@ bool shader::set_float(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_float: error setting float value for shader '{}' with name '{}': {}",
+    ERROR("Shader::set_float: error setting float value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_mat4(shader::name_t shader_name,
+bool Shader::set_mat4(Shader::Name shader_name,
                       const GLchar *name,
                       glm::mat4 value)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_mat4: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_mat4: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -130,23 +130,23 @@ bool shader::set_mat4(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_mat4: error setting mat4 value for shader '{}' with name '{}': {}",
+    ERROR("Shader::set_mat4: error setting mat4 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_vec3(shader::name_t shader_name,
+bool Shader::set_vec3(Shader::Name shader_name,
                       const GLchar *name,
                       float x, float y, float z)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_vec3: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_vec3: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -156,23 +156,23 @@ bool shader::set_vec3(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
+    ERROR("Shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::set_vec3(shader::name_t shader_name,
+bool Shader::set_vec3(Shader::Name shader_name,
                       const GLchar *name,
                       glm::vec3 value)
 {
-  GLuint program = shader::get_id(shader_name);
+  GLuint program = Shader::get_id(shader_name);
   GLint location = glGetUniformLocation(program, name);
 
   if (location == -1)
   {
-    ERROR("shader::set_vec3: uniform '{}' not found in shader '{}'",
+    ERROR("Shader::set_vec3: uniform '{}' not found in shader '{}'",
           name, shader_name);
     return false;
   }
@@ -182,14 +182,14 @@ bool shader::set_vec3(shader::name_t shader_name,
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
+    ERROR("Shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
           shader_name, name, err);
     return false;
   }
   return true;
 }
 
-bool shader::check_compile_errors(unsigned int shader, std::string type)
+bool Shader::check_compile_errors(Shader::Id shader, std::string type)
 {
   int success;
   char infoLog[1024];

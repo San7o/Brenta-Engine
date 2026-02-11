@@ -14,15 +14,15 @@ using namespace brenta;
 // Static variables
 //
 
-std::vector<std::reference_wrapper<subsystem>> engine::subsystems;
-const std::string engine::subsystem_name = "engine";
-bool engine::initialized = false;
+std::vector<std::reference_wrapper<Subsystem>> Engine::subsystems;
+const std::string Engine::subsystem_name = "engine";
+bool Engine::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> engine::initialize()
+std::expected<void, Subsystem::Error> Engine::initialize()
 {
   if (this->is_initialized()) return {};
   
@@ -30,16 +30,16 @@ std::expected<void, subsystem::error> engine::initialize()
   {
     auto ret = s.get().initialize();
     if (!ret.has_value())
-      return std::unexpected(engine::subsystem_name + ": failed to initialize "
+      return std::unexpected(Engine::subsystem_name + ": failed to initialize "
                              + s.get().name() + ": " + ret.error());
   }
 
-  engine::initialized = true;
-  INFO("{}: initialized", engine::subsystem_name);
+  Engine::initialized = true;
+  INFO("{}: initialized", Engine::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> engine::terminate()
+std::expected<void, Subsystem::Error> Engine::terminate()
 {
   if (!this->is_initialized()) return {};
   
@@ -50,90 +50,92 @@ std::expected<void, subsystem::error> engine::terminate()
     
     auto ret = s.get().terminate();
     if (!ret.has_value())
-      return std::unexpected(engine::subsystem_name + "failed to terminate "
+      return std::unexpected(Engine::subsystem_name + "failed to terminate "
                              + s.get().name() + ": " + ret.error());
   }
 
-  engine::initialized = false;
-  INFO("{}: terminated", engine::subsystem_name);
+  Engine::initialized = false;
+  INFO("{}: terminated", Engine::subsystem_name);
   return {};
 }
 
-std::string engine::name()
+std::string Engine::name()
 {
-  return engine::subsystem_name;
+  return Engine::subsystem_name;
 }
 
-bool engine::is_initialized()
+bool Engine::is_initialized()
 {
-  return engine::initialized;
+  return Engine::initialized;
 }
 
 //
 // Member functions
 //
 
-engine &engine::instance()
+Engine &Engine::instance()
 {
-  static brenta::engine _instance;
+  static brenta::Engine _instance;
   return _instance;
 }
 
-engine::manager engine::managed()
+Engine::Manager Engine::managed()
 {
-  return engine::manager();
+  return Engine::Manager();
 }
 
 std::expected<void, std::string>
-engine::with(subsystem::builder &&builder)
+Engine::with(Subsystem::Builder &&builder)
 {
-  std::reference_wrapper<brenta::subsystem> s = builder.build();
+  std::reference_wrapper<brenta::Subsystem> s = builder.build();
   if (!s.get().initialize().has_value())
     return std::unexpected(s.get().name());
-  engine::subsystems.push_back(s);
+  Engine::subsystems.push_back(s);
   return {};
 }
 
-engine::manager::manager()
+Engine::Manager::Manager()
 {
-  auto ret = engine::instance().initialize();
+  auto ret = Engine::instance().initialize();
   if (!ret.has_value())
   {
-    ERROR("engine::manager: failed to initialize subsystem, {}", ret.error());
-    throw std::runtime_error("engine::manager: failed to initialize subsystem,"
+    ERROR("Engine::Manager: failed to initialize subsystem, {}", ret.error());
+    throw std::runtime_error("Engine::Manager: failed to initialize subsystem,"
                              + ret.error());
   }
+  return;
 }
 
-engine::manager::~manager()
+Engine::Manager::~Manager()
 {
-  auto ret = engine::instance().terminate();
+  auto ret = Engine::instance().terminate();
   if (!ret.has_value())
   {
-    ERROR("engine::manager: failed to terminate subsystem, {}", ret.error());
+    ERROR("Engine::Manager: failed to terminate subsystem, {}", ret.error());
   }
+  return;
 }
 
 //
 // Builder
 //
 
-brenta::engine::builder&
-engine::builder::with(subsystem::builder &builder)
+brenta::Engine::Builder&
+Engine::Builder::with(Subsystem::Builder &builder)
 {
   this->subsystems.push_back(builder.build());
   return *this;
 }
 
-brenta::engine::builder&
-engine::builder::with(subsystem::builder &&builder)
+brenta::Engine::Builder&
+Engine::Builder::with(Subsystem::Builder &&builder)
 {
   this->subsystems.push_back(builder.build());
   return *this;
 }
 
-subsystem &engine::builder::build()
+Subsystem &Engine::Builder::build()
 {
-  engine::subsystems = this->subsystems;
-  return engine::instance();
+  Engine::subsystems = this->subsystems;
+  return Engine::instance();
 }

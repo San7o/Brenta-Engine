@@ -12,8 +12,8 @@ using namespace viotecs;
 
 struct CameraResource : resource
 {
-  brenta::camera *cam;
-  CameraResource(brenta::camera *c) : cam(c)
+  brenta::Camera *cam;
+  CameraResource(brenta::Camera *c) : cam(c)
   {
   }
 };

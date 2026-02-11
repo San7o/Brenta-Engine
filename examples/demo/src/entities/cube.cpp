@@ -17,14 +17,14 @@ using namespace brenta;
 
 void init_cube_entity()
 {
-  if (shader::get_id("cube_shader") == 0)
+  if (Shader::get_id("cube_shader") == 0)
   {
-    shader::create("cube_shader",
-                   shader::type::vertex, "examples/demo/shaders/shader.vs",
-                   shader::type::fragment, "examples/demo/shaders/shader.fs");
+    Shader::create("cube_shader",
+                   Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
+                   Shader::Type::Fragment, "examples/demo/shaders/shader.fs");
   }
 
-  model m = model::builder()
+  Model m = Model::Builder()
     .path("examples/assets/models/simple_cube/simple_cube.obj")
     .build();
 

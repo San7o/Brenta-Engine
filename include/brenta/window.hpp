@@ -27,28 +27,28 @@ namespace brenta
  * the window, get the window size, check if a key is pressed, get the
  * time since the start of the program, and more.
  */
-class window : public subsystem
+class Window : public Subsystem
 {
 public:
 
-  struct config;
-  class builder;
+  struct Config;
+  class Builder;
 
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
 
   // Constructors destructors
-  window() = default;
-  ~window() = default;
+  Window() = default;
+  ~Window() = default;
 
   // Member functions
   
   // Get a static instance of the window
-  static brenta::window &instance();
+  static brenta::Window &instance();
   
   //
   // Getters
@@ -86,8 +86,8 @@ public:
 
 private:
   
-  static const window::config default_config;
-  static window::config       init_config;
+  static const Window::Config default_config;
+  static Window::Config       init_config;
 
   static int          width;
   static int          height;
@@ -105,7 +105,7 @@ private:
                                         int width, int height);
 };
 
-struct window::config
+struct Window::Config
 {
 public:
   int width;
@@ -117,26 +117,26 @@ public:
   bool debug;
 };
   
-class window::builder : public subsystem::builder
+class Window::Builder : public Subsystem::Builder
 {
 private:
 
-  window::config conf = window::default_config;
+  Window::Config conf = Window::default_config;
   
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder() = default;
+  ~Builder() = default;
   
-  builder &width(int width);
-  builder &height(int height);
-  builder &title(const std::string &title);
-  builder &capture_mouse();
-  builder &msaa();
-  builder &vsync();
-  builder &debug(); // opengl debug errors, set this during development
+  Builder &width(int width);
+  Builder &height(int height);
+  Builder &title(const std::string &title);
+  Builder &capture_mouse();
+  Builder &msaa();
+  Builder &vsync();
+  Builder &debug(); // opengl debug errors, set this during development
   
-  subsystem &build() override;
+  Subsystem &build() override;
 };
   
 } // namespace brenta

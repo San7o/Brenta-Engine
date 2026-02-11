@@ -1,31 +1,27 @@
 var annotated_dup =
 [
     [ "brenta", null, [
-      [ "types", null, [
-        [ "buffer", "classbrenta_1_1types_1_1buffer.html", "classbrenta_1_1types_1_1buffer" ],
-        [ "character", "structbrenta_1_1types_1_1character.html", null ],
-        [ "framebuffer", "classbrenta_1_1types_1_1framebuffer.html", "classbrenta_1_1types_1_1framebuffer" ],
-        [ "translation", "classbrenta_1_1types_1_1translation.html", "classbrenta_1_1types_1_1translation" ],
-        [ "vao", "classbrenta_1_1types_1_1vao.html", "classbrenta_1_1types_1_1vao" ],
-        [ "vertex", "structbrenta_1_1types_1_1vertex.html", null ]
-      ] ],
-      [ "audio", "classbrenta_1_1audio.html", "classbrenta_1_1audio" ],
-      [ "camera", "classbrenta_1_1camera.html", "classbrenta_1_1camera" ],
-      [ "engine", "classbrenta_1_1engine.html", "classbrenta_1_1engine" ],
-      [ "gl", "classbrenta_1_1gl.html", "classbrenta_1_1gl" ],
-      [ "gui", "classbrenta_1_1gui.html", "classbrenta_1_1gui" ],
-      [ "input", "classbrenta_1_1input.html", "classbrenta_1_1input" ],
-      [ "logger", "classbrenta_1_1logger.html", "classbrenta_1_1logger" ],
-      [ "mesh", "classbrenta_1_1mesh.html", "classbrenta_1_1mesh" ],
-      [ "model", "classbrenta_1_1model.html", "classbrenta_1_1model" ],
-      [ "mouse", "classbrenta_1_1mouse.html", null ],
-      [ "particle_emitter", "classbrenta_1_1particle__emitter.html", "classbrenta_1_1particle__emitter" ],
-      [ "renderer", "classbrenta_1_1renderer.html", "classbrenta_1_1renderer" ],
-      [ "shader", "classbrenta_1_1shader.html", "classbrenta_1_1shader" ],
-      [ "subsystem", "classbrenta_1_1subsystem.html", "classbrenta_1_1subsystem" ],
-      [ "text", "classbrenta_1_1text.html", "classbrenta_1_1text" ],
-      [ "texture", "classbrenta_1_1texture.html", "classbrenta_1_1texture" ],
-      [ "time", "classbrenta_1_1time.html", "classbrenta_1_1time" ],
-      [ "window", "classbrenta_1_1window.html", "classbrenta_1_1window" ]
+      [ "Audio", "classbrenta_1_1Audio.html", "classbrenta_1_1Audio" ],
+      [ "Buffer", "classbrenta_1_1Buffer.html", null ],
+      [ "Camera", "classbrenta_1_1Camera.html", "classbrenta_1_1Camera" ],
+      [ "Engine", "classbrenta_1_1Engine.html", "classbrenta_1_1Engine" ],
+      [ "FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
+      [ "Gl", "classbrenta_1_1Gl.html", "classbrenta_1_1Gl" ],
+      [ "Gui", "classbrenta_1_1Gui.html", "classbrenta_1_1Gui" ],
+      [ "Input", "classbrenta_1_1Input.html", "classbrenta_1_1Input" ],
+      [ "Logger", "classbrenta_1_1Logger.html", "classbrenta_1_1Logger" ],
+      [ "Mesh", "classbrenta_1_1Mesh.html", "classbrenta_1_1Mesh" ],
+      [ "Model", "classbrenta_1_1Model.html", "classbrenta_1_1Model" ],
+      [ "Mouse", "classbrenta_1_1Mouse.html", null ],
+      [ "ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", "classbrenta_1_1ParticleEmitter" ],
+      [ "Renderer", "classbrenta_1_1Renderer.html", "classbrenta_1_1Renderer" ],
+      [ "Shader", "classbrenta_1_1Shader.html", "classbrenta_1_1Shader" ],
+      [ "Subsystem", "classbrenta_1_1Subsystem.html", "classbrenta_1_1Subsystem" ],
+      [ "Text", "classbrenta_1_1Text.html", "classbrenta_1_1Text" ],
+      [ "Texture", "classbrenta_1_1Texture.html", null ],
+      [ "Time", "classbrenta_1_1Time.html", null ],
+      [ "Translation", "classbrenta_1_1Translation.html", null ],
+      [ "Vao", "classbrenta_1_1Vao.html", "classbrenta_1_1Vao" ],
+      [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ]
     ] ]
 ];

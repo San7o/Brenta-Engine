@@ -12,6 +12,7 @@
 #include <iostream>
 #include <expected>
 #include <string>
+#include <filesystem>
 
 #define DEBUG(...)  OAK_DEBUG(__VA_ARGS__);
 #define INFO(...)   OAK_INFO(__VA_ARGS__);
@@ -21,58 +22,57 @@
 namespace brenta
 {
 
-class logger : public subsystem
+class Logger : public Subsystem
 {
 public:
 
-  struct config;
-  class builder;
+  struct Config;
+  class Builder;
   
-  static const std::string subsystem_name;
-
   // Subsystem interface
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  static const std::string subsystem_name;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
   
   // Constructors / destructors
-  logger() = default;
-  ~logger() = default;
+  Logger() = default;
+  ~Logger() = default;
 
   // Member functions
   
-  static logger &instance();
+  static Logger &instance();
   
 private:
   
-  static const config   default_config;
-  static config         init_config;
+  static const Config   default_config;
+  static Config         init_config;
   static bool           initialized;
   
 };
 
-struct logger::config
+struct Logger::Config
 {
-  oak::level  log_level;
-  std::string log_file;
+  oak::level            log_level;
+  std::filesystem::path log_file;
 };
 
-class logger::builder : public subsystem::builder
+class Logger::Builder : public Subsystem::Builder
 {
 private:
 
-  logger::config conf = logger::default_config;
+  Logger::Config conf = Logger::default_config;
   
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder()  = default;
+  ~Builder() = default;
 
-  builder &level(oak::level log_level);
-  builder &file(std::string out_file);
+  Builder &level(oak::level log_level);
+  Builder &file(std::filesystem::path out_file);
   
-  subsystem &build();
+  Subsystem &build();
 };
   
 } // namespace brenta

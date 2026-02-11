@@ -6,37 +6,37 @@ Giovanni Santini in the summer of 2024, the name is inspired by the
 Brenta Dolimites in the Italian Alps.
 
 ```c++
-#include <brenta/engine.hpp>
+#include <brenta/brenta.hpp>
 
 int main()
 {
 
   // Setup
   
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("load opengl test")
           .width(screen_width)
           .height(screen_height))
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
 
   // Loop
   
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
     
     // Update logic...
     // Draw...
-    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::clear();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

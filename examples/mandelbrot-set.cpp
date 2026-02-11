@@ -4,13 +4,13 @@
 // Github:  @San7o
 
 #include <brenta/brenta.hpp>
-#include <iostream>
+
 #include <viotecs/viotecs.hpp>
+REGISTER_SYSTEMS()
+
+#include <iostream>
 
 using namespace brenta;
-using namespace brenta::types;
-
-REGISTER_SYSTEMS()
 
 int main()
 {
@@ -18,25 +18,25 @@ int main()
   // Setup
   //
   
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("mandelbrot set")
           .width(800)
           .height(600)
           .vsync()
           .debug())
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(input::builder())
-    .with(gui::builder())
+    .with(Input::Builder())
+    .with(Gui::Builder())
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
 
   // A square
   float vertices[] = {// First Triangle
@@ -44,57 +44,57 @@ int main()
 
                       // Second Triangle
                       -1.0f, 1.0f, 0.0f, -1.0f, -1.0f, 0.0f, 1.0f, -1.0f, 0.0f};
-  vao v;
+  Vao v;
   v.init();
   v.bind();
-  buffer vbo;
+  Buffer vbo;
   vbo.init(GL_ARRAY_BUFFER);
   vbo.bind();
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  shader::create("fractal",
-                 shader::type::vertex, "examples/mandelbrot.vs",
-                 shader::type::fragment, "examples/mandelbrot.fs");
+  Shader::create("fractal",
+                 Shader::Type::Vertex, "examples/mandelbrot.vs",
+                 Shader::Type::Fragment, "examples/mandelbrot.fs");
 
-  framebuffer fb(window::get_width(), window::get_height());
+  FrameBuffer fb(Window::get_width(), Window::get_height());
 
-  float zoom = 1.0f;
-  glm::vec3 offset = glm::vec3(-0.11f, -0.11f, 0.0f);
-  glm::vec3 constant = glm::vec3(0.350f, 0.467f, 0.0f);
-  bool animate = false;
-  bool julia = false;
-  float animation_speed = 0.5;
-  int max_iterations = 100;
+  float     zoom            = 1.0f;
+  glm::vec3 offset          = glm::vec3(-0.11f, -0.11f, 0.0f);
+  glm::vec3 constant        = glm::vec3(0.350f, 0.467f, 0.0f);
+  bool      animate         = false;
+  bool      julia           = false;
+  float     animation_speed = 0.5;
+  int       max_iterations  = 100;
 
-  while (!window::should_close())
+  while (!Window::should_close())
   {
-    window::poll_events();
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    Window::poll_events();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
     // Use arrows to move the fractal
-    if (window::is_key_pressed(GLFW_KEY_Z))
+    if (Window::is_key_pressed(GLFW_KEY_Z))
       zoom += 0.01f;
-    if (window::is_key_pressed(GLFW_KEY_X))
+    if (Window::is_key_pressed(GLFW_KEY_X))
       zoom -= 0.01f;
-    if (window::is_key_pressed(GLFW_KEY_LEFT))
+    if (Window::is_key_pressed(GLFW_KEY_LEFT))
       offset.x -= 0.005f / pow(zoom, 4.0);
-    if (window::is_key_pressed(GLFW_KEY_RIGHT))
+    if (Window::is_key_pressed(GLFW_KEY_RIGHT))
       offset.x += 0.005f / pow(zoom, 4.0);
-    if (window::is_key_pressed(GLFW_KEY_UP))
+    if (Window::is_key_pressed(GLFW_KEY_UP))
       offset.y += 0.005f / pow(zoom, 4.0);
-    if (window::is_key_pressed(GLFW_KEY_DOWN))
+    if (Window::is_key_pressed(GLFW_KEY_DOWN))
       offset.y -= 0.005f / pow(zoom, 4.0);
 
     // Vary constant over time
     if (animate)
     {
-      constant.x = sin(window::get_time().get_elapsed() * animation_speed);
-      constant.y = cos(window::get_time().get_elapsed() * animation_speed);
+      constant.x = sin(Window::get_time().get_elapsed() * animation_speed);
+      constant.y = cos(Window::get_time().get_elapsed() * animation_speed);
     }
 
 #ifdef BRENTA_USE_IMGUI
-    gui::new_frame(&fb, "Mandlebrot");
+    Gui::new_frame(&fb, "Mandlebrot");
     ImGui::Begin("Fractal");
     ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);
     ImGui::SliderInt("Max iterations", &max_iterations, 1, 1000);
@@ -109,29 +109,29 @@ int main()
     ImGui::End();
 #endif
     fb.bind();
-    gl::clear();
+    Gl::clear();
 
     // Render here
     v.bind();
-    shader::use("fractal");
-    shader::set_vec3("fractal", "resolution",
-                     glm::vec3(float(window::get_width()),
-                               float(window::get_height()), 0.0f));
-    shader::set_vec3("fractal", "offset", offset);
-    shader::set_float("fractal", "zoom", zoom);
-    shader::set_vec3("fractal", "constant", constant);
-    shader::set_bool("fractal", "juliaSet", julia);
-    shader::set_int("fractal", "maxIterations", max_iterations);
+    Shader::use("fractal");
+    Shader::set_vec3("fractal", "resolution",
+                     glm::vec3(float(Window::get_width()),
+                               float(Window::get_height()), 0.0f));
+    Shader::set_vec3("fractal", "offset", offset);
+    Shader::set_float("fractal", "zoom", zoom);
+    Shader::set_vec3("fractal", "constant", constant);
+    Shader::set_bool("fractal", "juliaSet", julia);
+    Shader::set_int("fractal", "maxIterations", max_iterations);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    gl::check_error();
+    Gl::check_error();
 
     v.unbind();
     fb.unbind();
 #ifdef BRENTA_USE_IMGUI
-    gui::render();
+    Gui::render();
 #endif
 
-    window::swap_buffers();
+    Window::swap_buffers();
   }
   return 0;
 }

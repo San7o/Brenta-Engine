@@ -106,112 +106,70 @@ $(document).ready(function(){initNavTree('translation_8cpp_source.html',''); ini
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span> </div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;brenta/renderer/translation.hpp&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span>brenta::types;</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">using namespace </span>brenta;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="}">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#afecb68e967e5cb9f92439525c27d1aab">   10</a></span><a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#afecb68e967e5cb9f92439525c27d1aab">translation::translation</a>()</div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> Translation::set_view(glm::mat4 view)</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a8dce4bd89b80ec46c4423e19d9e53bb1">view</a> = glm::mat4(1.0f);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">projection</a> = glm::mat4(1.0f);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::mat4(1.0f);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
-</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="foldopen" id="foldopen00017" data-start="{" data-end="}">
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#ade39e929cc08e02c2ffda513682b32c9">   17</a></span><a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#afecb68e967e5cb9f92439525c27d1aab">translation::translation</a>(glm::mat4 view, glm::mat4 projection, glm::mat4 <a class="code hl_class" href="classbrenta_1_1model.html">model</a>)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  this-&gt;view = view;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="keywordtype">void</span> Translation::set_projection(<span class="keywordtype">int</span> window_width, <span class="keywordtype">int</span> window_height,</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>                                 <span class="keywordtype">float</span> fov, <span class="keywordtype">float</span> near, <span class="keywordtype">float</span> far)</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  this-&gt;view = <a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a8dce4bd89b80ec46c4423e19d9e53bb1">view</a>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  this-&gt;projection = <a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">projection</a>;</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  this-&gt;model = <a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a31e6ef1e3a598b3f4b889cfc8ddc2838">model</a>;</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
-</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="foldopen" id="foldopen00024" data-start="{" data-end="}">
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783">   24</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783">translation::set_view</a>(glm::mat4 view)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  this-&gt;view = <a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a8dce4bd89b80ec46c4423e19d9e53bb1">view</a>;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>
-</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="foldopen" id="foldopen00029" data-start="{" data-end="}">
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#acbb926632cc226b46f15c1dc64613c9c">   29</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8">translation::set_projection</a>(<span class="keywordtype">int</span> window_width, <span class="keywordtype">int</span> window_height,</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                                 <span class="keywordtype">float</span> fov, <span class="keywordtype">float</span> near, <span class="keywordtype">float</span> far)</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">projection</a> = glm::perspective(</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    glm::radians(fov),</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    (<span class="keywordtype">float</span>) window_width / (<span class="keywordtype">float</span>) window_height, near, far);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  this-&gt;projection = glm::perspective(</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    glm::radians(fov),</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    (<span class="keywordtype">float</span>) window_width / (<span class="keywordtype">float</span>) window_height, near, far);</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>}</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="keywordtype">void</span> Translation::set_projection(glm::mat4 projection)</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  this-&gt;projection = projection;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>}</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keywordtype">void</span> Translation::set_model(glm::mat4 new_model)</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  this-&gt;model = new_model;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>}</div>
-</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="foldopen" id="foldopen00037" data-start="{" data-end="}">
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8">   37</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8">translation::set_projection</a>(glm::mat4 projection)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keywordtype">void</span> Translation::translate(glm::vec3 translation)</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  this-&gt;projection = <a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">projection</a>;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>}</div>
-</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="foldopen" id="foldopen00042" data-start="{" data-end="}">
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b">   42</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b">translation::set_model</a>(glm::mat4 new_model)</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>{</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = new_model;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
-</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="}">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#ae01bf699306b8387b78d195944e705b1">   47</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#ae01bf699306b8387b78d195944e705b1">translation::translate</a>(glm::vec3 <a class="code hl_class" href="classbrenta_1_1types_1_1translation.html">translation</a>)</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::translate(this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>, <a class="code hl_class" href="classbrenta_1_1types_1_1translation.html">translation</a>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
-</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="comment">// Note: the order of rotations is important</span></div>
-<div class="foldopen" id="foldopen00053" data-start="{" data-end="}">
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#aff34ae715263b7d242691bbd79439d48">   53</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#aff34ae715263b7d242691bbd79439d48">translation::rotate</a>(glm::vec3 rotation)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>{</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::rotate(this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>, glm::radians(rotation.x),</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                            glm::vec3(1.0f, 0.0f, 0.0f));</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::rotate(this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>, glm::radians(rotation.y),</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                            glm::vec3(0.0f, 1.0f, 0.0f));</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::rotate(this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>, glm::radians(rotation.z),</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                            glm::vec3(0.0f, 0.0f, 1.0f));</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>}</div>
-</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="}">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#aefbf3fd757116bc606426d856b3c8f32">   63</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#aefbf3fd757116bc606426d856b3c8f32">translation::scale</a>(<span class="keywordtype">float</span> scale)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a> = glm::scale(this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>, glm::vec3(<a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#aefbf3fd757116bc606426d856b3c8f32">scale</a>));</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>}</div>
-</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="foldopen" id="foldopen00068" data-start="{" data-end="}">
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno"><a class="line" href="classbrenta_1_1types_1_1translation.html#af532d6c2c1d391b6d6d085385b6cf4d3">   68</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1types_1_1translation.html#af532d6c2c1d391b6d6d085385b6cf4d3">translation::set_shader</a>(shader::name_t shader_name)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>{</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classbrenta_1_1shader.html#a11f7e52dcdc3a92ea8e9f2bbcdc3bffe">shader::use</a>(shader_name))</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordflow">if</span> (!shader::set_mat4(shader_name, <span class="stringliteral">&quot;view&quot;</span>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a8dce4bd89b80ec46c4423e19d9e53bb1">view</a>) ||</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>      !shader::set_mat4(shader_name, <span class="stringliteral">&quot;projection&quot;</span>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">projection</a>) ||</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>      !shader::set_mat4(shader_name, <span class="stringliteral">&quot;model&quot;</span>, this-&gt;<a class="code hl_class" href="classbrenta_1_1model.html">model</a>))</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>}</div>
-</div>
-<div class="ttc" id="aclassbrenta_1_1model_html"><div class="ttname"><a href="classbrenta_1_1model.html">brenta::model</a></div><div class="ttdoc">Model class.</div><div class="ttdef"><b>Definition</b> <a href="model_8hpp_source.html#l00028">model.hpp:29</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1shader_html_a11f7e52dcdc3a92ea8e9f2bbcdc3bffe"><div class="ttname"><a href="classbrenta_1_1shader.html#a11f7e52dcdc3a92ea8e9f2bbcdc3bffe">brenta::shader::use</a></div><div class="ttdeci">static bool use(shader::name_t shader_name)</div><div class="ttdoc">Use the shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8cpp_source.html#l00024">shader.cpp:24</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html">brenta::types::translation</a></div><div class="ttdoc">Translation util class.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00027">translation.hpp:28</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a13e05614c6b1442dd070659978548de8"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a13e05614c6b1442dd070659978548de8">brenta::types::translation::set_projection</a></div><div class="ttdeci">void set_projection(glm::mat4 projection)</div><div class="ttdoc">Set the projection matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00037">translation.cpp:37</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a2b77af11717c7741cd03669a69b49551"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a2b77af11717c7741cd03669a69b49551">brenta::types::translation::projection</a></div><div class="ttdeci">glm::mat4 projection</div><div class="ttdoc">Camera projection matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00037">translation.hpp:37</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a31e6ef1e3a598b3f4b889cfc8ddc2838"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a31e6ef1e3a598b3f4b889cfc8ddc2838">brenta::types::translation::model</a></div><div class="ttdeci">glm::mat4 model</div><div class="ttdoc">Object position matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00041">translation.hpp:41</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a642930c13558b86b7110dcdf81456b2b"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a642930c13558b86b7110dcdf81456b2b">brenta::types::translation::set_model</a></div><div class="ttdeci">void set_model(glm::mat4 model)</div><div class="ttdoc">Set the model matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00042">translation.cpp:42</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a8a667a1751bb36beb4b73d11655a2783"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a8a667a1751bb36beb4b73d11655a2783">brenta::types::translation::set_view</a></div><div class="ttdeci">void set_view(glm::mat4 view)</div><div class="ttdoc">Set the view matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00024">translation.cpp:24</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_a8dce4bd89b80ec46c4423e19d9e53bb1"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#a8dce4bd89b80ec46c4423e19d9e53bb1">brenta::types::translation::view</a></div><div class="ttdeci">glm::mat4 view</div><div class="ttdoc">Camera view matrix.</div><div class="ttdef"><b>Definition</b> <a href="translation_8hpp_source.html#l00033">translation.hpp:33</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_ae01bf699306b8387b78d195944e705b1"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#ae01bf699306b8387b78d195944e705b1">brenta::types::translation::translate</a></div><div class="ttdeci">void translate(glm::vec3 translation)</div><div class="ttdoc">Translate the object.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00047">translation.cpp:47</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_aefbf3fd757116bc606426d856b3c8f32"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#aefbf3fd757116bc606426d856b3c8f32">brenta::types::translation::scale</a></div><div class="ttdeci">void scale(float scale)</div><div class="ttdoc">Scale the object.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00063">translation.cpp:63</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_af532d6c2c1d391b6d6d085385b6cf4d3"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#af532d6c2c1d391b6d6d085385b6cf4d3">brenta::types::translation::set_shader</a></div><div class="ttdeci">bool set_shader(shader::name_t shader_name)</div><div class="ttdoc">Set the shader.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00068">translation.cpp:68</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_afecb68e967e5cb9f92439525c27d1aab"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#afecb68e967e5cb9f92439525c27d1aab">brenta::types::translation::translation</a></div><div class="ttdeci">translation()</div><div class="ttdoc">Translation constructor.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00010">translation.cpp:10</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1translation_html_aff34ae715263b7d242691bbd79439d48"><div class="ttname"><a href="classbrenta_1_1types_1_1translation.html#aff34ae715263b7d242691bbd79439d48">brenta::types::translation::rotate</a></div><div class="ttdeci">void rotate(glm::vec3 rotation)</div><div class="ttdoc">Rotate the object.</div><div class="ttdef"><b>Definition</b> <a href="translation_8cpp_source.html#l00053">translation.cpp:53</a></div></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  this-&gt;model = glm::translate(this-&gt;model, translation);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="comment">// Note: the order of rotations is important</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keywordtype">void</span> Translation::rotate(glm::vec3 rotation)</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>{</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  this-&gt;model = glm::rotate(this-&gt;model, glm::radians(rotation.x),</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>                            glm::vec3(1.0f, 0.0f, 0.0f));</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  this-&gt;model = glm::rotate(this-&gt;model, glm::radians(rotation.y),</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>                            glm::vec3(0.0f, 1.0f, 0.0f));</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  this-&gt;model = glm::rotate(this-&gt;model, glm::radians(rotation.z),</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                            glm::vec3(0.0f, 0.0f, 1.0f));</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>}</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="keywordtype">void</span> Translation::scale(<span class="keywordtype">float</span> scale)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>{</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  this-&gt;model = glm::scale(this-&gt;model, glm::vec3(scale));</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>}</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span><span class="keywordtype">bool</span> Translation::set_shader(Shader::Name shader_name)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>{</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordflow">if</span> (!<a class="code hl_function" href="classbrenta_1_1Shader.html#a5627acfb8b8c35dfb9b8ea625d13dffd">Shader::use</a>(shader_name))</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">if</span> (!Shader::set_mat4(shader_name, <span class="stringliteral">&quot;view&quot;</span>, this-&gt;view) ||</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>      !Shader::set_mat4(shader_name, <span class="stringliteral">&quot;projection&quot;</span>, this-&gt;projection) ||</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>      !Shader::set_mat4(shader_name, <span class="stringliteral">&quot;model&quot;</span>, this-&gt;model))</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>}</div>
+<div class="ttc" id="aclassbrenta_1_1Shader_html_a5627acfb8b8c35dfb9b8ea625d13dffd"><div class="ttname"><a href="classbrenta_1_1Shader.html#a5627acfb8b8c35dfb9b8ea625d13dffd">brenta::Shader::use</a></div><div class="ttdeci">static bool use(Shader::Name shader_name)</div><div class="ttdoc">Use the shader.</div><div class="ttdef"><b>Definition</b> <a href="shader_8cpp_source.html#l00024">shader.cpp:24</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

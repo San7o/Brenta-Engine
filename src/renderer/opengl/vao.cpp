@@ -6,54 +6,55 @@
 #include <brenta/renderer/opengl/vao.hpp>
 #include <brenta/logger.hpp>
 
-using namespace brenta::types;
+using namespace brenta;
 
-vao::vao()
-{
-}
-
-vao::~vao()
+Vao::~Vao()
 {
   this->destroy();
+  return;
 }
 
-void vao::init()
+void Vao::init()
 {
-  glGenVertexArrays(1, &this->vao_id);
-  DEBUG("vao: initialized");
+  glGenVertexArrays(1, &this->id);
+  DEBUG("Vao: initialized");
+  return;
 }
 
-void vao::destroy()
+void Vao::destroy()
 {
   if (this->get_id() == 0) return;
 
-  glDeleteVertexArrays(1, &this->vao_id);
-  DEBUG("vao: destroyed");
+  glDeleteVertexArrays(1, &this->id);
+  DEBUG("Vao: destroyed");
+  return;
 }
 
-void vao::bind() const
+void Vao::bind() const
 {
   if (this->get_id() == 0)
   {
-    ERROR("vao::bind: not initialized");
+    ERROR("Vao::bind: not initialized");
     return;
   }
   glBindVertexArray(this->get_id());
+  return;
 }
 
-void vao::unbind() const
+void Vao::unbind() const
 {
   glBindVertexArray(0);
+  return;
 }
 
-unsigned int vao::get_id() const
+unsigned int Vao::get_id() const
 {
-  if (vao_id == 0)
+  if (id == 0)
     return 0;
-  return vao_id;
+  return id;
 }
 
-void vao::set_vertex_data(buffer &buffer, unsigned int index, GLint size,
+void Vao::set_vertex_data(Buffer &buffer, unsigned int index, GLint size,
                           GLenum type, GLboolean normalized, GLsizei stride,
                           const void *pointer)
 {
@@ -63,4 +64,6 @@ void vao::set_vertex_data(buffer &buffer, unsigned int index, GLint size,
   glEnableVertexAttribArray(index);
   buffer.unbind();
   this->unbind();
+
+  return;
 }

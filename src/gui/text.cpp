@@ -14,98 +14,99 @@ using namespace brenta;
 // Static variables
 //
 
-shader::name_t text::shader_name;
-types::vao text::vao;
-types::buffer text::vbo;
-std::map<char, types::character> text::characters;
-const std::string text::subsystem_name = "text";
-const text::config text::default_config = {
+bool              Text::initialized = false;
+Shader::Name      Text::shader_name;
+Vao               Text::vao;
+Buffer            Text::vbo;
+const std::string Text::subsystem_name = "text";
+Text::Config      Text::init_config = default_config;
+std::map<char, Text::Character> Text::characters;
+const Text::Config Text::default_config = {
   "examples/assets/fonts/arial.ttf",
   48,
 };
-text::config text::init_config = default_config;
-bool text::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> text::initialize()
+std::expected<void, Subsystem::Error> Text::initialize()
 {
   if (this->is_initialized()) return {};
   
-  text::vbo.init(GL_ARRAY_BUFFER);
-  text::vao.init();
-  text::vao.bind();
-  if (text::init_config.font_path != "")
-    load(text::init_config.font_path, text::init_config.font_size);
+  Text::vbo.init(GL_ARRAY_BUFFER);
+  Text::vao.init();
+  Text::vao.bind();
+  if (Text::init_config.font_path != "")
+    load(Text::init_config.font_path, Text::init_config.font_size);
 
-  text::initialized = true;
-  INFO("{}: initialized", text::subsystem_name);
+  Text::initialized = true;
+  INFO("{}: initialized", Text::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> text::terminate()
+std::expected<void, Subsystem::Error> Text::terminate()
 {
   if (!this->is_initialized()) return {};
 
-  text::initialized = false;
-  INFO("{}: text terminated", text::subsystem_name);
+  Text::initialized = false;
+  INFO("{}: text terminated", Text::subsystem_name);
   return {};
 }
 
-std::string text::name()
+std::string Text::name()
 {
-  return text::subsystem_name;
+  return Text::subsystem_name;
 }
 
-bool text::is_initialized()
+bool Text::is_initialized()
 {
-  return text::initialized;
+  return Text::initialized;
 }
 
 //
 // Member functions
 //
 
-text &text::instance()
+Text &Text::instance()
 {
-  static text _text;
+  static Text _text;
   return _text;
 }
 
-void text::load(std::string font_path, int font_size)
+void Text::load(const std::filesystem::path &font_path, int font_size)
 {
-  if (text::vao.get_id() == 0)
+  if (Text::vao.get_id() == 0)
   {
-    ERROR("{}: not initialized", text::subsystem_name);
+    ERROR("{}: not initialized", Text::subsystem_name);
     return;
   }
   FT_Library ft;
   if (FT_Init_FreeType(&ft))
   {
-    ERROR("{}: could not init FreeType library", text::subsystem_name);
+    ERROR("{}: could not init FreeType library", Text::subsystem_name);
     return;
   }
 
-  shader::create("TextShader",
-                 shader::type::vertex, "src/renderer/shaders/text.vs",
-                 shader::type::fragment, "src/renderer/shaders/text.fs");
-  text::shader_name = "TextShader";
-  shader::use(text::shader_name);
+  Shader::create("TextShader",
+                 Shader::Type::Vertex,   "src/renderer/shaders/text.vs",
+                 Shader::Type::Fragment, "src/renderer/shaders/text.fs");
+  Text::shader_name = "TextShader";
+  Shader::use(Text::shader_name);
 
   // find path to font
-  std::string font_name = font_path;
-  if (font_name.empty())
+  if (font_path.empty())
   {
-    ERROR("{}: could not find font", text::subsystem_name);
+    ERROR("{}: could not find font at path {}",
+          Text::subsystem_name, font_path.c_str());
     return;
   }
 
   FT_Face face;
-  if (FT_New_Face(ft, font_name.c_str(), 0, &face))
+  if (FT_New_Face(ft, font_path.c_str(), 0, &face))
   {
-    ERROR("{}: could not load font", text::subsystem_name);
+    ERROR("{}: could not load font at path {}",
+          Text::subsystem_name, font_path.c_str());
     return;
   }
   else
@@ -122,13 +123,13 @@ void text::load(std::string font_path, int font_size)
       // Load character glyph
       if (FT_Load_Char(face, c, FT_LOAD_RENDER))
       {
-        ERROR("{}: could not load glyph", text::subsystem_name);
+        ERROR("{}: could not load glyph", Text::subsystem_name);
         continue;
       }
       // generate texture
       unsigned int texture;
       glGenTextures(1, &texture);
-      texture::bind_id(GL_TEXTURE_2D, texture);
+      Texture::bind_id(GL_TEXTURE_2D, texture);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width,
                    face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
                    face->glyph->bitmap.buffer);
@@ -138,58 +139,58 @@ void text::load(std::string font_path, int font_size)
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       // now store character for later use
-      types::character character_ = {
+      Text::Character character = {
         texture,
         glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
         glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
         static_cast<unsigned int>(face->glyph->advance.x)};
-      characters.insert(std::pair<char, types::character>(c, character_));
+      characters.insert(std::pair<char, Text::Character>(c, character));
     }
-    texture::bind_id(GL_TEXTURE_2D, 0);
+    Texture::bind_id(GL_TEXTURE_2D, 0);
   }
   // destroy FreeType once we're finished
   FT_Done_Face(face);
   FT_Done_FreeType(ft);
 
   // configure VAO/VBO for texture quads
-  text::vao.bind();
-  text::vbo.bind();
+  Text::vao.bind();
+  Text::vbo.bind();
   glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6 * 4, NULL, GL_DYNAMIC_DRAW);
   glEnableVertexAttribArray(0);
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
-  text::vbo.unbind();
-  text::vao.unbind();
+  Text::vbo.unbind();
+  Text::vao.unbind();
 }
 
-void text::render_text(std::string text, float x, float y, float scale,
+void Text::render_text(std::string text, float x, float y, float scale,
                        glm::vec3 color)
 {
-  if (text::vao.get_id() == 0)
+  if (Text::vao.get_id() == 0)
   {
-    ERROR("{}: not initialized", text::subsystem_name);
+    ERROR("{}: not initialized", Text::subsystem_name);
     return;
   }
 
-  shader::use(text::shader_name);
-  unsigned int textShaderId = shader::get_id(text::shader_name);
+  Shader::use(Text::shader_name);
+  unsigned int textShaderId = Shader::get_id(Text::shader_name);
 
   glUniform3f(glGetUniformLocation(textShaderId, "textColor"), color.x, color.y,
               color.z);
 
   glm::mat4 projection =
-    glm::ortho(0.0f, static_cast<float>(window::get_width()), 0.0f,
-               static_cast<float>(window::get_height()));
+    glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
+               static_cast<float>(Window::get_height()));
   glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1,
                      GL_FALSE, glm::value_ptr(projection));
 
   glActiveTexture(GL_TEXTURE0);
-  text::vao.bind();
+  Text::vao.bind();
 
   // iterate through all characters
   std::string::const_iterator c;
   for (c = text.begin(); c != text.end(); c++)
   {
-    types::character ch = characters[*c];
+    Text::Character ch = characters[*c];
 
     float xpos = x + ch.bearing.x * scale;
     float ypos = y - (ch.size.y - ch.bearing.y) * scale;
@@ -210,7 +211,7 @@ void text::render_text(std::string text, float x, float y, float scale,
     glBindTexture(GL_TEXTURE_2D, ch.texture_id);
 
     // update content of VBO memory
-    glBindBuffer(GL_ARRAY_BUFFER, text::vbo.id);
+    glBindBuffer(GL_ARRAY_BUFFER, Text::vbo.id);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -223,26 +224,27 @@ void text::render_text(std::string text, float x, float y, float scale,
   }
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);
+  return;
 }
 
 //
 // Builder
 //
 
-text::builder &text::builder::font(const std::string &font_path)
+Text::Builder &Text::Builder::font(const std::filesystem::path &font_path)
 {
   this->conf.font_path = font_path;
   return *this;
 }
 
-text::builder &text::builder::size(int font_size)
+Text::Builder &Text::Builder::size(int font_size)
 {
   this->conf.font_size = font_size;
   return *this;
 }
 
-subsystem &text::builder::build()
+Subsystem &Text::Builder::build()
 {
-  text::init_config = this->conf;
-  return text::instance();
+  Text::init_config = this->conf;
+  return Text::instance();
 }

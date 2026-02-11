@@ -11,11 +11,10 @@
 #include <stdexcept>
 
 using namespace brenta;
-using namespace brenta::types;
 
-framebuffer::framebuffer(int width, int height, GLenum format)
+FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
 {
-  this->format = format;
+  this->color_format = color_format;
 
   glGenFramebuffers(1, &this->id);
   if (this->id == 0)
@@ -35,7 +34,7 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
   check_error();
 
-  glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGB,
+  glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0, GL_RGB,
                GL_UNSIGNED_BYTE, NULL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -58,33 +57,38 @@ framebuffer::framebuffer(int width, int height, GLenum format)
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   glBindTexture(GL_TEXTURE_2D, 0);
   glBindRenderbuffer(GL_RENDERBUFFER, 0);
+  return;
 }
 
-framebuffer::~framebuffer()
+FrameBuffer::~FrameBuffer()
 {
   glDeleteFramebuffers(1, &this->id);
   glDeleteTextures(1, &this->texture_id);
+  return;
 }
 
-void framebuffer::bind()
+void FrameBuffer::bind()
 {
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   check_error();
+  return;
 }
 
-void framebuffer::unbind()
+void FrameBuffer::unbind()
 {
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   check_error();
+  return;
 }
 
-void framebuffer::destroy()
+void FrameBuffer::destroy()
 {
   glDeleteFramebuffers(1, &this->id);
   glDeleteTextures(1, &this->texture_id);
+  return;
 }
 
-void framebuffer::rescale(int width, int height)
+void FrameBuffer::rescale(int width, int height)
 {
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
@@ -96,7 +100,7 @@ void framebuffer::rescale(int width, int height)
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
   check_error();
 
-  glTexImage2D(GL_TEXTURE_2D, 0, this->format, width, height, 0, GL_RGBA,
+  glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0, GL_RGBA,
                GL_UNSIGNED_BYTE, NULL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -110,10 +114,12 @@ void framebuffer::rescale(int width, int height)
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
                             GL_RENDERBUFFER, this->render_buffer_id);
 
-  window::set_width_height(width, height);
+  Window::set_width_height(width, height);
+  return;
 }
 
-void framebuffer::set_format(GLenum format)
+void FrameBuffer::set_color_format(GLenum color_format)
 {
-  this->format = format;
+  this->color_format = color_format;
+  return;
 }

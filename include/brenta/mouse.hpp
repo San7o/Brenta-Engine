@@ -8,13 +8,13 @@
 namespace brenta
 {
 
-class mouse
+class Mouse
 {
 public:
 
-  mouse() = default;
-  mouse(float x, float y) : x(x), y(y) {}
-  mouse(float x, float y, float sensitivity)
+  Mouse() = default;
+  Mouse(float x, float y) : x(x), y(y) {}
+  Mouse(float x, float y, float sensitivity)
     : x(x), y(y), sensitivity(sensitivity) {}
   
   // Getters

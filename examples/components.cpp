@@ -24,11 +24,11 @@ using namespace viotecs;
 
 struct PhysicsComponent : component
 {
-  float mass;
-  float density;
+  float     mass;
+  float     density;
   glm::vec3 velocity;
   glm::vec3 acceleration;
-  bool isElastic;
+  bool      isElastic;
 
   PhysicsComponent()
       : mass(0.0f), density(0.0f), velocity(glm::vec3(0.0f)),
@@ -54,7 +54,7 @@ struct TransformComponent : component
 {
   glm::vec3 position;
   glm::vec3 rotation;
-  float scale;
+  float     scale;
 
   TransformComponent()
       : position(glm::vec3(0.0f)), rotation(glm::vec3(0.0f)), scale(1.0f)
@@ -76,7 +76,7 @@ struct PointLightComponent : component
   float linear;
   float quadratic;
   float strength;
-  std::vector<brenta::shader::name_t> shaders;
+  std::vector<brenta::Shader::Name> shaders;
 
   PointLightComponent()
       : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
@@ -87,7 +87,7 @@ struct PointLightComponent : component
   PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular,
                       float constant, float linear, float quadratic,
                       float strength,
-                      std::vector<brenta::shader::name_t> shaders)
+                      std::vector<brenta::Shader::Name> shaders)
       : ambient(ambient), diffuse(diffuse), specular(specular),
         constant(constant), linear(linear), quadratic(quadratic),
         strength(strength), shaders(shaders)

@@ -9,7 +9,7 @@
 
 using namespace brenta;
 
-const model::config model::default_config = {
+const Model::Config Model::default_config = {
   "",
   GL_REPEAT,
   GL_NEAREST,
@@ -20,7 +20,7 @@ const model::config model::default_config = {
   true,
 };
 
-model::model(config conf)
+Model::Model(Config conf)
 {
   this->wrapping = conf.wrapping;
   this->filtering_min = conf.filtering_min;
@@ -33,14 +33,16 @@ model::model(config conf)
 
   this->init();
   DEBUG("model: initialized");
+  return;
 }
 
-model::~model()
+Model::~Model()
 {
   DEBUG("model: destroyed");
+  return;
 }
 
-void model::init()
+void Model::init()
 {
   // Load with assimp
   Assimp::Importer importer;
@@ -53,20 +55,22 @@ void model::init()
           importer.GetErrorString());
     return;
   }
-  directory = this->path.substr(0, this->path.find_last_of('/'));
+  this->directory = this->path.parent_path();
 
   process_node(scene->mRootNode, scene);
+  return;
 }
 
-void model::draw(shader::name_t shader) const
+void Model::draw(Shader::Name shader) const
 {
   for (unsigned int i = 0; i < meshes.size(); i++)
   {
     meshes[i].draw(shader);
   }
+  return;
 }
 
-void model::process_node(aiNode *node, const aiScene *scene)
+void Model::process_node(aiNode *node, const aiScene *scene)
 {
   for (unsigned int i = 0; i < node->mNumMeshes; i++)
   {
@@ -77,21 +81,23 @@ void model::process_node(aiNode *node, const aiScene *scene)
   {
     process_node(node->mChildren[i], scene);
   }
+  return;
 }
 
-void model::process_mesh(aiMesh *m, const aiScene *scene)
+void Model::process_mesh(aiMesh *m, const aiScene *scene)
 {
-  std::vector<types::vertex> vertices;
+  std::vector<Mesh::Vertex> vertices;
   std::vector<unsigned int> indices;
-  std::vector<std::shared_ptr<texture>> textures;
+  std::vector<std::shared_ptr<Texture>> textures;
   
   for (unsigned int i = 0; i < m->mNumVertices; i++)
   {
-    types::vertex vertex;
+    Mesh::Vertex vertex;
     glm::vec3 vector;
     vector.x = m->mVertices[i].x;
     vector.y = m->mVertices[i].y;
     vector.z = m->mVertices[i].z;
+
     vertex.position = vector;
 
     vector.x = m->mNormals[i].x;
@@ -120,39 +126,41 @@ void model::process_mesh(aiMesh *m, const aiScene *scene)
   }
 
   aiMaterial *material = scene->mMaterials[m->mMaterialIndex];
-  std::vector<std::shared_ptr<texture>> diffuse =
+  std::vector<std::shared_ptr<Texture>> diffuse =
     load_material_textures(material,
                            aiTextureType_DIFFUSE,
-                           "texture_diffuse");
+                           Texture::Type::Diffuse);
   textures.insert(textures.end(),
                   diffuse.begin(),
                   diffuse.end());
   
-  std::vector<std::shared_ptr<texture>> specular =
+  std::vector<std::shared_ptr<Texture>> specular =
     load_material_textures(material,
                            aiTextureType_SPECULAR,
-                           "texture_specular");
+                           Texture::Type::Specular);
   textures.insert(textures.end(),
                   specular.begin(),
                   specular.end());
 
-  mesh me = mesh({vertices, indices, textures, this->wrapping,
+  Mesh mesh = Mesh({vertices, indices, textures, this->wrapping,
       this->filtering_min, this->filtering_mag, this->has_mipmap,
       this->mipmap_min, this->mipmap_mag});
-  meshes.push_back(std::move(me));
+  meshes.push_back(std::move(mesh));
 }
 
-std::vector<std::shared_ptr<texture>> model::load_material_textures(aiMaterial *mat,
-                                                                    aiTextureType type,
-                                                                    const std::string &typeName)
+std::vector<std::shared_ptr<Texture>>
+Model::load_material_textures(aiMaterial *mat,
+                              aiTextureType type,
+                              Texture::Type type_brenta)
 {
-  std::vector<std::shared_ptr<texture>> textures;
+  std::vector<std::shared_ptr<Texture>> textures;
   for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
   {
     aiString str;
     mat->GetTexture(type, i, &str);
     bool skip = false;
-    std::string path = directory + "/" + std::string(str.C_Str());
+    std::string path =
+      std::string(this->directory.c_str()) + "/" + std::string(str.C_Str());
     
     for (unsigned int j = 0; j < textures_loaded.size(); j++)
     {
@@ -166,8 +174,8 @@ std::vector<std::shared_ptr<texture>> model::load_material_textures(aiMaterial *
     }
     if (!skip)
     {
-      texture t = texture(path, this->flip, typeName);
-      std::shared_ptr<texture> t_ptr = std::make_shared<texture>(std::move(t));
+      Texture t = Texture(path, this->flip, type_brenta);
+      std::shared_ptr<Texture> t_ptr = std::make_shared<Texture>(std::move(t));
       textures_loaded.push_back(t_ptr);
       textures.push_back(t_ptr);
     }
@@ -179,55 +187,55 @@ std::vector<std::shared_ptr<texture>> model::load_material_textures(aiMaterial *
 // Builder functions
 //
 
-model::builder &model::builder::path(std::string path)
+Model::Builder &Model::Builder::path(const std::filesystem::path &path)
 {
   this->conf.path = path;
   return *this;
 }
 
-model::builder &model::builder::wrapping(GLint wrapping)
+Model::Builder &Model::Builder::wrapping(GLint wrapping)
 {
   this->conf.wrapping = wrapping;
   return *this;
 }
 
-model::builder &model::builder::filtering_min(GLint filtering_min)
+Model::Builder &Model::Builder::filtering_min(GLint filtering_min)
 {
   this->conf.filtering_min = filtering_min;
   return *this;
 }
 
-model::builder &model::builder::filtering_mag(GLint filtering_mag)
+Model::Builder &Model::Builder::filtering_mag(GLint filtering_mag)
 {
   this->conf.filtering_mag = filtering_mag;
   return *this;
 }
 
-model::builder &model::builder::has_mipmap(GLboolean has_mipmap)
+Model::Builder &Model::Builder::has_mipmap(GLboolean has_mipmap)
 {
   this->conf.has_mipmap = has_mipmap;
   return *this;
 }
 
-model::builder &model::builder::mipmap_min(GLint mipmap_min)
+Model::Builder &Model::Builder::mipmap_min(GLint mipmap_min)
 {
   this->conf.mipmap_min = mipmap_min;
   return *this;
 }
 
-model::builder &model::builder::mipmap_mag(GLint mipmap_mag)
+Model::Builder &Model::Builder::mipmap_mag(GLint mipmap_mag)
 {
   this->conf.mipmap_mag = mipmap_mag;
   return *this;
 }
 
-model::builder &model::builder::flip(bool flip)
+Model::Builder &Model::Builder::flip(bool flip)
 {
   this->conf.flip = flip;
   return *this;
 }
 
-model model::builder::build()
+Model Model::Builder::build()
 {
-  return model(this->conf);
+  return Model(this->conf);
 }

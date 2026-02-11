@@ -16,7 +16,7 @@ struct TransformComponent : component
 {
   glm::vec3 position;
   glm::vec3 rotation;
-  float scale;
+  float     scale;
 
   TransformComponent()
       : position(glm::vec3(0.0f)), rotation(glm::vec3(0.0f)), scale(1.0f)

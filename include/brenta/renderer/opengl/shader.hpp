@@ -19,6 +19,7 @@
 #include <string>
 #include <unordered_map>
 #include <vector>
+#include <filesystem>
 
 namespace brenta
 {
@@ -34,29 +35,21 @@ namespace brenta
  * used with the Use method, and the uniforms can be set using the
  * set_bool, set_int, set_float, set_mat4, set_vec3 methods.
  */
-class shader
+class Shader
 {
 public:
 
-  using name_t = std::string;
+  using Name = std::string;
+  using Id   = unsigned int;
 
-  enum type
+  enum Type
   {
-    vertex,
-    fragment,
-    geometry,
-    compute,
+    Vertex,
+    Fragment,
+    Geometry,
+    Compute,
   };
   
-  /**
-   * @brief Map of shaders
-   *
-   * This map is used to store the shaders that are created during the
-   * execution of the program. The key is the name of the shader and
-   * the value is the ID of the shader.
-   */
-  static std::unordered_map<shader::name_t, unsigned int> shaders;
-
   /**
    * @brief Create a new shader
    *
@@ -74,29 +67,29 @@ public:
    * compiled and linked in the same program.
    */
   template <typename... Args>
-  static bool create(const std::string &shader_name,
-                     shader::type type, const std::string &path,
+  static bool create(const Shader::Name &shader_name,
+                     Shader::Type type, const std::filesystem::path &path,
                      Args... args)
   {
-    std::vector<unsigned int> compiled_shaders = {};
+    std::vector<Shader::Id> compiled_shaders = {};
     if (!compile_shaders(compiled_shaders, type, path, args...))
     {
-      ERROR("shader: error compiling shader {}", path);
+      ERROR("shader: error compiling shader {}", path.c_str());
       return false;
     }
 
-    /* shader Program */
-    unsigned int ID = glCreateProgram();
+    // shader Program
+    Shader::Id id = glCreateProgram();
     std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
-                  [&ID](auto shader) { glAttachShader(ID, shader); });
+                  [&id](auto shader) { glAttachShader(id, shader); });
 
-    glLinkProgram(ID);
-    if (!shader::check_compile_errors(ID, "PROGRAM"))
+    glLinkProgram(id);
+    if (!Shader::check_compile_errors(id, "PROGRAM"))
     {
       return false;
     }
 
-    shader::shaders.insert({shader_name, ID});
+    Shader::shaders.insert({shader_name, id});
     std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                   [](auto shader) { glDeleteShader(shader); });
     return true;
@@ -120,35 +113,35 @@ public:
    */
   template <typename... Args>
   static bool create(const GLchar **feedback_varyings, int num_varyings,
-                     const std::string &shader_name,
-                     shader::type type, const std::string &path,
+                     const Shader::Name &shader_name,
+                     Shader::Type type, const std::filesystem::path &path,
                      Args... args)
   {
-    std::vector<unsigned int> compiled_shaders = {};
+    std::vector<Shader::Id> compiled_shaders = {};
     if (!compile_shaders(compiled_shaders, type, path, args...))
     {
-      ERROR("shader: error compiling shader {}", path)
+      ERROR("shader: error compiling shader {}", path.c_str())
       return false;
     }
 
-    /* shader Program */
-    unsigned int ID = glCreateProgram();
+    // shader Program
+    Shader::Id id = glCreateProgram();
     std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
-                  [&ID](auto shader) { glAttachShader(ID, shader); });
+                  [&id](auto shader) { glAttachShader(id, shader); });
 
     if (feedback_varyings != nullptr)
     {
-      glTransformFeedbackVaryings(ID, num_varyings, feedback_varyings,
+      glTransformFeedbackVaryings(id, num_varyings, feedback_varyings,
                                   GL_INTERLEAVED_ATTRIBS);
     }
 
-    glLinkProgram(ID);
-    if (!shader::check_compile_errors(ID, "PROGRAM"))
+    glLinkProgram(id);
+    if (!Shader::check_compile_errors(id, "PROGRAM"))
     {
       return false;
     }
 
-    shader::shaders.insert({shader_name, ID});
+    Shader::shaders.insert({shader_name, id});
     std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                   [](auto shader) { glDeleteShader(shader); });
 
@@ -156,14 +149,14 @@ public:
   }
 
   static bool
-  compile_shaders([[maybe_unused]] std::vector<unsigned int> &compiled)
+  compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled)
   {
     return true;
   }
 
   template <typename... Args>
-  static bool compile_shaders(std::vector<unsigned int> &compiled,
-                              shader::type type, const std::string &path,
+  static bool compile_shaders(std::vector<Shader::Id> &compiled,
+                              Shader::Type type, const std::filesystem::path &path,
                               Args... args)
   {
     std::string code;
@@ -181,13 +174,13 @@ public:
     }
     catch (std::ifstream::failure &e)
     {
-      ERROR("shader: error reading shader file: {}", path);
+      ERROR("shader: error reading shader file: {}", path.c_str());
       return false;
     }
 
     if (code.empty())
     {
-      ERROR("shader: file is empty: {}", path);
+      ERROR("shader: file is empty: {}", path.c_str());
       return false;
     }
 
@@ -196,17 +189,17 @@ public:
     GLenum shader_type_gl;
     switch(type)
     {
-    case fragment: shader_type_gl = GL_FRAGMENT_SHADER; break;
-    case vertex: shader_type_gl = GL_VERTEX_SHADER; break;
-    case geometry: shader_type_gl = GL_GEOMETRY_SHADER; break;
-    case compute: shader_type_gl = GL_COMPUTE_SHADER; break;
-    default: shader_type_gl = 0; break;
+    case Fragment: shader_type_gl = GL_FRAGMENT_SHADER; break;
+    case Vertex: shader_type_gl   = GL_VERTEX_SHADER; break;
+    case Geometry: shader_type_gl = GL_GEOMETRY_SHADER; break;
+    case Compute: shader_type_gl  = GL_COMPUTE_SHADER; break;
+    default: shader_type_gl       = 0; break;
     }
     
     unsigned int shader = glCreateShader(shader_type_gl);
     glShaderSource(shader, 1, &shader_code, NULL);
     glCompileShader(shader);
-    if (!shader::check_compile_errors(shader, "SHADER"))
+    if (!Shader::check_compile_errors(shader, "SHADER"))
     {
       return false;
     }
@@ -221,7 +214,7 @@ public:
    * @param shader_name Name of the shader
    * @return ID of the shader
    */
-  static unsigned int get_id(shader::name_t shader_name);
+  static Shader::Id get_id(Shader::Name shader_name);
 
   /**
    * @brief Use the shader
@@ -233,26 +226,36 @@ public:
    
    * @return true on success, or false on error
    */
-  static bool use(shader::name_t shader_name);
+  static bool use(Shader::Name shader_name);
 
   // Utility uniform functions
 
-  static bool set_bool(shader::name_t shader_name,
+  static bool set_bool(Shader::Name shader_name,
                        const GLchar *name, bool value);
-  static bool set_int(shader::name_t shader_name, const GLchar *name,
+  static bool set_int(Shader::Name shader_name, const GLchar *name,
                       int value);
-  static bool set_float(shader::name_t shader_name,
+  static bool set_float(Shader::Name shader_name,
                         const GLchar *name, float value);
-  static bool set_mat4(shader::name_t shader_name, const GLchar *name,
+  static bool set_mat4(Shader::Name shader_name, const GLchar *name,
                        glm::mat4 value);
-  static bool set_vec3(shader::name_t shader_name, const GLchar *name,
+  static bool set_vec3(Shader::Name shader_name, const GLchar *name,
                        float x, float y, float z);
-  static bool set_vec3(shader::name_t shader_name, const GLchar *name,
+  static bool set_vec3(Shader::Name shader_name, const GLchar *name,
                        glm::vec3 value);
 
 private:
   
-  static bool check_compile_errors(unsigned int shader, std::string type);
+  static bool check_compile_errors(Shader::Id shader, std::string type);
+
+  
+  /**
+   * @brief Map of shaders
+   *
+   * This map is used to store the shaders that are created during the
+   * execution of the program. The key is the name of the shader and
+   * the value is the ID of the shader.
+   */
+  static std::unordered_map<Shader::Name, Shader::Id> shaders;
   
 };
 

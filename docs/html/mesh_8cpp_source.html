@@ -110,7 +110,7 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keyword">using namespace </span>brenta;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">const</span> <a class="code hl_struct" href="structbrenta_1_1mesh_1_1config.html">mesh::config</a> mesh::default_config = {</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">const</span> <a class="code hl_class" href="classbrenta_1_1Mesh_1_1Config.html">Mesh::Config</a> Mesh::default_config = {</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>  {},</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  {},</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  {},</div>
@@ -122,158 +122,168 @@ $(document).ready(function(){initNavTree('mesh_8cpp_source.html',''); initResiza
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  GL_LINEAR,</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>};</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>mesh::mesh(config&amp;&amp; conf)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>Mesh::Mesh(Config&amp;&amp; conf)</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  this-&gt;vertices = conf.vertices;</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">indices</a> = conf.indices;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a> = conf.indices;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  this-&gt;textures = std::move(conf.textures);</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc">wrapping</a> = conf.wrapping;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">filtering_min</a> = conf.filtering_min;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">filtering_mag</a> = conf.filtering_mag;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e">has_mipmap</a> = conf.has_mipmap;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">mipmap_min</a> = conf.mipmap_min;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a55ab3d027a03a76b974e425e1f30e778">mipmap_mag</a> = conf.mipmap_max;</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#a182827d0152f3a90486b6dcc0b0b77e6">wrapping</a> = conf.wrapping;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748">filtering_min</a> = conf.filtering_min;</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab">filtering_mag</a> = conf.filtering_mag;</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#afd977fdb8d623a5323deff2eea6a1bc2">has_mipmap</a> = conf.has_mipmap;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796">mipmap_min</a> = conf.mipmap_min;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#af97f715c22789ef6854809f28c9c096d">mipmap_mag</a> = conf.mipmap_max;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  this-&gt;init();</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  DEBUG(<span class="stringliteral">&quot;mesh: created&quot;</span>);</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>mesh::~mesh()</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  DEBUG(<span class="stringliteral">&quot;mesh: deleted&quot;</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>}</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keywordtype">void</span> mesh::init()</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>{</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  this-&gt;vao.init();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  this-&gt;vao.bind();</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  this-&gt;vbo.init(GL_ARRAY_BUFFER);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  this-&gt;ebo.init(GL_ELEMENT_ARRAY_BUFFER);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  this-&gt;vbo.<a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">copy_vertices</a>(this-&gt;vertices.size() * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>),</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                          &amp;this-&gt;vertices[0], GL_STATIC_DRAW);</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  this-&gt;ebo.<a class="code hl_function" href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">copy_indices</a>(this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">indices</a>.size() * <span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>),</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                         &amp;this-&gt;indices[0], GL_STATIC_DRAW);</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1types_1_1vao.html#aaa06cdf080864f1e6ace3f5b984f3d3b">set_vertex_data</a>(this-&gt;vbo, 0, 3, GL_FLOAT, GL_FALSE,</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                            <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>), (<span class="keywordtype">void</span> *) 0);</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1types_1_1vao.html#aaa06cdf080864f1e6ace3f5b984f3d3b">set_vertex_data</a>(this-&gt;vbo, 1, 3, GL_FLOAT, GL_FALSE,</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                            <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>),</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>                            (<span class="keywordtype">void</span> *) offsetof(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>, normal));</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1types_1_1vao.html#aaa06cdf080864f1e6ace3f5b984f3d3b">set_vertex_data</a>(this-&gt;vbo, 2, 2, GL_FLOAT, GL_FALSE,</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                            <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>),</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                            (<span class="keywordtype">void</span> *) offsetof(<a class="code hl_struct" href="structbrenta_1_1types_1_1vertex.html">types::vertex</a>, tex_coords));</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  gl::bind_vertex_array(0);</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> mesh::draw(shader::name_t shader_name)<span class="keyword"> const</span></div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span><span class="keyword"></span>{</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">if</span> (this-&gt;vao.get_id() == 0)</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  {</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>    ERROR(<span class="stringliteral">&quot;mesh::draw: not initialized&quot;</span>);</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> diffuseNr = 1;</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> specularNr = 1;</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; this-&gt;textures.size(); i++)</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    <a class="code hl_function" href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">texture::active_texture</a>(GL_TEXTURE0 + i);</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span> </div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>    std::string number;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    std::string name = textures[i]-&gt;type;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;texture_diffuse&quot;</span>)</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>      number = std::to_string(diffuseNr++);</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;texture_specular&quot;</span>)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>      number = std::to_string(specularNr++);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    </div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    shader::set_int(shader_name, (<span class="stringliteral">&quot;material.&quot;</span> + name + number).c_str(), i);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    textures[i]-&gt;bind(GL_TEXTURE_2D, this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc">wrapping</a>,</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                     this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">filtering_min</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">filtering_mag</a>,</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                     this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e">has_mipmap</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">mipmap_min</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a55ab3d027a03a76b974e425e1f30e778">mipmap_mag</a>);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  }</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_function" href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">texture::active_texture</a>(GL_TEXTURE0);</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <span class="comment">// draw mesh</span></div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>  this-&gt;vao.bind();</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>  <a class="code hl_function" href="classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913">gl::draw_elements</a>(GL_TRIANGLES, this-&gt;<a class="code hl_variable" href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">indices</a>.size(), GL_UNSIGNED_INT, 0);</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  this-&gt;vao.unbind();</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <a class="code hl_function" href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">texture::active_texture</a>(GL_TEXTURE0);</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>}</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span> </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span><span class="comment">//</span></div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span><span class="comment">// Builder functions</span></div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span><span class="comment">//</span></div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span> </div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::vertices(std::vector&lt;types::vertex&gt; vertices)</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>{</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  this-&gt;conf.vertices = vertices;</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>}</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span> </div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::indices(std::vector&lt;unsigned int&gt; <a class="code hl_variable" href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">indices</a>)</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>{</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  this-&gt;conf.indices = <a class="code hl_variable" href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">indices</a>;</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>}</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::textures(std::vector&lt;std::shared_ptr&lt;texture&gt;&gt; textures)</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>{</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  this-&gt;conf.textures = std::move(textures);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>}</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span> </div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::wrapping(GLint <a class="code hl_variable" href="classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc">wrapping</a>)</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>{</div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  this-&gt;conf.wrapping = <a class="code hl_variable" href="classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc">wrapping</a>;</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>}</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span> </div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::filtering_min(GLint <a class="code hl_variable" href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">filtering_min</a>)</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>{</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>  this-&gt;conf.filtering_min = <a class="code hl_variable" href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">filtering_min</a>;</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>}</div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span> </div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::filtering_mag(GLint <a class="code hl_variable" href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">filtering_mag</a>)</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>{</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>  this-&gt;conf.filtering_mag = <a class="code hl_variable" href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">filtering_mag</a>;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span> </div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::has_mipmap(GLboolean <a class="code hl_variable" href="classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e">has_mipmap</a>)</div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>{</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>  this-&gt;conf.has_mipmap = <a class="code hl_variable" href="classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e">has_mipmap</a>;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>}</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span> </div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span><a class="code hl_class" href="classbrenta_1_1mesh_1_1builder.html">mesh::builder</a> &amp;mesh::builder::mipmap_min(GLint <a class="code hl_variable" href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">mipmap_min</a>)</div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>{</div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>  this-&gt;conf.mipmap_min = <a class="code hl_variable" href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">mipmap_min</a>;</div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>}</div>
-<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
-<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><a class="code hl_class" href="classbrenta_1_1mesh.html">mesh</a> mesh::builder::build()</div>
-<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>{</div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classbrenta_1_1mesh.html">mesh</a>(std::move(this-&gt;conf));</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1gl_html_a7c3eda21806ec4c51a843617cb542913"><div class="ttname"><a href="classbrenta_1_1gl.html#a7c3eda21806ec4c51a843617cb542913">brenta::gl::draw_elements</a></div><div class="ttdeci">static void draw_elements(GLenum mode, int count, GLenum type, const void *indices)</div><div class="ttdoc">Draw Elements.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00164">gl.cpp:164</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_1_1builder_html"><div class="ttname"><a href="classbrenta_1_1mesh_1_1builder.html">brenta::mesh::builder</a></div><div class="ttdoc">The Builder class is used to build a Mesh object.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00209">mesh.hpp:210</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html"><div class="ttname"><a href="classbrenta_1_1mesh.html">brenta::mesh</a></div><div class="ttdoc">The Mesh class represents a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00050">mesh.hpp:51</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_a2095331e9f3c01b00367074c61e8da5f"><div class="ttname"><a href="classbrenta_1_1mesh.html#a2095331e9f3c01b00367074c61e8da5f">brenta::mesh::filtering_min</a></div><div class="ttdeci">GLint filtering_min</div><div class="ttdoc">Minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00089">mesh.hpp:89</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_a55ab3d027a03a76b974e425e1f30e778"><div class="ttname"><a href="classbrenta_1_1mesh.html#a55ab3d027a03a76b974e425e1f30e778">brenta::mesh::mipmap_mag</a></div><div class="ttdeci">GLint mipmap_mag</div><div class="ttdoc">Type of mipmap magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00167">mesh.hpp:167</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_a6833190f04027bb6c7ff0396322c08fc"><div class="ttname"><a href="classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc">brenta::mesh::wrapping</a></div><div class="ttdeci">GLint wrapping</div><div class="ttdoc">Type of texture wrapping.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00079">mesh.hpp:79</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_a8af04c3cb6ccdf28191f1e14d3c9c85e"><div class="ttname"><a href="classbrenta_1_1mesh.html#a8af04c3cb6ccdf28191f1e14d3c9c85e">brenta::mesh::has_mipmap</a></div><div class="ttdeci">GLboolean has_mipmap</div><div class="ttdoc">Should the texture have a mipmap?</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00103">mesh.hpp:103</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_a9991822785185a303b3f5c5cd23095c5"><div class="ttname"><a href="classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5">brenta::mesh::indices</a></div><div class="ttdeci">std::vector&lt; unsigned int &gt; indices</div><div class="ttdoc">indices of the mesh</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00062">mesh.hpp:62</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_acb6397f1f0cca5124b571cb2d2d0d258"><div class="ttname"><a href="classbrenta_1_1mesh.html#acb6397f1f0cca5124b571cb2d2d0d258">brenta::mesh::mipmap_min</a></div><div class="ttdeci">GLint mipmap_min</div><div class="ttdoc">Type of mipmap minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00135">mesh.hpp:135</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1mesh_html_ae9314538cf2c0a2a0b7510110384553f"><div class="ttname"><a href="classbrenta_1_1mesh.html#ae9314538cf2c0a2a0b7510110384553f">brenta::mesh::filtering_mag</a></div><div class="ttdeci">GLint filtering_mag</div><div class="ttdoc">Magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00099">mesh.hpp:99</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1texture_html_a0fced9fc65404ec7a70064d4cfc77e79"><div class="ttname"><a href="classbrenta_1_1texture.html#a0fced9fc65404ec7a70064d4cfc77e79">brenta::texture::active_texture</a></div><div class="ttdeci">static void active_texture(GLenum texture)</div><div class="ttdoc">Activate a texture unit.</div><div class="ttdef"><b>Definition</b> <a href="texture_8cpp_source.html#l00041">texture.cpp:41</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a43a2fddc74c1b19b181927fa317579c3"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a43a2fddc74c1b19b181927fa317579c3">brenta::types::buffer::copy_indices</a></div><div class="ttdeci">void copy_indices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8cpp_source.html#l00027">buffer.cpp:27</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1buffer_html_a7c575aaa505051e25c1074fdc30449e8"><div class="ttname"><a href="classbrenta_1_1types_1_1buffer.html#a7c575aaa505051e25c1074fdc30449e8">brenta::types::buffer::copy_vertices</a></div><div class="ttdeci">void copy_vertices(GLsizeiptr size, const void *data, GLenum usage)</div><div class="ttdoc">Copy data to the buffer object.</div><div class="ttdef"><b>Definition</b> <a href="buffer_8cpp_source.html#l00036">buffer.cpp:36</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1types_1_1vao_html_aaa06cdf080864f1e6ace3f5b984f3d3b"><div class="ttname"><a href="classbrenta_1_1types_1_1vao.html#aaa06cdf080864f1e6ace3f5b984f3d3b">brenta::types::vao::set_vertex_data</a></div><div class="ttdeci">void set_vertex_data(buffer &amp;buffer, unsigned int index, GLint size, GLenum type, GLboolean is_normalized, GLsizei stride, const void *pointer)</div><div class="ttdoc">Set the vertex data.</div><div class="ttdef"><b>Definition</b> <a href="vao_8cpp_source.html#l00056">vao.cpp:56</a></div></div>
-<div class="ttc" id="astructbrenta_1_1mesh_1_1config_html"><div class="ttname"><a href="structbrenta_1_1mesh_1_1config.html">brenta::mesh::config</a></div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00193">mesh.hpp:194</a></div></div>
-<div class="ttc" id="astructbrenta_1_1types_1_1vertex_html"><div class="ttname"><a href="structbrenta_1_1types_1_1vertex.html">brenta::types::vertex</a></div><div class="ttdoc">The Vertex struct represents a vertex of a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00034">mesh.hpp:35</a></div></div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>}</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>Mesh::~Mesh()</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>{</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  DEBUG(<span class="stringliteral">&quot;mesh: deleted&quot;</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>}</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span><span class="keywordtype">void</span> Mesh::init()</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  this-&gt;vao.init();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  this-&gt;vao.bind();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  this-&gt;vbo.init(GL_ARRAY_BUFFER);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  this-&gt;ebo.init(GL_ELEMENT_ARRAY_BUFFER);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  this-&gt;vbo.copy_vertices(this-&gt;vertices.size() * <span class="keyword">sizeof</span>(Vertex),</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>                          &amp;this-&gt;vertices[0], GL_STATIC_DRAW);</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  this-&gt;ebo.copy_indices(this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a>.size() * <span class="keyword">sizeof</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span>),</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>                         &amp;this-&gt;indices[0], GL_STATIC_DRAW);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1Vao.html#a6e8e22b3463d7d5892a5172fcd91e025">set_vertex_data</a>(this-&gt;vbo, 0, 3, GL_FLOAT, GL_FALSE,</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>                            <span class="keyword">sizeof</span>(Vertex), (<span class="keywordtype">void</span> *) 0);</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1Vao.html#a6e8e22b3463d7d5892a5172fcd91e025">set_vertex_data</a>(this-&gt;vbo, 1, 3, GL_FLOAT, GL_FALSE,</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                            <span class="keyword">sizeof</span>(Vertex),</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                            (<span class="keywordtype">void</span> *) offsetof(Vertex, normal));</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  this-&gt;vao.<a class="code hl_function" href="classbrenta_1_1Vao.html#a6e8e22b3463d7d5892a5172fcd91e025">set_vertex_data</a>(this-&gt;vbo, 2, 2, GL_FLOAT, GL_FALSE,</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                            <span class="keyword">sizeof</span>(Vertex),</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                            (<span class="keywordtype">void</span> *) offsetof(Vertex, tex_coords));</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  Gl::bind_vertex_array(0);</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>}</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span><span class="keywordtype">void</span> Mesh::draw(Shader::Name shader_name)<span class="keyword"> const</span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span><span class="keyword"></span>{</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">if</span> (this-&gt;vao.get_id() == 0)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  {</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    ERROR(<span class="stringliteral">&quot;Mesh::draw: not initialized&quot;</span>);</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  }</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> diffuseNr = 1;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> specularNr = 1;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keywordflow">for</span> (<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> i = 0; i &lt; this-&gt;textures.size(); i++)</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  {</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    Texture::active_texture(GL_TEXTURE0 + i);</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    std::string number;</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    std::string name;</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>    <span class="keyword">auto</span> type = textures[i]-&gt;type;</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>    <span class="keywordflow">switch</span> (type)</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>    {</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>    <span class="keywordflow">case</span> Texture::Type::Diffuse:</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>      name   = <span class="stringliteral">&quot;texture_diffuse&quot;</span>;</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>      number = std::to_string(diffuseNr++);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>    <span class="keywordflow">case</span> Texture::Type::Specular:</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>      name   = <span class="stringliteral">&quot;texture_specular&quot;</span>;</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>      number = std::to_string(specularNr++);</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>    <span class="keywordflow">default</span>:</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>      number = <span class="stringliteral">&quot;0&quot;</span>;</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>      <span class="keywordflow">break</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>    }</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>    </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>    Shader::set_int(shader_name, (<span class="stringliteral">&quot;material.&quot;</span> + name + number).c_str(), i);</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>    textures[i]-&gt;bind(GL_TEXTURE_2D, this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#a182827d0152f3a90486b6dcc0b0b77e6">wrapping</a>,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                     this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748">filtering_min</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab">filtering_mag</a>,</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                     this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#afd977fdb8d623a5323deff2eea6a1bc2">has_mipmap</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796">mipmap_min</a>, this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#af97f715c22789ef6854809f28c9c096d">mipmap_mag</a>);</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  }</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  </div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  Texture::active_texture(GL_TEXTURE0);</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span> </div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>  <span class="comment">// draw mesh</span></div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>  this-&gt;vao.bind();</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>  Gl::draw_elements(GL_TRIANGLES, this-&gt;<a class="code hl_variable" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a>.size(), GL_UNSIGNED_INT, 0);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>  this-&gt;vao.unbind();</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span> </div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>  Texture::active_texture(GL_TEXTURE0);</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>  <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>}</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span> </div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span><span class="comment">//</span></div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span><span class="comment">// Builder functions</span></div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span><span class="comment">//</span></div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::vertices(std::vector&lt;Vertex&gt; vertices)</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>{</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  this-&gt;conf.vertices = vertices;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>}</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span> </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::indices(std::vector&lt;unsigned int&gt; <a class="code hl_variable" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a>)</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>{</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>  this-&gt;conf.indices = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a>;</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::textures(std::vector&lt;std::shared_ptr&lt;Texture&gt;&gt; textures)</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>{</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  this-&gt;conf.textures = std::move(textures);</div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>}</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span> </div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::wrapping(GLint <a class="code hl_variable" href="classbrenta_1_1Mesh.html#a182827d0152f3a90486b6dcc0b0b77e6">wrapping</a>)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>{</div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>  this-&gt;conf.wrapping = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#a182827d0152f3a90486b6dcc0b0b77e6">wrapping</a>;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>}</div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span> </div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::filtering_min(GLint <a class="code hl_variable" href="classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748">filtering_min</a>)</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>{</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>  this-&gt;conf.filtering_min = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748">filtering_min</a>;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>}</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::filtering_mag(GLint <a class="code hl_variable" href="classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab">filtering_mag</a>)</div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>{</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>  this-&gt;conf.filtering_mag = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab">filtering_mag</a>;</div>
+<div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span>}</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span> </div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::has_mipmap(GLboolean <a class="code hl_variable" href="classbrenta_1_1Mesh.html#afd977fdb8d623a5323deff2eea6a1bc2">has_mipmap</a>)</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>{</div>
+<div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  this-&gt;conf.has_mipmap = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#afd977fdb8d623a5323deff2eea6a1bc2">has_mipmap</a>;</div>
+<div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>}</div>
+<div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span><a class="code hl_class" href="classbrenta_1_1Mesh_1_1Builder.html">Mesh::Builder</a> &amp;Mesh::Builder::mipmap_min(GLint <a class="code hl_variable" href="classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796">mipmap_min</a>)</div>
+<div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>{</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  this-&gt;conf.mipmap_min = <a class="code hl_variable" href="classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796">mipmap_min</a>;</div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span><a class="code hl_class" href="classbrenta_1_1Mesh.html">Mesh</a> Mesh::Builder::build()</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>{</div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classbrenta_1_1Mesh.html">Mesh</a>(std::move(this-&gt;conf));</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Mesh_1_1Builder.html">brenta::Mesh::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00205">mesh.hpp:206</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_1_1Config_html"><div class="ttname"><a href="classbrenta_1_1Mesh_1_1Config.html">brenta::Mesh::Config</a></div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00191">mesh.hpp:192</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html"><div class="ttname"><a href="classbrenta_1_1Mesh.html">brenta::Mesh</a></div><div class="ttdoc">The Mesh class represents a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00032">mesh.hpp:33</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_a182827d0152f3a90486b6dcc0b0b77e6"><div class="ttname"><a href="classbrenta_1_1Mesh.html#a182827d0152f3a90486b6dcc0b0b77e6">brenta::Mesh::wrapping</a></div><div class="ttdeci">GLint wrapping</div><div class="ttdoc">Type of texture wrapping.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00065">mesh.hpp:65</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_a7320745bd679b2ca2226edc10b6c9748"><div class="ttname"><a href="classbrenta_1_1Mesh.html#a7320745bd679b2ca2226edc10b6c9748">brenta::Mesh::filtering_min</a></div><div class="ttdeci">GLint filtering_min</div><div class="ttdoc">Minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00075">mesh.hpp:75</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_ad6bdf5536dd569619351dce9483e26a4"><div class="ttname"><a href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">brenta::Mesh::indices</a></div><div class="ttdeci">std::vector&lt; unsigned int &gt; indices</div><div class="ttdoc">indices of the mesh</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00048">mesh.hpp:48</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_aee44db984d96675ea6870a2b34672796"><div class="ttname"><a href="classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796">brenta::Mesh::mipmap_min</a></div><div class="ttdeci">GLint mipmap_min</div><div class="ttdoc">Type of mipmap minifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00121">mesh.hpp:121</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_af97f715c22789ef6854809f28c9c096d"><div class="ttname"><a href="classbrenta_1_1Mesh.html#af97f715c22789ef6854809f28c9c096d">brenta::Mesh::mipmap_mag</a></div><div class="ttdeci">GLint mipmap_mag</div><div class="ttdoc">Type of mipmap magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00153">mesh.hpp:153</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_af9a0bc3313fbb8ee33a01e920b56abab"><div class="ttname"><a href="classbrenta_1_1Mesh.html#af9a0bc3313fbb8ee33a01e920b56abab">brenta::Mesh::filtering_mag</a></div><div class="ttdeci">GLint filtering_mag</div><div class="ttdoc">Magnifying texture filtering.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00085">mesh.hpp:85</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Mesh_html_afd977fdb8d623a5323deff2eea6a1bc2"><div class="ttname"><a href="classbrenta_1_1Mesh.html#afd977fdb8d623a5323deff2eea6a1bc2">brenta::Mesh::has_mipmap</a></div><div class="ttdeci">GLboolean has_mipmap</div><div class="ttdoc">Should the texture have a mipmap?</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00089">mesh.hpp:89</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Vao_html_a6e8e22b3463d7d5892a5172fcd91e025"><div class="ttname"><a href="classbrenta_1_1Vao.html#a6e8e22b3463d7d5892a5172fcd91e025">brenta::Vao::set_vertex_data</a></div><div class="ttdeci">void set_vertex_data(Buffer &amp;buffer, unsigned int index, GLint size, GLenum type, GLboolean is_normalized, GLsizei stride, const void *pointer)</div><div class="ttdoc">Set the vertex data.</div><div class="ttdef"><b>Definition</b> <a href="vao_8cpp_source.html#l00057">vao.cpp:57</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

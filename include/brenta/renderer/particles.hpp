@@ -18,6 +18,7 @@
 
 #include <string>
 #include <vector>
+#include <filesystem>
 
 namespace brenta
 {
@@ -30,12 +31,12 @@ namespace brenta
  * ParticleEmitter object.  The particles ban be updated and rendered
  * using the updateParticles and renderParticles methods.
  */
-class particle_emitter
+class ParticleEmitter
 {
 public:
   
-  struct config;
-  class builder;
+  struct Config;
+  class  Builder;
   
   glm::vec3 starting_position;
   glm::vec3 starting_velocity;
@@ -51,32 +52,33 @@ public:
   //
   // These are used to save the new state of updated particles in the
   // update_particles method.
-  types::buffer fbo[2];
-  int           current;   // current fbo index
+  Buffer fbo[2];
+  int    current;   // current fbo index
   
-  texture atlas;
+  Texture atlas;
   int     atlas_width;
   int     atlas_height;
   int     atlas_index;
-  types::vao vao;
+  Vao     vao;
 
-  static const config default_config;
-
-  particle_emitter(config conf);
+  ParticleEmitter(Config conf);
   
   /**
    * @brief Update the particles
    *
    * @param deltaTime Time passed since last frame
    */
-  void update_particles(float delta_time);
-  void render_particles();
+  void update(float delta_time);
+  void render();
 
 private:
-  camera *cam;
+  Camera *cam;
+  
+  static const Config default_config;
+
 };
 
-struct particle_emitter::config
+struct ParticleEmitter::Config
 {
   glm::vec3    starting_position;
   glm::vec3    starting_velocity;
@@ -85,34 +87,34 @@ struct particle_emitter::config
   int          num_particles;
   float        spawn_rate;
   float        scale;
-  std::string  atlas_path;
+  std::filesystem::path atlas_path;
   int          atlas_width;
   int          atlas_height;
   int          atlas_index;
-  camera      *cam;
+  Camera      *cam;
 };
   
-class particle_emitter::builder
+class ParticleEmitter::Builder
 {
 private:
 
-  particle_emitter::config conf = particle_emitter::default_config;
+  ParticleEmitter::Config conf = ParticleEmitter::default_config;
 
 public:
-  builder &starting_position(glm::vec3 starting_position);
-  builder &starting_velocity(glm::vec3 starting_velocity);
-  builder &starting_spread(glm::vec3 starting_spread);
-  builder &starting_time_to_live(float starting_time_to_live);
-  builder &num_particles(int num_particles);
-  builder &spawn_rate(float spawn_rate);
-  builder &scale(float scale);
-  builder &atlas_path(std::string atlas_path);
-  builder &atlas_width(int atlas_width);
-  builder &atlas_height(int atlas_height);
-  builder &atlas_index(int atlas_index);
-  builder &with_camera(camera *cam);
+  Builder &starting_position(glm::vec3 starting_position);
+  Builder &starting_velocity(glm::vec3 starting_velocity);
+  Builder &starting_spread(glm::vec3 starting_spread);
+  Builder &starting_time_to_live(float starting_time_to_live);
+  Builder &num_particles(int num_particles);
+  Builder &spawn_rate(float spawn_rate);
+  Builder &scale(float scale);
+  Builder &atlas_path(const std::filesystem::path &atlas_path);
+  Builder &atlas_width(int atlas_width);
+  Builder &atlas_height(int atlas_height);
+  Builder &atlas_index(int atlas_index);
+  Builder &with_camera(Camera *cam);
 
-  particle_emitter build();
+  ParticleEmitter build();
 };
 
 } // namespace brenta

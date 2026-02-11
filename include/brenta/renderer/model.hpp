@@ -16,100 +16,94 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <filesystem>
 
 namespace brenta
 {
 
-/**
- * @brief Model class
- *
- * This class is used to load a model from a file and draw it
- */
-class model
+class Model
 {
 public:
   
-  GLint wrapping;
-  GLint filtering_min;
-  GLint filtering_mag;
+  GLint     wrapping;
+  GLint     filtering_min;
+  GLint     filtering_mag;
   GLboolean has_mipmap;
-  GLint mipmap_min;
-  GLint mipmap_mag;
-  bool flip;
-  std::string path;
+  GLint     mipmap_min;
+  GLint     mipmap_mag;
+  bool      flip;
+  std::filesystem::path path;
 
-  struct config;
-  class builder;
+  class Config;
+  class Builder;
 
-  static const config default_config;
+  Model() = default;
+  Model(Config conf);
+  ~Model();
+
+  /*
+  constexpr Model(const Model&)            = delete;
+  constexpr Model& operator=(const Model&) = delete;
+
+  constexpr Model(Model&&) noexcept            = default;
+  constexpr Model& operator=(Model&&) noexcept = default;
+  */
   
-  /**
-   * @brief Empty constructor
-   *
-   * Does nothing
-   */
-  model()
-  {
-  }
-  
-  model(config conf);
-  ~model();
-  
-  constexpr model(const model&) = delete;
-  constexpr model& operator=(const model&) = delete;
+  Model(const Model&)            = delete;
+  Model& operator=(const Model&) = delete;
 
-  constexpr model(model&&) noexcept = default;
-  constexpr model& operator=(model&&) noexcept = default;;
+  Model(Model&&) noexcept            = default;
+  Model& operator=(Model&&) noexcept = default;
 
-  void draw(shader::name_t shader) const;
+  void draw(Shader::Name shader) const;
 
 private:
 
-  std::vector<mesh> meshes;
-  std::vector<std::shared_ptr<texture>> textures_loaded;
-  std::string directory;
+  std::vector<Mesh>                     meshes;
+  std::vector<std::shared_ptr<Texture>> textures_loaded;
+  std::filesystem::path                 directory;
 
   void process_node(aiNode *node, const aiScene *scene);
   void process_mesh(aiMesh *mesh, const aiScene *scene);
-  std::vector<std::shared_ptr<texture>>
+  std::vector<std::shared_ptr<Texture>>
   load_material_textures(aiMaterial *mat,
                          aiTextureType type,
-                         const std::string &type_name);
+                         Texture::Type type_brenta);
+  
+  static const Config default_config;
+  
   void init();
 };
 
-struct model::config
+struct Model::Config
 {
-  std::string path;
-  GLint wrapping;
-  GLint filtering_min;
-  GLint filtering_mag;
+  std::filesystem::path path;
+  GLint     wrapping;
+  GLint     filtering_min;
+  GLint     filtering_mag;
   GLboolean has_mipmap;
-  GLint mipmap_min;
-  GLint mipmap_mag;
-  bool flip;
+  GLint     mipmap_min;
+  GLint     mipmap_mag;
+  bool      flip;
 };
-  
-/**
- * @brief Builder class for Model
- */
-class model::builder
+
+class Model::Builder
 {
 private:
 
-  model::config conf = model::default_config;
+  Model::Config conf = Model::default_config;
   
 public:
-  builder &path(std::string path);
-  builder &wrapping(GLint wrapping);
-  builder &filtering_min(GLint filtering_min);
-  builder &filtering_mag(GLint filtering_mag);
-  builder &has_mipmap(GLboolean has_mipmap);
-  builder &mipmap_min(GLint mipmap_min);
-  builder &mipmap_mag(GLint mipmap_mag);
-  builder &flip(bool flip);
+  Builder &path(const std::filesystem::path &path);
+  Builder &wrapping(GLint wrapping);
+  Builder &filtering_min(GLint filtering_min);
+  Builder &filtering_mag(GLint filtering_mag);
+  Builder &has_mipmap(GLboolean has_mipmap);
+  Builder &mipmap_min(GLint mipmap_min);
+  Builder &mipmap_mag(GLint mipmap_mag);
+  Builder &flip(bool flip);
 
-  model build();
+  Model build();
 };
 
 } // namespace brenta

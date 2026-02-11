@@ -15,15 +15,15 @@ using namespace brenta;
 // Static variables
 //
 
-const std::string gl::subsystem_name = "gl";
-const gl::config gl::default_config = {
+const std::string Gl::subsystem_name = "gl";
+const Gl::Config  Gl::default_config = {
   false,
   false,
   false,
   false,
 };
-gl::config gl::init_config = default_config;
-bool gl::initialized = false;
+Gl::Config Gl::init_config = default_config;
+bool       Gl::initialized = false;
 
 // Forward declaration
 void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
@@ -38,45 +38,45 @@ void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> gl::initialize()
+std::expected<void, Subsystem::Error> Gl::initialize()
 {
   if (this->is_initialized()) return {};
   
-  GLADloadproc loadproc = (GLADloadproc) window::get_proc_address();
+  GLADloadproc loadproc = (GLADloadproc) Window::get_proc_address();
   if (!gladLoadGLLoader(loadproc))
   {
-    ERROR("{}: failed to initialize GLAD", gl::subsystem_name);
+    ERROR("{}: failed to initialize GLAD", Gl::subsystem_name);
     return std::unexpected("Failed to initialize GLAD");
   }
 
-  int width = window::get_width();
-  int height = window::get_height();
+  int width = Window::get_width();
+  int height = Window::get_height();
 
   glViewport(0, 0, width, height);
 
-  if (gl::init_config.enable_depth_test)
+  if (Gl::init_config.enable_depth_test)
   {
     glEnable(GL_DEPTH_TEST);
-    INFO("{}: enabled GL_DEPTH_TEST", gl::subsystem_name);
+    INFO("{}: enabled GL_DEPTH_TEST", Gl::subsystem_name);
   }
 
-  if (gl::init_config.enable_blending)
+  if (Gl::init_config.enable_blending)
   {
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    INFO("{}: enabled GL_BLEND (transparency)", gl::subsystem_name);
+    INFO("{}: enabled GL_BLEND (transparency)", Gl::subsystem_name);
   }
 
-  if (gl::init_config.enable_cull_face)
+  if (Gl::init_config.enable_cull_face)
   {
     glEnable(GL_CULL_FACE);
-    INFO("{}: enabled GL_CULL_FACE", gl::subsystem_name);
+    INFO("{}: enabled GL_CULL_FACE", Gl::subsystem_name);
   }
 
-  if (gl::init_config.enable_multisample)
+  if (Gl::init_config.enable_multisample)
   {
     glEnable(GL_MULTISAMPLE);
-    INFO("{}: enabled GL_MULTISAMPLE", gl::subsystem_name);
+    INFO("{}: enabled GL_MULTISAMPLE", Gl::subsystem_name);
   }
 
   int flags;
@@ -89,94 +89,101 @@ std::expected<void, subsystem::error> gl::initialize()
     glDebugMessageCallback(glDebugOutput, nullptr);
     glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE,
                           0, nullptr, GL_TRUE);
-    INFO("{}: configured GL_DEBUG_OUTPUT", gl::subsystem_name);
+    INFO("{}: configured GL_DEBUG_OUTPUT", Gl::subsystem_name);
   }
   
-  GLenum errcode = gl::check_error();
+  GLenum errcode = Gl::check_error();
   if (errcode != GL_NO_ERROR)
   {
     return std::unexpected("GL error");
   }
 
-  gl::initialized = true;
-  INFO("{}: initialized", gl::subsystem_name);
+  Gl::initialized = true;
+  INFO("{}: initialized", Gl::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> gl::terminate()
+std::expected<void, Subsystem::Error> Gl::terminate()
 {
   if (!this->is_initialized()) return {};
 
-  gl::initialized = false;
-  INFO("{}: terminated", gl::subsystem_name);
+  Gl::initialized = false;
+  INFO("{}: terminated", Gl::subsystem_name);
   return {};
 }
 
-std::string gl::name()
+std::string Gl::name()
 {
-  return gl::subsystem_name;
+  return Gl::subsystem_name;
 }
 
-bool gl::is_initialized()
+bool Gl::is_initialized()
 {
-  return gl::initialized;
+  return Gl::initialized;
 }
 
 //
 // Member functions
 //
 
-void gl::set_poligon_mode(GLboolean enable)
+void Gl::set_poligon_mode(GLboolean enable)
 {
   if (enable)
   {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    INFO("{}: enabled GL_POLYGON_MODE (wireframe)", gl::subsystem_name);
+    INFO("{}: enabled GL_POLYGON_MODE (wireframe)", Gl::subsystem_name);
   }
   else
   {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    INFO("{}: disabled GL_POLYGON_MODE (fill)", gl::subsystem_name);
+    INFO("{}: disabled GL_POLYGON_MODE (fill)", Gl::subsystem_name);
   }
+  return;
 }
 
-gl &gl::instance()
+Gl &Gl::instance()
 {
-  static gl _gl;
+  static Gl _gl;
   return _gl;
 }
 
-void gl::set_viewport(int x, int y, int width, int height)
+void Gl::set_viewport(int x, int y, int width, int height)
 {
   glViewport(x, y, width, height);
+  return;
 }
 
-void gl::set_color(float r, float g, float b, float a)
+void Gl::set_color(float r, float g, float b, float a)
 {
   glClearColor(r, g, b, a);
+  return;
 }
 
-void gl::draw_arrays(GLenum mode, int first, int count)
+void Gl::draw_arrays(GLenum mode, int first, int count)
 {
   glDrawArrays(mode, first, count);
+  return;
 }
 
-void gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
+void Gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
 {
   glDrawElements(mode, count, type, indices);
+  return;
 }
 
-void gl::bind_vertex_array(unsigned int n)
+void Gl::bind_vertex_array(unsigned int n)
 {
   glBindVertexArray(n);
+  return;
 }
 
-void gl::clear()
+void Gl::clear()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+  return;
 }
 
-GLenum gl::_check_error(const char *file, int line)
+GLenum Gl::_check_error(const char *file, int line)
 {
   GLenum errorCode;
   while ((errorCode = glGetError()) != GL_NO_ERROR)
@@ -196,7 +203,7 @@ GLenum gl::_check_error(const char *file, int line)
     }
 
     error += " | " + std::string(file) + " (" + std::to_string(line) + ")";
-    ERROR("{}: {}", gl::subsystem_name, error);
+    ERROR("{}: {}", Gl::subsystem_name, error);
   }
   return errorCode;
 }
@@ -270,39 +277,39 @@ void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
   } out << std::endl;
   out << std::endl;
 
-  ERROR("{}: {}", gl::subsystem_name, out.str());
+  ERROR("{}: {}", Gl::subsystem_name, out.str());
 }
 
 //
 // Builder
 //
 
-gl::builder &gl::builder::blending()
+Gl::Builder &Gl::Builder::blending()
 {
   this->conf.enable_blending = true;
   return *this;
 }
 
-gl::builder &gl::builder::cull_face()
+Gl::Builder &Gl::Builder::cull_face()
 {
   this->conf.enable_cull_face = true;
   return *this;
 }
 
-gl::builder &gl::builder::multisample()
+Gl::Builder &Gl::Builder::multisample()
 {
   this->conf.enable_multisample = true;
   return *this;
 }
 
-gl::builder &gl::builder::depth_test()
+Gl::Builder &Gl::Builder::depth_test()
 {
   this->conf.enable_depth_test = true;
   return *this;
 }
 
-brenta::subsystem &gl::builder::build()
+brenta::Subsystem &Gl::Builder::build()
 {
-  gl::init_config = this->conf;
-  return gl::instance();
+  Gl::init_config = this->conf;
+  return Gl::instance();
 }

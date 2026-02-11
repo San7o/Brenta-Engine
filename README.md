@@ -40,17 +40,17 @@ classes, to get a detailed look at the engine, please visit the
 ### Modular APIs
 
 ```c++
-auto engine = engine::builder()
-  .with(logger::builder()
+auto engine = Engine::Builder()
+  .with(Logger::Builder()
         .level(oak::level::debug)
         .file("/tmp/brenta-logs"))
-  .with(window::builder()
+  .with(Window::Builder()
         .title("brenta demo")
         .width(800)
         .height(600)
         .vsync()
         .msaa())
-  .with(gl::builder()
+  .with(Gl::Builder()
         .blending()
         .cull_face()
         .multisample()
@@ -61,7 +61,7 @@ auto engine = engine::builder()
 ### Model Loading
 
 ```c++
-audo my_model = model::builder()
+audo model = Model::Builder()
     .path("assets/models/backpack/backpack.obj")
     .build();
 ```
@@ -72,7 +72,7 @@ audo my_model = model::builder()
 ### Particles
 
 ```c++
-auto emitter = particle_emitter::builder()
+auto emitter = ParticleEmitter::Builder()
         .with_camera(&camera)
         .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
         .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
@@ -97,9 +97,9 @@ auto emitter = particle_emitter::builder()
 ### 3D Camera
 
 ```cpp
-auto camera = camera::builder()
-  .projection_type(camera::projection_type::perspective)
-  .position(camera::spherical::builder()
+auto camera = Camera::Builder()
+  .projection_type(Camera::ProjectionType::Perspective)
+  .position(Camera::Spherical::Builder()
             .center({0.0f, 2.0f, 0.0f})
             .phi(1.25f)
             .theta(1.25f)

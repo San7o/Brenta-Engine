@@ -11,6 +11,6 @@ using namespace brenta;
 
 void init_play_guitar_callback()
 {
-  auto play_guitar = []() { audio::play("guitar"); };
-  input::add_keyboard_callback(GLFW_KEY_P, play_guitar);
+  auto play_guitar = []() { Audio::play("guitar"); };
+  Input::add_keyboard_callback(GLFW_KEY_P, play_guitar);
 }

@@ -35,7 +35,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       return;
     }
 
-    brenta::camera *cam = world::get_resource<CameraResource>()->cam;
+    brenta::Camera *cam = world::get_resource<CameraResource>()->cam;
 
     for (auto match : matches)
     {
@@ -45,13 +45,13 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       auto transform_component =
         world::entity_to_component<TransformComponent>(match);
 
-      model *m = &model_component->mod;
+      Model *m = &model_component->mod;
       auto default_shader = model_component->shader;
 
-      brenta::types::translation t = brenta::types::translation();
+      brenta::Translation t = brenta::Translation();
       t.set_view(cam->get_view_matrix());
-      t.set_projection(cam->get_projection_matrix(window::get_width(),
-                                                  window::get_height()));
+      t.set_projection(cam->get_projection_matrix(Window::get_width(),
+                                                  Window::get_height()));
 
       t.set_model(glm::mat4(1.0f));
       t.translate(transform_component->position);
@@ -60,9 +60,9 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
 
       t.set_shader(default_shader);
 
-      shader::set_vec3(default_shader, "viewPos",
+      Shader::set_vec3(default_shader, "viewPos",
                        cam->get_world_pos());
-      shader::set_float(default_shader, "material.shininess",
+      Shader::set_float(default_shader, "material.shininess",
                         model_component->shininess);
 
       // Animation control
@@ -81,14 +81,14 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
         {
           model_component->elapsedFrames++;
         }
-        shader::set_int(default_shader, "atlasSize",
+        Shader::set_int(default_shader, "atlasSize",
                         model_component->atlasSize);
-        shader::set_int(default_shader, "atlasIndex",
+        Shader::set_int(default_shader, "atlasIndex",
                         model_component->atlasIndex);
       }
       else
       {
-        shader::set_int(default_shader, "atlasIndex", 0);
+        Shader::set_int(default_shader, "atlasIndex", 0);
       }
 
       m->draw(default_shader);

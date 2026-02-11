@@ -17,29 +17,29 @@ To create an engine, you can use the Builder class:
 #include <brenta/brenta.hpp>
 
 int main() {
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("load opengl test")
           .width(screen_width)
           .height(screen_height))
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
 
-  while (!window::should_close())
+  while (!Window::should_close())
   {
     // Handle input...
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
     
     // Update logic...
     // Draw...
-    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::clear();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }
@@ -63,7 +63,7 @@ auto toggle_wireframe_callback = []() {
     wireframe->enabled = !wireframe->enabled;
 };
 
-input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
+Input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
 ```
 
 In this example we register a keyboard callback that toggles the
@@ -85,7 +85,7 @@ multiple audio files at the same time.
 You can load an audio file like so:
 
 ```cpp
-audio::load("guitar", "assets/audio/guitar.wav");
+Audio::load("guitar", "assets/audio/guitar.wav");
 ```
 
 We are identifying this audio file with the name `guitar`.
@@ -93,13 +93,13 @@ We are identifying this audio file with the name `guitar`.
 You can create a stream with the name "music" like so:
 
 ```cpp
-audio::create_stream("music");
+Audio::create_stream("music");
 ```
 
 And finally play the `guitar` audio like so:
 
 ```cpp
-sudio::play("guitar");
+Audio::play("guitar");
 ```
 
 You can Pause and Resume streams with `brenta::audio::stream_pause` and
@@ -114,7 +114,7 @@ GPU so the engine can handle lots and lots of particles. Here's a
 quick look on the API:
 
 ```cpp
-particle_emitter emitter = particle_emitter::builder()
+auto emitter = ParticleEmitter::Builder()
        .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
        .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
        .starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
@@ -129,8 +129,8 @@ particle_emitter emitter = particle_emitter::builder()
        .build();
 
 // Inside the game loop:
-emitter.update_particles(time::get_delta_time());
-emitter.render_particles();
+emitter.update(Window::get_time().get_delta());
+emitter.render();
 ```
 
 ## Logger
@@ -149,7 +149,7 @@ The `brenta::text` subsystem allows you to render text on the screen. You can
 set the font and font size of your text, and render it in the main loop like
 this:
 ```cpp
-text::render_text("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
+Text::render_text("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
 ```
 
 ## ECS
@@ -180,51 +180,38 @@ with `brenta::time`, display text with `brenta::text` and more!
 using namespace brenta;
 using namespace viotecs;
 
-// Initialize a default camera
-namespace brenta
-{
-  camera default_camera = camera();
-}
-
 REGISTER_SYSTEMS(none);
 
 int main()
 {
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug)
           .file("/tmp/brenta-logs"))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("brenta demo")
           .width(800)
           .height(600)
           .vsync()
           .msaa())
-    .with(input::builder())
-    .with(ecs::builder())
+    .with(Input::Builder())
+    .with(Ecs::Builder())
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
   
   // Your init functions ...
   init_player();
   init_renderer();
 
-  /* 
-   * It is nice to reset the time
-   * before starting the game loop
-   * so that the first frame will have
-   * a delta time of 0.
-   */
-  time::update(window::get_time());
-  while(!window::should_Close()) {
+  while(!Window::should_Close()) {
 
-    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::clear();
 
     world::tick();
 
-    window::poll_wvents();
-    window::swap_buffers();
+    Window::poll_wvents();
+    Window::swap_buffers();
   }
   
   // The engine will take care of deallocation
@@ -243,14 +230,14 @@ You can define your own component like so:
 ```c++
 // This is a component
 struct model_component : component {
-  model mod;
-  types::shader_name_t shader;
+  Model mod;
+  Shader::Name shader;
 
   // You need to provide a default constructor
   model_component() {};
 
   // Any other construtor is optional
-  model_component(model mod, types::shader_name_t shader)
+  model_component(model mod, Shader::Name shader)
         : model(model), shader(shader) {}
 };
 ```

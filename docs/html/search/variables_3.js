@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['id_0',['id',['../classbrenta_1_1types_1_1buffer.html#ac8b1673619c84a5521720a506fd71c32',1,'brenta::types::buffer']]],
-  ['indices_1',['indices',['../classbrenta_1_1mesh.html#a9991822785185a303b3f5c5cd23095c5',1,'brenta::mesh']]]
+  ['mipmap_5fmag_0',['mipmap_mag',['../classbrenta_1_1Mesh.html#af97f715c22789ef6854809f28c9c096d',1,'brenta::Mesh']]],
+  ['mipmap_5fmin_1',['mipmap_min',['../classbrenta_1_1Mesh.html#aee44db984d96675ea6870a2b34672796',1,'brenta::Mesh']]]
 ];

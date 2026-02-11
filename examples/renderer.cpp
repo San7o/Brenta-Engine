@@ -11,67 +11,67 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <iostream>
 #include <viotecs/viotecs.hpp>
-
 REGISTER_SYSTEMS()
 
+#include <iostream>
+
 using namespace brenta;
-  
-const int screen_width = 800;
-const int screen_height = 600;
 
 int main()
 {
-  engine::builder()
-    .with(logger::builder()
+  const int screen_width = 800;
+  const int screen_height = 600;
+
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("load model test")
           .width(screen_width)
           .height(screen_height))
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
   
-  auto cam = camera::builder()
-    .projection_type(camera::projection_type::perspective)
-    .position(camera::aircraft::builder()
+  auto cam = Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Aircraft::Builder()
               .pos({0.0f, 0.0f, 0.0f})
               .build())
     .fov(45.0f)
     .build();
   
-  model m = model::builder()
+  Model m = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .build();
 
-  shader::name_t s = "default_shader";
-  shader::create(s,
-                 shader::type::vertex, "examples/default_shader.vs",
-                 shader::type::fragment, "examples/default_shader.fs");
+  Shader::Name s = "default_shader";
+  Shader::create(s,
+                 Shader::Type::Vertex,   "examples/default_shader.vs",
+                 Shader::Type::Fragment, "examples/default_shader.fs");
 
-  while (!window::should_close())
+  while (!Window::should_close())
   { 
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
-    gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::clear();
     
-    renderer::begin_frame(cam);
-    renderer::submit(renderer::item(&m, s)
+    Renderer::begin_frame(cam);
+    Renderer::submit(Renderer::Target(&m, s)
                      .translate(glm::vec3(5.0f, 0.0f, 0.0f))
                      .rotate(glm::vec3(0.0, -90.0, 0.0))
                      .scale(1.0));
-    renderer::end_frame();
+    Renderer::end_frame();
     
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }

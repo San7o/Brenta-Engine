@@ -1,7 +1,8 @@
 var searchData=
 [
-  ['text_0',['text',['../classbrenta_1_1text.html',1,'brenta']]],
-  ['texture_1',['texture',['../classbrenta_1_1texture.html',1,'brenta']]],
-  ['time_2',['time',['../classbrenta_1_1time.html',1,'brenta']]],
-  ['translation_3',['translation',['../classbrenta_1_1types_1_1translation.html',1,'brenta::types']]]
+  ['target_0',['Target',['../classbrenta_1_1Renderer_1_1Target.html',1,'brenta::Renderer']]],
+  ['text_1',['Text',['../classbrenta_1_1Text.html',1,'brenta']]],
+  ['texture_2',['Texture',['../classbrenta_1_1Texture.html',1,'brenta']]],
+  ['time_3',['Time',['../classbrenta_1_1Time.html',1,'brenta']]],
+  ['translation_4',['Translation',['../classbrenta_1_1Translation.html',1,'brenta']]]
 ];

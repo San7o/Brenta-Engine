@@ -21,17 +21,19 @@ struct DirectionalLightComponent : component
   glm::vec3 ambient;
   glm::vec3 diffuse;
   glm::vec3 specular;
-  float strength;
-  std::vector<brenta::shader::name_t> shaders;
+  float     strength;
+  std::vector<Shader::Name> shaders;
+  
   DirectionalLightComponent()
       : direction(glm::vec3(0.0f)), ambient(glm::vec3(0.0f)),
         diffuse(glm::vec3(0.0f)), specular(glm::vec3(0.0f)), strength(0.0f)
   {
   }
+  
   DirectionalLightComponent(glm::vec3 direction, glm::vec3 ambient,
                             glm::vec3 diffuse, glm::vec3 specular,
                             float strength,
-                            std::vector<brenta::shader::name_t> shaders)
+                            std::vector<Shader::Name> shaders)
       : direction(direction), ambient(ambient), diffuse(diffuse),
         specular(specular), strength(strength), shaders(shaders)
   {

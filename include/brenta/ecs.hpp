@@ -13,26 +13,26 @@
 namespace brenta
 {
 
-class ecs : public subsystem
+class Ecs : public Subsystem
 {
 public:
 
-  class builder;
+  class Builder;
 
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
   
   // Constructors / destructors
-  ecs() = default;
-  ~ecs() = default;
+  Ecs() = default;
+  ~Ecs() = default;
 
   // Member functions
   
-  static ecs &instance();
+  static Ecs &instance();
 
 private:
 
@@ -40,14 +40,14 @@ private:
 
 };
 
-class ecs::builder : public subsystem::builder
+class Ecs::Builder : public Subsystem::Builder
 {
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder() = default;
+  ~Builder() = default;
 
-  subsystem &build();
+  Subsystem &build();
 };
   
 } // namespace brenta

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['vao_0',['vao',['../classbrenta_1_1types_1_1vao.html',1,'brenta::types']]],
-  ['vertex_1',['vertex',['../structbrenta_1_1types_1_1vertex.html',1,'brenta::types']]]
+  ['vao_0',['Vao',['../classbrenta_1_1Vao.html',1,'brenta']]],
+  ['vertex_1',['Vertex',['../classbrenta_1_1Mesh_1_1Vertex.html',1,'brenta::Mesh']]]
 ];

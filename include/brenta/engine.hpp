@@ -23,38 +23,38 @@ namespace brenta
  * added, and terminated in reverse order. Make sure that they are
  * ordered correctly if a subsystem depends on another one.
  */
-class engine : public subsystem
+class Engine : public Subsystem
 {
 public:
 
-  class manager;
-  class builder;
+  class Manager;
+  class Builder;
   
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, subsystem::error> initialize() override;
-  std::expected<void, subsystem::error> terminate() override;
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
 
   // Constructors / destructors
-  engine() = default;
-  ~engine() = default;
+  Engine() = default;
+  ~Engine() = default;
 
   // Member functions
   
   // Get a static object instance
-  static engine &instance();
-  static engine::manager managed();
+  static Engine &instance();
+  static Engine::Manager managed();
 
   // Initialize a subsystem and add it to the managed subsystems (will
   // be terminated with the others).
   static std::expected<void, std::string>
-  with(subsystem::builder &&builder);
+  with(Subsystem::Builder &&builder);
 
 private:
 
-  static std::vector<std::reference_wrapper<subsystem>> subsystems;
+  static std::vector<std::reference_wrapper<Subsystem>> subsystems;
   static bool initialized;
 
 };
@@ -62,34 +62,34 @@ private:
 /**
  * @brief Automatically initialize and terminate engine with RAII
  */
-class engine::manager
+class Engine::Manager
 {
 public:
   /**
    * @brief Initializes all subsystems, throws and exeption in case of failure
    */
-  manager();
+  Manager();
   /**
    * @brief Terminates all subsystems
    */
-  ~manager();
+  ~Manager();
 };
 
-class engine::builder : public subsystem::builder
+class Engine::Builder : public Subsystem::Builder
 {
 public:
 
-  builder() = default;
-  ~builder() = default;
+  Builder() = default;
+  ~Builder() = default;
   
-  builder &with(subsystem::builder &builder);
-  builder &with(subsystem::builder &&builder);
+  Builder &with(Subsystem::Builder &builder);
+  Builder &with(Subsystem::Builder &&builder);
   
-  brenta::subsystem &build() override;
+  brenta::Subsystem &build() override;
   
 private:
   
-  std::vector<std::reference_wrapper<brenta::subsystem>> subsystems;
+  std::vector<std::reference_wrapper<brenta::Subsystem>> subsystems;
    
 };
 

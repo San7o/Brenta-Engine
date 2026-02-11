@@ -18,18 +18,18 @@ namespace brenta
  * terminated. The initialization settings should be passed via a
  * builder class.
  */
-class subsystem
+class Subsystem
 {
 public:
 
-  using error = std::string;
+  using Error = std::string;
   
-  class builder;
+  class Builder;
   
-  virtual ~subsystem() = default;
+  virtual ~Subsystem() = default;
   
-  virtual std::expected<void, subsystem::error> initialize() = 0;
-  virtual std::expected<void, subsystem::error> terminate() = 0;
+  virtual std::expected<void, Subsystem::Error> initialize() = 0;
+  virtual std::expected<void, Subsystem::Error> terminate() = 0;
   /**
    * @brief Returns the name of the sybsystem
    */
@@ -45,12 +45,12 @@ public:
  *
  * Interface to build a subsystem. It does not initialize it.
  */
-class subsystem::builder
+class Subsystem::Builder
 {
 public:
-  virtual ~builder() = default;
+  virtual ~Builder() = default;
   
-  virtual subsystem &build() = 0;
+  virtual Subsystem &build() = 0;
 };
 
 } // namepsace brenta

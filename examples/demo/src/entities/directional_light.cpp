@@ -28,5 +28,5 @@ void init_directional_light_entity()
                                               glm::vec3(0.5f, 0.5f, 0.5f),   // diffuse
                                               glm::vec3(1.0f, 1.0f, 1.0f),   // specular
                                               1.0f,                          // intensity
-                                              std::vector<brenta::shader::name_t>{"default_shader"});
+                                              std::vector<Shader::Name>{"default_shader"});
 }

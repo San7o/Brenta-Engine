@@ -12,52 +12,52 @@ using namespace brenta;
 // Static variables
 //
 
-const std::string ecs::subsystem_name = "ecs";
-bool ecs::initialized = false;
+const std::string Ecs::subsystem_name = "ecs";
+bool Ecs::initialized = false;
 
 //
 // Subsystem interface
 //
 
-std::expected<void, subsystem::error> ecs::initialize()
+std::expected<void, Subsystem::Error> Ecs::initialize()
 {
   if (this->is_initialized()) return {};
   
   viotecs::world::init();
 
-  ecs::initialized = true;
-  INFO("{}: initialized", ecs::subsystem_name);
+  Ecs::initialized = true;
+  INFO("{}: initialized", Ecs::subsystem_name);
   return {};
 }
 
-std::expected<void, subsystem::error> ecs::terminate()
+std::expected<void, Subsystem::Error> Ecs::terminate()
 {
   if (!this->is_initialized()) return {};
 
   viotecs::world::destroy();
 
-  ecs::initialized = true;
-  INFO("{}: terminated", ecs::subsystem_name);
+  Ecs::initialized = true;
+  INFO("{}: terminated", Ecs::subsystem_name);
   return {};
 }
 
-std::string ecs::name()
+std::string Ecs::name()
 {
-  return ecs::subsystem_name;
+  return Ecs::subsystem_name;
 }
 
-bool ecs::is_initialized()
+bool Ecs::is_initialized()
 {
-  return ecs::initialized;
+  return Ecs::initialized;
 }
 
 //
 // Member functions
 //
 
-ecs &ecs::instance()
+Ecs &Ecs::instance()
 {
-  static ecs _ecs;
+  static Ecs _ecs;
   return _ecs;
 }
 
@@ -65,7 +65,7 @@ ecs &ecs::instance()
 // Builder
 //
 
-subsystem &ecs::builder::build()
+Subsystem &Ecs::Builder::build()
 {
-  return ecs::instance();
+  return Ecs::instance();
 }

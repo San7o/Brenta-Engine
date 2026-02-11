@@ -22,24 +22,6 @@
 namespace brenta
 {
 
-namespace types
-{
-
-/**
- * @brief The Vertex struct represents a vertex of a 3D model
- *
- * A vertex is a point in 3D space that has a position, a normal and
- * texture coordinates.
- */
-struct vertex
-{
-  glm::vec3 position;
-  glm::vec3 normal;
-  glm::vec2 tex_coords;
-};
-
-} // namespace types
-
 /**
  * @brief The Mesh class represents a 3D model
  *
@@ -47,20 +29,24 @@ struct vertex
  * represent a 3D model. The mesh can be drawn using a shader and
  * calling the draw() method.
  */
-class mesh
+class Mesh
 {
 public:
+
+  class Vertex;
+  class Config;
+  class Builder;
   
-  std::vector<types::vertex> vertices;
+  std::vector<Vertex> vertices;
   /**
    * @brief indices of the mesh
    *
    * Indicies are used to reduce the memory footprint required to
-   * represent a 3D model. They are indices in the vertex array and
-   * there can be multiple indices for a vertex.
+   * represent a 3D model. They are indices in the vertex array, there
+   * can be multiple indices for the same vertex.
    */
-  std::vector<unsigned int> indices;
-  std::vector<std::shared_ptr<texture>> textures;
+  std::vector<unsigned int>             indices;
+  std::vector<std::shared_ptr<Texture>> textures;
   /**
    * @brief Type of texture wrapping
    *
@@ -166,64 +152,74 @@ public:
    */
   GLint mipmap_mag;
 
-  struct config;
-  class builder;
-  static const config default_config;
+  Mesh(Config&& conf);
   
-  mesh(config&& conf);
-  
-  constexpr mesh(const mesh&) = delete;
-  constexpr mesh& operator=(const mesh&) = delete;
+  constexpr Mesh(const Mesh&) = delete;
+  constexpr Mesh& operator=(const Mesh&) = delete;
 
-  constexpr mesh(mesh&&) noexcept = default;
-  constexpr mesh& operator=(mesh&&) noexcept = default;
-  ~mesh();
+  constexpr Mesh(Mesh&&) noexcept = default;
+  constexpr Mesh& operator=(Mesh&&) noexcept = default;
+  ~Mesh();
 
-  void draw(shader::name_t shader_name) const;
+  void draw(Shader::Name shader_name) const;
 
 private:
 
-  types::vao vao;
-  types::buffer vbo;
-  types::buffer ebo;
+  Vao vao;
+  Buffer vbo;
+  Buffer ebo;
 
+  static const Config default_config;
+  
   void init();
 };
 
-struct mesh::config
+/**
+ * @brief The Vertex struct represents a vertex of a 3D model
+ *
+ * A vertex is a point in 3D space that has a position, a normal and
+ * texture coordinates.
+ */
+class Mesh::Vertex
 {
-  std::vector<types::vertex> vertices;
-  std::vector<unsigned int> indices;
-  std::vector<std::shared_ptr<texture>> textures;
-  GLint wrapping;
-  GLint filtering_min;
-  GLint filtering_mag;
-  GLboolean has_mipmap;
-  GLint mipmap_min;
-  GLint mipmap_max;
+public:
+  glm::vec3 position;
+  glm::vec3 normal;
+  glm::vec2 tex_coords;
 };
 
-/**
- * @brief The Builder class is used to build a Mesh object
- */
-class mesh::builder
+class Mesh::Config
+{
+public:
+  std::vector<Vertex>                   vertices;
+  std::vector<unsigned int>             indices;
+  std::vector<std::shared_ptr<Texture>> textures;
+  GLint     wrapping;
+  GLint     filtering_min;
+  GLint     filtering_mag;
+  GLboolean has_mipmap;
+  GLint     mipmap_min;
+  GLint     mipmap_max;
+};
+
+class Mesh::Builder
 {
 private:
 
-  mesh::config conf = mesh::default_config;
+  Mesh::Config conf = Mesh::default_config;
   
 public:
-  builder &vertices(std::vector<types::vertex> vertices);
-  builder &indices(std::vector<unsigned int> indices);
-  builder &textures(std::vector<std::shared_ptr<texture>> textures);
-  builder &wrapping(GLint wrapping);
-  builder &filtering_min(GLint filtering_min);
-  builder &filtering_mag(GLint filtering_mag);
-  builder &has_mipmap(GLboolean has_mipmap);
-  builder &mipmap_min(GLint mipmap_min);
-  builder &mipmap_mag(GLint mipmap_mag);
+  Builder &vertices(std::vector<Vertex> vertices);
+  Builder &indices(std::vector<unsigned int> indices);
+  Builder &textures(std::vector<std::shared_ptr<Texture>> textures);
+  Builder &wrapping(GLint wrapping);
+  Builder &filtering_min(GLint filtering_min);
+  Builder &filtering_mag(GLint filtering_mag);
+  Builder &has_mipmap(GLboolean has_mipmap);
+  Builder &mipmap_min(GLint mipmap_min);
+  Builder &mipmap_mag(GLint mipmap_mag);
 
-  mesh build();
+  Mesh build();
 };
 
 } // namespace brenta

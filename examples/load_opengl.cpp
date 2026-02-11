@@ -12,55 +12,55 @@
 #include <brenta/window.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <iostream>
 #include <viotecs/viotecs.hpp>
-
 REGISTER_SYSTEMS()
 
+#include <iostream>
+
 using namespace brenta;
-  
-const int screen_width = 800;
-const int screen_height = 600;
 
 int main()
 {
+  const int screen_width = 800;
+  const int screen_height = 600;
+
   //
   // Setup
   //
 
-  engine::builder()
-    .with(logger::builder()
+  Engine::Builder()
+    .with(Logger::Builder()
           .level(oak::level::debug))
-    .with(window::builder()
+    .with(Window::Builder()
           .title("load opengl test")
           .width(screen_width)
           .height(screen_height))
-    .with(gl::builder()
+    .with(Gl::Builder()
           .blending()
           .cull_face()
           .multisample()
           .depth_test())
     .build();
-  auto engine = engine::managed();
+  auto engine = Engine::managed();
   
   //
   // Render loop
   //
   
-  while (!window::should_close())
+  while (!Window::should_close())
   {
     // Input
-    if (window::is_key_pressed(GLFW_KEY_ESCAPE))
-      window::close();
+    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+      Window::close();
 
     // Draw
     // If you see a black window, it means that the OpenGL options are not
     // set correctly.
-    gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
-    gl::clear();
+    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::clear();
 
-    window::poll_events();
-    window::swap_buffers();
+    Window::poll_events();
+    Window::swap_buffers();
   }
   return 0;
 }
