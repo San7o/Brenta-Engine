@@ -82,7 +82,6 @@ int main()
   // Render loop
   //
   
-  time::update(window::get_time());
   while (!window::should_close())
   {
     if (window::is_key_pressed(GLFW_KEY_ESCAPE))
@@ -91,10 +90,8 @@ int main()
     gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
     gl::clear();
 
-    emitter.update_particles(time::get_delta_time());
+    emitter.update_particles(window::get_time().get_delta());
     emitter.render_particles();
-
-    time::update(window::get_time());
 
     window::poll_events();
     window::swap_buffers();

@@ -22,6 +22,7 @@ int window::width;
 int window::height;
 GLFWwindow *window::window_backend;
 std::string window::title;
+Time window::time;
 const std::string window::subsystem_name = "window";
 const window::config window::default_config = {
   800,
@@ -139,9 +140,9 @@ bool window::is_key_pressed(int key)
   return glfwGetKey(window::window_backend, key) == GLFW_PRESS;
 }
 
-float window::get_time()
+Time window::get_time()
 {
-  return glfwGetTime();
+  return window::time;
 }
 
 GLFWwindow *window::get_window()
@@ -197,6 +198,7 @@ void window::close()
 
 void window::swap_buffers()
 {
+  window::time.update(glfwGetTime());
   glfwSwapBuffers(window::window_backend);
 }
 

@@ -32,6 +32,7 @@ public:
   void set_sensitivity(float sensitivity);
 
 private:
+  
   // First is useful if you want to set the initial position of
   // the mouse as "invalid" instead of (0, 0)
   bool    first = true;

@@ -26,7 +26,7 @@ struct DebugTextSystem : system<none>
     brenta::camera *cam = world::get_resource<CameraResource>()->cam;
     auto camera_world_pos = cam->get_world_pos();
 
-    text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f,
+    text::render_text("FPS: " + std::to_string(window::get_time().get_fps()), 25.0f,
                       window::get_height() - 30.0f, 0.35f, color);
 
     text::render_text("CameraX: " + std::to_string(camera_world_pos.x), 25.0f,

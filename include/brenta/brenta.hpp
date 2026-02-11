@@ -5,22 +5,25 @@
 
 #pragma once
 
+//
+// Import everything
+//
+
+// renderer
 #include <brenta/renderer/opengl/buffer.hpp>
-#include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/opengl/frame_buffer.hpp>
-#include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
+#include <brenta/renderer/opengl/vao.hpp>
+#include <brenta/renderer/camera.hpp>
+#include <brenta/renderer/mesh.hpp>
+#include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/translation.hpp>
-#include <brenta/renderer/opengl/vao.hpp>
 #include <brenta/renderer/model.hpp>
 
-#include <brenta/gui/gui.hpp>
-#include <brenta/gui/text.hpp>
-
+// Core
 #include <brenta/audio.hpp>
 #include <brenta/mouse.hpp>
 #include <brenta/input.hpp>
@@ -30,3 +33,7 @@
 #include <brenta/subsystem.hpp>
 #include <brenta/ecs.hpp>
 #include <brenta/engine.hpp>
+
+// Gui
+#include <brenta/gui/gui.hpp>
+#include <brenta/gui/text.hpp>

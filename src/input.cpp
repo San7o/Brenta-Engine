@@ -97,7 +97,7 @@ void input::key_callback([[maybe_unused]] GLFWwindow *window,
   }
 }
 
-void input::add_mouse_pos_callback(types::mouse_callback_name_t callback_name,
+void input::add_mouse_pos_callback(mouse_callback_name_t callback_name,
                                    std::function<void(double, double)> callback)
 {
   input::mouse_callbacks[callback_name] = callback;
@@ -105,7 +105,7 @@ void input::add_mouse_pos_callback(types::mouse_callback_name_t callback_name,
        input::subsystem_name, callback_name);
 }
 
-void input::remove_mouse_pos_callback(types::mouse_callback_name_t callback_name)
+void input::remove_mouse_pos_callback(mouse_callback_name_t callback_name)
 {
   if (input::mouse_callbacks.find(callback_name)
       == input::mouse_callbacks.end())

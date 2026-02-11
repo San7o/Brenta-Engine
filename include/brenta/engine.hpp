@@ -19,9 +19,9 @@ namespace brenta
  * subsystems. You can use the builder class to initialize the engine,
  * as with any other subsystem.
  *
- * Note: The subsystems will be initialized in the order as they are
- * added and terminated in reverse, so make sure that they are ordered
- * correctly if a subsystem depends on another one.
+ * Note: The subsystems will be initialized in the order they were
+ * added, and terminated in reverse order. Make sure that they are
+ * ordered correctly if a subsystem depends on another one.
  */
 class engine : public subsystem
 {
@@ -30,9 +30,8 @@ public:
   class manager;
   class builder;
   
-  static const std::string subsystem_name;
-  
   // Subsystem interface
+  static const std::string subsystem_name;
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
@@ -43,16 +42,13 @@ public:
   ~engine() = default;
 
   // Member functions
-  /**
-   * @brief Get a static object instance
-   */
+  
+  // Get a static object instance
   static engine &instance();
   static engine::manager managed();
-  
-  /**
-   * @brief Initialize a subsystem and add it to the managed
-   * subsystems (will be terminated with the others).
-   */
+
+  // Initialize a subsystem and add it to the managed subsystems (will
+  // be terminated with the others).
   static std::expected<void, std::string>
   with(subsystem::builder &&builder);
 
@@ -78,18 +74,9 @@ public:
    */
   ~manager();
 };
-  
-/**
- * @brief Engine builder
- *
- * This class is used to build the engine.
- */
+
 class engine::builder : public subsystem::builder
 {
-private:
-  
-  std::vector<std::reference_wrapper<brenta::subsystem>> subsystems;
-  
 public:
 
   builder() = default;
@@ -97,8 +84,13 @@ public:
   
   builder &with(subsystem::builder &builder);
   builder &with(subsystem::builder &&builder);
+  
   brenta::subsystem &build() override;
   
+private:
+  
+  std::vector<std::reference_wrapper<brenta::subsystem>> subsystems;
+   
 };
 
 } // namespace brenta

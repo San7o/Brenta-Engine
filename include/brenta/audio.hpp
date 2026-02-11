@@ -37,13 +37,12 @@ public:
   using sound_t     = ma_sound;
   using stream_t    = ma_sound_group;
 
-  class builder;
+  class      builder;
   enum class error;
 
   // This map contains all the sound files loaded by the engine.  The
   // key is the id of the sound file, the value is the struct sound_t.
   static std::unordered_map<sound_id_t, sound_t> sounds;
-  
   // This map contains all the audio streams created by the engine.
   // The key is the id of the stream, the value is a stream type. The
   // engine creates a default stream called "default".
@@ -71,19 +70,13 @@ public:
   
   static audio &instance();
 
-  /**
-   * @brief Load a sound from path on a stream
-   *
-   * Automatically creates the stream if it does not exist.
-   */
+  // Automatically creates the stream if it does not exist.
   static std::expected<void, audio::error>
   load(const sound_id_t &sound_id,
        const std::string &path,
        const stream_id_t &stream_id = "default");
 
-  /**
-   * @brief Play a sound on its stream
-   */
+  // Play a sound on its stream
   static std::expected<void, audio::error>
   play(const sound_id_t &id);
 
@@ -109,31 +102,21 @@ private:
   // A list of pairs (stream_id, volume) of streams that will be
   // created when the subsystem is initialized.
   static std::vector<std::pair<stream_id_t, float>> init_streams;
-
   // A list of pairs (sound_id, pathname, stream_id) of sounds that
   // will be loaded when the subsystem is initialized.
   static std::vector<std::tuple<sound_id_t,
                                 std::string,
                                 stream_id_t>> init_sounds;
-
   static bool initialized;
   
   // Backend
   static ma_engine engine;
-
 };
 
 class audio::builder : public subsystem::builder
 {
-private:
-  
-  std::vector<std::tuple<sound_id_t, std::string,
-                         stream_id_t>> init_sounds;
-  std::vector<std::pair<stream_id_t, float>> init_streams;
-  float volume = 1.0;
-  
 public:
-
+  
   builder() = default;
   ~builder() = default;
 
@@ -145,6 +128,12 @@ public:
   
   brenta::subsystem &build() override;
   
+private:
+  
+  std::vector<std::tuple<sound_id_t, std::string,
+                         stream_id_t>> init_sounds;
+  std::vector<std::pair<stream_id_t, float>> init_streams;
+  float volume = 1.0;
 };
 
 enum class audio::error : int

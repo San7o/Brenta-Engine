@@ -18,9 +18,9 @@ class ecs : public subsystem
 public:
 
   class builder;
-  static const std::string subsystem_name;
 
   // Subsystem interface
+  static const std::string subsystem_name;
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;

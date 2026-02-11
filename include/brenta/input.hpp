@@ -20,7 +20,6 @@ namespace brenta
 namespace types
 {
 
-typedef std::string mouse_callback_name_t;
 
 } // namespace types
 
@@ -34,6 +33,8 @@ typedef std::string mouse_callback_name_t;
 class input : public subsystem
 {
 public:
+
+  using mouse_callback_name_t = std::string;
 
   class builder;
 
@@ -109,7 +110,7 @@ public:
    * @param callback The callback function
    */
   static void
-  add_mouse_pos_callback(types::mouse_callback_name_t name,
+  add_mouse_pos_callback(mouse_callback_name_t name,
                          std::function<void(double, double)> callback);
   /**
    * @brief Remove a mouse position callback
@@ -120,7 +121,7 @@ public:
    * @param callback_name The name of the callback
    */
   static void
-  remove_mouse_pos_callback(types::mouse_callback_name_t callback_name);
+  remove_mouse_pos_callback(mouse_callback_name_t callback_name);
   /**
    * @brief Mouse position callback
    *

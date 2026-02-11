@@ -104,7 +104,6 @@ int main()
   brenta::types::framebuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
-  time::update(window::get_time());
   while (!window::should_close())
   {
     window::poll_events();
@@ -117,11 +116,10 @@ int main()
     gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
     gl::clear();
 
-    emitter.update_particles(time::get_delta_time());
+    emitter.update_particles(window::get_time().get_delta());
     emitter.render_particles();
 
 #ifdef BRENTA_USE_ECS
-    time::update(window::get_time());
     world::tick();
 #endif
 

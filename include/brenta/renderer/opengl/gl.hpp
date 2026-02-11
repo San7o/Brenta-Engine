@@ -33,11 +33,8 @@ public:
   class config;
   class builder;
 
-  static const std::string subsystem_name;
-  static const gl::config default_config;
-  static gl::config init_config;
-
   // Subsystem interface
+  static const std::string subsystem_name;
   std::expected<void, subsystem::error> initialize() override;
   std::expected<void, subsystem::error> terminate() override;
   std::string name() override;
@@ -125,9 +122,10 @@ public:
   static GLenum _check_error(const char *file, int line);
 
 private:
-  
   static bool initialized;
   
+  static const gl::config  default_config;
+  static gl::config        init_config;
 };
 
 struct gl::config

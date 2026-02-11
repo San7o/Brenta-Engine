@@ -42,9 +42,9 @@ private:
 class renderer::item
 {
 public:
-  const model* m;
+  const model         *m;
   const shader::name_t material;
-  glm::mat4 transform;
+  glm::mat4            transform;
 
   item() = default;
   item(const model* m,

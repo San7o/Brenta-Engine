@@ -13,10 +13,10 @@
 #include <expected>
 #include <string>
 
-#define DEBUG(...) OAK_DEBUG(__VA_ARGS__);
-#define INFO(...) OAK_INFO(__VA_ARGS__);
-#define WARN(...) OAK_WARN(__VA_ARGS__);
-#define ERROR(...) OAK_ERROR(__VA_ARGS__);
+#define DEBUG(...)  OAK_DEBUG(__VA_ARGS__);
+#define INFO(...)   OAK_INFO(__VA_ARGS__);
+#define WARN(...)   OAK_WARN(__VA_ARGS__);
+#define ERROR(...)  OAK_ERROR(__VA_ARGS__);
 
 namespace brenta
 {
@@ -29,8 +29,6 @@ public:
   class builder;
   
   static const std::string subsystem_name;
-  static const config default_config;
-  static config init_config;
 
   // Subsystem interface
   std::expected<void, subsystem::error> initialize() override;
@@ -48,13 +46,15 @@ public:
   
 private:
   
-  static bool initialized;
+  static const config   default_config;
+  static config         init_config;
+  static bool           initialized;
   
 };
 
 struct logger::config
 {
-  oak::level log_level;
+  oak::level  log_level;
   std::string log_file;
 };
 
