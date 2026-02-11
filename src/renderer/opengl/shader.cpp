@@ -11,6 +11,12 @@ using namespace brenta;
 
 std::unordered_map<Shader::Name, Shader::Id> Shader::shaders;
 
+
+bool Shader::compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled)
+{
+  return true;
+}
+
 Shader::Id Shader::get_id(Shader::Name shader_name)
 {
   if (Shader::shaders.find(shader_name) == Shader::shaders.end())

@@ -61,7 +61,7 @@ auto engine = Engine::Builder()
 ### Model Loading
 
 ```c++
-audo model = Model::Builder()
+auto model = Model::Builder()
     .path("assets/models/backpack/backpack.obj")
     .build();
 ```
