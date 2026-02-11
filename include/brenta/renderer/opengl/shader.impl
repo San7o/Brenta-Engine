@@ -21,7 +21,7 @@ bool Shader::create(const Shader::Name &shader_name,
                 [&id](auto shader) { glAttachShader(id, shader); });
 
   glLinkProgram(id);
-  if (!Shader::check_compile_errors(id, "PROGRAM"))
+  if (!Shader::check_link_errors(id))
   {
     return false;
   }
@@ -57,7 +57,7 @@ bool Shader::create(const GLchar **feedback_varyings, int num_varyings,
   }
 
   glLinkProgram(id);
-  if (!Shader::check_compile_errors(id, "PROGRAM"))
+  if (!Shader::check_link_errors(id))
   {
     return false;
   }
@@ -104,17 +104,17 @@ bool Shader::compile_shaders(std::vector<Shader::Id> &compiled,
   GLenum shader_type_gl;
   switch(type)
   {
-  case Fragment: shader_type_gl = GL_FRAGMENT_SHADER; break;
-  case Vertex: shader_type_gl   = GL_VERTEX_SHADER; break;
-  case Geometry: shader_type_gl = GL_GEOMETRY_SHADER; break;
-  case Compute: shader_type_gl  = GL_COMPUTE_SHADER; break;
-  default: shader_type_gl       = 0; break;
+  case Fragment:  shader_type_gl  = GL_FRAGMENT_SHADER; break;
+  case Vertex:    shader_type_gl  = GL_VERTEX_SHADER; break;
+  case Geometry:  shader_type_gl  = GL_GEOMETRY_SHADER; break;
+  case Compute:   shader_type_gl  = GL_COMPUTE_SHADER; break;
+  default:        shader_type_gl  = 0; break;
   }
     
   unsigned int shader = glCreateShader(shader_type_gl);
   glShaderSource(shader, 1, &shader_code, NULL);
   glCompileShader(shader);
-  if (!Shader::check_compile_errors(shader, "SHADER"))
+  if (!Shader::check_compile_errors(shader))
   {
     return false;
   }

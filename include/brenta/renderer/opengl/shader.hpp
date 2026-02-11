@@ -24,17 +24,19 @@
 namespace brenta
 {
 
-/**
- * @brief Shader class
- *
- * This class is used to create and manage shaders. The shaders are
- * created using the new method, which takes the name of the shader,
- * the type of the shader, and the path to the file that contains the
- * shader code. Multile shaders can be compiled and linked together by
- * providing any number of types and paths paired.  The shader can be
- * used with the Use method, and the uniforms can be set using the
- * set_bool, set_int, set_float, set_mat4, set_vec3 methods.
- */
+//
+// Shader
+// ------
+//
+// Shaders are programs that run on the GPU. They can be written in
+// a high-level language and then compiled into instructions that
+// the GPU understands. OpenGL uses the GLSL language which is similar
+// to C in syntax.
+//
+// To create a program, you need to compile the varous GLSL source
+// files of the shader, then link them together. This class provides
+// a simple API to create shaders, load them and set uniforms.
+//
 class Shader
 {
 public:
@@ -52,7 +54,8 @@ public:
 
   Shader()  = delete;
   ~Shader() = delete;
-  
+
+  // Creates and compiles several shaders (into a shader "program")
   template <typename... Args>
   static bool create(const Shader::Name &shader_name,
                      Shader::Type type, const std::filesystem::path &path,
@@ -62,13 +65,6 @@ public:
                      const Shader::Name &shader_name,
                      Shader::Type type, const std::filesystem::path &path,
                      Args... args);
-  static bool
-  compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
-  template <typename... Args>
-  static bool compile_shaders(std::vector<Shader::Id> &compiled,
-                              Shader::Type type, const std::filesystem::path &path,
-                              Args... args);
-
 
   static Shader::Id get_id(Shader::Name shader_name);
   static bool use(Shader::Name shader_name);
@@ -76,21 +72,28 @@ public:
   // Utility uniform functions
 
   static bool set_bool(Shader::Name shader_name,
-                       const GLchar *name, bool value);
-  static bool set_int(Shader::Name shader_name, const GLchar *name,
-                      int value);
+                       const GLchar *unif_name, bool value);
+  static bool set_int(Shader::Name shader_name,
+                      const GLchar *unif_name, int value);
   static bool set_float(Shader::Name shader_name,
-                        const GLchar *name, float value);
-  static bool set_mat4(Shader::Name shader_name, const GLchar *name,
-                       glm::mat4 value);
-  static bool set_vec3(Shader::Name shader_name, const GLchar *name,
-                       float x, float y, float z);
-  static bool set_vec3(Shader::Name shader_name, const GLchar *name,
-                       glm::vec3 value);
+                        const GLchar *unif_name, float value);
+  static bool set_mat4(Shader::Name shader_name,
+                       const GLchar *unif_name, glm::mat4 value);
+  static bool set_vec3(Shader::Name shader_name,
+                       const GLchar *name, float x, float y, float z);
+  static bool set_vec3(Shader::Name shader_name,
+                       const GLchar *unif_name, glm::vec3 value);
 
 private:
   
-  static bool check_compile_errors(Shader::Id shader, std::string type);
+  static bool
+  compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
+  template <typename... Args>
+  static bool compile_shaders(std::vector<Shader::Id> &compiled,
+                              Shader::Type type, const std::filesystem::path &path,
+                              Args... args);
+  static bool check_compile_errors(Shader::Id shader);  
+  static bool check_link_errors(Shader::Id shader);
   
   /**
    * @brief Map of shaders

@@ -37,7 +37,8 @@ public:
   
   struct Config;
   class  Builder;
-  
+
+  // Particle variables
   glm::vec3 starting_position;
   glm::vec3 starting_velocity;
   glm::vec3 starting_spread;
@@ -52,6 +53,7 @@ public:
   //
   // These are used to save the new state of updated particles in the
   // update_particles method.
+  // We have two fbo which get swapped when rendered
   Buffer fbo[2];
   int    current;   // current fbo index
   

@@ -91,11 +91,11 @@ ParticleEmitter::ParticleEmitter(Config conf)
 void ParticleEmitter::update(float delta_time)
 {
   Shader::use("particle_update");
-  Shader::set_float("particle_update", "deltaTime", delta_time);
-  Shader::set_vec3("particle_update", "emitterPos", this->starting_position);
-  Shader::set_vec3("particle_update", "emitterSpread", this->starting_spread);
+  Shader::set_float("particle_update", "deltaTime",        delta_time);
+  Shader::set_vec3("particle_update",  "emitterPos",       this->starting_position);
+  Shader::set_vec3("particle_update",  "emitterSpread",    this->starting_spread);
   Shader::set_float("particle_update", "spawnProbability", this->spawn_rate);
-  Shader::set_vec3("particle_update", "emitterVel", this->starting_velocity);
+  Shader::set_vec3("particle_update",  "emitterVel",       this->starting_velocity);
   Shader::set_float("particle_update", "emitterTTL",
                     this->starting_time_to_live);
   Gl::check_error();
@@ -133,7 +133,6 @@ void ParticleEmitter::update(float delta_time)
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
   this->vao.unbind();
-  current = !current; // Swap buffers
 }
 
 // Render particles
@@ -187,6 +186,9 @@ void ParticleEmitter::render()
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
   vao.unbind();
+
+  // Swap buffers
+  current = !current; // Swap buffers
   return;
 }
 
