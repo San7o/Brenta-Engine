@@ -53,7 +53,7 @@ void Mesh::init()
   this->vbo.bind();
   this->vbo.copy_data(&this->vertices[0],
                       this->vertices.size() * sizeof(Vertex),
-                      Buffer::DataUsage::Static);
+                      Buffer::DataUsage::StaticDraw);
 
   this->vao.link_buffer(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
                         sizeof(Vertex), (void *) 0);
@@ -68,12 +68,11 @@ void Mesh::init()
   this->ebo.bind();
   this->ebo.copy_data(&this->indices[0],
                       this->indices.size() * sizeof(unsigned int),
-                      Buffer::DataUsage::Static);
+                      Buffer::DataUsage::StaticDraw);
 
   this->vao.unbind();
   this->vbo.unbind();
   this->ebo.unbind();
-  Gl::bind_vertex_array(0);
   return;
 }
 

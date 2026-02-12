@@ -40,7 +40,6 @@ Model::Model(Config conf)
 
 Model::~Model()
 {
-  DEBUG("model: destroyed");
   return;
 }
 

@@ -50,10 +50,19 @@ void Texture::active_texture(GLenum texture)
 
 unsigned int Texture::load(const std::filesystem::path &path, bool flip)
 {
+  // save state
+  GLint old_active_texture, old_texture_2d;
+  glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active_texture);
+  glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_texture_2d);
+ 
   Texture::Id texture;
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
   read_image(path.c_str(), flip);
+
+  // restore state
+  glBindTexture(GL_TEXTURE_2D, old_texture_2d);
+  glActiveTexture(old_active_texture);  
   return texture;
 }
 

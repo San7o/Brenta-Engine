@@ -62,11 +62,20 @@ void Vao::link_buffer(Buffer &vbo,
                       GLsizei stride,
                       const void *offset)
 {
+  // Save current state
+  GLint old_vao, old_vbo;
+  glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &old_vao);
+  glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &old_vbo);
+    
   this->bind();
   vbo.bind();
   glVertexAttribPointer(layout_index, components, type,
                         normalized, stride, offset);
   glEnableVertexAttribArray(layout_index);
+
+  // Restore state
+  glBindBuffer(GL_ARRAY_BUFFER, old_vbo);
+  glBindVertexArray(old_vao);
   return;
 }
 

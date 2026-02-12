@@ -54,7 +54,6 @@ public:
   static void draw_elements(GLenum mode, int count, GLenum type,
                             const void *indices);
   static void clear();
-  static void bind_vertex_array(unsigned int n);
   
   static GLenum _check_error(const char *file, int line);
 

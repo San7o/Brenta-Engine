@@ -14,6 +14,12 @@ using namespace brenta;
 
 FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
 {
+  // Save the current state
+  GLint old_fbo, old_tex, old_rbo;
+  glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fbo);
+  glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_tex);
+  glGetIntegerv(GL_RENDERBUFFER_BINDING, &old_rbo);
+  
   this->color_format = color_format;
 
   glGenFramebuffers(1, &this->id);
@@ -54,9 +60,10 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
     exit(1);
   }
 
-  glBindFramebuffer(GL_FRAMEBUFFER, 0);
-  glBindTexture(GL_TEXTURE_2D, 0);
-  glBindRenderbuffer(GL_RENDERBUFFER, 0);
+  // Restore old state
+  glBindFramebuffer(GL_FRAMEBUFFER, old_fbo);
+  glBindTexture(GL_TEXTURE_2D, old_tex);
+  glBindRenderbuffer(GL_RENDERBUFFER, old_rbo);
   return;
 }
 

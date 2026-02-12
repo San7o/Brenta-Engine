@@ -122,7 +122,7 @@ ParticleEmitter::ParticleEmitter(Config conf)
   glBindBufferRange(GL_UNIFORM_BUFFER, 3, this->ubo.get_id(), 0, sizeof(ParticleSettings));
   this->ubo.copy_data(NULL,
                       sizeof(ParticleSettings),
-                      Buffer::DataUsage::Dynamic);
+                      Buffer::DataUsage::DynamicDraw);
   this->ubo.unbind();
 
   return;
@@ -149,7 +149,7 @@ void ParticleEmitter::update(float delta_time)
   // ubo
   this->ubo.bind();
   this->ubo.copy_data(&settings, sizeof(ParticleSettings),
-                      Buffer::DataUsage::Dynamic);
+                      Buffer::DataUsage::DynamicDraw);
   this->ubo.unbind();
   Gl::check_error();
 

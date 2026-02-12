@@ -171,12 +171,6 @@ void Gl::draw_elements(GLenum mode, int count, GLenum type, const void *indices)
   return;
 }
 
-void Gl::bind_vertex_array(unsigned int n)
-{
-  glBindVertexArray(n);
-  return;
-}
-
 void Gl::clear()
 {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);

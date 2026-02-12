@@ -11,13 +11,20 @@
 namespace brenta
 {
 
-/**
- * @brief FrameBuffer class
- *
- * This class is a wrapper around OpenGL frame buffers, providing
- * functions to create, bind, unbind, delete and rescale the frame
- * buffer.
- */
+//
+// Framebuffer
+// -----------
+//
+// The framebuffer stores a Texture that is rendered into after a
+// draw call. You usually use it like this:
+//
+//      FrameBuffer fb(Window::get_width(), Window::get_height());
+//      // setup...
+//
+//      fb.bind();
+//      Draw();
+//      fb.unbind();
+//
 class FrameBuffer : public Buffer
 {
 public:

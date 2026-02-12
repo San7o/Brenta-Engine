@@ -18,6 +18,10 @@ namespace brenta
 //
 // Specifies how to read the data from another buffer, usually the
 // VBO which contains vertex data.
+//
+// Use the `link_buffer` function for this, after having initialized
+// and bound the object.
+//
 class Vao
 {
 public:
@@ -47,8 +51,6 @@ public:
 
   // Specifies the buffer data layout, and makes it accessible in
   // the [layout_index] location
-  //
-  // Side effect: binds [vbo]
   //
   // Args:
   // - vbo           the buffer containing the vertex data.

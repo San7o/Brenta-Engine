@@ -23,11 +23,11 @@ public:
   enum DataUsage {
     // The data is set only once and used by the GPU at most a few
     // times
-    Stream   = GL_STREAM_DRAW,
+    StreamDraw   = GL_STREAM_DRAW,
     // The data is set only once and used many times
-    Static   = GL_STATIC_DRAW,
+    StaticDraw   = GL_STATIC_DRAW,
     // The data is changed a lot and used many times
-    Dynamic  = GL_DYNAMIC_DRAW,
+    DynamicDraw  = GL_DYNAMIC_DRAW,
   };
   
   unsigned int id;
