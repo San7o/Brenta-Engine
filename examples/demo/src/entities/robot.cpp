@@ -34,12 +34,12 @@ void init_robot_entity()
                .rotate(glm::angleAxis(glm::radians(-90.0f),
                                       glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(5.0f)))
-    .wrapping(GL_REPEAT)
-    .filtering_min(GL_NEAREST)
-    .filtering_mag(GL_NEAREST)
-    .has_mipmap(GL_TRUE)
-    .mipmap_min(GL_LINEAR_MIPMAP_NEAREST)
-    .mipmap_mag(GL_NEAREST)
+    .wrapping(Texture::Wrapping::Repeat)
+    .filtering_min(Texture::Filtering::Nearest)
+    .filtering_mag(Texture::Filtering::Nearest)
+    .has_mipmap(Gl::True)
+    .mipmap_min(Texture::Filtering::LinearMipmapNearest)
+    .mipmap_mag(Texture::Filtering::Nearest)
     .flip(false)
     .build();
 

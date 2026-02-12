@@ -37,98 +37,19 @@ public:
   class Config;
   class Builder;
   
-  std::vector<Vertex> vertices;
+  std::vector<Vertex>                   vertices;
   // Indicies are used to reduce the memory footprint required to
   // represent a 3D model. They are indices in the vertex array, there
   // can be multiple indices for the same vertex.
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
-  
-  // Options are:
-  // - GL_REPEAT: The default behavior for textures.
-  //              Repeats the texture image.
-  // - GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors
-  //              the image with each repeat.
-  // - GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
-  //              The result is that higher coordinates become
-  //              clamped to the edge, resulting in a stretched
-  //              edge pattern.
-  // - GL_CLAMP_TO_BORDER: Coordinates outside the range are
-  //              now given a user-specified border color.
-  GLint wrapping;
 
-  // Type of texture filtering used when minifying (scaling
-  // down) a texture. Options are:
-  // - GL_NEAREST: select the closest color to the texture coordinate
-  // - GL_LINEAR: interpolates the neighbouring pixels to get an
-  //              approximate color.
-  GLint filtering_min;
-
-  // Type of texture filtering used when magnifying (scaling
-  // up) a texture. Options are:
-  // - GL_NEAREST: select the closest color to the texture coordinate
-  // - GL_LINEAR: interpolates the neighbouring pixels to get an
-  //              approximate color.
-  GLint filtering_mag;
-  GLboolean has_mipmap;
-
-  // Type of texture filtering used when minifying (scaling
-  // down) a texture with mipmaps. Options are:
-  // - GL_NEAREST: select the closest color to the texture coordinate
-  // - GL_LINEAR: interpolates the neighbouring pixels to get an
-  //              approximate color.
-  // - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
-  //              closely matches the size of the pixel being textured
-  //              and uses the GL_NEAREST criterion (the texture element
-  //              nearest to the center of the pixel) to produce a texture
-  //              value.
-  // - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
-  //              matches the size of the pixel being textured and uses
-  //              the GL_LINEAR criterion (a weighted average of the four
-  //              texture elements that are closest to the center of the
-  //              pixel) to produce a texture value.
-  // - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
-  //              match the size of the pixel being textured and uses the
-  //              GL_NEAREST criterion (the texture element nearest to the
-  //              center of the pixel) to produce a texture value from each
-  //              mipmap. The final texture value is a weighted average of
-  //              those two values.
-  // - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
-  //              match the size of the pixel being textured and uses the
-  //              GL_LINEAR criterion (a weighted average of the texture
-  //              elements that are closest to the center of the pixel) to
-  //              produce a texture value from each mipmap. The final texture
-  //              value is a weighted average of those two values.
-  GLint mipmap_min;
-
-  // Type of texture filtering used when magnifying (scaling
-  // up) a texture with mipmaps. Options are:
-  // - GL_NEAREST: select the closest color to the texture coordinate
-  // - GL_LINEAR: interpolates the neighbouring pixels to get an
-  //              approximate color.
-  // - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
-  //              closely matches the size of the pixel being textured
-  //              and uses the GL_NEAREST criterion (the texture element
-  //              nearest to the center of the pixel) to produce a texture
-  //              value.
-  // - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
-  //              matches the size of the pixel being textured and uses
-  //              the GL_LINEAR criterion (a weighted average of the four
-  //              texture elements that are closest to the center of the
-  //              pixel) to produce a texture value.
-  // - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
-  //              match the size of the pixel being textured and uses the
-  //              GL_NEAREST criterion (the texture element nearest to the
-  //              center of the pixel) to produce a texture value from each
-  //              mipmap. The final texture value is a weighted average of
-  //              those two values.
-  // - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
-  //              match the size of the pixel being textured and uses the
-  //              GL_LINEAR criterion (a weighted average of the texture
-  //              elements that are closest to the center of the pixel) to
-  //              produce a texture value from each mipmap. The final texture
-  //              value is a weighted average of those two values.
-  GLint mipmap_mag;
+  Texture::Wrapping    wrapping;
+  Texture::Filtering   filtering_min;
+  Texture::Filtering   filtering_mag;
+  GLboolean            has_mipmap;
+  Texture::Filtering   mipmap_min;
+  Texture::Filtering   mipmap_mag;
 
   Mesh(Config&& conf);
   
@@ -156,23 +77,27 @@ private:
 class Mesh::Vertex
 {
 public:
-  glm::vec3 position;
-  glm::vec3 normal;
-  glm::vec2 tex_coords;
+  
+  glm::vec3   position;
+  glm::vec3   normal;
+  glm::vec2   tex_coords;
+  
 };
 
 class Mesh::Config
 {
 public:
+  
   std::vector<Vertex>                   vertices;
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
-  GLint     wrapping;
-  GLint     filtering_min;
-  GLint     filtering_mag;
-  GLboolean has_mipmap;
-  GLint     mipmap_min;
-  GLint     mipmap_max;
+  Texture::Wrapping     wrapping;
+  Texture::Filtering    filtering_min;
+  Texture::Filtering    filtering_mag;
+  GLboolean             has_mipmap;
+  Texture::Filtering    mipmap_min;
+  Texture::Filtering    mipmap_max;
+  
 };
 
 class Mesh::Builder
@@ -182,15 +107,16 @@ private:
   Mesh::Config conf = Mesh::default_config;
   
 public:
+  
   Builder &vertices(std::vector<Vertex> vertices);
   Builder &indices(std::vector<unsigned int> indices);
   Builder &textures(std::vector<std::shared_ptr<Texture>> textures);
-  Builder &wrapping(GLint wrapping);
-  Builder &filtering_min(GLint filtering_min);
-  Builder &filtering_mag(GLint filtering_mag);
+  Builder &wrapping(Texture::Wrapping wrapping);
+  Builder &filtering_min(Texture::Filtering filtering_min);
+  Builder &filtering_mag(Texture::Filtering filtering_mag);
   Builder &has_mipmap(GLboolean has_mipmap);
-  Builder &mipmap_min(GLint mipmap_min);
-  Builder &mipmap_mag(GLint mipmap_mag);
+  Builder &mipmap_min(Texture::Filtering mipmap_min);
+  Builder &mipmap_mag(Texture::Filtering mipmap_mag);
 
   Mesh build();
 };

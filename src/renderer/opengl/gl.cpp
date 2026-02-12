@@ -24,6 +24,9 @@ const Gl::Config  Gl::default_config = {
 };
 Gl::Config Gl::init_config = default_config;
 bool       Gl::initialized = false;
+const GLboolean Gl::True = GL_TRUE;
+const GLboolean Gl::False = GL_FALSE;
+  
 
 // Forward declaration
 void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,

@@ -10,15 +10,15 @@
 using namespace brenta;
 
 const Mesh::Config Mesh::default_config = {
-  {},
-  {},
-  {},
-  GL_REPEAT,
-  GL_NEAREST,
-  GL_LINEAR,
-  GL_TRUE,
-  GL_LINEAR_MIPMAP_LINEAR,
-  GL_LINEAR,
+  .vertices      = {},
+  .indices       = {},
+  .textures      = {},
+  .wrapping      = Texture::Wrapping::Repeat,
+  .filtering_min = Texture::Filtering::Nearest,
+  .filtering_mag = Texture::Filtering::Linear,
+  .has_mipmap    = GL_TRUE,
+  .mipmap_min    = Texture::Filtering::LinearMipmapLinear,
+  .mipmap_max    = Texture::Filtering::Linear,
 };
 
 Mesh::Mesh(Config&& conf)
@@ -55,12 +55,12 @@ void Mesh::init()
                       this->vertices.size() * sizeof(Vertex),
                       Buffer::DataUsage::StaticDraw);
 
-  this->vao.link_buffer(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->vbo, 0, 3, Gl::Type::Float, Gl::False,
                         sizeof(Vertex), (void *) 0);
-  this->vao.link_buffer(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->vbo, 1, 3, Gl::Type::Float, Gl::False,
                         sizeof(Vertex),
                         (void *) offsetof(Vertex, normal));
-  this->vao.link_buffer(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->vbo, 2, 2, Gl::Type::Float, Gl::False,
                         sizeof(Vertex),
                         (void *) offsetof(Vertex, tex_coords));
   
@@ -151,19 +151,19 @@ Mesh::Builder &Mesh::Builder::textures(std::vector<std::shared_ptr<Texture>> tex
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::wrapping(GLint wrapping)
+Mesh::Builder &Mesh::Builder::wrapping(Texture::Wrapping wrapping)
 {
   this->conf.wrapping = wrapping;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::filtering_min(GLint filtering_min)
+Mesh::Builder &Mesh::Builder::filtering_min(Texture::Filtering filtering_min)
 {
   this->conf.filtering_min = filtering_min;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::filtering_mag(GLint filtering_mag)
+Mesh::Builder &Mesh::Builder::filtering_mag(Texture::Filtering filtering_mag)
 {
   this->conf.filtering_mag = filtering_mag;
   return *this;
@@ -175,7 +175,7 @@ Mesh::Builder &Mesh::Builder::has_mipmap(GLboolean has_mipmap)
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::mipmap_min(GLint mipmap_min)
+Mesh::Builder &Mesh::Builder::mipmap_min(Texture::Filtering mipmap_min)
 {
   this->conf.mipmap_min = mipmap_min;
   return *this;

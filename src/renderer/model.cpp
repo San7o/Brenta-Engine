@@ -12,12 +12,12 @@ using namespace brenta;
 const Model::Config Model::default_config = {
   .transform     = Transform(),
   .path          = "",
-  .wrapping      = GL_REPEAT,
-  .filtering_min = GL_NEAREST,
-  .filtering_mag = GL_LINEAR,
-  .has_mipmap    = GL_TRUE,
-  .mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
-  .mipmap_mag    = GL_LINEAR,
+  .wrapping      = Texture::Wrapping::Repeat,
+  .filtering_min = Texture::Filtering::Nearest,
+  .filtering_mag = Texture::Filtering::Linear,
+  .has_mipmap    = Gl::True,
+  .mipmap_min    = Texture::Filtering::LinearMipmapLinear,
+  .mipmap_mag    = Texture::Filtering::Linear,
   .flip          = true,
 };
 
@@ -205,19 +205,19 @@ Model::Builder &Model::Builder::path(const std::filesystem::path &path)
   return *this;
 }
 
-Model::Builder &Model::Builder::wrapping(GLint wrapping)
+Model::Builder &Model::Builder::wrapping(Texture::Wrapping wrapping)
 {
   this->conf.wrapping = wrapping;
   return *this;
 }
 
-Model::Builder &Model::Builder::filtering_min(GLint filtering_min)
+Model::Builder &Model::Builder::filtering_min(Texture::Filtering filtering_min)
 {
   this->conf.filtering_min = filtering_min;
   return *this;
 }
 
-Model::Builder &Model::Builder::filtering_mag(GLint filtering_mag)
+Model::Builder &Model::Builder::filtering_mag(Texture::Filtering filtering_mag)
 {
   this->conf.filtering_mag = filtering_mag;
   return *this;
@@ -229,13 +229,13 @@ Model::Builder &Model::Builder::has_mipmap(GLboolean has_mipmap)
   return *this;
 }
 
-Model::Builder &Model::Builder::mipmap_min(GLint mipmap_min)
+Model::Builder &Model::Builder::mipmap_min(Texture::Filtering mipmap_min)
 {
   this->conf.mipmap_min = mipmap_min;
   return *this;
 }
 
-Model::Builder &Model::Builder::mipmap_mag(GLint mipmap_mag)
+Model::Builder &Model::Builder::mipmap_mag(Texture::Filtering mipmap_mag)
 {
   this->conf.mipmap_mag = mipmap_mag;
   return *this;

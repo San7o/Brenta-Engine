@@ -25,14 +25,15 @@ namespace brenta
 class Model
 {
 public:
+
+  Texture::Wrapping     wrapping;
+  Texture::Filtering    filtering_min;
+  Texture::Filtering    filtering_mag;
+  GLboolean          has_mipmap;
+  Texture::Filtering    mipmap_min;
+  Texture::Filtering    mipmap_mag;
   
-  GLint     wrapping;
-  GLint     filtering_min;
-  GLint     filtering_mag;
-  GLboolean has_mipmap;
-  GLint     mipmap_min;
-  GLint     mipmap_mag;
-  bool      flip;
+  bool   flip;
 
   struct Config;
   class  Builder;
@@ -72,15 +73,15 @@ private:
 
 struct Model::Config
 {
-  Transform   transform;
-  std::string path;
-  GLint       wrapping;
-  GLint       filtering_min;
-  GLint       filtering_mag;
-  GLboolean   has_mipmap;
-  GLint       mipmap_min;
-  GLint       mipmap_mag;
-  bool        flip;
+  Transform          transform;
+  std::string        path;
+  Texture::Wrapping  wrapping;
+  Texture::Filtering filtering_min;
+  Texture::Filtering filtering_mag;
+  GLboolean          has_mipmap;
+  Texture::Filtering mipmap_min;
+  Texture::Filtering mipmap_mag;
+  bool               flip;
 };
 
 class Model::Builder
@@ -93,12 +94,12 @@ public:
 
   Builder &transform(const Transform& transform);
   Builder &path(const std::filesystem::path &path);
-  Builder &wrapping(GLint wrapping);
-  Builder &filtering_min(GLint filtering_min);
-  Builder &filtering_mag(GLint filtering_mag);
+  Builder &wrapping(Texture::Wrapping wrapping);
+  Builder &filtering_min(Texture::Filtering filtering_min);
+  Builder &filtering_mag(Texture::Filtering filtering_mag);
   Builder &has_mipmap(GLboolean has_mipmap);
-  Builder &mipmap_min(GLint mipmap_min);
-  Builder &mipmap_mag(GLint mipmap_mag);
+  Builder &mipmap_min(Texture::Filtering mipmap_min);
+  Builder &mipmap_mag(Texture::Filtering mipmap_mag);
   Builder &flip(bool flip);
 
   Model build();

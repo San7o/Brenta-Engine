@@ -33,6 +33,19 @@ public:
   class Config;
   class Builder;
 
+  static const GLboolean True;
+  static const GLboolean False;
+
+  enum Type {
+    Byte          = GL_BYTE,
+    UnsignedByte  = GL_UNSIGNED_BYTE,
+    Short         = GL_SHORT,
+    UnsignedShort = GL_UNSIGNED_SHORT,
+    Int           = GL_INT,
+    UnsignedInt   = GL_UNSIGNED_INT,
+    Float         = GL_FLOAT,
+  };
+  
   // Subsystem interface
   static const std::string subsystem_name;
   std::expected<void, Subsystem::Error> initialize() override;

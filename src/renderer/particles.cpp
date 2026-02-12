@@ -220,9 +220,13 @@ void ParticleEmitter::render()
 
   // Set Textures
   Texture::active_texture(GL_TEXTURE0);
-  this->atlas.bind(GL_TEXTURE_2D, GL_REPEAT, GL_NEAREST,
-                   GL_NEAREST, GL_TRUE, GL_NEAREST_MIPMAP_NEAREST,
-                   GL_NEAREST);
+  this->atlas.bind(GL_TEXTURE_2D,
+                   Texture::Wrapping::Repeat,
+                   Texture::Filtering::Nearest,
+                   Texture::Filtering::Nearest,
+                   Gl::True,
+                   Texture::Filtering::NearestMipmapNearest,
+                   Texture::Filtering::Nearest);
 
   glDrawArrays(GL_POINTS, 0, num_particles);
   Gl::check_error();

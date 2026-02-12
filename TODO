@@ -3,3 +3,4 @@
 - create model from raw vertexes
 - add Scene class
 - rewrite logger
+- fix the model / mesh texture enums mess
