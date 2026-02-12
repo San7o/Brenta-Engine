@@ -96,3 +96,12 @@ To format the code using `clang-format`:
 ```bash
 make format
 ```
+
+## Generating shaders
+
+To generate the shaders bindings ru nthe following command (you
+should do this every time you modify a shader):
+
+```bash
+make shaders
+```

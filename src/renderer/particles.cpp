@@ -13,6 +13,11 @@
 #include <iostream>
 #include <time.h>
 
+#include "./shaders/c/particle_render_fs.c"
+#include "./shaders/c/particle_render_vs.c"
+#include "./shaders/c/particle_render_gs.c"
+#include "./shaders/c/particle_update_vs.c"
+
 using namespace brenta;
 
 const ParticleEmitter::Config ParticleEmitter::default_config = {
@@ -54,14 +59,14 @@ ParticleEmitter::ParticleEmitter(Config conf)
     Shader::create(varyings,
                    sizeof(varyings) / sizeof(varyings[0]),
                    "particle_update", {
-                     { Shader::Type::Vertex, std::filesystem::path("src/renderer/shaders/particle_update.vs") }});
+                     { Shader::Type::Vertex, particle_update_vs }});
   if (!shader_update) return;
   
   auto shader_render =
     Shader::create("particle_render", {
-        { Shader::Type::Vertex,   std::filesystem::path("src/renderer/shaders/particle_render.vs") },
-        { Shader::Type::Geometry, std::filesystem::path("src/renderer/shaders/particle_render.gs") },
-        { Shader::Type::Fragment, std::filesystem::path("src/renderer/shaders/particle_render.fs") }});
+        { Shader::Type::Vertex,   particle_render_vs },
+        { Shader::Type::Geometry, particle_render_gs },
+        { Shader::Type::Fragment, particle_render_fs }});
   if (!shader_render) return;
 
   // This is needed to render points

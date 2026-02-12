@@ -19,6 +19,9 @@ REGISTER_SYSTEMS()
 
 #include <iostream>
 
+#include "assets/shaders/c/default_shader_vs.c"
+#include "assets/shaders/c/default_shader_fs.c"
+
 using namespace brenta;
 
 int main()
@@ -57,8 +60,8 @@ int main()
 
   // Load the shader
   auto shader = Shader::create("default_shader", {
-         { Shader::Type::Vertex, std::filesystem::path("examples/default_shader.vs") },
-         { Shader::Type::Fragment, std::filesystem::path("examples/default_shader.fs") } });
+         { Shader::Type::Vertex, default_shader_vs },
+         { Shader::Type::Fragment, default_shader_fs } });
   if (!shader)
   {
     ERROR("Error creating shader");

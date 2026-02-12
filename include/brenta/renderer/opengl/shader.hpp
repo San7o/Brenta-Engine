@@ -148,6 +148,8 @@ public:
   std::string src;
 
   Object() = default;
+  Object(Type type, const char* src)
+    : type(type), src(std::string(src)) {}
   Object(Type type, const std::string &src)
     : type(type), src(src) {}
   Object(Type type, const std::filesystem::path &path);

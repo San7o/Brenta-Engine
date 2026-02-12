@@ -16,14 +16,17 @@ using namespace viotecs;
 using namespace viotecs::types;
 using namespace brenta;
 
+#include "../../../assets/shaders/c/default_shader_vs.c"
+#include "../../../assets/shaders/c/default_shader_fs.c"
+
 void init_player_entity()
 {
   auto shader = Shader::get_shader("default_shader");
   if (!shader)
   {
     Shader::create("default_shader", {
-       { Shader::Type::Vertex, std::filesystem::path("examples/demo/shaders/shader.vs") },
-       { Shader::Type::Fragment, std::filesystem::path("examples/demo/shaders/shader.fs") } });
+        { Shader::Type::Vertex, default_shader_vs },
+        { Shader::Type::Fragment, default_shader_fs } });
   }
 
   Model m = Model::Builder()

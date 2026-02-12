@@ -10,6 +10,9 @@ REGISTER_SYSTEMS()
 
 #include <iostream>
 
+#include "assets/shaders/c/mandelbrot_vs.c"
+#include "assets/shaders/c/mandelbrot_fs.c"
+
 using namespace brenta;
 
 int main()
@@ -54,8 +57,8 @@ int main()
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
   auto shader = Shader::create("fractal", {
-       { Shader::Type::Vertex, std::filesystem::path("examples/mandelbrot.vs") },
-       { Shader::Type::Fragment, std::filesystem::path("examples/mandelbrot.fs") } });
+       { Shader::Type::Vertex, mandelbrot_vs },
+       { Shader::Type::Fragment, mandelbrot_fs } });
   if (!shader)
   {
     ERROR("Error creating shader");

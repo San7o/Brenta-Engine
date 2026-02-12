@@ -1,0 +1,13 @@
+static const char* text_fs = "#version 330 core\n"
+"in vec2 TexCoords;\n"
+"out vec4 color;\n"
+"\n"
+"uniform sampler2D text;\n"
+"uniform vec3 textColor;\n"
+"\n"
+"void main()\n"
+"{   \n"
+"    vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);\n"
+"    color = vec4(textColor, 1.0) * sampled;\n"
+"}\n"
+;

@@ -1,6 +1,29 @@
+# SPDX-License-Identifier: MIT
+# Author:  Giovanni Santini
+# Mail:    giovanni.santini@proton.me
+# Github:  @San7o
+
+PWD ?= (shell pwd)
+
+SHADERS_DIR              := $(PWD)/src/renderer/shaders
+SHADERS_OUT_DIR          := $(PWD)/src/renderer/shaders/c
+SHADERS                  := $(shell find $(SHADERS_DIR) -regex '.*\.\(fs\|vs\|gs\)')
+
+EXAMPLES_SHADERS_DIR     := $(PWD)/examples/assets/shaders
+EXAMPLES_SHADERS_OUT_DIR := $(PWD)/examples/assets/shaders/c
+EXAMPLES_SHADERS         := $(shell find $(EXAMPLES_SHADERS_DIR) -regex '.*\.\(fs\|vs\|gs\)')
+
 .PHONY: format
 format:
 	find include/brenta src examples tests -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
+
+.PHONY: shaders
+shaders: $(SHADERS) shaders-examples
+	python3 utils/shaders_to_c.py --out-dir $(SHADERS_OUT_DIR) $(SHADERS)
+
+.PHONY: shaders-examples
+shaders-examples:
+	python3 utils/shaders_to_c.py --out-dir $(EXAMPLES_SHADERS_OUT_DIR) $(EXAMPLES_SHADERS)	
 
 DOCS_DIR := docs
 HTML_DIR := docs/html
