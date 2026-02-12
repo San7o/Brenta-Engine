@@ -222,7 +222,7 @@ int main(int argc, char** argv)
   v.init();
   v.bind();
   Buffer vbo;
-  vbo.init(GL_ARRAY_BUFFER);
+  vbo.init(Buffer::Target::Array);
   vbo.bind();
   vbo.copy_data(vertices, sizeof(vertices), Buffer::DataUsage::StaticDraw);
   v.link_buffer(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);

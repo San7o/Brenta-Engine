@@ -10,31 +10,49 @@
 namespace brenta
 {
 
-/**
- * @brief Buffer wrapper around OpenGL buffer objects
- *
- * This class is a wrapper around OpenGL buffer objects. It provides a
- * simple interface to create, bind, unbind and delete buffer objects.
- */
 class Buffer
 {
 public:
 
-  enum DataUsage {
-    // The data is set only once and used by the GPU at most a few
-    // times
-    StreamDraw   = GL_STREAM_DRAW,
-    // The data is set only once and used many times
-    StaticDraw   = GL_STATIC_DRAW,
-    // The data is changed a lot and used many times
-    DynamicDraw  = GL_DYNAMIC_DRAW,
+  using Id = unsigned int;
+  
+  enum Target {
+    // vertex attributes (positions, normals...)
+    Array             = GL_ARRAY_BUFFER,
+    // indices for glDrawElements
+    ElementArray      = GL_ELEMENT_ARRAY_BUFFER,
+    // uniform blocks for shared shader data
+    Uniform           = GL_UNIFORM_BUFFER,
+    // buffer textures for large data sets
+    Texture           = GL_TEXTURE_BUFFER,
+    // capturing output from shaders
+    TransformFeedback = GL_TRANSFORM_FEEDBACK_BUFFER,
+    // used as source/destinaiton for copying between buffers
+    CopyRead          = GL_COPY_READ_BUFFER,
+    // source for texture uploads (glTexImag2D)
+    PixelUnpack       = GL_PIXEL_UNPACK_BUFFER,
+    // Large, writable data structures
+    ShaderStorage     = GL_SHADER_STORAGE_BUFFER,      
   };
   
-  unsigned int id;
-  GLenum       target;
-
+  enum DataUsage {
+    // The data is accessed only once and used by the GPU at most a
+    // few times
+    StreamDraw   = GL_STREAM_DRAW,
+    StreamRead   = GL_STREAM_READ,
+    StreamCopy   = GL_STREAM_COPY,
+    // The data is accessed only once and used many times
+    StaticDraw   = GL_STATIC_DRAW,
+    StaticRead   = GL_STATIC_READ,
+    StaticCopy   = GL_STATIC_COPY,
+    // The data is accessed a lot and used many times
+    DynamicDraw  = GL_DYNAMIC_DRAW,
+    DynamicRead  = GL_DYNAMIC_READ,
+    DynamicCopy  = GL_DYNAMIC_COPY,
+  };
+  
   Buffer() = default;
-  Buffer(GLenum input_target);
+  Buffer(Target target);
 
   constexpr Buffer(const Buffer&)            = delete;
   constexpr Buffer& operator=(const Buffer&) = delete;
@@ -55,24 +73,30 @@ public:
 
   ~Buffer();
   
-  void init(GLenum input_target);
+  void init(Target target);
   void destroy();
   void bind();
   void unbind();
 
   // Getters
 
-  int    get_id();
-  GLenum get_target();
+  Buffer::Id    &get_id();
+  Target        &get_target();
 
   // Setters
 
-  void set_id(unsigned int id);
-  void set_target(GLenum target);
+  void set_id(Buffer::Id id);
+  void set_target(Target target);
 
   // Utilities
 
   void copy_data(const void *data, GLsizeiptr size, DataUsage usage);
+
+private:
+  
+  Buffer::Id   id;
+  Target       target;
+
 };
 
 //

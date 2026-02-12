@@ -37,9 +37,10 @@ std::expected<void, Subsystem::Error> Text::initialize()
 {
   if (this->is_initialized()) return {};
   
-  Text::vbo.init(GL_ARRAY_BUFFER);
   Text::vao.init();
   Text::vao.bind();
+
+  Text::vbo.init(Buffer::Target::Array);
   if (Text::init_config.font_path != "")
     load(Text::init_config.font_path, Text::init_config.font_size);
 
@@ -218,7 +219,7 @@ void Text::render_text(std::string text, float x, float y, float scale,
     glBindTexture(GL_TEXTURE_2D, ch.texture_id);
 
     // update content of VBO memory
-    glBindBuffer(GL_ARRAY_BUFFER, Text::vbo.id);
+    glBindBuffer(GL_ARRAY_BUFFER, Text::vbo.get_id());
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

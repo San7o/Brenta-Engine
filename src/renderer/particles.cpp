@@ -88,24 +88,22 @@ ParticleEmitter::ParticleEmitter(Config conf)
   Gl::check_error();
 
   // Create fbos
-  this->fbo[0].init(GL_TRANSFORM_FEEDBACK_BUFFER);
-  this->fbo[1].init(GL_TRANSFORM_FEEDBACK_BUFFER);
+  this->fbo[0].init(Buffer::Target::TransformFeedback);
+  this->fbo[1].init(Buffer::Target::TransformFeedback);
 
-  glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[0].id);
-  glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
-               this->num_particles * 2 * sizeof(glm::vec3)
-                 + this->num_particles * sizeof(float),
-               NULL, GL_DYNAMIC_COPY);
-  glBindBuffer(GL_TRANSFORM_FEEDBACK_BUFFER, this->fbo[1].id);
-  glBufferData(GL_TRANSFORM_FEEDBACK_BUFFER,
-               this->num_particles * 2 * sizeof(glm::vec3)
-                 + this->num_particles * sizeof(float),
-               NULL, GL_DYNAMIC_COPY);
+  this->fbo[0].bind();
+  this->fbo[0].copy_data(NULL, this->num_particles * 2 * sizeof(glm::vec3)
+                         + this->num_particles * sizeof(float),
+                         Buffer::DataUsage::DynamicCopy);
+  this->fbo[1].bind();
+  this->fbo[1].copy_data(NULL,
+                         this->num_particles * 2 * sizeof(glm::vec3)
+                         + this->num_particles * sizeof(float),
+                         Buffer::DataUsage::DynamicCopy);
   Gl::check_error();
 
   // Unbind buffers
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
+  this->fbo[0].unbind();
   this->vao.unbind();
 
   // Setup UBO
@@ -115,11 +113,12 @@ ParticleEmitter::ParticleEmitter(Config conf)
     ERROR("Particles::init: error settings uniform block index");
     return;
   }
-  this->ubo.init(GL_UNIFORM_BUFFER);
+  this->ubo.init(Buffer::Target::Uniform);
   this->ubo.bind();
   glUniformBlockBinding(shader_update->get_id(), block_index, 3);
   glBindBufferBase(GL_UNIFORM_BUFFER, 3, this->ubo.get_id());
-  glBindBufferRange(GL_UNIFORM_BUFFER, 3, this->ubo.get_id(), 0, sizeof(ParticleSettings));
+  glBindBufferRange(GL_UNIFORM_BUFFER, 3, this->ubo.get_id(), 0,
+                    sizeof(ParticleSettings));
   this->ubo.copy_data(NULL,
                       sizeof(ParticleSettings),
                       Buffer::DataUsage::DynamicDraw);
@@ -155,21 +154,21 @@ void ParticleEmitter::update(float delta_time)
 
   this->vao.bind();
 
-  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current_fbo_index].id);
+  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current_fbo_index].get_id());
   Gl::check_error();
 
-  glBindBuffer(GL_ARRAY_BUFFER, fbo[!current_fbo_index].id);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+  glBindBuffer(GL_ARRAY_BUFFER, fbo[!current_fbo_index].get_id());
+  this->vao.link_buffer(this->fbo[!current_fbo_index],
+                        0, 3, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->fbo[!current_fbo_index],  
+                        1, 3, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) sizeof(glm::vec3));
-  glEnableVertexAttribArray(1);
-  glVertexAttribPointer(2, 1, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->fbo[!current_fbo_index],  
+                        2, 1, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) (2 * sizeof(glm::vec3)));
-  glEnableVertexAttribArray(2);
 
   // Start transform feedback
   glEnable(GL_RASTERIZER_DISCARD);     // Disable rasterization
@@ -182,10 +181,11 @@ void ParticleEmitter::update(float delta_time)
   glEndTransformFeedback();         // Exit transform feedback mode
   glDisable(GL_RASTERIZER_DISCARD); // Enable rasterization
   // Unbind buffers
-  glBindVertexArray(0);
+
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
   this->vao.unbind();
+  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);
+  return;
 }
 
 // Render particles
@@ -203,15 +203,15 @@ void ParticleEmitter::render()
   shader->use();
   this->vao.bind();
 
-  glBindBuffer(GL_ARRAY_BUFFER, fbo[current_fbo_index].id);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+  glBindBuffer(GL_ARRAY_BUFFER, fbo[current_fbo_index].get_id());
+  this->vao.link_buffer(this->fbo[current_fbo_index],
+                        0, 3, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(1, 1, GL_FLOAT, GL_FALSE,
+  this->vao.link_buffer(this->fbo[current_fbo_index],
+                        1, 1, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) (2 * sizeof(glm::vec3)));
   Gl::check_error();
-  glEnableVertexAttribArray(1);
 
   // Set uniforms
   int window_width = Window::get_width();
@@ -236,9 +236,9 @@ void ParticleEmitter::render()
   glDrawArrays(GL_POINTS, 0, num_particles);
   Gl::check_error();
 
+  
   glBindBuffer(GL_ARRAY_BUFFER, 0);
-  glBindVertexArray(0);
-  vao.unbind();
+  this->vao.unbind();
 
   // Swap buffers
   current_fbo_index = !current_fbo_index; // Swap buffers

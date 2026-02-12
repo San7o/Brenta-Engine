@@ -49,7 +49,7 @@ void Mesh::init()
   this->vao.init();
   this->vao.bind();
   
-  this->vbo.init(GL_ARRAY_BUFFER);
+  this->vbo.init(Buffer::Target::Array);
   this->vbo.bind();
   this->vbo.copy_data(&this->vertices[0],
                       this->vertices.size() * sizeof(Vertex),
@@ -64,7 +64,7 @@ void Mesh::init()
                         sizeof(Vertex),
                         (void *) offsetof(Vertex, tex_coords));
   
-  this->ebo.init(GL_ELEMENT_ARRAY_BUFFER);
+  this->ebo.init(Buffer::Target::ElementArray);
   this->ebo.bind();
   this->ebo.copy_data(&this->indices[0],
                       this->indices.size() * sizeof(unsigned int),

@@ -8,9 +8,9 @@
 
 using namespace brenta;
 
-Buffer::Buffer(GLenum input_target)
+Buffer::Buffer(Buffer::Target target)
 {
-  this->init(input_target);
+  this->init(target);
   return;
 }
 
@@ -19,9 +19,9 @@ Buffer::~Buffer()
   return;
 }
 
-void Buffer::init(GLenum input_target)
+void Buffer::init(Buffer::Target target)
 {
-  this->target = input_target;
+  this->target = target;
   glGenBuffers(1, &id);
   
   DEBUG("buffer: initialized");
@@ -56,22 +56,22 @@ void Buffer::unbind()
   return;
 }
 
-int Buffer::get_id()
+Buffer::Id &Buffer::get_id()
 {
   return this->id;
 }
 
-GLenum Buffer::get_target()
+Buffer::Target &Buffer::get_target()
 {
   return this->target;
 }
 
-void Buffer::set_id(unsigned int id)
+void Buffer::set_id(Buffer::Id id)
 {
   this->id = id;
 }
 
-void Buffer::set_target(GLenum target)
+void Buffer::set_target(Buffer::Target target)
 {
   this->target = target;
 }
