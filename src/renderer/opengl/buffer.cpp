@@ -16,33 +16,6 @@ Buffer::Buffer(GLenum input_target)
 
 Buffer::~Buffer()
 {
-  this->destroy();
-  return;
-}
-
-void Buffer::copy_data(GLsizeiptr size, const void *data, GLenum usage)
-{
-  glBufferData(this->target, size, data, usage);
-  return;
-}
-
-void Buffer::copy_indices(GLsizeiptr size, const void *data, GLenum usage)
-{
-  if (this->target != GL_ELEMENT_ARRAY_BUFFER)
-    return;
-  
-  this->bind();
-  glBufferData(this->target, size, data, usage);
-  return;
-}
-
-void Buffer::copy_vertices(GLsizeiptr size, const void *data, GLenum usage)
-{
-  if (this->target == GL_ELEMENT_ARRAY_BUFFER)
-    return;
-  
-  this->bind();
-  glBufferData(this->target, size, data, usage);
   return;
 }
 
@@ -101,4 +74,11 @@ void Buffer::set_id(unsigned int id)
 void Buffer::set_target(GLenum target)
 {
   this->target = target;
+}
+
+void Buffer::copy_data(const void *data, GLsizeiptr size,
+                       Buffer::DataUsage usage)
+{
+  glBufferData(this->target, size, data, (GLenum) usage);
+  return;
 }

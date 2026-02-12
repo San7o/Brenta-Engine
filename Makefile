@@ -18,7 +18,10 @@ format:
 	find include/brenta src examples tests -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
 
 .PHONY: shaders
-shaders: $(SHADERS) shaders-examples
+shaders: shaders-brenta shaders-examples
+
+.PHONY: shaders-brenta
+shaders-brenta: $(SHADERS)
 	python3 utils/shaders_to_c.py --out-dir $(SHADERS_OUT_DIR) $(SHADERS)
 
 .PHONY: shaders-examples

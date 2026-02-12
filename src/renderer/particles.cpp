@@ -35,6 +35,17 @@ const ParticleEmitter::Config ParticleEmitter::default_config = {
   nullptr,
 };
 
+struct ParticleSettings {
+  glm::vec3 gravity;
+  float     deltaTime;
+  glm::vec3 emitterVel;
+  float     emitterTTL;
+  glm::vec3 emitterPos;
+  float     spawnProbability;
+  glm::vec3 emitterSpread;
+  float     __padding;
+};
+
 ParticleEmitter::ParticleEmitter(Config conf)
 {
   this->starting_position = conf.starting_position;
@@ -47,7 +58,7 @@ ParticleEmitter::ParticleEmitter(Config conf)
   this->atlas_width = conf.atlas_width;
   this->atlas_height = conf.atlas_height;
   this->atlas_index = conf.atlas_index;
-  this->current = 0;
+  this->current_fbo_index = 0;
   this->cam = conf.cam;
 
   // Load Texture Atlas
@@ -96,6 +107,25 @@ ParticleEmitter::ParticleEmitter(Config conf)
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   glBindVertexArray(0);
   this->vao.unbind();
+
+  // Setup UBO
+  GLuint block_index = glGetUniformBlockIndex(shader_update->get_id(), "settings");
+  if (block_index == GL_INVALID_INDEX)
+  {
+    ERROR("Particles::init: error settings uniform block index");
+    return;
+  }
+  this->ubo.init(GL_UNIFORM_BUFFER);
+  this->ubo.bind();
+  glUniformBlockBinding(shader_update->get_id(), block_index, 3);
+  glBindBufferBase(GL_UNIFORM_BUFFER, 3, this->ubo.get_id());
+  glBindBufferRange(GL_UNIFORM_BUFFER, 3, this->ubo.get_id(), 0, sizeof(ParticleSettings));
+  this->ubo.copy_data(NULL,
+                      sizeof(ParticleSettings),
+                      Buffer::DataUsage::Dynamic);
+  this->ubo.unbind();
+
+  return;
 }
 
 // Update particles using Transform Feedback
@@ -103,22 +133,32 @@ void ParticleEmitter::update(float delta_time)
 {
   auto shader = Shader::get_shader("particle_update");
   if (!shader) return;
-
   shader->use();
-  shader->set_float("deltaTime",        delta_time);
-  shader->set_vec3("emitterPos",        this->starting_position);
-  shader->set_vec3("emitterSpread",     this->starting_spread);
-  shader->set_float("spawnProbability", this->spawn_rate);
-  shader->set_vec3("emitterVel",        this->starting_velocity);
-  shader->set_float("emitterTTL",       this->starting_time_to_live);
+
+  ParticleSettings settings = {
+    .gravity = glm::vec3(0.0f, -9.81f, 0.0f),
+    .deltaTime = delta_time,
+    .emitterVel = this->starting_velocity,
+    .emitterTTL = this->starting_time_to_live,
+    .emitterPos = this->starting_position,
+    .spawnProbability = this->spawn_rate,
+    .emitterSpread = this->starting_spread,
+    .__padding = 0.0f,
+  };
+
+  // ubo
+  this->ubo.bind();
+  this->ubo.copy_data(&settings, sizeof(ParticleSettings),
+                      Buffer::DataUsage::Dynamic);
+  this->ubo.unbind();
   Gl::check_error();
 
   this->vao.bind();
 
-  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current].id);
+  glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current_fbo_index].id);
   Gl::check_error();
 
-  glBindBuffer(GL_ARRAY_BUFFER, fbo[!current].id);
+  glBindBuffer(GL_ARRAY_BUFFER, fbo[!current_fbo_index].id);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
   glEnableVertexAttribArray(0);
@@ -163,7 +203,7 @@ void ParticleEmitter::render()
   shader->use();
   this->vao.bind();
 
-  glBindBuffer(GL_ARRAY_BUFFER, fbo[current].id);
+  glBindBuffer(GL_ARRAY_BUFFER, fbo[current_fbo_index].id);
   glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
   glEnableVertexAttribArray(0);
@@ -201,7 +241,7 @@ void ParticleEmitter::render()
   vao.unbind();
 
   // Swap buffers
-  current = !current; // Swap buffers
+  current_fbo_index = !current_fbo_index; // Swap buffers
   return;
 }
 

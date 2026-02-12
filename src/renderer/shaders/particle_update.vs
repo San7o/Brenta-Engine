@@ -8,13 +8,16 @@ out vec3 outPosition;
 out vec3 outVelocity;
 out float outTTL;
 
-uniform float deltaTime;
-uniform vec3 gravity = vec3(0.0, -2.0, 0.0);
-uniform vec3 emitterVel = vec3(0.0, 0.0, 0.0);
-uniform vec3 emitterPos = vec3(0.0, 0.0, 0.0);
-uniform vec3 emitterSpread = vec3(1.0, 0.0, 1.0);
-uniform float emitterTTL = 3.0;
-uniform float spawnProbability = 0.01;
+layout (std140) uniform settings
+{
+  vec3  gravity;
+  float deltaTime;
+  vec3  emitterVel;
+  float emitterTTL;
+  vec3  emitterPos;
+  float spawnProbability;
+  vec3  emitterSpread;
+};
 
 // Random number generator between [-1, 1]
 float rand(vec2 co);

@@ -21,6 +21,7 @@ namespace brenta
 class FrameBuffer : public Buffer
 {
 public:
+  
   GLuint texture_id;
   GLuint render_buffer_id;
   GLenum color_format;
@@ -33,25 +34,9 @@ public:
   void unbind();
 
   void destroy();
-  void copy_data([[maybe_unused]] GLsizeiptr size,
-                 [[maybe_unused]] const void *data,
-                 [[maybe_unused]] GLenum usage)
-  {
-    assert(false && "TODO");
-  }
-
-  void copy_vertices([[maybe_unused]] GLsizeiptr size,
-                     [[maybe_unused]] const void *data,
-                     [[maybe_unused]] GLenum usage)
-  {
-    assert(false && "TODO");
-  }
-  void copy_indices([[maybe_unused]] GLsizeiptr size,
-                    [[maybe_unused]] const void *data,
-                    [[maybe_unused]] GLenum usage)
-  {
-    assert(false && "TODO");
-  }
+  void copy_data(GLsizeiptr size,
+                 const void *data,
+                 Buffer::DataUsage usage);
 
   void rescale(int width, int height);
   void set_color_format(GLenum color_format);

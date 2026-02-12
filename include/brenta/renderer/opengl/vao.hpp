@@ -12,11 +12,12 @@
 namespace brenta
 {
 
-/**
- * @brief Vertex Array Object (VAO)
- *
- * Wrapper for OpenGL Vertex Array Objects
- */
+//
+// Vertex array object
+// -------------------
+//
+// Specifies how to read the data from another buffer, usually the
+// VBO which contains vertex data.
 class Vao
 {
 public:
@@ -38,28 +39,36 @@ public:
 
   ~Vao();
   
-  void init();
-  void destroy();
-  void bind() const;
-  void unbind() const;
+  void         init();
+  void         destroy();
+  void         bind() const;
+  void         unbind() const;
   unsigned int get_id() const;
 
-  /**
-   * @brief Set the vertex data
-   *
-   * @param buffer The buffer object
-   * @param index The index of the vertex attribute
-   * @param size The number of components per attribute
-   * @param type The data type of each component
-   * @param is_normalized Whether the data should be normalized
-   * @param stride The byte offset between consecutive generic vertex
-   * attributes
-   * @param pointer The offset of the first component of the first generic
-   * vertex attribute in the array
-   */
-  void set_vertex_data(Buffer &buffer, unsigned int index, GLint size,
-                       GLenum type, GLboolean is_normalized, GLsizei stride,
-                       const void *pointer);
+  // Specifies the buffer data layout, and makes it accessible in
+  // the [layout_index] location
+  //
+  // Side effect: binds [vbo]
+  //
+  // Args:
+  // - vbo           the buffer containing the vertex data.
+  // - layout_index: the `location` index specified in the shader
+  //            (e.g., layout(location = 0))
+  // - components:   the number of components per attribute
+  // - type:         the data type of each component (e.g. GL_FLOAT)
+  // - normalized:   whether the data should be mapped to [0, 1] or
+  //                 [-1, 1] range
+  // - stride:       the byte distance between the start of one
+  //                 attribute and the next (0 lets OpenGL calculate
+  //                 it based on 'type' and 'components')
+  // - offset:       the byte offset of the first attribute in the buffer
+  void link_buffer(Buffer &vbo,
+                   unsigned int layout_index,
+                   GLint components,
+                   GLenum type,
+                   GLboolean normalized,
+                   GLsizei stride,
+                   const void *offset);
 
 private:
 

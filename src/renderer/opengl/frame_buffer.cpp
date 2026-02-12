@@ -88,6 +88,14 @@ void FrameBuffer::destroy()
   return;
 }
 
+void FrameBuffer::copy_data(GLsizeiptr size,
+                            const void *data,
+                            Buffer::DataUsage usage)
+{
+  glBufferData(this->target, size, data, (GLenum) usage);
+  return;
+}
+
 void FrameBuffer::rescale(int width, int height)
 {
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);

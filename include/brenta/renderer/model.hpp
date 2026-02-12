@@ -41,14 +41,6 @@ public:
   Model(Config conf);
   ~Model();
 
-  /*
-  constexpr Model(const Model&)            = delete;
-  constexpr Model& operator=(const Model&) = delete;
-
-  constexpr Model(Model&&) noexcept            = default;
-  constexpr Model& operator=(Model&&) noexcept = default;
-  */
-
   Model(const Model&)            = delete;
   Model& operator=(const Model&) = delete;
 
@@ -62,9 +54,9 @@ private:
   
   Transform                             transform;
   std::string                           path;
+  std::string                           directory;
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
-  std::string                           directory;
 
   void process_node(aiNode *node, const aiScene *scene);
   void process_mesh(aiMesh *mesh, const aiScene *scene);

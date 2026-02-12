@@ -47,35 +47,26 @@ public:
   float     spawn_rate;
   float     scale;
 
-  //
-  // Feddback buffer objects
-  // ------------------------
-  //
-  // These are used to save the new state of updated particles in the
-  // update_particles method.
+  Vao     vao;
   // We have two fbo which get swapped when rendered
-  Buffer fbo[2];
-  int    current;   // current fbo index
+  // Feedback buffer
+  Fbo     fbo[2];
+  int     current_fbo_index;
+  Ubo     ubo;
   
   Texture atlas;
   int     atlas_width;
   int     atlas_height;
   int     atlas_index;
-  Vao     vao;
 
   ParticleEmitter(Config conf);
-  
-  /**
-   * @brief Update the particles
-   *
-   * @param deltaTime Time passed since last frame
-   */
+
   void update(float delta_time);
   void render();
 
 private:
-  Camera *cam;
   
+  Camera *cam;
   static const Config default_config;
 
 };

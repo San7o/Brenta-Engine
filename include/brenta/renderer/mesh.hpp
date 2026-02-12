@@ -38,118 +38,96 @@ public:
   class Builder;
   
   std::vector<Vertex> vertices;
-  /**
-   * @brief indices of the mesh
-   *
-   * Indicies are used to reduce the memory footprint required to
-   * represent a 3D model. They are indices in the vertex array, there
-   * can be multiple indices for the same vertex.
-   */
+  // Indicies are used to reduce the memory footprint required to
+  // represent a 3D model. They are indices in the vertex array, there
+  // can be multiple indices for the same vertex.
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
-  /**
-   * @brief Type of texture wrapping
-   *
-   * Options are:
-   * - GL_REPEAT: The default behavior for textures.
-   *              Repeats the texture image.
-   * - GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors
-   *              the image with each repeat.
-   * - GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
-   *              The result is that higher coordinates become
-   *              clamped to the edge, resulting in a stretched
-   *              edge pattern.
-   * - GL_CLAMP_TO_BORDER: Coordinates outside the range are
-   *              now given a user-specified border color.
-   */
+  
+  // Options are:
+  // - GL_REPEAT: The default behavior for textures.
+  //              Repeats the texture image.
+  // - GL_MIRRORED_REPEAT: Same as GL_REPEAT but mirrors
+  //              the image with each repeat.
+  // - GL_CLAMP_TO_EDGE: Clamps the coordinates between 0 and 1.
+  //              The result is that higher coordinates become
+  //              clamped to the edge, resulting in a stretched
+  //              edge pattern.
+  // - GL_CLAMP_TO_BORDER: Coordinates outside the range are
+  //              now given a user-specified border color.
   GLint wrapping;
-  /**
-   * @brief Minifying texture filtering
-   *
-   * Type of texture filtering used when minifying (scaling
-   * down) a texture. Options are:
-   * - GL_NEAREST: select the closest color to the texture coordinate
-   * - GL_LINEAR: interpolates the neighbouring pixels to get an
-   *              approximate color.
-   */
+
+  // Type of texture filtering used when minifying (scaling
+  // down) a texture. Options are:
+  // - GL_NEAREST: select the closest color to the texture coordinate
+  // - GL_LINEAR: interpolates the neighbouring pixels to get an
+  //              approximate color.
   GLint filtering_min;
-  /**
-   * @brief Magnifying texture filtering
-   *
-   * Type of texture filtering used when magnifying (scaling
-   * up) a texture. Options are:
-   * - GL_NEAREST: select the closest color to the texture coordinate
-   * - GL_LINEAR: interpolates the neighbouring pixels to get an
-   *              approximate color.
-   */
+
+  // Type of texture filtering used when magnifying (scaling
+  // up) a texture. Options are:
+  // - GL_NEAREST: select the closest color to the texture coordinate
+  // - GL_LINEAR: interpolates the neighbouring pixels to get an
+  //              approximate color.
   GLint filtering_mag;
-  /**
-   * @brief Should the texture have a mipmap?
-   */
   GLboolean has_mipmap;
-  /**
-   * @brief Type of mipmap minifying texture filtering
-   *
-   * Type of texture filtering used when minifying (scaling
-   * down) a texture with mipmaps. Options are:
-   * - GL_NEAREST: select the closest color to the texture coordinate
-   * - GL_LINEAR: interpolates the neighbouring pixels to get an
-   *              approximate color.
-   * - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
-   *              closely matches the size of the pixel being textured
-   *              and uses the GL_NEAREST criterion (the texture element
-   *              nearest to the center of the pixel) to produce a texture
-   *              value.
-   * - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
-   *              matches the size of the pixel being textured and uses
-   *              the GL_LINEAR criterion (a weighted average of the four
-   *              texture elements that are closest to the center of the
-   *              pixel) to produce a texture value.
-   * - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
-   *              match the size of the pixel being textured and uses the
-   *              GL_NEAREST criterion (the texture element nearest to the
-   *              center of the pixel) to produce a texture value from each
-   *              mipmap. The final texture value is a weighted average of
-   *              those two values.
-   * - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
-   *              match the size of the pixel being textured and uses the
-   *              GL_LINEAR criterion (a weighted average of the texture
-   *              elements that are closest to the center of the pixel) to
-   *              produce a texture value from each mipmap. The final texture
-   *              value is a weighted average of those two values.
-   */
+
+  // Type of texture filtering used when minifying (scaling
+  // down) a texture with mipmaps. Options are:
+  // - GL_NEAREST: select the closest color to the texture coordinate
+  // - GL_LINEAR: interpolates the neighbouring pixels to get an
+  //              approximate color.
+  // - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
+  //              closely matches the size of the pixel being textured
+  //              and uses the GL_NEAREST criterion (the texture element
+  //              nearest to the center of the pixel) to produce a texture
+  //              value.
+  // - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
+  //              matches the size of the pixel being textured and uses
+  //              the GL_LINEAR criterion (a weighted average of the four
+  //              texture elements that are closest to the center of the
+  //              pixel) to produce a texture value.
+  // - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
+  //              match the size of the pixel being textured and uses the
+  //              GL_NEAREST criterion (the texture element nearest to the
+  //              center of the pixel) to produce a texture value from each
+  //              mipmap. The final texture value is a weighted average of
+  //              those two values.
+  // - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
+  //              match the size of the pixel being textured and uses the
+  //              GL_LINEAR criterion (a weighted average of the texture
+  //              elements that are closest to the center of the pixel) to
+  //              produce a texture value from each mipmap. The final texture
+  //              value is a weighted average of those two values.
   GLint mipmap_min;
-  /**
-   * @brief Type of mipmap magnifying texture filtering
-   *
-   * Type of texture filtering used when magnifying (scaling
-   * up) a texture with mipmaps. Options are:
-   * - GL_NEAREST: select the closest color to the texture coordinate
-   * - GL_LINEAR: interpolates the neighbouring pixels to get an
-   *              approximate color.
-   * - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
-   *              closely matches the size of the pixel being textured
-   *              and uses the GL_NEAREST criterion (the texture element
-   *              nearest to the center of the pixel) to produce a texture
-   *              value.
-   * - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
-   *              matches the size of the pixel being textured and uses
-   *              the GL_LINEAR criterion (a weighted average of the four
-   *              texture elements that are closest to the center of the
-   *              pixel) to produce a texture value.
-   * - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
-   *              match the size of the pixel being textured and uses the
-   *              GL_NEAREST criterion (the texture element nearest to the
-   *              center of the pixel) to produce a texture value from each
-   *              mipmap. The final texture value is a weighted average of
-   *              those two values.
-   * - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
-   *              match the size of the pixel being textured and uses the
-   *              GL_LINEAR criterion (a weighted average of the texture
-   *              elements that are closest to the center of the pixel) to
-   *              produce a texture value from each mipmap. The final texture
-   *              value is a weighted average of those two values.
-   */
+
+  // Type of texture filtering used when magnifying (scaling
+  // up) a texture with mipmaps. Options are:
+  // - GL_NEAREST: select the closest color to the texture coordinate
+  // - GL_LINEAR: interpolates the neighbouring pixels to get an
+  //              approximate color.
+  // - GL_NEAREST_MIPMAP_NEAREST: selects the mipmap that most
+  //              closely matches the size of the pixel being textured
+  //              and uses the GL_NEAREST criterion (the texture element
+  //              nearest to the center of the pixel) to produce a texture
+  //              value.
+  // - GL_LINEAR_MIPMAP_NEAREST: selects the mipmap that most closely
+  //              matches the size of the pixel being textured and uses
+  //              the GL_LINEAR criterion (a weighted average of the four
+  //              texture elements that are closest to the center of the
+  //              pixel) to produce a texture value.
+  // - GL_NEAREST_MIPMAP_LINEAR: selects the two mipmaps that most closely
+  //              match the size of the pixel being textured and uses the
+  //              GL_NEAREST criterion (the texture element nearest to the
+  //              center of the pixel) to produce a texture value from each
+  //              mipmap. The final texture value is a weighted average of
+  //              those two values.
+  // - GL_LINEAR_MIPMAP_LINEAR: selects the two mipmaps that most closely
+  //              match the size of the pixel being textured and uses the
+  //              GL_LINEAR criterion (a weighted average of the texture
+  //              elements that are closest to the center of the pixel) to
+  //              produce a texture value from each mipmap. The final texture
+  //              value is a weighted average of those two values.
   GLint mipmap_mag;
 
   Mesh(Config&& conf);
@@ -165,21 +143,16 @@ public:
 
 private:
 
-  Vao vao;
-  Buffer vbo;
-  Buffer ebo;
+  Vao    vao;
+  Vbo    vbo;
+  Ebo    ebo;
 
   static const Config default_config;
   
   void init();
 };
 
-/**
- * @brief The Vertex struct represents a vertex of a 3D model
- *
- * A vertex is a point in 3D space that has a position, a normal and
- * texture coordinates.
- */
+// The Vertex struct represents a vertex of a 3D model
 class Mesh::Vertex
 {
 public:

@@ -54,16 +54,19 @@ unsigned int Vao::get_id() const
   return id;
 }
 
-void Vao::set_vertex_data(Buffer &buffer, unsigned int index, GLint size,
-                          GLenum type, GLboolean normalized, GLsizei stride,
-                          const void *pointer)
+void Vao::link_buffer(Buffer &vbo,
+                      unsigned int layout_index,
+                      GLint components,
+                      GLenum type,
+                      GLboolean normalized,
+                      GLsizei stride,
+                      const void *offset)
 {
   this->bind();
-  buffer.bind();
-  glVertexAttribPointer(index, size, type, normalized, stride, pointer);
-  glEnableVertexAttribArray(index);
-  buffer.unbind();
-  this->unbind();
-
+  vbo.bind();
+  glVertexAttribPointer(layout_index, components, type,
+                        normalized, stride, offset);
+  glEnableVertexAttribArray(layout_index);
   return;
 }
+

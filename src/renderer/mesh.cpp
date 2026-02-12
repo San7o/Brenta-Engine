@@ -23,15 +23,15 @@ const Mesh::Config Mesh::default_config = {
 
 Mesh::Mesh(Config&& conf)
 {
-  this->vertices = conf.vertices;
-  this->indices = conf.indices;
-  this->textures = std::move(conf.textures);
-  this->wrapping = conf.wrapping;
+  this->vertices      = conf.vertices;
+  this->indices       = conf.indices;
+  this->textures      = std::move(conf.textures);
+  this->wrapping      = conf.wrapping;
   this->filtering_min = conf.filtering_min;
   this->filtering_mag = conf.filtering_mag;
-  this->has_mipmap = conf.has_mipmap;
-  this->mipmap_min = conf.mipmap_min;
-  this->mipmap_mag = conf.mipmap_max;
+  this->has_mipmap    = conf.has_mipmap;
+  this->mipmap_min    = conf.mipmap_min;
+  this->mipmap_mag    = conf.mipmap_max;
 
   this->init();
   DEBUG("mesh: created");
@@ -48,21 +48,31 @@ void Mesh::init()
 {
   this->vao.init();
   this->vao.bind();
+  
   this->vbo.init(GL_ARRAY_BUFFER);
-  this->ebo.init(GL_ELEMENT_ARRAY_BUFFER);
-  this->vbo.copy_vertices(this->vertices.size() * sizeof(Vertex),
-                          &this->vertices[0], GL_STATIC_DRAW);
-  this->ebo.copy_indices(this->indices.size() * sizeof(unsigned int),
-                         &this->indices[0], GL_STATIC_DRAW);
-  this->vao.set_vertex_data(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(Vertex), (void *) 0);
-  this->vao.set_vertex_data(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
-                            sizeof(Vertex),
-                            (void *) offsetof(Vertex, normal));
-  this->vao.set_vertex_data(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
-                            sizeof(Vertex),
-                            (void *) offsetof(Vertex, tex_coords));
+  this->vbo.bind();
+  this->vbo.copy_data(&this->vertices[0],
+                      this->vertices.size() * sizeof(Vertex),
+                      Buffer::DataUsage::Static);
 
+  this->vao.link_buffer(this->vbo, 0, 3, GL_FLOAT, GL_FALSE,
+                        sizeof(Vertex), (void *) 0);
+  this->vao.link_buffer(this->vbo, 1, 3, GL_FLOAT, GL_FALSE,
+                        sizeof(Vertex),
+                        (void *) offsetof(Vertex, normal));
+  this->vao.link_buffer(this->vbo, 2, 2, GL_FLOAT, GL_FALSE,
+                        sizeof(Vertex),
+                        (void *) offsetof(Vertex, tex_coords));
+  
+  this->ebo.init(GL_ELEMENT_ARRAY_BUFFER);
+  this->ebo.bind();
+  this->ebo.copy_data(&this->indices[0],
+                      this->indices.size() * sizeof(unsigned int),
+                      Buffer::DataUsage::Static);
+
+  this->vao.unbind();
+  this->vbo.unbind();
+  this->ebo.unbind();
   Gl::bind_vertex_array(0);
   return;
 }

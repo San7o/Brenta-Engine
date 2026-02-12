@@ -224,8 +224,8 @@ int main(int argc, char** argv)
   Buffer vbo;
   vbo.init(GL_ARRAY_BUFFER);
   vbo.bind();
-  vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
-  v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+  vbo.copy_data(vertices, sizeof(vertices), Buffer::DataUsage::Static);
+  v.link_buffer(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
   std::string  fragment_source = fragment_color_animation;
   std::string  prev_source     = fragment_source;
