@@ -11,6 +11,74 @@ using namespace brenta;
 
 std::unordered_map<Shader::Name, Shader::Id> Shader::shaders;
 
+std::optional<Shader>
+Shader::create(const Shader::Name &shader_name,
+               const std::vector<Shader::Object> &objects)
+{
+  std::vector<Shader::Id> compiled_shaders = {};
+  if (!compile_shaders(compiled_shaders, objects))
+  {
+    ERROR("shader: error compiling shader {}", shader_name);
+    return {};
+  }
+
+  std::optional<Shader::Id> id =
+    Shader::link_program(compiled_shaders, nullptr, 0);
+  if (!id) return {};
+  
+  Shader::clean_compilation(compiled_shaders);
+  Shader::shaders.insert({shader_name, *id});
+  return Shader(*id, shader_name);
+}
+
+std::optional<Shader>
+Shader::create(const GLchar **feedback_varyings, int num_varyings,
+               const Shader::Name &shader_name,
+               const std::vector<Shader::Object> &objects)
+{
+  std::vector<Shader::Id> compiled_shaders = {};
+  if (!compile_shaders(compiled_shaders, objects))
+  {
+    ERROR("shader: error compiling shader {}", shader_name);
+    return {};
+  }
+
+  std::optional<Shader::Id> id =
+    Shader::link_program(compiled_shaders, feedback_varyings, num_varyings);
+  if (!id) return {};
+  
+  Shader::clean_compilation(compiled_shaders);
+  Shader::shaders.insert({shader_name, *id});
+  return Shader(*id, shader_name);
+}
+
+bool Shader::compile_shaders(std::vector<Shader::Id> &compiled,
+                             const std::vector<Shader::Object> &objects)
+{
+  for (auto& obj : objects)
+  {
+    GLenum shader_type_gl;
+    switch(obj.type)
+    {
+    case Shader::Type::Fragment:  shader_type_gl  = GL_FRAGMENT_SHADER; break;
+    case Shader::Type::Vertex:    shader_type_gl  = GL_VERTEX_SHADER; break;
+    case Shader::Type::Geometry:  shader_type_gl  = GL_GEOMETRY_SHADER; break;
+    case Shader::Type::Compute:   shader_type_gl  = GL_COMPUTE_SHADER; break;
+    default:                      shader_type_gl  = 0; break;
+    }
+    
+    unsigned int shader = glCreateShader(shader_type_gl);
+    const GLchar *src = obj.src.c_str();
+    glShaderSource(shader, 1, &src, NULL);
+    glCompileShader(shader);
+    if (!Shader::check_compile_errors(shader))
+      return false;
+
+    compiled.push_back(shader);
+  }
+  return true;
+}
+
 bool Shader::compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled)
 {
   return true;
@@ -39,36 +107,6 @@ void Shader::clean_compilation(std::vector<Shader::Id>& compiled_shaders)
   std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                 [](auto shader) { glDeleteShader(shader); });
  return;
-}
-std::optional<std::string>
-Shader::read_file(const std::filesystem::path &path)
-{
-  std::string code;
-  std::ifstream file;
-  file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-  try
-  {
-    file.open(path);
-    if (!file.is_open()) throw "Cannot open file";
-    std::stringstream stream;
-    stream << file.rdbuf();
-    file.close();
-    code = stream.str();
-  }
-  catch (std::ifstream::failure &e)
-  {
-    ERROR("shader: error reading shader file: {}", path.c_str());
-    return {};
-  }
-
-  if (code.empty())
-  {
-    ERROR("shader: file is empty: {}", path.c_str());
-    return {};
-  }
-
-  return code;
 }
 
 std::optional<Shader> Shader::get_shader(Shader::Name shader_name)
@@ -322,4 +360,54 @@ bool Shader::check_link_errors(Shader::Id shader)
   out << "shader: program linking error: " << infoLog;
   ERROR("{}", out.str());
   return false;
+}
+
+//
+// Object
+//
+
+Shader::Object::Object(Type type, const std::filesystem::path &path)
+{
+  this->type = type;
+  auto src = Object::read_file(path);
+  if (!src)
+  {
+    this->src = "";
+  }
+  else
+  {
+    this->src = *src;
+  }
+  return;
+}
+
+std::optional<std::string>
+Shader::Object::read_file(const std::filesystem::path &path)
+{
+  std::string code;
+  std::ifstream file;
+  file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+  try
+  {
+    file.open(path);
+    if (!file.is_open()) throw "Cannot open file";
+    std::stringstream stream;
+    stream << file.rdbuf();
+    file.close();
+    code = stream.str();
+  }
+  catch (std::ifstream::failure &e)
+  {
+    ERROR("shader: error reading shader file: {}", path.c_str());
+    return {};
+  }
+
+  if (code.empty())
+  {
+    ERROR("shader: file is empty: {}", path.c_str());
+    return {};
+  }
+
+  return code;
 }

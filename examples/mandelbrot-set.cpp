@@ -53,9 +53,9 @@ int main()
   vbo.copy_data(sizeof(vertices), vertices, GL_STATIC_DRAW);
   v.set_vertex_data(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
-  auto shader = Shader::create("fractal",
-     Shader::Type::Vertex, std::filesystem::path("examples/mandelbrot.vs"),
-     Shader::Type::Fragment, std::filesystem::path("examples/mandelbrot.fs"));
+  auto shader = Shader::create("fractal", {
+       { Shader::Type::Vertex, std::filesystem::path("examples/mandelbrot.vs") },
+       { Shader::Type::Fragment, std::filesystem::path("examples/mandelbrot.fs") } });
   if (!shader)
   {
     ERROR("Error creating shader");

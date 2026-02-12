@@ -20,11 +20,9 @@ void init_cube_entity()
   auto shader = Shader::get_shader("cube_shader");
   if (!shader)
   {
-    Shader::create("cube_shader",
-                   Shader::Type::Vertex,
-                   std::filesystem::path("examples/demo/shaders/shader.vs"),
-                   Shader::Type::Fragment,
-                   std::filesystem::path("examples/demo/shaders/shader.fs"));
+    Shader::create("cube_shader", {
+       { Shader::Type::Vertex, std::filesystem::path("examples/demo/shaders/shader.vs") },
+       { Shader::Type::Fragment, std::filesystem::path("examples/demo/shaders/shader.fs") } });
   }
 
   Model m = Model::Builder()

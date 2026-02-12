@@ -58,21 +58,18 @@ public:
     Compute,
   };
 
-  struct Object
-  {
-    Type        type;
-    std::string src;
-  };
+  class Object;
   
-
   // Static API
   
   // Creates and compiles several shaders (into a shader "program")
-  template <typename... Args>
+  // Example:
+  //     auto my_shader = Shader::create("my_shader", {
+  //        { Shader::Type::Vertex, std::filesystem::path("shaders/shader.vs") },
+  //        { Shader::Type::Fragment, std::filesystem::path("shaders/shader.fs") }});
   static std::optional<Shader>
   create(const Shader::Name &shader_name,
-         Shader::Type type, const char* src,
-         Args... args);
+         const std::vector<Shader::Object> &objects);
 
   // Set [feedback_varyings] to an array of CHchar* that specifies
   // the output attributes we want to capture into a buffer
@@ -81,7 +78,7 @@ public:
   //
   // When using these shaders, you need to surround your draw call
   // with glBeginTransformFeedback() and glEndTransformFeedback()
-  // like so:
+  // like this:
   //
   //      my_shader.use();
   //      glBeginTransformFeedback(GL_POINTS); // Enter transform feedback mode
@@ -92,26 +89,10 @@ public:
   //      // ...
   //
   //      glEndTransformFeedback();         // Exit transform feedback mode
-  template <typename... Args>
   static std::optional<Shader>
   create(const GLchar **feedback_varyings, int num_varyings,
          const Shader::Name &shader_name,
-         Shader::Type type, const char* src,
-         Args... args);
-
-  // Same as the previous two functions, but they take a file path
-  template <typename... Args>
-  static std::optional<Shader>
-  create(const Shader::Name &shader_name,
-         Shader::Type type, const std::filesystem::path &path,
-         Args... args);
-  template <typename... Args>
-  static std::optional<Shader>
-  create(const GLchar **feedback_varyings, int num_varyings,
-         const Shader::Name &shader_name,
-         Shader::Type type, const std::filesystem::path &path,
-         Args... args);
-
+         const std::vector<Shader::Object> &objects);
   
   static std::optional<Shader> get_shader(Shader::Name shader_name);
 
@@ -127,8 +108,8 @@ public:
   bool              use();
 
   // Set uniforms
-  bool set_bool(const GLchar   *unif_name, bool value);
-  bool set_int(const GLchar    *unif_name, int value);
+  bool set_bool(const GLchar   *unif_name, bool  value);
+  bool set_int(const GLchar    *unif_name, int   value);
   bool set_float(const GLchar  *unif_name, float value);
   bool set_float2(const GLchar *unif_name, float v1, float v2);
   bool set_float3(const GLchar *unif_name, float v1, float v2, float v3);
@@ -143,33 +124,38 @@ private:
   
   static bool
   compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
-  template <typename... Args>
   static bool compile_shaders(std::vector<Shader::Id> &compiled,
-                              Shader::Type type, const char* src,
-                              Args... args);
-  template <typename... Args>
-  static bool compile_shaders(std::vector<Shader::Id> &compiled,
-                       Shader::Type type, const std::filesystem::path& path,
-                       Args... args);
+                              const std::vector<Shader::Object> &objects);
   static std::optional<Shader::Id>
   link_program(std::vector<Shader::Id>& compiled_shaders,
                const GLchar **feedback_varyings, int num_varyings);
   static void clean_compilation(std::vector<Shader::Id>& compiled_shader);
-  static std::optional<std::string> read_file(const std::filesystem::path &path);
   static bool check_compile_errors(Shader::Id shader);  
   static bool check_link_errors(Shader::Id shader);
   
-  /**
-   * @brief Map of shaders
-   *
-   * This map is used to store the shaders that are created during the
-   * execution of the program. The key is the name of the shader and
-   * the value is the ID of the shader.
-   */
+  // This map is used to store the shaders that are created during the
+  // execution of the program. The key is the name of the shader and
+  // the value is the ID of the shader.
   static std::unordered_map<Shader::Name, Shader::Id> shaders;
   
 };
 
-#include "shader.impl"
+class Shader::Object
+{
+public:
+  
+  Type        type;
+  std::string src;
+
+  Object() = default;
+  Object(Type type, const std::string &src)
+    : type(type), src(src) {}
+  Object(Type type, const std::filesystem::path &path);
+  
+private:
+
+  static std::optional<std::string> read_file(const std::filesystem::path &path);
+
+};
   
 } // namespace brenta

@@ -21,11 +21,9 @@ void init_player_entity()
   auto shader = Shader::get_shader("default_shader");
   if (!shader)
   {
-    Shader::create("default_shader",
-                   Shader::Type::Vertex,
-                   std::filesystem::path("examples/demo/shaders/shader.vs"),
-                   Shader::Type::Fragment,
-                   std::filesystem::path("examples/demo/shaders/shader.fs"));
+    Shader::create("default_shader", {
+       { Shader::Type::Vertex, std::filesystem::path("examples/demo/shaders/shader.vs") },
+       { Shader::Type::Fragment, std::filesystem::path("examples/demo/shaders/shader.fs") } });
   }
 
   Model m = Model::Builder()

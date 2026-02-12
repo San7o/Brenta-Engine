@@ -50,16 +50,18 @@ ParticleEmitter::ParticleEmitter(Config conf)
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-  auto shader_update = Shader::create(varyings,
-          sizeof(varyings) / sizeof(varyings[0]),
-          "particle_update",
-                                      Shader::Type::Vertex, std::filesystem::path("src/renderer/shaders/particle_update.vs"));
+  auto shader_update =
+    Shader::create(varyings,
+                   sizeof(varyings) / sizeof(varyings[0]),
+                   "particle_update", {
+                     { Shader::Type::Vertex, std::filesystem::path("src/renderer/shaders/particle_update.vs") }});
   if (!shader_update) return;
   
-  auto shader_render = Shader::create("particle_render",
-                                      Shader::Type::Vertex,   std::filesystem::path("src/renderer/shaders/particle_render.vs"),
-                                      Shader::Type::Geometry, std::filesystem::path("src/renderer/shaders/particle_render.gs"),
-                                      Shader::Type::Fragment, std::filesystem::path("src/renderer/shaders/particle_render.fs"));
+  auto shader_render =
+    Shader::create("particle_render", {
+        { Shader::Type::Vertex,   std::filesystem::path("src/renderer/shaders/particle_render.vs") },
+        { Shader::Type::Geometry, std::filesystem::path("src/renderer/shaders/particle_render.gs") },
+        { Shader::Type::Fragment, std::filesystem::path("src/renderer/shaders/particle_render.fs") }});
   if (!shader_render) return;
 
   // This is needed to render points

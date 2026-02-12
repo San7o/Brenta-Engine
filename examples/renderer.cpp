@@ -55,11 +55,9 @@ int main()
     .build();
 
   Shader::Name s = "default_shader";
-  Shader::create(s,
-                 Shader::Type::Vertex,
-                 std::filesystem::path("examples/default_shader.vs"),
-                 Shader::Type::Fragment,
-                 std::filesystem::path("examples/default_shader.fs"));
+  Shader::create(s, {
+      { Shader::Type::Vertex, std::filesystem::path("examples/default_shader.vs") },
+      { Shader::Type::Fragment, std::filesystem::path("examples/default_shader.fs") } });
 
   while (!Window::should_close())
   { 
