@@ -10,26 +10,28 @@
 using namespace brenta;
 
 const Model::Config Model::default_config = {
-  "",
-  GL_REPEAT,
-  GL_NEAREST,
-  GL_LINEAR,
-  GL_TRUE,
-  GL_LINEAR_MIPMAP_LINEAR,
-  GL_LINEAR,
-  true,
+  .transform     = Transform(),
+  .path          = "",
+  .wrapping      = GL_REPEAT,
+  .filtering_min = GL_NEAREST,
+  .filtering_mag = GL_LINEAR,
+  .has_mipmap    = GL_TRUE,
+  .mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
+  .mipmap_mag    = GL_LINEAR,
+  .flip          = true,
 };
 
 Model::Model(Config conf)
 {
-  this->wrapping = conf.wrapping;
+  this->wrapping      = conf.wrapping;
   this->filtering_min = conf.filtering_min;
   this->filtering_mag = conf.filtering_mag;
-  this->has_mipmap = conf.has_mipmap;
-  this->mipmap_min = conf.mipmap_min;
-  this->mipmap_mag = conf.mipmap_mag;
-  this->flip = conf.flip;
-  this->path = conf.path;
+  this->has_mipmap    = conf.has_mipmap;
+  this->mipmap_min    = conf.mipmap_min;
+  this->mipmap_mag    = conf.mipmap_mag;
+  this->flip          = conf.flip;
+  this->path          = conf.path;
+  this->transform     = conf.transform;
 
   this->init();
   DEBUG("model: initialized");
@@ -68,6 +70,11 @@ void Model::draw(Shader::Name shader) const
     meshes[i].draw(shader);
   }
   return;
+}
+
+Transform &Model::get_transform()
+{
+  return this->transform;
 }
 
 void Model::process_node(aiNode *node, const aiScene *scene)
@@ -186,6 +193,12 @@ Model::load_material_textures(aiMaterial *mat,
 //
 // Builder functions
 //
+
+Model::Builder &Model::Builder::transform(const Transform& transform)
+{
+  this->conf.transform = transform;
+  return *this;
+}
 
 Model::Builder &Model::Builder::path(const std::filesystem::path &path)
 {

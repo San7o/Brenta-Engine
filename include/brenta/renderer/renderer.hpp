@@ -7,6 +7,7 @@
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/model.hpp>
+#include <brenta/renderer/material.hpp>
 
 #include <glm/glm.hpp>
 
@@ -20,10 +21,11 @@ class Renderer
 public:
 
   class Command;
+  
   Renderer() = delete;
   ~Renderer() = delete;
   
-  static void begin_frame(const Camera& cam);
+  static void begin_frame(Camera& cam);
   static void submit(const Renderer::Command& it);
   static void end_frame();
 
@@ -42,20 +44,13 @@ class Renderer::Command
 {
 public:
   
-  const Model         *m;
-  const Shader::Name   material;
-  glm::mat4            transform;
+  Model         *model;
+  const Material       material;
 
   Command() = default;
-  Command(const Model* m,
-          const Shader::Name material,
-          const glm::mat4 transform = glm::mat4(1.0))
-    : m(m), material(material), transform(transform) {}
-
-  Renderer::Command& translate(glm::vec3 translation);
-  Renderer::Command& rotate(glm::vec3 rotation);
-  Renderer::Command& scale(float scale);
-
+  Command(Model *model,
+          const Material &material)
+    : model(model), material(material) {}
 };
   
 } // namespace brenta

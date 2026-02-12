@@ -6,6 +6,7 @@
 #pragma once
 
 #include <brenta/renderer/mesh.hpp>
+#include <brenta/renderer/transform.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 
 #include <assimp/Importer.hpp>
@@ -32,25 +33,35 @@ public:
   GLint     mipmap_min;
   GLint     mipmap_mag;
   bool      flip;
-  std::string path;
 
-  class Config;
-  class Builder;
+  struct Config;
+  class  Builder;
 
   Model() {}
   Model(Config conf);
   ~Model();
 
+  /*
   constexpr Model(const Model&)            = delete;
   constexpr Model& operator=(const Model&) = delete;
 
   constexpr Model(Model&&) noexcept            = default;
   constexpr Model& operator=(Model&&) noexcept = default;
+  */
 
+  Model(const Model&)            = delete;
+  Model& operator=(const Model&) = delete;
+
+  Model(Model&&) noexcept            = default;
+  Model& operator=(Model&&) noexcept = default;
+  
+  Transform &get_transform();
   void draw(Shader::Name shader) const;
 
 private:
-
+  
+  Transform                             transform;
+  std::string                           path;
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
   std::string                           directory;
@@ -69,14 +80,15 @@ private:
 
 struct Model::Config
 {
+  Transform   transform;
   std::string path;
-  GLint     wrapping;
-  GLint     filtering_min;
-  GLint     filtering_mag;
-  GLboolean has_mipmap;
-  GLint     mipmap_min;
-  GLint     mipmap_mag;
-  bool      flip;
+  GLint       wrapping;
+  GLint       filtering_min;
+  GLint       filtering_mag;
+  GLboolean   has_mipmap;
+  GLint       mipmap_min;
+  GLint       mipmap_mag;
+  bool        flip;
 };
 
 class Model::Builder
@@ -86,6 +98,8 @@ private:
   Model::Config conf = Model::default_config;
   
 public:
+
+  Builder &transform(const Transform& transform);
   Builder &path(const std::filesystem::path &path);
   Builder &wrapping(GLint wrapping);
   Builder &filtering_min(GLint filtering_min);

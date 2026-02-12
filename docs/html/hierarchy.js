@@ -22,6 +22,7 @@ var hierarchy =
     ] ],
     [ "brenta::Camera", "classbrenta_1_1Camera.html", null ],
     [ "brenta::Text::Character", "classbrenta_1_1Text_1_1Character.html", null ],
+    [ "brenta::Renderer::Command", "classbrenta_1_1Renderer_1_1Command.html", null ],
     [ "brenta::Camera::Config", "structbrenta_1_1Camera_1_1Config.html", null ],
     [ "brenta::Gl::Config", "structbrenta_1_1Gl_1_1Config.html", null ],
     [ "brenta::Logger::Config", "structbrenta_1_1Logger_1_1Config.html", null ],
@@ -31,6 +32,7 @@ var hierarchy =
     [ "brenta::Text::Config", "classbrenta_1_1Text_1_1Config.html", null ],
     [ "brenta::Window::Config", "structbrenta_1_1Window_1_1Config.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
+    [ "brenta::Material", "classbrenta_1_1Material.html", null ],
     [ "brenta::Mesh", "classbrenta_1_1Mesh.html", null ],
     [ "brenta::Model", "classbrenta_1_1Model.html", null ],
     [ "brenta::Mouse", "classbrenta_1_1Mouse.html", null ],
@@ -48,10 +50,9 @@ var hierarchy =
       [ "brenta::Text", "classbrenta_1_1Text.html", null ],
       [ "brenta::Window", "classbrenta_1_1Window.html", null ]
     ] ],
-    [ "brenta::Renderer::Target", "classbrenta_1_1Renderer_1_1Target.html", null ],
     [ "brenta::Texture", "classbrenta_1_1Texture.html", null ],
     [ "brenta::Time", "classbrenta_1_1Time.html", null ],
-    [ "brenta::Translation", "classbrenta_1_1Translation.html", null ],
+    [ "brenta::Transform", "classbrenta_1_1Transform.html", null ],
     [ "brenta::Vao", "classbrenta_1_1Vao.html", null ],
     [ "brenta::Mesh::Vertex", "classbrenta_1_1Mesh_1_1Vertex.html", null ]
 ];

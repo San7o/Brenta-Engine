@@ -5,6 +5,8 @@
 
 #pragma once
 
+#include <brenta/renderer/transform.hpp>
+
 #include <glad/glad.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -57,7 +59,7 @@ public:
   // Getters
 
   std::variant<Spherical, Aircraft> get_pos() const;
-  glm::vec3        get_world_pos() const;
+  Transform        get_transform();
   float            get_fov() const;
   glm::mat4        get_view_matrix() const;
   ProjectionType   get_projection_type() const;
@@ -128,7 +130,7 @@ private:
 
   // Remember to always use set_pos when changing the position,
   // never modify this value manually
-  glm::vec3   world_pos;
+  Transform   transform;
 
   void update_spherical(Spherical pos);
   void update_aircraft(Aircraft pos);

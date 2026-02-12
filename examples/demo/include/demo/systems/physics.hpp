@@ -41,8 +41,9 @@ struct PhysicsSystem : system<PhysicsComponent, TransformComponent>
       }
       if (physics_component->velocity != glm::vec3(0.0f))
       {
-        transform_component->position +=
-          physics_component->velocity * Window::get_time().get_delta();
+        transform_component->transform
+          .set_pos(transform_component->transform.get_pos() +
+                   physics_component->velocity * Window::get_time().get_delta());
       }
     }
   }

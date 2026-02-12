@@ -71,7 +71,7 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
       auto new_cam = cam->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
-        glm::vec3 world_pos = cam->get_world_pos();
+        glm::vec3 world_pos = cam->get_transform().get_pos();
         // Local coordinate system
         glm::vec3 fixed_center =
           glm::vec3(scam.center.x, world_pos.y, scam.center.z);

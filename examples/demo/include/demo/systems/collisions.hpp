@@ -44,8 +44,8 @@ struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
         auto sphere_component2 = e2.get_component<SphereColliderComponent>();
         auto transform_component2 = e2.get_component<TransformComponent>();
 
-        float distance = glm::distance(transform_component1->position,
-                                       transform_component2->position);
+        float distance = glm::distance(transform_component1->transform.get_pos(),
+                                       transform_component2->transform.get_pos());
         if (distance < sphere_component1->radius + sphere_component2->radius)
         {
           auto physics_component1 = e1.get_component<PhysicsComponent>();
@@ -56,27 +56,31 @@ struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
           }
           if (physics_component1 != nullptr && physics_component2 == nullptr)
           {
-            transform_component1->position = ResolveCollision(
-              transform_component1->position, transform_component2->position,
-              sphere_component1->radius, sphere_component2->radius, distance);
+            transform_component1->transform
+              .set_pos(ResolveCollision(transform_component1->transform.get_pos(),
+                                        transform_component2->transform.get_pos(),
+              sphere_component1->radius, sphere_component2->radius, distance));
             physics_component1->velocity = glm::vec3(0.0f);
           }
           else if (physics_component1 == nullptr
                    && physics_component2 != nullptr)
           {
-            transform_component2->position = ResolveCollision(
-              transform_component2->position, transform_component1->position,
-              sphere_component2->radius, sphere_component1->radius, distance);
+            transform_component2->transform
+              .set_pos(ResolveCollision(transform_component2->transform.get_pos(),
+                                        transform_component1->transform.get_pos(),
+              sphere_component2->radius, sphere_component1->radius, distance));
             physics_component2->velocity = glm::vec3(0.0f);
           }
           else
           {
-            transform_component1->position = ResolveCollision(
-              transform_component1->position, transform_component2->position,
-              sphere_component1->radius, sphere_component2->radius, distance);
-            transform_component2->position = ResolveCollision(
-              transform_component2->position, transform_component1->position,
-              sphere_component2->radius, sphere_component1->radius, distance);
+            transform_component1->transform
+              .set_pos(ResolveCollision(transform_component1->transform.get_pos(),
+                                        transform_component2->transform.get_pos(),
+              sphere_component1->radius, sphere_component2->radius, distance));
+            transform_component2->transform
+              .set_pos(ResolveCollision(transform_component2->transform.get_pos(),
+                                        transform_component1->transform.get_pos(),
+              sphere_component2->radius, sphere_component1->radius, distance));
             physics_component1->velocity = -physics_component1->velocity;
             physics_component2->velocity = -physics_component2->velocity;
           }

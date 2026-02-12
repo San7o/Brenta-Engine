@@ -48,6 +48,10 @@ int main()
   
   Model m = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+               .rotate(glm::vec3(0.0, -90.0, 0.0))
+               .scale(glm::vec3(1.0)))
     .build();
 
   Shader::Name s = "default_shader";
@@ -64,10 +68,7 @@ int main()
     Gl::clear();
     
     Renderer::begin_frame(cam);
-    Renderer::submit(Renderer::Command(&m, s)
-                     .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-                     .rotate(glm::vec3(0.0, -90.0, 0.0))
-                     .scale(1.0));
+    Renderer::submit({&m, Material(s)});
     Renderer::end_frame();
     
     Window::poll_events();

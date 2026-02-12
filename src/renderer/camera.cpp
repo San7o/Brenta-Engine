@@ -27,12 +27,13 @@ glm::mat4 Camera::get_view_matrix() const
   try
   {
     Spherical spos = std::get<Spherical>(this->pos);
-    return glm::lookAt(this->world_pos, spos.center, this->world_up);
+    return glm::lookAt(this->transform.get_pos(), spos.center, this->world_up);
 
   }
   catch ([[maybe_unused]] const std::bad_variant_access& ex)
   {
-    return glm::lookAt(this->world_pos, this->world_pos + this->front, this->up);
+    return glm::lookAt(this->transform.get_pos(),
+                       this->transform.get_pos() + this->front, this->up);
   }
 }
 
@@ -58,11 +59,9 @@ glm::mat4 Camera::get_projection_matrix(int window_width,
 
 void Camera::update_spherical(Spherical pos)
 {
-  this->world_pos.x =
-    sin(pos.theta) * cos(pos.phi) * pos.radius + pos.center.x;
-  this->world_pos.y = cos(pos.theta) * pos.radius + pos.center.y;
-  this->world_pos.z =
-    sin(pos.theta) * sin(pos.phi) * pos.radius + pos.center.z;
+  this->transform.set_x(sin(pos.theta) * cos(pos.phi) * pos.radius + pos.center.x);
+  this->transform.set_y(cos(pos.theta) * pos.radius + pos.center.y);
+  this->transform.set_z(sin(pos.theta) * sin(pos.phi) * pos.radius + pos.center.z);
   
   return;
 }
@@ -80,7 +79,7 @@ void Camera::update_aircraft(Aircraft pos)
   // also re-calculate the Right and Up vector
   this->right = glm::normalize(glm::cross(this->front, this->world_up));
   this->up    = glm::normalize(glm::cross(this->right, this->front));
-  
+  this->transform.set_pos(pos.pos);
   return;
 }
 
@@ -98,9 +97,9 @@ std::variant<Camera::Spherical, Camera::Aircraft> Camera::get_pos() const
   return this->pos;
 }
 
-glm::vec3 Camera::get_world_pos() const
+Transform Camera::get_transform()
 {
-  return this->world_pos;
+  return this->transform;
 }
 
 float Camera::get_fov() const

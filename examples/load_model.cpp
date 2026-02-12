@@ -52,6 +52,7 @@ int main()
   // Load the model
   Model our_model = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform(glm::vec3(0.0f)))
     .build();
 
   // Load the shader
@@ -81,7 +82,7 @@ int main()
     // Draw
     shader->use();
 
-    // Make transformations (you can also use brenta::translation)
+    // Make transformations
     glm::mat4 view = glm::mat4(1.0f); // Camera position
     glm::mat4 projection =
       glm::perspective(glm::radians(45.0f),

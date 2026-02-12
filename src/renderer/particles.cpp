@@ -8,7 +8,6 @@
 #include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
-#include <brenta/renderer/translation.hpp>
 #include <brenta/window.hpp>
 
 #include <iostream>
@@ -168,11 +167,13 @@ void ParticleEmitter::render()
   // Set uniforms
   int window_width = Window::get_width();
   int window_height = Window::get_height();
-  Translation t = Translation();
-  t.set_view(this->cam->get_view_matrix());
-  t.set_projection(this->cam->get_projection_matrix(window_width, window_height));
-  t.set_model(glm::mat4(1.0f));
-  t.set_shader("particle_render");
+
+  auto view = this->cam->get_view_matrix();
+  auto projection = this->cam->get_projection_matrix(window_width, window_height);
+  auto model = glm::mat4(1.0f);
+  shader->set_mat4("view",       view);
+  shader->set_mat4("projection", projection);
+  shader->set_mat4("model",      model);
   
   shader->set_int("atlas_width",  this->atlas_width);
   shader->set_int("atlas_height", this->atlas_height);

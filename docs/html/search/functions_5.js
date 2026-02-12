@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['set_5fvertex_5fdata_0',['set_vertex_data',['../classbrenta_1_1Vao.html#a6e8e22b3463d7d5892a5172fcd91e025',1,'brenta::Vao']]]
+  ['_7emanager_0',['~Manager',['../classbrenta_1_1Engine_1_1Manager.html#add46e5bb4a824d925f0cd983020b330a',1,'brenta::Engine::Manager']]]
 ];

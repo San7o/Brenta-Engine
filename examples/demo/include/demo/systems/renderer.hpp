@@ -7,8 +7,8 @@
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/model.hpp>
+#include <brenta/window.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
-#include <brenta/renderer/translation.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/player.hpp>
 #include <demo/components/transform.hpp>
@@ -50,19 +50,13 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       auto shader = Shader::get_shader(shader_name);
       if (!shader) continue;
 
-      brenta::Translation t = brenta::Translation();
-      t.set_view(cam->get_view_matrix());
-      t.set_projection(cam->get_projection_matrix(Window::get_width(),
+      shader->use();
+      shader->set_mat4("view", cam->get_view_matrix());
+      shader->set_mat4("projection",
+                       cam->get_projection_matrix(Window::get_width(),
                                                   Window::get_height()));
-
-      t.set_model(glm::mat4(1.0f));
-      t.translate(transform_component->position);
-      t.rotate(transform_component->rotation);
-      t.scale(transform_component->scale);
-
-      t.set_shader(shader_name);
-
-      shader->set_vec3("viewPos", cam->get_world_pos());
+      shader->set_mat4("model", transform_component->transform.get_model_matrix());
+      shader->set_vec3("viewPos", cam->get_transform().get_pos());
       shader->set_float("material.shininess", model_component->shininess);
 
       // Animation control

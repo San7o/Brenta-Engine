@@ -93,15 +93,11 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Shader.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#pub-types">Public Types</a> &#124;
+<a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle"><div class="title">brenta::Shader Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classbrenta_1_1Shader.html" title="Shader class.">Shader</a> class.  
- <a href="classbrenta_1_1Shader.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="shader_8hpp_source.html">shader.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -116,45 +112,49 @@ Public Types</h2></td></tr>
 <tr class="memitem:aaa76109543a4456ac362cd795bd11287" id="r_aaa76109543a4456ac362cd795bd11287"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#aaa76109543a4456ac362cd795bd11287">Id</a> = unsigned int</td></tr>
 <tr class="separator:aaa76109543a4456ac362cd795bd11287"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a6ce5ee435f8efbf3b98602f67a5575eb" id="r_a6ce5ee435f8efbf3b98602f67a5575eb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a6ce5ee435f8efbf3b98602f67a5575eb">Shader</a> (Shader::Id id, Shader::Name name)</td></tr>
+<tr class="separator:a6ce5ee435f8efbf3b98602f67a5575eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c486d6b46b492abdab708b4da65fd81" id="r_a4c486d6b46b492abdab708b4da65fd81"><td class="memItemLeft" align="right" valign="top">Shader::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a4c486d6b46b492abdab708b4da65fd81">get_id</a> ()</td></tr>
+<tr class="separator:a4c486d6b46b492abdab708b4da65fd81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5d1adafee201ed2e53922d28e65e292" id="r_aa5d1adafee201ed2e53922d28e65e292"><td class="memItemLeft" align="right" valign="top">Shader::Name&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#aa5d1adafee201ed2e53922d28e65e292">get_name</a> ()</td></tr>
+<tr class="separator:aa5d1adafee201ed2e53922d28e65e292"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88dc789bb9d3d65858f8e2b1afec92bd" id="r_a88dc789bb9d3d65858f8e2b1afec92bd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a88dc789bb9d3d65858f8e2b1afec92bd">use</a> ()</td></tr>
+<tr class="separator:a88dc789bb9d3d65858f8e2b1afec92bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1cdb35e47c60502f7ffb04c4ccfc228d" id="r_a1cdb35e47c60502f7ffb04c4ccfc228d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a1cdb35e47c60502f7ffb04c4ccfc228d">set_bool</a> (const GLchar *unif_name, bool value)</td></tr>
+<tr class="separator:a1cdb35e47c60502f7ffb04c4ccfc228d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5608cb60c490805cd4cf99333d6128d" id="r_ab5608cb60c490805cd4cf99333d6128d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#ab5608cb60c490805cd4cf99333d6128d">set_int</a> (const GLchar *unif_name, int value)</td></tr>
+<tr class="separator:ab5608cb60c490805cd4cf99333d6128d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38e2a914e4a2e6530bcd040e58df0cc3" id="r_a38e2a914e4a2e6530bcd040e58df0cc3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a38e2a914e4a2e6530bcd040e58df0cc3">set_float</a> (const GLchar *unif_name, float value)</td></tr>
+<tr class="separator:a38e2a914e4a2e6530bcd040e58df0cc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4ca9a27f80aecb293d1cd707a011b1a" id="r_aa4ca9a27f80aecb293d1cd707a011b1a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#aa4ca9a27f80aecb293d1cd707a011b1a">set_float2</a> (const GLchar *unif_name, float v1, float v2)</td></tr>
+<tr class="separator:aa4ca9a27f80aecb293d1cd707a011b1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3360dfe1aed961d796437cbcc7c756" id="r_a5e3360dfe1aed961d796437cbcc7c756"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a5e3360dfe1aed961d796437cbcc7c756">set_float3</a> (const GLchar *unif_name, float v1, float v2, float v3)</td></tr>
+<tr class="separator:a5e3360dfe1aed961d796437cbcc7c756"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaff6789d301aab43b0131dc895315ff5" id="r_aaff6789d301aab43b0131dc895315ff5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#aaff6789d301aab43b0131dc895315ff5">set_mat4</a> (const GLchar *unif_name, glm::mat4 value)</td></tr>
+<tr class="separator:aaff6789d301aab43b0131dc895315ff5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af337c5110d3cbe27f95699b4115a98b5" id="r_af337c5110d3cbe27f95699b4115a98b5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#af337c5110d3cbe27f95699b4115a98b5">set_vec3</a> (const GLchar *name, float x, float y, float z)</td></tr>
+<tr class="separator:af337c5110d3cbe27f95699b4115a98b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae00ca60ee6da7b04b808209feae750c5" id="r_ae00ca60ee6da7b04b808209feae750c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#ae00ca60ee6da7b04b808209feae750c5">set_vec3</a> (const GLchar *unif_name, glm::vec3 value)</td></tr>
+<tr class="separator:ae00ca60ee6da7b04b808209feae750c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:afca33f6fccfb880933d196ddc674c91a" id="r_afca33f6fccfb880933d196ddc674c91a"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:afca33f6fccfb880933d196ddc674c91a"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#afca33f6fccfb880933d196ddc674c91a">create</a> (const Shader::Name &amp;shader_name, Shader::Type type, const std::filesystem::path &amp;path, Args... args)</td></tr>
-<tr class="memdesc:afca33f6fccfb880933d196ddc674c91a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new shader.  <br /></td></tr>
-<tr class="separator:afca33f6fccfb880933d196ddc674c91a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a06073fa7e6dff01ed767e7d5a26297ff" id="r_a06073fa7e6dff01ed767e7d5a26297ff"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a06073fa7e6dff01ed767e7d5a26297ff"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a06073fa7e6dff01ed767e7d5a26297ff">create</a> (const GLchar **feedback_varyings, int num_varyings, const Shader::Name &amp;shader_name, Shader::Type type, const std::filesystem::path &amp;path, Args... args)</td></tr>
-<tr class="memdesc:a06073fa7e6dff01ed767e7d5a26297ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new shader with feedback varyings.  <br /></td></tr>
-<tr class="separator:a06073fa7e6dff01ed767e7d5a26297ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7811d737475fc5a8fec96f83a687704a" id="r_a7811d737475fc5a8fec96f83a687704a"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a7811d737475fc5a8fec96f83a687704a">compile_shaders</a> (std::vector&lt; Shader::Id &gt; &amp;compiled)</td></tr>
-<tr class="separator:a7811d737475fc5a8fec96f83a687704a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4821fc7c1feb6163425c22960a096fc7" id="r_a4821fc7c1feb6163425c22960a096fc7"><td class="memTemplParams" colspan="2">template&lt;typename... Args&gt; </td></tr>
-<tr class="memitem:a4821fc7c1feb6163425c22960a096fc7"><td class="memTemplItemLeft" align="right" valign="top">static bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a4821fc7c1feb6163425c22960a096fc7">compile_shaders</a> (std::vector&lt; Shader::Id &gt; &amp;compiled, Shader::Type type, const std::filesystem::path &amp;path, Args... args)</td></tr>
-<tr class="separator:a4821fc7c1feb6163425c22960a096fc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a19c2b80175ba19c89e6c6f911e085a8c" id="r_a19c2b80175ba19c89e6c6f911e085a8c"><td class="memItemLeft" align="right" valign="top">static Shader::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a19c2b80175ba19c89e6c6f911e085a8c">get_id</a> (Shader::Name shader_name)</td></tr>
-<tr class="memdesc:a19c2b80175ba19c89e6c6f911e085a8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the ID of a shader.  <br /></td></tr>
-<tr class="separator:a19c2b80175ba19c89e6c6f911e085a8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5627acfb8b8c35dfb9b8ea625d13dffd" id="r_a5627acfb8b8c35dfb9b8ea625d13dffd"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a5627acfb8b8c35dfb9b8ea625d13dffd">use</a> (Shader::Name shader_name)</td></tr>
-<tr class="memdesc:a5627acfb8b8c35dfb9b8ea625d13dffd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the shader.  <br /></td></tr>
-<tr class="separator:a5627acfb8b8c35dfb9b8ea625d13dffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac54f768e0b1de3e750bad3e3532c18be" id="r_ac54f768e0b1de3e750bad3e3532c18be"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#ac54f768e0b1de3e750bad3e3532c18be">set_bool</a> (Shader::Name shader_name, const GLchar *name, bool value)</td></tr>
-<tr class="separator:ac54f768e0b1de3e750bad3e3532c18be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5955f135d91891eeff412c4823ed3106" id="r_a5955f135d91891eeff412c4823ed3106"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a5955f135d91891eeff412c4823ed3106">set_int</a> (Shader::Name shader_name, const GLchar *name, int value)</td></tr>
-<tr class="separator:a5955f135d91891eeff412c4823ed3106"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80fa7e50594640067ddb4eab49876b92" id="r_a80fa7e50594640067ddb4eab49876b92"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a80fa7e50594640067ddb4eab49876b92">set_float</a> (Shader::Name shader_name, const GLchar *name, float value)</td></tr>
-<tr class="separator:a80fa7e50594640067ddb4eab49876b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41c7fd8c1808a4c931513b60e2108c8e" id="r_a41c7fd8c1808a4c931513b60e2108c8e"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a41c7fd8c1808a4c931513b60e2108c8e">set_mat4</a> (Shader::Name shader_name, const GLchar *name, glm::mat4 value)</td></tr>
-<tr class="separator:a41c7fd8c1808a4c931513b60e2108c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a12b4f236bf86cbb6b91349c93497d935" id="r_a12b4f236bf86cbb6b91349c93497d935"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a12b4f236bf86cbb6b91349c93497d935">set_vec3</a> (Shader::Name shader_name, const GLchar *name, float x, float y, float z)</td></tr>
-<tr class="separator:a12b4f236bf86cbb6b91349c93497d935"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a431214632b0972972f5fdcc27a04aaa9" id="r_a431214632b0972972f5fdcc27a04aaa9"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a431214632b0972972f5fdcc27a04aaa9">set_vec3</a> (Shader::Name shader_name, const GLchar *name, glm::vec3 value)</td></tr>
-<tr class="separator:a431214632b0972972f5fdcc27a04aaa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a986d844b868cc1744d3e26ebb455fe32" id="r_a986d844b868cc1744d3e26ebb455fe32"><td class="memTemplParams" colspan="2"><a id="a986d844b868cc1744d3e26ebb455fe32" name="a986d844b868cc1744d3e26ebb455fe32"></a>
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a986d844b868cc1744d3e26ebb455fe32"><td class="memTemplItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classbrenta_1_1Shader.html">Shader</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>create</b> (const Shader::Name &amp;shader_name, Shader::Type type, const std::filesystem::path &amp;path, Args... args)</td></tr>
+<tr class="separator:a986d844b868cc1744d3e26ebb455fe32"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a347ac7aed7a82ed8c4fe61166abf98ee" id="r_a347ac7aed7a82ed8c4fe61166abf98ee"><td class="memTemplParams" colspan="2"><a id="a347ac7aed7a82ed8c4fe61166abf98ee" name="a347ac7aed7a82ed8c4fe61166abf98ee"></a>
+template&lt;typename... Args&gt; </td></tr>
+<tr class="memitem:a347ac7aed7a82ed8c4fe61166abf98ee"><td class="memTemplItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classbrenta_1_1Shader.html">Shader</a> &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>create</b> (const GLchar **feedback_varyings, int num_varyings, const Shader::Name &amp;shader_name, Shader::Type type, const std::filesystem::path &amp;path, Args... args)</td></tr>
+<tr class="separator:a347ac7aed7a82ed8c4fe61166abf98ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b340f02c45cfd52e771be7b503fbc90" id="r_a8b340f02c45cfd52e771be7b503fbc90"><td class="memItemLeft" align="right" valign="top">static std::optional&lt; <a class="el" href="classbrenta_1_1Shader.html">Shader</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Shader.html#a8b340f02c45cfd52e771be7b503fbc90">get_shader</a> (Shader::Name shader_name)</td></tr>
+<tr class="separator:a8b340f02c45cfd52e771be7b503fbc90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classbrenta_1_1Shader.html" title="Shader class.">Shader</a> class. </p>
-<p>This class is used to create and manage shaders. The shaders are created using the new method, which takes the name of the shader, the type of the shader, and the path to the file that contains the shader code. Multile shaders can be compiled and linked together by providing any number of types and paths paired. The shader can be used with the Use method, and the uniforms can be set using the set_bool, set_int, set_float, set_mat4, set_vec3 methods. </p>
-
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00038">38</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00045">45</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="aaa76109543a4456ac362cd795bd11287" name="aaa76109543a4456ac362cd795bd11287"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaa76109543a4456ac362cd795bd11287">&#9670;&#160;</a></span>Id</h2>
@@ -168,7 +168,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00043">43</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00050">50</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -184,7 +184,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00042">42</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00049">49</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
@@ -201,246 +201,99 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00045">45</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00052">52</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a6ce5ee435f8efbf3b98602f67a5575eb" name="a6ce5ee435f8efbf3b98602f67a5575eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ce5ee435f8efbf3b98602f67a5575eb">&#9670;&#160;</a></span>Shader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">brenta::Shader::Shader </td>
+          <td>(</td>
+          <td class="paramtype">Shader::Id&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Shader::Name&#160;</td>
+          <td class="paramname"><em>name</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00081">81</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a7811d737475fc5a8fec96f83a687704a" name="a7811d737475fc5a8fec96f83a687704a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7811d737475fc5a8fec96f83a687704a">&#9670;&#160;</a></span>compile_shaders() <span class="overload">[1/2]</span></h2>
+<a id="a4c486d6b46b492abdab708b4da65fd81" name="a4c486d6b46b492abdab708b4da65fd81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c486d6b46b492abdab708b4da65fd81">&#9670;&#160;</a></span>get_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool brenta::Shader::compile_shaders </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; Shader::Id &gt; &amp;&#160;</td>
-          <td class="paramname"><em>compiled</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00152">152</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a4821fc7c1feb6163425c22960a096fc7" name="a4821fc7c1feb6163425c22960a096fc7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4821fc7c1feb6163425c22960a096fc7">&#9670;&#160;</a></span>compile_shaders() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool brenta::Shader::compile_shaders </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; Shader::Id &gt; &amp;&#160;</td>
-          <td class="paramname"><em>compiled</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Shader::Type&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00158">158</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a06073fa7e6dff01ed767e7d5a26297ff" name="a06073fa7e6dff01ed767e7d5a26297ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a06073fa7e6dff01ed767e7d5a26297ff">&#9670;&#160;</a></span>create() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool brenta::Shader::create </td>
-          <td>(</td>
-          <td class="paramtype">const GLchar **&#160;</td>
-          <td class="paramname"><em>feedback_varyings</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>num_varyings</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const Shader::Name &amp;&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Shader::Type&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a new shader with feedback varyings. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">feedback_varyings</td><td>Array of feedback varyings </td></tr>
-    <tr><td class="paramname">num_varyings</td><td>Number of feedback varyings </td></tr>
-    <tr><td class="paramname">shader_name</td><td>Name of the shader </td></tr>
-    <tr><td class="paramname">type</td><td>Type of the shader </td></tr>
-    <tr><td class="paramname">path</td><td>Path to the file that contains the shader code </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true on success, or false on error</dd></dl>
-<p>Same as the New method, but adds feedback varyings to the shader, so that the output of the shader can be saved in a buffer object.</p>
-<p>Example feedback_varyings: const GLchar* feedback_varyings[] = {"outValue"}; </p>
-
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00115">115</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
-
-</div>
-</div>
-<a id="afca33f6fccfb880933d196ddc674c91a" name="afca33f6fccfb880933d196ddc674c91a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afca33f6fccfb880933d196ddc674c91a">&#9670;&#160;</a></span>create() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Args&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static bool brenta::Shader::create </td>
-          <td>(</td>
-          <td class="paramtype">const Shader::Name &amp;&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Shader::Type&#160;</td>
-          <td class="paramname"><em>type</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Args...&#160;</td>
-          <td class="paramname"><em>args</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Create a new shader. </p>
-<p>This method is used to create a new shader with the given name, type, and path. The path is the path to the file that contains the shader code. The type is the type of the shader (GL_VERTEX_SHADER, GL_FRAGMENT_SHADER, GL_GEOMETRY_SHADER).</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader_name</td><td>Name of the shader </td></tr>
-    <tr><td class="paramname">type</td><td>Type of the shader </td></tr>
-    <tr><td class="paramname">path</td><td>Path to the file that contains the shader code </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>true on success, or false on error</dd></dl>
-<p>You can provide any number of types and paths, those will be all compiled and linked in the same program. </p>
-
-<p class="definition">Definition at line <a class="el" href="shader_8hpp_source.html#l00070">70</a> of file <a class="el" href="shader_8hpp_source.html">shader.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a19c2b80175ba19c89e6c6f911e085a8c" name="a19c2b80175ba19c89e6c6f911e085a8c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a19c2b80175ba19c89e6c6f911e085a8c">&#9670;&#160;</a></span>get_id()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">Shader::Id Shader::get_id </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00028">28</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa5d1adafee201ed2e53922d28e65e292" name="aa5d1adafee201ed2e53922d28e65e292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5d1adafee201ed2e53922d28e65e292">&#9670;&#160;</a></span>get_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Shader::Name Shader::get_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00033">33</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a8b340f02c45cfd52e771be7b503fbc90" name="a8b340f02c45cfd52e771be7b503fbc90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b340f02c45cfd52e771be7b503fbc90">&#9670;&#160;</a></span>get_shader()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::optional&lt; <a class="el" href="classbrenta_1_1Shader.html">Shader</a> &gt; Shader::get_shader </td>
           <td>(</td>
           <td class="paramtype">Shader::Name&#160;</td>
           <td class="paramname"><em>shader_name</em></td><td>)</td>
@@ -454,39 +307,21 @@ template&lt;typename... Args&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Get the ID of a shader. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader_name</td><td>Name of the shader </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>ID of the shader </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00014">14</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00019">19</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac54f768e0b1de3e750bad3e3532c18be" name="ac54f768e0b1de3e750bad3e3532c18be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac54f768e0b1de3e750bad3e3532c18be">&#9670;&#160;</a></span>set_bool()</h2>
+<a id="a1cdb35e47c60502f7ffb04c4ccfc228d" name="a1cdb35e47c60502f7ffb04c4ccfc228d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1cdb35e47c60502f7ffb04c4ccfc228d">&#9670;&#160;</a></span>set_bool()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::set_bool </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -500,37 +335,23 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00037">37</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00052">52</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a80fa7e50594640067ddb4eab49876b92" name="a80fa7e50594640067ddb4eab49876b92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80fa7e50594640067ddb4eab49876b92">&#9670;&#160;</a></span>set_float()</h2>
+<a id="a38e2a914e4a2e6530bcd040e58df0cc3" name="a38e2a914e4a2e6530bcd040e58df0cc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38e2a914e4a2e6530bcd040e58df0cc3">&#9670;&#160;</a></span>set_float()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::set_float </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -544,37 +365,101 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00089">89</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00100">100</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a5955f135d91891eeff412c4823ed3106" name="a5955f135d91891eeff412c4823ed3106"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5955f135d91891eeff412c4823ed3106">&#9670;&#160;</a></span>set_int()</h2>
+<a id="aa4ca9a27f80aecb293d1cd707a011b1a" name="aa4ca9a27f80aecb293d1cd707a011b1a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4ca9a27f80aecb293d1cd707a011b1a">&#9670;&#160;</a></span>set_float2()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Shader::set_int </td>
+          <td class="memname">bool Shader::set_float2 </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
+          <td class="paramtype">const GLchar *&#160;</td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v2</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00124">124</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a5e3360dfe1aed961d796437cbcc7c756" name="a5e3360dfe1aed961d796437cbcc7c756"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3360dfe1aed961d796437cbcc7c756">&#9670;&#160;</a></span>set_float3()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Shader::set_float3 </td>
+          <td>(</td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>unif_name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>v3</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00148">148</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ab5608cb60c490805cd4cf99333d6128d" name="ab5608cb60c490805cd4cf99333d6128d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5608cb60c490805cd4cf99333d6128d">&#9670;&#160;</a></span>set_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Shader::set_int </td>
+          <td>(</td>
+          <td class="paramtype">const GLchar *&#160;</td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -588,37 +473,23 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00063">63</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00076">76</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a41c7fd8c1808a4c931513b60e2108c8e" name="a41c7fd8c1808a4c931513b60e2108c8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41c7fd8c1808a4c931513b60e2108c8e">&#9670;&#160;</a></span>set_mat4()</h2>
+<a id="aaff6789d301aab43b0131dc895315ff5" name="aaff6789d301aab43b0131dc895315ff5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaff6789d301aab43b0131dc895315ff5">&#9670;&#160;</a></span>set_mat4()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::set_mat4 </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -632,35 +503,21 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00114">114</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00172">172</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a12b4f236bf86cbb6b91349c93497d935" name="a12b4f236bf86cbb6b91349c93497d935"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a12b4f236bf86cbb6b91349c93497d935">&#9670;&#160;</a></span>set_vec3() <span class="overload">[1/2]</span></h2>
+<a id="af337c5110d3cbe27f95699b4115a98b5" name="af337c5110d3cbe27f95699b4115a98b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af337c5110d3cbe27f95699b4115a98b5">&#9670;&#160;</a></span>set_vec3() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::set_vec3 </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
           <td class="paramname"><em>name</em>, </td>
         </tr>
@@ -688,37 +545,23 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00140">140</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00196">196</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a431214632b0972972f5fdcc27a04aaa9" name="a431214632b0972972f5fdcc27a04aaa9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a431214632b0972972f5fdcc27a04aaa9">&#9670;&#160;</a></span>set_vec3() <span class="overload">[2/2]</span></h2>
+<a id="ae00ca60ee6da7b04b808209feae750c5" name="ae00ca60ee6da7b04b808209feae750c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae00ca60ee6da7b04b808209feae750c5">&#9670;&#160;</a></span>set_vec3() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::set_vec3 </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const GLchar *&#160;</td>
-          <td class="paramname"><em>name</em>, </td>
+          <td class="paramname"><em>unif_name</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -732,52 +575,28 @@ template&lt;typename... Args&gt; </div>
           <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00166">166</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00220">220</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a5627acfb8b8c35dfb9b8ea625d13dffd" name="a5627acfb8b8c35dfb9b8ea625d13dffd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5627acfb8b8c35dfb9b8ea625d13dffd">&#9670;&#160;</a></span>use()</h2>
+<a id="a88dc789bb9d3d65858f8e2b1afec92bd" name="a88dc789bb9d3d65858f8e2b1afec92bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88dc789bb9d3d65858f8e2b1afec92bd">&#9670;&#160;</a></span>use()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Shader::use </td>
           <td>(</td>
-          <td class="paramtype">Shader::Name&#160;</td>
-          <td class="paramname"><em>shader_name</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Use the shader. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">shader_name</td><td>Name of the shader</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>You need to call this method before rendering anything with the shader.</p>
-<dl class="section return"><dt>Returns</dt><dd>true on success, or false on error </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00024">24</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="shader_8cpp_source.html#l00039">39</a> of file <a class="el" href="shader_8cpp_source.html">shader.cpp</a>.</p>
 
 </div>
 </div>

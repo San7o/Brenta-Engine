@@ -4,7 +4,6 @@
 // Github:  @San7o
 
 #include <brenta/renderer/renderer.hpp>
-#include <brenta/renderer/translation.hpp>
 #include <brenta/window.hpp>
 
 using namespace brenta;
@@ -22,14 +21,14 @@ glm::vec3 Renderer::cam_position;
 // Member functions
 //
 
-void Renderer::begin_frame(const Camera& cam)
+void Renderer::begin_frame(Camera& cam)
 {
   Renderer::render_queue.clear();
   Renderer::projection =
     cam.get_projection_matrix(Window::get_width(),
                               Window::get_height());
   Renderer::view = cam.get_view_matrix();
-  Renderer::cam_position = cam.get_world_pos();
+  Renderer::cam_position = cam.get_transform().get_pos();
 
   return;
 }
@@ -46,60 +45,25 @@ void Renderer::end_frame()
 
 void Renderer::flush()
 {
-  for (auto i : Renderer::render_queue)
+  for (auto& i : Renderer::render_queue)
   {
-    Translation t = Translation();
-    t.set_view(Renderer::view);
-    t.set_projection(Renderer::projection);
-    t.set_model(i.transform);
-    if (!t.set_shader(i.material))
-    {
-      ERROR("Renderer::flust: error setting translation");
-      continue;
-    }
-
-    auto shader = Shader::get_shader(i.material);
+    auto shader = Shader::get_shader(i.material.shader);
     if (!shader)
     {
       ERROR("Renderer::flush: error accessing shader named {}",
-            i.material);
+            i.material.shader);
       continue;
     }
     
     shader->use();
+    shader->set_mat4("view", Renderer::view);
+    shader->set_mat4("projection", Renderer::projection);
+    shader->set_mat4("model", i.model->get_transform().get_model_matrix());
     shader->set_vec3("viewPos", Renderer::cam_position);
     shader->set_float("material.shininess", 32.0f); // TODO
     // shader->set_int("atlasIndex", 0); // TODO
 
-    i.m->draw(i.material);
+    i.model->draw(i.material.shader);
   }
   return;
-}
-
-//
-// Command
-//
-
-Renderer::Command& Renderer::Command::translate(glm::vec3 translation)
-{
-  this->transform = glm::translate(this->transform, translation);
-  return *this;
-}
-
-// Note: the order of rotations is important
-Renderer::Command& Renderer::Command::rotate(glm::vec3 rotation)
-{
-  this->transform = glm::rotate(this->transform, glm::radians(rotation.x),
-                                glm::vec3(1.0f, 0.0f, 0.0f));
-  this->transform = glm::rotate(this->transform, glm::radians(rotation.y),
-                                glm::vec3(0.0f, 1.0f, 0.0f));
-  this->transform = glm::rotate(this->transform, glm::radians(rotation.z),
-                                glm::vec3(0.0f, 0.0f, 1.0f));
-  return *this;
-}
-
-Renderer::Command& Renderer::Command::scale(float scale)
-{
-  this->transform = glm::scale(this->transform, glm::vec3(scale));
-  return *this;
 }

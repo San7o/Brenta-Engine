@@ -26,6 +26,11 @@ void init_robot_entity()
 
   Model m = Model::Builder()
     .path("examples/assets/models/robot_sprite/robot_sprite.obj")
+    .transform(Transform()
+               .translate(glm::vec3(0.0f, 5.0f, 0.0f))
+               .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                      glm::vec3(0.0f, 1.0f, 0.0f)))
+               .scale(glm::vec3(5.0f)))
     .wrapping(GL_REPEAT)
     .filtering_min(GL_NEAREST)
     .filtering_mag(GL_NEAREST)
@@ -36,7 +41,6 @@ void init_robot_entity()
     .build();
 
   auto cube_entity = world::new_entity()
-    .add_component<TransformComponent>(glm::vec3(0.0f, 5.0f, 0.0f),
-                                       glm::vec3(0.0f, -90.0f, 0.0f), 5.0f)
+    .add_component<TransformComponent>(m.get_transform())
     .add_component<ModelComponent>(std::move(m), 32.0f, "default_shader", true, 4, 0);
 }

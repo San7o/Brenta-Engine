@@ -63,6 +63,9 @@ auto engine = Engine::Builder()
 ```c++
 auto model = Model::Builder()
     .path("assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(1.0f, 5.0f, 2.0f))
+               .scale(glm::vec3(2.0f, 1.0f, 1.0f)))
     .build();
 ```
 

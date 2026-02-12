@@ -30,7 +30,6 @@ void init_floor_entity()
     .build();
 
   auto floor = world::new_entity()
-    .add_component<TransformComponent>(glm::vec3(0.0f, 0.0f, 0.0f),
-                                       glm::vec3(0.0f), 1.0f)
+    .add_component<TransformComponent>(m.get_transform())
     .add_component<ModelComponent>(std::move(m), 32.0f, "default_shader");
 }

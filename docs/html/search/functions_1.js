@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_5fid_0',['get_id',['../classbrenta_1_1Shader.html#a19c2b80175ba19c89e6c6f911e085a8c',1,'brenta::Shader']]]
+  ['manager_0',['Manager',['../classbrenta_1_1Engine_1_1Manager.html#ad72ca9c80ee70206bde54df23ca50b4c',1,'brenta::Engine::Manager']]]
 ];

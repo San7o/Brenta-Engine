@@ -53,7 +53,7 @@ struct PointLightsSystem : system<TransformComponent, PointLightComponent>
         shader->set_float((lightn + ".linear").c_str(),    light->linear);
         shader->set_float((lightn + ".quadratic").c_str(), light->quadratic);
         shader->set_float((lightn + ".strength").c_str(),  light->strength);
-        shader->set_vec3((lightn + ".position").c_str(),   transform->position);
+        shader->set_vec3((lightn + ".position").c_str(),   transform->transform.get_pos());
         shader->set_float((lightn + ".strength").c_str(),  light->strength);
         shader->set_int("nPointLights",                    entities.size());
       }

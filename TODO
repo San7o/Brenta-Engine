@@ -1,5 +1,3 @@
-- introduce the transform class (maybe change translation?)
-- introduce the viewport class
 - copy the particle and text shaders to C strings before building?
 - make a struct that contains shader variables and their values, to
   handle cases like setting uniforms for rendering the particles

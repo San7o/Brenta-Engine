@@ -23,7 +23,7 @@ struct DebugTextSystem : system<none>
     auto            color            = glm::vec3(1.0f, 0.9f, 0.0f);
     const float     offset           = 20.0f;
     brenta::Camera *cam              = world::get_resource<CameraResource>()->cam;
-    auto            camera_world_pos = cam->get_world_pos();
+    auto            camera_world_pos = cam->get_transform().get_pos();
 
     Text::render_text("FPS: " + std::to_string(Window::get_time().get_fps()), 25.0f,
                       Window::get_height() - 30.0f, 0.35f, color);

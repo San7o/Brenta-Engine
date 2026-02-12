@@ -32,11 +32,12 @@ void init_sphere_entity()
   }
   Model m1 = Model::Builder()
     .path("examples/assets/models/sphere/sphere.obj")
+    .transform(Transform()
+               .translate(glm::vec3(2.0f, 1.0f, 0.0f)))
     .build();
 
   auto sphere1 = world::new_entity()
-    .add_component<TransformComponent>(glm::vec3(2.0f, 1.0f, 0.0f),
-                                       glm::vec3(0.0f), 1.0f)
+    .add_component<TransformComponent>(m1.get_transform())
     .add_component<PhysicsComponent>(1.0f,                        // mass
                                      1.0f,                        // density
                                      glm::vec3(0.0f, 0.0f, 0.0f), // velocity
@@ -51,11 +52,12 @@ void init_sphere_entity()
 
   Model m2 = Model::Builder()
     .path("examples/assets/models/sphere/sphere.obj")
+    .transform(Transform()
+               .translate(glm::vec3(-2.0f, 1.0f, 0.0f)))
     .build();
   
   auto sphere2 = world::new_entity()
-    .add_component<TransformComponent>(glm::vec3(-2.0f, 1.0f, 0.0f),
-                                       glm::vec3(0.0f), 1.0f)
+    .add_component<TransformComponent>(m2.get_transform())
     .add_component<PhysicsComponent>(1.0f,                        // mass
                                      1.0f,                        // density
                                      glm::vec3(0.0f, 0.0f, 0.0f), // velocity

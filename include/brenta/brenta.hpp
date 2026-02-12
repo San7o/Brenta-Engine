@@ -20,7 +20,7 @@
 #include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/renderer.hpp>
-#include <brenta/renderer/translation.hpp>
+#include <brenta/renderer/transform.hpp>
 #include <brenta/renderer/model.hpp>
 
 // Core
