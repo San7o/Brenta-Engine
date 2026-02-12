@@ -39,7 +39,7 @@ void Buffer::destroy()
   return;
 }
 
-void Buffer::bind()
+void Buffer::bind() const
 {
   if (this->id == 0)
   {
@@ -50,7 +50,7 @@ void Buffer::bind()
   return;
 }
 
-void Buffer::unbind()
+void Buffer::unbind() const
 {
   glBindBuffer(this->target, 0);
   return;

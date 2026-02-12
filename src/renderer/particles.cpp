@@ -107,18 +107,8 @@ ParticleEmitter::ParticleEmitter(Config conf)
   this->vao.unbind();
 
   // Setup UBO
-  GLuint block_index = glGetUniformBlockIndex(shader_update->get_id(), "settings");
-  if (block_index == GL_INVALID_INDEX)
-  {
-    ERROR("Particles::init: error settings uniform block index");
-    return;
-  }
-  this->ubo.init(Buffer::Target::Uniform);
+  this->ubo.init(*shader_update, "settings", 3, sizeof(ParticleSettings));
   this->ubo.bind();
-  glUniformBlockBinding(shader_update->get_id(), block_index, 3);
-  glBindBufferBase(GL_UNIFORM_BUFFER, 3, this->ubo.get_id());
-  glBindBufferRange(GL_UNIFORM_BUFFER, 3, this->ubo.get_id(), 0,
-                    sizeof(ParticleSettings));
   this->ubo.copy_data(NULL,
                       sizeof(ParticleSettings),
                       Buffer::DataUsage::DynamicDraw);
@@ -146,17 +136,18 @@ void ParticleEmitter::update(float delta_time)
   };
 
   // ubo
+  
   this->ubo.bind();
   this->ubo.copy_data(&settings, sizeof(ParticleSettings),
                       Buffer::DataUsage::DynamicDraw);
   this->ubo.unbind();
   Gl::check_error();
 
+  // Vao
+  
   this->vao.bind();
-
   glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, fbo[current_fbo_index].get_id());
   Gl::check_error();
-
   glBindBuffer(GL_ARRAY_BUFFER, fbo[!current_fbo_index].get_id());
   this->vao.link_buffer(this->fbo[!current_fbo_index],
                         0, 3, GL_FLOAT, GL_FALSE,
@@ -180,8 +171,8 @@ void ParticleEmitter::update(float delta_time)
 
   glEndTransformFeedback();         // Exit transform feedback mode
   glDisable(GL_RASTERIZER_DISCARD); // Enable rasterization
+  
   // Unbind buffers
-
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   this->vao.unbind();
   glBindBufferBase(GL_TRANSFORM_FEEDBACK_BUFFER, 0, 0);

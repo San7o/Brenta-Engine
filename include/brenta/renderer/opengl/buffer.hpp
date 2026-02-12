@@ -75,8 +75,8 @@ public:
   
   void init(Target target);
   void destroy();
-  void bind();
-  void unbind();
+  void bind() const;
+  void unbind() const;
 
   // Getters
 
@@ -92,7 +92,7 @@ public:
 
   void copy_data(const void *data, GLsizeiptr size, DataUsage usage);
 
-private:
+protected:
   
   Buffer::Id   id;
   Target       target;
@@ -121,12 +121,5 @@ typedef Buffer Ebo;
 //
 // These are used to save the state of some uniforms after draw call
 typedef Buffer Fbo;
-  
-//
-// Uniform buffer objects
-// ----------------------
-//
-// These are used to set multiple uniforms with a single command
-typedef Buffer Ubo;
   
 } // namespace brenta

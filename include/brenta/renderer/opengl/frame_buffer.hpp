@@ -41,9 +41,6 @@ public:
   void unbind();
 
   void destroy();
-  void copy_data(GLsizeiptr size,
-                 const void *data,
-                 Buffer::DataUsage usage);
 
   void rescale(int width, int height);
   void set_color_format(GLenum color_format);

@@ -76,7 +76,7 @@ public:
   //                 attribute and the next (0 lets OpenGL calculate
   //                 it based on 'type' and 'components')
   // - offset:       the byte offset of the first attribute in the buffer
-  void link_buffer(Buffer &vbo,
+  void link_buffer(const Buffer &vbo,
                    unsigned int layout_index,
                    GLint components,
                    GLenum type,

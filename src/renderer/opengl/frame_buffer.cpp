@@ -69,8 +69,7 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
 
 FrameBuffer::~FrameBuffer()
 {
-  glDeleteFramebuffers(1, &this->get_id());
-  glDeleteTextures(1, &this->texture_id);
+  this->destroy();
   return;
 }
 
@@ -92,14 +91,6 @@ void FrameBuffer::destroy()
 {
   glDeleteFramebuffers(1, &this->get_id());
   glDeleteTextures(1, &this->texture_id);
-  return;
-}
-
-void FrameBuffer::copy_data(GLsizeiptr size,
-                            const void *data,
-                            Buffer::DataUsage usage)
-{
-  glBufferData(this->get_target(), size, data, (GLenum) usage);
   return;
 }
 

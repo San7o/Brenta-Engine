@@ -9,6 +9,7 @@
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
+#include <brenta/renderer/opengl/ubo.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 
 #include <glad/glad.h>

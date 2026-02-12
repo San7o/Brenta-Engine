@@ -54,7 +54,7 @@ unsigned int Vao::get_id() const
   return id;
 }
 
-void Vao::link_buffer(Buffer &vbo,
+void Vao::link_buffer(const Buffer &vbo,
                       unsigned int layout_index,
                       GLint components,
                       GLenum type,
