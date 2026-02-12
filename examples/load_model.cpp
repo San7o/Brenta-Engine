@@ -57,8 +57,10 @@ int main()
 
   // Load the shader
   auto shader = Shader::create("default_shader",
-          Shader::Type::Vertex,   "examples/default_shader.vs",
-          Shader::Type::Fragment, "examples/default_shader.fs");
+                               Shader::Type::Vertex,
+                               std::filesystem::path("examples/default_shader.vs"),
+                               Shader::Type::Fragment,
+                               std::filesystem::path("examples/default_shader.fs"));
   if (!shader)
   {
     ERROR("Error creating shader");

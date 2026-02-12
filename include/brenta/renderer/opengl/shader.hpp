@@ -42,6 +42,7 @@ namespace brenta
 //
 // This class provides a simple API to create shaders, load them and
 // set uniforms.
+//
 class Shader
 {
 public:
@@ -49,7 +50,7 @@ public:
   using Name = std::string;
   using Id   = unsigned int;
 
-  enum Type
+  enum class Type
   {
     Vertex,
     Fragment,
@@ -57,21 +58,60 @@ public:
     Compute,
   };
 
+  struct Object
+  {
+    Type        type;
+    std::string src;
+  };
+  
+
   // Static API
   
   // Creates and compiles several shaders (into a shader "program")
   template <typename... Args>
   static std::optional<Shader>
   create(const Shader::Name &shader_name,
+         Shader::Type type, const char* src,
+         Args... args);
+
+  // Set [feedback_varyings] to an array of CHchar* that specifies
+  // the output attributes we want to capture into a buffer
+  // For example:
+  //    const GLchar* feedbackVaryings[] = { "outValue" };
+  //
+  // When using these shaders, you need to surround your draw call
+  // with glBeginTransformFeedback() and glEndTransformFeedback()
+  // like so:
+  //
+  //      my_shader.use();
+  //      glBeginTransformFeedback(GL_POINTS); // Enter transform feedback mode
+  //
+  //      //...
+  //      glDrawArrays(GL_POINTS, 0, num_particles);
+  //      Gl::check_error();
+  //      // ...
+  //
+  //      glEndTransformFeedback();         // Exit transform feedback mode
+  template <typename... Args>
+  static std::optional<Shader>
+  create(const GLchar **feedback_varyings, int num_varyings,
+         const Shader::Name &shader_name,
+         Shader::Type type, const char* src,
+         Args... args);
+
+  // Same as the previous two functions, but they take a file path
+  template <typename... Args>
+  static std::optional<Shader>
+  create(const Shader::Name &shader_name,
          Shader::Type type, const std::filesystem::path &path,
          Args... args);
-  
   template <typename... Args>
   static std::optional<Shader>
   create(const GLchar **feedback_varyings, int num_varyings,
          const Shader::Name &shader_name,
          Shader::Type type, const std::filesystem::path &path,
          Args... args);
+
   
   static std::optional<Shader> get_shader(Shader::Name shader_name);
 
@@ -82,16 +122,19 @@ public:
   
   Shader::Id        get_id();
   Shader::Name      get_name();
+  // Remember to call use() before setting uniforms and using this
+  // shader
   bool              use();
-  
-  bool set_bool(const GLchar *unif_name, bool value);
-  bool set_int(const GLchar *unif_name, int value);
-  bool set_float(const GLchar *unif_name, float value);
+
+  // Set uniforms
+  bool set_bool(const GLchar   *unif_name, bool value);
+  bool set_int(const GLchar    *unif_name, int value);
+  bool set_float(const GLchar  *unif_name, float value);
   bool set_float2(const GLchar *unif_name, float v1, float v2);
   bool set_float3(const GLchar *unif_name, float v1, float v2, float v3);
-  bool set_mat4(const GLchar *unif_name, glm::mat4 value);
-  bool set_vec3(const GLchar *name, float x, float y, float z);
-  bool set_vec3(const GLchar *unif_name, glm::vec3 value);
+  bool set_mat4(const GLchar   *unif_name, glm::mat4 value);
+  bool set_vec3(const GLchar   *name, float x, float y, float z);
+  bool set_vec3(const GLchar   *unif_name, glm::vec3 value);
 
 private:
 
@@ -102,8 +145,17 @@ private:
   compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
   template <typename... Args>
   static bool compile_shaders(std::vector<Shader::Id> &compiled,
-                              Shader::Type type, const std::filesystem::path &path,
+                              Shader::Type type, const char* src,
                               Args... args);
+  template <typename... Args>
+  static bool compile_shaders(std::vector<Shader::Id> &compiled,
+                       Shader::Type type, const std::filesystem::path& path,
+                       Args... args);
+  static std::optional<Shader::Id>
+  link_program(std::vector<Shader::Id>& compiled_shaders,
+               const GLchar **feedback_varyings, int num_varyings);
+  static void clean_compilation(std::vector<Shader::Id>& compiled_shader);
+  static std::optional<std::string> read_file(const std::filesystem::path &path);
   static bool check_compile_errors(Shader::Id shader);  
   static bool check_link_errors(Shader::Id shader);
   

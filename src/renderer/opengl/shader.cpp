@@ -16,6 +16,61 @@ bool Shader::compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled)
   return true;
 }
 
+std::optional<Shader::Id>
+Shader::link_program(std::vector<Shader::Id>& compiled_shaders,
+                     const GLchar **feedback_varyings, int num_varyings)
+{
+  Shader::Id id = glCreateProgram();
+  std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                [&id](auto shader) { glAttachShader(id, shader); });
+
+  if (feedback_varyings != nullptr)
+    glTransformFeedbackVaryings(id, num_varyings, feedback_varyings,
+                                GL_INTERLEAVED_ATTRIBS);
+  
+  glLinkProgram(id);
+  if (!Shader::check_link_errors(id))
+    return {};
+  return id;
+}
+
+void Shader::clean_compilation(std::vector<Shader::Id>& compiled_shaders)
+{
+  std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
+                [](auto shader) { glDeleteShader(shader); });
+ return;
+}
+std::optional<std::string>
+Shader::read_file(const std::filesystem::path &path)
+{
+  std::string code;
+  std::ifstream file;
+  file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+  try
+  {
+    file.open(path);
+    if (!file.is_open()) throw "Cannot open file";
+    std::stringstream stream;
+    stream << file.rdbuf();
+    file.close();
+    code = stream.str();
+  }
+  catch (std::ifstream::failure &e)
+  {
+    ERROR("shader: error reading shader file: {}", path.c_str());
+    return {};
+  }
+
+  if (code.empty())
+  {
+    ERROR("shader: file is empty: {}", path.c_str());
+    return {};
+  }
+
+  return code;
+}
+
 std::optional<Shader> Shader::get_shader(Shader::Name shader_name)
 {
   if (Shader::shaders.find(shader_name) == Shader::shaders.end())

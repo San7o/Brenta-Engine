@@ -89,8 +89,8 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
   }
 
   auto shader = Shader::create("TextShader",
-                               Shader::Type::Vertex,   "src/renderer/shaders/text.vs",
-                               Shader::Type::Fragment, "src/renderer/shaders/text.fs");
+                               Shader::Type::Vertex,   std::filesystem::path("src/renderer/shaders/text.vs"),
+                               Shader::Type::Fragment, std::filesystem::path("src/renderer/shaders/text.fs"));
   if (!shader) return;
   
   Text::shader_name = "TextShader";

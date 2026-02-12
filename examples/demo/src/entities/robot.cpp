@@ -20,8 +20,10 @@ void init_robot_entity()
   if (!shader)
   {
     Shader::create("default_shader",
-                   Shader::Type::Vertex,   "examples/demo/shaders/shader.vs",
-                   Shader::Type::Fragment, "examples/demo/shader.fs");
+                   Shader::Type::Vertex,
+                   std::filesystem::path("examples/demo/shaders/shader.vs"),
+                   Shader::Type::Fragment,
+                   std::filesystem::path("examples/demo/shader.fs"));
   }
 
   Model m = Model::Builder()

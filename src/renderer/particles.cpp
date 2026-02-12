@@ -50,14 +50,16 @@ ParticleEmitter::ParticleEmitter(Config conf)
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-  auto shader_update = Shader::create(varyings, 3, "particle_update",
-          Shader::Type::Vertex, "src/renderer/shaders/particle_update.vs");
+  auto shader_update = Shader::create(varyings,
+          sizeof(varyings) / sizeof(varyings[0]),
+          "particle_update",
+                                      Shader::Type::Vertex, std::filesystem::path("src/renderer/shaders/particle_update.vs"));
   if (!shader_update) return;
   
   auto shader_render = Shader::create("particle_render",
-                 Shader::Type::Vertex,   "src/renderer/shaders/particle_render.vs",
-                 Shader::Type::Geometry, "src/renderer/shaders/particle_render.gs",
-                 Shader::Type::Fragment, "src/renderer/shaders/particle_render.fs");
+                                      Shader::Type::Vertex,   std::filesystem::path("src/renderer/shaders/particle_render.vs"),
+                                      Shader::Type::Geometry, std::filesystem::path("src/renderer/shaders/particle_render.gs"),
+                                      Shader::Type::Fragment, std::filesystem::path("src/renderer/shaders/particle_render.fs"));
   if (!shader_render) return;
 
   // This is needed to render points
@@ -168,13 +170,9 @@ void ParticleEmitter::render()
   int window_width = Window::get_width();
   int window_height = Window::get_height();
 
-  auto view = this->cam->get_view_matrix();
-  auto projection = this->cam->get_projection_matrix(window_width, window_height);
-  auto model = glm::mat4(1.0f);
-  shader->set_mat4("view",       view);
-  shader->set_mat4("projection", projection);
-  shader->set_mat4("model",      model);
-  
+  shader->set_mat4("view",       this->cam->get_view_matrix());
+  shader->set_mat4("projection", this->cam->get_projection_matrix(window_width, window_height));
+  shader->set_mat4("model",      glm::mat4(1.0f));
   shader->set_int("atlas_width",  this->atlas_width);
   shader->set_int("atlas_height", this->atlas_height);
   shader->set_int("atlas_index",  this->atlas_index);
