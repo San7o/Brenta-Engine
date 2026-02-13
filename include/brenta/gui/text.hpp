@@ -69,7 +69,6 @@ private:
   // Map an ascii character to a Character struct
   static std::map<char, Character> characters;
   
-  static const Text::Config default_config;
   static Text::Config       init_config;
 };
 
@@ -93,15 +92,15 @@ public:
 class Text::Config
 {
 public:
-  std::filesystem::path font_path;
-  int font_size;
+  std::filesystem::path font_path = "examples/assets/fonts/arial.ttf";
+  int font_size                   = 48;
 };
   
 class Text::Builder : public Subsystem::Builder
 {
 private:
 
-  Text::Config conf = Text::default_config;
+  Text::Config conf = {};
   
 public:
 

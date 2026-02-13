@@ -10,6 +10,7 @@
 #pragma once
 
 #include <brenta/subsystem.hpp>
+#include <brenta/renderer/color.hpp>
 
 #include <glad/glad.h> // OpenGL driver
 
@@ -62,7 +63,7 @@ public:
   
   static void set_poligon_mode(GLboolean enable);
   static void set_viewport(int x, int y, int width, int height);
-  static void set_color(float r, float g, float b, float a);
+  static void set_color(const Color &color);
   static void draw_arrays(GLenum mode, int first, int count);
   static void draw_elements(GLenum mode, int count, GLenum type,
                             const void *indices);
@@ -73,25 +74,24 @@ public:
 private:
   
   static bool initialized;
-  
-  static const Gl::Config  default_config;
   static Gl::Config        init_config;
+  
 };
 
 struct Gl::Config
 {
 public:
-  bool enable_blending;
-  bool enable_cull_face;
-  bool enable_multisample;
-  bool enable_depth_test;
+  bool enable_blending    = false;
+  bool enable_cull_face   = false;
+  bool enable_multisample = false;
+  bool enable_depth_test  = false;
 };
   
 class Gl::Builder : public Subsystem::Builder
 {
 private:
 
-  Gl::Config conf = Gl::default_config;
+  Gl::Config conf = {};
   
 public:
 

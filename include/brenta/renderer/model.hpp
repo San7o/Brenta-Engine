@@ -30,7 +30,7 @@ public:
   class  Builder;
 
   Model() {}
-  Model(const Config &conf);
+  Model(Config &&conf);
   ~Model();
 
   Model(const Model&)            = delete;
@@ -49,7 +49,8 @@ private:
   std::string                           directory;
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
-
+  
+  void load(const Texture::Properties &props);
   void process_node(aiNode *node, const aiScene *scene,
                     const Texture::Properties &props);
   void process_mesh(aiMesh *mesh, const aiScene *scene,
@@ -60,14 +61,14 @@ private:
                          Texture::Type type_brenta,
                          const Texture::Properties &props);
   
-  void init(const Texture::Properties &props);
 };
 
 struct Model::Config
 {
-  Transform           transform     = {};
-  std::string         model_path    = "";
-  Texture::Properties texture_props = {};
+  Transform                 transform     = {};
+  std::string               model_path    = "";
+  Texture::Properties       texture_props = {};
+  std::vector<Mesh>         meshes        = {};
 };
 
 class Model::Builder
@@ -77,6 +78,8 @@ public:
   Builder &transform(const Transform& transform);
   Builder &path(const std::filesystem::path &path);
   Builder &texture_props(const Texture::Properties &props);
+  Builder &mesh(Mesh &&mesh);
+  Builder &meshes(std::vector<Mesh> &&meshes);
 
   Model build();
 

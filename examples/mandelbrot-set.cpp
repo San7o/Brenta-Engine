@@ -78,20 +78,20 @@ int main()
   while (!Window::should_close())
   {
     Window::poll_events();
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
     // Use arrows to move the fractal
-    if (Window::is_key_pressed(GLFW_KEY_Z))
+    if (Window::is_key_pressed(Key::Z))
       zoom += 0.01f;
-    if (Window::is_key_pressed(GLFW_KEY_X))
+    if (Window::is_key_pressed(Key::X))
       zoom -= 0.01f;
-    if (Window::is_key_pressed(GLFW_KEY_LEFT))
+    if (Window::is_key_pressed(Key::Left))
       offset.x -= 0.005f / pow(zoom, 4.0);
-    if (Window::is_key_pressed(GLFW_KEY_RIGHT))
+    if (Window::is_key_pressed(Key::Right))
       offset.x += 0.005f / pow(zoom, 4.0);
-    if (Window::is_key_pressed(GLFW_KEY_UP))
+    if (Window::is_key_pressed(Key::Up))
       offset.y += 0.005f / pow(zoom, 4.0);
-    if (Window::is_key_pressed(GLFW_KEY_DOWN))
+    if (Window::is_key_pressed(Key::Down))
       offset.y -= 0.005f / pow(zoom, 4.0);
 
     // Vary constant over time

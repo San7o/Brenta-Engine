@@ -47,11 +47,11 @@ void Renderer::flush()
 {
   for (auto& i : Renderer::render_queue)
   {
-    auto shader = Shader::get_shader(i.material.shader);
+    auto shader = Shader::get_shader(i.material.shader.get_name());
     if (!shader)
     {
       ERROR("Renderer::flush: error accessing shader named {}",
-            i.material.shader);
+            i.material.shader.get_name());
       continue;
     }
     
@@ -63,7 +63,7 @@ void Renderer::flush()
     shader->set_float("material.shininess", 32.0f); // TODO
     // shader->set_int("atlasIndex", 0); // TODO
 
-    i.model->draw(i.material.shader);
+    i.model->draw(i.material.shader.get_name());
   }
   return;
 }

@@ -75,15 +75,11 @@ int main()
   while (!Window::should_close())
   { 
     // Input
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Space))
       Window::close();
 
-    // Clear
-    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
-
-    // Draw
-    shader->use();
 
     // Make transformations
     glm::mat4 view = glm::mat4(1.0f); // Camera position
@@ -94,11 +90,11 @@ int main()
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, glm::vec3(0.0f, 0.0f, -10.0f));
 
-    shader->set_mat4("view", view);
+    shader->use();
+    shader->set_mat4("view",       view);
     shader->set_mat4("projection", projection);
-    shader->set_mat4("model", model);
+    shader->set_mat4("model",      model);
 
-    // Draw the model
     our_model.draw("default_shader");
 
     Window::poll_events();

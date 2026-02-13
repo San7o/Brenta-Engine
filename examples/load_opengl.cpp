@@ -50,13 +50,11 @@ int main()
   while (!Window::should_close())
   {
     // Input
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
     // Draw
-    // If you see a black window, it means that the OpenGL options are not
-    // set correctly.
-    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
 
     Window::poll_events();

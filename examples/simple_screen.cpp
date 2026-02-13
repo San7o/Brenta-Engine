@@ -32,7 +32,7 @@ int main()
   
   while (!Window::should_close())
   {
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
     Window::poll_events();

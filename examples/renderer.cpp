@@ -53,25 +53,30 @@ int main()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform()
                .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-               .rotate(glm::vec3(0.0, -90.0, 0.0))
+               .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                      glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(1.0)))
     .build();
 
-  Shader::Name s = "default_shader";
-  Shader::create(s, {
-      { Shader::Type::Vertex, default_shader_vs },
+  auto shader = Shader::create("default_shader", {
+      { Shader::Type::Vertex,   default_shader_vs },
       { Shader::Type::Fragment, default_shader_fs } });
+  if (!shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
 
   while (!Window::should_close())
   { 
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
-    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::set_color(Color(0.2f, 0.2f, 0.207f, 1.0f));
     Gl::clear();
     
     Renderer::begin_frame(cam);
-    Renderer::submit({&m, Material(s)});
+    Renderer::submit({&m, Material(*shader)});
     Renderer::end_frame();
     
     Window::poll_events();

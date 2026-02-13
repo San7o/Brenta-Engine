@@ -9,11 +9,21 @@
 
 using namespace brenta;
 
-Model::Model(const Config &conf)
+Model::Model(Config &&conf)
 {
   this->path          = conf.model_path;
   this->transform     = conf.transform;
-  this->init(conf.texture_props);
+  
+  if (conf.model_path != "")
+    this->load(conf.texture_props);
+
+  for (size_t i = 0; i < conf.meshes.size(); ++i)
+  {
+    this->meshes.push_back(std::move(conf.meshes[i]));
+
+    for (auto& t : conf.meshes[i].textures)
+      this->textures_loaded.push_back(t);
+  }
   
   DEBUG("model: initialized");
   return;
@@ -24,7 +34,7 @@ Model::~Model()
   return;
 }
 
-void Model::init(const Texture::Properties &props)
+void Model::load(const Texture::Properties &props)
 {
   // Load with assimp
   Assimp::Importer importer;
@@ -199,7 +209,20 @@ Model::Builder &Model::Builder::texture_props(const Texture::Properties &props)
   return *this;
 }
 
+Model::Builder &Model::Builder::mesh(Mesh &&mesh)
+{
+  this->conf.meshes.push_back(std::move(mesh));
+  return *this;
+}
+
+Model::Builder &Model::Builder::meshes(std::vector<Mesh> &&meshes)
+{
+  for (size_t i = 0; i < meshes.size(); ++i)
+    this->conf.meshes.push_back(std::move(meshes[i]));
+  return *this;
+}
+
 Model Model::Builder::build()
 {
-  return Model(this->conf);
+  return Model(std::move(this->conf));
 }

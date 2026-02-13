@@ -68,14 +68,14 @@ int main()
   
   while (!Window::should_close())
   {
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
     //
     // Press space to play the audio "guitar". If the stream is not
     // specified, it will be used the value "default"
     //
-    if (Window::is_key_pressed(GLFW_KEY_SPACE))
+    if (Window::is_key_pressed(Key::Space))
     {
       Audio::play(sound_guitar_id);
     }

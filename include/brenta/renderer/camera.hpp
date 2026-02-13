@@ -104,9 +104,9 @@ public:
     class Builder;
     
     glm::vec3 pos;
-    float     yaw;
-    float     pitch;
-    float     roll;
+    float yaw   = 0;
+    float pitch = 0;
+    float roll  = 0;
 
     Aircraft() = default;
     Aircraft(glm::vec3 pos)
@@ -164,7 +164,9 @@ public:
   Camera::Spherical build();
   
 private:
+  
   Camera::Spherical scam;
+
 };
 
 class Camera::Aircraft::Builder
@@ -181,33 +183,27 @@ public:
   Camera::Aircraft build();
   
 private:
+  
   Camera::Aircraft acam;
+  
 };
   
 struct Camera::Config
 {
-  std::variant<Spherical, Aircraft> pos;
-  ProjectionType  proj_type;
-  float           fov;
-  glm::vec3       world_up;
-  glm::vec3       front;
-  glm::vec3       up;
-  glm::vec3       right;
+  std::variant<Spherical, Aircraft> pos       = Camera::Aircraft(glm::vec3(0.0));
+  ProjectionType                    proj_type = Camera::ProjectionType::Perspective;
+  float                             fov       = 45.0f;
+  glm::vec3                         world_up  = glm::vec3(0.0f, 1.0f, 0.0f);
+  glm::vec3                         front     = glm::vec3(0.0f, 0.0f, -1.0f);
+  glm::vec3                         up        = glm::vec3(0.0f, 1.0f, 0.0f);
+  glm::vec3                         right     = glm::vec3(1.0f, 0.0f, 0.0f);
 };
   
 class Camera::Builder
 {
 private:
 
-  Camera::Config conf = {
-    Camera::Aircraft(glm::vec3(0.0)),
-    Camera::ProjectionType::Perspective,
-    45.0f,
-    glm::vec3(0.0f, 1.0f, 0.0f),
-    glm::vec3(0.0f, 0.0f, -1.0f),
-    glm::vec3(0.0f, 1.0f, 0.0f),
-    glm::vec3(1.0f, 0.0f, 0.0f),
-  };
+  Camera::Config conf = {};
 
 public:
   

@@ -14,10 +14,10 @@ class Material
 {
 public:
 
-  Shader::Name shader;
+  Shader shader;
 
   Material() = default;
-  Material(Shader::Name name) : shader(name) {}
+  Material(const Shader &shader) : shader(shader) {}
   
   // TODO
   

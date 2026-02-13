@@ -126,9 +126,9 @@ void Window::set_width_height(int width, int height)
   return;
 }
 
-bool Window::is_key_pressed(int key)
+bool Window::is_key_pressed(Key key)
 {
-  return glfwGetKey(Window::window_backend, key) == GLFW_PRESS;
+  return glfwGetKey(Window::window_backend, (int)key) == GLFW_PRESS;
 }
 
 Time Window::get_time()
@@ -154,6 +154,19 @@ int Window::get_width()
 int Window::get_height()
 {
   return Window::height;
+}
+
+void Window::update_dimensions()
+{
+  glfwGetWindowSize(Window::window_backend, &Window::width, &Window::height);
+  return;
+}
+
+void Window::update_dimensions(int width, int height)
+{
+  Window::width  = width;
+  Window::height = height;
+  return;
 }
 
 void Window::set_mouse_callback(GLFWcursorposfun callback)
@@ -264,11 +277,11 @@ void Window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
                                        [[maybe_unused]] int width,
                                        [[maybe_unused]] int height)
 {
-#ifndef BRENTA_USE_IMGUI
   glViewport(0, 0, width, height);
   Window::width = width;
   Window::height = height;
-#endif
+
+  DEBUG("Window: size changed {}x{}", width, height);
   return;
 }
 

@@ -13,7 +13,7 @@ using namespace brenta;
 // Static variables
 //
 
-std::unordered_map<Input::KeyId, Input::KeyboardCallback> Input::keyboard_callbacks;
+std::unordered_map<brenta::Key, Input::KeyboardCallback> Input::keyboard_callbacks;
 std::unordered_map<Input::MouseCallbackId, Input::MouseCallback>
   Input::mouse_callbacks;
 const std::string Input::subsystem_name = "input";
@@ -64,24 +64,24 @@ Input &Input::instance()
   return _input;
 }
 
-void Input::add_keyboard_callback(KeyId key, KeyboardCallback callback)
+void Input::add_keyboard_callback(Key key, KeyboardCallback callback)
 {
   Input::keyboard_callbacks[key] = callback;
   DEBUG("{}: aded callback for key: {}",
-       Input::subsystem_name, std::to_string(key));
+        Input::subsystem_name, (int) key);
   return;
 }
 
-void Input::remove_keyboard_callback(KeyId key)
+void Input::remove_keyboard_callback(Key key)
 {
   if (Input::keyboard_callbacks.find(key) == Input::keyboard_callbacks.end())
   {
-    ERROR("{}: no callback found for key: {}", Input::subsystem_name, key);
+    ERROR("{}: no callback found for key: {}", Input::subsystem_name, (int) key);
     return;
   }
 
   Input::keyboard_callbacks.erase(key);
-  DEBUG("{}: removed callback for key: {}", Input::subsystem_name, key);
+  DEBUG("{}: removed callback for key: {}", Input::subsystem_name, (int) key);
   return;
 }
 
@@ -92,9 +92,9 @@ void Input::key_callback([[maybe_unused]] GLFWwindow *window,
 {
   if (action == GLFW_PRESS)
   {
-    if (Input::keyboard_callbacks.find(key) != Input::keyboard_callbacks.end())
+    if (Input::keyboard_callbacks.find((Key) key) != Input::keyboard_callbacks.end())
     {
-      Input::keyboard_callbacks.at(key)();
+      Input::keyboard_callbacks.at((Key) key)();
     }
   }
   return;

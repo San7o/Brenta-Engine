@@ -16,13 +16,7 @@ using namespace brenta;
 //
 
 const std::string Gl::subsystem_name = "gl";
-const Gl::Config  Gl::default_config = {
-  false,
-  false,
-  false,
-  false,
-};
-Gl::Config Gl::init_config = default_config;
+Gl::Config Gl::init_config = {};
 bool       Gl::initialized = false;
 const GLboolean Gl::True = GL_TRUE;
 const GLboolean Gl::False = GL_FALSE;
@@ -156,9 +150,9 @@ void Gl::set_viewport(int x, int y, int width, int height)
   return;
 }
 
-void Gl::set_color(float r, float g, float b, float a)
+void Gl::set_color(const Color &color)
 {
-  glClearColor(r, g, b, a);
+  glClearColor(color.r, color.g, color.b, color.a);
   return;
 }
 

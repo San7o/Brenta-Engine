@@ -114,7 +114,7 @@ int main()
     fb.bind();
 #endif
     
-    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
 
     emitter.update(Window::get_time().get_delta());

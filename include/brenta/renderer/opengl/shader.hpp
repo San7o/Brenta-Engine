@@ -101,8 +101,8 @@ public:
   Shader()  = delete;
   Shader(Shader::Id id, Shader::Name name) : id(id), name(name) {}
   
-  Shader::Id        get_id();
-  Shader::Name      get_name();
+  Shader::Id        get_id() const;
+  Shader::Name      get_name() const;
   // Remember to call use() before setting uniforms and using this
   // shader
   bool              use();

@@ -113,21 +113,35 @@ void Mesh::draw(Shader::Name shader_name) const
 // Builder functions
 //
 
-Mesh::Builder &Mesh::Builder::vertices(std::vector<Vertex> vertices)
+Mesh::Builder &Mesh::Builder::vertices(std::vector<Vertex> &&vertices)
 {
   this->conf.vertices = vertices;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::indices(std::vector<unsigned int> indices)
+Mesh::Builder &Mesh::Builder::indices(std::vector<unsigned int> &&indices)
 {
   this->conf.indices = indices;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::textures(std::vector<std::shared_ptr<Texture>> textures)
+Mesh::Builder &Mesh::Builder::texture(std::shared_ptr<Texture> &&texture)
 {
-  this->conf.textures = std::move(textures);
+  this->conf.textures.push_back(std::move(texture));
+  return *this;
+}
+
+Mesh::Builder &Mesh::Builder::texture(Texture &&texture)
+{
+  std::shared_ptr<Texture> shared = std::make_shared<Texture>(std::move(texture));
+  this->conf.textures.push_back(std::move(shared));
+  return *this;
+}
+
+Mesh::Builder &Mesh::Builder::textures(std::vector<std::shared_ptr<Texture>> &&textures)
+{
+  for (auto t : textures)
+    this->conf.textures.push_back(std::move(t));
   return *this;
 }
 

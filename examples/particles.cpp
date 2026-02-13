@@ -83,10 +83,10 @@ int main()
   
   while (!Window::should_close())
   {
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
-    Gl::set_color(0.2f, 0.2f, 0.207f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
 
     emitter.update(Window::get_time().get_delta());

@@ -118,12 +118,12 @@ std::optional<Shader> Shader::get_shader(Shader::Name shader_name)
   return Shader(Shader::shaders.at(shader_name), shader_name);
 }
 
-Shader::Id Shader::get_id()
+Shader::Id Shader::get_id() const
 {
   return this->id;
 }
 
-Shader::Name Shader::get_name()
+Shader::Name Shader::get_name() const
 {
   return this->name;
 }

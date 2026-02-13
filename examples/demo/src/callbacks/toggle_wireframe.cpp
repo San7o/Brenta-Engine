@@ -24,5 +24,5 @@ void init_toggle_wireframe_callback()
     Gl::set_poligon_mode(!wireframe->enabled);
     wireframe->enabled = !wireframe->enabled;
   };
-  Input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
+  Input::add_keyboard_callback(Key::F, toggle_wireframe_callback);
 }

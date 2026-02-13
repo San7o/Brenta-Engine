@@ -13,6 +13,7 @@
 
 #include <brenta/subsystem.hpp>
 #include <brenta/time.hpp>
+#include <brenta/key.hpp>
 
 #include <string>
 
@@ -57,7 +58,7 @@ public:
   static int         get_width();
   static int         get_height();
   static bool        should_close();
-  static bool        is_key_pressed(int key);
+  static bool        is_key_pressed(Key key);
   static Time        get_time();
   static GLFWwindow *get_window();  
   static GLFWglproc  get_proc_address();
@@ -65,7 +66,7 @@ public:
   //
   // Setters
   //
-
+  
   static void set_mouse_callback(GLFWcursorposfun callback);
   static void set_size_callback(GLFWframebuffersizefun callback);
   static void set_mouse_pos_callback(GLFWcursorposfun callback);
@@ -83,6 +84,8 @@ public:
   static void swap_buffers();
   // Poll all pending events
   static void poll_events();
+  static void update_dimensions();
+  static void update_dimensions(int width, int height);
 
 private:
   

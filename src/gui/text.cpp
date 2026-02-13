@@ -22,12 +22,8 @@ Shader::Name      Text::shader_name;
 Vao               Text::vao;
 Buffer            Text::vbo;
 const std::string Text::subsystem_name = "text";
-Text::Config      Text::init_config = default_config;
+Text::Config      Text::init_config = {};
 std::map<char, Text::Character> Text::characters;
-const Text::Config Text::default_config = {
-  "examples/assets/fonts/arial.ttf",
-  48,
-};
 
 //
 // Subsystem interface

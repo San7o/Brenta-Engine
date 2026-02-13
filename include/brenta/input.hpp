@@ -6,6 +6,7 @@
 #pragma once
 
 #include <brenta/subsystem.hpp>
+#include <brenta/key.hpp>
 
 #include <GLFW/glfw3.h>
 #include <functional>
@@ -30,7 +31,6 @@ public:
 
   using MouseCallbackId  = std::string;
   using MouseCallback    = std::function<void(double, double)>;
-  using KeyId            = int;
   using KeyboardCallback = std::function<void()>;
   
   class Builder;
@@ -50,8 +50,8 @@ public:
   
   static Input &instance();
   
-  static void add_keyboard_callback(KeyId key, KeyboardCallback callback);
-  static void remove_keyboard_callback(KeyId key);
+  static void add_keyboard_callback(Key key, KeyboardCallback callback);
+  static void remove_keyboard_callback(Key key);
   
   static void
   add_mouse_callback(MouseCallbackId name,
@@ -61,7 +61,7 @@ public:
 
 private:
   
-  static std::unordered_map<KeyId, KeyboardCallback> keyboard_callbacks;
+  static std::unordered_map<brenta::Key, KeyboardCallback> keyboard_callbacks;
   static std::unordered_map<MouseCallbackId, MouseCallback> mouse_callbacks;
   static bool initialized;
 

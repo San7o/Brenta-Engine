@@ -16,7 +16,7 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
   auto camera_mouse_callback = [cam, mouse](double xpos, double ypos)
   {
     // Rotate the camera
-    if (Window::is_key_pressed(GLFW_KEY_LEFT_SHIFT))
+    if (Window::is_key_pressed(Key::LeftShift))
     {
       if (mouse->get_first())
       {
@@ -50,7 +50,7 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
       }
     }
     // translate the cam center
-    else if (Window::is_key_pressed(GLFW_KEY_LEFT_CONTROL))
+    else if (Window::is_key_pressed(Key::LeftControl))
     {
       if (mouse->get_first())
       {
@@ -90,7 +90,7 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
       }
     }
     // zoom the camera
-    else if (Window::is_key_pressed(GLFW_KEY_LEFT_ALT))
+    else if (Window::is_key_pressed(Key::LeftAlt))
     {
       if (mouse->get_first())
       {

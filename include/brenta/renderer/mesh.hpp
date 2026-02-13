@@ -44,7 +44,7 @@ public:
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
 
-  Mesh(Config&& conf);
+  Mesh(Config&& builder);
   
   constexpr Mesh(const Mesh&) = delete;
   constexpr Mesh& operator=(const Mesh&) = delete;
@@ -72,6 +72,12 @@ public:
   glm::vec3   position;
   glm::vec3   normal;
   glm::vec2   tex_coords;
+
+  Vertex() = default;
+  Vertex(glm::vec3 position)
+    : position(position) {}
+  Vertex(glm::vec3 position, glm::vec3 normal, glm::vec2 tex_coords)
+    : position(position), normal(normal), tex_coords(tex_coords) {}
   
 };
 
@@ -93,9 +99,11 @@ private:
   
 public:
   
-  Builder &vertices(std::vector<Vertex> vertices);
-  Builder &indices(std::vector<unsigned int> indices);
-  Builder &textures(std::vector<std::shared_ptr<Texture>> textures);
+  Builder &vertices(std::vector<Vertex> &&vertices);
+  Builder &indices(std::vector<unsigned int> &&indices);
+  Builder &texture(Texture &&texture);
+  Builder &texture(std::shared_ptr<Texture> &&texture);
+  Builder &textures(std::vector<std::shared_ptr<Texture>> &&textures);
   
   Mesh build();
 };
