@@ -27,12 +27,12 @@ int main()
   
   while (!Window::should_close())
   {
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
     
     // Update logic...
     // Draw...
-    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
 
     Window::poll_events();

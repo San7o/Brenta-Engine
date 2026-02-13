@@ -126,8 +126,6 @@ Public Types</h2></td></tr>
 <tr class="separator:a93ff5f28a2a16011db9b6407a75e7354"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad84ff94116e8a94ae16b991b1a32b0b8" id="r_ad84ff94116e8a94ae16b991b1a32b0b8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#ad84ff94116e8a94ae16b991b1a32b0b8">MouseCallback</a> = std::function&lt; void(double, double)&gt;</td></tr>
 <tr class="separator:ad84ff94116e8a94ae16b991b1a32b0b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8aa81cf0c74b523b19f0f39dda823756" id="r_a8aa81cf0c74b523b19f0f39dda823756"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a8aa81cf0c74b523b19f0f39dda823756">KeyId</a> = int</td></tr>
-<tr class="separator:a8aa81cf0c74b523b19f0f39dda823756"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c778642eb63a37d72742aa85fa7f0c6" id="r_a7c778642eb63a37d72742aa85fa7f0c6"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a7c778642eb63a37d72742aa85fa7f0c6">KeyboardCallback</a> = std::function&lt; void()&gt;</td></tr>
 <tr class="separator:a7c778642eb63a37d72742aa85fa7f0c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
@@ -151,10 +149,10 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ad29f119f2cb682ca928c70682f5f8ae1" id="r_ad29f119f2cb682ca928c70682f5f8ae1"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1Input.html">Input</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#ad29f119f2cb682ca928c70682f5f8ae1">instance</a> ()</td></tr>
 <tr class="separator:ad29f119f2cb682ca928c70682f5f8ae1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a95377d6851bfc3c06b569c7162212866" id="r_a95377d6851bfc3c06b569c7162212866"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a95377d6851bfc3c06b569c7162212866">add_keyboard_callback</a> (KeyId key, KeyboardCallback callback)</td></tr>
-<tr class="separator:a95377d6851bfc3c06b569c7162212866"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa01e1aafaaa80af2518a103e51ede0a4" id="r_aa01e1aafaaa80af2518a103e51ede0a4"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#aa01e1aafaaa80af2518a103e51ede0a4">remove_keyboard_callback</a> (KeyId key)</td></tr>
-<tr class="separator:aa01e1aafaaa80af2518a103e51ede0a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd9f56f97f57daf7d5212b0b1ea55420" id="r_abd9f56f97f57daf7d5212b0b1ea55420"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#abd9f56f97f57daf7d5212b0b1ea55420">add_keyboard_callback</a> (Key key, KeyboardCallback callback)</td></tr>
+<tr class="separator:abd9f56f97f57daf7d5212b0b1ea55420"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37b8deda7ac0207a131062e18af6ecc8" id="r_a37b8deda7ac0207a131062e18af6ecc8"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a37b8deda7ac0207a131062e18af6ecc8">remove_keyboard_callback</a> (Key key)</td></tr>
+<tr class="separator:a37b8deda7ac0207a131062e18af6ecc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abad4f04db20f04007a16fcfd4eba676c" id="r_abad4f04db20f04007a16fcfd4eba676c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#abad4f04db20f04007a16fcfd4eba676c">add_mouse_callback</a> (MouseCallbackId <a class="el" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">name</a>, std::function&lt; void(double, double)&gt; callback)</td></tr>
 <tr class="separator:abad4f04db20f04007a16fcfd4eba676c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42467a4da656e64c180a45aace3b1513" id="r_a42467a4da656e64c180a45aace3b1513"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a42467a4da656e64c180a45aace3b1513">remove_mouse_callback</a> (MouseCallbackId <a class="el" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">name</a>)</td></tr>
@@ -169,7 +167,7 @@ Static Public Attributes</h2></td></tr>
 <div class="textblock"><p><a class="el" href="classbrenta_1_1Input.html" title="Input subsystem.">Input</a> subsystem. </p>
 <p>This subsystem is used to add and remove callbacks for keyboard and mouse events. You can define your own callbacks and register them with the input subsystem. </p>
 
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00027">27</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00028">28</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a7c778642eb63a37d72742aa85fa7f0c6" name="a7c778642eb63a37d72742aa85fa7f0c6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7c778642eb63a37d72742aa85fa7f0c6">&#9670;&#160;</a></span>KeyboardCallback</h2>
@@ -187,22 +185,6 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8aa81cf0c74b523b19f0f39dda823756" name="a8aa81cf0c74b523b19f0f39dda823756"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8aa81cf0c74b523b19f0f39dda823756">&#9670;&#160;</a></span>KeyId</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using brenta::Input::KeyId =  int</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00033">33</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
-
-</div>
-</div>
 <a id="ad84ff94116e8a94ae16b991b1a32b0b8" name="ad84ff94116e8a94ae16b991b1a32b0b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad84ff94116e8a94ae16b991b1a32b0b8">&#9670;&#160;</a></span>MouseCallback</h2>
 
@@ -215,7 +197,7 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00032">32</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00033">33</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
 
 </div>
 </div>
@@ -231,13 +213,13 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00031">31</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00032">32</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a95377d6851bfc3c06b569c7162212866" name="a95377d6851bfc3c06b569c7162212866"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95377d6851bfc3c06b569c7162212866">&#9670;&#160;</a></span>add_keyboard_callback()</h2>
+<a id="abd9f56f97f57daf7d5212b0b1ea55420" name="abd9f56f97f57daf7d5212b0b1ea55420"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd9f56f97f57daf7d5212b0b1ea55420">&#9670;&#160;</a></span>add_keyboard_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -248,7 +230,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Input::add_keyboard_callback </td>
           <td>(</td>
-          <td class="paramtype">KeyId&#160;</td>
+          <td class="paramtype">Key&#160;</td>
           <td class="paramname"><em>key</em>, </td>
         </tr>
         <tr>
@@ -430,8 +412,8 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aa01e1aafaaa80af2518a103e51ede0a4" name="aa01e1aafaaa80af2518a103e51ede0a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa01e1aafaaa80af2518a103e51ede0a4">&#9670;&#160;</a></span>remove_keyboard_callback()</h2>
+<a id="a37b8deda7ac0207a131062e18af6ecc8" name="a37b8deda7ac0207a131062e18af6ecc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37b8deda7ac0207a131062e18af6ecc8">&#9670;&#160;</a></span>remove_keyboard_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -442,7 +424,7 @@ Static Public Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Input::remove_keyboard_callback </td>
           <td>(</td>
-          <td class="paramtype">KeyId&#160;</td>
+          <td class="paramtype">Key&#160;</td>
           <td class="paramname"><em>key</em></td><td>)</td>
           <td></td>
         </tr>

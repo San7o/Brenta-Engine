@@ -2,7 +2,8 @@ var hierarchy =
 [
     [ "brenta::Camera::Aircraft", "classbrenta_1_1Camera_1_1Aircraft.html", null ],
     [ "brenta::Buffer", "classbrenta_1_1Buffer.html", [
-      [ "brenta::FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ]
+      [ "brenta::FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
+      [ "brenta::Ubo", "classbrenta_1_1Ubo.html", null ]
     ] ],
     [ "brenta::Camera::Aircraft::Builder", "classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html", null ],
     [ "brenta::Camera::Builder", "classbrenta_1_1Camera_1_1Builder.html", null ],
@@ -20,8 +21,10 @@ var hierarchy =
       [ "brenta::Text::Builder", "classbrenta_1_1Text_1_1Builder.html", null ],
       [ "brenta::Window::Builder", "classbrenta_1_1Window_1_1Builder.html", null ]
     ] ],
+    [ "brenta::Texture::Builder", "classbrenta_1_1Texture_1_1Builder.html", null ],
     [ "brenta::Camera", "classbrenta_1_1Camera.html", null ],
     [ "brenta::Text::Character", "classbrenta_1_1Text_1_1Character.html", null ],
+    [ "brenta::Color", "classbrenta_1_1Color.html", null ],
     [ "brenta::Renderer::Command", "classbrenta_1_1Renderer_1_1Command.html", null ],
     [ "brenta::Camera::Config", "structbrenta_1_1Camera_1_1Config.html", null ],
     [ "brenta::Gl::Config", "structbrenta_1_1Gl_1_1Config.html", null ],
@@ -30,14 +33,19 @@ var hierarchy =
     [ "brenta::Model::Config", "structbrenta_1_1Model_1_1Config.html", null ],
     [ "brenta::ParticleEmitter::Config", "structbrenta_1_1ParticleEmitter_1_1Config.html", null ],
     [ "brenta::Text::Config", "classbrenta_1_1Text_1_1Config.html", null ],
+    [ "brenta::Texture::Config", "structbrenta_1_1Texture_1_1Config.html", null ],
     [ "brenta::Window::Config", "structbrenta_1_1Window_1_1Config.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],
     [ "brenta::Mesh", "classbrenta_1_1Mesh.html", null ],
     [ "brenta::Model", "classbrenta_1_1Model.html", null ],
     [ "brenta::Mouse", "classbrenta_1_1Mouse.html", null ],
+    [ "brenta::Shader::Object", "classbrenta_1_1Shader_1_1Object.html", null ],
     [ "brenta::ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", null ],
+    [ "ParticleSettings", "structParticleSettings.html", null ],
+    [ "brenta::Texture::Properties", "classbrenta_1_1Texture_1_1Properties.html", null ],
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
+    [ "brenta::Scene", "classbrenta_1_1Scene.html", null ],
     [ "brenta::Shader", "classbrenta_1_1Shader.html", null ],
     [ "brenta::Camera::Spherical", "classbrenta_1_1Camera_1_1Spherical.html", null ],
     [ "brenta::Subsystem", "classbrenta_1_1Subsystem.html", [

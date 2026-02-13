@@ -45,6 +45,7 @@ doxygen:
 	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxygen.html
 	cp -r utils/docs-images ${HTML_DIR}/images
 	cp -r utils/website/*.gif ${HTML_DIR}/images
+	cp -r docs/*.png ${HTML_DIR}
 
 $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	pandoc $< -o ${TMP_FILE} ${PANDOC_FLAGS}

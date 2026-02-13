@@ -92,58 +92,100 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Texture.html',''); init
 
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
   <div class="headertitle"><div class="title">brenta::Texture Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture_1_1Builder.html">Builder</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Texture_1_1Config.html">Config</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Properties</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
-<tr class="memitem:a40e4e6b8cbbf1e6fdac6718d74722c16" id="r_a40e4e6b8cbbf1e6fdac6718d74722c16"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <b>None</b>
+<tr class="memitem:a40e4e6b8cbbf1e6fdac6718d74722c16" id="r_a40e4e6b8cbbf1e6fdac6718d74722c16"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Type</b> { <b>None</b>
 , <b>Diffuse</b>
 , <b>Specular</b>
  }</td></tr>
 <tr class="separator:a40e4e6b8cbbf1e6fdac6718d74722c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91c2181de715b7f4c6d884b7226fcbd0" id="r_a91c2181de715b7f4c6d884b7226fcbd0"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Target</b> { <br />
+&#160;&#160;<b>Texture1D</b> = GL_TEXTURE_1D
+, <b>Texture2D</b> = GL_TEXTURE_2D
+, <b>Texture3D</b> = GL_TEXTURE_3D
+, <b>Texture1DArray</b> = GL_TEXTURE_1D_ARRAY
+, <br />
+&#160;&#160;<b>Texture2DArray</b> = GL_TEXTURE_2D_ARRAY
+, <b>TextureRectangle</b> = GL_TEXTURE_RECTANGLE
+, <b>TextureCubeMap</b> = GL_TEXTURE_CUBE_MAP
+, <b>TextureCubeMapArray</b> = GL_TEXTURE_CUBE_MAP_ARRAY
+, <br />
+&#160;&#160;<b>TextureBuffer</b> = GL_TEXTURE_BUFFER
+, <b>Texture2DMultisample</b> = GL_TEXTURE_2D_MULTISAMPLE
+, <b>Texture2DMultisampleArray</b> = GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+<br />
+ }</td></tr>
+<tr class="separator:a91c2181de715b7f4c6d884b7226fcbd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e859e984a59627634312863d81fa401" id="r_a5e859e984a59627634312863d81fa401"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Wrapping</b> { <b>Repeat</b> = GL_REPEAT
+, <b>MirroredRepeat</b> = GL_MIRRORED_REPEAT
+, <b>ClampToEdge</b> = GL_CLAMP_TO_EDGE
+, <b>ClampToBorder</b> = GL_CLAMP_TO_BORDER
+ }</td></tr>
+<tr class="separator:a5e859e984a59627634312863d81fa401"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a033bbb55b63460b2f519ee3874836036" id="r_a033bbb55b63460b2f519ee3874836036"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Filtering</b> { <br />
+&#160;&#160;<b>Nearest</b> = GL_NEAREST
+, <b>Linear</b> = GL_LINEAR
+, <b>NearestMipmapNearest</b> = GL_NEAREST_MIPMAP_NEAREST
+, <b>NearestMipmapLinear</b> = GL_NEAREST_MIPMAP_LINEAR
+, <br />
+&#160;&#160;<b>LinearMipmapNearest</b> = GL_LINEAR_MIPMAP_NEAREST
+, <b>LinearMipmapLinear</b> = GL_LINEAR_MIPMAP_LINEAR
+<br />
+ }</td></tr>
+<tr class="separator:a033bbb55b63460b2f519ee3874836036"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a111eb3c02d0c652036640f570669ce31" id="r_a111eb3c02d0c652036640f570669ce31"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a111eb3c02d0c652036640f570669ce31">Id</a> = unsigned int</td></tr>
 <tr class="separator:a111eb3c02d0c652036640f570669ce31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a26beec212a5a4833e171fff7c8a77f51" id="r_a26beec212a5a4833e171fff7c8a77f51"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a26beec212a5a4833e171fff7c8a77f51">Texture</a> (const std::filesystem::path &amp;path, bool flip=true, Texture::Type type=Texture::Type::None)</td></tr>
-<tr class="separator:a26beec212a5a4833e171fff7c8a77f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad043f775941ae49af97c051fd3faf182" id="r_ad043f775941ae49af97c051fd3faf182"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#ad043f775941ae49af97c051fd3faf182">Texture</a> (const <a class="el" href="structbrenta_1_1Texture_1_1Config.html">Config</a> &amp;conf)</td></tr>
+<tr class="separator:ad043f775941ae49af97c051fd3faf182"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a7982d3c87a8e688a4dd21573514f34" id="r_a8a7982d3c87a8e688a4dd21573514f34"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a8a7982d3c87a8e688a4dd21573514f34">Texture</a> (<a class="el" href="classbrenta_1_1Texture.html">Texture</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:a8a7982d3c87a8e688a4dd21573514f34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a94e497c2727c1ada434160d08522d017" id="r_a94e497c2727c1ada434160d08522d017"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classbrenta_1_1Texture.html">Texture</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a94e497c2727c1ada434160d08522d017">operator=</a> (<a class="el" href="classbrenta_1_1Texture.html">Texture</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:a94e497c2727c1ada434160d08522d017"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b4958ff57d7fd3c1a38664ae59e0c96" id="r_a6b4958ff57d7fd3c1a38664ae59e0c96"><td class="memItemLeft" align="right" valign="top">Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a6b4958ff57d7fd3c1a38664ae59e0c96">get_id</a> () const</td></tr>
-<tr class="separator:a6b4958ff57d7fd3c1a38664ae59e0c96"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aca2b171387c9167eb244a9a997303c5a" id="r_aca2b171387c9167eb244a9a997303c5a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aca2b171387c9167eb244a9a997303c5a">bind</a> (GLenum target, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mpmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</td></tr>
-<tr class="separator:aca2b171387c9167eb244a9a997303c5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9213076e25700afd95725d40eec809b6" id="r_a9213076e25700afd95725d40eec809b6"><td class="memItemLeft" align="right" valign="top">Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a9213076e25700afd95725d40eec809b6">get_id</a> () const</td></tr>
+<tr class="separator:a9213076e25700afd95725d40eec809b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae92880dc68cf60ed3aa6800779b943a" id="r_aae92880dc68cf60ed3aa6800779b943a"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aae92880dc68cf60ed3aa6800779b943a">get_path</a> () const</td></tr>
+<tr class="separator:aae92880dc68cf60ed3aa6800779b943a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a70a558944f89e72baee65b33ce4eea00" id="r_a70a558944f89e72baee65b33ce4eea00"><td class="memItemLeft" align="right" valign="top">Texture::Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a70a558944f89e72baee65b33ce4eea00">get_type</a> () const</td></tr>
+<tr class="separator:a70a558944f89e72baee65b33ce4eea00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d34e542e4ecb4e40136fabd08325b8e" id="r_a2d34e542e4ecb4e40136fabd08325b8e"><td class="memItemLeft" align="right" valign="top">Texture::Target&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a2d34e542e4ecb4e40136fabd08325b8e">get_target</a> () const</td></tr>
+<tr class="separator:a2d34e542e4ecb4e40136fabd08325b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb1e289365897481ee7778a7844b6ab" id="r_aedb1e289365897481ee7778a7844b6ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aedb1e289365897481ee7778a7844b6ab">get_properties</a> ()</td></tr>
+<tr class="separator:aedb1e289365897481ee7778a7844b6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3840dc7429982ffaddeafc8d62345b5d" id="r_a3840dc7429982ffaddeafc8d62345b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a3840dc7429982ffaddeafc8d62345b5d">bind</a> ()</td></tr>
+<tr class="separator:a3840dc7429982ffaddeafc8d62345b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a1573029ea34075a0089bcfda8b278e10" id="r_a1573029ea34075a0089bcfda8b278e10"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a1573029ea34075a0089bcfda8b278e10">active_texture</a> (GLenum texture)</td></tr>
-<tr class="separator:a1573029ea34075a0089bcfda8b278e10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae85f9cf9bce8d83505c6a48e6540990f" id="r_ae85f9cf9bce8d83505c6a48e6540990f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#ae85f9cf9bce8d83505c6a48e6540990f">active_texture</a> (int texture)</td></tr>
+<tr class="separator:ae85f9cf9bce8d83505c6a48e6540990f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4379e30ca37c7c77c96f2a3ccc40c25" id="r_ad4379e30ca37c7c77c96f2a3ccc40c25"><td class="memItemLeft" align="right" valign="top">static Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#ad4379e30ca37c7c77c96f2a3ccc40c25">load</a> (const std::filesystem::path &amp;path, bool flip=true)</td></tr>
 <tr class="separator:ad4379e30ca37c7c77c96f2a3ccc40c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2f3124d6a9fe9baeab44d8589dbb1474" id="r_a2f3124d6a9fe9baeab44d8589dbb1474"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a2f3124d6a9fe9baeab44d8589dbb1474">bind_id</a> (GLenum target, Texture::Id id, GLint wrapping=GL_REPEAT, GLint filtering_min=GL_NEAREST, GLint filtering_mag=GL_NEAREST, GLboolean has_mipmap=GL_TRUE, GLint mipmap_min=GL_LINEAR_MIPMAP_LINEAR, GLint mipmap_mag=GL_LINEAR)</td></tr>
-<tr class="separator:a2f3124d6a9fe9baeab44d8589dbb1474"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:a094642248b262b7568cab678c029e631" id="r_a094642248b262b7568cab678c029e631"><td class="memItemLeft" align="right" valign="top">Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a094642248b262b7568cab678c029e631">id</a></td></tr>
-<tr class="separator:a094642248b262b7568cab678c029e631"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65db3694bc36d602bb174e7ae0538fc6" id="r_a65db3694bc36d602bb174e7ae0538fc6"><td class="memItemLeft" align="right" valign="top">Texture::Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a65db3694bc36d602bb174e7ae0538fc6">type</a></td></tr>
-<tr class="separator:a65db3694bc36d602bb174e7ae0538fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:affdf5c1638c8fa2d25bb8234f0dc2090" id="r_affdf5c1638c8fa2d25bb8234f0dc2090"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#affdf5c1638c8fa2d25bb8234f0dc2090">path</a></td></tr>
-<tr class="separator:affdf5c1638c8fa2d25bb8234f0dc2090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a67a308d43418e22c252b36caa01625df" id="r_a67a308d43418e22c252b36caa01625df"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a67a308d43418e22c252b36caa01625df">bind_id</a> (Texture::Target target, Texture::Id id, const <a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;properties=<a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>())</td></tr>
+<tr class="separator:a67a308d43418e22c252b36caa01625df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00016">16</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00030">30</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a111eb3c02d0c652036640f570669ce31" name="a111eb3c02d0c652036640f570669ce31"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a111eb3c02d0c652036640f570669ce31">&#9670;&#160;</a></span>Id</h2>
@@ -157,32 +199,72 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00020">20</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00034">34</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a033bbb55b63460b2f519ee3874836036" name="a033bbb55b63460b2f519ee3874836036"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a033bbb55b63460b2f519ee3874836036">&#9670;&#160;</a></span>Filtering</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Texture::Filtering</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00073">73</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a91c2181de715b7f4c6d884b7226fcbd0" name="a91c2181de715b7f4c6d884b7226fcbd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91c2181de715b7f4c6d884b7226fcbd0">&#9670;&#160;</a></span>Target</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Texture::Target</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00043">43</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a40e4e6b8cbbf1e6fdac6718d74722c16" name="a40e4e6b8cbbf1e6fdac6718d74722c16"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a40e4e6b8cbbf1e6fdac6718d74722c16">&#9670;&#160;</a></span>Type</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">enum class brenta::Texture::Type</td>
+          <td class="memname">enum brenta::Texture::Type</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00022">22</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00036">36</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5e859e984a59627634312863d81fa401" name="a5e859e984a59627634312863d81fa401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e859e984a59627634312863d81fa401">&#9670;&#160;</a></span>Wrapping</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Texture::Wrapping</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00058">58</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
@@ -210,12 +292,12 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00044">44</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00117">117</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a26beec212a5a4833e171fff7c8a77f51" name="a26beec212a5a4833e171fff7c8a77f51"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26beec212a5a4833e171fff7c8a77f51">&#9670;&#160;</a></span>Texture() <span class="overload">[2/3]</span></h2>
+<a id="ad043f775941ae49af97c051fd3faf182" name="ad043f775941ae49af97c051fd3faf182"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad043f775941ae49af97c051fd3faf182">&#9670;&#160;</a></span>Texture() <span class="overload">[2/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -223,25 +305,9 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">Texture::Texture </td>
           <td>(</td>
-          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
-          <td class="paramname"><em>path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">const <a class="el" href="structbrenta_1_1Texture_1_1Config.html">Config</a> &amp;&#160;</td>
+          <td class="paramname"><em>conf</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>flip</em> = <code>true</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Texture::Type&#160;</td>
-          <td class="paramname"><em>type</em> = <code>Texture::Type::None</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -274,7 +340,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00048">48</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00120">120</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
@@ -298,8 +364,8 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a1573029ea34075a0089bcfda8b278e10" name="a1573029ea34075a0089bcfda8b278e10"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1573029ea34075a0089bcfda8b278e10">&#9670;&#160;</a></span>active_texture()</h2>
+<a id="ae85f9cf9bce8d83505c6a48e6540990f" name="ae85f9cf9bce8d83505c6a48e6540990f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae85f9cf9bce8d83505c6a48e6540990f">&#9670;&#160;</a></span>active_texture()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -310,7 +376,7 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Texture::active_texture </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>texture</em></td><td>)</td>
           <td></td>
         </tr>
@@ -322,12 +388,12 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00045">45</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00066">66</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aca2b171387c9167eb244a9a997303c5a" name="aca2b171387c9167eb244a9a997303c5a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aca2b171387c9167eb244a9a997303c5a">&#9670;&#160;</a></span>bind()</h2>
+<a id="a3840dc7429982ffaddeafc8d62345b5d" name="a3840dc7429982ffaddeafc8d62345b5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3840dc7429982ffaddeafc8d62345b5d">&#9670;&#160;</a></span>bind()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -335,59 +401,18 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Texture::bind </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
-          <td class="paramname"><em>target</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>wrapping</em> = <code>GL_REPEAT</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>filtering_min</em> = <code>GL_NEAREST</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>filtering_mag</em> = <code>GL_NEAREST</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLboolean&#160;</td>
-          <td class="paramname"><em>has_mpmap</em> = <code>GL_TRUE</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>mipmap_min</em> = <code>GL_LINEAR_MIPMAP_LINEAR</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>mipmap_mag</em> = <code>GL_LINEAR</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00072">72</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00116">116</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a2f3124d6a9fe9baeab44d8589dbb1474" name="a2f3124d6a9fe9baeab44d8589dbb1474"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2f3124d6a9fe9baeab44d8589dbb1474">&#9670;&#160;</a></span>bind_id()</h2>
+<a id="a67a308d43418e22c252b36caa01625df" name="a67a308d43418e22c252b36caa01625df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67a308d43418e22c252b36caa01625df">&#9670;&#160;</a></span>bind_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -398,7 +423,7 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Texture::bind_id </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramtype">Texture::Target&#160;</td>
           <td class="paramname"><em>target</em>, </td>
         </tr>
         <tr>
@@ -410,38 +435,8 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>wrapping</em> = <code>GL_REPEAT</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>filtering_min</em> = <code>GL_NEAREST</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>filtering_mag</em> = <code>GL_NEAREST</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLboolean&#160;</td>
-          <td class="paramname"><em>has_mipmap</em> = <code>GL_TRUE</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>mipmap_min</em> = <code>GL_LINEAR_MIPMAP_LINEAR</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLint&#160;</td>
-          <td class="paramname"><em>mipmap_mag</em> = <code>GL_LINEAR</code>&#160;</td>
+          <td class="paramtype">const <a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties</em> = <code><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>()</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -456,18 +451,18 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00060">60</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00092">92</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6b4958ff57d7fd3c1a38664ae59e0c96" name="a6b4958ff57d7fd3c1a38664ae59e0c96"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b4958ff57d7fd3c1a38664ae59e0c96">&#9670;&#160;</a></span>get_id()</h2>
+<a id="a9213076e25700afd95725d40eec809b6" name="a9213076e25700afd95725d40eec809b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9213076e25700afd95725d40eec809b6">&#9670;&#160;</a></span>get_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int Texture::get_id </td>
+          <td class="memname">Texture::Id Texture::get_id </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -476,6 +471,82 @@ Data Fields</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00040">40</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aae92880dc68cf60ed3aa6800779b943a" name="aae92880dc68cf60ed3aa6800779b943a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae92880dc68cf60ed3aa6800779b943a">&#9670;&#160;</a></span>get_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Texture::get_path </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00045">45</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aedb1e289365897481ee7778a7844b6ab" name="aedb1e289365897481ee7778a7844b6ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb1e289365897481ee7778a7844b6ab">&#9670;&#160;</a></span>get_properties()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp; Texture::get_properties </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00061">61</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2d34e542e4ecb4e40136fabd08325b8e" name="a2d34e542e4ecb4e40136fabd08325b8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2d34e542e4ecb4e40136fabd08325b8e">&#9670;&#160;</a></span>get_target()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture::Target Texture::get_target </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00055">55</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a70a558944f89e72baee65b33ce4eea00" name="a70a558944f89e72baee65b33ce4eea00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a70a558944f89e72baee65b33ce4eea00">&#9670;&#160;</a></span>get_type()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture::Type Texture::get_type </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00050">50</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -513,7 +584,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00051">51</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00073">73</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -541,56 +612,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00056">56</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Field Documentation</h2>
-<a id="a094642248b262b7568cab678c029e631" name="a094642248b262b7568cab678c029e631"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a094642248b262b7568cab678c029e631">&#9670;&#160;</a></span>id</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Texture::Id brenta::Texture::id</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00028">28</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
-
-</div>
-</div>
-<a id="affdf5c1638c8fa2d25bb8234f0dc2090" name="affdf5c1638c8fa2d25bb8234f0dc2090"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#affdf5c1638c8fa2d25bb8234f0dc2090">&#9670;&#160;</a></span>path</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string brenta::Texture::path</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00030">30</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a65db3694bc36d602bb174e7ae0538fc6" name="a65db3694bc36d602bb174e7ae0538fc6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65db3694bc36d602bb174e7ae0538fc6">&#9670;&#160;</a></span>type</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Texture::Type brenta::Texture::type</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00029">29</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00130">130</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>

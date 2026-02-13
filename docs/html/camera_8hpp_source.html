@@ -187,9 +187,9 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>    <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Builder</a>;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>    </div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>    glm::vec3 pos;</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">float</span>     yaw;</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">float</span>     pitch;</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">float</span>     roll;</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>    <span class="keywordtype">float</span> yaw   = 0;</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>    <span class="keywordtype">float</span> pitch = 0;</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>    <span class="keywordtype">float</span> roll  = 0;</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span> </div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>    <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Aircraft</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>    <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Aircraft</a>(glm::vec3 pos)</div>
@@ -250,80 +250,76 @@ $(document).ready(function(){initNavTree('camera_8hpp_source.html',''); initResi
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Spherical.html">Camera::Spherical</a> build();</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  </div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Spherical.html">Camera::Spherical</a> scam;</div>
-<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>};</div>
-</div>
+<div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span>  </div>
+<div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Spherical.html">Camera::Spherical</a> scam;</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
-<div class="foldopen" id="foldopen00170" data-start="{" data-end="};">
-<div class="line"><a id="l00170" name="l00170"></a><span class="lineno"><a class="line" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">  170</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a></div>
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>{</div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span> </div>
-<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>};</div>
+</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
+<div class="foldopen" id="foldopen00172" data-start="{" data-end="};">
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno"><a class="line" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">  172</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a></div>
+<div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>{</div>
+<div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; pos(glm::vec3 pos);</div>
-<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; yaw(<span class="keywordtype">float</span> yaw);</div>
-<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; pitch(<span class="keywordtype">float</span> pitch);</div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; roll(<span class="keywordtype">float</span> roll);</div>
-<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
-<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a> build();</div>
-<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>  </div>
-<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a> acam;</div>
-<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span>};</div>
-</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span> </div>
+<div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; pos(glm::vec3 pos);</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; yaw(<span class="keywordtype">float</span> yaw);</div>
+<div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; pitch(<span class="keywordtype">float</span> pitch);</div>
+<div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">Camera::Aircraft::Builder</a>&amp; roll(<span class="keywordtype">float</span> roll);</div>
+<div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span> </div>
+<div class="line"><a id="l00183" name="l00183"></a><span class="lineno">  183</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a> build();</div>
+<div class="line"><a id="l00184" name="l00184"></a><span class="lineno">  184</span>  </div>
+<div class="line"><a id="l00185" name="l00185"></a><span class="lineno">  185</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00186" name="l00186"></a><span class="lineno">  186</span>  </div>
-<div class="foldopen" id="foldopen00187" data-start="{" data-end="};">
-<div class="line"><a id="l00187" name="l00187"></a><span class="lineno"><a class="line" href="structbrenta_1_1Camera_1_1Config.html">  187</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Camera_1_1Config.html">Camera::Config</a></div>
-<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>{</div>
-<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>  std::variant&lt;Spherical, Aircraft&gt; pos;</div>
-<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  ProjectionType  proj_type;</div>
-<div class="line"><a id="l00191" name="l00191"></a><span class="lineno">  191</span>  <span class="keywordtype">float</span>           fov;</div>
-<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>  glm::vec3       world_up;</div>
-<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  glm::vec3       front;</div>
-<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  glm::vec3       up;</div>
-<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  glm::vec3       right;</div>
-<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>};</div>
+<div class="line"><a id="l00187" name="l00187"></a><span class="lineno">  187</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a> acam;</div>
+<div class="line"><a id="l00188" name="l00188"></a><span class="lineno">  188</span>  </div>
+<div class="line"><a id="l00189" name="l00189"></a><span class="lineno">  189</span>};</div>
 </div>
-<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  </div>
-<div class="foldopen" id="foldopen00198" data-start="{" data-end="};">
-<div class="line"><a id="l00198" name="l00198"></a><span class="lineno"><a class="line" href="classbrenta_1_1Camera_1_1Builder.html">  198</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Camera::Builder</a></div>
-<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>{</div>
-<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span> </div>
-<div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>  <a class="code hl_struct" href="structbrenta_1_1Camera_1_1Config.html">Camera::Config</a> conf = {</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a>(glm::vec3(0.0)),</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    Camera::ProjectionType::Perspective,</div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    45.0f,</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    glm::vec3(0.0f, 1.0f, 0.0f),</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    glm::vec3(0.0f, 0.0f, -1.0f),</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    glm::vec3(0.0f, 1.0f, 0.0f),</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    glm::vec3(1.0f, 0.0f, 0.0f),</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  };</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  </div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;projection_type(ProjectionType proj_type);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;position(std::variant&lt;Spherical, Aircraft&gt; pos);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;fov(<span class="keywordtype">float</span> fov);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;world_up(glm::vec3 worldUp);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;front(glm::vec3 front);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;up(glm::vec3 up);</div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;right(glm::vec3 right);</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span> </div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  <a class="code hl_class" href="classbrenta_1_1Camera.html">Camera</a> build();</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>};</div>
+<div class="line"><a id="l00190" name="l00190"></a><span class="lineno">  190</span>  </div>
+<div class="foldopen" id="foldopen00191" data-start="{" data-end="};">
+<div class="line"><a id="l00191" name="l00191"></a><span class="lineno"><a class="line" href="structbrenta_1_1Camera_1_1Config.html">  191</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Camera_1_1Config.html">Camera::Config</a></div>
+<div class="line"><a id="l00192" name="l00192"></a><span class="lineno">  192</span>{</div>
+<div class="line"><a id="l00193" name="l00193"></a><span class="lineno">  193</span>  std::variant&lt;Spherical, Aircraft&gt; pos       = <a class="code hl_class" href="classbrenta_1_1Camera_1_1Aircraft.html">Camera::Aircraft</a>(glm::vec3(0.0));</div>
+<div class="line"><a id="l00194" name="l00194"></a><span class="lineno">  194</span>  ProjectionType                    proj_type = Camera::ProjectionType::Perspective;</div>
+<div class="line"><a id="l00195" name="l00195"></a><span class="lineno">  195</span>  <span class="keywordtype">float</span>                             fov       = 45.0f;</div>
+<div class="line"><a id="l00196" name="l00196"></a><span class="lineno">  196</span>  glm::vec3                         world_up  = glm::vec3(0.0f, 1.0f, 0.0f);</div>
+<div class="line"><a id="l00197" name="l00197"></a><span class="lineno">  197</span>  glm::vec3                         front     = glm::vec3(0.0f, 0.0f, -1.0f);</div>
+<div class="line"><a id="l00198" name="l00198"></a><span class="lineno">  198</span>  glm::vec3                         up        = glm::vec3(0.0f, 1.0f, 0.0f);</div>
+<div class="line"><a id="l00199" name="l00199"></a><span class="lineno">  199</span>  glm::vec3                         right     = glm::vec3(1.0f, 0.0f, 0.0f);</div>
+<div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span>};</div>
 </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>} <span class="comment">// namespace brenta</span></div>
-<div class="ttc" id="aclassbrenta_1_1Camera_1_1Aircraft_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">brenta::Camera::Aircraft::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00170">camera.hpp:171</a></div></div>
+<div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  </div>
+<div class="foldopen" id="foldopen00202" data-start="{" data-end="};">
+<div class="line"><a id="l00202" name="l00202"></a><span class="lineno"><a class="line" href="classbrenta_1_1Camera_1_1Builder.html">  202</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Camera::Builder</a></div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>{</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  <a class="code hl_struct" href="structbrenta_1_1Camera_1_1Config.html">Camera::Config</a> conf = {};</div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span> </div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>  </div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;projection_type(ProjectionType proj_type);</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;position(std::variant&lt;Spherical, Aircraft&gt; pos);</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;fov(<span class="keywordtype">float</span> fov);</div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;world_up(glm::vec3 worldUp);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;front(glm::vec3 front);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;up(glm::vec3 up);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>  <a class="code hl_class" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;right(glm::vec3 right);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span> </div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>  <a class="code hl_class" href="classbrenta_1_1Camera.html">Camera</a> build();</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>};</div>
+</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>} <span class="comment">// namespace brenta</span></div>
+<div class="ttc" id="aclassbrenta_1_1Camera_1_1Aircraft_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html">brenta::Camera::Aircraft::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00172">camera.hpp:173</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Camera_1_1Aircraft_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Aircraft.html">brenta::Camera::Aircraft</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00100">camera.hpp:101</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Camera_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Builder.html">brenta::Camera::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00198">camera.hpp:199</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Camera_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Builder.html">brenta::Camera::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00202">camera.hpp:203</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Camera_1_1Spherical_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Spherical_1_1Builder.html">brenta::Camera::Spherical::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00153">camera.hpp:154</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Camera_1_1Spherical_html"><div class="ttname"><a href="classbrenta_1_1Camera_1_1Spherical.html">brenta::Camera::Spherical</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00083">camera.hpp:84</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Camera_html"><div class="ttname"><a href="classbrenta_1_1Camera.html">brenta::Camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00041">camera.hpp:42</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Transform_html"><div class="ttname"><a href="classbrenta_1_1Transform.html">brenta::Transform</a></div><div class="ttdef"><b>Definition</b> <a href="transform_8hpp_source.html#l00014">transform.hpp:15</a></div></div>
-<div class="ttc" id="astructbrenta_1_1Camera_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Camera_1_1Config.html">brenta::Camera::Config</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00187">camera.hpp:188</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Camera_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Camera_1_1Config.html">brenta::Camera::Config</a></div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00191">camera.hpp:192</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

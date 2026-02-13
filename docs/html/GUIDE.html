@@ -7,6 +7,7 @@
   <body>
     <div class="topnav">
       <a href="./index.html">Brenta Engine</a>
+      <a href="./DESIGN.html">Design</a>      
       <a href="./BUILD.html">Build</a>
       <a href="./GUIDE.html">Guide</a>
       <a href="./CONTRIBUTING.html">Contributing</a>
@@ -43,12 +44,12 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> <span class="op">(!</span>Window<span class="op">::</span>should_close<span class="op">())</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="op">{</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Handle input...</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>Window<span class="op">::</span>is_key_pressed<span class="op">(</span>GLFW_KEY_ESCAPE<span class="op">))</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>Window<span class="op">::</span>is_key_pressed<span class="op">(</span>Key<span class="op">::</span>Escape<span class="op">))</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>      Window<span class="op">::</span>close<span class="op">();</span></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Update logic...</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Draw...</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span>Color<span class="op">::</span>grey<span class="op">());</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>clear<span class="op">();</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    Window<span class="op">::</span>poll_events<span class="op">();</span></span>
@@ -72,7 +73,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#c
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    wireframe<span class="op">-&gt;</span>enabled <span class="op">=</span> <span class="op">!</span>wireframe<span class="op">-&gt;</span>enabled<span class="op">;</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Input<span class="op">::</span>add_keyboard_callback<span class="op">(</span>GLFW_KEY_F<span class="op">,</span> toggle_wireframe_callback<span class="op">);</span></span></code></pre></div>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>Input<span class="op">::</span>add_keyboard_callback<span class="op">(</span>Key<span class="op">::</span>F<span class="op">,</span> toggle_wireframe_callback<span class="op">);</span></span></code></pre></div>
 <p>In this example we register a keyboard callback that toggles the
 wireframe mode when the <code>F</code> key is pressed. You can use
 <code>Brenta::Input::AddMousePosCallback</code> to register a mouse
@@ -188,7 +189,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>Window<span class="op">::</span>should_Close<span class="op">())</span> <span class="op">{</span></span>
 <span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span><span class="fl">0.2</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">0.3</span><span class="bu">f</span><span class="op">,</span> <span class="fl">1.0</span><span class="bu">f</span><span class="op">);</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span>Color<span class="op">::</span>gray<span class="op">());</span></span>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>clear<span class="op">();</span></span>
 <span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    world<span class="op">::</span>tick<span class="op">();</span></span>

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_0',['update',['../classbrenta_1_1ParticleEmitter.html#a732de9faadc86db0fa69dc81f90eb3a8',1,'brenta::ParticleEmitter']]]
+  ['ubo_0',['Ubo',['../classbrenta_1_1Ubo.html',1,'brenta']]]
 ];

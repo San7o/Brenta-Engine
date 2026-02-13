@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="topnav">
+      <a href="./index.html">Brenta Engine</a>
+      <a href="./DESIGN.html">Design</a>      
+      <a href="./BUILD.html">Build</a>
+      <a href="./GUIDE.html">Guide</a>
+      <a href="./CONTRIBUTING.html">Contributing</a>
+      <a href="./annotated.html">Data structures</a>
+      <a href="./files.html">Files</a>
+      <a href="https://github.com/San7o/Brenta-Engine">Github</a>
+    </div>
+<h1 id="design">Design</h1>
+<p>THIS DOCUMENT IS JUST A SKETCH AND NEEDS TO BE UPDATED</p>
+<p>Game engines are complex pieces of software. They provide some way to
+define logic, render graphics, and access system resources like audio
+and input, as well as providing a corss-platform interface.</p>
+<p>Brenta engine is divided in subsystems, each one has different
+responsibilities and provides certain abstractions. The most important
+subsystems are the rendering, which manages things like models and
+textures, and the entity component system which manages logic.</p>
+<h2 id="renderer">Renderer</h2>
+<p>Here is an high-level overview of the most important objects in the
+renderer sunsystem:</p>
+<figure>
+<img src="./brenta-renderer.png" alt="renderer-design" />
+<figcaption aria-hidden="true">renderer-design</figcaption>
+</figure>
+<p>You will use these abstractions to represent the graphical scene.</p>
+<h2 id="ecs">Ecs</h2>
+<figure>
+<img
+src="https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23"
+alt="image" />
+<figcaption aria-hidden="true">image</figcaption>
+</figure>
+
+<footer>
+  
+<hr>
+
+  <p>Author: Giovanni Santini <a href="mailto:giovanni.santini@proton.me">giovanni.santini@proton.me</a>
+  </p>
+<p>Code: GitHub <a href="https://github.com/San7o/Brenta-Engine/tree/main">@San7o/Brenta-Engine</a>
+<p>License: MIT <a href="https://github.com/San7o/Brenta-Engine/blob/main/LICENSE">LICENSE</a>
+  </p>
+</footer>
+
+</body>
+./>

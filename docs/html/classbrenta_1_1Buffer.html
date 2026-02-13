@@ -92,30 +92,60 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Buffer.html',''); initR
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Data Fields</a>  </div>
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::Buffer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classbrenta_1_1Buffer.html" title="Buffer wrapper around OpenGL buffer objects.">Buffer</a> wrapper around OpenGL buffer objects.  
- <a href="classbrenta_1_1Buffer.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for brenta::Buffer:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classbrenta_1_1Buffer.png" usemap="#brenta::Buffer_map" alt=""/>
   <map id="brenta::Buffer_map" name="brenta::Buffer_map">
-<area href="classbrenta_1_1FrameBuffer.html" title="FrameBuffer class." alt="brenta::FrameBuffer" shape="rect" coords="0,56,125,80"/>
+<area href="classbrenta_1_1FrameBuffer.html" alt="brenta::FrameBuffer" shape="rect" coords="0,56,125,80"/>
+<area href="classbrenta_1_1Ubo.html" alt="brenta::Ubo" shape="rect" coords="135,56,260,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:ae5d241adcfa2d90d3632e4aeace61629" id="r_ae5d241adcfa2d90d3632e4aeace61629"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Target</b> { <br />
+&#160;&#160;<b>Array</b> = GL_ARRAY_BUFFER
+, <b>ElementArray</b> = GL_ELEMENT_ARRAY_BUFFER
+, <b>Uniform</b> = GL_UNIFORM_BUFFER
+, <b>Texture</b> = GL_TEXTURE_BUFFER
+, <br />
+&#160;&#160;<b>TransformFeedback</b> = GL_TRANSFORM_FEEDBACK_BUFFER
+, <b>CopyRead</b> = GL_COPY_READ_BUFFER
+, <b>PixelUnpack</b> = GL_PIXEL_UNPACK_BUFFER
+, <b>ShaderStorage</b> = GL_SHADER_STORAGE_BUFFER
+<br />
+ }</td></tr>
+<tr class="separator:ae5d241adcfa2d90d3632e4aeace61629"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5228058de08ef7471e1afaa47f3feb75" id="r_a5228058de08ef7471e1afaa47f3feb75"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>DataUsage</b> { <br />
+&#160;&#160;<b>StreamDraw</b> = GL_STREAM_DRAW
+, <b>StreamRead</b> = GL_STREAM_READ
+, <b>StreamCopy</b> = GL_STREAM_COPY
+, <b>StaticDraw</b> = GL_STATIC_DRAW
+, <br />
+&#160;&#160;<b>StaticRead</b> = GL_STATIC_READ
+, <b>StaticCopy</b> = GL_STATIC_COPY
+, <b>DynamicDraw</b> = GL_DYNAMIC_DRAW
+, <b>DynamicRead</b> = GL_DYNAMIC_READ
+, <br />
+&#160;&#160;<b>DynamicCopy</b> = GL_DYNAMIC_COPY
+<br />
+ }</td></tr>
+<tr class="separator:a5228058de08ef7471e1afaa47f3feb75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7da539333611b8ae69dae9e51fdd81af" id="r_a7da539333611b8ae69dae9e51fdd81af"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a7da539333611b8ae69dae9e51fdd81af">Id</a> = unsigned int</td></tr>
+<tr class="separator:a7da539333611b8ae69dae9e51fdd81af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:acb8111c6a595f7d07cbb93edd4ab72d0" id="r_acb8111c6a595f7d07cbb93edd4ab72d0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#acb8111c6a595f7d07cbb93edd4ab72d0">Buffer</a> (GLenum input_target)</td></tr>
-<tr class="separator:acb8111c6a595f7d07cbb93edd4ab72d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2947005467e907dda6cdee9fc655abb0" id="r_a2947005467e907dda6cdee9fc655abb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a2947005467e907dda6cdee9fc655abb0">Buffer</a> (Target target)</td></tr>
+<tr class="separator:a2947005467e907dda6cdee9fc655abb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acab932133c3acffcb5694be202eb9aa9" id="r_acab932133c3acffcb5694be202eb9aa9"><td class="memItemLeft" align="right" valign="top"><a id="acab932133c3acffcb5694be202eb9aa9" name="acab932133c3acffcb5694be202eb9aa9"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>Buffer</b> (const <a class="el" href="classbrenta_1_1Buffer.html">Buffer</a> &amp;)=delete</td></tr>
 <tr class="separator:acab932133c3acffcb5694be202eb9aa9"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -126,44 +156,88 @@ constexpr <a class="el" href="classbrenta_1_1Buffer.html">Buffer</a> &amp;&#160;
 <tr class="separator:a9537a30b5920e523dc068cb27a54f199"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aff27262b0dfc4376c3b6454609be5f7a" id="r_aff27262b0dfc4376c3b6454609be5f7a"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classbrenta_1_1Buffer.html">Buffer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#aff27262b0dfc4376c3b6454609be5f7a">operator=</a> (<a class="el" href="classbrenta_1_1Buffer.html">Buffer</a> &amp;&amp;other) noexcept</td></tr>
 <tr class="separator:aff27262b0dfc4376c3b6454609be5f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab039f213281ca837a5008076bb701470" id="r_ab039f213281ca837a5008076bb701470"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#ab039f213281ca837a5008076bb701470">init</a> (GLenum input_target)</td></tr>
-<tr class="separator:ab039f213281ca837a5008076bb701470"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2748fba4dc3f0ad2a1cdf08f9f4bd75a" id="r_a2748fba4dc3f0ad2a1cdf08f9f4bd75a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a2748fba4dc3f0ad2a1cdf08f9f4bd75a">init</a> (Target target)</td></tr>
+<tr class="separator:a2748fba4dc3f0ad2a1cdf08f9f4bd75a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7345574d2ad0202f9e1e745df6519d3" id="r_ac7345574d2ad0202f9e1e745df6519d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#ac7345574d2ad0202f9e1e745df6519d3">destroy</a> ()</td></tr>
 <tr class="separator:ac7345574d2ad0202f9e1e745df6519d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa6e6d41bd8f3bdb1ffc22ead99ab18d4" id="r_aa6e6d41bd8f3bdb1ffc22ead99ab18d4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#aa6e6d41bd8f3bdb1ffc22ead99ab18d4">bind</a> ()</td></tr>
-<tr class="separator:aa6e6d41bd8f3bdb1ffc22ead99ab18d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab82db19c5f5dcf93cb6f48ffc79109ac" id="r_ab82db19c5f5dcf93cb6f48ffc79109ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#ab82db19c5f5dcf93cb6f48ffc79109ac">unbind</a> ()</td></tr>
-<tr class="separator:ab82db19c5f5dcf93cb6f48ffc79109ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5371b908427236c17d43c2b9d5d25c8e" id="r_a5371b908427236c17d43c2b9d5d25c8e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a5371b908427236c17d43c2b9d5d25c8e">get_id</a> ()</td></tr>
-<tr class="separator:a5371b908427236c17d43c2b9d5d25c8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a93790cfdd2c8c9c78666dc26e942717f" id="r_a93790cfdd2c8c9c78666dc26e942717f"><td class="memItemLeft" align="right" valign="top">GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a93790cfdd2c8c9c78666dc26e942717f">get_target</a> ()</td></tr>
-<tr class="separator:a93790cfdd2c8c9c78666dc26e942717f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afacbccbdebf9000c2c2d6b68583b47f3" id="r_afacbccbdebf9000c2c2d6b68583b47f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#afacbccbdebf9000c2c2d6b68583b47f3">set_id</a> (unsigned int id)</td></tr>
-<tr class="separator:afacbccbdebf9000c2c2d6b68583b47f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a327d0b83c7e5f8ba8712ec2c8301af9d" id="r_a327d0b83c7e5f8ba8712ec2c8301af9d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a327d0b83c7e5f8ba8712ec2c8301af9d">set_target</a> (GLenum target)</td></tr>
-<tr class="separator:a327d0b83c7e5f8ba8712ec2c8301af9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a57cda6ade80febffb6343da3a77503c5" id="r_a57cda6ade80febffb6343da3a77503c5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a57cda6ade80febffb6343da3a77503c5">copy_data</a> (GLsizeiptr size, const void *data, GLenum usage)</td></tr>
-<tr class="separator:a57cda6ade80febffb6343da3a77503c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aebefda33a5a037924acb92fe25e2a089" id="r_aebefda33a5a037924acb92fe25e2a089"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#aebefda33a5a037924acb92fe25e2a089">copy_vertices</a> (GLsizeiptr size, const void *data, GLenum usage)</td></tr>
-<tr class="separator:aebefda33a5a037924acb92fe25e2a089"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a975152dd019cb67aa344afbe733de6f8" id="r_a975152dd019cb67aa344afbe733de6f8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a975152dd019cb67aa344afbe733de6f8">copy_indices</a> (GLsizeiptr size, const void *data, GLenum usage)</td></tr>
-<tr class="separator:a975152dd019cb67aa344afbe733de6f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74d3978c044d48c0b6145e6a55c4a374" id="r_a74d3978c044d48c0b6145e6a55c4a374"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a74d3978c044d48c0b6145e6a55c4a374">bind</a> () const</td></tr>
+<tr class="separator:a74d3978c044d48c0b6145e6a55c4a374"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a97cf9a6c02223e5716aea177286cca5c" id="r_a97cf9a6c02223e5716aea177286cca5c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a97cf9a6c02223e5716aea177286cca5c">unbind</a> () const</td></tr>
+<tr class="separator:a97cf9a6c02223e5716aea177286cca5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e8917de6c7786208dbd1eda15d18059" id="r_a0e8917de6c7786208dbd1eda15d18059"><td class="memItemLeft" align="right" valign="top">Buffer::Id &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a0e8917de6c7786208dbd1eda15d18059">get_id</a> ()</td></tr>
+<tr class="separator:a0e8917de6c7786208dbd1eda15d18059"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57cf50888e17cbf61a07e6531f222efd" id="r_a57cf50888e17cbf61a07e6531f222efd"><td class="memItemLeft" align="right" valign="top">Target &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a57cf50888e17cbf61a07e6531f222efd">get_target</a> ()</td></tr>
+<tr class="separator:a57cf50888e17cbf61a07e6531f222efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5914d16a121290586ffd3b4fd109a155" id="r_a5914d16a121290586ffd3b4fd109a155"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a5914d16a121290586ffd3b4fd109a155">set_id</a> (Buffer::Id id)</td></tr>
+<tr class="separator:a5914d16a121290586ffd3b4fd109a155"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac581cf301264e2888ef75af95f22fec8" id="r_ac581cf301264e2888ef75af95f22fec8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#ac581cf301264e2888ef75af95f22fec8">set_target</a> (Target target)</td></tr>
+<tr class="separator:ac581cf301264e2888ef75af95f22fec8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed0b6b09fe7c890652ebb5c6c43ae8e9" id="r_aed0b6b09fe7c890652ebb5c6c43ae8e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#aed0b6b09fe7c890652ebb5c6c43ae8e9">copy_data</a> (const void *data, GLsizeiptr size, DataUsage usage)</td></tr>
+<tr class="separator:aed0b6b09fe7c890652ebb5c6c43ae8e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Data Fields</h2></td></tr>
-<tr class="memitem:ae149f802032cb83b5d9c8994c06a566e" id="r_ae149f802032cb83b5d9c8994c06a566e"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#ae149f802032cb83b5d9c8994c06a566e">id</a></td></tr>
-<tr class="separator:ae149f802032cb83b5d9c8994c06a566e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd3104d2d23e87c417717cbd159489f2" id="r_abd3104d2d23e87c417717cbd159489f2"><td class="memItemLeft" align="right" valign="top">GLenum&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#abd3104d2d23e87c417717cbd159489f2">target</a></td></tr>
-<tr class="separator:abd3104d2d23e87c417717cbd159489f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a183807f60f6a1968c6e9f662edf26f1c" id="r_a183807f60f6a1968c6e9f662edf26f1c"><td class="memItemLeft" align="right" valign="top">Buffer::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#a183807f60f6a1968c6e9f662edf26f1c">id</a></td></tr>
+<tr class="separator:a183807f60f6a1968c6e9f662edf26f1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6988863a6bef16871b24832ff6a72e" id="r_aed6988863a6bef16871b24832ff6a72e"><td class="memItemLeft" align="right" valign="top">Target&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Buffer.html#aed6988863a6bef16871b24832ff6a72e">target</a></td></tr>
+<tr class="separator:aed6988863a6bef16871b24832ff6a72e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classbrenta_1_1Buffer.html" title="Buffer wrapper around OpenGL buffer objects.">Buffer</a> wrapper around OpenGL buffer objects. </p>
-<p>This class is a wrapper around OpenGL buffer objects. It provides a simple interface to create, bind, unbind and delete buffer objects. </p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00013">13</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a7da539333611b8ae69dae9e51fdd81af" name="a7da539333611b8ae69dae9e51fdd81af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7da539333611b8ae69dae9e51fdd81af">&#9670;&#160;</a></span>Id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Buffer::Id =  unsigned int</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00017">17</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a5228058de08ef7471e1afaa47f3feb75" name="a5228058de08ef7471e1afaa47f3feb75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5228058de08ef7471e1afaa47f3feb75">&#9670;&#160;</a></span>DataUsage</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Buffer::DataUsage</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00038">38</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ae5d241adcfa2d90d3632e4aeace61629" name="ae5d241adcfa2d90d3632e4aeace61629"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5d241adcfa2d90d3632e4aeace61629">&#9670;&#160;</a></span>Target</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Buffer::Target</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00019">19</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="acb8111c6a595f7d07cbb93edd4ab72d0" name="acb8111c6a595f7d07cbb93edd4ab72d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acb8111c6a595f7d07cbb93edd4ab72d0">&#9670;&#160;</a></span>Buffer() <span class="overload">[1/2]</span></h2>
+
+</div>
+</div>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a2947005467e907dda6cdee9fc655abb0" name="a2947005467e907dda6cdee9fc655abb0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2947005467e907dda6cdee9fc655abb0">&#9670;&#160;</a></span>Buffer() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -171,8 +245,8 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">Buffer::Buffer </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
-          <td class="paramname"><em>input_target</em></td><td>)</td>
+          <td class="paramtype">Buffer::Target&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -206,7 +280,7 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00032">32</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00060">60</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
 
 </div>
 </div>
@@ -230,8 +304,8 @@ Data Fields</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aa6e6d41bd8f3bdb1ffc22ead99ab18d4" name="aa6e6d41bd8f3bdb1ffc22ead99ab18d4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa6e6d41bd8f3bdb1ffc22ead99ab18d4">&#9670;&#160;</a></span>bind()</h2>
+<a id="a74d3978c044d48c0b6145e6a55c4a374" name="a74d3978c044d48c0b6145e6a55c4a374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74d3978c044d48c0b6145e6a55c4a374">&#9670;&#160;</a></span>bind()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -240,17 +314,17 @@ Data Fields</h2></td></tr>
           <td class="memname">void Buffer::bind </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00069">69</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00042">42</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a57cda6ade80febffb6343da3a77503c5" name="a57cda6ade80febffb6343da3a77503c5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a57cda6ade80febffb6343da3a77503c5">&#9670;&#160;</a></span>copy_data()</h2>
+<a id="aed0b6b09fe7c890652ebb5c6c43ae8e9" name="aed0b6b09fe7c890652ebb5c6c43ae8e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed0b6b09fe7c890652ebb5c6c43ae8e9">&#9670;&#160;</a></span>copy_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,19 +332,19 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Buffer::copy_data </td>
           <td>(</td>
-          <td class="paramtype">GLsizeiptr&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>data</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramtype">GLsizeiptr&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Buffer::DataUsage&#160;</td>
           <td class="paramname"><em>usage</em>&#160;</td>
         </tr>
         <tr>
@@ -281,79 +355,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00023">23</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a975152dd019cb67aa344afbe733de6f8" name="a975152dd019cb67aa344afbe733de6f8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a975152dd019cb67aa344afbe733de6f8">&#9670;&#160;</a></span>copy_indices()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Buffer::copy_indices </td>
-          <td>(</td>
-          <td class="paramtype">GLsizeiptr&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum&#160;</td>
-          <td class="paramname"><em>usage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00029">29</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
-
-</div>
-</div>
-<a id="aebefda33a5a037924acb92fe25e2a089" name="aebefda33a5a037924acb92fe25e2a089"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aebefda33a5a037924acb92fe25e2a089">&#9670;&#160;</a></span>copy_vertices()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Buffer::copy_vertices </td>
-          <td>(</td>
-          <td class="paramtype">GLsizeiptr&#160;</td>
-          <td class="paramname"><em>size</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const void *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">GLenum&#160;</td>
-          <td class="paramname"><em>usage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00039">39</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00079">79</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -372,18 +374,18 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00058">58</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00031">31</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a5371b908427236c17d43c2b9d5d25c8e" name="a5371b908427236c17d43c2b9d5d25c8e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5371b908427236c17d43c2b9d5d25c8e">&#9670;&#160;</a></span>get_id()</h2>
+<a id="a0e8917de6c7786208dbd1eda15d18059" name="a0e8917de6c7786208dbd1eda15d18059"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e8917de6c7786208dbd1eda15d18059">&#9670;&#160;</a></span>get_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int Buffer::get_id </td>
+          <td class="memname">Buffer::Id &amp; Buffer::get_id </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -391,18 +393,18 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00086">86</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00059">59</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a93790cfdd2c8c9c78666dc26e942717f" name="a93790cfdd2c8c9c78666dc26e942717f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a93790cfdd2c8c9c78666dc26e942717f">&#9670;&#160;</a></span>get_target()</h2>
+<a id="a57cf50888e17cbf61a07e6531f222efd" name="a57cf50888e17cbf61a07e6531f222efd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57cf50888e17cbf61a07e6531f222efd">&#9670;&#160;</a></span>get_target()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">GLenum Buffer::get_target </td>
+          <td class="memname">Buffer::Target &amp; Buffer::get_target </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -410,12 +412,12 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00091">91</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00064">64</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ab039f213281ca837a5008076bb701470" name="ab039f213281ca837a5008076bb701470"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab039f213281ca837a5008076bb701470">&#9670;&#160;</a></span>init()</h2>
+<a id="a2748fba4dc3f0ad2a1cdf08f9f4bd75a" name="a2748fba4dc3f0ad2a1cdf08f9f4bd75a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2748fba4dc3f0ad2a1cdf08f9f4bd75a">&#9670;&#160;</a></span>init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -423,14 +425,14 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Buffer::init </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
-          <td class="paramname"><em>input_target</em></td><td>)</td>
+          <td class="paramtype">Buffer::Target&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00049">49</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00022">22</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
@@ -458,12 +460,12 @@ Data Fields</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00038">38</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00066">66</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="afacbccbdebf9000c2c2d6b68583b47f3" name="afacbccbdebf9000c2c2d6b68583b47f3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afacbccbdebf9000c2c2d6b68583b47f3">&#9670;&#160;</a></span>set_id()</h2>
+<a id="a5914d16a121290586ffd3b4fd109a155" name="a5914d16a121290586ffd3b4fd109a155"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5914d16a121290586ffd3b4fd109a155">&#9670;&#160;</a></span>set_id()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -471,19 +473,19 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Buffer::set_id </td>
           <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramtype">Buffer::Id&#160;</td>
           <td class="paramname"><em>id</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00096">96</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00069">69</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a327d0b83c7e5f8ba8712ec2c8301af9d" name="a327d0b83c7e5f8ba8712ec2c8301af9d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a327d0b83c7e5f8ba8712ec2c8301af9d">&#9670;&#160;</a></span>set_target()</h2>
+<a id="ac581cf301264e2888ef75af95f22fec8" name="ac581cf301264e2888ef75af95f22fec8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac581cf301264e2888ef75af95f22fec8">&#9670;&#160;</a></span>set_target()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,19 +493,19 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">void Buffer::set_target </td>
           <td>(</td>
-          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramtype">Buffer::Target&#160;</td>
           <td class="paramname"><em>target</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00101">101</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00074">74</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ab82db19c5f5dcf93cb6f48ffc79109ac" name="ab82db19c5f5dcf93cb6f48ffc79109ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab82db19c5f5dcf93cb6f48ffc79109ac">&#9670;&#160;</a></span>unbind()</h2>
+<a id="a97cf9a6c02223e5716aea177286cca5c" name="a97cf9a6c02223e5716aea177286cca5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a97cf9a6c02223e5716aea177286cca5c">&#9670;&#160;</a></span>unbind()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -512,45 +514,61 @@ Data Fields</h2></td></tr>
           <td class="memname">void Buffer::unbind </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00080">80</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8cpp_source.html#l00053">53</a> of file <a class="el" href="buffer_8cpp_source.html">buffer.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="ae149f802032cb83b5d9c8994c06a566e" name="ae149f802032cb83b5d9c8994c06a566e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae149f802032cb83b5d9c8994c06a566e">&#9670;&#160;</a></span>id</h2>
+<a id="a183807f60f6a1968c6e9f662edf26f1c" name="a183807f60f6a1968c6e9f662edf26f1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a183807f60f6a1968c6e9f662edf26f1c">&#9670;&#160;</a></span>id</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int brenta::Buffer::id</td>
+          <td class="memname">Buffer::Id brenta::Buffer::id</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00023">23</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00097">97</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
 
 </div>
 </div>
-<a id="abd3104d2d23e87c417717cbd159489f2" name="abd3104d2d23e87c417717cbd159489f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd3104d2d23e87c417717cbd159489f2">&#9670;&#160;</a></span>target</h2>
+<a id="aed6988863a6bef16871b24832ff6a72e" name="aed6988863a6bef16871b24832ff6a72e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed6988863a6bef16871b24832ff6a72e">&#9670;&#160;</a></span>target</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GLenum brenta::Buffer::target</td>
+          <td class="memname">Target brenta::Buffer::target</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00024">24</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="buffer_8hpp_source.html#l00098">98</a> of file <a class="el" href="buffer_8hpp_source.html">buffer.hpp</a>.</p>
 
 </div>
 </div>

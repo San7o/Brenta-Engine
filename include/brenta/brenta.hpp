@@ -20,8 +20,10 @@
 #include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/scene.hpp>
 #include <brenta/renderer/transform.hpp>
 #include <brenta/renderer/model.hpp>
+#include <brenta/renderer/material.hpp>
 
 // Core
 #include <brenta/audio.hpp>

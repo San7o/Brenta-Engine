@@ -30,12 +30,12 @@ int main() {
   while (!Window::should_close())
   {
     // Handle input...
-    if (Window::is_key_pressed(GLFW_KEY_ESCAPE))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
     
     // Update logic...
     // Draw...
-    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::set_color(Color::grey());
     Gl::clear();
 
     Window::poll_events();
@@ -63,7 +63,7 @@ auto toggle_wireframe_callback = []() {
     wireframe->enabled = !wireframe->enabled;
 };
 
-Input::add_keyboard_callback(GLFW_KEY_F, toggle_wireframe_callback);
+Input::add_keyboard_callback(Key::F, toggle_wireframe_callback);
 ```
 
 In this example we register a keyboard callback that toggles the
@@ -205,7 +205,7 @@ int main()
 
   while(!Window::should_Close()) {
 
-    Gl::set_color(0.2f, 0.3f, 0.3f, 1.0f);
+    Gl::set_color(Color::gray());
     Gl::clear();
 
     world::tick();

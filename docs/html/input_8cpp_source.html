@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="comment">// Static variables</span></div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="comment">//</span></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>std::unordered_map&lt;Input::KeyId, Input::KeyboardCallback&gt; Input::keyboard_callbacks;</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>std::unordered_map&lt;brenta::Key, Input::KeyboardCallback&gt; Input::keyboard_callbacks;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>std::unordered_map&lt;Input::MouseCallbackId, Input::MouseCallback&gt;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  Input::mouse_callbacks;</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">const</span> std::string Input::subsystem_name = <span class="stringliteral">&quot;input&quot;</span>;</div>
@@ -169,24 +169,24 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keywordflow">return</span> _input;</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>}</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> Input::add_keyboard_callback(KeyId key, KeyboardCallback callback)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keywordtype">void</span> Input::add_keyboard_callback(Key key, KeyboardCallback callback)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>{</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  Input::keyboard_callbacks[key] = callback;</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  DEBUG(<span class="stringliteral">&quot;{}: aded callback for key: {}&quot;</span>,</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>       Input::subsystem_name, std::to_string(key));</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        Input::subsystem_name, (<span class="keywordtype">int</span>) key);</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>}</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">void</span> Input::remove_keyboard_callback(KeyId key)</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span><span class="keywordtype">void</span> Input::remove_keyboard_callback(Key key)</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  <span class="keywordflow">if</span> (Input::keyboard_callbacks.find(key) == Input::keyboard_callbacks.end())</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  {</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    ERROR(<span class="stringliteral">&quot;{}: no callback found for key: {}&quot;</span>, Input::subsystem_name, key);</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>    ERROR(<span class="stringliteral">&quot;{}: no callback found for key: {}&quot;</span>, Input::subsystem_name, (<span class="keywordtype">int</span>) key);</div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>    <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  }</div>
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span> </div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  Input::keyboard_callbacks.erase(key);</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  DEBUG(<span class="stringliteral">&quot;{}: removed callback for key: {}&quot;</span>, Input::subsystem_name, key);</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  DEBUG(<span class="stringliteral">&quot;{}: removed callback for key: {}&quot;</span>, Input::subsystem_name, (<span class="keywordtype">int</span>) key);</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
 <div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
@@ -197,9 +197,9 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>{</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <span class="keywordflow">if</span> (action == GLFW_PRESS)</div>
 <div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  {</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">if</span> (Input::keyboard_callbacks.find(key) != Input::keyboard_callbacks.end())</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>    <span class="keywordflow">if</span> (Input::keyboard_callbacks.find((Key) key) != Input::keyboard_callbacks.end())</div>
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    {</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      Input::keyboard_callbacks.at(key)();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>      Input::keyboard_callbacks.at((Key) key)();</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>    }</div>
 <div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>  }</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <span class="keywordflow">return</span>;</div>
@@ -249,7 +249,7 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>{</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>  <span class="keywordflow">return</span> Input::instance();</div>
 <div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1Input_html"><div class="ttname"><a href="classbrenta_1_1Input.html">brenta::Input</a></div><div class="ttdoc">Input subsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00027">input.hpp:28</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Input_html"><div class="ttname"><a href="classbrenta_1_1Input.html">brenta::Input</a></div><div class="ttdoc">Input subsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00028">input.hpp:29</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Input_html_a0ae5fd441d95f7bd1bcfaf13a87c2fed"><div class="ttname"><a href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">brenta::Input::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00052">input.cpp:52</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Input_html_ab4b16a111710e2230f9c58ec9b7f06ec"><div class="ttname"><a href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">brenta::Input::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00047">input.cpp:47</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
