@@ -96,13 +96,15 @@ int main()
     .atlas_path("examples/assets/textures/particle_atlas.png")
     .atlas_width(8)
     .atlas_height(8)
-    .atlas_index(5)
+    .atlas_index(0)
     .build();
 
 #ifdef BRENTA_USE_IMGUI
   FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
+  int frames = 0;
+  
   while (!Window::should_close())
   {
     Window::poll_events();
@@ -118,6 +120,13 @@ int main()
     emitter.update(Window::get_time().get_delta());
     emitter.render();
 
+    frames++;
+    if (frames > 5)
+    {
+      frames = 0;
+      emitter.atlas_index++;
+    }
+    
 #ifdef BRENTA_USE_ECS
     world::tick();
 #endif

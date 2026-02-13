@@ -14,13 +14,12 @@
 
 using namespace brenta;
 
-Texture::Texture(const std::filesystem::path &path,
-                 bool flip,
-                 Texture::Type type)
+Texture::Texture(const Config &conf)
 {
-  this->type = type;
-  this->path = path;
-  this->id = this->load(path, flip);
+  this->type = conf.type;
+  this->path = conf.path;
+  this->properties = conf.properties;
+  this->id = this->load(this->path, conf.properties.get_flipped());
   
   DEBUG("texture: {} created", this->id);
   return;
@@ -37,9 +36,24 @@ Texture::~Texture()
   return;
 }
 
-unsigned int Texture::get_id() const
+Texture::Id Texture::get_id() const
 {
   return this->id;
+}
+
+std::string Texture::get_path() const
+{
+  return this->path;
+}
+
+Texture::Type Texture::get_type() const
+{
+  return this->type;
+}
+
+Texture::Properties &Texture::get_properties()
+{
+  return this->properties;
 }
 
 void Texture::active_texture(GLenum texture)
@@ -66,49 +80,31 @@ unsigned int Texture::load(const std::filesystem::path &path, bool flip)
   return texture;
 }
 
-void Texture::bind_id(GLenum target, Texture::Id id, GLint wrapping,
-                      GLint filtering_min, GLint filtering_mag,
-                      GLboolean has_mipmap, GLint mipmap_min,
-                      GLint mipmap_mag)
+void Texture::bind_id(Texture::Target target, Texture::Id id,
+                      const Texture::Properties &prop)
 {
   glBindTexture(target, id);
-  set_texture_wrapping(wrapping);
-  set_texture_filtering(filtering_min, filtering_mag);
-  set_mipmap(has_mipmap, mipmap_min, mipmap_mag);
+
+  // Wrapping
+  glTexParameteri(target, GL_TEXTURE_WRAP_S, prop.get_wrapping());
+  glTexParameteri(target, GL_TEXTURE_WRAP_T, prop.get_wrapping());
+
+  // Filtering
+  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.get_filtering_min());
+  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.get_filtering_mag());
+  
+  // Mipmap
+  if (!prop.get_has_mipmap()) return;
+
+  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.get_mipmap_min());
+  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.get_mipmap_mag());
+  
   return;
 }
 
-void Texture::bind(GLenum target, GLint wrapping,
-                   GLint filtering_min, GLint filtering_mag,
-                   GLboolean has_mipmap, GLint mipmap_min,
-                   GLint mipmap_mag)
+void Texture::bind(Texture::Target target)
 {
-  Texture::bind_id(target, this->id, wrapping, filtering_min,
-                   filtering_mag, has_mipmap, mipmap_min, mipmap_mag);
-  return;
-}
-
-void Texture::set_texture_wrapping(GLint wrapping)
-{
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, wrapping);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, wrapping);
-  return;
-}
-
-void Texture::set_texture_filtering(GLint filtering_min, GLint filtering_mag)
-{
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filtering_min);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filtering_mag);
-  return;
-}
-
-void Texture::set_mipmap(GLboolean hasMipmap, GLint mipmap_min,
-                         GLint mipmap_mag)
-{
-  if (!hasMipmap) return;
-
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, mipmap_min);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mipmap_mag);
+  Texture::bind_id(target, this->id, this->properties);
   return;
 }
 
@@ -137,4 +133,116 @@ void Texture::read_image(const char *path, bool flip)
   }
   stbi_image_free(data);
   return;
+}
+
+//
+// Properties
+//
+
+
+Texture::Wrapping Texture::Properties::get_wrapping() const
+{
+  return this->prop_wrapping;
+}
+
+Texture::Filtering Texture::Properties::get_filtering_min() const
+{
+  return this->prop_filtering_min;
+}
+
+Texture::Filtering Texture::Properties::get_filtering_mag() const
+{
+  return this->prop_filtering_mag;
+}
+
+GLboolean Texture::Properties::get_has_mipmap() const
+{
+  return this->prop_has_mipmap;
+}
+
+Texture::Filtering Texture::Properties::get_mipmap_min() const
+{
+  return this->prop_mipmap_min;
+}
+
+Texture::Filtering Texture::Properties::get_mipmap_mag() const
+{
+  return this->prop_mipmap_mag;
+}
+
+GLboolean Texture::Properties::get_flipped() const
+{
+  return this->prop_flipped;
+}
+
+// Setters
+
+Texture::Properties &Texture::Properties::wrapping(Texture::Wrapping wrapping)
+{
+  this->prop_wrapping = wrapping;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::filtering_min(Texture::Filtering filtering)
+{
+  this->prop_filtering_min = filtering;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::filtering_mag(Texture::Filtering filtering)
+{
+  this->prop_filtering_mag = filtering;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::has_mipmap(GLboolean mipmap)
+{
+  this->prop_has_mipmap = mipmap;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::mipmap_min(Texture::Filtering filtering)
+{
+  this->prop_mipmap_min = filtering;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::mipmap_mag(Texture::Filtering filtering)
+{
+  this->prop_mipmap_mag = filtering;
+  return *this;
+}
+
+Texture::Properties &Texture::Properties::flipped(GLboolean flipped)
+{
+  this->prop_flipped = flipped;
+  return *this;
+}
+
+//
+// Builder
+//
+
+// Texture
+
+Texture::Builder& Texture::Builder::type(Texture::Type type)
+{
+  this->conf.type = type;
+  return *this;
+}
+Texture::Builder& Texture::Builder::path(const std::string& path)
+{
+  this->conf.path = path;
+  return *this;
+}
+
+Texture::Builder& Texture::Builder::properties(const Texture::Properties& prop)
+{
+  this->conf.properties = prop;
+  return *this;
+}
+
+Texture Texture::Builder::build()
+{
+  return Texture(this->conf);
 }

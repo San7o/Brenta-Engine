@@ -7,6 +7,8 @@
 
 #include <glad/glad.h>
 
+#include <brenta/renderer/opengl/gl.hpp>
+
 #include <string>
 #include <filesystem>
 
@@ -19,36 +21,50 @@ public:
 
   using Id = unsigned int;
 
-  enum class Type {
+  enum Type
+  {
     None,
     Diffuse,
     Specular,
+  };
+
+  enum Target
+  {
+    Texture1D                 = GL_TEXTURE_1D,
+    Texture2D                 = GL_TEXTURE_2D,
+    Texture3D                 = GL_TEXTURE_3D,
+    Texture1DArray            = GL_TEXTURE_1D_ARRAY,
+    Texture2DArray            = GL_TEXTURE_2D_ARRAY,
+    TextureRectangle          = GL_TEXTURE_RECTANGLE,
+    TextureCubeMap            = GL_TEXTURE_CUBE_MAP,
+    TextureCubeMapArray       = GL_TEXTURE_CUBE_MAP_ARRAY,
+    TextureBuffer             = GL_TEXTURE_BUFFER,
+    Texture2DMultisample      = GL_TEXTURE_2D_MULTISAMPLE,
+    Texture2DMultisampleArray = GL_TEXTURE_2D_MULTISAMPLE_ARRAY,
   };
   
   enum Wrapping
   {
     // Repeats the texture image. This is the default begaviour
-    Repeat = GL_REPEAT,
+    Repeat         = GL_REPEAT,
     // Same as Repeat byt mirrirs the image with each repeat
     MirroredRepeat = GL_MIRRORED_REPEAT,
     // Clamps the coordinates between 0 and 1. The result is that
     // higher coordinates become clamped to the edge, resulting in a
     // stretched edge pattern
-    ClampToEdge = GL_CLAMP_TO_EDGE,
+    ClampToEdge    = GL_CLAMP_TO_EDGE,
     // Coordinates outsize the range are now given a use-specified
     // border color
-    ClampToBorder = GL_CLAMP_TO_BORDER,
+    ClampToBorder  = GL_CLAMP_TO_BORDER,
   };
   
-  // Type of texture filtering used when minifying or maxifing
-  // (scaling down or up) a texture.
   enum Filtering
   {
     // Select the closest color to the texture coordinate
     Nearest              = GL_NEAREST,
     // Interpolates the neighbouring pixels to get an approximate
     // color
-    Linear               = GL_NEAREST,
+    Linear               = GL_LINEAR,
     // Selects the mipmap that most closely matches the size of the
     // pixel being textured and uses the GL_NEAREST criterion (the
     // texture element nearest to the center of the pixel) to produce
@@ -73,39 +89,37 @@ public:
     // two values.
     LinearMipmapLinear   = GL_LINEAR_MIPMAP_LINEAR,
   };
+
+  struct Config;
+  class  Properties;
+  class  Builder;
   
   // This method activates a texture unit. Arg is GL_TEXTURE0 + x
   static void active_texture(GLenum texture);
   static Texture::Id load(const std::filesystem::path &path, bool flip = true);
-  static void bind_id(GLenum    target, Texture::Id id,
-                      GLint     wrapping      = GL_REPEAT,
-                      GLint     filtering_min = GL_NEAREST,
-                      GLint     filtering_mag = GL_NEAREST,
-                      GLboolean has_mipmap    = GL_TRUE,
-                      GLint     mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
-                      GLint     mipmap_mag    = GL_LINEAR);
+  static void bind_id(Texture::Target target, Texture::Id id,
+                      const Texture::Properties &properties = Texture::Properties());
 
-  Texture::Id    id;
-  Texture::Type  type;
-  std::string    path;
-  
+  // Non static
+    
   Texture() {}
-  Texture(const std::filesystem::path &path,
-          bool flip = true,
-          Texture::Type type = Texture::Type::None);
+  Texture(const Config &conf);
+  
   constexpr Texture(Texture&& other) noexcept
   {
-    this->id = other.id;
-    this->path = other.path;
-    this->type = other.type;
+    this->id         = other.id;
+    this->path       = other.path;
+    this->type       = other.type;
+    this->properties = other.properties;
     other.id = 0;
   }
 
   constexpr Texture& operator=(Texture&& other) noexcept
   {
-    this->id = other.id;
-    this->type = other.type;
-    this->path = other.path;
+    this->id         = other.id;
+    this->type       = other.type;
+    this->path       = other.path;
+    this->properties = other.properties;
     other.id = 0;
     return *this;
   }
@@ -113,23 +127,82 @@ public:
   ~Texture();
 
   Texture::Id get_id() const;
+  std::string get_path() const;
+  Texture::Type get_type() const;
+  Texture::Properties &get_properties();
   
-  void bind(GLenum    target,
-            GLint     wrapping      = GL_REPEAT,
-            GLint     filtering_min = GL_NEAREST,
-            GLint     filtering_mag = GL_NEAREST,
-            GLboolean has_mpmap     = GL_TRUE,
-            GLint     mipmap_min    = GL_LINEAR_MIPMAP_LINEAR,
-            GLint     mipmap_mag    = GL_LINEAR);
+  void bind(Texture::Target target);
+
+  class Properties
+  {
+  public:
+
+    Properties() {};
+
+    // Getters
+
+    Texture::Wrapping  get_wrapping() const;
+    Texture::Filtering get_filtering_min() const;
+    Texture::Filtering get_filtering_mag() const;
+    GLboolean          get_has_mipmap() const;
+    Texture::Filtering get_mipmap_min() const;
+    Texture::Filtering get_mipmap_mag() const;
+    GLboolean          get_flipped() const;
+  
+    // Setters
+
+    Properties &wrapping(Texture::Wrapping wrapping);
+    Properties &filtering_min(Texture::Filtering filtering);
+    Properties &filtering_mag(Texture::Filtering filtering);
+    Properties &has_mipmap(GLboolean mipmap);
+    Properties &mipmap_min(Texture::Filtering filtering);
+    Properties &mipmap_mag(Texture::Filtering filtering);
+    Properties &flipped(GLboolean flipped);
+  
+  private:
+  
+    Texture::Wrapping  prop_wrapping      = Texture::Wrapping::Repeat;
+    Texture::Filtering prop_filtering_min = Texture::Filtering::Nearest;
+    Texture::Filtering prop_filtering_mag = Texture::Filtering::Nearest;
+    GLboolean          prop_has_mipmap    = Gl::True;
+    Texture::Filtering prop_mipmap_min    = Texture::Filtering::LinearMipmapLinear;
+    Texture::Filtering prop_mipmap_mag    = Texture::Filtering::Linear;
+    GLboolean          prop_flipped       = true;
+  };
 
 private:
   
-  static void set_texture_wrapping(GLint wrapping);
-  static void set_texture_filtering(GLint filtering_min, GLint filtering_mag);
-  static void set_mipmap(GLboolean has_mipmap, GLint mipmap_min,
-                         GLint mipmap_mag);
+  Texture::Id          id;
+  Texture::Type        type;
+  std::string          path;
+  Texture::Properties  properties;
+  
   static void read_image(const char *path, bool flip);
   
 };
+  
+struct Texture::Config
+{
+  Texture::Type       type       = Texture::Type::None;
+  std::string         path       = "";
+  Texture::Properties properties = {};
+};
 
+class Texture::Builder
+{
+public:
+
+  Builder& type(Texture::Type type);
+  Builder& path(const std::string& path);
+  Builder& flipped(bool flipped);
+  Builder& properties(const Texture::Properties& prop);
+
+  Texture build();
+  
+private:
+
+  Texture::Config conf = {};
+  
+};
+  
 } // namespace brenta

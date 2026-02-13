@@ -1,6 +1,4 @@
-- make a struct that contains shader variables and their values, to
-  handle cases like setting uniforms for rendering the particles
-- create model from raw vertexes
+- add meshe to model's config
 - add Scene class
+- implement Material abstraction
 - rewrite logger
-- fix the model / mesh texture enums mess

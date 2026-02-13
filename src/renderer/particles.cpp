@@ -62,7 +62,17 @@ ParticleEmitter::ParticleEmitter(Config conf)
   this->cam = conf.cam;
 
   // Load Texture Atlas
-  this->atlas = std::move(Texture(conf.atlas_path, false));
+  this->atlas =
+    Texture::Builder()
+    .path(conf.atlas_path)
+    .properties(Texture::Properties()
+                .wrapping(Texture::Wrapping::Repeat)
+                .filtering_min(Texture::Filtering::Nearest)
+                .filtering_mag(Texture::Filtering::Nearest)
+                .has_mipmap(Gl::True)
+                .mipmap_min(Texture::Filtering::NearestMipmapNearest)
+                .mipmap_mag(Texture::Filtering::Nearest))
+    .build();
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
@@ -150,14 +160,14 @@ void ParticleEmitter::update(float delta_time)
   Gl::check_error();
   glBindBuffer(GL_ARRAY_BUFFER, fbo[!current_fbo_index].get_id());
   this->vao.link_buffer(this->fbo[!current_fbo_index],
-                        0, 3, GL_FLOAT, GL_FALSE,
+                        0, 3, Gl::Float, Gl::False,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
   this->vao.link_buffer(this->fbo[!current_fbo_index],  
-                        1, 3, GL_FLOAT, GL_FALSE,
+                        1, 3, Gl::Float, Gl::False,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) sizeof(glm::vec3));
   this->vao.link_buffer(this->fbo[!current_fbo_index],  
-                        2, 1, GL_FLOAT, GL_FALSE,
+                        2, 1, Gl::Float, Gl::False,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) (2 * sizeof(glm::vec3)));
 
@@ -191,15 +201,14 @@ void ParticleEmitter::render()
   auto shader = Shader::get_shader("particle_render");
   if (!shader) return;
 
-  shader->use();
   this->vao.bind();
 
   glBindBuffer(GL_ARRAY_BUFFER, fbo[current_fbo_index].get_id());
   this->vao.link_buffer(this->fbo[current_fbo_index],
-                        0, 3, GL_FLOAT, GL_FALSE,
+                        0, 3, Gl::Float, Gl::False,
                         2 * sizeof(glm::vec3) + sizeof(float), (void *) 0);
   this->vao.link_buffer(this->fbo[current_fbo_index],
-                        1, 1, GL_FLOAT, GL_FALSE,
+                        1, 1, Gl::Float, Gl::False,
                         2 * sizeof(glm::vec3) + sizeof(float),
                         (void *) (2 * sizeof(glm::vec3)));
   Gl::check_error();
@@ -208,6 +217,7 @@ void ParticleEmitter::render()
   int window_width = Window::get_width();
   int window_height = Window::get_height();
 
+  shader->use();
   shader->set_mat4("view",       this->cam->get_view_matrix());
   shader->set_mat4("projection", this->cam->get_projection_matrix(window_width, window_height));
   shader->set_mat4("model",      glm::mat4(1.0f));
@@ -220,17 +230,10 @@ void ParticleEmitter::render()
 
   // Set Textures
   Texture::active_texture(GL_TEXTURE0);
-  this->atlas.bind(GL_TEXTURE_2D,
-                   Texture::Wrapping::Repeat,
-                   Texture::Filtering::Nearest,
-                   Texture::Filtering::Nearest,
-                   Gl::True,
-                   Texture::Filtering::NearestMipmapNearest,
-                   Texture::Filtering::Nearest);
-
+  this->atlas.bind(Texture::Target::Texture2D);
+  
   glDrawArrays(GL_POINTS, 0, num_particles);
   Gl::check_error();
-
   
   glBindBuffer(GL_ARRAY_BUFFER, 0);
   this->vao.unbind();

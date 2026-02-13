@@ -136,7 +136,7 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
       // generate texture
       unsigned int texture;
       glGenTextures(1, &texture);
-      Texture::bind_id(GL_TEXTURE_2D, texture);
+      Texture::bind_id(Texture::Target::Texture2D, texture);
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RED, face->glyph->bitmap.width,
                    face->glyph->bitmap.rows, 0, GL_RED, GL_UNSIGNED_BYTE,
                    face->glyph->bitmap.buffer);
@@ -153,7 +153,7 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
         static_cast<unsigned int>(face->glyph->advance.x)};
       characters.insert(std::pair<char, Text::Character>(c, character));
     }
-    Texture::bind_id(GL_TEXTURE_2D, 0);
+    Texture::bind_id(Texture::Target::Texture2D, 0);
   }
   // destroy FreeType once we're finished
   FT_Done_Face(face);

@@ -26,20 +26,11 @@ class Model
 {
 public:
 
-  Texture::Wrapping     wrapping;
-  Texture::Filtering    filtering_min;
-  Texture::Filtering    filtering_mag;
-  GLboolean          has_mipmap;
-  Texture::Filtering    mipmap_min;
-  Texture::Filtering    mipmap_mag;
-  
-  bool   flip;
-
   struct Config;
   class  Builder;
 
   Model() {}
-  Model(Config conf);
+  Model(const Config &conf);
   ~Model();
 
   Model(const Model&)            = delete;
@@ -59,50 +50,40 @@ private:
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
 
-  void process_node(aiNode *node, const aiScene *scene);
-  void process_mesh(aiMesh *mesh, const aiScene *scene);
+  void process_node(aiNode *node, const aiScene *scene,
+                    const Texture::Properties &props);
+  void process_mesh(aiMesh *mesh, const aiScene *scene,
+                    const Texture::Properties &props);
   std::vector<std::shared_ptr<Texture>>
   load_material_textures(aiMaterial *mat,
                          aiTextureType type,
-                         Texture::Type type_brenta);
+                         Texture::Type type_brenta,
+                         const Texture::Properties &props);
   
-  static const Config default_config;
-  
-  void init();
+  void init(const Texture::Properties &props);
 };
 
 struct Model::Config
 {
-  Transform          transform;
-  std::string        path;
-  Texture::Wrapping  wrapping;
-  Texture::Filtering filtering_min;
-  Texture::Filtering filtering_mag;
-  GLboolean          has_mipmap;
-  Texture::Filtering mipmap_min;
-  Texture::Filtering mipmap_mag;
-  bool               flip;
+  Transform           transform     = {};
+  std::string         model_path    = "";
+  Texture::Properties texture_props = {};
 };
 
 class Model::Builder
 {
-private:
-
-  Model::Config conf = Model::default_config;
-  
 public:
 
   Builder &transform(const Transform& transform);
   Builder &path(const std::filesystem::path &path);
-  Builder &wrapping(Texture::Wrapping wrapping);
-  Builder &filtering_min(Texture::Filtering filtering_min);
-  Builder &filtering_mag(Texture::Filtering filtering_mag);
-  Builder &has_mipmap(GLboolean has_mipmap);
-  Builder &mipmap_min(Texture::Filtering mipmap_min);
-  Builder &mipmap_mag(Texture::Filtering mipmap_mag);
-  Builder &flip(bool flip);
+  Builder &texture_props(const Texture::Properties &props);
 
   Model build();
+
+private:
+
+  Model::Config conf = {};
+  
 };
 
 } // namespace brenta

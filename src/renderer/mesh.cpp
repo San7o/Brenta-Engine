@@ -9,30 +9,12 @@
 
 using namespace brenta;
 
-const Mesh::Config Mesh::default_config = {
-  .vertices      = {},
-  .indices       = {},
-  .textures      = {},
-  .wrapping      = Texture::Wrapping::Repeat,
-  .filtering_min = Texture::Filtering::Nearest,
-  .filtering_mag = Texture::Filtering::Linear,
-  .has_mipmap    = GL_TRUE,
-  .mipmap_min    = Texture::Filtering::LinearMipmapLinear,
-  .mipmap_max    = Texture::Filtering::Linear,
-};
-
 Mesh::Mesh(Config&& conf)
 {
   this->vertices      = conf.vertices;
   this->indices       = conf.indices;
   this->textures      = std::move(conf.textures);
-  this->wrapping      = conf.wrapping;
-  this->filtering_min = conf.filtering_min;
-  this->filtering_mag = conf.filtering_mag;
-  this->has_mipmap    = conf.has_mipmap;
-  this->mipmap_min    = conf.mipmap_min;
-  this->mipmap_mag    = conf.mipmap_max;
-
+  
   this->init();
   DEBUG("mesh: created");
   return;
@@ -96,7 +78,7 @@ void Mesh::draw(Shader::Name shader_name) const
 
     std::string number;
     std::string name;
-    auto type = textures[i]->type;
+    auto type = textures[i]->get_type();
     switch (type)
     {
     case Texture::Type::Diffuse:
@@ -113,9 +95,7 @@ void Mesh::draw(Shader::Name shader_name) const
     }
 
     shader->set_int(("material." + name + number).c_str(), i);
-    textures[i]->bind(GL_TEXTURE_2D, this->wrapping,
-                     this->filtering_min, this->filtering_mag,
-                     this->has_mipmap, this->mipmap_min, this->mipmap_mag);
+    textures[i]->bind(Texture::Target::Texture2D);
   }
   
   Texture::active_texture(GL_TEXTURE0);
@@ -148,36 +128,6 @@ Mesh::Builder &Mesh::Builder::indices(std::vector<unsigned int> indices)
 Mesh::Builder &Mesh::Builder::textures(std::vector<std::shared_ptr<Texture>> textures)
 {
   this->conf.textures = std::move(textures);
-  return *this;
-}
-
-Mesh::Builder &Mesh::Builder::wrapping(Texture::Wrapping wrapping)
-{
-  this->conf.wrapping = wrapping;
-  return *this;
-}
-
-Mesh::Builder &Mesh::Builder::filtering_min(Texture::Filtering filtering_min)
-{
-  this->conf.filtering_min = filtering_min;
-  return *this;
-}
-
-Mesh::Builder &Mesh::Builder::filtering_mag(Texture::Filtering filtering_mag)
-{
-  this->conf.filtering_mag = filtering_mag;
-  return *this;
-}
-
-Mesh::Builder &Mesh::Builder::has_mipmap(GLboolean has_mipmap)
-{
-  this->conf.has_mipmap = has_mipmap;
-  return *this;
-}
-
-Mesh::Builder &Mesh::Builder::mipmap_min(Texture::Filtering mipmap_min)
-{
-  this->conf.mipmap_min = mipmap_min;
   return *this;
 }
 

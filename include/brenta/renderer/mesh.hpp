@@ -44,13 +44,6 @@ public:
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
 
-  Texture::Wrapping    wrapping;
-  Texture::Filtering   filtering_min;
-  Texture::Filtering   filtering_mag;
-  GLboolean            has_mipmap;
-  Texture::Filtering   mipmap_min;
-  Texture::Filtering   mipmap_mag;
-
   Mesh(Config&& conf);
   
   constexpr Mesh(const Mesh&) = delete;
@@ -68,8 +61,6 @@ private:
   Vbo    vbo;
   Ebo    ebo;
 
-  static const Config default_config;
-  
   void init();
 };
 
@@ -91,12 +82,6 @@ public:
   std::vector<Vertex>                   vertices;
   std::vector<unsigned int>             indices;
   std::vector<std::shared_ptr<Texture>> textures;
-  Texture::Wrapping     wrapping;
-  Texture::Filtering    filtering_min;
-  Texture::Filtering    filtering_mag;
-  GLboolean             has_mipmap;
-  Texture::Filtering    mipmap_min;
-  Texture::Filtering    mipmap_max;
   
 };
 
@@ -104,20 +89,14 @@ class Mesh::Builder
 {
 private:
 
-  Mesh::Config conf = Mesh::default_config;
+  Mesh::Config conf = {};
   
 public:
   
   Builder &vertices(std::vector<Vertex> vertices);
   Builder &indices(std::vector<unsigned int> indices);
   Builder &textures(std::vector<std::shared_ptr<Texture>> textures);
-  Builder &wrapping(Texture::Wrapping wrapping);
-  Builder &filtering_min(Texture::Filtering filtering_min);
-  Builder &filtering_mag(Texture::Filtering filtering_mag);
-  Builder &has_mipmap(GLboolean has_mipmap);
-  Builder &mipmap_min(Texture::Filtering mipmap_min);
-  Builder &mipmap_mag(Texture::Filtering mipmap_mag);
-
+  
   Mesh build();
 };
 
