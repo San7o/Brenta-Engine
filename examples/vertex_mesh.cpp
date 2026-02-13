@@ -45,6 +45,16 @@ int main(void)
               .build())
     .build();
 
+  auto shader = Shader::create("my_shader", {
+      { Shader::Type::Vertex,   default_shader_vs },
+      { Shader::Type::Fragment, default_shader_fs },
+    });
+  if (!shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
+
   auto model = Model::Builder()
     .transform(Transform()
                // Move the model forward in the X axis, and rotate it
@@ -68,20 +78,9 @@ int main(void)
                    .path("examples/assets/textures/container2.png")
                    .build())
           .build())
+    .material({*shader})
     .build();
 
-  auto shader = Shader::create("my_shader", {
-      { Shader::Type::Vertex,   default_shader_vs },
-      { Shader::Type::Fragment, default_shader_fs },
-    });
-  if (!shader)
-  {
-    ERROR("Error creating shader");
-    return 1;
-  }
-
-  auto material = Material(*shader);
-  
   while(!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
@@ -102,7 +101,7 @@ int main(void)
     
     // Draw
     Renderer::begin_frame(camera);
-    Renderer::submit({&model, &material});
+    Renderer::submit(&model);
     Renderer::end_frame();
     
     Window::poll_events();

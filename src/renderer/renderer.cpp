@@ -47,15 +47,16 @@ void Renderer::flush()
 {
   for (auto& command : Renderer::render_queue)
   {
-    command.material->apply();
+    auto& material = command.model->get_material();
+    material.apply();
     
-    command.material->shader.set_mat4("view",       Renderer::view);
-    command.material->shader.set_mat4("projection", Renderer::projection);
-    command.material->shader.set_mat4("model",      command.model->get_transform().get_model_matrix());
-    command.material->shader.set_vec3("viewPos",    Renderer::cam_position);
+    material.shader.set_mat4("view",       Renderer::view);
+    material.shader.set_mat4("projection", Renderer::projection);
+    material.shader.set_mat4("model",      command.model->get_transform().get_model_matrix());
+    material.shader.set_vec3("viewPos",    Renderer::cam_position);
 
     // TODO: move this to material
-    command.material->shader.set_float("material.shininess", 32.0f);
+    material.shader.set_float("material.shininess", 32.0f);
     
     // shader->set_int("atlasIndex", 0); // TODO
 

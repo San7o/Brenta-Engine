@@ -13,6 +13,7 @@ Model::Model(Config &&conf)
 {
   this->path          = conf.model_path;
   this->transform     = conf.transform;
+  this->material      = std::move(conf.material);
   
   if (conf.model_path != "")
     this->load(conf.texture_props);
@@ -65,6 +66,11 @@ void Model::draw() const
 Transform &Model::get_transform()
 {
   return this->transform;
+}
+
+Material &Model::get_material()
+{
+  return this->material;
 }
 
 void Model::process_node(aiNode *node, const aiScene *scene,
@@ -195,6 +201,12 @@ Model::load_material_textures(aiMaterial *mat,
 Model::Builder &Model::Builder::transform(const Transform& transform)
 {
   this->conf.transform = transform;
+  return *this;
+}
+
+Model::Builder &Model::Builder::material(Material &&material)
+{
+  this->conf.material = std::move(material);
   return *this;
 }
 

@@ -6,8 +6,8 @@
 #pragma once
 
 #include <brenta/renderer/mesh.hpp>
+#include <brenta/renderer/material.hpp>
 #include <brenta/renderer/transform.hpp>
-#include <brenta/renderer/opengl/shader.hpp>
 
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
@@ -29,7 +29,7 @@ public:
   struct Config;
   class  Builder;
 
-  Model() {}
+  Model() = default;
   Model(Config &&conf);
   ~Model();
 
@@ -40,13 +40,17 @@ public:
   Model& operator=(Model&&) noexcept = default;
   
   Transform &get_transform();
+  Material  &get_material();
+  
   void draw() const;
 
 private:
   
-  Transform                             transform;
   std::string                           path;
   std::string                           directory;
+  
+  Transform                             transform;
+  Material                              material;
   std::vector<Mesh>                     meshes;
   std::vector<std::shared_ptr<Texture>> textures_loaded;
   
@@ -66,6 +70,7 @@ private:
 struct Model::Config
 {
   Transform                 transform     = {};
+  Material                  material      = {};
   std::string               model_path    = "";
   Texture::Properties       texture_props = {};
   std::vector<Mesh>         meshes        = {};
@@ -76,6 +81,7 @@ class Model::Builder
 public:
 
   Builder &transform(const Transform& transform);
+  Builder &material(Material &&);
   Builder &path(const std::filesystem::path &path);
   Builder &texture_props(const Texture::Properties &props);
   Builder &mesh(Mesh &&mesh);

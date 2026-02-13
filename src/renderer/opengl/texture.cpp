@@ -52,6 +52,12 @@ Texture::Type Texture::get_type() const
   return this->type;
 }
 
+Texture::Target Texture::get_target() const
+{
+  return this->target;
+}
+
+
 Texture::Properties &Texture::get_properties()
 {
   return this->properties;

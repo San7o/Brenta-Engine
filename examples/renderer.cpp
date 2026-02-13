@@ -48,15 +48,6 @@ int main()
               .build())
     .fov(45.0f)
     .build();
-  
-  auto model = Model::Builder()
-    .path("examples/assets/models/backpack/backpack.obj")
-    .transform(Transform()
-               .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-               .rotate(glm::angleAxis(glm::radians(-90.0f),
-                                      glm::vec3(0.0f, 1.0f, 0.0f)))
-               .scale(glm::vec3(1.0)))
-    .build();
 
   auto shader = Shader::create("default_shader", {
       { Shader::Type::Vertex,   default_shader_vs },
@@ -69,6 +60,16 @@ int main()
 
   auto material = Material(*shader);
 
+  auto model = Model::Builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+               .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                      glm::vec3(0.0f, 1.0f, 0.0f)))
+               .scale(glm::vec3(1.0)))
+    .material(std::move(material))
+    .build();
+
   while (!Window::should_close())
   { 
     if (Window::is_key_pressed(Key::Escape))
@@ -78,7 +79,7 @@ int main()
     Gl::clear();
     
     Renderer::begin_frame(cam);
-    Renderer::submit({&model, &material});
+    Renderer::submit(&model);
     Renderer::end_frame();
     
     Window::poll_events();

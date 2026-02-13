@@ -122,7 +122,7 @@ public:
     this->id         = other.id;
     this->path       = other.path;
     this->type       = other.type;
-    this->target    = other.target;
+    this->target     = other.target;
     this->properties = other.properties;
     other.id = 0;
   }
@@ -132,7 +132,7 @@ public:
     this->id         = other.id;
     this->type       = other.type;
     this->path       = other.path;
-    this->target    = other.target;
+    this->target     = other.target;
     this->properties = other.properties;
     other.id = 0;
     return *this;
@@ -140,9 +140,10 @@ public:
 
   ~Texture();
 
-  Texture::Id get_id() const;
-  std::string get_path() const;
-  Texture::Type get_type() const;
+  Texture::Id      get_id() const;
+  std::string      get_path() const;
+  Texture::Type    get_type() const;
+  Texture::Target  get_target() const;
   Texture::Properties &get_properties();
   
   void bind();

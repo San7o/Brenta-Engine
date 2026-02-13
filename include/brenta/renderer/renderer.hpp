@@ -16,6 +16,15 @@
 namespace brenta
 {
 
+//
+// Renderer
+// --------
+//
+// The renderer is a logical abtraction that is responsible to draw
+// a "rendering unit" aka render command. It takes all the
+// information for a render call and it performs the drawing,
+// calculating view, projection and model matrixes.
+//
 class Renderer
 {
 public:
@@ -45,11 +54,10 @@ class Renderer::Command
 public:
   
   Model        *model;
-  Material     *material;
+  
   Command() = default;
-  Command(Model *model,
-          Material *material)
-    : model(model), material(material) {}
+  Command(Model *model)
+    : model(model) {}
 };
   
 } // namespace brenta

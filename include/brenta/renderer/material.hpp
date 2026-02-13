@@ -22,8 +22,7 @@ namespace brenta
 //
 // A material stores a shader and the values of its uniforms. The
 // renderer uses the material to set which shader program should be
-// used, and which uniform values. This makes it possible to easily
-// swap / modify materials to change the output of the rendering.
+// used, and which uniform values.
 //
 // Use apply() to set the shader and its uniforms.
 //
@@ -35,6 +34,8 @@ public:
 
   Material() = default;
   Material(const Shader &shader) : shader(shader) {}
+  Material(Material&& other) = default;
+  Material &operator=(Material&& other) = default;
 
   void apply();
 

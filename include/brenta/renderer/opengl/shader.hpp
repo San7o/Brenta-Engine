@@ -98,7 +98,7 @@ public:
 
   // Non static API
   
-  Shader()  = delete;
+  Shader() = default;
   Shader(Shader::Id id, Shader::Name name) : id(id), name(name) {}
   
   Shader::Id        get_id() const;
