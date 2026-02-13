@@ -86,7 +86,6 @@ public:
 
 private:
   
-  static const Window::Config default_config;
   static Window::Config       init_config;
 
   static int          width;
@@ -108,20 +107,20 @@ private:
 struct Window::Config
 {
 public:
-  int width;
-  int height;
-  std::string title;
-  bool capture_mouse;
-  bool msaa;
-  bool vsync;
-  bool debug;
+  int         width         = 800;
+  int         height        = 600;
+  std::string title         = "Brenta Engine";
+  bool        capture_mouse = false;
+  bool        msaa          = false;
+  bool        vsync         = false;
+  bool        debug         = false;
 };
   
 class Window::Builder : public Subsystem::Builder
 {
 private:
 
-  Window::Config conf = Window::default_config;
+  Window::Config conf = {};
   
 public:
 

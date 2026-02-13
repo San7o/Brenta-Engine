@@ -12,11 +12,7 @@ using namespace brenta;
 //
 
 const std::string Logger::subsystem_name = "logger";
-const Logger::Config Logger::default_config = {
-  oak::level::info,
-  "/tmp/brenta_logs",
-};
-Logger::Config Logger::init_config = default_config;
+Logger::Config Logger::init_config = {};
 bool Logger::initialized = false;
 
 //

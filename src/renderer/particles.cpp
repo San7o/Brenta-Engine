@@ -20,21 +20,6 @@
 
 using namespace brenta;
 
-const ParticleEmitter::Config ParticleEmitter::default_config = {
-  glm::vec3(0.0f, 0.0f, 0.0f),
-  glm::vec3(0.0f, 0.0f, 0.0f),
-  glm::vec3(0.0f, 0.0f, 0.0f),
-  1.0f,
-  MAX_PARTICLES,
-  0.01f,
-  1.0f,
-  "",
-  8,
-  8,
-  0,
-  nullptr,
-};
-
 struct ParticleSettings {
   glm::vec3 gravity;
   float     deltaTime;

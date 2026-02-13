@@ -68,31 +68,30 @@ public:
 private:
   
   Camera *cam;
-  static const Config default_config;
 
 };
 
 struct ParticleEmitter::Config
 {
-  glm::vec3    starting_position;
-  glm::vec3    starting_velocity;
-  glm::vec3    starting_spread;
-  float        starting_time_to_live;
-  int          num_particles;
-  float        spawn_rate;
-  float        scale;
-  std::filesystem::path atlas_path;
-  int          atlas_width;
-  int          atlas_height;
-  int          atlas_index;
-  Camera      *cam;
+  glm::vec3              starting_position     = {};
+  glm::vec3              starting_velocity     = {};
+  glm::vec3              starting_spread       = {};
+  float                  starting_time_to_live = 1.0f;
+  int                    num_particles         = MAX_PARTICLES;
+  float                  spawn_rate            = 0.01f;
+  float                  scale                 = 1.0f;
+  std::filesystem::path  atlas_path            = "";
+  int                    atlas_width           = 8;
+  int                    atlas_height          = 8;
+  int                    atlas_index           = 0;
+  Camera                *cam                   = nullptr;
 };
   
 class ParticleEmitter::Builder
 {
 private:
 
-  ParticleEmitter::Config conf = ParticleEmitter::default_config;
+  ParticleEmitter::Config conf = {};
 
 public:
   Builder &starting_position(glm::vec3 starting_position);

@@ -1,4 +1,4 @@
-- add meshe to model's config
+- add meshes to model's config
 - add Scene class
 - implement Material abstraction
 - rewrite logger

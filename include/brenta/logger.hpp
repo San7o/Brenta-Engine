@@ -47,7 +47,6 @@ public:
   
 private:
   
-  static const Config   default_config;
   static Config         init_config;
   static bool           initialized;
   
@@ -55,15 +54,15 @@ private:
 
 struct Logger::Config
 {
-  oak::level            log_level;
-  std::filesystem::path log_file;
+  oak::level            log_level = oak::level::info;
+  std::filesystem::path log_file  = "/tmp/brenta_logs";
 };
 
 class Logger::Builder : public Subsystem::Builder
 {
 private:
 
-  Logger::Config conf = Logger::default_config;
+  Logger::Config conf = {};
   
 public:
 

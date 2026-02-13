@@ -24,16 +24,7 @@ GLFWwindow        *Window::window_backend;
 std::string        Window::title;
 Time               Window::time;
 const std::string  Window::subsystem_name = "window";
-const Window::Config Window::default_config = {
-  800,
-  600,
-  "Brenta Engine",
-  false,
-  false,
-  false,
-  false,
-};
-Window::Config Window::init_config = Window::default_config;
+Window::Config Window::init_config = {};
 bool Window::initialized = false;
 
 //
