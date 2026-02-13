@@ -10,10 +10,12 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/scene.hpp>
 
 #include <viotecs/viotecs.hpp>
 REGISTER_SYSTEMS()
 
+#include <memory>
 #include <iostream>
 
 #include "assets/shaders/c/default_shader_vs.c"
@@ -70,9 +72,13 @@ int main()
     .material(std::move(material))
     .build();
 
-  auto cam_ptr   = std::make_shared<Camera>(std::move(cam));
-  auto model_ptr = std::make_shared<Model>(std::move(model));
+  auto camera_ptr = std::make_shared<Camera>(std::move(cam));
+  auto model_ptr  = std::make_shared<Model>(std::move(model));
   
+  auto scene = Scene()
+    .add_model(model_ptr)
+    .set_active_camera(camera_ptr);
+
   while (!Window::should_close())
   { 
     if (Window::is_key_pressed(Key::Escape))
@@ -80,10 +86,9 @@ int main()
 
     Gl::set_color(Color::grey());
     Gl::clear();
-    
-    Renderer::begin_frame(cam_ptr);
-    Renderer::submit(model_ptr);
-    Renderer::end_frame();
+
+    scene.update(Window::get_time().get_delta());
+    scene.draw();
     
     Window::poll_events();
     Window::swap_buffers();

@@ -22,6 +22,8 @@ REGISTER_SYSTEMS();
 #include "assets/shaders/c/default_shader_vs.c"
 #include "assets/shaders/c/default_shader_fs.c"
 
+#include <memory>
+
 using namespace brenta;
 
 int main(void)
@@ -81,6 +83,9 @@ int main(void)
     .material({*shader})
     .build();
 
+  auto camera_ptr = std::make_shared<Camera>(std::move(camera));
+  auto model_ptr  = std::make_shared<Model>(std::move(model));
+  
   while(!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
@@ -92,7 +97,7 @@ int main(void)
     // Update
 
     // Just to create some action
-    auto pos = camera.get_pos();
+    auto pos = camera_ptr->get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
     acam.yaw++;
     if (acam.yaw >= 45.0f)
@@ -100,8 +105,8 @@ int main(void)
     camera.set_pos(acam);
     
     // Draw
-    Renderer::begin_frame(camera);
-    Renderer::submit(&model);
+    Renderer::begin_frame(camera_ptr);
+    Renderer::submit(model_ptr);
     Renderer::end_frame();
     
     Window::poll_events();

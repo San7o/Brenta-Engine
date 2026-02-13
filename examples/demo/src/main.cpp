@@ -14,7 +14,6 @@ using namespace brenta;
 
 #ifdef BRENTA_USE_ECS
 using namespace viotecs;
-
 REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
                  DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
@@ -49,8 +48,10 @@ int main()
           .font("examples/assets/fonts/arial.ttf")
           .size(40))
     .build();
-  
-  auto engine = Engine::managed();
+
+  auto engine = Engine::instance();
+  engine.initialize();
+  ///auto engine = Engine::managed();
   
   auto camera = Camera::Builder()
     .projection_type(Camera::ProjectionType::Perspective)
@@ -138,5 +139,6 @@ int main()
     Window::swap_buffers();
   }
 
+  engine.terminate();
   return 0;
 }

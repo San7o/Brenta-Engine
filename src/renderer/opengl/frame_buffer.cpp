@@ -89,6 +89,8 @@ void FrameBuffer::unbind()
 
 void FrameBuffer::destroy()
 {
+  if (this->get_id() == 0) return;
+  
   glDeleteFramebuffers(1, &this->get_id());
   glDeleteTextures(1, &this->texture_id);
   return;

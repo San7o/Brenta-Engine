@@ -55,7 +55,7 @@ private:
 struct Logger::Config
 {
   oak::level            log_level = oak::level::info;
-  std::filesystem::path log_file  = "/tmp/brenta_logs";
+  std::filesystem::path log_file  = "/tmp/brenta-logs.txt";
 };
 
 class Logger::Builder : public Subsystem::Builder

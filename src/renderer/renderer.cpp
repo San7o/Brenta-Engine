@@ -21,14 +21,14 @@ glm::vec3 Renderer::cam_position;
 // Member functions
 //
 
-void Renderer::begin_frame(Camera& cam)
+void Renderer::begin_frame(std::shared_ptr<Camera> cam)
 {
   Renderer::render_queue.clear();
   Renderer::projection =
-    cam.get_projection_matrix(Window::get_width(),
-                              Window::get_height());
-  Renderer::view = cam.get_view_matrix();
-  Renderer::cam_position = cam.get_transform().get_pos();
+    cam->get_projection_matrix(Window::get_width(),
+                               Window::get_height());
+  Renderer::view = cam->get_view_matrix();
+  Renderer::cam_position = cam->get_transform().get_pos();
 
   return;
 }
@@ -62,5 +62,7 @@ void Renderer::flush()
 
     command.model->draw();
   }
+
+  Renderer::render_queue.clear();
   return;
 }

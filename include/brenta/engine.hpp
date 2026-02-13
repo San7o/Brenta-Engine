@@ -59,19 +59,13 @@ private:
 
 };
 
-/**
- * @brief Automatically initialize and terminate engine with RAII
- */
+// Automatically initialize and terminate engine with RAII
 class Engine::Manager
 {
 public:
-  /**
-   * @brief Initializes all subsystems, throws and exeption in case of failure
-   */
+  // Initializes all subsystems, throws and exeption in case of failure
   Manager();
-  /**
-   * @brief Terminates all subsystems
-   */
+  // Terminates all subsystems
   ~Manager();
 };
 

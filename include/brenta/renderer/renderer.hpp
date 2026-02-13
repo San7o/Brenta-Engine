@@ -34,7 +34,7 @@ public:
   Renderer() = delete;
   ~Renderer() = delete;
   
-  static void begin_frame(Camera& cam);
+  static void begin_frame(std::shared_ptr<Camera> cam);
   static void submit(const Renderer::Command& it);
   static void end_frame();
 
@@ -53,10 +53,10 @@ class Renderer::Command
 {
 public:
   
-  Model        *model;
+  std::shared_ptr<Model>         model;
   
   Command() = default;
-  Command(Model *model)
+  Command(std::shared_ptr<Model> model)
     : model(model) {}
 };
   
