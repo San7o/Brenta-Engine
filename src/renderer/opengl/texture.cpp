@@ -16,10 +16,11 @@ using namespace brenta;
 
 Texture::Texture(const Config &conf)
 {
-  this->type = conf.type;
-  this->path = conf.path;
+  this->type       = conf.type;
+  this->target     = conf.target;
+  this->path       = conf.path;
   this->properties = conf.properties;
-  this->id = this->load(this->path, conf.properties.get_flipped());
+  this->id         = this->load(this->path, conf.properties.get_flipped());
   
   DEBUG("texture: {} created", this->id);
   return;
@@ -56,9 +57,10 @@ Texture::Properties &Texture::get_properties()
   return this->properties;
 }
 
-void Texture::active_texture(GLenum texture)
+void Texture::active_texture(int texture)
 {
-  glActiveTexture(texture);
+  glActiveTexture(GL_TEXTURE0 + texture);
+  check_error();
   return;
 }
 
@@ -76,7 +78,8 @@ unsigned int Texture::load(const std::filesystem::path &path, bool flip)
 
   // restore state
   glBindTexture(GL_TEXTURE_2D, old_texture_2d);
-  glActiveTexture(old_active_texture);  
+  glActiveTexture(old_active_texture);
+  check_error();
   return texture;
 }
 
@@ -84,6 +87,7 @@ void Texture::bind_id(Texture::Target target, Texture::Id id,
                       const Texture::Properties &prop)
 {
   glBindTexture(target, id);
+  check_error();
 
   // Wrapping
   glTexParameteri(target, GL_TEXTURE_WRAP_S, prop.get_wrapping());
@@ -98,13 +102,14 @@ void Texture::bind_id(Texture::Target target, Texture::Id id,
 
   glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.get_mipmap_min());
   glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.get_mipmap_mag());
-  
+
+  check_error();
   return;
 }
 
-void Texture::bind(Texture::Target target)
+void Texture::bind()
 {
-  Texture::bind_id(target, this->id, this->properties);
+  Texture::bind_id(this->target, this->id, this->properties);
   return;
 }
 
@@ -132,6 +137,8 @@ void Texture::read_image(const char *path, bool flip)
     ERROR("Texture::read_image: failed to load texture at location: {}", path);
   }
   stbi_image_free(data);
+
+  check_error();
   return;
 }
 
@@ -230,6 +237,13 @@ Texture::Builder& Texture::Builder::type(Texture::Type type)
   this->conf.type = type;
   return *this;
 }
+
+Texture::Builder& Texture::Builder::target(Texture::Target target)
+{
+  this->conf.target = target;
+  return *this;
+}
+
 Texture::Builder& Texture::Builder::path(const std::string& path)
 {
   this->conf.path = path;

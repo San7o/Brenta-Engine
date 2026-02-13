@@ -49,6 +49,7 @@ ParticleEmitter::ParticleEmitter(Config conf)
   // Load Texture Atlas
   this->atlas =
     Texture::Builder()
+    .target(Texture::Target::Texture2D)
     .path(conf.atlas_path)
     .properties(Texture::Properties()
                 .wrapping(Texture::Wrapping::Repeat)
@@ -214,8 +215,8 @@ void ParticleEmitter::render()
                            (float) window_width  / (float) window_height);
 
   // Set Textures
-  Texture::active_texture(GL_TEXTURE0);
-  this->atlas.bind(Texture::Target::Texture2D);
+  Texture::active_texture(0);
+  this->atlas.bind();
   
   glDrawArrays(GL_POINTS, 0, num_particles);
   Gl::check_error();

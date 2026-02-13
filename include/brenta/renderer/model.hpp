@@ -40,7 +40,7 @@ public:
   Model& operator=(Model&&) noexcept = default;
   
   Transform &get_transform();
-  void draw(Shader::Name shader) const;
+  void draw() const;
 
 private:
   

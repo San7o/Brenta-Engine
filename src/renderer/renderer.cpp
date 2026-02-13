@@ -45,25 +45,21 @@ void Renderer::end_frame()
 
 void Renderer::flush()
 {
-  for (auto& i : Renderer::render_queue)
+  for (auto& command : Renderer::render_queue)
   {
-    auto shader = Shader::get_shader(i.material.shader.get_name());
-    if (!shader)
-    {
-      ERROR("Renderer::flush: error accessing shader named {}",
-            i.material.shader.get_name());
-      continue;
-    }
+    command.material->apply();
     
-    shader->use();
-    shader->set_mat4("view", Renderer::view);
-    shader->set_mat4("projection", Renderer::projection);
-    shader->set_mat4("model", i.model->get_transform().get_model_matrix());
-    shader->set_vec3("viewPos", Renderer::cam_position);
-    shader->set_float("material.shininess", 32.0f); // TODO
+    command.material->shader.set_mat4("view",       Renderer::view);
+    command.material->shader.set_mat4("projection", Renderer::projection);
+    command.material->shader.set_mat4("model",      command.model->get_transform().get_model_matrix());
+    command.material->shader.set_vec3("viewPos",    Renderer::cam_position);
+
+    // TODO: move this to material
+    command.material->shader.set_float("material.shininess", 32.0f);
+    
     // shader->set_int("atlasIndex", 0); // TODO
 
-    i.model->draw(i.material.shader.get_name());
+    command.model->draw();
   }
   return;
 }

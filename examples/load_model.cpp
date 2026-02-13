@@ -60,7 +60,7 @@ int main()
 
   // Load the shader
   auto shader = Shader::create("default_shader", {
-         { Shader::Type::Vertex, default_shader_vs },
+         { Shader::Type::Vertex,   default_shader_vs },
          { Shader::Type::Fragment, default_shader_fs } });
   if (!shader)
   {
@@ -95,7 +95,7 @@ int main()
     shader->set_mat4("projection", projection);
     shader->set_mat4("model",      model);
 
-    our_model.draw("default_shader");
+    our_model.draw();
 
     Window::poll_events();
     Window::swap_buffers();

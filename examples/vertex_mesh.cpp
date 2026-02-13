@@ -3,6 +3,10 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+//
+// Create a model from a list of vertexes
+//
+
 #include <brenta/renderer/mesh.hpp>
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
@@ -52,6 +56,8 @@ int main(void)
     .mesh(Mesh::Builder()
           .vertices({
               // A simple triangle
+              // Note that textures are indexed with the boottom left
+              // at (0,0) and top right (1,1)
               { glm::vec3(-0.5f, -0.5f, 0.0), glm::vec3(1.0), glm::vec2(0.0, 0.0) },
               { glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(1.0), glm::vec2(1.0, 0.0) },
               { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0),  glm::vec2(0.5, 1.0) },
@@ -73,6 +79,8 @@ int main(void)
     ERROR("Error creating shader");
     return 1;
   }
+
+  auto material = Material(*shader);
   
   while(!Window::should_close())
   {
@@ -84,6 +92,7 @@ int main(void)
 
     // Update
 
+    // Just to create some action
     auto pos = camera.get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
     acam.yaw++;
@@ -93,7 +102,7 @@ int main(void)
     
     // Draw
     Renderer::begin_frame(camera);
-    Renderer::submit({&model, Material(*shader)});
+    Renderer::submit({&model, &material});
     Renderer::end_frame();
     
     Window::poll_events();

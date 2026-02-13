@@ -49,7 +49,7 @@ int main()
     .fov(45.0f)
     .build();
   
-  Model m = Model::Builder()
+  auto model = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform()
                .translate(glm::vec3(5.0f, 0.0f, 0.0f))
@@ -67,16 +67,18 @@ int main()
     return 1;
   }
 
+  auto material = Material(*shader);
+
   while (!Window::should_close())
   { 
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
-    Gl::set_color(Color(0.2f, 0.2f, 0.207f, 1.0f));
+    Gl::set_color(Color::grey());
     Gl::clear();
     
     Renderer::begin_frame(cam);
-    Renderer::submit({&m, Material(*shader)});
+    Renderer::submit({&model, &material});
     Renderer::end_frame();
     
     Window::poll_events();

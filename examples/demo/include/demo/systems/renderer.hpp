@@ -83,7 +83,7 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
         shader->set_int("atlasIndex", 0);
       }
 
-      m->draw(shader_name);
+      m->draw();
     }
   }
 };

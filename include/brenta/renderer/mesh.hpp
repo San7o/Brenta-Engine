@@ -7,7 +7,6 @@
 
 #include <brenta/renderer/opengl/buffer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 
@@ -26,8 +25,8 @@ namespace brenta
  * @brief The Mesh class represents a 3D model
  *
  * A mesh is a collection of vertices, indices and textures that
- * represent a 3D model. The mesh can be drawn using a shader and
- * calling the draw() method.
+ * represent a 3D model. The mesh can be drawn using the draw()
+ * method.
  */
 class Mesh
 {
@@ -53,7 +52,7 @@ public:
   constexpr Mesh& operator=(Mesh&&) noexcept = default;
   ~Mesh();
 
-  void draw(Shader::Name shader_name) const;
+  void draw() const;
 
 private:
 

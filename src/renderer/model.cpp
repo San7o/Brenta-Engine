@@ -53,11 +53,11 @@ void Model::load(const Texture::Properties &props)
   return;
 }
 
-void Model::draw(Shader::Name shader) const
+void Model::draw() const
 {
   for (unsigned int i = 0; i < meshes.size(); i++)
   {
-    meshes[i].draw(shader);
+    meshes[i].draw();
   }
   return;
 }
@@ -176,6 +176,7 @@ Model::load_material_textures(aiMaterial *mat,
     {
       Texture t = Texture::Builder()
         .type(type_brenta)
+        .target(Texture::Target::Texture2D)
         .path(path)
         .properties(props)
         .build();

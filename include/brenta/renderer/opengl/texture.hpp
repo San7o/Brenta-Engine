@@ -15,6 +15,18 @@
 namespace brenta
 {
 
+//
+// Texture
+// -------
+//
+// This class provides an interface to interact with opengl
+// textures. There are several types of textures, as well as target
+// and with different properties.
+//
+// To bind a texture, use the bind() method. Before this, you need
+// to make sure that you set the coorect active_texture(), which
+// is the index that the shader will use to access the bound texture.
+//
 class Texture
 {
 public:
@@ -94,8 +106,8 @@ public:
   class  Properties;
   class  Builder;
   
-  // This method activates a texture unit. Arg is GL_TEXTURE0 + x
-  static void active_texture(GLenum texture);
+  // This tells the shader where to find the texture
+  static void active_texture(int texture);
   static Texture::Id load(const std::filesystem::path &path, bool flip = true);
   static void bind_id(Texture::Target target, Texture::Id id,
                       const Texture::Properties &properties = Texture::Properties());
@@ -110,6 +122,7 @@ public:
     this->id         = other.id;
     this->path       = other.path;
     this->type       = other.type;
+    this->target    = other.target;
     this->properties = other.properties;
     other.id = 0;
   }
@@ -119,6 +132,7 @@ public:
     this->id         = other.id;
     this->type       = other.type;
     this->path       = other.path;
+    this->target    = other.target;
     this->properties = other.properties;
     other.id = 0;
     return *this;
@@ -131,7 +145,7 @@ public:
   Texture::Type get_type() const;
   Texture::Properties &get_properties();
   
-  void bind(Texture::Target target);
+  void bind();
 
   class Properties
   {
@@ -174,6 +188,7 @@ private:
   
   Texture::Id          id;
   Texture::Type        type;
+  Texture::Target      target;
   std::string          path;
   Texture::Properties  properties;
   
@@ -184,6 +199,7 @@ private:
 struct Texture::Config
 {
   Texture::Type       type       = Texture::Type::None;
+  Texture::Target     target     = Texture::Target::Texture2D;
   std::string         path       = "";
   Texture::Properties properties = {};
 };
@@ -193,6 +209,7 @@ class Texture::Builder
 public:
 
   Builder& type(Texture::Type type);
+  Builder& target(Texture::Target target);
   Builder& path(const std::string& path);
   Builder& flipped(bool flipped);
   Builder& properties(const Texture::Properties& prop);

@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/mesh.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/logger.hpp>
 #include <iostream>
 
@@ -58,12 +59,8 @@ void Mesh::init()
   return;
 }
 
-void Mesh::draw(Shader::Name shader_name) const
+void Mesh::draw() const
 {
-  auto shader = Shader::get_shader(shader_name);
-  if (!shader) return;
-  shader->use();
-
   if (this->vao.get_id() == 0)
   {
     ERROR("Mesh::draw: not initialized");
@@ -74,7 +71,7 @@ void Mesh::draw(Shader::Name shader_name) const
   unsigned int specularNr = 1;
   for (unsigned int i = 0; i < this->textures.size(); i++)
   {
-    Texture::active_texture(GL_TEXTURE0 + i);
+    Texture::active_texture(i);
 
     std::string number;
     std::string name;
@@ -93,19 +90,22 @@ void Mesh::draw(Shader::Name shader_name) const
       number = "0";
       break;
     }
-
-    shader->set_int(("material." + name + number).c_str(), i);
-    textures[i]->bind(Texture::Target::Texture2D);
+    
+    GLint prog = 0;
+    glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
+    Shader shader = Shader(prog, "tmp_material_shader");
+    shader.set_int(("material." + name + number).c_str(), i);
+    textures[i]->bind();
   }
   
-  Texture::active_texture(GL_TEXTURE0);
+  Texture::active_texture(0);
 
   // draw mesh
   this->vao.bind();
   Gl::draw_elements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
   this->vao.unbind();
 
-  Texture::active_texture(GL_TEXTURE0);
+  Texture::active_texture(0);
   return;
 }
 

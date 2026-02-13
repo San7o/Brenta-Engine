@@ -44,12 +44,11 @@ class Renderer::Command
 {
 public:
   
-  Model         *model;
-  const Material       material;
-
+  Model        *model;
+  Material     *material;
   Command() = default;
   Command(Model *model,
-          const Material &material)
+          Material *material)
     : model(model), material(material) {}
 };
   
