@@ -42,7 +42,7 @@ Texture::Id Texture::get_id() const
   return this->id;
 }
 
-std::string Texture::get_path() const
+std::filesystem::path Texture::get_path() const
 {
   return this->path;
 }
@@ -80,7 +80,7 @@ unsigned int Texture::load(const std::filesystem::path &path, bool flip)
   Texture::Id texture;
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
-  read_image(path.c_str(), flip);
+  read_image(path, flip);
 
   // restore state
   glBindTexture(GL_TEXTURE_2D, old_texture_2d);
@@ -119,11 +119,12 @@ void Texture::bind()
   return;
 }
 
-void Texture::read_image(const char *path, bool flip)
+void Texture::read_image(const std::filesystem::path &path, bool flip)
 {
   int width, height, nrChannels;
   stbi_set_flip_vertically_on_load(flip);
-  unsigned char *data = stbi_load(path, &width, &height, &nrChannels, 0);
+  unsigned char *data = stbi_load(path.string().c_str(), &width,
+                                  &height, &nrChannels, 0);
   if (data)
   {
     GLenum format = GL_RGB;
@@ -140,7 +141,8 @@ void Texture::read_image(const char *path, bool flip)
   }
   else
   {
-    ERROR("Texture::read_image: failed to load texture at location: {}", path);
+    ERROR("Texture::read_image: failed to load texture at location: {}",
+          path.string());
   }
   stbi_image_free(data);
 
@@ -250,7 +252,7 @@ Texture::Builder& Texture::Builder::target(Texture::Target target)
   return *this;
 }
 
-Texture::Builder& Texture::Builder::path(const std::string& path)
+Texture::Builder& Texture::Builder::path(const std::filesystem::path& path)
 {
   this->conf.path = path;
   return *this;

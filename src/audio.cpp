@@ -40,7 +40,7 @@ std::expected<void, Subsystem::Error> Audio::initialize()
   for (auto& f : Audio::init_sounds)
   {
     if (!Audio::load(std::get<0>(f), std::get<1>(f), std::get<2>(f)).has_value())
-      return std::unexpected("Loading audio " + get<0>(f));
+      return std::unexpected("Loading audio " + std::string(get<0>(f)));
   }
 
   for (auto& s : Audio::init_streams)
@@ -66,10 +66,10 @@ std::expected<void, Subsystem::Error> Audio::terminate()
 {
   if (!this->is_initialized()) return {};
   
-  for (auto sound : Audio::sounds)
+  for (auto& sound : Audio::sounds)
     ma_sound_uninit(&sound.second);
   
-  for (auto stream : Audio::streams)
+  for (auto& stream : Audio::streams)
     ma_sound_group_uninit(&stream.second);
 
   ma_engine_uninit(&Audio::engine);
@@ -101,7 +101,7 @@ Audio &Audio::instance()
 
 std::expected<void, Audio::Error>
 Audio::load(const Audio::SoundId &sound_id,
-            const std::string &path,
+            const std::filesystem::path &path,
             const Audio::StreamId &stream_id)
 {
   Audio::Stream *stream = Audio::get_stream(stream_id);
@@ -119,16 +119,16 @@ Audio::load(const Audio::SoundId &sound_id,
 
   Audio::Sound sound = {};
   Audio::sounds.insert({sound_id, sound});
-  if (ma_sound_init_from_file(&Audio::engine, path.c_str(), 0, stream, NULL,
+  if (ma_sound_init_from_file(&Audio::engine, (const char*)path.c_str(), 0, stream, NULL,
                               &Audio::sounds.at(sound_id)) != MA_SUCCESS)
   {
     ERROR("{}: error loading sound {} from path {}",
-          Audio::subsystem_name, sound_id, path);
+          Audio::subsystem_name, sound_id, path.string());
     return std::unexpected(Audio::Error::InitFromFile);
   }
   
   INFO("{}: loaded sound {} from {} in stream {}",
-       Audio::subsystem_name, sound_id, path, stream_id);
+       Audio::subsystem_name, sound_id, path.string(), stream_id);
   return {};
 }
 

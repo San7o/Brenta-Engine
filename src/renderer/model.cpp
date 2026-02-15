@@ -11,7 +11,7 @@ using namespace brenta;
 
 Model::Model(Config &&conf)
 {
-  this->path          = conf.model_path;
+  this->path          = conf.model_path.string();
   this->transform     = conf.transform;
   this->material      = std::move(conf.material);
   
@@ -58,7 +58,8 @@ Material &Model::get_material()
 void Model::load(const Texture::Properties &props)
 {
   tinyobj::ObjReaderConfig reader_config;
-  this->directory = this->path.substr(0, this->path.find_last_of('/'));
+  std::string path_str = path.string();
+  this->directory = path_str.substr(0, path_str.find_last_of('/'));
   reader_config.mtl_search_path = this->directory; // Path to material files
 
   tinyobj::ObjReader reader;

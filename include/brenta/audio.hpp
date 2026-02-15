@@ -74,7 +74,7 @@ public:
   // Automatically creates the stream if it does not exist.
   static std::expected<void, Audio::Error>
   load(const SoundId &sound_id,
-       const std::string &path,
+       const std::filesystem::path &path,
        const StreamId &stream_id = "default");
 
   // Play a sound on its stream

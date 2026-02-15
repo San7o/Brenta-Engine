@@ -399,13 +399,13 @@ Shader::Object::read_file(const std::filesystem::path &path)
   }
   catch (std::ifstream::failure &e)
   {
-    ERROR("shader: error reading shader file: {}", path.c_str());
+    ERROR("shader: error reading shader file: {}", path.string());
     return {};
   }
 
   if (code.empty())
   {
-    ERROR("shader: file is empty: {}", path.c_str());
+    ERROR("shader: file is empty: {}", path.string());
     return {};
   }
 

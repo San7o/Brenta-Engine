@@ -53,7 +53,7 @@ std::expected<void, Subsystem::Error> Logger::initialize()
   if (file_name != "")
   {
     oak::add_writer<oak::FileWriter>(file_name);
-    INFO("{}: set logging to file to {}", Logger::subsystem_name, file_name.c_str());
+    INFO("{}: set logging to file to {}", Logger::subsystem_name, file_name.string());
   }
 
   Logger::initialized = true;

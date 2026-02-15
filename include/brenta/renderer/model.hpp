@@ -9,9 +9,6 @@
 #include <brenta/renderer/material.hpp>
 #include <brenta/renderer/transform.hpp>
 
-#include <assimp/Importer.hpp>
-#include <assimp/postprocess.h>
-#include <assimp/scene.h>
 #include <glad/glad.h>
 
 #include <string>
@@ -48,7 +45,7 @@ public:
 
 private:
   
-  std::string                           path;
+  std::filesystem::path                 path;
   std::string                           directory;
   
   Transform                             transform;
@@ -72,7 +69,7 @@ struct Model::Config
 {
   Transform                 transform     = {};
   Material                  material      = {};
-  std::string               model_path    = "";
+  std::filesystem::path     model_path    = "";
   Texture::Properties       texture_props = {};
   std::vector<Mesh>         meshes        = {};
 };

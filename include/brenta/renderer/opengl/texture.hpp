@@ -117,7 +117,7 @@ public:
   Texture() {}
   Texture(const Config &conf);
   
-  constexpr Texture(Texture&& other) noexcept
+  Texture(Texture&& other) noexcept
   {
     this->id         = other.id;
     this->path       = other.path;
@@ -127,7 +127,7 @@ public:
     other.id = 0;
   }
 
-  constexpr Texture& operator=(Texture&& other) noexcept
+  Texture& operator=(Texture&& other) noexcept
   {
     this->id         = other.id;
     this->type       = other.type;
@@ -140,11 +140,11 @@ public:
 
   ~Texture();
 
-  Texture::Id      get_id() const;
-  std::string      get_path() const;
-  Texture::Type    get_type() const;
-  Texture::Target  get_target() const;
-  Texture::Properties &get_properties();
+  Texture::Id              get_id() const;
+  std::filesystem::path    get_path() const;
+  Texture::Type            get_type() const;
+  Texture::Target          get_target() const;
+  Texture::Properties     &get_properties();
   
   void bind();
 
@@ -187,22 +187,22 @@ public:
 
 private:
   
-  Texture::Id          id;
-  Texture::Type        type;
-  Texture::Target      target;
-  std::string          path;
-  Texture::Properties  properties;
+  Texture::Id             id;
+  Texture::Type           type;
+  Texture::Target         target;
+  std::filesystem::path   path;
+  Texture::Properties     properties;
   
-  static void read_image(const char *path, bool flip);
+  static void read_image(const std::filesystem::path &path, bool flip);
   
 };
   
 struct Texture::Config
 {
-  Texture::Type       type       = Texture::Type::None;
-  Texture::Target     target     = Texture::Target::Texture2D;
-  std::string         path       = "";
-  Texture::Properties properties = {};
+  Texture::Type           type       = Texture::Type::None;
+  Texture::Target         target     = Texture::Target::Texture2D;
+  std::filesystem::path   path       = "";
+  Texture::Properties     properties = {};
 };
 
 class Texture::Builder
@@ -211,7 +211,7 @@ public:
 
   Builder& type(Texture::Type type);
   Builder& target(Texture::Target target);
-  Builder& path(const std::string& path);
+  Builder& path(const std::filesystem::path& path);
   Builder& flipped(bool flipped);
   Builder& properties(const Texture::Properties& prop);
 
