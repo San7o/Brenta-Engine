@@ -26,7 +26,7 @@ Model::Model(Config &&conf)
       this->textures_loaded.push_back(t);
   }
   
-  DEBUG("model: initialized");
+  EVENT(Logger::Event::Lifetime, "model: initialized");
   return;
 }
 

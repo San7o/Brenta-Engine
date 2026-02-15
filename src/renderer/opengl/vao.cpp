@@ -17,7 +17,7 @@ Vao::~Vao()
 void Vao::init()
 {
   glGenVertexArrays(1, &this->id);
-  DEBUG("Vao: initialized");
+  EVENT(Logger::Event::Lifetime, "Vao: initialized");
   return;
 }
 
@@ -26,7 +26,7 @@ void Vao::destroy()
   if (this->get_id() == 0) return;
 
   glDeleteVertexArrays(1, &this->id);
-  DEBUG("Vao: destroyed");
+  EVENT(Logger::Event::Lifetime, "Vao: destroyed");
   return;
 }
 

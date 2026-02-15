@@ -19,25 +19,41 @@ bool Logger::initialized = false;
 // Subsystem interface
 //
 
+std::string Logger::event_name(enum Event event)
+{
+  switch(event)
+  {
+  case Logger::Event::Lifetime: return "lifetime";
+  default:                      return "unknown";
+  }
+}
+
 std::expected<void, Subsystem::Error> Logger::initialize()
 {
   if (this->is_initialized()) return {};
   
-  oak::init_writer();
-  
   oak::set_level(Logger::init_config.log_level);
+
+  for (auto event : Logger::init_config.events)
+    oak::enable_event(event, Logger::event_name(event));
+
+  if (Logger::init_config.flags.size() == 0)
+  {
+    // Default
+    oak::set_flags(oak::Flags::Level);
+  }
+  else
+  {
+    oak::set_flags(oak::Flags::None);
+    for (auto& flag : Logger::init_config.flags)
+      oak::add_flags(flag);
+  }
 
   auto file_name = Logger::init_config.log_file;
   if (file_name != "")
   {
-    auto file = oak::set_file(file_name);
-    if (!file.has_value())
-    {
-      ERROR("{}: Failed to open log file: {}",
-            Logger::subsystem_name, file_name.c_str());
-      return std::unexpected(this->subsystem_name);
-    }
-    INFO("{}: set log file to {}", Logger::subsystem_name, file_name.c_str());
+    oak::add_writer<oak::FileWriter>(file_name);
+    INFO("{}: set logging to file to {}", Logger::subsystem_name, file_name.c_str());
   }
 
   Logger::initialized = true;
@@ -49,8 +65,6 @@ std::expected<void, Subsystem::Error> Logger::terminate()
 {
   if (!this->is_initialized()) return {};
   
-  oak::stop_writer();
-
   Logger::initialized = false;
   return {};
 }
@@ -79,7 +93,7 @@ Logger &Logger::instance()
 // Builder
 //
 
-Logger::Builder &Logger::Builder::level(oak::level log_level)
+Logger::Builder &Logger::Builder::level(Logger::Level log_level)
 {
   this->conf.log_level = log_level;
   return *this;
@@ -88,6 +102,18 @@ Logger::Builder &Logger::Builder::level(oak::level log_level)
 Logger::Builder &Logger::Builder::file(std::filesystem::path log_file)
 {
   this->conf.log_file = log_file;
+  return *this;
+}
+
+Logger::Builder &Logger::Builder::event(Logger::Event event)
+{
+  this->conf.events.push_back(event);
+  return *this;
+}
+
+Logger::Builder &Logger::Builder::flag(Logger::Flags flag)
+{
+  this->conf.flags.push_back(flag);
   return *this;
 }
 

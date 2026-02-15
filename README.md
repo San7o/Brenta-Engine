@@ -72,7 +72,7 @@ auto model = Model::Builder()
 ![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)
 
 
-### Particles
+### GPU Particles
 
 ```c++
 auto emitter = ParticleEmitter::Builder()

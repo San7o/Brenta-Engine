@@ -17,13 +17,13 @@ Mesh::Mesh(Config&& conf)
   this->textures      = std::move(conf.textures);
   
   this->init();
-  DEBUG("mesh: created");
+  EVENT(Logger::Event::Lifetime, "mesh: created");
   return;
 }
 
 Mesh::~Mesh()
 {
-  DEBUG("mesh: deleted");
+  EVENT(Logger::Event::Lifetime, "mesh: deleted");
   return;
 }
 

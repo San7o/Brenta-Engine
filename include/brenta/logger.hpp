@@ -15,10 +15,11 @@
 #include <filesystem>
 #include <print>
 
-#define DEBUG(...)  OAK_DEBUG(__VA_ARGS__);
-#define INFO(...)   OAK_INFO(__VA_ARGS__);
-#define WARN(...)   OAK_WARN(__VA_ARGS__);
-#define ERROR(...)  OAK_ERROR(__VA_ARGS__);
+#define DEBUG(...)       OAK_DEBUG(__VA_ARGS__);
+#define INFO(...)        OAK_INFO(__VA_ARGS__);
+#define WARN(...)        OAK_WARN(__VA_ARGS__);
+#define ERROR(...)       OAK_ERROR(__VA_ARGS__);
+#define EVENT(type, ...) OAK_EVENT(type, __VA_ARGS__)
 
 namespace brenta
 {
@@ -27,6 +28,14 @@ class Logger : public Subsystem
 {
 public:
 
+  enum Event
+  {
+    Lifetime,
+  };
+
+  using Level = oak::Level;
+  using Flags  = oak::Flags;
+  
   struct Config;
   class Builder;
   
@@ -44,6 +53,7 @@ public:
   // Member functions
   
   static Logger &instance();
+  static std::string event_name(enum Event event);
   
 private:
   
@@ -54,8 +64,10 @@ private:
 
 struct Logger::Config
 {
-  oak::level            log_level = oak::level::info;
+  oak::Level            log_level = oak::Level::Info;
   std::filesystem::path log_file  = "/tmp/brenta-logs.txt";
+  std::vector<Event>    events    = {};
+  std::vector<Flags>    flags     = {};
 };
 
 class Logger::Builder : public Subsystem::Builder
@@ -69,8 +81,10 @@ public:
   Builder()  = default;
   ~Builder() = default;
 
-  Builder &level(oak::level log_level);
+  Builder &level(Logger::Level log_level);
   Builder &file(std::filesystem::path out_file);
+  Builder &event(Logger::Event event);
+  Builder &flag(Logger::Flags flag);
   
   Subsystem &build();
 };

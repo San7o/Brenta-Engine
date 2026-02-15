@@ -43,7 +43,7 @@ int main()
 
   Engine::Builder()
     .with(Logger::Builder()
-          .level(oak::level::debug))
+          .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("audio test")
           .width(screen_width)

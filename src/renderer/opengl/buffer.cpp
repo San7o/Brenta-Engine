@@ -16,6 +16,8 @@ Buffer::Buffer(Buffer::Target target)
 
 Buffer::~Buffer()
 {
+  // TODO: should call destoy here?
+  this->destroy();
   return;
 }
 
@@ -24,7 +26,7 @@ void Buffer::init(Buffer::Target target)
   this->target = target;
   glGenBuffers(1, &id);
   
-  DEBUG("buffer: initialized");
+  EVENT(Logger::Event::Lifetime, "buffer: initialized");
   return;
 }
 
@@ -35,7 +37,7 @@ void Buffer::destroy()
   glDeleteBuffers(1, &this->id);
   this->id = 0;
 
-  DEBUG("buffer: destroyed");
+  EVENT(Logger::Event::Lifetime, "buffer: destroyed");
   return;
 }
 

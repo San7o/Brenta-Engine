@@ -64,6 +64,8 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   glBindFramebuffer(GL_FRAMEBUFFER, old_fbo);
   glBindTexture(GL_TEXTURE_2D, old_tex);
   glBindRenderbuffer(GL_RENDERBUFFER, old_rbo);
+
+  EVENT(Logger::Event::Lifetime, "framebuffer: initialized");
   return;
 }
 
@@ -93,6 +95,8 @@ void FrameBuffer::destroy()
   
   glDeleteFramebuffers(1, &this->get_id());
   glDeleteTextures(1, &this->texture_id);
+
+  EVENT(Logger::Event::Lifetime, "frame_buffer: destroyed");
   return;
 }
 

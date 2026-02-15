@@ -22,7 +22,7 @@ Texture::Texture(const Config &conf)
   this->properties = conf.properties;
   this->id         = this->load(this->path, conf.properties.get_flipped());
   
-  DEBUG("texture: {} created", this->id);
+  EVENT(Logger::Event::Lifetime, "texture: {} created", this->id);
   return;
 }
 
@@ -33,7 +33,7 @@ Texture::~Texture()
   glDeleteTextures(1, &this->id);
   this->id = 0;
   
-  DEBUG("texture: {} deleted", this->id);
+  EVENT(Logger::Event::Lifetime, "texture: {} deleted", this->id);
   return;
 }
 

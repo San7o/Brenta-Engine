@@ -25,7 +25,7 @@ class Ubo : public Buffer
 public:
 
   Ubo() : Buffer(Buffer::Target::Uniform) {}
-
+  
   // Initialized the UBO
   void init(Shader& shader,
             std::string uniform_name,

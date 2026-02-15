@@ -23,7 +23,7 @@ int main()
   
   Engine::Builder()
     .with(Logger::Builder()
-          .level(oak::level::debug)
+          .level(Logger::Level::Debug)
           .file("/tmp/brenta-logs"))
     .with(Window::Builder()
           .title("mandelbrot set")
