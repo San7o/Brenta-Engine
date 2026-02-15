@@ -35,25 +35,6 @@ Model::~Model()
   return;
 }
 
-void Model::load(const Texture::Properties &props)
-{
-  // Load with assimp
-  Assimp::Importer importer;
-  const aiScene *scene =
-    importer.ReadFile(this->path, aiProcess_Triangulate | aiProcess_FlipUVs);
-
-  if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
-  {
-    ERROR("model::load_model: Could not load model with assimp: {}",
-          importer.GetErrorString());
-    return;
-  }
-  this->directory = this->path.substr(0, this->path.find_last_of('/'));
-
-  process_node(scene->mRootNode, scene, props);
-  return;
-}
-
 void Model::draw() const
 {
   for (unsigned int i = 0; i < meshes.size(); i++)
@@ -73,124 +54,140 @@ Material &Model::get_material()
   return this->material;
 }
 
-void Model::process_node(aiNode *node, const aiScene *scene,
-                         const Texture::Properties &props)
+// TODO: pass props down
+void Model::load(const Texture::Properties &props)
 {
-  for (unsigned int i = 0; i < node->mNumMeshes; i++)
+  tinyobj::ObjReaderConfig reader_config;
+  this->directory = this->path.substr(0, this->path.find_last_of('/'));
+  reader_config.mtl_search_path = this->directory; // Path to material files
+
+  tinyobj::ObjReader reader;
+
+  if (!reader.ParseFromFile(this->path, reader_config))
   {
-    aiMesh *m = scene->mMeshes[node->mMeshes[i]];
-    process_mesh(m, scene, props);
+    if (!reader.Error().empty())
+    {
+      std::cerr << "TinyObjReader: " << reader.Error();
+    }
+    exit(1);
   }
-  for (unsigned int i = 0; i < node->mNumChildren; i++)
+
+  auto& attrib = reader.GetAttrib();
+  auto& shapes = reader.GetShapes();
+  auto& materials = reader.GetMaterials();
+
+  // Loop over shapes (equivalent to Assimp meshes/nodes)
+  for (size_t s = 0; s < shapes.size(); s++)
   {
-    process_node(node->mChildren[i], scene, props);
+    process_shape(attrib, shapes[s], materials, props);
   }
-  return;
 }
 
-void Model::process_mesh(aiMesh *m, const aiScene *scene,
-                         const Texture::Properties &props)
+void Model::process_shape(const tinyobj::attrib_t& attrib, 
+                          const tinyobj::shape_t& shape,
+                          const std::vector<tinyobj::material_t>& materials,
+                          const Texture::Properties& props)
 {
-  std::vector<Mesh::Vertex> vertices;
-  std::vector<unsigned int> indices;
-  std::vector<std::shared_ptr<Texture>> textures;
-  
-  for (unsigned int i = 0; i < m->mNumVertices; i++)
+  // Map material_id -> Mesh Data (vertices and indices)
+  std::map<int, std::vector<Mesh::Vertex>> per_mat_vertices;
+  std::map<int, std::vector<unsigned int>> per_mat_indices;
+
+  size_t index_offset = 0;
+
+  for (size_t f = 0; f < shape.mesh.num_face_vertices.size(); f++)
   {
-    Mesh::Vertex vertex;
-    glm::vec3 vector;
-    vector.x = m->mVertices[i].x;
-    vector.y = m->mVertices[i].y;
-    vector.z = m->mVertices[i].z;
+    size_t fv = size_t(shape.mesh.num_face_vertices[f]);
+    int mat_id = shape.mesh.material_ids[f]; // Get material for THIS face
 
-    vertex.position = vector;
-
-    vector.x = m->mNormals[i].x;
-    vector.y = m->mNormals[i].y;
-    vector.z = m->mNormals[i].z;
-    vertex.normal = vector;
-
-    if (m->mTextureCoords[0])
+    for (size_t v = 0; v < fv; v++)
     {
-      glm::vec2 vec;
-      vec.x = m->mTextureCoords[0][i].x;
-      vec.y = m->mTextureCoords[0][i].y;
-      vertex.tex_coords = vec;
+      tinyobj::index_t idx = shape.mesh.indices[index_offset + v];
+      Mesh::Vertex vertex;
+
+      // Positions
+      vertex.position = {
+        attrib.vertices[3 * idx.vertex_index + 0],
+        attrib.vertices[3 * idx.vertex_index + 1],
+        attrib.vertices[3 * idx.vertex_index + 2]
+      };
+
+      // Normals
+      if (idx.normal_index >= 0)
+      {
+        vertex.normal = {
+          attrib.normals[3 * idx.normal_index + 0],
+          attrib.normals[3 * idx.normal_index + 1],
+          attrib.normals[3 * idx.normal_index + 2]
+        };
+      }
+
+      // UVs with Flip
+      if (idx.texcoord_index >= 0)
+      {
+        vertex.tex_coords = {
+          attrib.texcoords[2 * idx.texcoord_index + 0],
+          1.0f - attrib.texcoords[2 * idx.texcoord_index + 1]
+        };
+      }
+
+      per_mat_vertices[mat_id].push_back(vertex);
+      per_mat_indices[mat_id].push_back(per_mat_indices[mat_id].size());
     }
-    else
-      vertex.tex_coords = glm::vec2(0.0f, 0.0f);
-
-    vertices.push_back(vertex);
+    index_offset += fv;
   }
 
-  for (unsigned int i = 0; i < m->mNumFaces; i++)
+  // Now create a Mesh for each material group found in this shape
+  for (auto const& [mat_id, verts] : per_mat_vertices)
   {
-    aiFace face = m->mFaces[i];
-    for (unsigned int j = 0; j < face.mNumIndices; j++)
-      indices.push_back(face.mIndices[j]);
+    std::vector<std::shared_ptr<Texture>> textures;
+    if (mat_id >= 0)
+    {
+      textures = load_tiny_material(materials[mat_id], props);
+    }
+        
+    // Push the mesh to your model's mesh list
+    meshes.push_back(Mesh({verts, per_mat_indices[mat_id], textures}));
   }
-
-  aiMaterial *material = scene->mMaterials[m->mMaterialIndex];
-  std::vector<std::shared_ptr<Texture>> diffuse =
-    load_material_textures(material,
-                           aiTextureType_DIFFUSE,
-                           Texture::Type::Diffuse,
-                           props);
-  textures.insert(textures.end(),
-                  diffuse.begin(),
-                  diffuse.end());
-  
-  std::vector<std::shared_ptr<Texture>> specular =
-    load_material_textures(material,
-                           aiTextureType_SPECULAR,
-                           Texture::Type::Specular,
-                           props);
-  textures.insert(textures.end(),
-                  specular.begin(),
-                  specular.end());
-
-  Mesh mesh = Mesh({vertices, indices, textures});
-  meshes.push_back(std::move(mesh));
 }
 
 std::vector<std::shared_ptr<Texture>>
-Model::load_material_textures(aiMaterial *mat,
-                              aiTextureType type,
-                              Texture::Type type_brenta,
-                              const Texture::Properties &props)
+Model::load_tiny_material(const tinyobj::material_t& mat,
+                          const Texture::Properties &props)
 {
   std::vector<std::shared_ptr<Texture>> textures;
-  for (unsigned int i = 0; i < mat->GetTextureCount(type); i++)
+
+  auto load_tex = [&](std::string tex_name, Texture::Type type)
   {
-    aiString str;
-    mat->GetTexture(type, i, &str);
-    bool skip = false;
-    std::string path =
-      std::string(this->directory.c_str()) + "/" + std::string(str.C_Str());
-    
-    for (unsigned int j = 0; j < textures_loaded.size(); j++)
+    if (tex_name.empty()) return;
+
+    std::string full_path = this->directory + "/" + tex_name;
+        
+    // Check cache (textures_loaded)
+    for (auto& loaded : textures_loaded)
     {
-      // Do not load the same texture again
-      if (textures_loaded[j]->get_path() == path)
+      if (loaded->get_path() == full_path)
       {
-        textures.push_back(textures_loaded[j]);
-        skip = true;
-        break;
+        textures.push_back(loaded);
+        return;
       }
     }
-    if (!skip)
-    {
-      Texture t = Texture::Builder()
-        .type(type_brenta)
-        .target(Texture::Target::Texture2D)
-        .path(path)
-        .properties(props)
-        .build();
-      std::shared_ptr<Texture> t_ptr = std::make_shared<Texture>(std::move(t));
-      textures_loaded.push_back(t_ptr);
-      textures.push_back(t_ptr);
-    }
-  }
+
+    // Use your Builder pattern
+    auto t =
+      std::make_shared<Texture>(Texture::Builder()
+                                .type(type)
+                                .target(Texture::Target::Texture2D)
+                                .path(full_path)
+                                .properties(props)
+                                .build());
+
+    textures_loaded.push_back(t);
+    textures.push_back(t);
+  };
+  
+  load_tex(mat.diffuse_texname, Texture::Type::Diffuse);
+  load_tex(mat.specular_texname, Texture::Type::Specular);
+
   return textures;
 }
 

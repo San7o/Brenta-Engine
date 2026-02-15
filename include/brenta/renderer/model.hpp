@@ -19,6 +19,8 @@
 #include <memory>
 #include <filesystem>
 
+#include <tiny_obj_loader.h>
+
 namespace brenta
 {
 
@@ -55,15 +57,14 @@ private:
   std::vector<std::shared_ptr<Texture>> textures_loaded;
   
   void load(const Texture::Properties &props);
-  void process_node(aiNode *node, const aiScene *scene,
-                    const Texture::Properties &props);
-  void process_mesh(aiMesh *mesh, const aiScene *scene,
-                    const Texture::Properties &props);
+
+  void process_shape(const tinyobj::attrib_t& attrib, 
+                     const tinyobj::shape_t& shape,
+                     const std::vector<tinyobj::material_t>& materials,
+                     const Texture::Properties &props);
   std::vector<std::shared_ptr<Texture>>
-  load_material_textures(aiMaterial *mat,
-                         aiTextureType type,
-                         Texture::Type type_brenta,
-                         const Texture::Properties &props);
+  load_tiny_material(const tinyobj::material_t& mat,
+                     const Texture::Properties &props);
   
 };
 

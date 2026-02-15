@@ -85,6 +85,7 @@ endmacro()
 register_dependency(freetype)
 register_dependency(glfw)
 register_dependency(glm)
+register_dependency(tinyobjloader)
 
 list(APPEND BRENTA_DEPS_INCLUDES
   ${PROJECT_SOURCE_DIR}/external)
@@ -97,13 +98,6 @@ if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
     ${PROJECT_SOURCE_DIR}/external/glad/glad.h
     ${PROJECT_SOURCE_DIR}/external/miniaudio/miniaudio.h)
 endif()
-
-# Assimp
-message(STATUS "Using assimp")
-set(ASSIMP_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-add_subdirectory(external/assimp)
-target_compile_definitions(assimp PRIVATE _GNU_SOURCE)
-list(APPEND BRENTA_DEPS_LIBS assimp::assimp)
 
 # ImGUI
 if (BRENTA_USE_IMGUI)
