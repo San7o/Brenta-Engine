@@ -55,7 +55,7 @@ public:
   
   static void
   add_mouse_callback(MouseCallbackId name,
-                         std::function<void(double, double)> callback);
+                     std::function<void(double, double)> callback);
   static void
   remove_mouse_callback(MouseCallbackId name);
 

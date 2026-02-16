@@ -227,6 +227,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(vertex_mesh)
   add_example(scene)
   add_example(lights)
+  add_example(aircraft)
 
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES
