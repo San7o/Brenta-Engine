@@ -71,19 +71,22 @@ int main()
                             .material(std::move(material))
                             .build());
 
-  auto scene = Scene()
-    .add_model(model)
-    .set_active_camera(camera);
+  auto scene = Scene(camera);
+  auto root_node = scene.get_root();
+  auto model_node = root_node->new_node();
+  model_node->add_model(model);
+  model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
 
   while (!Window::should_close())
-  { 
+  {
+    auto delta_time = Window::get_time().get_delta();
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    scene.update(Window::get_time().get_delta());
+    scene.update(delta_time);
     scene.draw();
     
     Window::poll_events();

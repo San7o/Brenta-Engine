@@ -16,6 +16,7 @@ var annotated_dup =
       [ "Mesh", "classbrenta_1_1Mesh.html", "classbrenta_1_1Mesh" ],
       [ "Model", "classbrenta_1_1Model.html", "classbrenta_1_1Model" ],
       [ "Mouse", "classbrenta_1_1Mouse.html", null ],
+      [ "Node", "classbrenta_1_1Node.html", null ],
       [ "ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", "classbrenta_1_1ParticleEmitter" ],
       [ "PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ],
       [ "PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ],

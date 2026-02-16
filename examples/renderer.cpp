@@ -79,7 +79,7 @@ int main()
     Gl::clear();
     
     Renderer::begin_frame(cam_ptr);
-    Renderer::submit(model_ptr);
+    Renderer::submit({glm::mat4(1.0f), model_ptr});
     Renderer::end_frame();
     
     Window::poll_events();

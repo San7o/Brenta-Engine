@@ -38,10 +38,13 @@ public:
   Renderer() = delete;
   ~Renderer() = delete;
   
-  static void begin_frame(std::shared_ptr<Camera> cam,
-                          std::vector<std::shared_ptr<PointLight>> point_lights = {},
-                          std::optional<std::shared_ptr<DirLight>> dir_light = {});
+  static void begin_frame(std::shared_ptr<Camera> cam);
+  
   static void submit(const Renderer::Command& it);
+  static void submit_point_light(std::shared_ptr<PointLight> point_light);
+  static void submit_point_lights(std::vector<std::shared_ptr<PointLight>> point_light);
+  static void submit_dir_light(std::shared_ptr<DirLight> dir_light);
+
   static void end_frame();
 
 private:
@@ -60,12 +63,15 @@ private:
 class Renderer::Command
 {
 public:
-  
-  std::shared_ptr<Model> model;
+
+  glm::mat4                  world_matrix;
+  std::shared_ptr<Model>     model;
   
   Command() = default;
-  Command(std::shared_ptr<Model> model)
-    : model(model) {}
+  Command(glm::mat4 world_matrix,
+          std::shared_ptr<Model>    model)
+    : world_matrix(world_matrix), model(model)
+  {}
 };
-  
+
 } // namespace brenta

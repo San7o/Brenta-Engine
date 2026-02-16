@@ -90,11 +90,11 @@ int main()
     std::make_shared<PhongPointLight>(PhongPointLight()
                                       .set_strength(1.8f));
   
-  auto scene = Scene()
-    .add_model(model)
-    .add_point_light(phong_point)
-    .set_active_camera(camera)
-    .set_dir_light(phong_dir);
+  auto scene = Scene(camera);
+  auto root_node = scene.get_root();
+  root_node->add_model(model);
+  root_node->add_point_light(phong_point);
+  root_node->set_dir_light(phong_dir);
 
   // Gui
   ImGuiIO& io = ImGui::GetIO();

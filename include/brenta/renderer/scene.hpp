@@ -3,9 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/light.hpp>
+#include <brenta/renderer/node.hpp>
 
 #pragma once
 
@@ -16,25 +15,22 @@ class Scene
 {
 public:
 
-  Scene() = default;
+  Scene(std::shared_ptr<Camera> camera)
+    : active_camera(camera)
+  {
+    this->root = std::make_shared<Node>();
+  }
 
-  Scene &add_model(std::shared_ptr<Model> model);
-  Scene &add_point_light(std::shared_ptr<PointLight> point_light);
-  Scene &set_dir_light(std::shared_ptr<DirLight> dir_light);
-  Scene &set_active_camera(std::shared_ptr<Camera> camera);
+  std::shared_ptr<Node>   get_root() const;
   std::shared_ptr<Camera> get_active_camera() const;
-
-  // Update logic (animations, movement, AI...)
+  
   void update(float delta_time);
-  // Render frame
   void draw();
-
+  
 private:
 
-  std::vector<std::shared_ptr<Model>>        models;
-  std::vector<std::shared_ptr<PointLight>>   point_lights;
-  std::optional<std::shared_ptr<DirLight>>   dir_light;
-  std::shared_ptr<Camera>                    active_camera;
+  std::shared_ptr<Node>   root;
+  std::shared_ptr<Camera> active_camera;
   
 };
   

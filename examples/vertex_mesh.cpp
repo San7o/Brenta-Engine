@@ -103,7 +103,7 @@ int main(void)
     
     // Draw
     Renderer::begin_frame(camera_ptr);
-    Renderer::submit({model_ptr});
+    Renderer::submit({glm::mat4(1.0f), model_ptr});
     Renderer::end_frame();
     
     Window::poll_events();

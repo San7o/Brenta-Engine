@@ -38,6 +38,9 @@ var hierarchy =
     [ "brenta::DirLight", "classbrenta_1_1DirLight.html", [
       [ "brenta::PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ]
     ] ],
+    [ "std::enable_shared_from_this", null, [
+      [ "brenta::Node", "classbrenta_1_1Node.html", null ]
+    ] ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],
     [ "brenta::Mesh", "classbrenta_1_1Mesh.html", null ],
