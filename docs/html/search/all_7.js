@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['logger_0',['Logger',['../classbrenta_1_1Logger.html',1,'brenta']]]
+  ['input_0',['Input',['../classbrenta_1_1Input.html',1,'brenta']]],
+  ['is_5finitialized_1',['is_initialized',['../classbrenta_1_1Audio.html#a4209513d7e827b9d5ceeeb3d5ca7af12',1,'brenta::Audio::is_initialized()'],['../classbrenta_1_1Engine.html#a274109934294fcd0dc8aebcae61ff493',1,'brenta::Engine::is_initialized()'],['../classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182',1,'brenta::Gui::is_initialized()'],['../classbrenta_1_1Text.html#a8e99c97568efa46dcc344fed386ded32',1,'brenta::Text::is_initialized()'],['../classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed',1,'brenta::Input::is_initialized()'],['../classbrenta_1_1Logger.html#ab6349bd0374c0f079623bf83fdb43cb3',1,'brenta::Logger::is_initialized()'],['../classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3',1,'brenta::Gl::is_initialized()'],['../classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b',1,'brenta::Subsystem::is_initialized()'],['../classbrenta_1_1Window.html#a4ebba078cfbe573cb0c5ce0a763fc61b',1,'brenta::Window::is_initialized()']]]
 ];

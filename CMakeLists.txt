@@ -29,6 +29,13 @@ find_package(OpenGL REQUIRED)
 
 set(BRENTA_DEFINES)
 
+if (WIN32)
+  # Put the .exe and .ldd in the same directory so they can be found
+  set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+endif()
+
 if(MSVC)
   set(BRENTA_WARNING_FLAGS /W4 /permissive-)
   set(BRENTA_DEBUG_FLAGS /Zi /Od)
@@ -110,7 +117,9 @@ if (BRENTA_USE_IMGUI)
     ${PROJECT_SOURCE_DIR}/external/imgui/misc/cpp)
 
   # ImGUI wants X11
-  list(APPEND BRENTA_DEPS_LIBS X11)
+  if (NOT WIN32)
+    list(APPEND BRENTA_DEPS_LIBS X11)
+  endif()
   
   if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
     file(GLOB IMGUI_SOURCES

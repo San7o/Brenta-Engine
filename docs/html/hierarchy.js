@@ -35,6 +35,9 @@ var hierarchy =
     [ "brenta::Text::Config", "classbrenta_1_1Text_1_1Config.html", null ],
     [ "brenta::Texture::Config", "structbrenta_1_1Texture_1_1Config.html", null ],
     [ "brenta::Window::Config", "structbrenta_1_1Window_1_1Config.html", null ],
+    [ "brenta::DirLight", "classbrenta_1_1DirLight.html", [
+      [ "brenta::PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ]
+    ] ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],
     [ "brenta::Mesh", "classbrenta_1_1Mesh.html", null ],
@@ -43,6 +46,9 @@ var hierarchy =
     [ "brenta::Shader::Object", "classbrenta_1_1Shader_1_1Object.html", null ],
     [ "brenta::ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", null ],
     [ "ParticleSettings", "structParticleSettings.html", null ],
+    [ "brenta::PointLight", "classbrenta_1_1PointLight.html", [
+      [ "brenta::PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ]
+    ] ],
     [ "brenta::Texture::Properties", "classbrenta_1_1Texture_1_1Properties.html", null ],
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
     [ "brenta::Scene", "classbrenta_1_1Scene.html", null ],

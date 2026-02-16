@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['framebuffer_0',['FrameBuffer',['../classbrenta_1_1FrameBuffer.html',1,'brenta']]]
+  ['engine_0',['Engine',['../classbrenta_1_1Engine.html',1,'brenta']]]
 ];

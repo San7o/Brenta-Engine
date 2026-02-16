@@ -105,8 +105,8 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a94edae97c6fe89044b217f38883dc86b" id="r_a94edae97c6fe89044b217f38883dc86b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Renderer.html#a94edae97c6fe89044b217f38883dc86b">begin_frame</a> (std::shared_ptr&lt; <a class="el" href="classbrenta_1_1Camera.html">Camera</a> &gt; cam)</td></tr>
-<tr class="separator:a94edae97c6fe89044b217f38883dc86b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2772ca68cbdc08acdfa6f4a8873bbf32" id="r_a2772ca68cbdc08acdfa6f4a8873bbf32"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Renderer.html#a2772ca68cbdc08acdfa6f4a8873bbf32">begin_frame</a> (std::shared_ptr&lt; <a class="el" href="classbrenta_1_1Camera.html">Camera</a> &gt; cam, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classbrenta_1_1PointLight.html">PointLight</a> &gt; &gt; point_lights={}, std::optional&lt; std::shared_ptr&lt; <a class="el" href="classbrenta_1_1DirLight.html">DirLight</a> &gt; &gt; dir_light={})</td></tr>
+<tr class="separator:a2772ca68cbdc08acdfa6f4a8873bbf32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a2ec6dd20c962c6fd389406a55c9da1" id="r_a1a2ec6dd20c962c6fd389406a55c9da1"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Renderer.html#a1a2ec6dd20c962c6fd389406a55c9da1">submit</a> (const <a class="el" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a> &amp;it)</td></tr>
 <tr class="separator:a1a2ec6dd20c962c6fd389406a55c9da1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9314b0cfba4e66fab35943083afa92de" id="r_a9314b0cfba4e66fab35943083afa92de"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Renderer.html#a9314b0cfba4e66fab35943083afa92de">end_frame</a> ()</td></tr>
@@ -114,10 +114,10 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="renderer_8hpp_source.html#l00028">28</a> of file <a class="el" href="renderer_8hpp_source.html">renderer.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="renderer_8hpp_source.html#l00032">32</a> of file <a class="el" href="renderer_8hpp_source.html">renderer.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a94edae97c6fe89044b217f38883dc86b" name="a94edae97c6fe89044b217f38883dc86b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a94edae97c6fe89044b217f38883dc86b">&#9670;&#160;</a></span>begin_frame()</h2>
+<a id="a2772ca68cbdc08acdfa6f4a8873bbf32" name="a2772ca68cbdc08acdfa6f4a8873bbf32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2772ca68cbdc08acdfa6f4a8873bbf32">&#9670;&#160;</a></span>begin_frame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,8 +129,24 @@ Static Public Member Functions</h2></td></tr>
           <td class="memname">void Renderer::begin_frame </td>
           <td>(</td>
           <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classbrenta_1_1Camera.html">Camera</a> &gt;&#160;</td>
-          <td class="paramname"><em>cam</em></td><td>)</td>
+          <td class="paramname"><em>cam</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classbrenta_1_1PointLight.html">PointLight</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>point_lights</em> = <code>{}</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::optional&lt; std::shared_ptr&lt; <a class="el" href="classbrenta_1_1DirLight.html">DirLight</a> &gt; &gt;&#160;</td>
+          <td class="paramname"><em>dir_light</em> = <code>{}</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -140,7 +156,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00024">24</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00026">26</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
 
 </div>
 </div>
@@ -167,7 +183,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00041">41</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00047">47</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
 
 </div>
 </div>
@@ -195,7 +211,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00036">36</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="renderer_8cpp_source.html#l00042">42</a> of file <a class="el" href="renderer_8cpp_source.html">renderer.cpp</a>.</p>
 
 </div>
 </div>

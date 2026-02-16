@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['engine_0',['Engine',['../classbrenta_1_1Engine.html',1,'brenta']]]
+  ['dirlight_0',['DirLight',['../classbrenta_1_1DirLight.html',1,'brenta']]]
 ];
