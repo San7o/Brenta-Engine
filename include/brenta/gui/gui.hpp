@@ -7,7 +7,7 @@
 
 #ifdef BRENTA_USE_IMGUI
 
-#include <brenta/renderer/opengl/frame_buffer.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/subsystem.hpp>
 
 #include <imgui.h>

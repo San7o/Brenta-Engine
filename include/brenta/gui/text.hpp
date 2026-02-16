@@ -8,6 +8,7 @@
 #include <brenta/renderer/opengl/buffer.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
+#include <brenta/renderer/color.hpp>
 #include <brenta/subsystem.hpp>
 
 #include <ft2build.h>
@@ -58,7 +59,7 @@ public:
   static void render_text(std::string text,
                           float x, float y,
                           float scale,
-                          glm::vec3 color);
+                          Color color);
 
 private:
   

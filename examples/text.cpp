@@ -51,7 +51,7 @@ int main()
     Gl::clear();
 
     Text::render_text("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
-                      glm::vec3(0.5f, 0.8f, 0.2));
+                      Color::yellow());
 
     Window::poll_events();
     Window::swap_buffers();

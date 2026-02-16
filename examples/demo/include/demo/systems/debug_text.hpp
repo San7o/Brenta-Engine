@@ -19,7 +19,7 @@ struct DebugTextSystem : System<None>
 {
   void run(std::vector<EntityId> _) const override
   {
-    auto            color            = glm::vec3(1.0f, 0.9f, 0.0f);
+    auto            color            = Color::yellow();
     const float     offset           = 20.0f;
     brenta::Camera *cam              = World::get_resource<CameraResource>()->cam;
     auto            camera_world_pos = cam->get_transform().get_pos();

@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/opengl/frame_buffer.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
@@ -98,7 +98,7 @@ void FrameBuffer::destroy()
   glDeleteFramebuffers(1, &this->get_id());
   glDeleteTextures(1, &this->texture_id);
 
-  EVENT(Logger::Event::Lifetime, "frame_buffer: destroyed");
+  EVENT(Logger::Event::Lifetime, "framebuffer: destroyed");
   return;
 }
 

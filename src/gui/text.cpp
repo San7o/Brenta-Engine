@@ -22,7 +22,7 @@ Shader::Name      Text::shader_name;
 Vao               Text::vao;
 Buffer            Text::vbo;
 const std::string Text::subsystem_name = "text";
-Text::Config      Text::init_config = {};
+Text::Config      Text::init_config    = {};
 std::map<char, Text::Character> Text::characters;
 
 //
@@ -166,7 +166,7 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
 }
 
 void Text::render_text(std::string text, float x, float y, float scale,
-                       glm::vec3 color)
+                       Color color)
 {
   if (Text::vao.get_id() == 0)
   {
@@ -179,7 +179,10 @@ void Text::render_text(std::string text, float x, float y, float scale,
   
   unsigned int textShaderId = shader->get_id();
   shader->use();
-  shader->set_float3("textColor", color.x, color.y, color.z);
+  shader->set_float3("textColor",
+                     255.99f * color.r,
+                     255.99f * color.g,
+                     255.99f * color.b);
 
   glm::mat4 projection =
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
