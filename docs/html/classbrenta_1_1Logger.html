@@ -93,6 +93,7 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Logger.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a>  </div>
@@ -116,6 +117,19 @@ Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html">Config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a81bfd8aec29dd1d446c785efd8552626" id="r_a81bfd8aec29dd1d446c785efd8552626"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><b>Event</b> { <b>Lifetime</b>
+ }</td></tr>
+<tr class="separator:a81bfd8aec29dd1d446c785efd8552626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8748b24c26a4266ffff73789973315ca" id="r_a8748b24c26a4266ffff73789973315ca"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#a8748b24c26a4266ffff73789973315ca">Level</a> = oak::Level</td></tr>
+<tr class="separator:a8748b24c26a4266ffff73789973315ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9d93853a47bf068394d4deaeaa4fedc" id="r_ab9d93853a47bf068394d4deaeaa4fedc"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#ab9d93853a47bf068394d4deaeaa4fedc">Flags</a> = oak::Flags</td></tr>
+<tr class="separator:ab9d93853a47bf068394d4deaeaa4fedc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
+<tr class="memitem:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem" id="r_adaa1969d5a9d482356bcf027ac30818a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#adaa1969d5a9d482356bcf027ac30818a">Error</a> = std::string</td></tr>
+<tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a7659842745f151528d942d47a750a7a7" id="r_a7659842745f151528d942d47a750a7a7"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#a7659842745f151528d942d47a750a7a7">initialize</a> () override</td></tr>
@@ -133,22 +147,96 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a4aa4d7c3b98f6e12e7ea8253da5ea0cd" id="r_a4aa4d7c3b98f6e12e7ea8253da5ea0cd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1Logger.html">Logger</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#a4aa4d7c3b98f6e12e7ea8253da5ea0cd">instance</a> ()</td></tr>
 <tr class="separator:a4aa4d7c3b98f6e12e7ea8253da5ea0cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a239905cf16b06623124077f33d8de757" id="r_a239905cf16b06623124077f33d8de757"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#a239905cf16b06623124077f33d8de757">event_name</a> (enum Event event)</td></tr>
+<tr class="separator:a239905cf16b06623124077f33d8de757"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ad9c88cdbf880633e4d2e4ac32b0dc306" id="r_ad9c88cdbf880633e4d2e4ac32b0dc306"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Logger.html#ad9c88cdbf880633e4d2e4ac32b0dc306">subsystem_name</a> = &quot;logger&quot;</td></tr>
 <tr class="separator:ad9c88cdbf880633e4d2e4ac32b0dc306"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
-<tr class="memitem:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem" id="r_adaa1969d5a9d482356bcf027ac30818a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#adaa1969d5a9d482356bcf027ac30818a">Error</a> = std::string</td></tr>
-<tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00026">26</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00027">27</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="ab9d93853a47bf068394d4deaeaa4fedc" name="ab9d93853a47bf068394d4deaeaa4fedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9d93853a47bf068394d4deaeaa4fedc">&#9670;&#160;</a></span>Flags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Logger::Flags =  oak::Flags</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00037">37</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a8748b24c26a4266ffff73789973315ca" name="a8748b24c26a4266ffff73789973315ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8748b24c26a4266ffff73789973315ca">&#9670;&#160;</a></span>Level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Logger::Level =  oak::Level</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00036">36</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a id="a81bfd8aec29dd1d446c785efd8552626" name="a81bfd8aec29dd1d446c785efd8552626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81bfd8aec29dd1d446c785efd8552626">&#9670;&#160;</a></span>Event</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum brenta::Logger::Event</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00031">31</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a239905cf16b06623124077f33d8de757" name="a239905cf16b06623124077f33d8de757"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a239905cf16b06623124077f33d8de757">&#9670;&#160;</a></span>event_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string Logger::event_name </td>
+          <td>(</td>
+          <td class="paramtype">enum Event&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00022">22</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+
+</div>
+</div>
 <a id="a7659842745f151528d942d47a750a7a7" name="a7659842745f151528d942d47a750a7a7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7659842745f151528d942d47a750a7a7">&#9670;&#160;</a></span>initialize()</h2>
 
@@ -174,7 +262,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00022">22</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00031">31</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -201,7 +289,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00072">72</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00086">86</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +320,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00063">63</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00077">77</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -263,7 +351,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00058">58</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00072">72</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -292,7 +380,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00048">48</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8cpp_source.html#l00064">64</a> of file <a class="el" href="logger_8cpp_source.html">logger.cpp</a>.</p>
 
 </div>
 </div>
@@ -317,7 +405,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00034">34</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00043">43</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>

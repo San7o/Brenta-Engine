@@ -16,75 +16,65 @@
 
 using namespace viotecs;
 
-struct player_component : component
+struct PlayerComponent : Component
 {
-  player_component()
-  {
-  }
+  PlayerComponent() {}
 };
 
-struct health_component : component
+struct HealthComponent : Component
 {
   int value;
-  health_component()
-  {
-  }
-  health_component(int value) : value(value)
-  {
-  }
+  HealthComponent() {}
+  HealthComponent(int value) : value(value) {}
 };
 
-struct poison_system : system<player_component, health_component>
+struct PoisonSystem : System<PlayerComponent, HealthComponent>
 {
-  void run(std::vector<types::entity_id> entities) const override
+  void run(std::vector<EntityId> entities) const override
   {
     if (entities.empty())
     {
       return;
     }
 
-    auto health = world::entity_to_component<health_component>(entities.at(0));
+    auto health = World::entity_to_component<HealthComponent>(entities.at(0));
     health->value--;
     std::cout << "Health: " << health->value << std::endl;
   }
 };
 
-struct global_resource : resource
+struct GlobalResource : Resource
 {
   int value;
-  global_resource()
-  {
-  }
-  global_resource(int value) : value(value)
-  {
-  }
+  GlobalResource() {}
+  GlobalResource(int value) : value(value) {}
 };
-
-REGISTER_SYSTEMS(poison_system);
 
 int main()
 {
-  world::init();
+  World::init();
+  World::register_systems<PoisonSystem>();
+  
   std::cout << "Welcome to my Test Game!" << std::endl;
   std::cout << "You are poisoned and will lose health every tick" << std::endl;
 
   // New entity as the player
-  entity player = world::new_entity();
+  Entity player = World::new_entity();
 
   // Add the Player component to the entity
-  player.add_component<player_component>(player_component());
+  player.add_component<PlayerComponent>();
 
   // Add a health component to the entity
-  player.add_component<health_component>(100);
+  player.add_component<HealthComponent>(100);
 
-  world::add_resource<global_resource>(10);
+  World::add_resource<GlobalResource>(10);
 
   // Main loop
   for (int i = 0; i < 10; i++)
   {
-    world::tick();
+    World::tick();
   }
 
-  world::destroy();
+  World::destroy();
   return 0;
 }

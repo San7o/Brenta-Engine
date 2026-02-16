@@ -15,9 +15,6 @@
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <iostream>
 
 using namespace brenta;

@@ -166,7 +166,7 @@ $(document).ready(function(){initNavTree('audio_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  <span class="comment">// Automatically creates the stream if it does not exist.</span></div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keyword">static</span> std::expected&lt;void, Audio::Error&gt;</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  load(<span class="keyword">const</span> SoundId &amp;sound_id,</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>       <span class="keyword">const</span> std::string &amp;path,</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>       <span class="keyword">const</span> std::filesystem::path &amp;path,</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>       <span class="keyword">const</span> StreamId &amp;stream_id = <span class="stringliteral">&quot;default&quot;</span>);</div>
 <div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
 <div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="comment">// Play a sound on its stream</span></div>

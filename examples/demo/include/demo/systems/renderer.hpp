@@ -25,9 +25,9 @@
 
 using namespace viotecs;
 
-struct RendererSystem : system<ModelComponent, TransformComponent>
+struct RendererSystem : System<ModelComponent, TransformComponent>
 {
-  void run(std::vector<entity_id> matches) const override
+  void run(std::vector<EntityId> matches) const override
   {
     if (matches.empty())
     {
@@ -35,15 +35,15 @@ struct RendererSystem : system<ModelComponent, TransformComponent>
       return;
     }
 
-    brenta::Camera *cam = world::get_resource<CameraResource>()->cam;
+    brenta::Camera *cam = World::get_resource<CameraResource>()->cam;
 
     for (auto match : matches)
     {
       // Get the model component
-      auto model_component = world::entity_to_component<ModelComponent>(match);
+      auto model_component = World::entity_to_component<ModelComponent>(match);
 
       auto transform_component =
-        world::entity_to_component<TransformComponent>(match);
+        World::entity_to_component<TransformComponent>(match);
 
       Model *m = &model_component->mod;
       auto shader_name = model_component->shader;

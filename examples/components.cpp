@@ -18,11 +18,9 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <vector>
 
-REGISTER_SYSTEMS()
-
 using namespace viotecs;
 
-struct PhysicsComponent : component
+struct PhysicsComponent : Component
 {
   float     mass;
   float     density;
@@ -43,14 +41,14 @@ struct PhysicsComponent : component
   }
 };
 
-struct PlayerComponent : component
+struct PlayerComponent : Component
 {
   PlayerComponent()
   {
   }
 };
 
-struct TransformComponent : component
+struct TransformComponent : Component
 {
   glm::vec3 position;
   glm::vec3 rotation;
@@ -66,7 +64,7 @@ struct TransformComponent : component
   }
 };
 
-struct PointLightComponent : component
+struct PointLightComponent : Component
 {
   glm::vec3 ambient;
   glm::vec3 diffuse;

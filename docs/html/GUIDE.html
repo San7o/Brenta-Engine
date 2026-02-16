@@ -33,7 +33,7 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#c
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">{</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  Engine<span class="op">::</span>Builder<span class="op">()</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Logger<span class="op">::</span>Builder<span class="op">()</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">))</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>Logger<span class="op">::</span>Level<span class="op">::</span>debug<span class="op">))</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Window<span class="op">::</span>Builder<span class="op">()</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;load opengl test&quot;</span><span class="op">)</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span>screen_width<span class="op">)</span></span>
@@ -164,59 +164,60 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb9-1"><a href="#c
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> brenta<span class="op">;</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> viotecs<span class="op">;</span></span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>REGISTER_SYSTEMS<span class="op">(</span>none<span class="op">);</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  Engine<span class="op">::</span>Builder<span class="op">()</span></span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Logger<span class="op">::</span>Builder<span class="op">()</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">)</span></span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>file<span class="op">(</span><span class="st">&quot;/tmp/brenta-logs&quot;</span><span class="op">))</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Window<span class="op">::</span>Builder<span class="op">()</span></span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;brenta demo&quot;</span><span class="op">)</span></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span><span class="dv">800</span><span class="op">)</span></span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>height<span class="op">(</span><span class="dv">600</span><span class="op">)</span></span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>vsync<span class="op">()</span></span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>msaa<span class="op">())</span></span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Input<span class="op">::</span>Builder<span class="op">())</span></span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Ecs<span class="op">::</span>Builder<span class="op">())</span></span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> engine <span class="op">=</span> Engine<span class="op">::</span>managed<span class="op">();</span></span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Your init functions ...</span></span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  init_player<span class="op">();</span></span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  init_renderer<span class="op">();</span></span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>Window<span class="op">::</span>should_Close<span class="op">())</span> <span class="op">{</span></span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span>Color<span class="op">::</span>gray<span class="op">());</span></span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>clear<span class="op">();</span></span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>    world<span class="op">::</span>tick<span class="op">();</span></span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a>    Window<span class="op">::</span>poll_wvents<span class="op">();</span></span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    Window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The engine will take care of deallocation</span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the submodules</span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  Engine<span class="op">::</span>Builder<span class="op">()</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Logger<span class="op">::</span>Builder<span class="op">()</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>level<span class="op">(</span>oak<span class="op">::</span>level<span class="op">::</span>debug<span class="op">)</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>file<span class="op">(</span><span class="st">&quot;/tmp/brenta-logs&quot;</span><span class="op">))</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Window<span class="op">::</span>Builder<span class="op">()</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>title<span class="op">(</span><span class="st">&quot;brenta demo&quot;</span><span class="op">)</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>width<span class="op">(</span><span class="dv">800</span><span class="op">)</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>height<span class="op">(</span><span class="dv">600</span><span class="op">)</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>vsync<span class="op">()</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>          <span class="op">.</span>msaa<span class="op">())</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Input<span class="op">::</span>Builder<span class="op">())</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>with<span class="op">(</span>Ecs<span class="op">::</span>Builder<span class="op">())</span></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span>build<span class="op">();</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">auto</span> engine <span class="op">=</span> Engine<span class="op">::</span>managed<span class="op">();</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Your init functions ...</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  init_player<span class="op">();</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  init_renderer<span class="op">();</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Register ECS systems</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  world<span class="op">::</span>register_systems<span class="op">&lt;</span>None<span class="op">&gt;();</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span><span class="op">(!</span>Window<span class="op">::</span>should_Close<span class="op">())</span> <span class="op">{</span></span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>set_color<span class="op">(</span>Color<span class="op">::</span>gray<span class="op">());</span></span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>    Gl<span class="op">::</span>clear<span class="op">();</span></span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>    World<span class="op">::</span>tick<span class="op">();</span></span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>    Window<span class="op">::</span>poll_events<span class="op">();</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a>    Window<span class="op">::</span>swap_buffers<span class="op">();</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">// The engine will take care of deallocation</span></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a>  <span class="co">// of the submodules</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <h3 id="component">Component</h3>
 <p>A Component is a piece of data (more precisely, a struct) that gets
 assigned to an Entity.</p>
 <p>You can define your own component like so:</p>
 <div class="sourceCode" id="cb10"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a component</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> model_component <span class="op">:</span> component <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> ModelComponent <span class="op">:</span> Component <span class="op">{</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  Model mod<span class="op">;</span></span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  Shader<span class="op">::</span>Name shader<span class="op">;</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">// You need to provide a default constructor</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  model_component<span class="op">()</span> <span class="op">{};</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  ModelComponent<span class="op">()</span> <span class="op">{};</span></span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Any other construtor is optional</span></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  model_component<span class="op">(</span>model mod<span class="op">,</span> Shader<span class="op">::</span>Name shader<span class="op">)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  ModelComponent<span class="op">(</span>Model mod<span class="op">,</span> Shader<span class="op">::</span>Name shader<span class="op">)</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="op">:</span> model<span class="op">(</span>model<span class="op">),</span> shader<span class="op">(</span>shader<span class="op">)</span> <span class="op">{}</span></span>
 <span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <h3 id="system">System</h3>
@@ -230,15 +231,15 @@ the components you specified.</p>
 <p>Here is an example:</p>
 <div class="sourceCode" id="cb11"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Specify ModelComponent and TransformComponent query</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> renderer_system <span class="op">:</span> system<span class="op">&lt;</span>model_component<span class="op">,</span> transform_component<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> RenderSystem <span class="op">:</span> System<span class="op">&lt;</span>ModelComponent<span class="op">,</span> TransformComponent<span class="op">&gt;</span> <span class="op">{</span></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">// You need to define this function</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> run<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="dt">entity_t</span><span class="op">&gt;</span> matches<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">void</span> run<span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span>EntityId<span class="op">&gt;</span> matches<span class="op">)</span> <span class="at">const</span> <span class="kw">override</span> <span class="op">{</span></span>
 <span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="op">(</span>matches<span class="op">.</span>empty<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
 <span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> match <span class="op">:</span> matches<span class="op">)</span> <span class="op">{</span></span>
 <span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Get the model component</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">auto</span> model_c <span class="op">=</span> world<span class="op">::</span>entity_to_component<span class="op">&lt;</span>model_component<span class="op">&gt;(</span>match<span class="op">);</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>      <span class="kw">auto</span> model_c <span class="op">=</span> World<span class="op">::</span>entity_to_component<span class="op">&lt;</span>ModelComponent<span class="op">&gt;(</span>match<span class="op">);</span></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>      <span class="kw">auto</span> my_model <span class="op">=</span> model_c<span class="op">-&gt;</span>mod<span class="op">;</span></span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>      <span class="co">// Translate the model</span></span>
@@ -249,37 +250,35 @@ class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb11-1"><a href="#
 <span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="op">}</span></span>
 <span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Somewhere in your code you need to</span></span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">// have one (and only one) call on this macro</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>REGISTER_SYSTEMS<span class="op">(</span>render_system<span class="op">);</span></span></code></pre></div>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">// Register this system</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>register_systems<span class="op">&lt;</span>RenderSystem<span class="op">&gt;();</span></span></code></pre></div>
 <h3 id="entity">Entity</h3>
 <p>You can create Entities and assign Components to them like so:</p>
 <div class="sourceCode" id="cb12"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Create the player entity</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> player_entity <span class="op">=</span> world<span class="op">::</span>new_entity<span class="op">();</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> player_entity <span class="op">=</span> World<span class="op">::</span>new_entity<span class="op">();</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Add the player component to the player entity</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_component<span class="op">&lt;</span>player_component<span class="op">&gt;(</span>player_entity<span class="op">,</span> player_component<span class="op">());</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>World<span class="op">::</span>add_component<span class="op">&lt;</span>PlayerComponent<span class="op">&gt;(</span>player_entity<span class="op">,</span> player_component<span class="op">());</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Load model and shader</span></span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Add the model component to the player entity</span></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> model_c <span class="op">=</span> model_component<span class="op">(</span>mod<span class="op">,</span> <span class="st">&quot;default_shader&quot;</span><span class="op">);</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_component<span class="op">&lt;</span>model_component<span class="op">&gt;(</span>player_entity<span class="op">,</span> model_c<span class="op">);</span></span></code></pre></div>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>player_entity<span class="op">.</span>add_component<span class="op">&lt;</span>ModelComponent<span class="op">&gt;(</span>mod<span class="op">,</span> <span class="st">&quot;default_shader&quot;</span><span class="op">);</span></span></code></pre></div>
 <h3 id="resources">Resources</h3>
 <p>Resources hold global data accessible via
 <code>world::get_resource&lt;name&gt;()</code>. You can define a
 Resource like so:</p>
 <div class="sourceCode" id="cb13"><pre
 class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">// This is a resource</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> wireframe_resource <span class="op">:</span> resource <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> WireframeResource <span class="op">:</span> Resource <span class="op">{</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">bool</span> enabled<span class="op">;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  wireframe_resource<span class="op">(</span><span class="dt">bool</span> e<span class="op">)</span> <span class="op">:</span> enabled<span class="op">(</span>e<span class="op">)</span> <span class="op">{}</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  WireframeResource<span class="op">(</span><span class="dt">bool</span> e<span class="op">)</span> <span class="op">:</span> enabled<span class="op">(</span>e<span class="op">)</span> <span class="op">{}</span></span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>world<span class="op">::</span>add_resource<span class="op">&lt;</span>wireframe_resource<span class="op">&gt;(</span>wireframe_resource<span class="op">(</span><span class="kw">false</span><span class="op">));</span></span></code></pre></div>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>World<span class="op">::</span>add_resource<span class="op">&lt;</span>WireframeResource<span class="op">&gt;(</span><span class="kw">false</span><span class="op">);</span></span></code></pre></div>
 <p>Here is an high lievel simplified view of those objects:</p>
 <figure>
 <img

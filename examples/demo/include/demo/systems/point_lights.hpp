@@ -13,10 +13,10 @@
 
 using namespace viotecs;
 
-/* Load the lights on the shaders */
-struct PointLightsSystem : system<TransformComponent, PointLightComponent>
+// Load the lights on the shaders
+struct PointLightsSystem : System<TransformComponent, PointLightComponent>
 {
-  void run(std::vector<entity_id> entities) const override
+  void run(std::vector<EntityId> entities) const override
   {
     if (entities.empty())
       return;
@@ -29,9 +29,9 @@ struct PointLightsSystem : system<TransformComponent, PointLightComponent>
         ERROR("Only 4 lights are supported");
         break;
       }
-      auto transform = world::entity_to_component<TransformComponent>(entity);
+      auto transform = World::entity_to_component<TransformComponent>(entity);
 
-      auto light = world::entity_to_component<PointLightComponent>(entity);
+      auto light = World::entity_to_component<PointLightComponent>(entity);
 
       for (auto shader_name : light->shaders)
       {

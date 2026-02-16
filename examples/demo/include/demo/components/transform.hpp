@@ -12,7 +12,7 @@
 
 using namespace viotecs;
 
-struct TransformComponent : component
+struct TransformComponent : Component
 {
   Transform transform;
   

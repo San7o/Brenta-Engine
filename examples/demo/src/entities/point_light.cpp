@@ -26,7 +26,7 @@ void init_point_light_entity()
     .translate(glm::vec3(0.0f, 10.0f, 0.0f))
     .scale(glm::vec3(0.5f));
   
-  auto light = world::new_entity()
+  auto light = World::new_entity()
     .add_component<PointLightComponent>(glm::vec3(0.1f, 0.1f, 0.1f),
                                         glm::vec3(0.5f, 0.5f, 0.5f),
                                         glm::vec3(1.0f, 1.0f, 1.0f),

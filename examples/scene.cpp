@@ -12,9 +12,6 @@
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/scene.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <memory>
 #include <iostream>
 

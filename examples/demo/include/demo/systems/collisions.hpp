@@ -18,14 +18,13 @@
 #include <vector>
 
 using namespace viotecs;
-using namespace viotecs::types;
 
 glm::vec3 ResolveCollision(glm::vec3 position1, glm::vec3 position2,
                            float radius1, float radius2, float distance);
 
-struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
+struct CollisionsSystem : System<SphereColliderComponent, TransformComponent>
 {
-  void run(std::vector<entity_id> matches) const override
+  void run(std::vector<EntityId> matches) const override
   {
     if (matches.empty())
       return;
@@ -37,8 +36,8 @@ struct CollisionsSystem : system<SphereColliderComponent, TransformComponent>
         if (i == j)
           continue;
 
-        entity e1 = matches[i];
-        entity e2 = matches[j];
+        Entity e1 = matches[i];
+        Entity e2 = matches[j];
         auto sphere_component1 = e1.get_component<SphereColliderComponent>();
         auto transform_component1 = e1.get_component<TransformComponent>();
         auto sphere_component2 = e2.get_component<SphereColliderComponent>();

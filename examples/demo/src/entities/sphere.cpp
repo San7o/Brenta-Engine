@@ -14,7 +14,6 @@
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
-using namespace viotecs::types;
 using namespace brenta;
 
 #include "../../../assets/shaders/c/default_shader_vs.c"
@@ -39,7 +38,7 @@ void init_sphere_entity()
                .translate(glm::vec3(2.0f, 1.0f, 0.0f)))
     .build();
 
-  auto sphere1 = world::new_entity()
+  auto sphere1 = World::new_entity()
     .add_component<TransformComponent>(m1.get_transform())
     .add_component<PhysicsComponent>(1.0f,                        // mass
                                      1.0f,                        // density
@@ -59,7 +58,7 @@ void init_sphere_entity()
                .translate(glm::vec3(-2.0f, 1.0f, 0.0f)))
     .build();
   
-  auto sphere2 = world::new_entity()
+  auto sphere2 = World::new_entity()
     .add_component<TransformComponent>(m2.get_transform())
     .add_component<PhysicsComponent>(1.0f,                        // mass
                                      1.0f,                        // density

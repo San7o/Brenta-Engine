@@ -10,9 +10,6 @@
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <iostream>
 
 using namespace brenta;

@@ -15,7 +15,7 @@
 using namespace brenta;
 using namespace viotecs;
 
-struct DirectionalLightComponent : component
+struct DirectionalLightComponent : Component
 {
   glm::vec3 direction;
   glm::vec3 ambient;

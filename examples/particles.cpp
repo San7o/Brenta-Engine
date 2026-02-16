@@ -15,10 +15,6 @@
 
 #include <bitset>
 
-#include <viotecs/viotecs.hpp>
-
-REGISTER_SYSTEMS()
-
 using namespace brenta;
 
 int main()

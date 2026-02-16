@@ -141,7 +141,7 @@ $(document).ready(function(){initNavTree('audio_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; f : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::init_sounds)</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  {</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (!Audio::load(std::get&lt;0&gt;(f), std::get&lt;1&gt;(f), std::get&lt;2&gt;(f)).has_value())</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">return</span> std::unexpected(<span class="stringliteral">&quot;Loading audio &quot;</span> + get&lt;0&gt;(f));</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">return</span> std::unexpected(<span class="stringliteral">&quot;Loading audio &quot;</span> + std::string(get&lt;0&gt;(f)));</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; s : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::init_streams)</div>
@@ -167,10 +167,10 @@ $(document).ready(function(){initNavTree('audio_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>{</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">if</span> (!this-&gt;<a class="code hl_function" href="classbrenta_1_1Audio.html#a4209513d7e827b9d5ceeeb3d5ca7af12">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  </div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> sound : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::sounds)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; sound : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::sounds)</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    ma_sound_uninit(&amp;sound.second);</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  </div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> stream : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::streams)</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; stream : <a class="code hl_class" href="classbrenta_1_1Audio.html">Audio</a>::streams)</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    ma_sound_group_uninit(&amp;stream.second);</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  ma_engine_uninit(&amp;Audio::engine);</div>
@@ -206,7 +206,7 @@ $(document).ready(function(){initNavTree('audio_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>std::expected&lt;void, Audio::Error&gt;</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>Audio::load(<span class="keyword">const</span> Audio::SoundId &amp;sound_id,</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keyword">const</span> std::string &amp;path,</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            <span class="keyword">const</span> std::filesystem::path &amp;path,</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>            <span class="keyword">const</span> Audio::StreamId &amp;stream_id)</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>{</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  Audio::Stream *stream = Audio::get_stream(stream_id);</div>
@@ -224,16 +224,16 @@ $(document).ready(function(){initNavTree('audio_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>  Audio::Sound sound = {};</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>  Audio::sounds.insert({sound_id, sound});</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordflow">if</span> (ma_sound_init_from_file(&amp;Audio::engine, path.c_str(), 0, stream, NULL,</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>  <span class="keywordflow">if</span> (ma_sound_init_from_file(&amp;Audio::engine, (<span class="keyword">const</span> <span class="keywordtype">char</span>*)path.c_str(), 0, stream, NULL,</div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                              &amp;Audio::sounds.at(sound_id)) != MA_SUCCESS)</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>  {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>    ERROR(<span class="stringliteral">&quot;{}: error loading sound {} from path {}&quot;</span>,</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>          Audio::subsystem_name, sound_id, path);</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>          Audio::subsystem_name, sound_id, path.string());</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>    <span class="keywordflow">return</span> std::unexpected(Audio::Error::InitFromFile);</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>  }</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>  </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>  INFO(<span class="stringliteral">&quot;{}: loaded sound {} from {} in stream {}&quot;</span>,</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>       Audio::subsystem_name, sound_id, path, stream_id);</div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>       Audio::subsystem_name, sound_id, path.string(), stream_id);</div>
 <div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>}</div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span> </div>

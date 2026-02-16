@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('ecs_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>{</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keywordflow">if</span> (this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  viotecs::world::init();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  viotecs::World::init();</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  Ecs::initialized = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  INFO(<span class="stringliteral">&quot;{}: initialized&quot;</span>, Ecs::subsystem_name);</div>
@@ -135,7 +135,7 @@ $(document).ready(function(){initNavTree('ecs_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keywordflow">if</span> (!this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  viotecs::world::destroy();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  viotecs::World::destroy();</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  Ecs::initialized = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  INFO(<span class="stringliteral">&quot;{}: terminated&quot;</span>, Ecs::subsystem_name);</div>

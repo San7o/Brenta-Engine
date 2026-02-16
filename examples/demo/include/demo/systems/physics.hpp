@@ -17,11 +17,10 @@
 #include <vector>
 
 using namespace viotecs;
-using namespace viotecs::types;
 
-struct PhysicsSystem : system<PhysicsComponent, TransformComponent>
+struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
 {
-  void run(std::vector<entity_id> matches) const override
+  void run(std::vector<EntityId> matches) const override
   {
     if (matches.empty())
       return;
@@ -29,10 +28,10 @@ struct PhysicsSystem : system<PhysicsComponent, TransformComponent>
     for (auto match : matches)
     {
       auto physics_component =
-        world::entity_to_component<PhysicsComponent>(match);
+        World::entity_to_component<PhysicsComponent>(match);
 
       auto transform_component =
-        world::entity_to_component<TransformComponent>(match);
+        World::entity_to_component<TransformComponent>(match);
 
       if (physics_component->acceleration != glm::vec3(0.0f))
       {

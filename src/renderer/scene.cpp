@@ -33,7 +33,7 @@ std::shared_ptr<Camera> Scene::get_active_camera() const
 void Scene::update([[maybe_unused]] float delta_time)
 {
   #ifdef BRENTA_USE_ECS
-  world::tick();
+  World::tick();
   #endif
   return;
 }

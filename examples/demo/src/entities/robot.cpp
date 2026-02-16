@@ -44,7 +44,7 @@ void init_robot_entity()
                    .flipped(false))
     .build();
 
-  auto cube_entity = world::new_entity()
+  auto cube_entity = World::new_entity()
     .add_component<TransformComponent>(m.get_transform())
     .add_component<ModelComponent>(std::move(m), 32.0f, "default_shader", true, 4, 0);
 }

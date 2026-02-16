@@ -14,15 +14,14 @@
 #include <vector>
 
 using namespace viotecs;
-using namespace viotecs::types;
 
-struct DebugTextSystem : system<none>
+struct DebugTextSystem : System<None>
 {
-  void run(std::vector<entity_id> _) const override
+  void run(std::vector<EntityId> _) const override
   {
     auto            color            = glm::vec3(1.0f, 0.9f, 0.0f);
     const float     offset           = 20.0f;
-    brenta::Camera *cam              = world::get_resource<CameraResource>()->cam;
+    brenta::Camera *cam              = World::get_resource<CameraResource>()->cam;
     auto            camera_world_pos = cam->get_transform().get_pos();
 
     Text::render_text("FPS: " + std::to_string(Window::get_time().get_fps()), 25.0f,

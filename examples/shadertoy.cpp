@@ -17,9 +17,6 @@
 
 #include <iostream>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 using namespace brenta;
 
 unsigned int update_shader(std::string fragment_source);

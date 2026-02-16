@@ -19,7 +19,7 @@ To create an engine, you can use the Builder class:
 int main() {
   Engine::Builder()
     .with(Logger::Builder()
-          .level(oak::level::debug))
+          .level(Logger::Level::debug))
     .with(Window::Builder()
           .title("load opengl test")
           .width(screen_width)
@@ -180,8 +180,6 @@ with `brenta::time`, display text with `brenta::text` and more!
 using namespace brenta;
 using namespace viotecs;
 
-REGISTER_SYSTEMS(none);
-
 int main()
 {
   Engine::Builder()
@@ -202,15 +200,18 @@ int main()
   // Your init functions ...
   init_player();
   init_renderer();
+  
+  // Register ECS systems
+  world::register_systems<None>();
 
   while(!Window::should_Close()) {
 
     Gl::set_color(Color::gray());
     Gl::clear();
 
-    world::tick();
+    World::tick();
 
-    Window::poll_wvents();
+    Window::poll_events();
     Window::swap_buffers();
   }
   
@@ -229,15 +230,15 @@ You can define your own component like so:
 
 ```c++
 // This is a component
-struct model_component : component {
+struct ModelComponent : Component {
   Model mod;
   Shader::Name shader;
 
   // You need to provide a default constructor
-  model_component() {};
+  ModelComponent() {};
 
   // Any other construtor is optional
-  model_component(model mod, Shader::Name shader)
+  ModelComponent(Model mod, Shader::Name shader)
         : model(model), shader(shader) {}
 };
 ```
@@ -255,15 +256,15 @@ Here is an example:
 
 ```c++
 // Specify ModelComponent and TransformComponent query
-struct renderer_system : system<model_component, transform_component> {
+struct RenderSystem : System<ModelComponent, TransformComponent> {
 
   // You need to define this function
-  void run(std::vector<entity_t> matches) const override {
+  void run(std::vector<EntityId> matches) const override {
     if (matches.empty()) return;
 
     for (auto match : matches) {
       // Get the model component
-      auto model_c = world::entity_to_component<model_component>(match);
+      auto model_c = World::entity_to_component<ModelComponent>(match);
       auto my_model = model_c->mod;
 
       // Translate the model
@@ -274,9 +275,8 @@ struct renderer_system : system<model_component, transform_component> {
   }
 };
 
-// Somewhere in your code you need to
-// have one (and only one) call on this macro
-REGISTER_SYSTEMS(render_system);
+// Register this system
+world::register_systems<RenderSystem>();
 ```
 
 ### Entity
@@ -285,18 +285,17 @@ You can create Entities and assign Components to them like so:
 
 ```c++
 // Create the player entity
-auto player_entity = world::new_entity();
+auto player_entity = World::new_entity();
 
 
 // Add the player component to the player entity
-world::add_component<player_component>(player_entity, player_component());
+World::add_component<PlayerComponent>(player_entity, player_component());
 
 // Load model and shader
 // ...
 
 // Add the model component to the player entity
-auto model_c = model_component(mod, "default_shader");
-world::add_component<model_component>(player_entity, model_c);
+player_entity.add_component<ModelComponent>(mod, "default_shader");
 ```
 
 ### Resources
@@ -306,12 +305,12 @@ You can define a Resource like so:
 
 ```c++
 // This is a resource
-struct wireframe_resource : resource {
+struct WireframeResource : Resource {
   bool enabled;
-  wireframe_resource(bool e) : enabled(e) {}
+  WireframeResource(bool e) : enabled(e) {}
 };
 
-world::add_resource<wireframe_resource>(wireframe_resource(false));
+World::add_resource<WireframeResource>(false);
 ```
 
 Here is an high lievel simplified view of those objects:

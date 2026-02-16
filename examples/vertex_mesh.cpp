@@ -16,9 +16,6 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/logger.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS();
-
 #include "assets/shaders/c/default_shader_vs.c"
 #include "assets/shaders/c/default_shader_fs.c"
 

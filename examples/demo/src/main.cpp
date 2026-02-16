@@ -11,11 +11,8 @@
 #include <bitset>
 
 using namespace brenta;
-
 #ifdef BRENTA_USE_ECS
 using namespace viotecs;
-REGISTER_SYSTEMS(RendererSystem, PointLightsSystem, DebugTextSystem,
-                 DirectionalLightSystem, PhysicsSystem, CollisionsSystem);
 #endif
 
 int main()
@@ -43,7 +40,9 @@ int main()
     .with(Audio::Builder()
           .sound("guitar", "examples/assets/audio/guitar.wav"))
     .with(Input::Builder())
+    #if BRENTA_USE_ECS
     .with(Ecs::Builder())
+    #endif
     .with(Gui::Builder())
     .with(Text::Builder()
           .font("examples/assets/fonts/arial.ttf")
@@ -82,8 +81,14 @@ int main()
   init_camera_mouse_callback(&camera, &mouse);
   init_play_guitar_callback();
 
-  world::add_resource<WireframeResource>(false);
-  world::add_resource<CameraResource>(&camera);
+  World::add_resource<WireframeResource>(false);
+  World::add_resource<CameraResource>(&camera);
+  World::register_systems<RendererSystem,
+                          PointLightsSystem,
+                          DebugTextSystem,
+                          DirectionalLightSystem,
+                          PhysicsSystem,
+                          CollisionsSystem>();
 #endif
 
   auto emitter = ParticleEmitter::Builder()
@@ -130,7 +135,7 @@ int main()
     }
     
 #ifdef BRENTA_USE_ECS
-    world::tick();
+    World::tick();
 #endif
 
 #ifdef BRENTA_USE_IMGUI

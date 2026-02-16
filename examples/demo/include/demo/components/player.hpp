@@ -8,7 +8,7 @@
 #include <demo/components/model.hpp>
 #include <iostream>
 
-struct PlayerComponent : component
+struct PlayerComponent : Component
 {
   PlayerComponent()
   {

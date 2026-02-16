@@ -11,13 +11,12 @@
 
 using namespace brenta;
 using namespace viotecs;
-using namespace viotecs::types;
 
 void init_toggle_wireframe_callback()
 {
   auto toggle_wireframe_callback = []()
   {
-    auto wireframe = world::get_resource<WireframeResource>();
+    auto wireframe = World::get_resource<WireframeResource>();
     if (wireframe == nullptr)
       return;
 

@@ -5,9 +5,6 @@
 
 #include <brenta/brenta.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <iostream>
 
 #include "assets/shaders/c/mandelbrot_vs.c"

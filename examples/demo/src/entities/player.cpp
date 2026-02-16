@@ -13,7 +13,6 @@
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
-using namespace viotecs::types;
 using namespace brenta;
 
 #include "../../../assets/shaders/c/default_shader_vs.c"
@@ -36,7 +35,7 @@ void init_player_entity()
                .scale(glm::vec3(1.0f)))
     .build();
   
-  auto player = world::new_entity()
+  auto player = World::new_entity()
     .add_component<PlayerComponent>()
     .add_component<TransformComponent>(m.get_transform())
     .add_component<ModelComponent>(std::move(m), 32.0f, "default_shader");

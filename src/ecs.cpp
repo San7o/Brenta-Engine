@@ -23,7 +23,7 @@ std::expected<void, Subsystem::Error> Ecs::initialize()
 {
   if (this->is_initialized()) return {};
   
-  viotecs::world::init();
+  viotecs::World::init();
 
   Ecs::initialized = true;
   INFO("{}: initialized", Ecs::subsystem_name);
@@ -34,7 +34,7 @@ std::expected<void, Subsystem::Error> Ecs::terminate()
 {
   if (!this->is_initialized()) return {};
 
-  viotecs::world::destroy();
+  viotecs::World::destroy();
 
   Ecs::initialized = true;
   INFO("{}: terminated", Ecs::subsystem_name);

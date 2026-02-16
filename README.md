@@ -42,7 +42,7 @@ classes, to get a detailed look at the engine, please visit the
 ```c++
 auto engine = Engine::Builder()
   .with(Logger::Builder()
-        .level(oak::level::debug)
+        .level(Logger::Level::debug)
         .file("/tmp/brenta-logs"))
   .with(Window::Builder()
         .title("brenta demo")
@@ -129,7 +129,7 @@ helps you manage the entity, for example by attaching a component to
 that entity, or removing the entity from the world.
 
 ```c++
-entity e = world::new_entity();
+Entity e = World::new_entity();
 ```
 
 ### Components
@@ -137,16 +137,16 @@ entity e = world::new_entity();
 Components are pieces of data that are attached to an entity:
 
 ```c++
-struct physics_component : component {
+struct PhysicsComponent : Component {
     float mass;
     float density;
     glm::vec3 velocity;
     glm::vec3 acceleration;
-    physics_component(float mass) : mass(mass) {}
+    PhysicsComponent(float mass) : mass(mass) {}
 };
 
 // Somewhere
-e.add_component<physics_component>(10.0f);
+e.add_component<PhysicsComponent>(10.0f);
 ```
 
 ### Systems
@@ -155,15 +155,15 @@ Systems are functions that operate on entities with specific components. They
 are called at each game tick by the `World`:
 
 ```c++
-struct fps_system : system<none> {
+struct FpsSystem : System<None> {
     void run(std::vector<entity_t> _) const override {
         text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f, 25.0f,
                          0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
     }
 };
 
-// Somewhere, only once
-REGISTER_SYSTEMS(fps_system);
+// To register the system
+World::register_systems<FpsSystem>();
 ```
 
 <h1 align=center> Building </h1>

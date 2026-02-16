@@ -16,7 +16,7 @@
 using namespace brenta;
 using namespace viotecs;
 
-struct PointLightComponent : component
+struct PointLightComponent : Component
 {
   glm::vec3 ambient;
   glm::vec3 diffuse;

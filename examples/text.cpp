@@ -9,9 +9,6 @@
 #include <brenta/gui/text.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <iostream>
 
 using namespace brenta;

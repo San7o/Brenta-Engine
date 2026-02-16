@@ -9,7 +9,7 @@
 
 using namespace viotecs;
 
-struct WireframeResource : resource
+struct WireframeResource : Resource
 {
   bool enabled;
   

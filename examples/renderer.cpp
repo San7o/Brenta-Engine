@@ -11,9 +11,6 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <viotecs/viotecs.hpp>
-REGISTER_SYSTEMS()
-
 #include <iostream>
 
 #include "assets/shaders/c/default_shader_vs.c"

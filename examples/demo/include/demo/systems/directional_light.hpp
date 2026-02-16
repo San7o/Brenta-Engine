@@ -13,9 +13,9 @@
 
 using namespace viotecs;
 
-struct DirectionalLightSystem : system<DirectionalLightComponent>
+struct DirectionalLightSystem : System<DirectionalLightComponent>
 {
-  void run(std::vector<entity_id> entities) const override
+  void run(std::vector<EntityId> entities) const override
   {
     if (entities.empty())
       return;
@@ -23,7 +23,7 @@ struct DirectionalLightSystem : system<DirectionalLightComponent>
     for (auto entity : entities)
     {
       auto light =
-        world::entity_to_component<DirectionalLightComponent>(entity);
+        World::entity_to_component<DirectionalLightComponent>(entity);
 
       for (auto shader_name : light->shaders)
       {

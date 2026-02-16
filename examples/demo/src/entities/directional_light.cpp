@@ -22,7 +22,7 @@ using namespace brenta;
 
 void init_directional_light_entity()
 {
-  auto light = world::new_entity()
+  auto light = World::new_entity()
     .add_component<DirectionalLightComponent>(glm::vec3(0.2f, -1.0f, -0.3f), // direction
                                               glm::vec3(0.7f, 0.7f, 0.7f),   // ambient
                                               glm::vec3(0.5f, 0.5f, 0.5f),   // diffuse

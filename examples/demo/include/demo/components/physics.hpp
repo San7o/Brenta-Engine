@@ -13,7 +13,7 @@
 
 using namespace viotecs;
 
-struct PhysicsComponent : component
+struct PhysicsComponent : Component
 {
   float     mass;
   float     density;

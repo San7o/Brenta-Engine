@@ -12,7 +12,6 @@
 #include <viotecs/viotecs.hpp>
 
 using namespace viotecs;
-using namespace viotecs::types;
 using namespace brenta;
 
 #include "../../../assets/shaders/c/default_shader_vs.c"
@@ -32,7 +31,7 @@ void init_cube_entity()
     .path("examples/assets/models/simple_cube/simple_cube.obj")
     .build();
 
-  auto cube = world::new_entity()
+  auto cube = World::new_entity()
     .add_component<TransformComponent>(m.get_transform())
     .add_component<ModelComponent>(std::move(m), 32.0f, "cube_shader");
 }

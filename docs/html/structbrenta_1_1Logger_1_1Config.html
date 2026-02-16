@@ -99,15 +99,51 @@ $(document).ready(function(){initNavTree('structbrenta_1_1Logger_1_1Config.html'
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a37a216191db6330cbffbe06f77ea26a7" id="r_a37a216191db6330cbffbe06f77ea26a7"><td class="memItemLeft" align="right" valign="top">oak::level&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html#a37a216191db6330cbffbe06f77ea26a7">log_level</a> = oak::level::info</td></tr>
-<tr class="separator:a37a216191db6330cbffbe06f77ea26a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8aa9c51ea7491db812db0b626d19d13b" id="r_a8aa9c51ea7491db812db0b626d19d13b"><td class="memItemLeft" align="right" valign="top">oak::Level&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html#a8aa9c51ea7491db812db0b626d19d13b">log_level</a> = oak::Level::Info</td></tr>
+<tr class="separator:a8aa9c51ea7491db812db0b626d19d13b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae28e36c62350363d714dfefbcac1f64d" id="r_ae28e36c62350363d714dfefbcac1f64d"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html#ae28e36c62350363d714dfefbcac1f64d">log_file</a> = &quot;/tmp/brenta-logs.txt&quot;</td></tr>
 <tr class="separator:ae28e36c62350363d714dfefbcac1f64d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cfab4cd0ce74091a99ab981aa5762ba" id="r_a0cfab4cd0ce74091a99ab981aa5762ba"><td class="memItemLeft" align="right" valign="top">std::vector&lt; Event &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html#a0cfab4cd0ce74091a99ab981aa5762ba">events</a> = {}</td></tr>
+<tr class="separator:a0cfab4cd0ce74091a99ab981aa5762ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a583fc9d64d8defab9bee4b295dbe5a9d" id="r_a583fc9d64d8defab9bee4b295dbe5a9d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; Flags &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Logger_1_1Config.html#a583fc9d64d8defab9bee4b295dbe5a9d">flags</a> = {}</td></tr>
+<tr class="separator:a583fc9d64d8defab9bee4b295dbe5a9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00055">55</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00065">65</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 </div><h2 class="groupheader">Field Documentation</h2>
+<a id="a0cfab4cd0ce74091a99ab981aa5762ba" name="a0cfab4cd0ce74091a99ab981aa5762ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cfab4cd0ce74091a99ab981aa5762ba">&#9670;&#160;</a></span>events</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;Event&gt; brenta::Logger::Config::events = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00069">69</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a583fc9d64d8defab9bee4b295dbe5a9d" name="a583fc9d64d8defab9bee4b295dbe5a9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a583fc9d64d8defab9bee4b295dbe5a9d">&#9670;&#160;</a></span>flags</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;Flags&gt; brenta::Logger::Config::flags = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00070">70</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ae28e36c62350363d714dfefbcac1f64d" name="ae28e36c62350363d714dfefbcac1f64d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae28e36c62350363d714dfefbcac1f64d">&#9670;&#160;</a></span>log_file</h2>
 
@@ -120,23 +156,23 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00058">58</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00068">68</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a37a216191db6330cbffbe06f77ea26a7" name="a37a216191db6330cbffbe06f77ea26a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a37a216191db6330cbffbe06f77ea26a7">&#9670;&#160;</a></span>log_level</h2>
+<a id="a8aa9c51ea7491db812db0b626d19d13b" name="a8aa9c51ea7491db812db0b626d19d13b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8aa9c51ea7491db812db0b626d19d13b">&#9670;&#160;</a></span>log_level</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">oak::level brenta::Logger::Config::log_level = oak::level::info</td>
+          <td class="memname">oak::Level brenta::Logger::Config::log_level = oak::Level::Info</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00057">57</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="logger_8hpp_source.html#l00067">67</a> of file <a class="el" href="logger_8hpp_source.html">logger.hpp</a>.</p>
 
 </div>
 </div>

@@ -12,7 +12,7 @@
 using namespace brenta;
 using namespace viotecs;
 
-struct ModelComponent : component
+struct ModelComponent : Component
 {
   Model        mod;
   float        shininess;
