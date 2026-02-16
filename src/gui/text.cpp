@@ -106,7 +106,7 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
   }
 
   FT_Face face;
-  if (FT_New_Face(ft, (const char*)font_path.c_str(), 0, &face))
+  if (FT_New_Face(ft, font_path.string().c_str(), 0, &face))
   {
     ERROR("{}: could not load font at path {}",
           Text::subsystem_name, font_path.string());

@@ -25,6 +25,7 @@ if(CCACHE_PROGRAM)
   message(STATUS "Using ccache: ${CCACHE_PROGRAM}")
   set(CMAKE_CXX_COMPILER_LAUNCHER "${CCACHE_PROGRAM}")
 endif()
+find_package(OpenGL REQUIRED)
 
 set(BRENTA_DEFINES)
 
@@ -138,7 +139,7 @@ endif()
 # Add oak after viotecs and valfuzz
 register_dependency(oak)
 
-list(APPEND BRENTA_DEPS_LIBS GL pthread dl m)
+list(APPEND BRENTA_DEPS_LIBS OpenGL::GL pthread dl m)
 
 #
 # Sources and headers

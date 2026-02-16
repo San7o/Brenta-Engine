@@ -54,7 +54,6 @@ Material &Model::get_material()
   return this->material;
 }
 
-// TODO: pass props down
 void Model::load(const Texture::Properties &props)
 {
   tinyobj::ObjReaderConfig reader_config;
@@ -64,7 +63,7 @@ void Model::load(const Texture::Properties &props)
 
   tinyobj::ObjReader reader;
 
-  if (!reader.ParseFromFile(this->path, reader_config))
+  if (!reader.ParseFromFile(this->path.string(), reader_config))
   {
     if (!reader.Error().empty())
     {

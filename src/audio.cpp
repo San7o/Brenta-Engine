@@ -119,7 +119,7 @@ Audio::load(const Audio::SoundId &sound_id,
 
   Audio::Sound sound = {};
   Audio::sounds.insert({sound_id, sound});
-  if (ma_sound_init_from_file(&Audio::engine, (const char*)path.c_str(), 0, stream, NULL,
+  if (ma_sound_init_from_file(&Audio::engine, path.string().c_str(), 0, stream, NULL,
                               &Audio::sounds.at(sound_id)) != MA_SUCCESS)
   {
     ERROR("{}: error loading sound {} from path {}",
