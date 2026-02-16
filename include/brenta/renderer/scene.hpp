@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
+#include <brenta/renderer/light.hpp>
 
 #pragma once
 
@@ -18,6 +19,8 @@ public:
   Scene() = default;
 
   Scene &add_model(std::shared_ptr<Model> model);
+  Scene &add_point_light(std::shared_ptr<PointLight> point_light);
+  Scene &set_dir_light(std::shared_ptr<DirLight> dir_light);
   Scene &set_active_camera(std::shared_ptr<Camera> camera);
   std::shared_ptr<Camera> get_active_camera() const;
 
@@ -28,8 +31,10 @@ public:
 
 private:
 
-  std::vector<std::shared_ptr<Model>> models;
-  std::shared_ptr<Camera>             active_camera;
+  std::vector<std::shared_ptr<Model>>        models;
+  std::vector<std::shared_ptr<PointLight>>   point_lights;
+  std::optional<std::shared_ptr<DirLight>>   dir_light;
+  std::shared_ptr<Camera>                    active_camera;
   
 };
   

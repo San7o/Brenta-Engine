@@ -22,38 +22,41 @@ layout (std140) uniform settings
 // Random number generator between [-1, 1]
 float rand(vec2 co);
 
-void main() {
+void main()
+{
+  float random = rand(vec2(deltaTime * float(gl_VertexID)));
+  if (random < spawnProbability)
+  {
+    outPosition = emitterPos;
+    outVelocity = emitterVel + emitterSpread *
+      vec3(rand(vec2(float(gl_VertexID + 1.0))) -0.5,
+           rand(vec2(float(gl_VertexID + 2.0))) -0.5,
+           rand(vec2(float(gl_VertexID + 3.0))) -0.5);
+    outTTL = emitterTTL;
+    return;
+  }
 
-    float random = rand(vec2(deltaTime * float(gl_VertexID)));
-    if (random < spawnProbability) {
-        outPosition = emitterPos;
-        outVelocity = emitterVel + emitterSpread *
-                      vec3(rand(vec2(float(gl_VertexID + 1.0))) -0.5,
-                           rand(vec2(float(gl_VertexID + 2.0))) -0.5,
-                           rand(vec2(float(gl_VertexID + 3.0))) -0.5);
-        outTTL = emitterTTL;
-        return;
-    }
+  if (inTTL <= 0.0)
+  {
+    outPosition = inPosition;
+    outVelocity = vec3(0.0);
+    outTTL = -1.0;
+    return;
+  }
 
-    if (inTTL <= 0.0) {
-        outPosition = inPosition;
-        outVelocity = vec3(0.0);
-        outTTL = -1.0;
-        return;
-    }
+  outTTL = inTTL - deltaTime;
 
-    outTTL = inTTL - deltaTime;
+  vec3 processed_velocity = inVelocity;
+  float delta = 0.0;
 
-    vec3 processed_velocity = inVelocity;
-    float delta = 0.0;
-
-    vec3 newVelocity = processed_velocity + gravity * deltaTime;
-    vec3 newPosition = inPosition + newVelocity * deltaTime;
+  vec3 newVelocity = processed_velocity + gravity * deltaTime;
+  vec3 newPosition = inPosition + newVelocity * deltaTime;
     
-    outVelocity = newVelocity;
-    outPosition = newPosition;
+  outVelocity = newVelocity;
+  outPosition = newPosition;
 }
     
-float rand(vec2 co){
+float rand(vec2 co)
+{
 	return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 }

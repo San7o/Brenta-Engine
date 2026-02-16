@@ -13,8 +13,8 @@
 
 #include <iostream>
 
-#include "assets/shaders/c/default_shader_vs.c"
-#include "assets/shaders/c/default_shader_fs.c"
+#include "../src/renderer/shaders/c/phong_vs.c"
+#include "../src/renderer/shaders/c/phong_fs.c"
 
 using namespace brenta;
 
@@ -47,15 +47,15 @@ int main()
     .build();
 
   auto shader = Shader::create("default_shader", {
-      { Shader::Type::Vertex,   default_shader_vs },
-      { Shader::Type::Fragment, default_shader_fs } });
+      { Shader::Type::Vertex,   phong_vs },
+      { Shader::Type::Fragment, phong_fs } });
   if (!shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
 
-  auto material = Material(*shader);
+  auto material = Material(shader.value());
 
   auto model = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")

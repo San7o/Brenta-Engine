@@ -32,6 +32,8 @@ public:
   GLuint texture_id;
   GLuint render_buffer_id;
   GLenum color_format;
+  int width;
+  int height;
 
   FrameBuffer() {}
   FrameBuffer(int width, int height, GLenum format = GL_RGBA);

@@ -14,8 +14,8 @@
 using namespace brenta;
 using namespace viotecs;
 
-#include "../../../assets/shaders/c/default_shader_vs.c"
-#include "../../../assets/shaders/c/default_shader_fs.c"
+#include "../../../../src/renderer/shaders/c/phong_vs.c"
+#include "../../../../src/renderer/shaders/c/phong_fs.c"
 
 void init_robot_entity()
 {
@@ -23,8 +23,8 @@ void init_robot_entity()
   if (!shader)
   {
     Shader::create("default_shader", {
-        { Shader::Type::Vertex, default_shader_vs },
-        { Shader::Type::Fragment, default_shader_fs } });
+        { Shader::Type::Vertex,   phong_vs },
+        { Shader::Type::Fragment, phong_fs } });
   }
 
   Model m = Model::Builder()

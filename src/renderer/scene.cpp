@@ -19,6 +19,18 @@ Scene& Scene::add_model(std::shared_ptr<Model> model)
   return *this;
 }
 
+Scene& Scene::add_point_light(std::shared_ptr<PointLight> point_light)
+{
+  this->point_lights.push_back(point_light);
+  return *this;
+}
+
+Scene& Scene::set_dir_light(std::shared_ptr<DirLight> dir_light)
+{
+  this->dir_light = dir_light;
+  return *this;
+}
+
 Scene& Scene::set_active_camera(std::shared_ptr<Camera> camera)
 {
   this->active_camera = camera;
@@ -40,7 +52,7 @@ void Scene::update([[maybe_unused]] float delta_time)
 
 void Scene::draw()
 {
-  Renderer::begin_frame({this->active_camera});
+  Renderer::begin_frame(this->active_camera, this->point_lights, this->dir_light);
   for (auto& model : this->models)
     Renderer::submit(model);
   Renderer::end_frame();

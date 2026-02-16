@@ -13,10 +13,6 @@ EXAMPLES_SHADERS_DIR     := $(PWD)/examples/assets/shaders
 EXAMPLES_SHADERS_OUT_DIR := $(PWD)/examples/assets/shaders/c
 EXAMPLES_SHADERS         := $(shell find $(EXAMPLES_SHADERS_DIR) -regex '.*\.\(fs\|vs\|gs\)')
 
-.PHONY: format
-format:
-	find include/brenta src examples tests -iname "*.cpp" -o -iname "*.hpp" | xargs clang-format -style=file:utils/.clang-format -i
-
 .PHONY: shaders
 shaders: shaders-brenta shaders-examples
 

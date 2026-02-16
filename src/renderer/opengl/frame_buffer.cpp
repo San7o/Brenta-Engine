@@ -19,7 +19,9 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fbo);
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_tex);
   glGetIntegerv(GL_RENDERBUFFER_BINDING, &old_rbo);
-  
+
+  this->width = width;
+  this->height = height;
   this->color_format = color_format;
 
   glGenFramebuffers(1, &this->get_id());
@@ -109,6 +111,8 @@ void FrameBuffer::rescale(int width, int height)
     return;
   }
 
+  this->width  = width;
+  this->height = height;
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
   check_error();
 

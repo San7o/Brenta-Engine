@@ -16,8 +16,8 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/logger.hpp>
 
-#include "assets/shaders/c/default_shader_vs.c"
-#include "assets/shaders/c/default_shader_fs.c"
+#include "../src/renderer/shaders/c/phong_vs.c"
+#include "../src/renderer/shaders/c/phong_fs.c"
 
 #include <memory>
 
@@ -45,8 +45,8 @@ int main(void)
     .build();
 
   auto shader = Shader::create("my_shader", {
-      { Shader::Type::Vertex,   default_shader_vs },
-      { Shader::Type::Fragment, default_shader_fs },
+      { Shader::Type::Vertex,   phong_vs },
+      { Shader::Type::Fragment, phong_fs },
     });
   if (!shader)
   {
@@ -103,7 +103,7 @@ int main(void)
     
     // Draw
     Renderer::begin_frame(camera_ptr);
-    Renderer::submit(model_ptr);
+    Renderer::submit({model_ptr});
     Renderer::end_frame();
     
     Window::poll_events();

@@ -108,14 +108,14 @@ public:
   bool              use();
 
   // Set uniforms
-  bool set_bool(const GLchar   *unif_name, bool  value);
-  bool set_int(const GLchar    *unif_name, int   value);
-  bool set_float(const GLchar  *unif_name, float value);
-  bool set_float2(const GLchar *unif_name, float v1, float v2);
-  bool set_float3(const GLchar *unif_name, float v1, float v2, float v3);
-  bool set_mat4(const GLchar   *unif_name, glm::mat4 value);
-  bool set_vec3(const GLchar   *name, float x, float y, float z);
-  bool set_vec3(const GLchar   *unif_name, glm::vec3 value);
+  bool set_bool(const std::string   &unif_name, bool  value);
+  bool set_int(const std::string    &unif_name, int   value);
+  bool set_float(const std::string  &unif_name, float value);
+  bool set_float2(const std::string &unif_name, float v1, float v2);
+  bool set_float3(const std::string &unif_name, float v1, float v2, float v3);
+  bool set_mat4(const std::string   &unif_name, glm::mat4 value);
+  bool set_vec3(const std::string   &name, float x, float y, float z);
+  bool set_vec3(const std::string   &unif_name, glm::vec3 value);
 
 private:
 

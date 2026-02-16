@@ -11,11 +11,12 @@ out vec3 geomPosition;
 out vec3 geomVelocity;
 out float geomTTL;
 
-void main() {
-    geomPosition = outPosition[0];
-    geomVelocity = outVelocity[0];
-    geomTTL = outTTL[0];
+void main()
+{
+  geomPosition = outPosition[0];
+  geomVelocity = outVelocity[0];
+  geomTTL = outTTL[0];
 
-    EmitVertex();
-    EndPrimitive();
+  EmitVertex();
+  EndPrimitive();
 }

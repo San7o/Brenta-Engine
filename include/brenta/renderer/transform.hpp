@@ -27,6 +27,7 @@ public:
   float     get_x() const;
   float     get_y() const;
   float     get_z() const;
+  glm::quat get_rotation() const;
 
   void     set_pos(glm::vec3 new_pos);
   void     set_x(float x);
@@ -35,6 +36,9 @@ public:
 
   Transform& translate(const glm::vec3& translation);
   Transform& rotate(const glm::quat &rotation);
+  Transform& rotate_x(float degrees);
+  Transform& rotate_y(float degrees);
+  Transform& rotate_z(float degrees);
   Transform& scale(const glm::vec3& scale);
   
 private:

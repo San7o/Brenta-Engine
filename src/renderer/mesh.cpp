@@ -90,10 +90,13 @@ void Mesh::draw() const
       number = "0";
       break;
     }
-    
+
+    // Get the current shader
     GLint prog = 0;
     glGetIntegerv(GL_CURRENT_PROGRAM, &prog);
-    Shader shader = Shader(prog, "tmp_material_shader");
+    Shader shader = Shader(prog, "current_mesh_material_shader");
+
+    // Set uniforms
     shader.set_int(("material." + name + number).c_str(), i);
     textures[i]->bind();
   }

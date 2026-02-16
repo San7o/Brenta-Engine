@@ -15,8 +15,8 @@
 #include <memory>
 #include <iostream>
 
-#include "assets/shaders/c/default_shader_vs.c"
-#include "assets/shaders/c/default_shader_fs.c"
+#include "../src/renderer/shaders/c/phong_vs.c"
+#include "../src/renderer/shaders/c/phong_fs.c"
 
 using namespace brenta;
 
@@ -40,41 +40,40 @@ int main()
     .build();
   auto engine = Engine::managed();
   
-  auto cam = Camera::Builder()
-    .projection_type(Camera::ProjectionType::Perspective)
-    .position(Camera::Aircraft::Builder()
-              .pos({0.0f, 0.0f, 0.0f})
-              .build())
-    .fov(45.0f)
-    .build();
+  auto camera =
+    std::make_shared<Camera>(Camera::Builder()
+                             .projection_type(Camera::ProjectionType::Perspective)
+                             .position(Camera::Aircraft::Builder()
+                                       .pos({0.0f, 0.0f, 0.0f})
+                                       .build())
+                             .fov(45.0f)
+                             .build());
 
   auto shader = Shader::create("default_shader", {
-      { Shader::Type::Vertex,   default_shader_vs },
-      { Shader::Type::Fragment, default_shader_fs } });
+      { Shader::Type::Vertex,   phong_vs },
+      { Shader::Type::Fragment, phong_fs } });
   if (!shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
 
-  auto material = Material(*shader);
+  auto material = Material(shader.value());
 
-  auto model = Model::Builder()
-    .path("examples/assets/models/backpack/backpack.obj")
-    .transform(Transform()
-               .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-               .rotate(glm::angleAxis(glm::radians(-90.0f),
-                                      glm::vec3(0.0f, 1.0f, 0.0f)))
-               .scale(glm::vec3(1.0)))
-    .material(std::move(material))
-    .build();
+  auto model =
+    std::make_shared<Model>(Model::Builder()
+                            .path("examples/assets/models/backpack/backpack.obj")
+                            .transform(Transform()
+                                       .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+                                       .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                                              glm::vec3(0.0f, 1.0f, 0.0f)))
+                                       .scale(glm::vec3(1.0)))
+                            .material(std::move(material))
+                            .build());
 
-  auto camera_ptr = std::make_shared<Camera>(std::move(cam));
-  auto model_ptr  = std::make_shared<Model>(std::move(model));
-  
   auto scene = Scene()
-    .add_model(model_ptr)
-    .set_active_camera(camera_ptr);
+    .add_model(model)
+    .set_active_camera(camera);
 
   while (!Window::should_close())
   { 

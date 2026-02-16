@@ -36,7 +36,7 @@ public:
   Material(const Shader &shader) : shader(shader) {}
   Material(Material&& other) = default;
   Material &operator=(Material&& other) = default;
-
+  
   void apply();
 
   Material &set_float(std::string name, float val);

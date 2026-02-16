@@ -142,10 +142,10 @@ bool Shader::use()
   return true;
 }
 
-bool Shader::set_bool(const GLchar *unif_name, bool value)
+bool Shader::set_bool(const std::string& unif_name, bool value)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -166,10 +166,10 @@ bool Shader::set_bool(const GLchar *unif_name, bool value)
   return true;
 }
 
-bool Shader::set_int(const GLchar *unif_name, int value)
+bool Shader::set_int(const std::string &unif_name, int value)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -190,10 +190,10 @@ bool Shader::set_int(const GLchar *unif_name, int value)
   return true;
 }
 
-bool Shader::set_float(const GLchar *unif_name, float value)
+bool Shader::set_float(const std::string &unif_name, float value)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -214,10 +214,10 @@ bool Shader::set_float(const GLchar *unif_name, float value)
   return true;
 }
 
-bool Shader::set_float2(const GLchar *unif_name, float v1, float v2)
+bool Shader::set_float2(const std::string &unif_name, float v1, float v2)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -238,10 +238,10 @@ bool Shader::set_float2(const GLchar *unif_name, float v1, float v2)
   return true;
 }
 
-bool Shader::set_float3(const GLchar *unif_name, float v1, float v2, float v3)
+bool Shader::set_float3(const std::string &unif_name, float v1, float v2, float v3)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -262,10 +262,10 @@ bool Shader::set_float3(const GLchar *unif_name, float v1, float v2, float v3)
   return true;
 }
 
-bool Shader::set_mat4(const GLchar *unif_name, glm::mat4 value)
+bool Shader::set_mat4(const std::string &unif_name, glm::mat4 value)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -286,10 +286,10 @@ bool Shader::set_mat4(const GLchar *unif_name, glm::mat4 value)
   return true;
 }
 
-bool Shader::set_vec3(const GLchar *unif_name, float x, float y, float z)
+bool Shader::set_vec3(const std::string &unif_name, float x, float y, float z)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {
@@ -310,10 +310,10 @@ bool Shader::set_vec3(const GLchar *unif_name, float x, float y, float z)
   return true;
 }
 
-bool Shader::set_vec3(const GLchar *unif_name, glm::vec3 value)
+bool Shader::set_vec3(const std::string& unif_name, glm::vec3 value)
 {
   GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name);
+  GLint location = glGetUniformLocation(program, unif_name.c_str());
 
   if (location == -1)
   {

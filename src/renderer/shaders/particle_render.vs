@@ -9,15 +9,17 @@ uniform mat4 projection;
 
 out float drawOrDie;
 
-void main() {
-   
-    if (inTTL < 0.0) {
-        drawOrDie = -1.0;
-    }
-    else {
-        drawOrDie = 1.0;
-    }
+void main()
+{
+  if (inTTL < 0.0)
+  {
+    drawOrDie = -1.0;
+  }
+  else
+  {
+    drawOrDie = 1.0;
+  }
 
-    gl_Position = projection * view * model * vec4(inPosition, 1.0);
-    gl_PointSize = 10.0;
+  gl_Position = projection * view * model * vec4(inPosition, 1.0);
+  gl_PointSize = 10.0;
 }

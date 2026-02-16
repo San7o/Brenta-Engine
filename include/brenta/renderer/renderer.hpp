@@ -8,8 +8,12 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/material.hpp>
+#include <brenta/renderer/light.hpp>
 
 #include <glm/glm.hpp>
+
+#include <memory>
+#include <vector>
 
 #pragma once
 
@@ -34,7 +38,9 @@ public:
   Renderer() = delete;
   ~Renderer() = delete;
   
-  static void begin_frame(std::shared_ptr<Camera> cam);
+  static void begin_frame(std::shared_ptr<Camera> cam,
+                          std::vector<std::shared_ptr<PointLight>> point_lights = {},
+                          std::optional<std::shared_ptr<DirLight>> dir_light = {});
   static void submit(const Renderer::Command& it);
   static void end_frame();
 
@@ -43,6 +49,8 @@ private:
   static glm::mat4 projection;
   static glm::mat4 view;
   static glm::vec3 cam_position;
+  static std::vector<std::shared_ptr<PointLight>>  point_lights;
+  static std::optional<std::shared_ptr<DirLight>>  dir_light;
   static std::vector<Command> render_queue;
   
   static void flush();
@@ -53,7 +61,7 @@ class Renderer::Command
 {
 public:
   
-  std::shared_ptr<Model>         model;
+  std::shared_ptr<Model> model;
   
   Command() = default;
   Command(std::shared_ptr<Model> model)

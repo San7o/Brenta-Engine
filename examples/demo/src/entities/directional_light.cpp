@@ -27,6 +27,6 @@ void init_directional_light_entity()
                                               glm::vec3(0.7f, 0.7f, 0.7f),   // ambient
                                               glm::vec3(0.5f, 0.5f, 0.5f),   // diffuse
                                               glm::vec3(1.0f, 1.0f, 1.0f),   // specular
-                                              1.0f,                          // intensity
+                                              0.9f,                          // intensity
                                               std::vector<Shader::Name>{"default_shader"});
 }

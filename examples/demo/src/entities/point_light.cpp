@@ -27,10 +27,13 @@ void init_point_light_entity()
     .scale(glm::vec3(0.5f));
   
   auto light = World::new_entity()
-    .add_component<PointLightComponent>(glm::vec3(0.1f, 0.1f, 0.1f),
-                                        glm::vec3(0.5f, 0.5f, 0.5f),
-                                        glm::vec3(1.0f, 1.0f, 1.0f),
-                                        1.0f, 0.09f, 0.0032f, 1.0f,
+    .add_component<PointLightComponent>(glm::vec3(0.1f, 0.1f, 0.1f), // ambient
+                                        glm::vec3(0.5f, 0.5f, 0.5f), // diffuse
+                                        glm::vec3(1.0f, 1.0f, 1.0f), // specular
+                                        1.0f,      // constant, > 1
+                                        0.09f,     // linear
+                                        0.00032f,  // quadratic
+                                        1.0f,      // strength
                                         std::vector<Shader::Name>{"default_shader"})
     .add_component<TransformComponent>(transform);
 }

@@ -56,7 +56,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
                        cam->get_projection_matrix(Window::get_width(),
                                                   Window::get_height()));
       shader->set_mat4("model", transform_component->transform.get_model_matrix());
-      shader->set_vec3("viewPos", cam->get_transform().get_pos());
+      shader->set_vec3("view_pos", cam->get_transform().get_pos());
       shader->set_float("material.shininess", model_component->shininess);
 
       // Animation control

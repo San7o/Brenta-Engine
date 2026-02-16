@@ -56,6 +56,11 @@ float Transform::get_z() const
   return this->m_position.z;
 }
 
+glm::quat Transform::get_rotation() const
+{
+  return this->m_rotation;
+}
+
 void Transform::set_pos(glm::vec3 new_pos)
 {
   this->m_position = new_pos;
@@ -91,10 +96,33 @@ Transform& Transform::translate(const glm::vec3& translation)
   return *this;
 }
 
-// Note: the order of rotations is important
 Transform& Transform::rotate(const glm::quat &rotation)
 {
-  this->m_rotation = rotation;
+  this->m_rotation *= rotation;
+  this->dirty    = true;
+  return *this;
+}
+
+Transform& Transform::rotate_x(float degrees)
+{
+  this->m_rotation *= glm::angleAxis(glm::radians(degrees),
+                                     glm::vec3(1.0f, 0.0f, 0.0f));
+  this->dirty    = true;
+  return *this;
+}
+
+Transform& Transform::rotate_y(float degrees)
+{
+  this->m_rotation *= glm::angleAxis(glm::radians(degrees),
+                                     glm::vec3(0.0f, 1.0f, 0.0f));
+  this->dirty    = true;
+  return *this;
+}
+
+Transform& Transform::rotate_z(float degrees)
+{
+  this->m_rotation *= glm::angleAxis(glm::radians(degrees),
+                                     glm::vec3(0.0f, 0.0f, 1.0f));
   this->dirty    = true;
   return *this;
 }
