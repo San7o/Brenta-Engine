@@ -1,5 +1,6 @@
 var dir_8be729f266d03cf130ed75096ea9284a =
 [
+    [ "drivers", "dir_ec767193c79f9ff8222aa27c9b134897.html", "dir_ec767193c79f9ff8222aa27c9b134897" ],
     [ "gui", "dir_9c9ed36f3f971f92ca1e98cb741044d0.html", "dir_9c9ed36f3f971f92ca1e98cb741044d0" ],
     [ "renderer", "dir_e378ba2053768d6a9544b8026eb92071.html", "dir_e378ba2053768d6a9544b8026eb92071" ],
     [ "audio.hpp", "audio_8hpp_source.html", null ],

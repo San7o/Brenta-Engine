@@ -2,6 +2,7 @@ var annotated_dup =
 [
     [ "brenta", null, [
       [ "Audio", "classbrenta_1_1Audio.html", "classbrenta_1_1Audio" ],
+      [ "AudioDriver", "classbrenta_1_1AudioDriver.html", null ],
       [ "Buffer", "classbrenta_1_1Buffer.html", null ],
       [ "Camera", "classbrenta_1_1Camera.html", "classbrenta_1_1Camera" ],
       [ "Color", "classbrenta_1_1Color.html", null ],
@@ -14,6 +15,7 @@ var annotated_dup =
       [ "Logger", "classbrenta_1_1Logger.html", "classbrenta_1_1Logger" ],
       [ "Material", "classbrenta_1_1Material.html", null ],
       [ "Mesh", "classbrenta_1_1Mesh.html", "classbrenta_1_1Mesh" ],
+      [ "Miniaudio", "classbrenta_1_1Miniaudio.html", null ],
       [ "Model", "classbrenta_1_1Model.html", "classbrenta_1_1Model" ],
       [ "Mouse", "classbrenta_1_1Mouse.html", null ],
       [ "Node", "classbrenta_1_1Node.html", null ],

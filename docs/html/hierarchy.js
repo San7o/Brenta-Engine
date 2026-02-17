@@ -1,6 +1,9 @@
 var hierarchy =
 [
     [ "brenta::Camera::Aircraft", "classbrenta_1_1Camera_1_1Aircraft.html", null ],
+    [ "brenta::AudioDriver", "classbrenta_1_1AudioDriver.html", [
+      [ "brenta::Miniaudio", "classbrenta_1_1Miniaudio.html", null ]
+    ] ],
     [ "brenta::Buffer", "classbrenta_1_1Buffer.html", [
       [ "brenta::FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
       [ "brenta::Ubo", "classbrenta_1_1Ubo.html", null ]

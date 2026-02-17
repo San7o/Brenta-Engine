@@ -44,7 +44,7 @@ int main()
     .with(Window::Builder()
           .title("audio test")
           .width(screen_width)
-          .height(screen_height))    
+          .height(screen_height))
     // Enable audio subsystem
     .with(Audio::Builder()
           // Load a sound from path to stream
@@ -73,9 +73,7 @@ int main()
     // specified, it will be used the value "default"
     //
     if (Window::is_key_pressed(Key::Space))
-    {
       Audio::play(sound_guitar_id);
-    }
 
     Window::poll_events();
     Window::swap_buffers();

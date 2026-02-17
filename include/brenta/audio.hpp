@@ -7,9 +7,6 @@
 
 #include <brenta/subsystem.hpp>
 
-// Backend
-#include <miniaudio/miniaudio.h>
-
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -18,6 +15,8 @@
 
 namespace brenta
 {
+
+class AudioDriver;
 
 /**
  * @brief Audio subsystem
@@ -33,23 +32,13 @@ class Audio : public Subsystem
 {  
 public:
 
-  using StreamId = std::string;
-  using SoundId  = std::string;
-  using Sound    = ma_sound;
-  using Stream   = ma_sound_group;
-
+  using StreamId     = std::string;
+  using StreamHandle = void*;
+  using SoundId      = std::string;
+  
   class      Builder;
   enum class Error;
 
-  // This map contains all the sound files loaded by the engine.  The
-  // key is the id of the sound file, the value is the struct sound_t.
-  static std::unordered_map<SoundId, Sound> sounds;
-  // This map contains all the audio streams created by the engine.
-  // The key is the id of the stream, the value is a stream type. The
-  // engine creates a default stream called "default".
-  static std::unordered_map<StreamId, Stream> streams;
-  
-  
   // Subsystem interface
   
   static const std::string subsystem_name;
@@ -64,8 +53,8 @@ public:
   
   // Constructors / destructors
   
-  Audio() = default;
-  ~Audio() = default;
+  Audio()  = default;
+  ~Audio() { this->terminate(); }
 
   // Member functions
   
@@ -87,7 +76,6 @@ public:
   
   static std::expected<void, Audio::Error>
   create_stream(const StreamId &id);
-  static Stream *get_stream(const StreamId &id);
   
   static std::expected<void, Audio::Error>
   stream_stop(const StreamId &id);
@@ -97,7 +85,10 @@ public:
   // 1.0 is default, 2.0 is double, 0.5 is half.
   static std::expected<void, Audio::Error>
   stream_set_volume(const StreamId &id, float volume);
-
+  
+  static std::optional<Audio::StreamHandle>
+  get_stream(const StreamId &stream_id);
+  
 private:
   
   // A list of pairs (stream_id, volume) of streams that will be
@@ -109,9 +100,8 @@ private:
                                 std::filesystem::path,
                                 StreamId>> init_sounds;
   static bool initialized;
-  
-  // Backend
-  static ma_engine engine;
+
+  static std::shared_ptr<AudioDriver> backend;
 };
 
 class Audio::Builder : public Subsystem::Builder
@@ -145,6 +135,48 @@ enum class Audio::Error : int
   StreamInit,
   StreamStop,
   StreamStart,
+  Uninitialized,
+};
+
+class AudioDriver
+{
+public:
+
+  virtual ~AudioDriver() {}
+
+  virtual std::expected<void, std::string> initialize() = 0;
+  virtual std::expected<void, std::string> terminate() = 0;
+
+  // Automatically creates the stream if it does not exist.
+  virtual std::expected<void, Audio::Error>
+  load(const Audio::SoundId &sound_id,
+       const std::filesystem::path &path,
+       const Audio::StreamId &stream_id = "default") = 0;
+
+  // Play a sound on its stream
+  virtual std::expected<void, Audio::Error>
+  play(const Audio::SoundId &id) = 0;
+
+  //
+  // Stream functions
+  //
+  
+  virtual std::expected<void, Audio::Error>
+  create_stream(const Audio::StreamId &id) = 0;
+  
+  virtual std::expected<void, Audio::Error>
+  stream_stop(const Audio::StreamId &id) = 0;
+  
+  virtual std::expected<void, Audio::Error>
+  stream_start(const Audio::StreamId &id) = 0;
+  
+  // 1.0 is default, 2.0 is double, 0.5 is half.
+  virtual std::expected<void, Audio::Error>
+  stream_set_volume(const Audio::StreamId &id, float volume) = 0;
+
+  virtual std::optional<Audio::StreamHandle>
+  get_stream(const Audio::StreamId &stream_id) = 0;
+  
 };
   
 } // namespace brenta

@@ -36,10 +36,11 @@ too.
 
 The actual rendering part deserves its own book. There are many
 rendering techniques available, the most popular ones are
-rasterization and ray tracing. Brenta uses rasterization, which means
-projecting each surface to the screen and calculating the color of
-each pixel by interpolating each one of them (parallelized on the
-GPU).
+rasterization which is common in realtime rendering, and ray tracing
+which is powerful but slower so it is used for offline rendering.
+Brenta uses rasterization, which means projecting each surface to
+the screen and calculating the color of each pixel by interpolating
+each one of them (parallelized on the GPU).
 
 This "projection" is achieved by multiplying together three matrices:
 the `model` or `world` matrix which translates a vertex to its

@@ -5,6 +5,7 @@
 
 #include <brenta/audio.hpp>
 #include <brenta/renderer/camera.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/input.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
@@ -277,7 +278,8 @@ void Window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
                                        [[maybe_unused]] int width,
                                        [[maybe_unused]] int height)
 {
-  glViewport(0, 0, width, height);
+  if (Gl::instance().is_initialized())
+    glViewport(0, 0, width, height);
   Window::width = width;
   Window::height = height;
 

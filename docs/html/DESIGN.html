@@ -49,9 +49,11 @@ parent; when a node is updated, all its children are updated too.</p>
 </figure>
 <p>The actual rendering part deserves its own book. There are many
 rendering techniques available, the most popular ones are rasterization
-and ray tracing. Brenta uses rasterization, which means projecting each
-surface to the screen and calculating the color of each pixel by
-interpolating each one of them (parallelized on the GPU).</p>
+which is common in realtime rendering, and ray tracing which is powerful
+but slower so it is used for offline rendering. Brenta uses
+rasterization, which means projecting each surface to the screen and
+calculating the color of each pixel by interpolating each one of them
+(parallelized on the GPU).</p>
 <p>This “projection” is achieved by multiplying together three matrices:
 the <code>model</code> or <code>world</code> matrix which translates a
 vertex to its position in world space, the <code>view</code> matrix
