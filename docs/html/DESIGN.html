@@ -19,7 +19,7 @@
 <p>THIS DOCUMENT IS JUST A SKETCH AND NEEDS TO BE UPDATED</p>
 <p>Game engines are complex pieces of software. They provide some way to
 define logic, render graphics, and access system resources like audio
-and input, as well as providing a corss-platform interface.</p>
+and input, as well as providing a cross-platform interface.</p>
 <p>Brenta engine is divided in subsystems, each one has different
 responsibilities and provides certain abstractions. The most important
 subsystems are the rendering, which manages things like models and
@@ -32,17 +32,17 @@ textures, and the entity component system which manages logic.</p>
 <p>The renderer provides a set of abstraction for working with geometry
 and lights in order to render a frame on the screen (or a
 framebuffer).</p>
-<p>Here is an higl-level picture that shows the main classes of the
-renderer sunsystem, where arrows going down mean the parent contains one
-or modre children:</p>
+<p>Here is an high-level picture that shows the main classes of the
+renderer subsystem, where arrows going down mean the parent contains one
+or more children:</p>
 <figure>
 <img src="./brenta-renderer.png" alt="renderer-design" />
 <figcaption aria-hidden="true">renderer-design</figcaption>
 </figure>
 <p>The scene is a tree of nodes where each node has a transform, and may
 have a model, a directional light, any number of point lights and other
-nodes (children). All transforms are relative to the transform of thier
-parent; when a node is updated, all its childrens are updated too.</p>
+nodes (children). All transforms are relative to the transform of their
+parent; when a node is updated, all its children are updated too.</p>
 <figure>
 <img src="./brenta-scene.png" alt="scene" />
 <figcaption aria-hidden="true">scene</figcaption>
@@ -50,7 +50,7 @@ parent; when a node is updated, all its childrens are updated too.</p>
 <p>The actual rendering part deserves its own book. There are many
 rendering techniques available, the most popular ones are rasterization
 and ray tracing. Brenta uses rasterization, which means projecting each
-surface to the screen and calculating the color of each pixle by
+surface to the screen and calculating the color of each pixel by
 interpolating each one of them (parallelized on the GPU).</p>
 <p>This “projection” is achieved by multiplying together three matrices:
 the <code>model</code> or <code>world</code> matrix which translates a
@@ -66,7 +66,7 @@ href="https://en.wikipedia.org/wiki/Phong_reflection_model">Phong
 reflection model</a> but provides the abstractions necessary to
 integrate other methods.</p>
 <h2 id="ecs">Ecs</h2>
-<p>The Entity Component System archtiecture is used to manage all logic
+<p>The Entity Component System architecture is used to manage all logic
 of a videogame. Check out <a
 href="https://github.com/San7o/viotecs">viotecs</a> for more
 information.</p>
