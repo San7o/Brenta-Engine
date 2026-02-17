@@ -11,15 +11,55 @@ responsibilities and provides certain abstractions. The most important
 subsystems are the rendering, which manages things like models and
 textures, and the entity component system which manages logic.
 
+![brenta-picture](./brenta-picture.png)
+
+
 ## Renderer
 
-Here is an high-level overview of the most important objects in the
-renderer sunsystem:
+The renderer provides a set of abstraction for working with geometry
+and lights in order to render a frame on the screen (or a
+framebuffer).
+
+Here is an higl-level picture that shows the main classes of the
+renderer sunsystem, where arrows going down mean the parent contains
+one or modre children:
 
 ![renderer-design](./brenta-renderer.png)
 
-You will use these abstractions to represent the graphical scene.
+The scene is a tree of nodes where each node has a transform, and
+may have a model, a directional light, any number of point lights and
+other nodes (children). All transforms are relative to the transform
+of thier parent; when a node is updated, all its childrens are updated
+too.
+
+![scene](./brenta-scene.png)
+
+The actual rendering part deserves its own book. There are many
+rendering techniques available, the most popular ones are
+rasterization and ray tracing. Brenta uses rasterization, which means
+projecting each surface to the screen and calculating the color of
+each pixle by interpolating each one of them (parallelized on the
+GPU).
+
+This "projection" is achieved by multiplying together three matrices:
+the `model` or `world` matrix which translates a vertex to its
+position in world space, the `view` matrix which shift and rotates the
+world based on the camera position (If the camera moves 5 feet to the
+right, it’s mathematically the same as moving the entire world 5 feet
+to the left), and `projection` matrix which applies perspective and
+field-of-view; this ultimately maps the vertices inside a cube called
+the Canonical Cube where the GPU can work with.
+
+Another huge topic is lighting. Brenta implements the [Phong
+reflection
+model](https://en.wikipedia.org/wiki/Phong_reflection_model) but
+provides the abstractions necessary to integrate other methods.
 
 ## Ecs
+
+The Entity Component System archtiecture is used to manage all logic
+of a videogame. Check out [viotecs](https://github.com/San7o/viotecs)
+for more information.
+
 
 ![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
