@@ -42,10 +42,6 @@ public:
   std::string name() override;
   bool is_initialized() override;
   
-  // Constructors / destructors
-  Input() = default;
-  ~Input() = default;
-
   // Member functions
   
   static Input &instance();
@@ -69,7 +65,11 @@ protected:
   static std::unordered_map<brenta::Key, KeyboardCallback> keyboard_callbacks;
   static std::unordered_map<MouseCallbackId, MouseCallback> mouse_callbacks;
   static bool initialized;
-  
+
+  // Private constructors / destructors for singleton  
+  Input() = default;
+  ~Input() = default;
+
 };
 
 class Input::Builder : public Subsystem::Builder

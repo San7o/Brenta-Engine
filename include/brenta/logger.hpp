@@ -45,10 +45,6 @@ public:
   std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
-  
-  // Constructors / destructors
-  Logger() = default;
-  ~Logger() = default;
 
   // Member functions
   
@@ -59,6 +55,10 @@ private:
   
   static Config         init_config;
   static bool           initialized;
+
+  // Private constructors / destructors for singleton  
+  Logger() = default;
+  ~Logger() = default;
   
 };
 

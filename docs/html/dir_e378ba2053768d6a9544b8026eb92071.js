@@ -1,6 +1,7 @@
 var dir_e378ba2053768d6a9544b8026eb92071 =
 [
     [ "opengl", "dir_80f59b562976ef29102acc9066e818e7.html", "dir_80f59b562976ef29102acc9066e818e7" ],
+    [ "asset_manager.hpp", "asset__manager_8hpp_source.html", null ],
     [ "camera.hpp", "camera_8hpp_source.html", null ],
     [ "color.hpp", "color_8hpp_source.html", null ],
     [ "light.hpp", "light_8hpp_source.html", null ],

@@ -48,10 +48,6 @@ public:
   bool         is_initialized() override;
   static Text &instance();
 
-  // Constructors / destructors
-  Text()  = default;
-  ~Text() = default;
-  
   // Member functions
 
   static void load(const std::filesystem::path &font_path,
@@ -71,6 +67,11 @@ private:
   static std::map<char, Character> characters;
   
   static Text::Config       init_config;
+
+  // Private constructors / destructors for singleton  
+  Text()  = default;
+  ~Text() = default;
+  
 };
 
 /**

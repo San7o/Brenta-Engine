@@ -42,10 +42,6 @@ public:
   std::string name() override;
   bool is_initialized() override;
 
-  // Constructors destructors
-  Window() = default;
-  ~Window() = default;
-
   // Member functions
   
   // Get a static instance of the window
@@ -96,6 +92,11 @@ protected:
 
   static bool                 initialized;
   static std::shared_ptr<WindowDriver> backend;
+
+  // Private constructors / destructors for singleton
+  Window() = default;
+  ~Window() = default;
+
 };
 
 class WindowDriver

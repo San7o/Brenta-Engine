@@ -53,9 +53,6 @@ public:
   std::expected<void, Subsystem::Error> terminate()  override;
   std::string name() override;
   bool is_initialized() override;
-  
-  Gl()  = default;
-  ~Gl() = default;
 
   // Member functions
   
@@ -75,6 +72,10 @@ private:
   
   static bool initialized;
   static Gl::Config        init_config;
+
+  // Private constructors / destructors for singleton  
+  Gl()  = default;
+  ~Gl() = default;
   
 };
 

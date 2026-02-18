@@ -51,11 +51,6 @@ public:
   std::string name() override;
   bool is_initialized() override;
   
-  // Constructors / destructors
-  
-  Audio()  = default;
-  ~Audio() { this->terminate(); }
-
   // Member functions
   
   static Audio &instance();
@@ -102,6 +97,11 @@ private:
   static bool initialized;
 
   static std::shared_ptr<AudioDriver> backend;
+
+  // Private constructors / destructors for singleton
+  Audio()  = default;
+  ~Audio() { this->terminate(); }
+
 };
 
 class Audio::Builder : public Subsystem::Builder

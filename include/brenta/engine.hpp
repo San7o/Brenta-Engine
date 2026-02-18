@@ -37,10 +37,9 @@ public:
   std::string name() override;
   bool is_initialized() override;
 
-  // Constructors / destructors
   Engine() = default;
   ~Engine() = default;
-
+  
   // Member functions
   
   // Get a static object instance

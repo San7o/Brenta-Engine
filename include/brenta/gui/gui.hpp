@@ -36,10 +36,6 @@ public:
   std::string name() override;
   bool is_initialized() override;
 
-  // Costructors / destructors
-  Gui() = default;
-  ~Gui() = default;
-
   // Member functions
   
   static Gui &instance();
@@ -50,6 +46,10 @@ public:
 private:
   
   static bool initialized;
+  
+  // Private constructors / destructors for singleton
+  Gui() = default;
+  ~Gui() = default;
   
 };
 

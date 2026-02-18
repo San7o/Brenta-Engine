@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "brenta", null, [
+      [ "AssetManager", "classbrenta_1_1AssetManager.html", null ],
       [ "Audio", "classbrenta_1_1Audio.html", "classbrenta_1_1Audio" ],
       [ "AudioDriver", "classbrenta_1_1AudioDriver.html", null ],
       [ "Buffer", "classbrenta_1_1Buffer.html", null ],

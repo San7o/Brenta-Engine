@@ -25,10 +25,6 @@ public:
   std::expected<void, Subsystem::Error> terminate() override;
   std::string name() override;
   bool is_initialized() override;
-  
-  // Constructors / destructors
-  Ecs() = default;
-  ~Ecs() = default;
 
   // Member functions
   
@@ -37,6 +33,10 @@ public:
 private:
 
   static bool initialized;
+  
+  // Private constructors / destructors for singleton
+  Ecs() = default;
+  ~Ecs() = default;
 
 };
 

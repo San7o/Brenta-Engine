@@ -5,6 +5,8 @@ to define logic, render graphics, and access system resources like
 audio and input, as well as providing a cross-platform abstraction to
 the developer.
 
+Here is an high-level overview of the main objects Brenta provides:
+
 ![brenta-picture](./brenta-picture.png)
 
 I wanted to write my own game engine primarely out of fascination and
@@ -13,21 +15,23 @@ implemented. I found out that writing a game engine has a lot in
 common with writing an operating system. You are working with audio,
 files, video, network and the GPU. A game engine is essentially a
 realtime system since you need to compute logic and render the frame
-in under 16ms to run at 60 FPS, hence you need to understand how the
-CPU and memory works in order to optimize it. Game engines and an
-operating system diverge in many other ways, for example an operating
-system should manage virtualization and security, while a game engine
-has to manage game logic and physics. Still, I think the parallelism
-is clear: you need to interface and understand many systems and
-devices, which makes this project interesting to me.
+in under 16ms to run at 60 FPS, hence you have to understand how the
+CPU and memory works in order to optimize it. Obviously game engines
+and an operating system diverge in many other ways, for example an
+operating system should manage virtualization and security, while a
+game engine has to manage game logic and physics. Still, I think the
+parallelism is clear: you need to interface and reason about many
+types of systems and devices, which makes this project interesting to
+me.
 
 ![engine-and-os](./engine-and-os.png)
 
 
 Brenta engine is divided in subsystems, each one has different
 responsibilities and provides certain abstractions. The most important
-subsystems are the rendering, which manages things like models and
-textures, and the entity component system which manages logic.
+subsystems are the Rendering, which manages things like the scene and
+render commands, and the Entity Component System (ECS) which manages
+game logic.
 
 ![brenta-subsystems](./brenta-subsystems.png)
 
