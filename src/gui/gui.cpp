@@ -38,7 +38,7 @@ std::expected<void, Subsystem::Error> Gui::initialize()
   io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
   // Setup Platform/Renderer backends
-  ImGui_ImplGlfw_InitForOpenGL(Window::get_window(), true);
+  ImGui_ImplGlfw_InitForOpenGL((GLFWwindow*)Window::get_window(), true);
   ImGui_ImplOpenGL3_Init();
   ImGui::SetNextWindowPos(ImVec2(0, 0));
 

@@ -3,14 +3,13 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/renderer/particles.hpp>
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
 #include <brenta/input.hpp>
 #include <brenta/time.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/particles.hpp>
 #include <brenta/gui/gui.hpp>
 
 #include <bitset>

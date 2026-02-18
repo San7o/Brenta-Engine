@@ -3,12 +3,11 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/audio.hpp>
-#include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/input.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
+#include <brenta/drivers/glfw.hpp>
+
 #include <cstdio>
 
 #include <glad/glad.h>
@@ -19,14 +18,10 @@ using namespace brenta;
 // Static variables
 //
 
-int                Window::width;
-int                Window::height;
-GLFWwindow        *Window::window_backend;
-std::string        Window::title;
-Time               Window::time;
-const std::string  Window::subsystem_name = "window";
-Window::Config Window::init_config = {};
-bool Window::initialized = false;
+std::shared_ptr<WindowDriver> Window::backend         = nullptr;
+const std::string             Window::subsystem_name  = "window";
+Window::Config                Window::init_config     = {};
+bool                          Window::initialized     = false;
 
 //
 // Subsystem interface
@@ -35,60 +30,26 @@ bool Window::initialized = false;
 std::expected<void, Subsystem::Error> Window::initialize()
 {
   if (this->is_initialized()) return {};
+
+  Window::backend = std::make_shared<Glfw>();
+  auto ret = Window::backend->initialize(Window::init_config);
+  if (!ret)
+  {
+    ERROR("{}: Failed to initialize window", Window::subsystem_name);
+    return ret;
+  }
   
-  if (glfwInit() == GLFW_FALSE)
-  {
-    return std::unexpected(Window::subsystem_name +
-                           ": failed to initialize GLFW");
-  }
-
-  set_context_version(3, 3);
-  use_core_profile();
-
-  if (Window::init_config.msaa)
-  {
-    glfwWindowHint(GLFW_SAMPLES, 4);
-    INFO("{}: enabled MSAA", Window::subsystem_name);
-  } else {
-    INFO("{}: disabled MSAA", Window::subsystem_name);
-  }
-
-  if (!Window::init_config.vsync)
-  {
-    glfwSwapInterval(0);
-    INFO("{}: disabled VSync", Window::subsystem_name);
-  } else {
-    INFO("{}: enabled VSync", Window::subsystem_name);
-  }
-
-  if (Window::init_config.debug)
-  {
-    glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
-    INFO("{}: enabled OPENGL_DEBUG_CONTEXT", Window::subsystem_name);
-  }
-
-#ifdef __APPLE__
-  set_hints_apple();
-#endif
-
-  create_window(Window::init_config.width,
-                Window::init_config.height, title);
-  make_context_current();
-  set_mouse_capture(Window::init_config.capture_mouse);
-
-  set_size_callback(framebuffer_size_callback);
-
+  INFO("{}: initialized", Window::subsystem_name);
   Window::initialized = true;
-  INFO("{}: initialized", Window::subsystem_name)
   return {};
 }
 
 std::expected<void, Subsystem::Error> Window::terminate()
 {
   if (!this->is_initialized()) return {};
-  
-  glfwDestroyWindow(Window::window_backend);
-  glfwTerminate();
+
+  if (Window::backend)
+    Window::backend->terminate();
 
   Window::initialized = false;
   INFO("{}: terminated", Window::subsystem_name);
@@ -117,173 +78,136 @@ Window &Window::instance()
 
 bool Window::should_close()
 {
-  return glfwWindowShouldClose(Window::window_backend);
+  if (Window::backend)
+    return Window::backend->should_close();
+  return true;
 }
 
 void Window::set_width_height(int width, int height)
 {
-  Window::width = width;
-  Window::height = height;
+  if (Window::backend)
+    Window::backend->set_width_height(width, height);
   return;
 }
 
 bool Window::is_key_pressed(Key key)
 {
-  return glfwGetKey(Window::window_backend, (int)key) == GLFW_PRESS;
+  if (Window::backend)
+    return Window::backend->is_key_pressed(key);
+  return false;
 }
 
 Time Window::get_time()
 {
-  return Window::time;
+  if (Window::backend)
+    return Window::backend->get_time();
+  return {};
 }
 
-GLFWwindow *Window::get_window()
+Window::WindowHandle Window::get_window()
 {
-  return Window::window_backend;
+  if (Window::backend)
+    return Window::backend->get_window();
+  return nullptr;
 }
 
-GLFWglproc Window::get_proc_address()
+Window::ProcHandle Window::get_proc_address()
 {
-  return reinterpret_cast<void (*)()>(glfwGetProcAddress);
+  if (Window::backend)
+    return Window::backend->get_proc_address();
+  return nullptr;
 }
 
 int Window::get_width()
 {
-  return Window::width;
+  if (Window::backend)
+    return Window::backend->get_width();
+  return 0;
 }
 
 int Window::get_height()
 {
-  return Window::height;
+  if (Window::backend)
+    return Window::backend->get_height();
+  return 0;
+}
+
+std::shared_ptr<WindowDriver> Window::get_driver()
+{
+  return Window::backend;
 }
 
 void Window::update_dimensions()
 {
-  glfwGetWindowSize(Window::window_backend, &Window::width, &Window::height);
-  return;
+  if (Window::backend)
+    Window::backend->update_dimensions();
 }
 
 void Window::update_dimensions(int width, int height)
 {
-  Window::width  = width;
-  Window::height = height;
+  if (Window::backend)
+    Window::backend->update_dimensions(width, height);
   return;
 }
 
-void Window::set_mouse_callback(GLFWcursorposfun callback)
+void Window::set_mouse_callback(void* callback)
 {
-  glfwSetCursorPosCallback(Window::window_backend, callback);
+  if (Window::backend)
+    Window::backend->set_mouse_callback(callback);
   return;
 }
 
-void Window::set_size_callback(GLFWframebuffersizefun callback)
+void Window::set_size_callback(void* callback)
 {
-  glfwSetFramebufferSizeCallback(Window::window_backend, callback);
-
-  DEBUG("{}: set framebuffer size callback", Window::subsystem_name);
+  if (Window::backend)
+    Window::backend->set_size_callback(callback);
   return;
 }
 
 void Window::set_mouse_capture(bool is_captured)
 {
-  if (is_captured)
-  {
-    glfwSetInputMode(Window::window_backend, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-    INFO("{}: mouse capture enabled", Window::subsystem_name);
-  }
-  else
-  {
-    glfwSetInputMode(Window::window_backend, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-    INFO("{}: mouse capture disabled", Window::subsystem_name);
-  }
+  if (Window::backend)
+    Window::backend->set_mouse_capture(is_captured);
   return;
 }
 
 void Window::close()
 {
-  glfwSetWindowShouldClose(Window::window_backend, GLFW_TRUE);
+  if (Window::backend)
+    Window::backend->close();
   return;
 }
 
 void Window::swap_buffers()
 {
-  Window::time.update(glfwGetTime());
-  glfwSwapBuffers(Window::window_backend);
+  if (Window::backend)
+    Window::backend->swap_buffers();
   return;
 }
 
 void Window::poll_events()
 {
-  glfwPollEvents();
+  if (Window::backend)
+    Window::backend->poll_events();
   return;
 }
 
-void Window::set_context_version(int major, int minor)
+void Window::set_key_callback(void* callback)
 {
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
-  glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
-
-  INFO("{}: set context to OpenGL version: {}.{}",
-       Window::subsystem_name, major, minor);
+  if (Window::backend)
+    Window::backend->set_key_callback(callback);
 }
 
-void Window::set_key_callback(GLFWkeyfun callback)
+void Window::set_mouse_pos_callback(void* callback)
 {
-  glfwSetKeyCallback(Window::window_backend, callback);
-  return;
-}
-
-void Window::set_mouse_pos_callback(GLFWcursorposfun callback)
-{
-  glfwSetCursorPosCallback(Window::get_window(), callback);
-  return;
-}
-
-void Window::use_core_profile()
-{
-  glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-  INFO("{}: set OpenGL profile to core", Window::subsystem_name);
-  return;
-}
-
-void Window::set_hints_apple()
-{
-  glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-  return;
-}
-
-void Window::create_window(int width, int height, std::string title)
-{
-  Window::window_backend = glfwCreateWindow(width, height, title.c_str(),
-                                            NULL, NULL);
-  if (Window::window_backend == NULL)
-  {
-    ERROR("{}: failed to create GLFW window", Window::subsystem_name);
-    Window::instance().terminate();
-  }
-  Window::width = width;
-  Window::height = height;
-  Window::title = title;
-  return;
+  if (Window::backend)
+    Window::backend->set_mouse_pos_callback(callback);
 }
 
 void Window::make_context_current()
 {
-  glfwMakeContextCurrent(Window::window_backend);
-  return;
-}
-
-void Window::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
-                                       [[maybe_unused]] int width,
-                                       [[maybe_unused]] int height)
-{
-  if (Gl::instance().is_initialized())
-    glViewport(0, 0, width, height);
-  Window::width = width;
-  Window::height = height;
-
-  DEBUG("Window: size changed {}x{}", width, height);
+  if (Window::backend)
+    Window::backend->make_context_current();
   return;
 }
 

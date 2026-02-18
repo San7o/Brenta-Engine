@@ -43,7 +43,7 @@ int main()
   //
   // Render loop
   //
-  
+
   while (!Window::should_close())
   {
     // Input

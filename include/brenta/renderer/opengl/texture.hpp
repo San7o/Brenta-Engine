@@ -5,8 +5,6 @@
 
 #pragma once
 
-#include <glad/glad.h>
-
 #include <brenta/renderer/opengl/gl.hpp>
 
 #include <string>

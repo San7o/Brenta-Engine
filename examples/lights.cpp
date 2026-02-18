@@ -9,7 +9,6 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
-#include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/scene.hpp>
 #include <brenta/renderer/phong.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>

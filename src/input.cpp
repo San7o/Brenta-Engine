@@ -3,7 +3,6 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/window.hpp>
 #include <brenta/input.hpp>
 #include <brenta/logger.hpp>
 
@@ -27,9 +26,6 @@ std::expected<void, Subsystem::Error> Input::initialize()
 {
   if (this->is_initialized()) return {};
   
-  Window::set_key_callback(Input::key_callback);
-  Window::set_mouse_callback(Input::mouse_callback);
-
   Input::initialized = true;
   INFO("{} initialized", Input::subsystem_name);
   return {};
@@ -85,16 +81,16 @@ void Input::remove_keyboard_callback(Key key)
   return;
 }
 
-void Input::key_callback([[maybe_unused]] GLFWwindow *window,
-                         [[maybe_unused]] int key,
-                         [[maybe_unused]] int scancode, int action,
-                         [[maybe_unused]] int mods)
+void Input::key_callback(Key key, KeyAction action,
+                         [[maybe_unused]] KeyMods mods)
 {
-  if (action == GLFW_PRESS)
+  DEBUG("{}: received key callback", Input::subsystem_name);
+
+  if (action == KeyAction::Press)
   {
-    if (Input::keyboard_callbacks.find((Key) key) != Input::keyboard_callbacks.end())
+    if (Input::keyboard_callbacks.find(key) != Input::keyboard_callbacks.end())
     {
-      Input::keyboard_callbacks.at((Key) key)();
+      Input::keyboard_callbacks.at(key)();
     }
   }
   return;
@@ -125,8 +121,7 @@ void Input::remove_mouse_callback(MouseCallbackId callback_name)
   return;
 }
 
-void Input::mouse_callback([[maybe_unused]] GLFWwindow *window,
-                           double xpos,
+void Input::mouse_callback(double xpos,
                            double ypos)
 {
   for (auto &callback : Input::mouse_callbacks)
