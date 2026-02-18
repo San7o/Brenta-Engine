@@ -80,10 +80,9 @@ examples/demo/src/main.cpp:
 
 ![demo.gif](./html/images/demo.gif)
 
-## The Submodules
+## The subsystems
 
-The Engine is composed of several submodules, which are mostly
-independent from each other:
+The Engine is composed of several subsystems:
 
 * **[viotecs](https://github.com/San7o/viotecs)**: Entity Component
 System

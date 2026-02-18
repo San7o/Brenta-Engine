@@ -96,7 +96,8 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Input.html',''); initRe
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::Input Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -157,11 +158,24 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:abad4f04db20f04007a16fcfd4eba676c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a42467a4da656e64c180a45aace3b1513" id="r_a42467a4da656e64c180a45aace3b1513"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a42467a4da656e64c180a45aace3b1513">remove_mouse_callback</a> (MouseCallbackId <a class="el" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">name</a>)</td></tr>
 <tr class="separator:a42467a4da656e64c180a45aace3b1513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eae9893edeaea8cc9535e3136cf9a9e" id="r_a2eae9893edeaea8cc9535e3136cf9a9e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a2eae9893edeaea8cc9535e3136cf9a9e">key_callback</a> (Key key, KeyAction action, <a class="el" href="classbrenta_1_1KeyMods.html">KeyMods</a> mods)</td></tr>
+<tr class="separator:a2eae9893edeaea8cc9535e3136cf9a9e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a960837af0c4808c8b20fc821b9de5091" id="r_a960837af0c4808c8b20fc821b9de5091"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a960837af0c4808c8b20fc821b9de5091">mouse_callback</a> (double xpos, double ypos)</td></tr>
+<tr class="separator:a960837af0c4808c8b20fc821b9de5091"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:ac383ccce4b99e2f15e09c24f3d886877" id="r_ac383ccce4b99e2f15e09c24f3d886877"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#ac383ccce4b99e2f15e09c24f3d886877">subsystem_name</a> = &quot;input&quot;</td></tr>
 <tr class="separator:ac383ccce4b99e2f15e09c24f3d886877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:a36158a64dd7fe80a251ddac63a4a4b30" id="r_a36158a64dd7fe80a251ddac63a4a4b30"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; brenta::Key, KeyboardCallback &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a36158a64dd7fe80a251ddac63a4a4b30">keyboard_callbacks</a></td></tr>
+<tr class="separator:a36158a64dd7fe80a251ddac63a4a4b30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff7d19a1fcdb411662e75db347ff8c5d" id="r_aff7d19a1fcdb411662e75db347ff8c5d"><td class="memItemLeft" align="right" valign="top">static std::unordered_map&lt; MouseCallbackId, MouseCallback &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#aff7d19a1fcdb411662e75db347ff8c5d">mouse_callbacks</a></td></tr>
+<tr class="separator:aff7d19a1fcdb411662e75db347ff8c5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d450d83a8fc0fab2715665fae8be428" id="r_a0d450d83a8fc0fab2715665fae8be428"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Input.html#a0d450d83a8fc0fab2715665fae8be428">initialized</a> = false</td></tr>
+<tr class="separator:a0d450d83a8fc0fab2715665fae8be428"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classbrenta_1_1Input.html" title="Input subsystem.">Input</a> subsystem. </p>
@@ -252,7 +266,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00067">67</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00063">63</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -290,7 +304,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00103">103</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00099">99</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -319,7 +333,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00026">26</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00025">25</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -346,7 +360,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00061">61</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00057">57</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -377,7 +391,89 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00052">52</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00048">48</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2eae9893edeaea8cc9535e3136cf9a9e" name="a2eae9893edeaea8cc9535e3136cf9a9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eae9893edeaea8cc9535e3136cf9a9e">&#9670;&#160;</a></span>key_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::key_callback </td>
+          <td>(</td>
+          <td class="paramtype">Key&#160;</td>
+          <td class="paramname"><em>key</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">KeyAction&#160;</td>
+          <td class="paramname"><em>action</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classbrenta_1_1KeyMods.html">KeyMods</a>&#160;</td>
+          <td class="paramname"><em>mods</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00084">84</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a960837af0c4808c8b20fc821b9de5091" name="a960837af0c4808c8b20fc821b9de5091"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a960837af0c4808c8b20fc821b9de5091">&#9670;&#160;</a></span>mouse_callback()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Input::mouse_callback </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>xpos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>ypos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00124">124</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +504,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00047">47</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00043">43</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -436,7 +532,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00075">75</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00071">71</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +560,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00112">112</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00108">108</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
@@ -493,11 +589,83 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00038">38</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="input_8cpp_source.html#l00034">34</a> of file <a class="el" href="input_8cpp_source.html">input.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
+<a id="a0d450d83a8fc0fab2715665fae8be428" name="a0d450d83a8fc0fab2715665fae8be428"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d450d83a8fc0fab2715665fae8be428">&#9670;&#160;</a></span>initialized</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Input::initialized = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00071">71</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a36158a64dd7fe80a251ddac63a4a4b30" name="a36158a64dd7fe80a251ddac63a4a4b30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36158a64dd7fe80a251ddac63a4a4b30">&#9670;&#160;</a></span>keyboard_callbacks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt; brenta::Key, Input::KeyboardCallback &gt; Input::keyboard_callbacks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00069">69</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aff7d19a1fcdb411662e75db347ff8c5d" name="aff7d19a1fcdb411662e75db347ff8c5d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff7d19a1fcdb411662e75db347ff8c5d">&#9670;&#160;</a></span>mouse_callbacks</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt; Input::MouseCallbackId, Input::MouseCallback &gt; Input::mouse_callbacks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="input_8hpp_source.html#l00070">70</a> of file <a class="el" href="input_8hpp_source.html">input.hpp</a>.</p>
+
+</div>
+</div>
 <a id="ac383ccce4b99e2f15e09c24f3d886877" name="ac383ccce4b99e2f15e09c24f3d886877"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac383ccce4b99e2f15e09c24f3d886877">&#9670;&#160;</a></span>subsystem_name</h2>
 

@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('input_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keyword">using </span>MouseCallbackId  = std::string;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="keyword">using </span>MouseCallback    = std::function&lt;void(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>)&gt;;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">using </span>KeyboardCallback = std::function&lt;void()&gt;;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  </div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">Builder</a>;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="comment">// Subsystem interface</span></div>
@@ -154,37 +154,38 @@ $(document).ready(function(){initNavTree('input_8hpp_source.html',''); initResiz
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keyword">static</span> <span class="keywordtype">void</span></div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  remove_mouse_callback(MouseCallbackId <a class="code hl_function" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">name</a>);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keyword">static</span> std::unordered_map&lt;brenta::Key, KeyboardCallback&gt; keyboard_callbacks;</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">static</span> std::unordered_map&lt;MouseCallbackId, MouseCallback&gt; mouse_callbacks;</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> initialized;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span> </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> key_callback(GLFWwindow *window, <span class="keywordtype">int</span> key, <span class="keywordtype">int</span> scancode,</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                           <span class="keywordtype">int</span> action, <span class="keywordtype">int</span> mods);</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> mouse_callback(GLFWwindow *window, <span class="keywordtype">double</span> xpos, <span class="keywordtype">double</span> ypos);</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  </div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>};</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="comment">// These functions will be called when a key or mouse event is</span></div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="comment">// received</span></div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> key_callback(Key key, KeyAction action, <a class="code hl_class" href="classbrenta_1_1KeyMods.html">KeyMods</a> mods);</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> mouse_callback(<span class="keywordtype">double</span> xpos, <span class="keywordtype">double</span> ypos);</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span><span class="keyword">protected</span>:</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">static</span> std::unordered_map&lt;brenta::Key, KeyboardCallback&gt; keyboard_callbacks;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keyword">static</span> std::unordered_map&lt;MouseCallbackId, MouseCallback&gt; mouse_callbacks;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span> initialized;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
 </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
-<div class="foldopen" id="foldopen00097" data-start="{" data-end="};">
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno"><a class="line" href="classbrenta_1_1Input_1_1Builder.html">   97</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">Input::Builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem_1_1Builder.html">Subsystem::Builder</a></div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>{</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span> </div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  <a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">Builder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  <a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">~Builder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>  </div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  <a class="code hl_class" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a> &amp;build() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>};</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="};">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classbrenta_1_1Input_1_1Builder.html">   75</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">Input::Builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem_1_1Builder.html">Subsystem::Builder</a></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  <a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">Builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  <a class="code hl_class" href="classbrenta_1_1Input_1_1Builder.html">~Builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_class" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a> &amp;build() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>};</div>
 </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>  </div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>} <span class="comment">// namespace brenta</span></div>
-<div class="ttc" id="aclassbrenta_1_1Input_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Input_1_1Builder.html">brenta::Input::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00097">input.hpp:98</a></div></div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>  </div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>} <span class="comment">// namespace brenta</span></div>
+<div class="ttc" id="aclassbrenta_1_1Input_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Input_1_1Builder.html">brenta::Input::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00075">input.hpp:76</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Input_html"><div class="ttname"><a href="classbrenta_1_1Input.html">brenta::Input</a></div><div class="ttdoc">Input subsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00028">input.hpp:29</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Input_html_a0ae5fd441d95f7bd1bcfaf13a87c2fed"><div class="ttname"><a href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">brenta::Input::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00052">input.cpp:52</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Input_html_ab4b16a111710e2230f9c58ec9b7f06ec"><div class="ttname"><a href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">brenta::Input::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00047">input.cpp:47</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Input_html_a0ae5fd441d95f7bd1bcfaf13a87c2fed"><div class="ttname"><a href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">brenta::Input::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00048">input.cpp:48</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Input_html_ab4b16a111710e2230f9c58ec9b7f06ec"><div class="ttname"><a href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">brenta::Input::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00043">input.cpp:43</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1KeyMods_html"><div class="ttname"><a href="classbrenta_1_1KeyMods.html">brenta::KeyMods</a></div><div class="ttdef"><b>Definition</b> <a href="key_8hpp_source.html#l00157">key.hpp:158</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Subsystem_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Subsystem_1_1Builder.html">brenta::Subsystem::Builder</a></div><div class="ttdoc">Builder interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00048">subsystem.hpp:49</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
 </div><!-- fragment --></div><!-- contents -->

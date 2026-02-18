@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['text_0',['Text',['../classbrenta_1_1Text.html',1,'brenta']]],
-  ['texture_1',['Texture',['../classbrenta_1_1Texture.html',1,'brenta']]],
-  ['time_2',['Time',['../classbrenta_1_1Time.html',1,'brenta']]],
-  ['transform_3',['Transform',['../classbrenta_1_1Transform.html',1,'brenta']]]
+  ['scene_0',['Scene',['../classbrenta_1_1Scene.html',1,'brenta']]],
+  ['shader_1',['Shader',['../classbrenta_1_1Shader.html',1,'brenta']]],
+  ['spherical_2',['Spherical',['../classbrenta_1_1Camera_1_1Spherical.html',1,'brenta::Camera']]],
+  ['subsystem_3',['Subsystem',['../classbrenta_1_1Subsystem.html',1,'brenta']]]
 ];

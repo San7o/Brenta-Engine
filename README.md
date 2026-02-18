@@ -6,7 +6,11 @@ created by Giovanni Santini in the summer of 2024, the name is
 inspired by the Brenta Dolimites in the Italian Alps.
 
 Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
-the engine works!
+the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
+the engine's internals.
+
+![brenta-picture](./brenta-picture.png)
+
 
 <h2 align=center>  Related Projects </h2>
 
@@ -15,12 +19,11 @@ The engine also features the following sub projects:
 - [oak](https://github.com/San7o/oak): feature-rich, thread-safe, Brenta Engine's logger.
 - [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
 - [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
-
+- [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
 <h1 align=center>  Features </h1>
 
-The engine is composed of many submodules independent from each other,
-those are:
+The engine is composed of many subsystems:
 
 - `window`: manages the window.
 - `input`: manages the user input using callbacks.

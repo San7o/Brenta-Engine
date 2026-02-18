@@ -10,8 +10,10 @@ var annotated_dup =
       [ "Engine", "classbrenta_1_1Engine.html", "classbrenta_1_1Engine" ],
       [ "FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
       [ "Gl", "classbrenta_1_1Gl.html", "classbrenta_1_1Gl" ],
+      [ "Glfw", "classbrenta_1_1Glfw.html", null ],
       [ "Gui", "classbrenta_1_1Gui.html", "classbrenta_1_1Gui" ],
       [ "Input", "classbrenta_1_1Input.html", "classbrenta_1_1Input" ],
+      [ "KeyMods", "classbrenta_1_1KeyMods.html", null ],
       [ "Logger", "classbrenta_1_1Logger.html", "classbrenta_1_1Logger" ],
       [ "Material", "classbrenta_1_1Material.html", null ],
       [ "Mesh", "classbrenta_1_1Mesh.html", "classbrenta_1_1Mesh" ],
@@ -33,7 +35,8 @@ var annotated_dup =
       [ "Transform", "classbrenta_1_1Transform.html", null ],
       [ "Ubo", "classbrenta_1_1Ubo.html", null ],
       [ "Vao", "classbrenta_1_1Vao.html", null ],
-      [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ]
+      [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ],
+      [ "WindowDriver", "classbrenta_1_1WindowDriver.html", null ]
     ] ],
     [ "ParticleSettings", "structParticleSettings.html", null ]
 ];

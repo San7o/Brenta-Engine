@@ -93,9 +93,11 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Window.html',''); initR
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Data Structures</a> &#124;
+<a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="#pub-static-attribs">Static Public Attributes</a>  </div>
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::Window Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -120,6 +122,16 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Window_1_1Config.html">Config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
+Public Types</h2></td></tr>
+<tr class="memitem:a644e32a9f239f340ac0d1923d80d4c08" id="r_a644e32a9f239f340ac0d1923d80d4c08"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a644e32a9f239f340ac0d1923d80d4c08">WindowHandle</a> = void *</td></tr>
+<tr class="separator:a644e32a9f239f340ac0d1923d80d4c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2788b582773953c4505b604cbcf2968f" id="r_a2788b582773953c4505b604cbcf2968f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2788b582773953c4505b604cbcf2968f">ProcHandle</a> = void *</td></tr>
+<tr class="separator:a2788b582773953c4505b604cbcf2968f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
+<tr class="memitem:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem" id="r_adaa1969d5a9d482356bcf027ac30818a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#adaa1969d5a9d482356bcf027ac30818a">Error</a> = std::string</td></tr>
+<tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -148,24 +160,24 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a29dfc30cbbaaf280075a169a19fe3ebc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33c994631310661a01ee2276bc7bf476" id="r_a33c994631310661a01ee2276bc7bf476"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1Time.html">Time</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a33c994631310661a01ee2276bc7bf476">get_time</a> ()</td></tr>
 <tr class="separator:a33c994631310661a01ee2276bc7bf476"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6a86e2d9de3bd06e4b3d8eb34c44aead" id="r_a6a86e2d9de3bd06e4b3d8eb34c44aead"><td class="memItemLeft" align="right" valign="top">static GLFWwindow *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a6a86e2d9de3bd06e4b3d8eb34c44aead">get_window</a> ()</td></tr>
-<tr class="separator:a6a86e2d9de3bd06e4b3d8eb34c44aead"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a281e8504b56760389aef20ab3d113d4a" id="r_a281e8504b56760389aef20ab3d113d4a"><td class="memItemLeft" align="right" valign="top">static GLFWglproc&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a281e8504b56760389aef20ab3d113d4a">get_proc_address</a> ()</td></tr>
-<tr class="separator:a281e8504b56760389aef20ab3d113d4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc5d635733d4676d3201bf959388e19a" id="r_abc5d635733d4676d3201bf959388e19a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#abc5d635733d4676d3201bf959388e19a">set_mouse_callback</a> (GLFWcursorposfun callback)</td></tr>
-<tr class="separator:abc5d635733d4676d3201bf959388e19a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae576a45de6a9b955ec606dc955c5edeb" id="r_ae576a45de6a9b955ec606dc955c5edeb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ae576a45de6a9b955ec606dc955c5edeb">set_size_callback</a> (GLFWframebuffersizefun callback)</td></tr>
-<tr class="separator:ae576a45de6a9b955ec606dc955c5edeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac1220d326caf0bff294f38a82a1f775e" id="r_ac1220d326caf0bff294f38a82a1f775e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ac1220d326caf0bff294f38a82a1f775e">set_mouse_pos_callback</a> (GLFWcursorposfun callback)</td></tr>
-<tr class="separator:ac1220d326caf0bff294f38a82a1f775e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aecfc99c9f96d8b10cd82069dd62a0513" id="r_aecfc99c9f96d8b10cd82069dd62a0513"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aecfc99c9f96d8b10cd82069dd62a0513">set_key_callback</a> (GLFWkeyfun callback)</td></tr>
-<tr class="separator:aecfc99c9f96d8b10cd82069dd62a0513"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bed48584f1db01500fb1778c439b9ae" id="r_a3bed48584f1db01500fb1778c439b9ae"><td class="memItemLeft" align="right" valign="top">static ProcHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a3bed48584f1db01500fb1778c439b9ae">get_proc_address</a> ()</td></tr>
+<tr class="separator:a3bed48584f1db01500fb1778c439b9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abba39c4d491902b6c45957a8b818177b" id="r_abba39c4d491902b6c45957a8b818177b"><td class="memItemLeft" align="right" valign="top">static WindowHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#abba39c4d491902b6c45957a8b818177b">get_window</a> ()</td></tr>
+<tr class="separator:abba39c4d491902b6c45957a8b818177b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a207b71942b55c9d078815f734a56a6" id="r_a2a207b71942b55c9d078815f734a56a6"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2a207b71942b55c9d078815f734a56a6">get_driver</a> ()</td></tr>
+<tr class="separator:a2a207b71942b55c9d078815f734a56a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad45d2bebc7b722c9801e570a2233cab7" id="r_ad45d2bebc7b722c9801e570a2233cab7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ad45d2bebc7b722c9801e570a2233cab7">set_mouse_capture</a> (bool is_captured)</td></tr>
 <tr class="separator:ad45d2bebc7b722c9801e570a2233cab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeba0eb85c7cf4cb1b3ec695fae6ddde6" id="r_aeba0eb85c7cf4cb1b3ec695fae6ddde6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aeba0eb85c7cf4cb1b3ec695fae6ddde6">set_width_height</a> (int width, int height)</td></tr>
 <tr class="separator:aeba0eb85c7cf4cb1b3ec695fae6ddde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a35055c04498121d39741bfcd5082705b" id="r_a35055c04498121d39741bfcd5082705b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a35055c04498121d39741bfcd5082705b">close</a> ()</td></tr>
-<tr class="separator:a35055c04498121d39741bfcd5082705b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8449adc223fc8dc08b4613f71c9f0a9" id="r_af8449adc223fc8dc08b4613f71c9f0a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#af8449adc223fc8dc08b4613f71c9f0a9">set_mouse_callback</a> (void *callback)</td></tr>
+<tr class="separator:af8449adc223fc8dc08b4613f71c9f0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1106215b612aef5b698ba7663b63323f" id="r_a1106215b612aef5b698ba7663b63323f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a1106215b612aef5b698ba7663b63323f">set_size_callback</a> (void *callback)</td></tr>
+<tr class="separator:a1106215b612aef5b698ba7663b63323f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62ef54c3094f7db2cafbe5d305e39dac" id="r_a62ef54c3094f7db2cafbe5d305e39dac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a62ef54c3094f7db2cafbe5d305e39dac">set_mouse_pos_callback</a> (void *callback)</td></tr>
+<tr class="separator:a62ef54c3094f7db2cafbe5d305e39dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a69b31494cefcf9b6fa54d0c5f7a2bc" id="r_a5a69b31494cefcf9b6fa54d0c5f7a2bc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a5a69b31494cefcf9b6fa54d0c5f7a2bc">set_key_callback</a> (void *callback)</td></tr>
+<tr class="separator:a5a69b31494cefcf9b6fa54d0c5f7a2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b1c49dc0ddd2b59405a44356444ed9d" id="r_a0b1c49dc0ddd2b59405a44356444ed9d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a0b1c49dc0ddd2b59405a44356444ed9d">swap_buffers</a> ()</td></tr>
 <tr class="separator:a0b1c49dc0ddd2b59405a44356444ed9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a5504a7fabe168d445989f210613e16" id="r_a2a5504a7fabe168d445989f210613e16"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2a5504a7fabe168d445989f210613e16">poll_events</a> ()</td></tr>
@@ -174,24 +186,64 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a081525331231e5d63f17ba46267a457e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d6aac2e514ea9245b2e1a311934c9a7" id="r_a8d6aac2e514ea9245b2e1a311934c9a7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a8d6aac2e514ea9245b2e1a311934c9a7">update_dimensions</a> (int width, int height)</td></tr>
 <tr class="separator:a8d6aac2e514ea9245b2e1a311934c9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0e865a4eb0ca1a167af8648dc9822fa" id="r_ae0e865a4eb0ca1a167af8648dc9822fa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ae0e865a4eb0ca1a167af8648dc9822fa">make_context_current</a> ()</td></tr>
+<tr class="separator:ae0e865a4eb0ca1a167af8648dc9822fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35055c04498121d39741bfcd5082705b" id="r_a35055c04498121d39741bfcd5082705b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a35055c04498121d39741bfcd5082705b">close</a> ()</td></tr>
+<tr class="separator:a35055c04498121d39741bfcd5082705b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a0cd497d5bd7dca9b2e082a74741e3dfc" id="r_a0cd497d5bd7dca9b2e082a74741e3dfc"><td class="memItemLeft" align="right" valign="top">static const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a0cd497d5bd7dca9b2e082a74741e3dfc">subsystem_name</a> = &quot;window&quot;</td></tr>
 <tr class="separator:a0cd497d5bd7dca9b2e082a74741e3dfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="inherited" name="inherited"></a>
-Additional Inherited Members</h2></td></tr>
-<tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
-<tr class="memitem:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem" id="r_adaa1969d5a9d482356bcf027ac30818a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#adaa1969d5a9d482356bcf027ac30818a">Error</a> = std::string</td></tr>
-<tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:aac33033a72aaa7b3bbcf0b2cf995468b" id="r_aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structbrenta_1_1Window_1_1Config.html">Window::Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aac33033a72aaa7b3bbcf0b2cf995468b">init_config</a> = {}</td></tr>
+<tr class="separator:aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad80150edf88d1dd060bfc0891ec3a625" id="r_ad80150edf88d1dd060bfc0891ec3a625"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ad80150edf88d1dd060bfc0891ec3a625">initialized</a> = false</td></tr>
+<tr class="separator:ad80150edf88d1dd060bfc0891ec3a625"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f05cf42748c8a1d285703d0fe365372" id="r_a9f05cf42748c8a1d285703d0fe365372"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a9f05cf42748c8a1d285703d0fe365372">backend</a> = nullptr</td></tr>
+<tr class="separator:a9f05cf42748c8a1d285703d0fe365372"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classbrenta_1_1Window.html" title="Window subsystem.">Window</a> subsystem. </p>
 <p>This class is used to create a window and handle all the events related to the window. This class provides methods to initialize the window, get the window size, check if a key is pressed, get the time since the start of the program, and more. </p>
 
-<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00031">31</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00028">28</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+</div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="a2788b582773953c4505b604cbcf2968f" name="a2788b582773953c4505b604cbcf2968f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2788b582773953c4505b604cbcf2968f">&#9670;&#160;</a></span>ProcHandle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Window::ProcHandle =  void*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00036">36</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a644e32a9f239f340ac0d1923d80d4c08" name="a644e32a9f239f340ac0d1923d80d4c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a644e32a9f239f340ac0d1923d80d4c08">&#9670;&#160;</a></span>WindowHandle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Window::WindowHandle =  void*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00035">35</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
 <a id="a35055c04498121d39741bfcd5082705b" name="a35055c04498121d39741bfcd5082705b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a35055c04498121d39741bfcd5082705b">&#9670;&#160;</a></span>close()</h2>
 
@@ -215,7 +267,34 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00202">202</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00174">174</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2a207b71942b55c9d078815f734a56a6" name="a2a207b71942b55c9d078815f734a56a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a207b71942b55c9d078815f734a56a6">&#9670;&#160;</a></span>get_driver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt; Window::get_driver </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00135">135</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -242,12 +321,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00155">155</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00128">128</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a281e8504b56760389aef20ab3d113d4a" name="a281e8504b56760389aef20ab3d113d4a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a281e8504b56760389aef20ab3d113d4a">&#9670;&#160;</a></span>get_proc_address()</h2>
+<a id="a3bed48584f1db01500fb1778c439b9ae" name="a3bed48584f1db01500fb1778c439b9ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bed48584f1db01500fb1778c439b9ae">&#9670;&#160;</a></span>get_proc_address()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -256,7 +335,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GLFWglproc Window::get_proc_address </td>
+          <td class="memname">Window::ProcHandle Window::get_proc_address </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -269,7 +348,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00145">145</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00114">114</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -296,7 +375,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00135">135</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00100">100</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -323,12 +402,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00150">150</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00121">121</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a6a86e2d9de3bd06e4b3d8eb34c44aead" name="a6a86e2d9de3bd06e4b3d8eb34c44aead"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6a86e2d9de3bd06e4b3d8eb34c44aead">&#9670;&#160;</a></span>get_window()</h2>
+<a id="abba39c4d491902b6c45957a8b818177b" name="abba39c4d491902b6c45957a8b818177b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abba39c4d491902b6c45957a8b818177b">&#9670;&#160;</a></span>get_window()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -337,7 +416,7 @@ Additional Inherited Members</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">GLFWwindow * Window::get_window </td>
+          <td class="memname">Window::WindowHandle Window::get_window </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -350,7 +429,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00140">140</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00107">107</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +458,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00035">35</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00030">30</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -406,7 +485,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00112">112</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00073">73</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -437,7 +516,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00103">103</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00064">64</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -465,7 +544,34 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00130">130</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00093">93</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ae0e865a4eb0ca1a167af8648dc9822fa" name="ae0e865a4eb0ca1a167af8648dc9822fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0e865a4eb0ca1a167af8648dc9822fa">&#9670;&#160;</a></span>make_context_current()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Window::make_context_current </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00207">207</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -496,7 +602,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00098">98</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00059">59</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -523,12 +629,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00215">215</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00188">188</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aecfc99c9f96d8b10cd82069dd62a0513" name="aecfc99c9f96d8b10cd82069dd62a0513"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aecfc99c9f96d8b10cd82069dd62a0513">&#9670;&#160;</a></span>set_key_callback()</h2>
+<a id="a5a69b31494cefcf9b6fa54d0c5f7a2bc" name="a5a69b31494cefcf9b6fa54d0c5f7a2bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a69b31494cefcf9b6fa54d0c5f7a2bc">&#9670;&#160;</a></span>set_key_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -539,7 +645,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_key_callback </td>
           <td>(</td>
-          <td class="paramtype">GLFWkeyfun&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -551,12 +657,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00230">230</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00195">195</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="abc5d635733d4676d3201bf959388e19a" name="abc5d635733d4676d3201bf959388e19a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abc5d635733d4676d3201bf959388e19a">&#9670;&#160;</a></span>set_mouse_callback()</h2>
+<a id="af8449adc223fc8dc08b4613f71c9f0a9" name="af8449adc223fc8dc08b4613f71c9f0a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8449adc223fc8dc08b4613f71c9f0a9">&#9670;&#160;</a></span>set_mouse_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -567,7 +673,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_mouse_callback </td>
           <td>(</td>
-          <td class="paramtype">GLFWcursorposfun&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -579,7 +685,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00173">173</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00153">153</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -607,12 +713,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00187">187</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00167">167</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ac1220d326caf0bff294f38a82a1f775e" name="ac1220d326caf0bff294f38a82a1f775e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1220d326caf0bff294f38a82a1f775e">&#9670;&#160;</a></span>set_mouse_pos_callback()</h2>
+<a id="a62ef54c3094f7db2cafbe5d305e39dac" name="a62ef54c3094f7db2cafbe5d305e39dac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62ef54c3094f7db2cafbe5d305e39dac">&#9670;&#160;</a></span>set_mouse_pos_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -623,7 +729,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_mouse_pos_callback </td>
           <td>(</td>
-          <td class="paramtype">GLFWcursorposfun&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -635,12 +741,12 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00236">236</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00201">201</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
-<a id="ae576a45de6a9b955ec606dc955c5edeb" name="ae576a45de6a9b955ec606dc955c5edeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae576a45de6a9b955ec606dc955c5edeb">&#9670;&#160;</a></span>set_size_callback()</h2>
+<a id="a1106215b612aef5b698ba7663b63323f" name="a1106215b612aef5b698ba7663b63323f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1106215b612aef5b698ba7663b63323f">&#9670;&#160;</a></span>set_size_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -651,7 +757,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_size_callback </td>
           <td>(</td>
-          <td class="paramtype">GLFWframebuffersizefun&#160;</td>
+          <td class="paramtype">void *&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -663,7 +769,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00179">179</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00160">160</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -701,7 +807,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00123">123</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00086">86</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +834,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00118">118</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00079">79</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -755,7 +861,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00208">208</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00181">181</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -784,7 +890,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00086">86</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00047">47</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -811,7 +917,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00160">160</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00140">140</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
@@ -849,11 +955,83 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00166">166</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00146">146</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
+<a id="a9f05cf42748c8a1d285703d0fe365372" name="a9f05cf42748c8a1d285703d0fe365372"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f05cf42748c8a1d285703d0fe365372">&#9670;&#160;</a></span>backend</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt; Window::backend = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00098">98</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
+<a id="aac33033a72aaa7b3bbcf0b2cf995468b" name="aac33033a72aaa7b3bbcf0b2cf995468b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac33033a72aaa7b3bbcf0b2cf995468b">&#9670;&#160;</a></span>init_config</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structbrenta_1_1Window_1_1Config.html">Window::Config</a> Window::init_config = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00095">95</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
+<a id="ad80150edf88d1dd060bfc0891ec3a625" name="ad80150edf88d1dd060bfc0891ec3a625"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad80150edf88d1dd060bfc0891ec3a625">&#9670;&#160;</a></span>initialized</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Window::initialized = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00097">97</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a0cd497d5bd7dca9b2e082a74741e3dfc" name="a0cd497d5bd7dca9b2e082a74741e3dfc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0cd497d5bd7dca9b2e082a74741e3dfc">&#9670;&#160;</a></span>subsystem_name</h2>
 
