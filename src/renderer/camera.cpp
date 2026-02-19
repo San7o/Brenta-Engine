@@ -37,12 +37,18 @@ glm::mat4 Camera::get_view_matrix() const
   }
 }
 
+// The projection matrix maps the verticies inside a cube called the
+// Canonical Cube where all axis are between -1 and 1
 glm::mat4 Camera::get_projection_matrix(int window_width,
                                         int window_height) const
 {
   switch (this->proj_type)
   {
   case ProjectionType::Perspective:
+
+    // The perspective calculates the position of a vertex from 3D
+    // view space to clip space using a technique base on triangle
+    // similarity.
     return glm::perspective(glm::radians(this->fov),
                             (float) window_width
                             / (float) window_height,

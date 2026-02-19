@@ -56,28 +56,14 @@ game logic.</p>
 <p>The renderer provides a set of abstraction for working with geometry
 and lights in order to render a frame on the screen (or to a
 framebuffer).</p>
-<p>Here is an high-level picture that shows the main classes of the
-renderer subsystem, where arrows going down mean the parent contains one
-or more children:</p>
-<figure>
-<img src="./brenta-renderer.png" alt="renderer-design" />
-<figcaption aria-hidden="true">renderer-design</figcaption>
-</figure>
-<p>The scene is a tree of nodes where each node has a transform, and may
-have a model, a directional light, any number of point lights and other
-nodes (children). All transforms are relative to the transform of their
-parent; when a node is updated, all its children are updated too.</p>
-<figure>
-<img src="./brenta-scene.png" alt="scene" />
-<figcaption aria-hidden="true">scene</figcaption>
-</figure>
-<p>The actual rendering part deserves its own book. There are many
+<p>The actual rendering algorithm deserves its own book. There are many
 rendering techniques available, the most popular ones are rasterization
 which is common in realtime rendering, and ray tracing which is powerful
-but slower so it is used for offline rendering. Brenta uses
-rasterization, which means projecting each surface to the screen and
-calculating the color of each pixel by interpolating each one of them
-(parallelized on the GPU).</p>
+but slower so it is often used for offline rendering (but modern GPUs
+now provide raytracing support on hardware to speed this up). Brenta
+uses rasterization, which means projecting each surface to the screen
+and calculating the color of each pixel by interpolating each one of
+them (parallelized on the GPU).</p>
 <p>This “projection” is achieved by multiplying together three matrices:
 the <code>model</code> or <code>world</code> matrix which translates a
 vertex to its position in world space, the <code>view</code> matrix
@@ -91,7 +77,28 @@ with.</p>
 href="https://en.wikipedia.org/wiki/Phong_reflection_model">Phong
 reflection model</a> but provides the abstractions necessary to
 integrate other methods.</p>
-<h2 id="ecs">Ecs</h2>
+<h2 id="scene">Scene</h2>
+<p>There are many ways to define a scene. Brenta supports both the
+scene-graph architecture, commonly used in Godot, Unity and Unreal, and
+the ECS (Entity Component System) architecture like in <a
+href="https://github.com/bevyengine/bevy/">Bevy</a>.</p>
+<h3 id="scene-graph">Scene graph</h3>
+<p>The scene is a tree of nodes where each node has a transform, and may
+have a model, a directional light, any number of point lights and other
+nodes (children). All transforms are relative to the transform of their
+parent; when a node is updated, all its children are updated too.</p>
+<figure>
+<img src="./brenta-scene.png" alt="scene" />
+<figcaption aria-hidden="true">scene</figcaption>
+</figure>
+<p>Here is an high-level picture that shows the main classes used in the
+scene graph, where arrows going down mean the parent contains one or
+more children:</p>
+<figure>
+<img src="./brenta-renderer.png" alt="renderer-design" />
+<figcaption aria-hidden="true">renderer-design</figcaption>
+</figure>
+<h3 id="ecs">Ecs</h3>
 <p>The Entity Component System architecture is used to manage all logic
 of a videogame. Check out <a
 href="https://github.com/San7o/viotecs">viotecs</a> for more

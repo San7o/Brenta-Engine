@@ -1,9 +1,10 @@
 ![Brenta-Engine-Banner](./utils/docs-images/brenta-engine-banner.png)
 
 **Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
-using the Entity Component System architecture. The engine was
-created by Giovanni Santini in the summer of 2024, the name is
-inspired by the Brenta Dolimites in the Italian Alps.
+using a hybrid scene-graph and Entity Component System
+architecture. The engine was created by Giovanni Santini in the summer
+of 2024, the name is inspired by the Brenta Dolimites in the Italian
+Alps.
 
 Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
 the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
