@@ -128,8 +128,8 @@ int main()
     auto pos = camera->get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
 
-    acam.yaw -= delta_x;
-    acam.pitch += delta_y;
+    acam.yaw += delta_x;
+    acam.pitch -= delta_y;
     camera->set_pos(acam);
     return;
   });
@@ -155,9 +155,9 @@ int main()
       acceleration.z = -ACCELERATION;
     if (Window::is_key_pressed(Key::D))
       acceleration.z = ACCELERATION;
-    if (Window::is_key_pressed(Key::Q))
-      acceleration.y = ACCELERATION;
     if (Window::is_key_pressed(Key::E))
+      acceleration.y = ACCELERATION;
+    if (Window::is_key_pressed(Key::Q))
       acceleration.y = -ACCELERATION;
 
     update_camera(camera, acceleration, speed, delta_time);

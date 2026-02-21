@@ -18,7 +18,7 @@ class AssetManager
 public:
 
   static std::shared_ptr<Texture>  get_texture(const Texture::Config &conf);
-  static std::shared_ptr<Model>    get_model(Config &&conf);
+  static std::shared_ptr<Model>    get_model(Model::Config &&conf);
   // TODO: make shader not static and make it cleanup in the destructor
   static std::shared_ptr<Material> get_material(std::shared_ptr<Shader> shader);
   static std::shared_ptr<Scene>    get_scene(std::shared_ptr<Camera> camera);
