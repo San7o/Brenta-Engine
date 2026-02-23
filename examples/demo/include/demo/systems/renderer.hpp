@@ -46,8 +46,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
         World::entity_to_component<TransformComponent>(match);
 
       Model *m = &model_component->mod;
-      auto shader_name = model_component->shader;
-      auto shader = Shader::get_shader(shader_name);
+      auto shader = model_component->shader;
       if (!shader) continue;
 
       shader->use();

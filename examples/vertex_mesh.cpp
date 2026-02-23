@@ -44,7 +44,7 @@ int main(void)
               .build())
     .build();
 
-  auto shader = Shader::create("my_shader", {
+  auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs },
     });
@@ -53,7 +53,11 @@ int main(void)
     ERROR("Error creating shader");
     return 1;
   }
+  std::shared_ptr<Shader> shader_ptr =
+    std::make_shared<Shader>(std::move(shader.value()));
 
+  auto material = std::make_shared<Material>(shader_ptr);
+  
   auto model = Model::Builder()
     .transform(Transform()
                // Move the model forward in the X axis, and rotate it
@@ -77,7 +81,7 @@ int main(void)
                    .path("examples/assets/textures/container2.png")
                    .build())
           .build())
-    .material({*shader})
+    .material(material)
     .build();
 
   auto camera_ptr = std::make_shared<Camera>(std::move(camera));

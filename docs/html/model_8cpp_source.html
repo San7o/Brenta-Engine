@@ -114,7 +114,7 @@ $(document).ready(function(){initNavTree('model_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  this-&gt;path          = conf.model_path.string();</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>  this-&gt;transform     = conf.transform;</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  this-&gt;material      = std::move(conf.material);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  this-&gt;material      = conf.material;</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>  </div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>  <span class="keywordflow">if</span> (conf.model_path != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    this-&gt;load(conf.texture_props);</div>
@@ -150,7 +150,7 @@ $(document).ready(function(){initNavTree('model_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordflow">return</span> this-&gt;transform;</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>}</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><a class="code hl_class" href="classbrenta_1_1Material.html">Material</a> &amp;Model::get_material()</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>std::shared_ptr&lt;Material&gt; Model::get_material()</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>{</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordflow">return</span> this-&gt;material;</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}</div>
@@ -302,9 +302,9 @@ $(document).ready(function(){initNavTree('model_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>}</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span> </div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><a class="code hl_class" href="classbrenta_1_1Model_1_1Builder.html">Model::Builder</a> &amp;Model::Builder::material(<a class="code hl_class" href="classbrenta_1_1Material.html">Material</a> &amp;&amp;material)</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span><a class="code hl_class" href="classbrenta_1_1Model_1_1Builder.html">Model::Builder</a> &amp;Model::Builder::material(std::shared_ptr&lt;Material&gt; material)</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>{</div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  this-&gt;conf.material = std::move(material);</div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>  this-&gt;conf.material = material;</div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>  <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
 <div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>}</div>
 <div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span> </div>
@@ -337,7 +337,11 @@ $(document).ready(function(){initNavTree('model_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>{</div>
 <div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>  <span class="keywordflow">return</span> <a class="code hl_class" href="classbrenta_1_1Model.html">Model</a>(std::move(this-&gt;conf));</div>
 <div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1Material_html"><div class="ttname"><a href="classbrenta_1_1Material.html">brenta::Material</a></div><div class="ttdef"><b>Definition</b> <a href="material_8hpp_source.html#l00029">material.hpp:30</a></div></div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span><a class="code hl_struct" href="structbrenta_1_1Model_1_1Config.html">Model::Config</a> Model::Builder::config()</div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>{</div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>  <span class="keywordflow">return</span> std::move(this-&gt;conf);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>}</div>
 <div class="ttc" id="aclassbrenta_1_1Mesh_1_1Vertex_html"><div class="ttname"><a href="classbrenta_1_1Mesh_1_1Vertex.html">brenta::Mesh::Vertex</a></div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00067">mesh.hpp:68</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Mesh_html"><div class="ttname"><a href="classbrenta_1_1Mesh.html">brenta::Mesh</a></div><div class="ttdoc">The Mesh class represents a 3D model.</div><div class="ttdef"><b>Definition</b> <a href="mesh_8hpp_source.html#l00031">mesh.hpp:32</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Model_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Model_1_1Builder.html">brenta::Model::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="model_8hpp_source.html#l00077">model.hpp:78</a></div></div>
@@ -345,6 +349,7 @@ $(document).ready(function(){initNavTree('model_8cpp_source.html',''); initResiz
 <div class="ttc" id="aclassbrenta_1_1Texture_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Texture_1_1Builder.html">brenta::Texture::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00206">texture.hpp:207</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Texture_1_1Properties_html"><div class="ttname"><a href="classbrenta_1_1Texture_1_1Properties.html">brenta::Texture::Properties</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00149">texture.hpp:150</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Transform_html"><div class="ttname"><a href="classbrenta_1_1Transform.html">brenta::Transform</a></div><div class="ttdef"><b>Definition</b> <a href="transform_8hpp_source.html#l00014">transform.hpp:15</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Model_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Model_1_1Config.html">brenta::Model::Config</a></div><div class="ttdef"><b>Definition</b> <a href="model_8hpp_source.html#l00068">model.hpp:69</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

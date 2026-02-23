@@ -56,7 +56,7 @@ int main()
     .build();
 
   // Load the shader
-  auto shader = Shader::create("default_shader", {
+  auto shader = Shader::create({
          { Shader::Type::Vertex,   phong_vs },
          { Shader::Type::Fragment, phong_fs } });
   if (!shader)

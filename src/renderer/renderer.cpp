@@ -69,8 +69,8 @@ void Renderer::flush()
 {
   for (auto& command : Renderer::render_queue)
   {
-    auto& material = command.model->get_material();
-    material.apply();
+    auto material = command.model->get_material();
+    material->apply();
 
     // Setup all lights
     int lights_number = 0;
@@ -82,19 +82,19 @@ void Renderer::flush()
         lights_number++;
       }
     }
-    material.shader.set_int("n_point_lights", lights_number);
+    material->shader->set_int("n_point_lights", lights_number);
 
     if (Renderer::dir_light)
       Renderer::dir_light.value()->apply();
 
-    material.shader.set_mat4("view",       Renderer::view);
-    material.shader.set_mat4("projection", Renderer::projection);
-    material.shader.set_mat4("model",
+    material->shader->set_mat4("view",       Renderer::view);
+    material->shader->set_mat4("projection", Renderer::projection);
+    material->shader->set_mat4("model",
                              // Node world position
                              command.world_matrix *
                              // Local transform
                              command.model->get_transform().get_model_matrix());
-    material.shader.set_vec3("view_pos",    Renderer::cam_position);
+    material->shader->set_vec3("view_pos",    Renderer::cam_position);
 
     // Geometry
     command.model->draw();

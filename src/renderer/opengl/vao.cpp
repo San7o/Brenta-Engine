@@ -26,6 +26,8 @@ void Vao::destroy()
   if (this->get_id() == 0) return;
 
   glDeleteVertexArrays(1, &this->id);
+  this->id = 0;
+  
   EVENT(Logger::Event::Lifetime, "Vao: destroyed");
   return;
 }

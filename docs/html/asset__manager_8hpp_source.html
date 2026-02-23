@@ -119,27 +119,46 @@ $(document).ready(function(){initNavTree('asset__manager_8hpp_source.html',''); 
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">static</span> std::shared_ptr&lt;Texture&gt;  get_texture(<span class="keyword">const</span> <a class="code hl_struct" href="structbrenta_1_1Texture_1_1Config.html">Texture::Config</a> &amp;conf);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keyword">static</span> std::shared_ptr&lt;Model&gt;    get_model(Config &amp;&amp;conf);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="comment">// TODO: make shader not static and make it cleanup in the destructor</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  <span class="keyword">static</span> std::shared_ptr&lt;Material&gt; get_material(std::shared_ptr&lt;Shader&gt; shader);</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">static</span> std::shared_ptr&lt;Scene&gt;    get_scene(std::shared_ptr&lt;Camera&gt; camera);</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keyword">static</span> std::unordered_map&lt;std::string, std::weak_ptr&lt;Model&gt;&gt;    models;</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keyword">static</span> std::unordered_map&lt;std::string, std::weak_ptr&lt;Texture&gt;&gt;  textures;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  <span class="keyword">static</span> std::unordered_map&lt;std::string, std::weak_ptr&lt;Material&gt;&gt; materials;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">static</span> std::unordered_map&lt;std::string, std::weak_ptr&lt;Scene&gt;&gt;    scenes;</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  <span class="comment">// Private constructor for singleton</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <a class="code hl_class" href="classbrenta_1_1AssetManager.html">AssetManager</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>};</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  <span class="keyword">using </span>AssetId = std::string;</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keyword">static</span> std::shared_ptr&lt;Texture&gt;  new_texture(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>                                               <span class="keyword">const</span> <a class="code hl_struct" href="structbrenta_1_1Texture_1_1Config.html">Texture::Config</a> &amp;conf);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="keyword">static</span> std::shared_ptr&lt;Model&gt;    new_model(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>                                             <a class="code hl_struct" href="structbrenta_1_1Model_1_1Config.html">Model::Config</a> &amp;&amp;conf);</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keyword">static</span> std::shared_ptr&lt;Shader&gt;   new_shader(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>                                              <span class="keyword">const</span> std::vector&lt;Shader::Object&gt; &amp;objects);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="keyword">static</span> std::shared_ptr&lt;Shader&gt;   new_shader(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>                                              <span class="keyword">const</span> GLchar **feedback_varyings,</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>                                              <span class="keywordtype">int</span> num_varyings,</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>                                              <span class="keyword">const</span> std::vector&lt;Shader::Object&gt; &amp;objects);</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  <span class="keyword">static</span> std::shared_ptr&lt;Material&gt; new_material(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>                                                std::shared_ptr&lt;Shader&gt; shader);</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keyword">static</span> std::shared_ptr&lt;Scene&gt;    new_scene(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>,</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>                                             std::shared_ptr&lt;Camera&gt; camera);</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keyword">static</span> std::shared_ptr&lt;Texture&gt;  get_texture(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keyword">static</span> std::shared_ptr&lt;Model&gt;    get_model(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <span class="keyword">static</span> std::shared_ptr&lt;Shader&gt;   get_shader(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">static</span> std::shared_ptr&lt;Material&gt; get_material(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">static</span> std::shared_ptr&lt;Scene&gt;    get_scene(<span class="keyword">const</span> AssetId&amp; <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">static</span> std::unordered_map&lt;AssetId, std::weak_ptr&lt;Model&gt;&gt;    models;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">static</span> std::unordered_map&lt;AssetId, std::weak_ptr&lt;Texture&gt;&gt;  textures;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">static</span> std::unordered_map&lt;AssetId, std::weak_ptr&lt;Material&gt;&gt; materials;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keyword">static</span> std::unordered_map&lt;AssetId, std::weak_ptr&lt;Scene&gt;&gt;    scenes;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">static</span> std::unordered_map&lt;AssetId, std::weak_ptr&lt;Shader&gt;&gt;   shaders;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="comment">// Private constructor for singleton</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <a class="code hl_class" href="classbrenta_1_1AssetManager.html">AssetManager</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>};</div>
 </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>} <span class="comment">// namespace brenta</span></div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>} <span class="comment">// namespace brenta</span></div>
 <div class="ttc" id="aclassbrenta_1_1AssetManager_html"><div class="ttname"><a href="classbrenta_1_1AssetManager.html">brenta::AssetManager</a></div><div class="ttdef"><b>Definition</b> <a href="asset__manager_8hpp_source.html#l00016">asset_manager.hpp:17</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Model_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Model_1_1Config.html">brenta::Model::Config</a></div><div class="ttdef"><b>Definition</b> <a href="model_8hpp_source.html#l00068">model.hpp:69</a></div></div>
 <div class="ttc" id="astructbrenta_1_1Texture_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Texture_1_1Config.html">brenta::Texture::Config</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00198">texture.hpp:199</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->

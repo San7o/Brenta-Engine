@@ -110,19 +110,19 @@ $(document).ready(function(){initNavTree('material_8cpp_source.html',''); initRe
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="keywordtype">void</span> Material::apply()</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  this-&gt;shader.use();</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>  this-&gt;shader-&gt;use();</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; [name, val] : this-&gt;floats)</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    shader.set_float(name.c_str(), val);</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    shader-&gt;set_float(name.c_str(), val);</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; [name, val] : this-&gt;vectors)</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    shader.set_vec3(name.c_str(), val);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    shader-&gt;set_vec3(name.c_str(), val);</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span> <span class="keyword">const</span>&amp; [name, index_tex] : this-&gt;textures)</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  {</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">auto</span> tex = std::get&lt;1&gt;(index_tex);</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    tex-&gt;active_texture(std::get&lt;0&gt;(index_tex));</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    tex-&gt;bind();</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    shader.set_int(name.c_str(), std::get&lt;0&gt;(index_tex));</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    shader-&gt;set_int(name.c_str(), std::get&lt;0&gt;(index_tex));</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  }</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>}</div>

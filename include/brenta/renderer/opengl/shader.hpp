@@ -47,7 +47,6 @@ class Shader
 {
 public:
 
-  using Name = std::string;
   using Id   = unsigned int;
 
   enum class Type
@@ -64,12 +63,11 @@ public:
   
   // Creates and compiles several shaders (into a shader "program")
   // Example:
-  //     auto my_shader = Shader::create("my_shader", {
+  //     auto my_shader = Shader::create({
   //        { Shader::Type::Vertex, std::filesystem::path("shaders/shader.vs") },
   //        { Shader::Type::Fragment, std::filesystem::path("shaders/shader.fs") }});
   static std::optional<Shader>
-  create(const Shader::Name &shader_name,
-         const std::vector<Shader::Object> &objects);
+  create(const std::vector<Shader::Object> &objects);
 
   // Set [feedback_varyings] to an array of CHchar* that specifies
   // the output attributes we want to capture into a buffer
@@ -91,18 +89,37 @@ public:
   //      glEndTransformFeedback();         // Exit transform feedback mode
   static std::optional<Shader>
   create(const GLchar **feedback_varyings, int num_varyings,
-         const Shader::Name &shader_name,
          const std::vector<Shader::Object> &objects);
-  
-  static std::optional<Shader> get_shader(Shader::Name shader_name);
 
+  // Set uniforms
+  static bool set_bool(Shader::Id id, const std::string   &unif_name,
+                       bool value);
+  static bool set_int(Shader::Id id, const std::string    &unif_name,
+                      int value);
+  static bool set_float(Shader::Id id, const std::string  &unif_name,
+                        float value);
+  static bool set_float2(Shader::Id id, const std::string &unif_name,
+                         float v1, float v2);
+  static bool set_float3(Shader::Id id, const std::string &unif_name,
+                         float v1, float v2, float v3);
+  static bool set_mat4(Shader::Id id, const std::string   &unif_name,
+                       glm::mat4 value);
+  static bool set_vec3(Shader::Id id, const std::string   &unif_name,
+                       float x, float y, float z);
+  static bool set_vec3(Shader::Id id, const std::string   &unif_name,
+                       glm::vec3 value);
+
+  
   // Non static API
   
   Shader() = default;
-  Shader(Shader::Id id, Shader::Name name) : id(id), name(name) {}
+  Shader(Shader::Id id) : id(id) {}
+  Shader(Shader&& other)
+  { this->id = other.id; other.id = 0; }
+  ~Shader();
   
   Shader::Id        get_id() const;
-  Shader::Name      get_name() const;
+  
   // Remember to call use() before setting uniforms and using this
   // shader
   bool              use();
@@ -114,13 +131,12 @@ public:
   bool set_float2(const std::string &unif_name, float v1, float v2);
   bool set_float3(const std::string &unif_name, float v1, float v2, float v3);
   bool set_mat4(const std::string   &unif_name, glm::mat4 value);
-  bool set_vec3(const std::string   &name, float x, float y, float z);
+  bool set_vec3(const std::string   &unif_name, float x, float y, float z);
   bool set_vec3(const std::string   &unif_name, glm::vec3 value);
 
 private:
 
   Shader::Id   id;
-  Shader::Name name;
   
   static bool
   compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
@@ -132,12 +148,7 @@ private:
   static void clean_compilation(std::vector<Shader::Id>& compiled_shader);
   static bool check_compile_errors(Shader::Id shader);  
   static bool check_link_errors(Shader::Id shader);
-  
-  // This map is used to store the shaders that are created during the
-  // execution of the program. The key is the name of the shader and
-  // the value is the ID of the shader.
-  static std::unordered_map<Shader::Name, Shader::Id> shaders;
-  
+
 };
 
 class Shader::Object

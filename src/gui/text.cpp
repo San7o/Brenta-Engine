@@ -7,6 +7,7 @@
 #include <brenta/window.hpp>
 #include <brenta/gui/text.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 
 #include "../renderer/shaders/c/text_fs.c"
 #include "../renderer/shaders/c/text_vs.c"
@@ -18,7 +19,7 @@ using namespace brenta;
 //
 
 bool              Text::initialized = false;
-Shader::Name      Text::shader_name;
+std::shared_ptr<Shader> Text::shader;
 Vao               Text::vao;
 Buffer            Text::vbo;
 const std::string Text::subsystem_name = "text";
@@ -48,6 +49,11 @@ std::expected<void, Subsystem::Error> Text::initialize()
 std::expected<void, Subsystem::Error> Text::terminate()
 {
   if (!this->is_initialized()) return {};
+
+  // Release resources
+  Text::shader = nullptr;
+  Text::vao.destroy();
+  Text::vbo.destroy();
 
   Text::initialized = false;
   INFO("{}: text terminated", Text::subsystem_name);
@@ -88,14 +94,12 @@ void Text::load(const std::filesystem::path &font_path, int font_size)
     return;
   }
 
-  auto shader =
-    Shader::create("TextShader", {
-        { Shader::Type::Vertex,   text_vs },
-        { Shader::Type::Fragment, text_fs } });
+  auto shader = AssetManager::new_shader("TextShader", {
+      { Shader::Type::Vertex,   text_vs },
+      { Shader::Type::Fragment, text_fs } });
   if (!shader) return;
-  
-  Text::shader_name = "TextShader";
-  shader->use();
+  Text::shader = shader;
+  Text::shader->use();
 
   // find path to font
   if (font_path.empty())
@@ -174,20 +178,18 @@ void Text::render_text(std::string text, float x, float y, float scale,
     return;
   }
 
-  auto shader = Shader::get_shader(Text::shader_name);
-  if (!shader) return;
+  if (!Text::shader) return;
   
-  unsigned int textShaderId = shader->get_id();
-  shader->use();
-  shader->set_float3("textColor",
-                     255.99f * color.r,
-                     255.99f * color.g,
-                     255.99f * color.b);
+  Text::shader->use();
+  Text::shader->set_float3("textColor",
+                           255.99f * color.r,
+                           255.99f * color.g,
+                           255.99f * color.b);
 
   glm::mat4 projection =
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
                static_cast<float>(Window::get_height()));
-  glUniformMatrix4fv(glGetUniformLocation(textShaderId, "projection"), 1,
+  glUniformMatrix4fv(glGetUniformLocation(shader->get_id(), "projection"), 1,
                      GL_FALSE, glm::value_ptr(projection));
 
   glActiveTexture(GL_TEXTURE0);

@@ -92,60 +92,62 @@ int main()
                           CollisionsSystem>();
 #endif
 
-  auto emitter = ParticleEmitter::Builder()
-    .with_camera(&camera)
-    .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
-    .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-    .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-    .starting_time_to_live(0.5f)
-    .num_particles(1000)
-    .spawn_rate(0.01f)
-    .scale(1.0f)
-    .atlas_path("examples/assets/textures/particle_atlas.png")
-    .atlas_width(8)
-    .atlas_height(8)
-    .atlas_index(0)
-    .build();
+  {  // Local scope
+    
+    auto emitter = ParticleEmitter::Builder()
+      .with_camera(&camera)
+      .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
+      .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+      .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
+      .starting_time_to_live(0.5f)
+      .num_particles(1000)
+      .spawn_rate(0.01f)
+      .scale(1.0f)
+      .atlas_path("examples/assets/textures/particle_atlas.png")
+      .atlas_width(8)
+      .atlas_height(8)
+      .atlas_index(0)
+      .build();
 
 #ifdef BRENTA_USE_IMGUI
-  FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
+    FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
 #endif
 
-  int frames = 0;
+    int frames = 0;
   
-  while (!Window::should_close())
-  {
-    Window::poll_events();
+    while (!Window::should_close())
+    {
+      Window::poll_events();
 
 #ifdef BRENTA_USE_IMGUI
-    Gui::new_frame(&fb, "demo");
-    fb.bind();
+      Gui::new_frame(&fb, "demo");
+      fb.bind();
 #endif
     
-    Gl::set_color(Color::grey());
-    Gl::clear();
+      Gl::set_color(Color::grey());
+      Gl::clear();
 
-    emitter.update(Window::get_time().get_delta());
-    emitter.render();
+      emitter.update(Window::get_time().get_delta());
+      emitter.render();
 
-    frames++;
-    if (frames > 5)
-    {
-      frames = 0;
-      emitter.atlas_index++;
-    }
+      frames++;
+      if (frames > 5)
+      {
+        frames = 0;
+        emitter.atlas_index++;
+      }
     
 #ifdef BRENTA_USE_ECS
-    World::tick();
+      World::tick();
 #endif
 
 #ifdef BRENTA_USE_IMGUI
-    fb.unbind();
-    Gui::render();
+      fb.unbind();
+      Gui::render();
 #endif
-    Window::swap_buffers();
+      Window::swap_buffers();
+    }
   }
-
   engine.terminate();
   return 0;
 }

@@ -17,18 +17,36 @@ class AssetManager
 {
 public:
 
-  static std::shared_ptr<Texture>  get_texture(const Texture::Config &conf);
-  static std::shared_ptr<Model>    get_model(Model::Config &&conf);
-  // TODO: make shader not static and make it cleanup in the destructor
-  static std::shared_ptr<Material> get_material(std::shared_ptr<Shader> shader);
-  static std::shared_ptr<Scene>    get_scene(std::shared_ptr<Camera> camera);
+  using AssetId = std::string;
+  
+  static std::shared_ptr<Texture>  new_texture(const AssetId& id,
+                                               const Texture::Config &conf);
+  static std::shared_ptr<Model>    new_model(const AssetId& id,
+                                             Model::Config &&conf);
+  static std::shared_ptr<Shader>   new_shader(const AssetId& id,
+                                              const std::vector<Shader::Object> &objects);
+  static std::shared_ptr<Shader>   new_shader(const AssetId& id,
+                                              const GLchar **feedback_varyings,
+                                              int num_varyings,
+                                              const std::vector<Shader::Object> &objects);
+  static std::shared_ptr<Material> new_material(const AssetId& id,
+                                                std::shared_ptr<Shader> shader);
+  static std::shared_ptr<Scene>    new_scene(const AssetId& id,
+                                             std::shared_ptr<Camera> camera);
+  
+  static std::shared_ptr<Texture>  get_texture(const AssetId& id);
+  static std::shared_ptr<Model>    get_model(const AssetId& id);
+  static std::shared_ptr<Shader>   get_shader(const AssetId& id);
+  static std::shared_ptr<Material> get_material(const AssetId& id);
+  static std::shared_ptr<Scene>    get_scene(const AssetId& id);
 
 private:
 
-  static std::unordered_map<std::string, std::weak_ptr<Model>>    models;
-  static std::unordered_map<std::string, std::weak_ptr<Texture>>  textures;
-  static std::unordered_map<std::string, std::weak_ptr<Material>> materials;
-  static std::unordered_map<std::string, std::weak_ptr<Scene>>    scenes;
+  static std::unordered_map<AssetId, std::weak_ptr<Model>>    models;
+  static std::unordered_map<AssetId, std::weak_ptr<Texture>>  textures;
+  static std::unordered_map<AssetId, std::weak_ptr<Material>> materials;
+  static std::unordered_map<AssetId, std::weak_ptr<Scene>>    scenes;
+  static std::unordered_map<AssetId, std::weak_ptr<Shader>>   shaders;
 
   // Private constructor for singleton
   AssetManager() = default;

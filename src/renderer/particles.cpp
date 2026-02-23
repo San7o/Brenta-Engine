@@ -8,6 +8,7 @@
 #include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 #include <brenta/window.hpp>
 
 #include <iostream>
@@ -62,19 +63,18 @@ ParticleEmitter::ParticleEmitter(Config conf)
 
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
-  auto shader_update =
-    Shader::create(varyings,
-                   sizeof(varyings) / sizeof(varyings[0]),
-                   "particle_update", {
-                     { Shader::Type::Vertex, particle_update_vs }});
-  if (!shader_update) return;
+  this->shader_update =
+    AssetManager::new_shader("particle_update_shader",
+                             varyings,
+                             sizeof(varyings) / sizeof(varyings[0]),
+                             {{ Shader::Type::Vertex, particle_update_vs }});
+  if (!this->shader_update) return;
   
-  auto shader_render =
-    Shader::create("particle_render", {
+  this->shader_render = AssetManager::new_shader("particole_render_shader", {
         { Shader::Type::Vertex,   particle_render_vs },
         { Shader::Type::Geometry, particle_render_gs },
         { Shader::Type::Fragment, particle_render_fs }});
-  if (!shader_render) return;
+  if (!this->shader_render) return;
 
   // This is needed to render points
   glEnable(GL_PROGRAM_POINT_SIZE);
@@ -103,7 +103,7 @@ ParticleEmitter::ParticleEmitter(Config conf)
   this->vao.unbind();
 
   // Setup UBO
-  this->ubo.init(*shader_update, "settings", 3, sizeof(ParticleSettings));
+  this->ubo.init(*this->shader_update, "settings", 3, sizeof(ParticleSettings));
   this->ubo.bind();
   this->ubo.copy_data(NULL,
                       sizeof(ParticleSettings),
@@ -116,9 +116,8 @@ ParticleEmitter::ParticleEmitter(Config conf)
 // Update particles using Transform Feedback
 void ParticleEmitter::update(float delta_time)
 {
-  auto shader = Shader::get_shader("particle_update");
-  if (!shader) return;
-  shader->use();
+  if (!this->shader_update) return;
+  this->shader_update->use();
 
   ParticleSettings settings = {
     .gravity = glm::vec3(0.0f, -9.81f, 0.0f),
@@ -184,8 +183,7 @@ void ParticleEmitter::render()
     return;
   }
 
-  auto shader = Shader::get_shader("particle_render");
-  if (!shader) return;
+  if (!this->shader_render) return;
 
   this->vao.bind();
 
@@ -203,15 +201,15 @@ void ParticleEmitter::render()
   int window_width = Window::get_width();
   int window_height = Window::get_height();
 
-  shader->use();
-  shader->set_mat4("view",       this->cam->get_view_matrix());
-  shader->set_mat4("projection", this->cam->get_projection_matrix(window_width, window_height));
-  shader->set_mat4("model",      glm::mat4(1.0f));
-  shader->set_int("atlas_width",  this->atlas_width);
-  shader->set_int("atlas_height", this->atlas_height);
-  shader->set_int("atlas_index",  this->atlas_index);
-  shader->set_float("scale",      this->scale);
-  shader->set_float("aspect_ratio",
+  shader_render->use();
+  shader_render->set_mat4("view",       this->cam->get_view_matrix());
+  shader_render->set_mat4("projection", this->cam->get_projection_matrix(window_width, window_height));
+  shader_render->set_mat4("model",      glm::mat4(1.0f));
+  shader_render->set_int("atlas_width",  this->atlas_width);
+  shader_render->set_int("atlas_height", this->atlas_height);
+  shader_render->set_int("atlas_index",  this->atlas_index);
+  shader_render->set_float("scale",      this->scale);
+  shader_render->set_float("aspect_ratio",
                            (float) window_width  / (float) window_height);
 
   // Set Textures

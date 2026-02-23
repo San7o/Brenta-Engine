@@ -97,6 +97,7 @@ void FrameBuffer::destroy()
   
   glDeleteFramebuffers(1, &this->get_id());
   glDeleteTextures(1, &this->texture_id);
+  this->id = 0;
 
   EVENT(Logger::Event::Lifetime, "framebuffer: destroyed");
   return;

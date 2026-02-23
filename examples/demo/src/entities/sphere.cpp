@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/physics.hpp>
@@ -25,12 +25,12 @@ void init_sphere_entity()
   // Spere 1
   //
 
-  auto shader = Shader::get_shader("default_shader");
+  auto shader = AssetManager::get_shader("default_shader");
   if (!shader)
   {
-    Shader::create("default_shader", {
-         { Shader::Type::Vertex,   phong_vs },
-         { Shader::Type::Fragment, phong_fs } });
+    shader = AssetManager::new_shader("default_shader", {
+        { Shader::Type::Vertex,   phong_vs },
+        { Shader::Type::Fragment, phong_fs } });
   }
   Model m1 = Model::Builder()
     .path("examples/assets/models/sphere/sphere.obj")
@@ -46,7 +46,7 @@ void init_sphere_entity()
                                      glm::vec3(-1.f, 0.0f, 0.0f), // acceleration
                                      true)                        // isElastic
     .add_component<SphereColliderComponent>(1.0f)
-    .add_component<ModelComponent>(std::move(m1), 32.0f, "default_shader");
+    .add_component<ModelComponent>(std::move(m1), 32.0f, shader);
 
   //
   // Spehere 2
@@ -66,5 +66,5 @@ void init_sphere_entity()
                                      glm::vec3(1.0f, 0.0f, 0.0f), // acceleration
                                      true)                        // isElastic
     .add_component<SphereColliderComponent>(1.0f)
-    .add_component<ModelComponent>(std::move(m2), 32.0f, "default_shader");
+    .add_component<ModelComponent>(std::move(m2), 32.0f, shader);
 }

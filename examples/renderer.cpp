@@ -46,7 +46,7 @@ int main()
     .fov(45.0f)
     .build();
 
-  auto shader = Shader::create("default_shader", {
+  auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
   if (!shader)
@@ -54,8 +54,9 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
-
-  auto material = Material(shader.value());
+  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
+  
+  auto material = std::make_shared<Material>(shader_ptr);
 
   auto model = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
@@ -64,7 +65,7 @@ int main()
                .rotate(glm::angleAxis(glm::radians(-90.0f),
                                       glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(1.0)))
-    .material(std::move(material))
+    .material(material)
     .build();
 
   auto cam_ptr   = std::make_shared<Camera>(std::move(cam));

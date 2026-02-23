@@ -16,7 +16,6 @@ Buffer::Buffer(Buffer::Target target)
 
 Buffer::~Buffer()
 {
-  // TODO: should call destoy here?
   this->destroy();
   return;
 }

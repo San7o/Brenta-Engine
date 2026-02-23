@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/point_light.hpp>
 #include <demo/components/transform.hpp>
@@ -17,6 +17,9 @@
 
 #include <vector>
 
+#include "../../../../src/renderer/shaders/c/phong_vs.c"
+#include "../../../../src/renderer/shaders/c/phong_fs.c"
+
 using namespace viotecs;
 using namespace brenta;
 
@@ -25,6 +28,15 @@ void init_point_light_entity()
   Transform transform = Transform()
     .translate(glm::vec3(0.0f, 10.0f, 0.0f))
     .scale(glm::vec3(0.5f));
+
+  auto shader = AssetManager::get_shader("default_shader");
+  if (!shader)
+  {
+    shader = AssetManager::new_shader("default_shader", {
+        { Shader::Type::Vertex,   phong_vs },
+        { Shader::Type::Fragment, phong_fs } });
+  }
+
   
   auto light = World::new_entity()
     .add_component<PointLightComponent>(glm::vec3(0.1f, 0.1f, 0.1f), // ambient
@@ -34,6 +46,6 @@ void init_point_light_entity()
                                         0.09f,     // linear
                                         0.00032f,  // quadratic
                                         1.0f,      // strength
-                                        std::vector<Shader::Name>{"default_shader"})
+                                        shader)
     .add_component<TransformComponent>(transform);
 }
