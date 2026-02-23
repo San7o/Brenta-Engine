@@ -59,7 +59,7 @@ public:
 
 private:
   
-  static Shader::Name shader_name;
+  static std::shared_ptr<Shader> shader;
   static Vao          vao;
   static Buffer       vbo;
   static bool         initialized;

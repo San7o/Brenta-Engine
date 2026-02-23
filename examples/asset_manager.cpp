@@ -10,7 +10,7 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/scene.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 
 #include <memory>
 #include <iostream>
@@ -49,7 +49,7 @@ int main()
                              .fov(45.0f)
                              .build());
 
-  auto shader = Shader::create({
+  auto shader = AssetManager::new_shader("default_shader", {
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
   if (!shader)
@@ -57,12 +57,12 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
-
-  auto material = std::make_shared<Material>(shader_ptr);
+  
+  auto material = AssetManager::new_material("backpack_material", shader);
 
   auto model =
-    std::make_shared<Model>(Model::Builder()
+    AssetManager::new_model("backpack",
+                            Model::Builder()
                             .path("examples/assets/models/backpack/backpack.obj")
                             .transform(Transform()
                                        .translate(glm::vec3(5.0f, 0.0f, 0.0f))
@@ -70,10 +70,10 @@ int main()
                                                               glm::vec3(0.0f, 1.0f, 0.0f)))
                                        .scale(glm::vec3(1.0)))
                             .material(material)
-                            .build());
+                            .config());
 
-  auto scene = Scene(camera);
-  auto root_node = scene.get_root();
+  auto scene = AssetManager::new_scene("main_scene", camera);
+  auto root_node = scene->get_root();
   auto model_node = root_node->new_node();
   model_node->add_model(model);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
@@ -87,8 +87,8 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    scene.update(delta_time);
-    scene.draw();
+    scene->update(delta_time);
+    scene->draw();
     
     Window::poll_events();
     Window::swap_buffers();

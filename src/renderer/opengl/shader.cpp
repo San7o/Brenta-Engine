@@ -9,16 +9,22 @@
 
 using namespace brenta;
 
-std::unordered_map<Shader::Name, Shader::Id> Shader::shaders;
+Shader::~Shader()
+{
+  if (this->id == 0) return;
+
+  glDeleteProgram(this->id);
+  this->id = 0;
+  return;
+}
 
 std::optional<Shader>
-Shader::create(const Shader::Name &shader_name,
-               const std::vector<Shader::Object> &objects)
+Shader::create(const std::vector<Shader::Object> &objects)
 {
   std::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, objects))
   {
-    ERROR("shader: error compiling shader {}", shader_name);
+    ERROR("shader: error compiling shader");
     return {};
   }
 
@@ -27,19 +33,17 @@ Shader::create(const Shader::Name &shader_name,
   if (!id) return {};
   
   Shader::clean_compilation(compiled_shaders);
-  Shader::shaders.insert({shader_name, *id});
-  return Shader(*id, shader_name);
+  return Shader(*id);
 }
 
 std::optional<Shader>
 Shader::create(const GLchar **feedback_varyings, int num_varyings,
-               const Shader::Name &shader_name,
                const std::vector<Shader::Object> &objects)
 {
   std::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, objects))
   {
-    ERROR("shader: error compiling shader {}", shader_name);
+    ERROR("shader: error compiling shader");
     return {};
   }
 
@@ -48,8 +52,7 @@ Shader::create(const GLchar **feedback_varyings, int num_varyings,
   if (!id) return {};
   
   Shader::clean_compilation(compiled_shaders);
-  Shader::shaders.insert({shader_name, *id});
-  return Shader(*id, shader_name);
+  return Shader(*id);
 }
 
 bool Shader::compile_shaders(std::vector<Shader::Id> &compiled,
@@ -109,23 +112,9 @@ void Shader::clean_compilation(std::vector<Shader::Id>& compiled_shaders)
  return;
 }
 
-std::optional<Shader> Shader::get_shader(Shader::Name shader_name)
-{
-  if (Shader::shaders.find(shader_name) == Shader::shaders.end())
-  {
-    return {};
-  }
-  return Shader(Shader::shaders.at(shader_name), shader_name);
-}
-
 Shader::Id Shader::get_id() const
 {
   return this->id;
-}
-
-Shader::Name Shader::get_name() const
-{
-  return this->name;
 }
 
 // Use/activate the shader
@@ -136,21 +125,20 @@ bool Shader::use()
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::use: error using shader {}: {}", this->get_name(), err);
+    ERROR("Shader::use: error using shader: {}", err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_bool(const std::string& unif_name, bool value)
+bool Shader::set_bool(Shader::Id id, const std::string& unif_name, bool value)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_bool: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_bool: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
   
@@ -159,22 +147,21 @@ bool Shader::set_bool(const std::string& unif_name, bool value)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_bool: error setting bool value for shader {} with name {}: {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_bool: error setting bool value with name {}: {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_int(const std::string &unif_name, int value)
+bool Shader::set_int(Shader::Id id, const std::string &unif_name, int value)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_int: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_int: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
 
@@ -183,22 +170,21 @@ bool Shader::set_int(const std::string &unif_name, int value)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_int: error setting int value for shader '{}' with name '{}'",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_int: error setting int value with name '{}'",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_float(const std::string &unif_name, float value)
+bool Shader::set_float(Shader::Id id, const std::string &unif_name, float value)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_float: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_float: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
 
@@ -207,22 +193,21 @@ bool Shader::set_float(const std::string &unif_name, float value)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_float: error setting float value for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_float: error setting float value with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_float2(const std::string &unif_name, float v1, float v2)
+bool Shader::set_float2(Shader::Id id, const std::string &unif_name, float v1, float v2)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_float2: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_float2: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
 
@@ -231,22 +216,21 @@ bool Shader::set_float2(const std::string &unif_name, float v1, float v2)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_float2: error setting float uniform for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_float2: error setting float uniform with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_float3(const std::string &unif_name, float v1, float v2, float v3)
+bool Shader::set_float3(Shader::Id id, const std::string &unif_name, float v1, float v2, float v3)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_float3: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_float3: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
 
@@ -255,22 +239,21 @@ bool Shader::set_float3(const std::string &unif_name, float v1, float v2, float 
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_float3: error setting float value for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_float3: error setting float value with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_mat4(const std::string &unif_name, glm::mat4 value)
+bool Shader::set_mat4(Shader::Id id, const std::string &unif_name, glm::mat4 value)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_mat4: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_mat4: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
   
@@ -279,22 +262,22 @@ bool Shader::set_mat4(const std::string &unif_name, glm::mat4 value)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_mat4: error setting mat4 value for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_mat4: error setting mat4 value with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_vec3(const std::string &unif_name, float x, float y, float z)
+bool Shader::set_vec3(Shader::Id id, const std::string &unif_name,
+                      float x, float y, float z)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_vec3: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_vec3: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
   
@@ -303,22 +286,21 @@ bool Shader::set_vec3(const std::string &unif_name, float x, float y, float z)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_vec3: error setting vec3 value with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
 
-bool Shader::set_vec3(const std::string& unif_name, glm::vec3 value)
+bool Shader::set_vec3(Shader::Id id, const std::string& unif_name, glm::vec3 value)
 {
-  GLuint program = this->get_id();
-  GLint location = glGetUniformLocation(program, unif_name.c_str());
+  GLint location = glGetUniformLocation(id, unif_name.c_str());
 
   if (location == -1)
   {
-    ERROR("Shader::set_vec3: uniform '{}' not found in shader '{}'",
-          unif_name, this->get_name());
+    ERROR("Shader::set_vec3: uniform '{}' not found in shader",
+          unif_name);
     return false;
   }
   
@@ -327,12 +309,30 @@ bool Shader::set_vec3(const std::string& unif_name, glm::vec3 value)
   GLenum err;
   if ((err = glGetError()) != GL_NO_ERROR)
   {
-    ERROR("Shader::set_vec3: error setting vec3 value for shader '{}' with name '{}': {}",
-          this->get_name(), unif_name, err);
+    ERROR("Shader::set_vec3: error setting vec3 value with name '{}': {}",
+          unif_name, err);
     return false;
   }
   return true;
 }
+
+
+bool Shader::set_bool(const std::string   &unif_name, bool  value)
+{ return Shader::set_bool(this->id, unif_name, value); }
+bool Shader::set_int(const std::string    &unif_name, int   value)
+{ return Shader::set_int(this->id, unif_name, value); }
+bool Shader::set_float(const std::string  &unif_name, float value)
+{ return Shader::set_float(this->id, unif_name, value); }
+bool Shader::set_float2(const std::string &unif_name, float v1, float v2)
+{ return Shader::set_float2(this->id, unif_name, v1, v2); }
+bool Shader::set_float3(const std::string &unif_name, float v1, float v2, float v3)
+{ return Shader::set_float3(this->id, unif_name, v1, v2, v3); }
+bool Shader::set_mat4(const std::string   &unif_name, glm::mat4 value)
+{ return Shader::set_mat4(this->id, unif_name, value); }
+bool Shader::set_vec3(const std::string   &unif_name, float x, float y, float z)
+{ return Shader::set_vec3(this->id, unif_name, x, y, z); }
+bool Shader::set_vec3(const std::string   &unif_name, glm::vec3 value)
+{ return Shader::set_vec3(this->id, unif_name, value); }
 
 bool Shader::check_compile_errors(Shader::Id shader)
 {

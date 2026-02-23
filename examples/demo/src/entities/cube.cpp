@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
 #include <demo/components/model.hpp>
 #include <demo/components/transform.hpp>
@@ -19,10 +19,10 @@ using namespace brenta;
 
 void init_cube_entity()
 {
-  auto shader = Shader::get_shader("cube_shader");
+  auto shader = AssetManager::get_shader("cube_shader");
   if (!shader)
   {
-    Shader::create("cube_shader", {
+    shader = AssetManager::new_shader("cube_shader", {
         { Shader::Type::Vertex,   phong_vs },
         { Shader::Type::Fragment, phong_fs } });
   }
@@ -33,5 +33,5 @@ void init_cube_entity()
 
   auto cube = World::new_entity()
     .add_component<TransformComponent>(m.get_transform())
-    .add_component<ModelComponent>(std::move(m), 32.0f, "cube_shader");
+    .add_component<ModelComponent>(std::move(m), 32.0f, shader);
 }

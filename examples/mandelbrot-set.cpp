@@ -53,7 +53,7 @@ int main()
   vbo.copy_data(vertices, sizeof(vertices), Buffer::DataUsage::StaticDraw);
   v.link_buffer(vbo, 0, 3, Gl::Type::Float, Gl::False, 3 * sizeof(float), 0);
 
-  auto shader = Shader::create("fractal", {
+  auto shader = Shader::create({
        { Shader::Type::Vertex, mandelbrot_vs },
        { Shader::Type::Fragment, mandelbrot_fs } });
   if (!shader)

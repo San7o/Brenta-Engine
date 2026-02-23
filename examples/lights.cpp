@@ -60,7 +60,7 @@ int main()
                              .fov(30.0f)
                              .build());
 
-  auto shader = Shader::create("default_shader", {
+  auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
   if (!shader)
@@ -68,9 +68,10 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
+  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
 
-  auto material = std::move(Material(shader.value())
-                            .set_float("material.shininess", 32.0f));
+  auto material = std::make_shared<Material>(shader_ptr);
+  material->set_float("material.shininess", 32.0f);
 
   auto model =
     std::make_shared<Model>(Model::Builder()
@@ -79,7 +80,7 @@ int main()
                                        .translate(glm::vec3(15.0f, 0.0f, 0.0f))
                                        .rotate_y(-90.0f)
                                        .scale(glm::vec3(1.0)))
-                            .material(std::move(material))
+                            .material(material)
                             .build());
 
   auto phong_dir =

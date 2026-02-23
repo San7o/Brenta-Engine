@@ -60,6 +60,7 @@ public:
   int     atlas_index;
 
   ParticleEmitter(Config conf);
+  ~ParticleEmitter() = default;
 
   void update(float delta_time);
   void render();
@@ -67,6 +68,8 @@ public:
 private:
   
   Camera *cam;
+  std::shared_ptr<Shader> shader_update;
+  std::shared_ptr<Shader> shader_render;
 
 };
 

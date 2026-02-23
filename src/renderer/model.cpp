@@ -13,7 +13,7 @@ Model::Model(Config &&conf)
 {
   this->path          = conf.model_path.string();
   this->transform     = conf.transform;
-  this->material      = std::move(conf.material);
+  this->material      = conf.material;
   
   if (conf.model_path != "")
     this->load(conf.texture_props);
@@ -49,7 +49,7 @@ Transform &Model::get_transform()
   return this->transform;
 }
 
-Material &Model::get_material()
+std::shared_ptr<Material> Model::get_material()
 {
   return this->material;
 }
@@ -201,9 +201,9 @@ Model::Builder &Model::Builder::transform(const Transform& transform)
   return *this;
 }
 
-Model::Builder &Model::Builder::material(Material &&material)
+Model::Builder &Model::Builder::material(std::shared_ptr<Material> material)
 {
-  this->conf.material = std::move(material);
+  this->conf.material = material;
   return *this;
 }
 
@@ -235,4 +235,9 @@ Model::Builder &Model::Builder::meshes(std::vector<Mesh> &&meshes)
 Model Model::Builder::build()
 {
   return Model(std::move(this->conf));
+}
+
+Model::Config Model::Builder::config()
+{
+  return std::move(this->conf);
 }

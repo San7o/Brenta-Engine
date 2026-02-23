@@ -30,10 +30,10 @@ class Material
 {
 public:
 
-  Shader shader;
+  std::shared_ptr<Shader> shader;
 
   Material() = default;
-  Material(const Shader &shader) : shader(shader) {}
+  Material(std::shared_ptr<Shader> shader) : shader(shader) {}
   Material(Material&& other) = default;
   Material &operator=(Material&& other) = default;
   
