@@ -45,15 +45,12 @@ int main()
     .with(Ecs::Builder())
     #endif
     .with(Gui::Builder())
-    .with(Text::Builder()
-          .font("examples/assets/fonts/arial.ttf")
-          .size(40))
     .build();
 
   auto engine = Engine::instance();
   engine.initialize();
   ///auto engine = Engine::managed();
-  
+
   auto camera = Camera::Builder()
     .projection_type(Camera::ProjectionType::Perspective)
     .position(Camera::Spherical::Builder()
@@ -93,6 +90,9 @@ int main()
 #endif
 
   {  // Local scope
+
+    auto font   = AssetManager::new_font("TextFont",
+                                         "examples/assets/fonts/arial.ttf", 40);
     
     auto emitter = ParticleEmitter::Builder()
       .with_camera(&camera)

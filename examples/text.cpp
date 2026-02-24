@@ -32,15 +32,14 @@ int main()
           .cull_face()
           .multisample()
           .depth_test())
-    .with(Text::Builder()
-          .font("examples/assets/fonts/arial.ttf")
-          .size(100))
     .build();
   auto engine = Engine::managed();
 
   //
   // Render loop
   //
+
+  auto font = std::make_shared<Font>("examples/assets/fonts/arial.ttf", 100);
   
   while (!Window::should_close())
   {
@@ -50,8 +49,8 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    Text::render_text("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
-                      Color::yellow());
+    Text::render("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
+                 Color::yellow(), font);
 
     Window::poll_events();
     Window::swap_buffers();

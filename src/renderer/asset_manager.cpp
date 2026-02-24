@@ -14,6 +14,7 @@ std::unordered_map<AssetManager::AssetId, std::weak_ptr<Texture>>  AssetManager:
 std::unordered_map<AssetManager::AssetId, std::weak_ptr<Material>> AssetManager::materials;
 std::unordered_map<AssetManager::AssetId, std::weak_ptr<Scene>>    AssetManager::scenes;
 std::unordered_map<AssetManager::AssetId, std::weak_ptr<Shader>>   AssetManager::shaders;
+std::unordered_map<AssetManager::AssetId, std::weak_ptr<Font>>     AssetManager::fonts;
 
 //
 // Member functions
@@ -81,6 +82,15 @@ AssetManager::new_scene(const AssetId& id,
   return ptr;
 }
 
+std::shared_ptr<Font>
+AssetManager::new_font(const AssetId& id,
+                       const std::filesystem::path &path, int size)
+{
+  auto ptr = std::make_shared<Font>(path, size);
+  AssetManager::fonts[id] = ptr;
+  return ptr;
+}
+
 std::shared_ptr<Texture>  AssetManager::get_texture(const AssetId& id)
 {
   if (!AssetManager::textures.contains(id)) return nullptr;
@@ -121,11 +131,21 @@ std::shared_ptr<Material> AssetManager::get_material(const AssetId& id)
   return nullptr;
 }
 
-std::shared_ptr<Scene>    AssetManager::get_scene(const AssetId& id)
+std::shared_ptr<Scene> AssetManager::get_scene(const AssetId& id)
 {
   if (!AssetManager::scenes.contains(id)) return nullptr;
 
   if (std::shared_ptr<Scene> ptr = AssetManager::scenes[id].lock())
+    return ptr;
+
+  return nullptr;
+}
+
+std::shared_ptr<Font> AssetManager::get_font(const AssetId& id)
+{
+  if (!AssetManager::fonts.contains(id)) return nullptr;
+
+  if (std::shared_ptr<Font> ptr = AssetManager::fonts[id].lock())
     return ptr;
 
   return nullptr;
