@@ -10,10 +10,18 @@ Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
 the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
 the engine's internals.
 
-![brenta-picture](./docs/brenta-picture.png)
+<div align=center> ![brenta-picture](./docs/brenta-picture.png) </div>
 
+<h2 align=center>  Features </h2>
 
-<h2 align=center>  Related Projects </h2>
+The engine is composed of many subsystems like `Window`, `Input`,
+`Audio`, `Engine`, `Logger`, `Ecs` as well as a custom opengl RAII
+objects and a scene-graph.
+
+To get a detailed look at the engine, please visit the
+[website](https://san7o.github.io/Brenta-Engine/) and code
+[documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
+**every class and function is highly documented.**
 
 The engine also features the following sub projects:
 
@@ -22,24 +30,6 @@ The engine also features the following sub projects:
 - [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
 - [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
-<h1 align=center>  Features </h1>
-
-The engine is composed of many subsystems:
-
-- `window`: manages the window.
-- `input`: manages the user input using callbacks.
-- `ecs`: manage the entity component system.
-- `text`: text rendering.
-- `gl`: setup OpenGL configuration.
-- `audio`: everything audio.
-- `logger`: log events and errors.
-- `engine`: manages the setup of the engine and the other subsystems.
-
-In addition to those, Brenta comes with many utility functions and
-classes, to get a detailed look at the engine, please visit the
-[website](https://san7o.github.io/Brenta-Engine/) and code
-[documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
-**every class and function is highly documented.**
 
 ### Modular APIs
 

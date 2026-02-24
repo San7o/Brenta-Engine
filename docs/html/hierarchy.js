@@ -22,12 +22,11 @@ var hierarchy =
       [ "brenta::Gui::Builder", "classbrenta_1_1Gui_1_1Builder.html", null ],
       [ "brenta::Input::Builder", "classbrenta_1_1Input_1_1Builder.html", null ],
       [ "brenta::Logger::Builder", "classbrenta_1_1Logger_1_1Builder.html", null ],
-      [ "brenta::Text::Builder", "classbrenta_1_1Text_1_1Builder.html", null ],
       [ "brenta::Window::Builder", "classbrenta_1_1Window_1_1Builder.html", null ]
     ] ],
     [ "brenta::Texture::Builder", "classbrenta_1_1Texture_1_1Builder.html", null ],
     [ "brenta::Camera", "classbrenta_1_1Camera.html", null ],
-    [ "brenta::Text::Character", "classbrenta_1_1Text_1_1Character.html", null ],
+    [ "brenta::Font::Character", "classbrenta_1_1Font_1_1Character.html", null ],
     [ "brenta::Color", "classbrenta_1_1Color.html", null ],
     [ "brenta::Renderer::Command", "classbrenta_1_1Renderer_1_1Command.html", null ],
     [ "brenta::Camera::Config", "structbrenta_1_1Camera_1_1Config.html", null ],
@@ -36,7 +35,6 @@ var hierarchy =
     [ "brenta::Mesh::Config", "classbrenta_1_1Mesh_1_1Config.html", null ],
     [ "brenta::Model::Config", "structbrenta_1_1Model_1_1Config.html", null ],
     [ "brenta::ParticleEmitter::Config", "structbrenta_1_1ParticleEmitter_1_1Config.html", null ],
-    [ "brenta::Text::Config", "classbrenta_1_1Text_1_1Config.html", null ],
     [ "brenta::Texture::Config", "structbrenta_1_1Texture_1_1Config.html", null ],
     [ "brenta::Window::Config", "structbrenta_1_1Window_1_1Config.html", null ],
     [ "brenta::DirLight", "classbrenta_1_1DirLight.html", [
@@ -45,6 +43,7 @@ var hierarchy =
     [ "std::enable_shared_from_this", null, [
       [ "brenta::Node", "classbrenta_1_1Node.html", null ]
     ] ],
+    [ "brenta::Font", "classbrenta_1_1Font.html", null ],
     [ "brenta::KeyMods", "classbrenta_1_1KeyMods.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],
@@ -69,9 +68,9 @@ var hierarchy =
       [ "brenta::Gui", "classbrenta_1_1Gui.html", null ],
       [ "brenta::Input", "classbrenta_1_1Input.html", null ],
       [ "brenta::Logger", "classbrenta_1_1Logger.html", null ],
-      [ "brenta::Text", "classbrenta_1_1Text.html", null ],
       [ "brenta::Window", "classbrenta_1_1Window.html", null ]
     ] ],
+    [ "brenta::Text", "classbrenta_1_1Text.html", null ],
     [ "brenta::Texture", "classbrenta_1_1Texture.html", null ],
     [ "brenta::Time", "classbrenta_1_1Time.html", null ],
     [ "brenta::Transform", "classbrenta_1_1Transform.html", null ],
