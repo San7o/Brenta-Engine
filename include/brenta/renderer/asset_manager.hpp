@@ -22,7 +22,7 @@ public:
   static std::shared_ptr<Texture>  new_texture(const AssetId& id,
                                                const Texture::Config &conf);
   static std::shared_ptr<Model>    new_model(const AssetId& id,
-                                             Model::Config &&conf);
+                                             Model::Builder &&builder);
   static std::shared_ptr<Shader>   new_shader(const AssetId& id,
                                               const std::vector<Shader::Object> &objects);
   static std::shared_ptr<Shader>   new_shader(const AssetId& id,

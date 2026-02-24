@@ -236,8 +236,3 @@ Model Model::Builder::build()
 {
   return Model(std::move(this->conf));
 }
-
-Model::Config Model::Builder::config()
-{
-  return std::move(this->conf);
-}

@@ -30,9 +30,9 @@ AssetManager::new_texture(const AssetId& id,
 
 std::shared_ptr<Model>
 AssetManager::new_model(const AssetId& id,
-                        Model::Config &&conf)
+                        Model::Builder &&builder)
 {
-  auto ptr = std::make_shared<Model>(std::move(conf));
+  auto ptr = std::make_shared<Model>(builder.build());
   AssetManager::models[id] = ptr;
   return ptr;
 }

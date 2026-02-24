@@ -62,15 +62,14 @@ int main()
 
   auto model =
     AssetManager::new_model("backpack",
-                            Model::Builder()
+                            std::move(Model::Builder()
                             .path("examples/assets/models/backpack/backpack.obj")
                             .transform(Transform()
                                        .translate(glm::vec3(5.0f, 0.0f, 0.0f))
                                        .rotate(glm::angleAxis(glm::radians(-90.0f),
                                                               glm::vec3(0.0f, 1.0f, 0.0f)))
                                        .scale(glm::vec3(1.0)))
-                            .material(material)
-                            .config());
+                                      .material(material)));
 
   auto scene = AssetManager::new_scene("main_scene", camera);
   auto root_node = scene->get_root();

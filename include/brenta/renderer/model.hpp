@@ -86,7 +86,6 @@ public:
   Builder &meshes(std::vector<Mesh> &&meshes);
 
   Model build();
-  Model::Config config();
 
 private:
 
