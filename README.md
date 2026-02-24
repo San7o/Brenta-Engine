@@ -10,8 +10,6 @@ Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
 the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
 the engine's internals.
 
-![brenta-picture](./docs/brenta-picture.png)
-
 <p align="center">
   <img src="https://san7o.github.io/Brenta-Engine/brenta-picture.png" />
 </p>
