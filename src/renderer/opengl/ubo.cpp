@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/opengl/ubo.hpp>
+#include <brenta/logger.hpp>
 
 using namespace brenta;
 

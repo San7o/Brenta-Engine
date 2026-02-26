@@ -84,7 +84,8 @@ void Input::remove_keyboard_callback(Key key)
 void Input::key_callback(Key key, KeyAction action,
                          [[maybe_unused]] KeyMods mods)
 {
-  DEBUG("{}: received key callback", Input::subsystem_name);
+  EVENT(Logger::Event::Callback, "{}: received key callback",
+        Input::subsystem_name);
 
   if (action == KeyAction::Press)
   {

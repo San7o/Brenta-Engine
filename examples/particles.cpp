@@ -10,7 +10,7 @@
 #include <brenta/time.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/renderer/camera.hpp>
-#include <brenta/gui/gui.hpp>
+#include <brenta/gui.hpp>
 
 #include <bitset>
 

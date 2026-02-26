@@ -5,10 +5,9 @@
 
 #pragma once
 
-#include <brenta/gui/font.hpp>
+#include <brenta/font.hpp>
 #include <brenta/renderer/color.hpp>
 
-#include <map>
 #include <string>
 
 namespace brenta

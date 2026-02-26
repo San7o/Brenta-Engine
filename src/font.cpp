@@ -4,9 +4,10 @@
 // Github:  @San7o
 
 #include <brenta/renderer/asset_manager.hpp>
+#include <brenta/logger.hpp>
 
-#include "../renderer/shaders/c/text_fs.c"
-#include "../renderer/shaders/c/text_vs.c"
+#include "renderer/shaders/c/text_fs.c"
+#include "renderer/shaders/c/text_vs.c"
 
 using namespace brenta;
 

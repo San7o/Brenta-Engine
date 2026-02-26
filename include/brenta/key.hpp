@@ -183,17 +183,17 @@ public:
   inline bool num_lock() const
   { return this->mods.test((std::size_t) Mod::NumLock); }
 
-  KeyMods &set_shift()
+  inline KeyMods &set_shift()
   { this->mods.set((std::size_t) Mod::Shift);    return *this; }
-  KeyMods &set_control()
+  inline KeyMods &set_control()
   { this->mods.set((std::size_t) Mod::Control);  return *this; }
-  KeyMods &set_alt()
+  inline KeyMods &set_alt()
   { this->mods.set((std::size_t) Mod::Alt);      return *this; }
-  KeyMods &set_super()
+  inline KeyMods &set_super()
   { this->mods.set((std::size_t) Mod::Super);    return *this; }
-  KeyMods &set_caps_lock()
+  inline KeyMods &set_caps_lock()
   { this->mods.set((std::size_t) Mod::CapsLock); return *this; }
-  KeyMods &set_num_lock()
+  inline KeyMods &set_num_lock()
   { this->mods.set((std::size_t) Mod::NumLock);  return *this; }
   
 private:

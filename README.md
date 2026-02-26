@@ -22,8 +22,7 @@ objects and a scene-graph.
 
 To get a detailed look at the engine, please visit the
 [website](https://san7o.github.io/Brenta-Engine/) and code
-[documentation](https://san7o.github.io/Brenta-Engine/annotated.html),
-**every class and function is highly documented.**
+[documentation](https://san7o.github.io/Brenta-Engine/annotated.html).
 
 The engine also features the following sub projects:
 
@@ -138,7 +137,8 @@ struct PhysicsComponent : Component {
     float density;
     glm::vec3 velocity;
     glm::vec3 acceleration;
-    PhysicsComponent(float mass) : mass(mass) {}
+    
+    PhysicsComponent() = default;
 };
 
 // Somewhere
@@ -151,11 +151,16 @@ Systems are functions that operate on entities with specific components. They
 are called at each game tick by the `World`:
 
 ```c++
-struct FpsSystem : System<None> {
-    void run(std::vector<entity_t> _) const override {
-        text::render_text("FPS: " + std::to_string(time::get_fps()), 25.0f, 25.0f,
-                         0.35f, glm::vec3(1.0f, 0.9f, 0.0f));
-    }
+struct FPSSystem : System<None>
+{
+  void run(std::vector<EntityId> _) const override
+  {
+    auto font = AssetManager::get_font("TextFont");
+    auto fps = std::to_string(Window::get_time().get_fps());
+    brenta::Text::render("FPS: " + fps,
+                         25.0f, 25.0f, 0.35f,
+                         Color::yellow(), font);
+  }
 };
 
 // To register the system

@@ -5,6 +5,7 @@
 
 #include <brenta/audio.hpp>
 #include <brenta/input.hpp>
+
 #include <demo/callbacks/play_guitar.hpp>
 
 using namespace brenta;

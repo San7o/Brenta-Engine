@@ -5,11 +5,19 @@
 
 #pragma once
 
-#include <demo/components/model.hpp>
-
-struct PlayerComponent : Component
+namespace brenta
 {
-  PlayerComponent()
-  {
-  }
+
+class FileSystemWatcher
+{
+public:
+
+  // TODO
+  
+private:
+
+  // TODO
+  
 };
+  
+} // namespace brenta

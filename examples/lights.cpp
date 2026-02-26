@@ -12,7 +12,7 @@
 #include <brenta/renderer/scene.hpp>
 #include <brenta/renderer/phong.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
-#include <brenta/gui/gui.hpp>
+#include <brenta/gui.hpp>
 
 #include <memory>
 #include <iostream>

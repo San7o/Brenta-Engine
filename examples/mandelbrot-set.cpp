@@ -5,8 +5,6 @@
 
 #include <brenta/brenta.hpp>
 
-#include <iostream>
-
 #include "assets/shaders/c/mandelbrot_vs.c"
 #include "assets/shaders/c/mandelbrot_fs.c"
 
@@ -54,7 +52,7 @@ int main()
   v.link_buffer(vbo, 0, 3, Gl::Type::Float, Gl::False, 3 * sizeof(float), 0);
 
   auto shader = Shader::create({
-       { Shader::Type::Vertex, mandelbrot_vs },
+       { Shader::Type::Vertex,   mandelbrot_vs },
        { Shader::Type::Fragment, mandelbrot_fs } });
   if (!shader)
   {

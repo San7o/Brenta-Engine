@@ -5,7 +5,6 @@
 
 #include <brenta/renderer/model.hpp>
 #include <brenta/logger.hpp>
-#include <iostream>
 
 using namespace brenta;
 

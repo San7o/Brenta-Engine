@@ -10,6 +10,7 @@
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/asset_manager.hpp>
 #include <brenta/window.hpp>
+#include <brenta/logger.hpp>
 
 #include <iostream>
 #include <time.h>
@@ -198,13 +199,15 @@ void ParticleEmitter::render()
   Gl::check_error();
 
   // Set uniforms
-  int window_width = Window::get_width();
+  int window_width  = Window::get_width();
   int window_height = Window::get_height();
+  auto projection =
+    this->cam->get_projection_matrix(window_width, window_height);
 
   shader_render->use();
-  shader_render->set_mat4("view",       this->cam->get_view_matrix());
-  shader_render->set_mat4("projection", this->cam->get_projection_matrix(window_width, window_height));
-  shader_render->set_mat4("model",      glm::mat4(1.0f));
+  shader_render->set_mat4("view",        this->cam->get_view_matrix());
+  shader_render->set_mat4("projection",  projection);
+  shader_render->set_mat4("model",       glm::mat4(1.0f));
   shader_render->set_int("atlas_width",  this->atlas_width);
   shader_render->set_int("atlas_height", this->atlas_height);
   shader_render->set_int("atlas_index",  this->atlas_index);

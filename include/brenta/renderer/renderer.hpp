@@ -6,7 +6,6 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/model.hpp>
 #include <brenta/renderer/material.hpp>
 #include <brenta/renderer/light.hpp>
 

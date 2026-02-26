@@ -7,6 +7,7 @@
 
 #include <brenta/window.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+
 #include <GLFW/glfw3.h>
 
 namespace brenta

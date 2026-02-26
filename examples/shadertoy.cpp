@@ -15,8 +15,6 @@
 
 #include <imgui_stdlib.h>
 
-#include <iostream>
-
 using namespace brenta;
 
 unsigned int update_shader(std::string fragment_source);

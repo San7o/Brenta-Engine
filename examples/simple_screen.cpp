@@ -10,8 +10,6 @@
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
 
-#include <iostream>
-
 using namespace brenta;
 
 int main()

@@ -3,14 +3,13 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
+
 #include <brenta/drivers/glfw.hpp>
+#include <glad/glad.h>
 
 #include <cstdio>
-
-#include <glad/glad.h>
 
 using namespace brenta;
 

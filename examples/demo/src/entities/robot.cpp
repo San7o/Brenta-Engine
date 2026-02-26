@@ -5,17 +5,18 @@
 
 #include <brenta/renderer/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
+
 #include <demo/components/model.hpp>
 #include <demo/components/transform.hpp>
 #include <demo/entities/robot.hpp>
 
 #include <viotecs/viotecs.hpp>
 
-using namespace brenta;
-using namespace viotecs;
-
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
 #include "../../../../src/renderer/shaders/c/phong_fs.c"
+
+using namespace brenta;
+using namespace viotecs;
 
 void init_robot_entity()
 {

@@ -6,10 +6,8 @@
 #include <brenta/engine.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
-#include <brenta/gui/text.hpp>
+#include <brenta/text.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-
-#include <iostream>
 
 using namespace brenta;
 

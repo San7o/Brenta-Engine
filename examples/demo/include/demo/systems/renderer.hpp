@@ -9,6 +9,7 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/window.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
+
 #include <demo/components/model.hpp>
 #include <demo/components/player.hpp>
 #include <demo/components/transform.hpp>

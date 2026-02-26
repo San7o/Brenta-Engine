@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
+
 #include <demo/components/model.hpp>
 #include <demo/components/player.hpp>
 #include <demo/components/transform.hpp>
@@ -12,11 +13,11 @@
 
 #include <viotecs/viotecs.hpp>
 
-using namespace viotecs;
-using namespace brenta;
-
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
 #include "../../../../src/renderer/shaders/c/phong_fs.c"
+
+using namespace viotecs;
+using namespace brenta;
 
 void init_player_entity()
 {

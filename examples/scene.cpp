@@ -13,7 +13,6 @@
 #include <brenta/renderer/scene.hpp>
 
 #include <memory>
-#include <iostream>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"

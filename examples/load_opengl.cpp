@@ -12,8 +12,6 @@
 #include <brenta/window.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
-#include <iostream>
-
 using namespace brenta;
 
 int main()

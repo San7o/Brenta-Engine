@@ -9,11 +9,9 @@
 #include <oak/oak.hpp>
 
 #include <fstream>
-#include <iostream>
 #include <expected>
 #include <string>
 #include <filesystem>
-#include <print>
 
 #define DEBUG(...)       OAK_DEBUG(__VA_ARGS__);
 #define INFO(...)        OAK_INFO(__VA_ARGS__);
@@ -31,6 +29,7 @@ public:
   enum Event
   {
     Lifetime,
+    Callback,
   };
 
   using Level = oak::Level;

@@ -3,10 +3,10 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#pragma once
+
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/light.hpp>
-
-#pragma once
 
 namespace brenta
 {

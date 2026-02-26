@@ -8,7 +8,6 @@
 #include <brenta/subsystem.hpp>
 
 #include <string>
-#include <unordered_map>
 #include <vector>
 #include <tuple>
 #include <filesystem>

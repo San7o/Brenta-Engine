@@ -5,9 +5,7 @@
 
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
-#include <brenta/gui/text.hpp>
-#include <brenta/renderer/opengl/texture.hpp>
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/text.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -23,15 +21,15 @@ void Text::render(const std::string &text,
   
   font->shader->use();
   font->shader->set_float3("textColor",
-                                 255.99f * color.r,
-                                 255.99f * color.g,
-                                 255.99f * color.b);
+                           255.99f * color.r,
+                           255.99f * color.g,
+                           255.99f * color.b);
 
   glm::mat4 projection =
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
                static_cast<float>(Window::get_height()));
-  glUniformMatrix4fv(glGetUniformLocation(font->shader->get_id(), "projection"), 1,
-                     GL_FALSE, glm::value_ptr(projection));
+
+  font->shader->set_mat4("projection", projection);
 
   glActiveTexture(GL_TEXTURE0);
   font->vao.bind();

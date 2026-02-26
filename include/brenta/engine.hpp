@@ -7,7 +7,7 @@
 
 #include <brenta/subsystem.hpp>
 
-#include <functional>
+#include <vector>
 
 namespace brenta
 {

@@ -4,9 +4,8 @@
 // Github:  @San7o
 
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/gui/gui.hpp>
+#include <brenta/gui.hpp>
 #include <brenta/window.hpp>
-#include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/logger.hpp>
 
 #ifdef BRENTA_USE_IMGUI

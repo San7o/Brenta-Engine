@@ -4,9 +4,8 @@
 // Github:  @San7o
 
 #include <brenta/renderer/asset_manager.hpp>
+
 #include <demo/components/directional_light.hpp>
-#include <demo/components/model.hpp>
-#include <demo/components/transform.hpp>
 #include <demo/entities/directional_light.hpp>
 
 #include <viotecs/viotecs.hpp>
@@ -14,8 +13,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#include <vector>
 
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
 #include "../../../../src/renderer/shaders/c/phong_fs.c"

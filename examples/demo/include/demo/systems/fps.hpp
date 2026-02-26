@@ -6,8 +6,9 @@
 #pragma once
 
 #include <brenta/renderer/asset_manager.hpp>
-#include <brenta/gui/text.hpp>
+#include <brenta/text.hpp>
 #include <brenta/window.hpp>
+
 #include <viotecs/viotecs.hpp>
 
 #include <vector>

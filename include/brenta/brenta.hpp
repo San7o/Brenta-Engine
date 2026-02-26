@@ -38,5 +38,6 @@
 #include <brenta/engine.hpp>
 
 // Gui
-#include <brenta/gui/gui.hpp>
-#include <brenta/gui/text.hpp>
+#include <brenta/gui.hpp>
+#include <brenta/font.hpp>
+#include <brenta/text.hpp>

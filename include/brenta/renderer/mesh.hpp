@@ -6,7 +6,6 @@
 #pragma once
 
 #include <brenta/renderer/opengl/buffer.hpp>
-#include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 
@@ -14,7 +13,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <string>
 #include <vector>
 #include <memory>
 
@@ -22,11 +20,7 @@ namespace brenta
 {
 
 /**
- * @brief The Mesh class represents a 3D model
- *
- * A mesh is a collection of vertices, indices and textures that
- * represent a 3D model. The mesh can be drawn using the draw()
- * method.
+ * @brief The Mesh class represents a collection of 3D vertices
  */
 class Mesh
 {

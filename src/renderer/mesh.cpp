@@ -6,7 +6,6 @@
 #include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/logger.hpp>
-#include <iostream>
 
 using namespace brenta;
 

@@ -9,7 +9,7 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/material.hpp>
 #include <brenta/renderer/scene.hpp>
-#include <brenta/gui/font.hpp>
+#include <brenta/font.hpp>
 
 namespace brenta
 {

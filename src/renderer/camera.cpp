@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/logger.hpp>
+
 #include <cmath>
 
 using namespace brenta;

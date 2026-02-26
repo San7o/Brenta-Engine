@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/logger.hpp>
 
 #include <sstream>
 

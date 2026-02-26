@@ -9,6 +9,8 @@
 
 #include <miniaudio/miniaudio.h>
 
+#include <unordered_map>
+
 namespace brenta
 {
 

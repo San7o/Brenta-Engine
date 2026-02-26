@@ -6,6 +6,7 @@
 #pragma once
 
 #include <brenta/renderer/opengl/buffer.hpp>
+
 #include <cassert>
 
 namespace brenta
