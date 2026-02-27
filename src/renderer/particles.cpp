@@ -65,16 +65,22 @@ ParticleEmitter::ParticleEmitter(Config conf)
   // Create shaders
   const GLchar *varyings[] = {"outPosition", "outVelocity", "outTTL"};
   this->shader_update =
-    AssetManager::new_shader("particle_update_shader",
-                             varyings,
-                             sizeof(varyings) / sizeof(varyings[0]),
-                             {{ Shader::Type::Vertex, particle_update_vs }});
+    AssetManager::new_asset<Shader>("particle_update_shader",
+                                    Shader::Builder()
+                                    .feedback(varyings,
+                                              sizeof(varyings) / sizeof(varyings[0]))
+                                    .object({
+                                        Shader::Type::Vertex,
+                                        particle_update_vs
+                                      }));
   if (!this->shader_update) return;
   
-  this->shader_render = AssetManager::new_shader("particole_render_shader", {
-        { Shader::Type::Vertex,   particle_render_vs },
-        { Shader::Type::Geometry, particle_render_gs },
-        { Shader::Type::Fragment, particle_render_fs }});
+  this->shader_render = AssetManager::new_asset<Shader>("particole_render_shader",
+                                                        Shader::Builder()
+                                                        .objects({
+                                                            { Shader::Type::Vertex,   particle_render_vs },
+                                                            { Shader::Type::Geometry, particle_render_gs },
+                                                            { Shader::Type::Fragment, particle_render_fs }}));
   if (!this->shader_render) return;
 
   // This is needed to render points

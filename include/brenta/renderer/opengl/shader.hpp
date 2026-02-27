@@ -52,6 +52,7 @@ public:
   };
 
   class Object;
+  class Builder;
   
   // Static API
   
@@ -164,5 +165,23 @@ private:
   static std::optional<std::string> read_file(const std::filesystem::path &path);
 
 };
+
+class Shader::Builder
+{
+public:
+
+  Builder& object(const Shader::Object &obj);
+  Builder& objects(const tenno::vector<Shader::Object> &objs);
+  Builder& feedback(const GLchar **feedback_varyings, int num_varyings);
+
+  std::optional<Shader> build();
   
+private:
+
+  int num_varyings = 0;
+  const GLchar **feedback_varyings;
+  tenno::vector<Object> objs;
+  
+};
+
 } // namespace brenta

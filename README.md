@@ -17,7 +17,7 @@ the engine's internals.
 <h2 align=center>  Features </h2>
 
 The engine is composed of many subsystems like `Window`, `Input`,
-`Audio`, `Engine`, `Logger`, `Ecs` as well as a custom opengl RAII
+`Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
 objects and a scene-graph.
 
 To get a detailed look at the engine, please visit the

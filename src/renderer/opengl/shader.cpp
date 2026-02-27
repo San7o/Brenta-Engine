@@ -416,3 +416,34 @@ Shader::Object::read_file(const std::filesystem::path &path)
 
   return code;
 }
+
+Shader::Builder &Shader::Builder::object(const Shader::Object &obj)
+{
+  this->objs.push_back(obj);
+  return *this;
+}
+
+Shader::Builder &Shader::Builder::objects(const tenno::vector<Shader::Object> &objs)
+{
+  for (auto& obj : objs)
+    this->objs.push_back(obj);
+  return *this;
+}
+
+Shader::Builder &Shader::Builder::feedback(const GLchar **feedback_varyings,
+                                           int num_varyings)
+{
+  this->feedback_varyings = feedback_varyings;
+  this->num_varyings = num_varyings;
+  return *this;
+}
+
+std::optional<Shader> Shader::Builder::build()
+{
+  if (num_varyings == 0)
+    return Shader::create(this->objs);
+  else
+    return Shader::create(this->feedback_varyings,
+                          this->num_varyings,
+                          this->objs);
+}

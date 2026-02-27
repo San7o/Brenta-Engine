@@ -91,8 +91,11 @@ int main()
 
   {  // Local scope
 
-    auto font   = AssetManager::new_font("TextFont",
-                                         "examples/assets/fonts/arial.ttf", 40);
+    auto font =
+      AssetManager::new_asset<Font>("TextFont",
+                                    Font::Builder()
+                                    .path("examples/assets/fonts/arial.ttf")
+                                    .size(40));
     
     auto emitter = ParticleEmitter::Builder()
       .with_camera(&camera)

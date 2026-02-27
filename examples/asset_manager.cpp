@@ -50,29 +50,37 @@ int main()
                                .fov(45.0f)
                                .build());
 
-  auto shader = AssetManager::new_shader("default_shader", {
-      { Shader::Type::Vertex,   phong_vs },
-      { Shader::Type::Fragment, phong_fs } });
+  auto shader =
+    AssetManager::new_asset<Shader>("default_shader",
+                                    Shader::Builder()
+                                    .objects({
+                                        { Shader::Type::Vertex,   phong_vs },
+                                        { Shader::Type::Fragment, phong_fs } }));
   if (!shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
   
-  auto material = AssetManager::new_material("backpack_material", shader);
+  auto material =
+    AssetManager::new_asset<Material>("backpack_material",
+                                         Material::Builder()
+                                         .shader(shader));
 
   auto model =
-    AssetManager::new_model("backpack",
-                            tenno::move(Model::Builder()
-                            .path("examples/assets/models/backpack/backpack.obj")
-                            .transform(Transform()
-                                       .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-                                       .rotate(glm::angleAxis(glm::radians(-90.0f),
-                                                              glm::vec3(0.0f, 1.0f, 0.0f)))
-                                       .scale(glm::vec3(1.0)))
-                                      .material(material)));
+    AssetManager::new_asset<Model>("backpack",
+                                   Model::Builder()
+                                   .path("examples/assets/models/backpack/backpack.obj")
+                                   .transform(Transform()
+                                              .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+                                              .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                                                     glm::vec3(0.0f, 1.0f, 0.0f)))
+                                              .scale(glm::vec3(1.0)))
+                                   .material(material));
 
-  auto scene      = AssetManager::new_scene("main_scene", camera);
+  auto scene = AssetManager::new_asset<Scene>("main_scene",
+                                              Scene::Builder()
+                                              .camera(camera));
   auto root_node  = scene->get_root();
   auto model_node = Scene::create_child(root_node);
   model_node->add_model(model);

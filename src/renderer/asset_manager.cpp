@@ -21,79 +21,73 @@ std::unordered_map<AssetManager::AssetId, tenno::weak_ptr<Font>>     AssetManage
 // Member functions
 //
 
-tenno::shared_ptr<Texture>
-AssetManager::new_texture(const AssetId& id,
-                          const Texture::Config &conf)
-{
-  auto ptr = tenno::make_shared<Texture>(conf);
-  AssetManager::textures[id] = ptr;
-  return ptr;
-}
-
+template<>
 tenno::shared_ptr<Model>
-AssetManager::new_model(const AssetId& id,
-                        Model::Builder &&builder)
+AssetManager::new_asset<Model>(const AssetId& id,
+                               Model::Builder &builder)
 {
   auto ptr = tenno::make_shared<Model>(builder.build());
   AssetManager::models[id] = ptr;
   return ptr;
 }
 
-tenno::shared_ptr<Shader>
-AssetManager::new_shader(const AssetId& id,
-                         const tenno::vector<Shader::Object> &objects)
+template<>
+tenno::shared_ptr<Texture>
+AssetManager::new_asset<Texture>(const AssetId& id,
+                                 Texture::Builder &builder)
 {
-  auto shader = Shader::create(objects);
-  if (!shader) return nullptr;
-
-  auto ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
-
-  AssetManager::shaders[id] = ptr;
+  auto ptr = tenno::make_shared<Texture>(builder.build());
+  AssetManager::textures[id] = ptr;
   return ptr;
 }
 
-tenno::shared_ptr<Shader>
-AssetManager::new_shader(const AssetId& id,
-                         const GLchar **feedback_varyings,
-                         int num_varyings,
-                         const tenno::vector<Shader::Object> &objects)
-{
-  auto shader = Shader::create(feedback_varyings, num_varyings, objects);
-  if (!shader) return nullptr;
-
-  auto ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
-  AssetManager::shaders[id] = ptr;
-  return ptr;
-}
-
+template<>
 tenno::shared_ptr<Material>
-AssetManager::new_material(const AssetId& id,
-                           tenno::shared_ptr<Shader> shader)
+AssetManager::new_asset<Material>(const AssetId& id,
+                                  Material::Builder &builder)
 {
-  auto ptr = tenno::make_shared<Material>(shader);
+  auto ptr = tenno::make_shared<Material>(builder.build());
   AssetManager::materials[id] = ptr;
   return ptr;
 }
 
-tenno::shared_ptr<Scene>
-AssetManager::new_scene(const AssetId& id,
-                        tenno::shared_ptr<Camera> camera)
-{
-  auto ptr = tenno::make_shared<Scene>(camera);
-  AssetManager::scenes[id] = ptr;
-  return ptr;
-}
-
+template<>
 tenno::shared_ptr<Font>
-AssetManager::new_font(const AssetId& id,
-                       const std::filesystem::path &path, int size)
+AssetManager::new_asset<Font>(const AssetId& id,
+                              Font::Builder &builder)
 {
-  auto ptr = tenno::make_shared<Font>(path, size);
+  auto ptr = tenno::make_shared<Font>(builder.build());
   AssetManager::fonts[id] = ptr;
   return ptr;
 }
 
-tenno::shared_ptr<Texture>  AssetManager::get_texture(const AssetId& id)
+template<>
+tenno::shared_ptr<Scene>
+AssetManager::new_asset<Scene>(const AssetId& id,
+                               Scene::Builder &builder)
+{
+  auto ptr = tenno::make_shared<Scene>(builder.build());
+  AssetManager::scenes[id] = ptr;
+  return ptr;
+}
+
+template<>
+tenno::shared_ptr<Shader>
+AssetManager::new_asset<Shader>(const AssetId& id,
+                                Shader::Builder &builder)
+{
+  auto maybe_shader = builder.build();
+  if (!maybe_shader) return nullptr;
+
+  auto shader =
+    tenno::make_shared<Shader>(tenno::move(maybe_shader.value()));
+
+  AssetManager::shaders[id] = shader;
+  return shader;
+}
+
+template<>
+tenno::shared_ptr<Texture>  AssetManager::get<Texture>(const AssetId& id)
 {
   if (!AssetManager::textures.contains(id)) return nullptr;
 
@@ -103,7 +97,8 @@ tenno::shared_ptr<Texture>  AssetManager::get_texture(const AssetId& id)
   return nullptr;
 }
 
-tenno::shared_ptr<Model>    AssetManager::get_model(const AssetId& id)
+template<>
+tenno::shared_ptr<Model> AssetManager::get<Model>(const AssetId& id)
 {
   if (!AssetManager::models.contains(id)) return nullptr;
 
@@ -112,8 +107,9 @@ tenno::shared_ptr<Model>    AssetManager::get_model(const AssetId& id)
 
   return nullptr;
 }
-  
-tenno::shared_ptr<Shader>   AssetManager::get_shader(const AssetId& id)
+
+template<>
+tenno::shared_ptr<Shader> AssetManager::get<Shader>(const AssetId& id)
 {
   if (!AssetManager::shaders.contains(id)) return nullptr;
 
@@ -123,7 +119,8 @@ tenno::shared_ptr<Shader>   AssetManager::get_shader(const AssetId& id)
   return nullptr;
 }
 
-tenno::shared_ptr<Material> AssetManager::get_material(const AssetId& id)
+template<>
+tenno::shared_ptr<Material> AssetManager::get<Material>(const AssetId& id)
 {
   if (!AssetManager::materials.contains(id)) return nullptr;
 
@@ -133,7 +130,8 @@ tenno::shared_ptr<Material> AssetManager::get_material(const AssetId& id)
   return nullptr;
 }
 
-tenno::shared_ptr<Scene> AssetManager::get_scene(const AssetId& id)
+template<>
+tenno::shared_ptr<Scene> AssetManager::get<Scene>(const AssetId& id)
 {
   if (!AssetManager::scenes.contains(id)) return nullptr;
 
@@ -143,7 +141,8 @@ tenno::shared_ptr<Scene> AssetManager::get_scene(const AssetId& id)
   return nullptr;
 }
 
-tenno::shared_ptr<Font> AssetManager::get_font(const AssetId& id)
+template<>
+tenno::shared_ptr<Font> AssetManager::get<Font>(const AssetId& id)
 {
   if (!AssetManager::fonts.contains(id)) return nullptr;
 

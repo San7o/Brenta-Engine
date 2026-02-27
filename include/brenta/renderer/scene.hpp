@@ -17,6 +17,8 @@ class Scene
 {
 public:
 
+  class Builder;
+  
   Scene(tenno::shared_ptr<Camera> camera)
     : active_camera(camera)
   {
@@ -35,6 +37,20 @@ private:
 
   tenno::shared_ptr<Node>   root;
   tenno::shared_ptr<Camera> active_camera;
+  
+};
+
+class Scene::Builder
+{
+public:
+  
+  Builder &camera(tenno::shared_ptr<Camera> camera);
+
+  Scene build();
+
+private:
+
+  tenno::shared_ptr<Camera> _camera;
   
 };
   

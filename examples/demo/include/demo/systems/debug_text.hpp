@@ -25,7 +25,7 @@ struct DebugTextSystem : System<None>
     const float     offset           = 20.0f;
     brenta::Camera *cam              = World::get_resource<CameraResource>()->cam;
     auto            camera_world_pos = cam->get_transform().get_pos();
-    auto            font             = AssetManager::get_font("TextFont");
+    auto            font             = AssetManager::get<Font>("TextFont");
 
     Text::render("FPS: " + std::to_string(Window::get_time().get_fps()), 25.0f,
                  Window::get_height() - 30.0f, 0.35f, color, font);

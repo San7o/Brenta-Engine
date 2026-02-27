@@ -10,7 +10,7 @@
 
 using namespace brenta;
 
-Model::Model(Config &&conf)
+Model::Model(Config &conf)
 {
   this->path          = conf.model_path.string();
   this->transform     = conf.transform;
@@ -21,9 +21,9 @@ Model::Model(Config &&conf)
 
   for (size_t i = 0; i < conf.meshes.size(); ++i)
   {
-    this->meshes.push_back(tenno::move(conf.meshes[i]));
+    this->meshes.push_back(tenno::move(conf.meshes[i].build()));
 
-    for (auto& t : conf.meshes[i].textures)
+    for (auto& t : this->meshes.back().value()->textures)
       this->textures_loaded.push_back(t);
   }
   
@@ -225,20 +225,33 @@ Model::Builder &Model::Builder::texture_props(const Texture::Properties &props)
   return *this;
 }
 
-Model::Builder &Model::Builder::mesh(Mesh &&mesh)
+Model::Builder &Model::Builder::mesh(const Mesh::Builder &mesh)
+{
+  this->conf.meshes.push_back(mesh);
+  return *this;
+}
+
+Model::Builder &Model::Builder::mesh(Mesh::Builder &&mesh)
 {
   this->conf.meshes.push_back(tenno::move(mesh));
   return *this;
 }
 
-Model::Builder &Model::Builder::meshes(tenno::vector<Mesh> &&meshes)
+Model::Builder &Model::Builder::meshes(const tenno::vector<Mesh::Builder> &meshes)
 {
   for (size_t i = 0; i < meshes.size(); ++i)
     this->conf.meshes.push_back(tenno::move(meshes[i]));
   return *this;
 }
 
+Model::Builder &Model::Builder::meshes(tenno::vector<Mesh::Builder> &&meshes)
+{
+  for (size_t i = 0; i < meshes.size(); ++i)
+    this->conf.meshes.push_back(meshes[i]);
+  return *this;
+}
+
 Model Model::Builder::build()
 {
-  return Model(tenno::move(this->conf));
+  return Model(this->conf);
 }

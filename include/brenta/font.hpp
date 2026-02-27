@@ -34,6 +34,8 @@ public:
     unsigned int advance;    // Offset to advance to next glyph
   };
 
+  class Builder;
+  
   tenno::shared_ptr<Shader>   shader;
   Vao                         vao;
   Buffer                      vbo;
@@ -41,8 +43,25 @@ public:
   
   Font() = default;
   Font(const std::filesystem::path &path, int size);
+  Font(Font&&) = default;
   ~Font();
 
 };
+
+class Font::Builder
+{
+public:
+
+  Builder& path(const std::filesystem::path& path);
+  Builder& size(int size);
+
+  Font build();
+  
+private:
+
+  std::filesystem::path _path;
+  int                   _size;
+  
+};  
 
 } // namespave brenta

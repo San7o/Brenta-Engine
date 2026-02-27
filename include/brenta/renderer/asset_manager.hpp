@@ -19,32 +19,18 @@ class AssetManager
 public:
 
   using AssetId = std::string;
-  
-  static tenno::shared_ptr<Texture>  new_texture(const AssetId& id,
-                                                 const Texture::Config &conf);
-  static tenno::shared_ptr<Model>    new_model(const AssetId& id,
-                                               Model::Builder &&builder);
-  static tenno::shared_ptr<Shader>   new_shader(const AssetId& id,
-                                                const tenno::vector<Shader::Object> &objects);
-  static tenno::shared_ptr<Shader>   new_shader(const AssetId& id,
-                                                const GLchar **feedback_varyings,
-                                                int num_varyings,
-                                                const tenno::vector<Shader::Object> &objects);
-  static tenno::shared_ptr<Material> new_material(const AssetId& id,
-                                                tenno::shared_ptr<Shader> shader);
-  static tenno::shared_ptr<Scene>    new_scene(const AssetId& id,
-                                               tenno::shared_ptr<Camera> camera);
-  static tenno::shared_ptr<Font>     new_font(const AssetId& id,
-                                              const std::filesystem::path &path,
-                                              int size);
-  
-  static tenno::shared_ptr<Texture>  get_texture(const AssetId& id);
-  static tenno::shared_ptr<Model>    get_model(const AssetId& id);
-  static tenno::shared_ptr<Shader>   get_shader(const AssetId& id);
-  static tenno::shared_ptr<Material> get_material(const AssetId& id);
-  static tenno::shared_ptr<Scene>    get_scene(const AssetId& id);
-  static tenno::shared_ptr<Font>     get_font(const AssetId& id);
 
+  template<typename T>
+  static tenno::shared_ptr<T> new_asset(const AssetId& id,
+                                        typename T::Builder& builder);
+  
+  template<typename T>
+  static tenno::shared_ptr<T> get(const AssetId& id);
+  
+  template<typename T>
+  static tenno::shared_ptr<T> reload(const AssetId& id);
+  
+  // Wipe out everything
   static void clear();
   
 private:

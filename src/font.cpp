@@ -24,12 +24,14 @@ Font::Font(const std::filesystem::path &path, int size)
     return;
   }
 
-  auto text_shader = AssetManager::get_shader("TextShader");
+  auto text_shader = AssetManager::get<Shader>("TextShader");
   if (!text_shader)
   {
-    text_shader = AssetManager::new_shader("TextShader", {
-        { Shader::Type::Vertex,   text_vs },
-        { Shader::Type::Fragment, text_fs } });
+    text_shader =
+      AssetManager::new_asset<Shader>("TextShader",
+                                      Shader::Builder()
+                                      .object({ Shader::Type::Vertex,   text_vs })
+                                      .object({ Shader::Type::Fragment, text_fs }));
   }
   if (!text_shader) return;
   
@@ -112,4 +114,21 @@ Font::~Font()
   this->vbo.destroy();
 
   EVENT(Logger::Event::Lifetime, "Font: destoyed");
+}
+
+Font::Builder& Font::Builder::path(const std::filesystem::path& path)
+{
+  this->_path = path;
+  return *this;
+}
+
+Font::Builder& Font::Builder::size(int size)
+{
+  this->_size = size;
+  return *this;
+}
+
+Font Font::Builder::build()
+{
+  return Font(this->_path, this->_size);
 }
