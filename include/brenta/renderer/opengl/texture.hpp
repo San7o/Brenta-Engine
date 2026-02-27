@@ -185,7 +185,7 @@ public:
 
 private:
   
-  Texture::Id             id;
+  Texture::Id             id = 0;
   Texture::Type           type;
   Texture::Target         target;
   std::filesystem::path   path;

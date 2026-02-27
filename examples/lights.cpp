@@ -14,7 +14,9 @@
 #include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/gui.hpp>
 
-#include <memory>
+#include <tenno/memory.hpp>
+#include <tenno/utility.hpp>
+
 #include <iostream>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
@@ -23,12 +25,12 @@
 using namespace brenta;
 
 #define ROTATION_SPEED 2.0f
-void rotate_model_counterclockwise(std::shared_ptr<Model> model);
-void rotate_model_clockwise(std::shared_ptr<Model> model);
+void rotate_model_counterclockwise(tenno::shared_ptr<Model> model);
+void rotate_model_clockwise(tenno::shared_ptr<Model> model);
 
 void setup_gui(FrameBuffer &fb, ImFont *font,
-               std::shared_ptr<PhongDirLight> dir_light,
-               std::shared_ptr<PhongPointLight> point_light);
+               tenno::shared_ptr<PhongDirLight> dir_light,
+               tenno::shared_ptr<PhongPointLight> point_light);
 
 int main()
 {
@@ -37,6 +39,7 @@ int main()
 
   Engine::Builder()
     .with(Logger::Builder()
+          .event(Logger::Event::Lifetime)
           .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("load model test")
@@ -52,13 +55,13 @@ int main()
   auto engine = Engine::managed();
   
   auto camera =
-    std::make_shared<Camera>(Camera::Builder()
-                             .projection_type(Camera::ProjectionType::Perspective)
-                             .position(Camera::Aircraft::Builder()
-                                       .pos({0.0f, 0.0f, 0.0f})
-                                       .build())
-                             .fov(30.0f)
-                             .build());
+    tenno::make_shared<Camera>(Camera::Builder()
+                               .projection_type(Camera::ProjectionType::Perspective)
+                               .position(Camera::Aircraft::Builder()
+                                         .pos({0.0f, 0.0f, 0.0f})
+                                         .build())
+                               .fov(30.0f)
+                               .build());
 
   auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
@@ -68,27 +71,27 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
+  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
 
-  auto material = std::make_shared<Material>(shader_ptr);
+  auto material = tenno::make_shared<Material>(shader_ptr);
   material->set_float("material.shininess", 32.0f);
 
   auto model =
-    std::make_shared<Model>(Model::Builder()
-                            .path("examples/assets/models/backpack/backpack.obj")
-                            .transform(Transform()
-                                       .translate(glm::vec3(15.0f, 0.0f, 0.0f))
-                                       .rotate_y(-90.0f)
-                                       .scale(glm::vec3(1.0)))
-                            .material(material)
-                            .build());
+    tenno::make_shared<Model>(Model::Builder()
+                              .path("examples/assets/models/backpack/backpack.obj")
+                              .transform(Transform()
+                                         .translate(glm::vec3(15.0f, 0.0f, 0.0f))
+                                         .rotate_y(-90.0f)
+                                         .scale(glm::vec3(1.0)))
+                              .material(material)
+                              .build());
 
   auto phong_dir =
-    std::make_shared<PhongDirLight>(PhongDirLight()
-                                    .set_strength(0.5f));
+    tenno::make_shared<PhongDirLight>(PhongDirLight()
+                                      .set_strength(0.5f));
   auto phong_point =
-    std::make_shared<PhongPointLight>(PhongPointLight()
-                                      .set_strength(1.8f));
+    tenno::make_shared<PhongPointLight>(PhongPointLight()
+                                        .set_strength(1.8f));
   
   auto scene = Scene(camera);
   auto root_node = scene.get_root();
@@ -102,7 +105,6 @@ int main()
                                                30.0f);
   FrameBuffer fb(Window::get_width(), Window::get_height());  
 
-  
   while (!Window::should_close())
   { 
     if (Window::is_key_pressed(Key::Escape))
@@ -132,21 +134,21 @@ int main()
   return 0;
 }
 
-void rotate_model_counterclockwise(std::shared_ptr<Model> model)
+void rotate_model_counterclockwise(tenno::shared_ptr<Model> model)
 {
   auto& transform = model->get_transform();
   transform.rotate_y(ROTATION_SPEED);
 }
 
-void rotate_model_clockwise(std::shared_ptr<Model> model)
+void rotate_model_clockwise(tenno::shared_ptr<Model> model)
 {
   auto& transform = model->get_transform();
   transform.rotate_y(-ROTATION_SPEED);
 }
 
 void setup_gui(FrameBuffer &fb, ImFont *font,
-               std::shared_ptr<PhongDirLight> dir_light,
-               std::shared_ptr<PhongPointLight> point_light)
+               tenno::shared_ptr<PhongDirLight> dir_light,
+               tenno::shared_ptr<PhongPointLight> point_light)
 {
   Gui::new_frame(&fb, "Lighting");
   ImGui::PushFont(font);

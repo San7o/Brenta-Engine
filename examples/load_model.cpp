@@ -70,7 +70,7 @@ int main()
   while (!Window::should_close())
   { 
     // Input
-    if (Window::is_key_pressed(Key::Space))
+    if (Window::is_key_pressed(Key::Escape))
       Window::close();
 
     Gl::set_color(Color::grey());

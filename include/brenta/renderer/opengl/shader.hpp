@@ -10,8 +10,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <tenno/vector.hpp>
+
 #include <optional>
-#include <vector>
 #include <string>
 #include <filesystem>
 
@@ -60,7 +61,7 @@ public:
   //        { Shader::Type::Vertex, std::filesystem::path("shaders/shader.vs") },
   //        { Shader::Type::Fragment, std::filesystem::path("shaders/shader.fs") }});
   static std::optional<Shader>
-  create(const std::vector<Shader::Object> &objects);
+  create(const tenno::vector<Shader::Object> &objects);
 
   // Set [feedback_varyings] to an array of CHchar* that specifies
   // the output attributes we want to capture into a buffer
@@ -82,7 +83,7 @@ public:
   //      glEndTransformFeedback();         // Exit transform feedback mode
   static std::optional<Shader>
   create(const GLchar **feedback_varyings, int num_varyings,
-         const std::vector<Shader::Object> &objects);
+         const tenno::vector<Shader::Object> &objects);
 
   // Set uniforms
   static bool set_bool(Shader::Id id, const std::string   &unif_name,
@@ -110,7 +111,7 @@ public:
   Shader(Shader&& other)
   { this->id = other.id; other.id = 0; }
   ~Shader();
-  
+
   Shader::Id        get_id() const;
   
   // Remember to call use() before setting uniforms and using this
@@ -129,16 +130,16 @@ public:
 
 private:
 
-  Shader::Id   id;
+  Shader::Id   id = 0;
   
   static bool
-  compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled);
-  static bool compile_shaders(std::vector<Shader::Id> &compiled,
-                              const std::vector<Shader::Object> &objects);
+  compile_shaders([[maybe_unused]] tenno::vector<Shader::Id> &compiled);
+  static bool compile_shaders(tenno::vector<Shader::Id> &compiled,
+                              const tenno::vector<Shader::Object> &objects);
   static std::optional<Shader::Id>
-  link_program(std::vector<Shader::Id>& compiled_shaders,
+  link_program(tenno::vector<Shader::Id>& compiled_shaders,
                const GLchar **feedback_varyings, int num_varyings);
-  static void clean_compilation(std::vector<Shader::Id>& compiled_shader);
+  static void clean_compilation(tenno::vector<Shader::Id>& compiled_shader);
   static bool check_compile_errors(Shader::Id shader);  
   static bool check_link_errors(Shader::Id shader);
 

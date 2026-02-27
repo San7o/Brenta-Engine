@@ -6,6 +6,8 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/logger.hpp>
 
+#include <tenno/std_interop.hpp>
+
 using namespace brenta;
 
 Model::Model(Config &&conf)
@@ -19,18 +21,23 @@ Model::Model(Config &&conf)
 
   for (size_t i = 0; i < conf.meshes.size(); ++i)
   {
-    this->meshes.push_back(std::move(conf.meshes[i]));
+    this->meshes.push_back(tenno::move(conf.meshes[i]));
 
     for (auto& t : conf.meshes[i].textures)
       this->textures_loaded.push_back(t);
   }
   
-  EVENT(Logger::Event::Lifetime, "model: initialized");
+  EVENT(Logger::Event::Lifetime, "model: initialized {}",
+        this->path.string());
   return;
 }
 
 Model::~Model()
 {
+  if (this->path.string() == "") return;
+  
+  EVENT(Logger::Event::Lifetime, "model: destroyed {}",
+        this->path.string());
   return;
 }
 
@@ -48,7 +55,7 @@ Transform &Model::get_transform()
   return this->transform;
 }
 
-std::shared_ptr<Material> Model::get_material()
+tenno::shared_ptr<Material> Model::get_material()
 {
   return this->material;
 }
@@ -78,18 +85,18 @@ void Model::load(const Texture::Properties &props)
   // Loop over shapes (equivalent to Assimp meshes/nodes)
   for (size_t s = 0; s < shapes.size(); s++)
   {
-    process_shape(attrib, shapes[s], materials, props);
+    process_shape(attrib, shapes[s], tenno::from_std(materials), props);
   }
 }
 
 void Model::process_shape(const tinyobj::attrib_t& attrib, 
                           const tinyobj::shape_t& shape,
-                          const std::vector<tinyobj::material_t>& materials,
+                          const tenno::vector<tinyobj::material_t>& materials,
                           const Texture::Properties& props)
 {
   // Map material_id -> Mesh Data (vertices and indices)
-  std::map<int, std::vector<Mesh::Vertex>> per_mat_vertices;
-  std::map<int, std::vector<unsigned int>> per_mat_indices;
+  std::map<int, tenno::vector<Mesh::Vertex>> per_mat_vertices;
+  std::map<int, tenno::vector<unsigned int>> per_mat_indices;
 
   size_t index_offset = 0;
 
@@ -138,7 +145,7 @@ void Model::process_shape(const tinyobj::attrib_t& attrib,
   // Now create a Mesh for each material group found in this shape
   for (auto const& [mat_id, verts] : per_mat_vertices)
   {
-    std::vector<std::shared_ptr<Texture>> textures;
+    tenno::vector<tenno::shared_ptr<Texture>> textures;
     if (mat_id >= 0)
     {
       textures = load_tiny_material(materials[mat_id], props);
@@ -149,11 +156,11 @@ void Model::process_shape(const tinyobj::attrib_t& attrib,
   }
 }
 
-std::vector<std::shared_ptr<Texture>>
+tenno::vector<tenno::shared_ptr<Texture>>
 Model::load_tiny_material(const tinyobj::material_t& mat,
                           const Texture::Properties &props)
 {
-  std::vector<std::shared_ptr<Texture>> textures;
+  tenno::vector<tenno::shared_ptr<Texture>> textures;
 
   auto load_tex = [&](std::string tex_name, Texture::Type type)
   {
@@ -173,12 +180,12 @@ Model::load_tiny_material(const tinyobj::material_t& mat,
 
     // Use your Builder pattern
     auto t =
-      std::make_shared<Texture>(Texture::Builder()
-                                .type(type)
-                                .target(Texture::Target::Texture2D)
-                                .path(full_path)
-                                .properties(props)
-                                .build());
+      tenno::make_shared<Texture>(Texture::Builder()
+                                  .type(type)
+                                  .target(Texture::Target::Texture2D)
+                                  .path(full_path)
+                                  .properties(props)
+                                  .build());
 
     textures_loaded.push_back(t);
     textures.push_back(t);
@@ -200,7 +207,7 @@ Model::Builder &Model::Builder::transform(const Transform& transform)
   return *this;
 }
 
-Model::Builder &Model::Builder::material(std::shared_ptr<Material> material)
+Model::Builder &Model::Builder::material(tenno::shared_ptr<Material> material)
 {
   this->conf.material = material;
   return *this;
@@ -220,18 +227,18 @@ Model::Builder &Model::Builder::texture_props(const Texture::Properties &props)
 
 Model::Builder &Model::Builder::mesh(Mesh &&mesh)
 {
-  this->conf.meshes.push_back(std::move(mesh));
+  this->conf.meshes.push_back(tenno::move(mesh));
   return *this;
 }
 
-Model::Builder &Model::Builder::meshes(std::vector<Mesh> &&meshes)
+Model::Builder &Model::Builder::meshes(tenno::vector<Mesh> &&meshes)
 {
   for (size_t i = 0; i < meshes.size(); ++i)
-    this->conf.meshes.push_back(std::move(meshes[i]));
+    this->conf.meshes.push_back(tenno::move(meshes[i]));
   return *this;
 }
 
 Model Model::Builder::build()
 {
-  return Model(std::move(this->conf));
+  return Model(tenno::move(this->conf));
 }

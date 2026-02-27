@@ -24,7 +24,7 @@ public:
                      float x, float y,
                      float scale,
                      Color color,
-                     std::shared_ptr<Font> font);
+                     tenno::shared_ptr<Font> font);
 
 };
   

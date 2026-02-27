@@ -45,12 +45,12 @@ elseif(MINGW)
   set(BRENTA_WARNING_FLAGS -Wall -Wextra -Wpedantic)
   set(BRENTA_DEBUG_FLAGS -O0 -ggdb)
   set(BRENTA_RELEASE_FLAGS -O3)
-  set(BRENTA_DEBUG_DEFINES DEBUG)
+  set(BRENTA_DEBUG_DEFINES _DEBUG)
 else()
   set(BRENTA_WARNING_FLAGS -Wall -Wextra -Werror -Wpedantic)
   set(BRENTA_DEBUG_FLAGS -O0 -ggdb -fsanitize=address)
   set(BRENTA_RELEASE_FLAGS -O3)
-  set(BRENTA_DEBUG_DEFINES DEBUG)
+  set(BRENTA_DEBUG_DEFINES _DEBUG)
   set(BRENTA_DEBUG_LINK_FLAGS -fsanitize=address)
 endif()
 
@@ -147,6 +147,10 @@ endif()
 
 # Add oak after viotecs and valfuzz
 register_dependency(oak)
+
+# Tenno template library
+message(STATUS "Using tenno")
+list(APPEND BRENTA_DEPS_INCLUDES "external/tenno-tl/include")
 
 list(APPEND BRENTA_DEPS_LIBS OpenGL::GL pthread dl m)
 

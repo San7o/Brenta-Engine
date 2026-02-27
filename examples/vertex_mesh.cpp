@@ -19,7 +19,7 @@
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
 
-#include <memory>
+#include <tenno/memory.hpp>
 
 using namespace brenta;
 
@@ -53,10 +53,10 @@ int main(void)
     ERROR("Error creating shader");
     return 1;
   }
-  std::shared_ptr<Shader> shader_ptr =
-    std::make_shared<Shader>(std::move(shader.value()));
+  tenno::shared_ptr<Shader> shader_ptr =
+    tenno::make_shared<Shader>(tenno::move(shader.value()));
 
-  auto material = std::make_shared<Material>(shader_ptr);
+  auto material = tenno::make_shared<Material>(shader_ptr);
   
   auto model = Model::Builder()
     .transform(Transform()
@@ -84,8 +84,8 @@ int main(void)
     .material(material)
     .build();
 
-  auto camera_ptr = std::make_shared<Camera>(std::move(camera));
-  auto model_ptr  = std::make_shared<Model>(std::move(model));
+  auto camera_ptr = tenno::make_shared<Camera>(tenno::move(camera));
+  auto model_ptr  = tenno::make_shared<Model>(tenno::move(model));
   
   while(!Window::should_close())
   {

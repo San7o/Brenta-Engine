@@ -30,7 +30,7 @@ void Ubo::init(Shader& shader,
   glBindBufferRange(GL_UNIFORM_BUFFER, binding_point, id, 0,
                     size);
 
-  EVENT(Logger::Event::Lifetime, "ubo: initialized");
+  EVENT(Logger::Event::Lifetime, "ubo: initialized {}", this->id);
   this->unbind();
   return;
 }

@@ -9,6 +9,8 @@
 #include <brenta/text.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
+#include <tenno/memory.hpp>
+
 using namespace brenta;
 
 int main()
@@ -19,6 +21,7 @@ int main()
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)
+          .event(Logger::Event::Lifetime)
           .file("/tmp/brenta-logs"))
     .with(Window::Builder()
           .title("text demo")
@@ -37,7 +40,8 @@ int main()
   // Render loop
   //
 
-  auto font = std::make_shared<Font>("examples/assets/fonts/arial.ttf", 100);
+  auto font =
+    tenno::make_shared<Font>("examples/assets/fonts/arial.ttf", 100);
   
   while (!Window::should_close())
   {

@@ -11,6 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include <tenno/memory.hpp>
 #include <vector>
 
 #include <viotecs/viotecs.hpp>
@@ -25,7 +26,7 @@ struct DirectionalLightComponent : Component
   glm::vec3 diffuse;
   glm::vec3 specular;
   float     strength;
-  std::shared_ptr<Shader> shader;
+  tenno::shared_ptr<Shader> shader;
   
   DirectionalLightComponent()
       : direction(glm::vec3(0.0f)), ambient(glm::vec3(0.0f)),
@@ -36,7 +37,7 @@ struct DirectionalLightComponent : Component
   DirectionalLightComponent(glm::vec3 direction, glm::vec3 ambient,
                             glm::vec3 diffuse, glm::vec3 specular,
                             float strength,
-                            std::shared_ptr<Shader> shader)
+                            tenno::shared_ptr<Shader> shader)
       : direction(direction), ambient(ambient), diffuse(diffuse),
         specular(specular), strength(strength), shader(shader)
   {

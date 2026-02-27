@@ -11,9 +11,9 @@
 
 #include <glad/glad.h>
 
+#include <tenno/vector.hpp>
+#include <tenno/memory.hpp>
 #include <string>
-#include <vector>
-#include <memory>
 #include <filesystem>
 
 #include <tiny_obj_loader.h>
@@ -39,7 +39,7 @@ public:
   Model& operator=(Model&&) noexcept = default;
   
   Transform &get_transform();
-  std::shared_ptr<Material> get_material();
+  tenno::shared_ptr<Material> get_material();
   
   void draw() const;
 
@@ -48,18 +48,18 @@ private:
   std::filesystem::path                 path;
   std::string                           directory;
   
-  Transform                             transform;
-  std::shared_ptr<Material>             material;
-  std::vector<Mesh>                     meshes;
-  std::vector<std::shared_ptr<Texture>> textures_loaded;
+  Transform                                 transform;
+  tenno::shared_ptr<Material>               material;
+  tenno::vector<Mesh>                       meshes;
+  tenno::vector<tenno::shared_ptr<Texture>> textures_loaded;
   
   void load(const Texture::Properties &props);
 
   void process_shape(const tinyobj::attrib_t& attrib, 
                      const tinyobj::shape_t& shape,
-                     const std::vector<tinyobj::material_t>& materials,
+                     const tenno::vector<tinyobj::material_t>& materials,
                      const Texture::Properties &props);
-  std::vector<std::shared_ptr<Texture>>
+  tenno::vector<tenno::shared_ptr<Texture>>
   load_tiny_material(const tinyobj::material_t& mat,
                      const Texture::Properties &props);
   
@@ -67,11 +67,11 @@ private:
 
 struct Model::Config
 {
-  Transform                 transform     = {};
-  std::shared_ptr<Material> material      = {};
-  std::filesystem::path     model_path    = "";
-  Texture::Properties       texture_props = {};
-  std::vector<Mesh>         meshes        = {};
+  Transform                   transform     = {};
+  tenno::shared_ptr<Material> material      = {};
+  std::filesystem::path       model_path    = "";
+  Texture::Properties         texture_props = {};
+  tenno::vector<Mesh>           meshes        = {};
 };
 
 class Model::Builder
@@ -79,11 +79,11 @@ class Model::Builder
 public:
 
   Builder &transform(const Transform& transform);
-  Builder &material(std::shared_ptr<Material> material);
+  Builder &material(tenno::shared_ptr<Material> material);
   Builder &path(const std::filesystem::path &path);
   Builder &texture_props(const Texture::Properties &props);
   Builder &mesh(Mesh &&mesh);
-  Builder &meshes(std::vector<Mesh> &&meshes);
+  Builder &meshes(tenno::vector<Mesh> &&meshes);
 
   Model build();
 

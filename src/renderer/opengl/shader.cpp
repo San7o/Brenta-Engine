@@ -15,14 +15,16 @@ Shader::~Shader()
   if (this->id == 0) return;
 
   glDeleteProgram(this->id);
+
+  EVENT(Logger::Event::Lifetime, "Shader: destroyed {}", this->id);
   this->id = 0;
   return;
 }
 
 std::optional<Shader>
-Shader::create(const std::vector<Shader::Object> &objects)
+Shader::create(const tenno::vector<Shader::Object> &objects)
 {
-  std::vector<Shader::Id> compiled_shaders = {};
+  tenno::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, objects))
   {
     ERROR("shader: error compiling shader");
@@ -34,14 +36,15 @@ Shader::create(const std::vector<Shader::Object> &objects)
   if (!id) return {};
   
   Shader::clean_compilation(compiled_shaders);
+  EVENT(Logger::Event::Lifetime, "Shader: initialized {}", *id);
   return Shader(*id);
 }
 
 std::optional<Shader>
 Shader::create(const GLchar **feedback_varyings, int num_varyings,
-               const std::vector<Shader::Object> &objects)
+               const tenno::vector<Shader::Object> &objects)
 {
-  std::vector<Shader::Id> compiled_shaders = {};
+  tenno::vector<Shader::Id> compiled_shaders = {};
   if (!compile_shaders(compiled_shaders, objects))
   {
     ERROR("shader: error compiling shader");
@@ -53,13 +56,14 @@ Shader::create(const GLchar **feedback_varyings, int num_varyings,
   if (!id) return {};
   
   Shader::clean_compilation(compiled_shaders);
+  EVENT(Logger::Event::Lifetime, "Shader: initialized {}", *id);
   return Shader(*id);
 }
 
-bool Shader::compile_shaders(std::vector<Shader::Id> &compiled,
-                             const std::vector<Shader::Object> &objects)
+bool Shader::compile_shaders(tenno::vector<Shader::Id> &compiled,
+                             const tenno::vector<Shader::Object> &objects)
 {
-  for (auto& obj : objects)
+  for (const auto& obj : objects)
   {
     GLenum shader_type_gl;
     switch(obj.type)
@@ -83,13 +87,13 @@ bool Shader::compile_shaders(std::vector<Shader::Id> &compiled,
   return true;
 }
 
-bool Shader::compile_shaders([[maybe_unused]] std::vector<Shader::Id> &compiled)
+bool Shader::compile_shaders([[maybe_unused]] tenno::vector<Shader::Id> &compiled)
 {
   return true;
 }
 
 std::optional<Shader::Id>
-Shader::link_program(std::vector<Shader::Id>& compiled_shaders,
+Shader::link_program(tenno::vector<Shader::Id>& compiled_shaders,
                      const GLchar **feedback_varyings, int num_varyings)
 {
   Shader::Id id = glCreateProgram();
@@ -106,7 +110,7 @@ Shader::link_program(std::vector<Shader::Id>& compiled_shaders,
   return id;
 }
 
-void Shader::clean_compilation(std::vector<Shader::Id>& compiled_shaders)
+void Shader::clean_compilation(tenno::vector<Shader::Id>& compiled_shaders)
 {
   std::for_each(compiled_shaders.begin(), compiled_shaders.end(),
                 [](auto shader) { glDeleteShader(shader); });

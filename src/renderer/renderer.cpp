@@ -12,9 +12,9 @@ using namespace brenta;
 // Static variables
 //
 
-std::vector<Renderer::Command> Renderer::render_queue           = {};
-std::vector<std::shared_ptr<PointLight>> Renderer::point_lights = {};
-std::optional<std::shared_ptr<DirLight>> Renderer::dir_light    = {};
+tenno::vector<Renderer::Command> Renderer::render_queue           = {};
+tenno::vector<tenno::shared_ptr<PointLight>> Renderer::point_lights = {};
+std::optional<tenno::shared_ptr<DirLight>> Renderer::dir_light    = {};
 glm::mat4 Renderer::view;
 glm::mat4 Renderer::projection;
 glm::vec3 Renderer::cam_position;
@@ -23,7 +23,7 @@ glm::vec3 Renderer::cam_position;
 // Member functions
 //
 
-void Renderer::begin_frame(std::shared_ptr<Camera> cam)
+void Renderer::begin_frame(tenno::shared_ptr<Camera> cam)
 {
   Renderer::render_queue.clear();
   Renderer::point_lights.clear();
@@ -41,12 +41,12 @@ void Renderer::submit(const Renderer::Command& it)
   Renderer::render_queue.push_back(it);
 }
 
-void Renderer::submit_point_light(std::shared_ptr<PointLight> point_light)
+void Renderer::submit_point_light(tenno::shared_ptr<PointLight> point_light)
 {
   Renderer::point_lights.push_back(point_light);
 }
 
-void Renderer::submit_point_lights(std::vector<std::shared_ptr<PointLight>> point_lights)
+void Renderer::submit_point_lights(const tenno::vector<tenno::shared_ptr<PointLight>> &point_lights)
 {
   Renderer::point_lights.reserve(Renderer::point_lights.size()
                                  + point_lights.size());
@@ -55,7 +55,7 @@ void Renderer::submit_point_lights(std::vector<std::shared_ptr<PointLight>> poin
                                 point_lights.end());
 }
 
-void Renderer::submit_dir_light(std::shared_ptr<DirLight> dir_light)
+void Renderer::submit_dir_light(tenno::shared_ptr<DirLight> dir_light)
 {
   Renderer::dir_light = dir_light;
 }

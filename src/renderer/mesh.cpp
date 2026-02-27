@@ -11,28 +11,37 @@ using namespace brenta;
 
 Mesh::Mesh(Config&& conf)
 {
+  static int _id = 1;
+  this->id            = _id;
   this->vertices      = conf.vertices;
   this->indices       = conf.indices;
-  this->textures      = std::move(conf.textures);
+  this->textures      = tenno::move(conf.textures);
+
+  _id++;
   
   this->init();
-  EVENT(Logger::Event::Lifetime, "mesh: created");
   return;
 }
 
 Mesh::~Mesh()
 {
-  EVENT(Logger::Event::Lifetime, "mesh: deleted");
+  if (id == 0) return;
+  
+  EVENT(Logger::Event::Lifetime, "mesh: deleted {}", this->id);
   return;
 }
 
 void Mesh::init()
 {
+  if (this->vertices.size() == 0 || this->indices.size() == 0)
+    return;
+  
   this->vao.init();
   this->vao.bind();
   
   this->vbo.init(Buffer::Target::Array);
   this->vbo.bind();
+
   this->vbo.copy_data(&this->vertices[0],
                       this->vertices.size() * sizeof(Vertex),
                       Buffer::DataUsage::StaticDraw);
@@ -51,10 +60,11 @@ void Mesh::init()
   this->ebo.copy_data(&this->indices[0],
                       this->indices.size() * sizeof(unsigned int),
                       Buffer::DataUsage::StaticDraw);
-
   this->vao.unbind();
   this->vbo.unbind();
   this->ebo.unbind();
+
+  EVENT(Logger::Event::Lifetime, "mesh: created {}", this->id);
   return;
 }
 
@@ -114,39 +124,39 @@ void Mesh::draw() const
 // Builder functions
 //
 
-Mesh::Builder &Mesh::Builder::vertices(std::vector<Vertex> &&vertices)
+Mesh::Builder &Mesh::Builder::vertices(tenno::vector<Vertex> &&vertices)
 {
   this->conf.vertices = vertices;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::indices(std::vector<unsigned int> &&indices)
+Mesh::Builder &Mesh::Builder::indices(tenno::vector<unsigned int> &&indices)
 {
   this->conf.indices = indices;
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::texture(std::shared_ptr<Texture> &&texture)
+Mesh::Builder &Mesh::Builder::texture(tenno::shared_ptr<Texture> &&texture)
 {
-  this->conf.textures.push_back(std::move(texture));
+  this->conf.textures.push_back(tenno::move(texture));
   return *this;
 }
 
 Mesh::Builder &Mesh::Builder::texture(Texture &&texture)
 {
-  std::shared_ptr<Texture> shared = std::make_shared<Texture>(std::move(texture));
-  this->conf.textures.push_back(std::move(shared));
+  tenno::shared_ptr<Texture> shared = tenno::make_shared<Texture>(tenno::move(texture));
+  this->conf.textures.push_back(tenno::move(shared));
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::textures(std::vector<std::shared_ptr<Texture>> &&textures)
+Mesh::Builder &Mesh::Builder::textures(tenno::vector<tenno::shared_ptr<Texture>> &&textures)
 {
   for (auto t : textures)
-    this->conf.textures.push_back(std::move(t));
+    this->conf.textures.push_back(tenno::move(t));
   return *this;
 }
 
 Mesh Mesh::Builder::build()
 {
-  return Mesh(std::move(this->conf));
+  return Mesh(tenno::move(this->conf));
 }

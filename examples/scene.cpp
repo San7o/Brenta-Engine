@@ -12,7 +12,8 @@
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/scene.hpp>
 
-#include <memory>
+#include <tenno/memory.hpp>
+#include <tenno/utility.hpp>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
@@ -40,13 +41,13 @@ int main()
   auto engine = Engine::managed();
   
   auto camera =
-    std::make_shared<Camera>(Camera::Builder()
-                             .projection_type(Camera::ProjectionType::Perspective)
-                             .position(Camera::Aircraft::Builder()
-                                       .pos({0.0f, 0.0f, 0.0f})
-                                       .build())
-                             .fov(45.0f)
-                             .build());
+    tenno::make_shared<Camera>(Camera::Builder()
+                               .projection_type(Camera::ProjectionType::Perspective)
+                               .position(Camera::Aircraft::Builder()
+                                         .pos({0.0f, 0.0f, 0.0f})
+                                         .build())
+                               .fov(45.0f)
+                               .build());
 
   auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
@@ -56,24 +57,24 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
+  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
 
-  auto material = std::make_shared<Material>(shader_ptr);
+  auto material = tenno::make_shared<Material>(shader_ptr);
 
   auto model =
-    std::make_shared<Model>(Model::Builder()
-                            .path("examples/assets/models/backpack/backpack.obj")
-                            .transform(Transform()
-                                       .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-                                       .rotate(glm::angleAxis(glm::radians(-90.0f),
-                                                              glm::vec3(0.0f, 1.0f, 0.0f)))
-                                       .scale(glm::vec3(1.0)))
-                            .material(material)
-                            .build());
+    tenno::make_shared<Model>(Model::Builder()
+                              .path("examples/assets/models/backpack/backpack.obj")
+                              .transform(Transform()
+                                         .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+                                         .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                                                glm::vec3(0.0f, 1.0f, 0.0f)))
+                                         .scale(glm::vec3(1.0)))
+                              .material(material)
+                              .build());
 
   auto scene = Scene(camera);
   auto root_node = scene.get_root();
-  auto model_node = root_node->new_node();
+  auto model_node = Scene::create_child(root_node);
   model_node->add_model(model);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
 

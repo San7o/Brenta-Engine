@@ -24,16 +24,16 @@ Font::Font(const std::filesystem::path &path, int size)
     return;
   }
 
-  auto shader = AssetManager::get_shader("TextShader");
-  if (!shader)
+  auto text_shader = AssetManager::get_shader("TextShader");
+  if (!text_shader)
   {
-    shader = AssetManager::new_shader("TextShader", {
+    text_shader = AssetManager::new_shader("TextShader", {
         { Shader::Type::Vertex,   text_vs },
         { Shader::Type::Fragment, text_fs } });
   }
-  if (!shader) return;
+  if (!text_shader) return;
   
-  this->shader = shader;
+  this->shader = text_shader;
   this->shader->use();
 
   // find path to font
@@ -101,6 +101,8 @@ Font::Font(const std::filesystem::path &path, int size)
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
   this->vbo.unbind();
   this->vao.unbind();
+
+  EVENT(Logger::Event::Lifetime, "Font: initialized");
 }
 
 Font::~Font()
@@ -108,4 +110,6 @@ Font::~Font()
   this->shader = nullptr;
   this->vao.destroy();
   this->vbo.destroy();
+
+  EVENT(Logger::Event::Lifetime, "Font: destoyed");
 }

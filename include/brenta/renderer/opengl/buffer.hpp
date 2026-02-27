@@ -94,7 +94,7 @@ public:
 
 protected:
   
-  Buffer::Id   id;
+  Buffer::Id   id = 0;
   Target       target;
 
 };

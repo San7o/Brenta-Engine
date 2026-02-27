@@ -15,11 +15,13 @@ class Node : public std::enable_shared_from_this<Node>
 {
 public:
 
+  friend class Scene;
+  
   Node() = default;
 
-  void add_model(std::shared_ptr<Model> model);
-  void add_point_light(std::shared_ptr<PointLight> point_light);
-  void set_dir_light(std::shared_ptr<DirLight> dir_light);
+  void add_model(tenno::shared_ptr<Model> model);
+  void add_point_light(tenno::shared_ptr<PointLight> point_light);
+  void set_dir_light(tenno::shared_ptr<DirLight> dir_light);
   
   void set_local(Transform local);
   Transform &get_local();
@@ -31,16 +33,14 @@ public:
   // Render frame
   void draw();
 
-  std::shared_ptr<Node> new_node();
-  
 private:
 
-  std::vector<std::shared_ptr<Model>>          models;
-  std::vector<std::shared_ptr<PointLight>>     point_lights;
-  std::optional<std::shared_ptr<DirLight>>     dir_light;
+  tenno::vector<tenno::shared_ptr<Model>>          models;
+  tenno::vector<tenno::shared_ptr<PointLight>>     point_lights;
+  std::optional<tenno::shared_ptr<DirLight>>       dir_light;
 
-  std::optional<std::weak_ptr<Node>>    parent;
-  std::vector<std::shared_ptr<Node>>    children;
+  std::optional<tenno::weak_ptr<Node>>      parent;
+  tenno::vector<tenno::shared_ptr<Node>>    children;
 
   Transform local;
   glm::mat4 world_matrix = glm::mat4(1.0f);

@@ -28,6 +28,7 @@ The engine also features the following sub projects:
 
 - [oak](https://github.com/San7o/oak): feature-rich, thread-safe, Brenta Engine's logger.
 - [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
+- [tenno](https://github.com/San7o/tenno-tl): custom standard library
 - [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
 - [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
