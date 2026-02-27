@@ -8,21 +8,20 @@
 
 using namespace brenta;
 
-void Node::add_model(std::shared_ptr<Model> model)
+void Node::add_model(tenno::shared_ptr<Model> model)
 {
   this->models.push_back(model);
 }
 
-void Node::add_point_light(std::shared_ptr<PointLight> point_light)
+void Node::add_point_light(tenno::shared_ptr<PointLight> point_light)
 {
   this->point_lights.push_back(point_light);
 }
 
-void Node::set_dir_light(std::shared_ptr<DirLight> dir_light)
+void Node::set_dir_light(tenno::shared_ptr<DirLight> dir_light)
 {
   this->dir_light = dir_light;
 }
-
 
 void Node::set_local(Transform local)
 {
@@ -47,14 +46,6 @@ void Node::update_world_matrix()
 
   for (auto& child : this->children)
     child->update_world_matrix();
-}
-
-std::shared_ptr<Node> Node::new_node()
-{
-  auto child = std::make_shared<Node>();
-  this->children.push_back(child);
-  child->parent = shared_from_this();
-  return child;
 }
 
 void Node::update(float delta_time)

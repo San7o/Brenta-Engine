@@ -10,6 +10,8 @@
 
 #include <viotecs/viotecs.hpp>
 
+#include <tenno/memory.hpp>
+
 using namespace brenta;
 using namespace viotecs;
 
@@ -17,7 +19,7 @@ struct ModelComponent : Component
 {
   Model        mod;
   float        shininess;
-  std::shared_ptr<Shader> shader;
+  tenno::shared_ptr<Shader> shader;
   bool         hasAtlas;
   int          atlasSize;
   int          atlasIndex;
@@ -29,9 +31,9 @@ struct ModelComponent : Component
   {
   }
   ModelComponent(Model &&mod, float shininess,
-                 std::shared_ptr<Shader> shader, bool hasAtlas = false,
+                 tenno::shared_ptr<Shader> shader, bool hasAtlas = false,
                  int atlasSize = 0, int atlasIndex = 0)
-    : mod(std::move(mod)), shininess(shininess), shader(shader),
+    : mod(tenno::move(mod)), shininess(shininess), shader(shader),
       hasAtlas(hasAtlas), atlasSize(atlasSize), atlasIndex(atlasIndex)
   {
   }

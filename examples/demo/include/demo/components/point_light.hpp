@@ -26,7 +26,7 @@ struct PointLightComponent : Component
   float     linear;
   float     quadratic;
   float     strength;
-  std::shared_ptr<Shader> shader;
+  tenno::shared_ptr<Shader> shader;
 
   PointLightComponent()
       : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
@@ -37,7 +37,7 @@ struct PointLightComponent : Component
   PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular,
                       float constant, float linear, float quadratic,
                       float strength,
-                      std::shared_ptr<Shader> shader)
+                      tenno::shared_ptr<Shader> shader)
       : ambient(ambient), diffuse(diffuse), specular(specular),
         constant(constant), linear(linear), quadratic(quadratic),
         strength(strength), shader(shader)

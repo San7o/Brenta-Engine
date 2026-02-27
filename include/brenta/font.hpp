@@ -34,10 +34,10 @@ public:
     unsigned int advance;    // Offset to advance to next glyph
   };
 
-  std::shared_ptr<Shader>   shader;
-  Vao                       vao;
-  Buffer                    vbo;
-  std::map<char, Character> characters;
+  tenno::shared_ptr<Shader>   shader;
+  Vao                         vao;
+  Buffer                      vbo;
+  std::map<char, Character>   characters;
   
   Font() = default;
   Font(const std::filesystem::path &path, int size);

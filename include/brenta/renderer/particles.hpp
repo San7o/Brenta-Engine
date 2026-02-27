@@ -68,8 +68,8 @@ public:
 private:
   
   Camera *cam;
-  std::shared_ptr<Shader> shader_update;
-  std::shared_ptr<Shader> shader_render;
+  tenno::shared_ptr<Shader> shader_update;
+  tenno::shared_ptr<Shader> shader_render;
 
 };
 

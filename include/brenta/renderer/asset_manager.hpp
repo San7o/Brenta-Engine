@@ -20,38 +20,41 @@ public:
 
   using AssetId = std::string;
   
-  static std::shared_ptr<Texture>  new_texture(const AssetId& id,
-                                               const Texture::Config &conf);
-  static std::shared_ptr<Model>    new_model(const AssetId& id,
-                                             Model::Builder &&builder);
-  static std::shared_ptr<Shader>   new_shader(const AssetId& id,
-                                              const std::vector<Shader::Object> &objects);
-  static std::shared_ptr<Shader>   new_shader(const AssetId& id,
-                                              const GLchar **feedback_varyings,
-                                              int num_varyings,
-                                              const std::vector<Shader::Object> &objects);
-  static std::shared_ptr<Material> new_material(const AssetId& id,
-                                                std::shared_ptr<Shader> shader);
-  static std::shared_ptr<Scene>    new_scene(const AssetId& id,
-                                             std::shared_ptr<Camera> camera);
-  static std::shared_ptr<Font>     new_font(const AssetId& id,
-                                            const std::filesystem::path &path, int size);
+  static tenno::shared_ptr<Texture>  new_texture(const AssetId& id,
+                                                 const Texture::Config &conf);
+  static tenno::shared_ptr<Model>    new_model(const AssetId& id,
+                                               Model::Builder &&builder);
+  static tenno::shared_ptr<Shader>   new_shader(const AssetId& id,
+                                                const tenno::vector<Shader::Object> &objects);
+  static tenno::shared_ptr<Shader>   new_shader(const AssetId& id,
+                                                const GLchar **feedback_varyings,
+                                                int num_varyings,
+                                                const tenno::vector<Shader::Object> &objects);
+  static tenno::shared_ptr<Material> new_material(const AssetId& id,
+                                                tenno::shared_ptr<Shader> shader);
+  static tenno::shared_ptr<Scene>    new_scene(const AssetId& id,
+                                               tenno::shared_ptr<Camera> camera);
+  static tenno::shared_ptr<Font>     new_font(const AssetId& id,
+                                              const std::filesystem::path &path,
+                                              int size);
   
-  static std::shared_ptr<Texture>  get_texture(const AssetId& id);
-  static std::shared_ptr<Model>    get_model(const AssetId& id);
-  static std::shared_ptr<Shader>   get_shader(const AssetId& id);
-  static std::shared_ptr<Material> get_material(const AssetId& id);
-  static std::shared_ptr<Scene>    get_scene(const AssetId& id);
-  static std::shared_ptr<Font>     get_font(const AssetId& id);
+  static tenno::shared_ptr<Texture>  get_texture(const AssetId& id);
+  static tenno::shared_ptr<Model>    get_model(const AssetId& id);
+  static tenno::shared_ptr<Shader>   get_shader(const AssetId& id);
+  static tenno::shared_ptr<Material> get_material(const AssetId& id);
+  static tenno::shared_ptr<Scene>    get_scene(const AssetId& id);
+  static tenno::shared_ptr<Font>     get_font(const AssetId& id);
 
+  static void clear();
+  
 private:
 
-  static std::unordered_map<AssetId, std::weak_ptr<Model>>    models;
-  static std::unordered_map<AssetId, std::weak_ptr<Texture>>  textures;
-  static std::unordered_map<AssetId, std::weak_ptr<Material>> materials;
-  static std::unordered_map<AssetId, std::weak_ptr<Scene>>    scenes;
-  static std::unordered_map<AssetId, std::weak_ptr<Shader>>   shaders;
-  static std::unordered_map<AssetId, std::weak_ptr<Font>>     fonts;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Model>>    models;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Texture>>  textures;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Material>> materials;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Scene>>    scenes;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Shader>>   shaders;
+  static std::unordered_map<AssetId, tenno::weak_ptr<Font>>     fonts;
 
   // Private constructor for singleton
   AssetManager() = default;

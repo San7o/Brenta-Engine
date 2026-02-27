@@ -17,7 +17,7 @@ using namespace brenta;
 // Static variables
 //
 
-std::shared_ptr<WindowDriver> Window::backend         = nullptr;
+tenno::shared_ptr<WindowDriver> Window::backend         = nullptr;
 const std::string             Window::subsystem_name  = "window";
 Window::Config                Window::init_config     = {};
 bool                          Window::initialized     = false;
@@ -30,7 +30,7 @@ std::expected<void, Subsystem::Error> Window::initialize()
 {
   if (this->is_initialized()) return {};
 
-  Window::backend = std::make_shared<Glfw>();
+  Window::backend = tenno::make_shared<Glfw>();
   auto ret = Window::backend->initialize(Window::init_config);
   if (!ret)
   {
@@ -131,7 +131,7 @@ int Window::get_height()
   return 0;
 }
 
-std::shared_ptr<WindowDriver> Window::get_driver()
+tenno::shared_ptr<WindowDriver> Window::get_driver()
 {
   return Window::backend;
 }

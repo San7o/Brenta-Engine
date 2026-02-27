@@ -9,16 +9,18 @@
 // Backend
 #include <brenta/drivers/miniaudio.hpp>
 
+#include <tuple>
+
 using namespace brenta;
 
 //
 // Static variables
 //
 
-std::vector<std::tuple<Audio::SoundId, std::filesystem::path,
-                       Audio::StreamId>> Audio::init_sounds;
-std::vector<std::pair<Audio::StreamId, float>> Audio::init_streams;
-std::shared_ptr<AudioDriver> Audio::backend = nullptr;
+tenno::vector<std::tuple<Audio::SoundId, std::filesystem::path,
+                         Audio::StreamId>> Audio::init_sounds;
+tenno::vector<std::pair<Audio::StreamId, float>> Audio::init_streams;
+tenno::shared_ptr<AudioDriver> Audio::backend = nullptr;
 bool Audio::initialized = false;
 const std::string Audio::subsystem_name = "audio";
 
@@ -30,7 +32,7 @@ std::expected<void, Subsystem::Error> Audio::initialize()
 {
   if (this->is_initialized()) return {};
 
-  this->backend = std::make_shared<Miniaudio>();
+  this->backend = tenno::make_shared<Miniaudio>();
   
   auto res = this->backend->initialize();
   if (!res) return res;
@@ -173,7 +175,7 @@ Audio::Builder::stream(const Audio::StreamId &id,
 
 Subsystem &Audio::Builder::build()
 {
-  Audio::init_sounds = this->init_sounds;
+  Audio::init_sounds  = this->init_sounds;
   Audio::init_streams = this->init_streams;
   return Audio::instance();
 }

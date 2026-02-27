@@ -86,7 +86,7 @@ public:
 
 private:
 
-  unsigned int id;
+  unsigned int id = 0;
 
 };
 

@@ -14,7 +14,7 @@ using namespace brenta;
 // Static variables
 //
 
-std::vector<std::reference_wrapper<Subsystem>> Engine::subsystems;
+tenno::vector<tenno::reference_wrapper<Subsystem>> Engine::subsystems;
 const std::string Engine::subsystem_name = "engine";
 bool Engine::initialized = false;
 
@@ -87,7 +87,7 @@ Engine::Manager Engine::managed()
 std::expected<void, std::string>
 Engine::with(Subsystem::Builder &&builder)
 {
-  std::reference_wrapper<brenta::Subsystem> s = builder.build();
+  tenno::reference_wrapper<brenta::Subsystem> s = builder.build();
   if (!s.get().initialize().has_value())
     return std::unexpected(s.get().name());
   Engine::subsystems.push_back(s);

@@ -13,6 +13,7 @@
 #include <demo/entities/sphere.hpp>
 
 #include <viotecs/viotecs.hpp>
+#include <tenno/utility.hpp>
 
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
 #include "../../../src/renderer/shaders/c/phong_fs.c"
@@ -47,7 +48,7 @@ void init_sphere_entity()
                                      glm::vec3(-1.f, 0.0f, 0.0f), // acceleration
                                      true)                        // isElastic
     .add_component<SphereColliderComponent>(1.0f)
-    .add_component<ModelComponent>(std::move(m1), 32.0f, shader);
+    .add_component<ModelComponent>(tenno::move(m1), 32.0f, shader);
 
   //
   // Spehere 2
@@ -67,5 +68,5 @@ void init_sphere_entity()
                                      glm::vec3(1.0f, 0.0f, 0.0f), // acceleration
                                      true)                        // isElastic
     .add_component<SphereColliderComponent>(1.0f)
-    .add_component<ModelComponent>(std::move(m2), 32.0f, shader);
+    .add_component<ModelComponent>(tenno::move(m2), 32.0f, shader);
 }

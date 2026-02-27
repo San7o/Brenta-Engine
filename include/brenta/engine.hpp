@@ -7,6 +7,9 @@
 
 #include <brenta/subsystem.hpp>
 
+#include <tenno/vector.hpp>
+#include <tenno/functional.hpp>
+
 #include <vector>
 
 namespace brenta
@@ -53,7 +56,7 @@ public:
 
 private:
 
-  static std::vector<std::reference_wrapper<Subsystem>> subsystems;
+  static tenno::vector<tenno::reference_wrapper<Subsystem>> subsystems;
   static bool initialized;
 
 };
@@ -82,7 +85,7 @@ public:
   
 private:
   
-  std::vector<std::reference_wrapper<brenta::Subsystem>> subsystems;
+  tenno::vector<tenno::reference_wrapper<brenta::Subsystem>> subsystems;
    
 };
 

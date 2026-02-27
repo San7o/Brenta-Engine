@@ -12,6 +12,7 @@
 #include <demo/entities/player.hpp>
 
 #include <viotecs/viotecs.hpp>
+#include <tenno/utility.hpp>
 
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
 #include "../../../../src/renderer/shaders/c/phong_fs.c"
@@ -39,5 +40,5 @@ void init_player_entity()
   auto player = World::new_entity()
     .add_component<PlayerComponent>()
     .add_component<TransformComponent>(m.get_transform())
-    .add_component<ModelComponent>(std::move(m), 32.0f, shader);
+    .add_component<ModelComponent>(tenno::move(m), 32.0f, shader);
 }

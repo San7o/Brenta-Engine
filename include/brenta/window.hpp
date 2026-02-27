@@ -9,8 +9,9 @@
 #include <brenta/time.hpp>
 #include <brenta/key.hpp>
 
+#include <tenno/memory.hpp>
+
 #include <string>
-#include <memory>
 
 namespace brenta
 {
@@ -58,7 +59,7 @@ public:
   static Time         get_time();
   static ProcHandle   get_proc_address();
   static WindowHandle get_window();
-  static std::shared_ptr<WindowDriver> get_driver();
+  static tenno::shared_ptr<WindowDriver> get_driver();
 
   //
   // Setters
@@ -91,7 +92,7 @@ protected:
   static Window::Config       init_config;
 
   static bool                 initialized;
-  static std::shared_ptr<WindowDriver> backend;
+  static tenno::shared_ptr<WindowDriver> backend;
 
   // Private constructors / destructors for singleton
   Window() = default;

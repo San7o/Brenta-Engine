@@ -8,6 +8,8 @@
 #include <brenta/subsystem.hpp>
 #include <oak/oak.hpp>
 
+#include <tenno/vector.hpp>
+
 #include <fstream>
 #include <expected>
 #include <string>
@@ -65,8 +67,8 @@ struct Logger::Config
 {
   oak::Level            log_level = oak::Level::Info;
   std::filesystem::path log_file  = "/tmp/brenta-logs.txt";
-  std::vector<Event>    events    = {};
-  std::vector<Flags>    flags     = {};
+  tenno::vector<Event>    events    = {};
+  tenno::vector<Flags>    flags     = {};
 };
 
 class Logger::Builder : public Subsystem::Builder

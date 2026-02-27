@@ -7,8 +7,10 @@
 
 #include <brenta/subsystem.hpp>
 
+#include <tenno/vector.hpp>
+#include <tenno/memory.hpp>
+
 #include <string>
-#include <vector>
 #include <tuple>
 #include <filesystem>
 
@@ -87,15 +89,15 @@ private:
   
   // A list of pairs (stream_id, volume) of streams that will be
   // created when the subsystem is initialized.
-  static std::vector<std::pair<StreamId, float>> init_streams;
+  static tenno::vector<std::pair<StreamId, float>> init_streams;
   // A list of pairs (sound_id, pathname, stream_id) of sounds that
   // will be loaded when the subsystem is initialized.
-  static std::vector<std::tuple<SoundId,
-                                std::filesystem::path,
-                                StreamId>> init_sounds;
+  static tenno::vector<std::tuple<SoundId,
+                                  std::filesystem::path,
+                                  StreamId>> init_sounds;
   static bool initialized;
 
-  static std::shared_ptr<AudioDriver> backend;
+  static tenno::shared_ptr<AudioDriver> backend;
 
   // Private constructors / destructors for singleton
   Audio()  = default;
@@ -120,9 +122,9 @@ public:
   
 private:
   
-  std::vector<std::tuple<SoundId, std::filesystem::path,
-                         StreamId>> init_sounds;
-  std::vector<std::pair<StreamId, float>> init_streams;
+  tenno::vector<std::tuple<SoundId, std::filesystem::path,
+                           StreamId>> init_sounds;
+  tenno::vector<std::pair<StreamId, float>> init_streams;
   float volume = 1.0;
 };
 

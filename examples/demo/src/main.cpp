@@ -148,6 +148,8 @@ int main()
       Window::swap_buffers();
     }
   }
+
+  AssetManager::clear();
   engine.terminate();
   return 0;
 }

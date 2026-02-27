@@ -25,7 +25,7 @@ void Buffer::init(Buffer::Target target)
   this->target = target;
   glGenBuffers(1, &id);
   
-  EVENT(Logger::Event::Lifetime, "buffer: initialized");
+  EVENT(Logger::Event::Lifetime, "buffer: initialized {}", this->id);
   return;
 }
 
@@ -34,9 +34,9 @@ void Buffer::destroy()
   if (this->id == 0) return;
 
   glDeleteBuffers(1, &this->id);
-  this->id = 0;
 
-  EVENT(Logger::Event::Lifetime, "buffer: destroyed");
+  EVENT(Logger::Event::Lifetime, "buffer: destroyed {}", this->id);
+  this->id = 0;
   return;
 }
 

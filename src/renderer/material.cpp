@@ -38,7 +38,8 @@ Material &Material::set_vector(std::string name, glm::vec3 val)
   return *this;
 }
 
-Material &Material::set_texture(std::string name, std::shared_ptr<Texture> val,
+Material &Material::set_texture(std::string name,
+                                tenno::shared_ptr<Texture> val,
                                 int index)
 {
   this->textures[name] = std::make_pair(index, val);

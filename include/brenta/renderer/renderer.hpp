@@ -37,12 +37,12 @@ public:
   Renderer() = delete;
   ~Renderer() = delete;
   
-  static void begin_frame(std::shared_ptr<Camera> cam);
+  static void begin_frame(tenno::shared_ptr<Camera> cam);
   
   static void submit(const Renderer::Command& it);
-  static void submit_point_light(std::shared_ptr<PointLight> point_light);
-  static void submit_point_lights(std::vector<std::shared_ptr<PointLight>> point_light);
-  static void submit_dir_light(std::shared_ptr<DirLight> dir_light);
+  static void submit_point_light(tenno::shared_ptr<PointLight> point_light);
+  static void submit_point_lights(const tenno::vector<tenno::shared_ptr<PointLight>>& point_light);
+  static void submit_dir_light(tenno::shared_ptr<DirLight> dir_light);
 
   static void end_frame();
 
@@ -51,9 +51,9 @@ private:
   static glm::mat4 projection;
   static glm::mat4 view;
   static glm::vec3 cam_position;
-  static std::vector<std::shared_ptr<PointLight>>  point_lights;
-  static std::optional<std::shared_ptr<DirLight>>  dir_light;
-  static std::vector<Command> render_queue;
+  static tenno::vector<tenno::shared_ptr<PointLight>>  point_lights;
+  static std::optional<tenno::shared_ptr<DirLight>>  dir_light;
+  static tenno::vector<Command> render_queue;
   
   static void flush();
 
@@ -64,11 +64,11 @@ class Renderer::Command
 public:
 
   glm::mat4                  world_matrix;
-  std::shared_ptr<Model>     model;
+  tenno::shared_ptr<Model>     model;
   
   Command() = default;
   Command(glm::mat4 world_matrix,
-          std::shared_ptr<Model>    model)
+          tenno::shared_ptr<Model>    model)
     : world_matrix(world_matrix), model(model)
   {}
 };

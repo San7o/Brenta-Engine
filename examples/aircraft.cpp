@@ -16,8 +16,8 @@
 #include <brenta/input.hpp>
 #include <brenta/mouse.hpp>
 
-#include <memory>
-#include <iostream>
+#include <tenno/memory.hpp>
+#include <tenno/utility.hpp>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
@@ -27,7 +27,7 @@ using namespace brenta;
 #define ACCELERATION 10.0f
 #define MAX_ACCELERATION 1.5f
 #define FRICTION 15.0f
-void update_camera(std::shared_ptr<Camera> camera,
+void update_camera(tenno::shared_ptr<Camera> camera,
                    glm::vec3 &acceleration,
                    glm::vec3 &speed,
                    float delta_time);
@@ -55,13 +55,13 @@ int main()
   auto engine = Engine::managed();
   
   auto camera =
-    std::make_shared<Camera>(Camera::Builder()
-                             .projection_type(Camera::ProjectionType::Perspective)
-                             .position(Camera::Aircraft::Builder()
-                                       .pos({0.0f, 0.0f, 0.0f})
-                                       .build())
-                             .fov(30.0f)
-                             .build());
+    tenno::make_shared<Camera>(Camera::Builder()
+                               .projection_type(Camera::ProjectionType::Perspective)
+                               .position(Camera::Aircraft::Builder()
+                                         .pos({0.0f, 0.0f, 0.0f})
+                                         .build())
+                               .fov(30.0f)
+                               .build());
 
   auto shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
@@ -71,29 +71,29 @@ int main()
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = std::make_shared<Shader>(std::move(shader.value()));
+  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
 
-  auto material = std::make_shared<Material>(shader_ptr);
+  auto material = tenno::make_shared<Material>(shader_ptr);
   material->set_float("material.shininess", 32.0f);
 
   auto model =
-    std::make_shared<Model>(Model::Builder()
-                            .path("examples/assets/models/backpack/backpack.obj")
-                            .transform(Transform()
-                                       .translate(glm::vec3(15.0f, 0.0f, 0.0f))
-                                       .rotate_y(-90.0f)
-                                       .scale(glm::vec3(1.0)))
-                            .material(material)
-                            .build());
+    tenno::make_shared<Model>(Model::Builder()
+                              .path("examples/assets/models/backpack/backpack.obj")
+                              .transform(Transform()
+                                         .translate(glm::vec3(15.0f, 0.0f, 0.0f))
+                                         .rotate_y(-90.0f)
+                                         .scale(glm::vec3(1.0)))
+                              .material(material)
+                              .build());
 
   auto phong_dir =
-    std::make_shared<PhongDirLight>(PhongDirLight()
-                                    .set_strength(0.5f));
+    tenno::make_shared<PhongDirLight>(PhongDirLight()
+                                      .set_strength(0.5f));
   auto phong_point =
-    std::make_shared<PhongPointLight>(PhongPointLight()
-                                      .set_strength(1.8f));
+    tenno::make_shared<PhongPointLight>(PhongPointLight()
+                                        .set_strength(1.8f));
   
-  auto scene = Scene(camera);
+  auto scene     = Scene(camera);
   auto root_node = scene.get_root();
   
   root_node->add_model(model);
@@ -102,13 +102,17 @@ int main()
 
   // Camera movement
   glm::vec3 acceleration = glm::vec3(0.0);
-  glm::vec3 speed = glm::vec3(0.0);
+  glm::vec3 speed        = glm::vec3(0.0);
 
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
+  bool capture_mouse = true;
   
-  Input::add_mouse_callback("rotate_camera", [camera, &mouse](double x, double y)
+  Input::add_mouse_callback("rotate_camera",
+                            [camera, &mouse, &capture_mouse](double x, double y)
   {
+    if (!capture_mouse) return;
+    
     if (mouse.get_first())
     {
       mouse.set_x(x);
@@ -135,11 +139,13 @@ int main()
     return;
   });
 
-  bool capture_mouse = true;
-  Input::add_keyboard_callback(Key::Space, [&capture_mouse]()
+  Input::add_keyboard_callback(Key::Space, [&capture_mouse, &mouse]()
   {
     capture_mouse = !capture_mouse;
     Window::set_mouse_capture(capture_mouse);
+
+    if (!capture_mouse)
+      mouse.set_first(true);
   });
 
   
@@ -175,7 +181,7 @@ int main()
   return 0;
 }
 
-void update_camera(std::shared_ptr<Camera> camera,
+void update_camera(tenno::shared_ptr<Camera> camera,
                    glm::vec3 &acceleration,
                    glm::vec3 &speed,
                    float delta_time)

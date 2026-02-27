@@ -16,6 +16,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+
+#include <tenno/vector.hpp>
 #include <vector>
 
 using namespace viotecs;
@@ -74,7 +76,7 @@ struct PointLightComponent : Component
   float linear;
   float quadratic;
   float strength;
-  std::vector<std::shared_ptr<brenta::Shader>> shaders;
+  tenno::vector<tenno::shared_ptr<brenta::Shader>> shaders;
 
   PointLightComponent()
       : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
@@ -85,7 +87,7 @@ struct PointLightComponent : Component
   PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular,
                       float constant, float linear, float quadratic,
                       float strength,
-                      std::vector<std::shared_ptr<brenta::Shader>> shaders)
+                      tenno::vector<tenno::shared_ptr<brenta::Shader>> shaders)
       : ambient(ambient), diffuse(diffuse), specular(specular),
         constant(constant), linear(linear), quadratic(quadratic),
         strength(strength), shaders(shaders)
