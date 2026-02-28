@@ -21,12 +21,14 @@ using namespace viotecs;
 
 void init_robot_entity()
 {
-  auto shader = AssetManager::get_shader("default_shader");
+  auto shader = AssetManager::get<Shader>("default_shader");
   if (!shader)
   {
-    shader = AssetManager::new_shader("default_shader", {
-        { Shader::Type::Vertex,   phong_vs },
-        { Shader::Type::Fragment, phong_fs } });
+    shader = AssetManager::new_asset<Shader>("default_shader",
+                                             Shader::Builder()
+                                             .objects({
+                                                 { Shader::Type::Vertex,   phong_vs },
+                                                 { Shader::Type::Fragment, phong_fs } }));
   }
 
   Model m = Model::Builder()
@@ -42,8 +44,7 @@ void init_robot_entity()
                    .filtering_mag(Texture::Filtering::Nearest)
                    .has_mipmap(Gl::True)
                    .mipmap_min(Texture::Filtering::LinearMipmapNearest)
-                   .mipmap_mag(Texture::Filtering::Nearest)
-                   .flipped(false))
+                   .mipmap_mag(Texture::Filtering::Nearest))
     .build();
 
   auto cube_entity = World::new_entity()

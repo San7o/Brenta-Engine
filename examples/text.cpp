@@ -51,7 +51,8 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    Text::render("Hello OpenGL!", 25.0f, 25.0f, 1.0f,
+    Text::render("Hello OpenGL!",
+                 25.0f, 25.0f, 1.0f,
                  Color::yellow(), font);
 
     Window::poll_events();

@@ -373,6 +373,7 @@ bool Shader::check_link_errors(Shader::Id shader)
 
 Shader::Object::Object(Type type, const std::filesystem::path &path)
 {
+  this->path = path;
   this->type = type;
   auto src = Object::read_file(path);
   if (!src)
@@ -415,4 +416,53 @@ Shader::Object::read_file(const std::filesystem::path &path)
   }
 
   return code;
+}
+
+Shader::Builder &Shader::Builder::object(const Shader::Object &obj)
+{
+  this->objs.push_back(obj);
+  if (obj.path)
+    this->watch_paths.push_back(*obj.path);
+  return *this;
+}
+
+Shader::Builder &Shader::Builder::objects(const tenno::vector<Shader::Object> &objs)
+{
+  for (auto& obj : objs)
+  {
+    this->objs.push_back(obj);
+    if (obj.path)
+      this->watch_paths.push_back(*obj.path);
+  }
+  return *this;
+}
+
+Shader::Builder &Shader::Builder::feedback(const GLchar **feedback_varyings,
+                                           int num_varyings)
+{
+  this->feedback_varyings = feedback_varyings;
+  this->num_varyings = num_varyings;
+  return *this;
+}
+
+// Add path to be watched for hot-reloading
+Shader::Builder &Shader::Builder::watch(const std::filesystem::path &path)
+{
+  this->watch_paths.push_back(path);
+  return *this;
+}
+
+std::optional<Shader> Shader::Builder::build()
+{
+  if (num_varyings == 0)
+    return Shader::create(this->objs);
+  else
+    return Shader::create(this->feedback_varyings,
+                          this->num_varyings,
+                          this->objs);
+}
+
+tenno::vector<std::filesystem::path> Shader::Builder::get_watch_paths() const
+{
+  return this->watch_paths;
 }

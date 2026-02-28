@@ -50,3 +50,14 @@ void Scene::draw()
   this->root->draw();
   Renderer::end_frame();
 }
+
+Scene::Builder &Scene::Builder::camera(tenno::shared_ptr<Camera> camera)
+{
+  this->_camera = camera;
+  return *this;
+}
+
+Scene Scene::Builder::build()
+{
+  return Scene(this->_camera);
+}

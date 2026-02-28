@@ -46,6 +46,9 @@ public:
 
   static void end_frame();
 
+  // Draw and clear state
+  static void flush();
+
 private:
 
   static glm::mat4 projection;
@@ -55,15 +58,13 @@ private:
   static std::optional<tenno::shared_ptr<DirLight>>  dir_light;
   static tenno::vector<Command> render_queue;
   
-  static void flush();
-
 };
 
 class Renderer::Command
 {
 public:
 
-  glm::mat4                  world_matrix;
+  glm::mat4                    world_matrix;
   tenno::shared_ptr<Model>     model;
   
   Command() = default;

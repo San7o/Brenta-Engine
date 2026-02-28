@@ -79,8 +79,7 @@ int main(void)
           .texture(Texture::Builder()
                    .type(Texture::Type::Diffuse)
                    .path("examples/assets/textures/container2.png")
-                   .build())
-          .build())
+                   .build()))
     .material(material)
     .build();
 

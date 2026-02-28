@@ -7,6 +7,8 @@
 
 #include <brenta/renderer/opengl/gl.hpp>
 
+#include <tenno/vector.hpp>
+
 #include <string>
 #include <filesystem>
 
@@ -180,7 +182,7 @@ public:
     GLboolean          prop_has_mipmap    = Gl::True;
     Texture::Filtering prop_mipmap_min    = Texture::Filtering::LinearMipmapLinear;
     Texture::Filtering prop_mipmap_mag    = Texture::Filtering::Linear;
-    GLboolean          prop_flipped       = true;
+    GLboolean          prop_flipped       = false;
   };
 
 private:
@@ -213,12 +215,17 @@ public:
   Builder& flipped(bool flipped);
   Builder& properties(const Texture::Properties& prop);
 
+  // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
+  
   Texture build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;  
   
 private:
 
   Texture::Config conf = {};
-  
+  tenno::vector<std::filesystem::path> watch_paths = {};  
+
 };
   
 } // namespace brenta

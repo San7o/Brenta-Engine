@@ -21,12 +21,14 @@ using namespace brenta;
 
 void init_cube_entity()
 {
-  auto shader = AssetManager::get_shader("cube_shader");
+  auto shader = AssetManager::get<Shader>("cube_shader");
   if (!shader)
   {
-    shader = AssetManager::new_shader("cube_shader", {
-        { Shader::Type::Vertex,   phong_vs },
-        { Shader::Type::Fragment, phong_fs } });
+    shader = AssetManager::new_asset<Shader>("cube_shader",
+                                             Shader::Builder()
+                                             .objects({
+                                                 { Shader::Type::Vertex,   phong_vs },
+                                                 { Shader::Type::Fragment, phong_fs } }));
   }
 
   Model m = Model::Builder()

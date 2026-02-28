@@ -9,7 +9,7 @@
 
 using namespace brenta;
 
-Mesh::Mesh(Config&& conf)
+Mesh::Mesh(const Config& conf)
 {
   static int _id = 1;
   this->id            = _id;
@@ -158,5 +158,5 @@ Mesh::Builder &Mesh::Builder::textures(tenno::vector<tenno::shared_ptr<Texture>>
 
 Mesh Mesh::Builder::build()
 {
-  return Mesh(tenno::move(this->conf));
+  return Mesh(this->conf);
 }

@@ -27,12 +27,14 @@ void init_sphere_entity()
   // Spere 1
   //
 
-  auto shader = AssetManager::get_shader("default_shader");
+  auto shader = AssetManager::get<Shader>("default_shader");
   if (!shader)
   {
-    shader = AssetManager::new_shader("default_shader", {
-        { Shader::Type::Vertex,   phong_vs },
-        { Shader::Type::Fragment, phong_fs } });
+    shader = AssetManager::new_asset<Shader>("default_shader",
+                                             Shader::Builder()
+                                             .objects({
+                                                 { Shader::Type::Vertex,   phong_vs },
+                                                 { Shader::Type::Fragment, phong_fs } }));
   }
   Model m1 = Model::Builder()
     .path("examples/assets/models/sphere/sphere.obj")

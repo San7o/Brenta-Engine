@@ -27,12 +27,14 @@ void init_point_light_entity()
     .translate(glm::vec3(0.0f, 10.0f, 0.0f))
     .scale(glm::vec3(0.5f));
 
-  auto shader = AssetManager::get_shader("default_shader");
+  auto shader = AssetManager::get<Shader>("default_shader");
   if (!shader)
   {
-    shader = AssetManager::new_shader("default_shader", {
-        { Shader::Type::Vertex,   phong_vs },
-        { Shader::Type::Fragment, phong_fs } });
+    shader = AssetManager::new_asset<Shader>("default_shader",
+                                             Shader::Builder()
+                                             .objects({
+                                                 { Shader::Type::Vertex,   phong_vs },
+                                                 { Shader::Type::Fragment, phong_fs } }));
   }
 
   

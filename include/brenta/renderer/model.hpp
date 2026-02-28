@@ -29,7 +29,7 @@ public:
   class  Builder;
 
   Model() = default;
-  Model(Config &&conf);
+  Model(Config &conf);
   ~Model();
 
   Model(const Model&)            = delete;
@@ -67,11 +67,11 @@ private:
 
 struct Model::Config
 {
-  Transform                   transform     = {};
-  tenno::shared_ptr<Material> material      = {};
-  std::filesystem::path       model_path    = "";
-  Texture::Properties         texture_props = {};
-  tenno::vector<Mesh>           meshes        = {};
+  Transform                     transform     = {};
+  tenno::shared_ptr<Material>   material      = {};
+  std::filesystem::path         model_path    = "";
+  Texture::Properties           texture_props = {};
+  tenno::vector<Mesh::Builder>  meshes        = {};
 };
 
 class Model::Builder
@@ -82,14 +82,21 @@ public:
   Builder &material(tenno::shared_ptr<Material> material);
   Builder &path(const std::filesystem::path &path);
   Builder &texture_props(const Texture::Properties &props);
-  Builder &mesh(Mesh &&mesh);
-  Builder &meshes(tenno::vector<Mesh> &&meshes);
+  Builder &mesh(const Mesh::Builder &mesh);
+  Builder &mesh(Mesh::Builder &&mesh);
+  Builder &meshes(const tenno::vector<Mesh::Builder> &meshes);
+  Builder &meshes(tenno::vector<Mesh::Builder> &&meshes);
+
+  // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
 
   Model build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;
 
 private:
 
   Model::Config conf = {};
+  tenno::vector<std::filesystem::path> watch_paths = {};
   
 };
 

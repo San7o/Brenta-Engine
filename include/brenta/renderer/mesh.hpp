@@ -37,7 +37,7 @@ public:
   tenno::vector<unsigned int>               indices;
   tenno::vector<tenno::shared_ptr<Texture>> textures;
 
-  Mesh(Config&& builder);
+  Mesh(const Config& conf);
   
   constexpr Mesh(const Mesh&) = delete;
   constexpr Mesh& operator=(const Mesh&) = delete;

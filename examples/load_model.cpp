@@ -51,6 +51,8 @@ int main()
   Model our_model = Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform(glm::vec3(0.0f)))
+    .texture_props(Texture::Properties()
+                   .flipped(true))
     .build();
 
   // Load the shader
