@@ -119,6 +119,7 @@ Font::~Font()
 Font::Builder& Font::Builder::path(const std::filesystem::path& path)
 {
   this->_path = path;
+  this->watch_paths.push_back(path);
   return *this;
 }
 
@@ -128,7 +129,18 @@ Font::Builder& Font::Builder::size(int size)
   return *this;
 }
 
+Font::Builder& Font::Builder::watch(const std::filesystem::path& path)
+{
+  this->watch_paths.push_back(path);
+  return *this;
+}
+
 Font Font::Builder::build()
 {
   return Font(this->_path, this->_size);
+}
+
+tenno::vector<std::filesystem::path> Font::Builder::get_watch_paths() const
+{
+  return this->watch_paths;
 }

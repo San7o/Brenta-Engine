@@ -55,12 +55,18 @@ public:
   Builder& path(const std::filesystem::path& path);
   Builder& size(int size);
 
+  // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
+  
   Font build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;
   
 private:
 
   std::filesystem::path _path;
   int                   _size;
+  
+  tenno::vector<std::filesystem::path> watch_paths = {};
   
 };  
 

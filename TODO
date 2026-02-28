@@ -1,4 +1,2 @@
-- hot reloading
-   - file watcher
 - lua scripting
 - standard ECS library

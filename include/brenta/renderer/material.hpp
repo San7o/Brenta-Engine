@@ -64,8 +64,12 @@ public:
   Builder& vector(const std::string &name, glm::vec3 val);
   Builder& texture(const std::string &name,
                    tenno::shared_ptr<Texture> val, int index);
+
+ // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
   
   Material build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;  
   
 private:
   
@@ -74,6 +78,7 @@ private:
   tenno::vector<std::pair<std::string, glm::vec3>> vectors;
   tenno::vector<std::pair<std::string,
                           std::pair<int, tenno::shared_ptr<Texture>>>> textures;
+
 };  
 
 } // namespace brenta

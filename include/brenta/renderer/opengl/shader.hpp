@@ -152,10 +152,11 @@ public:
   
   Type        type;
   std::string src;
+  std::optional<std::filesystem::path> path;
 
   Object() = default;
   Object(Type type, const char* src)
-    : type(type), src(std::string(src)) {}
+    : type(type), src(std::string(src)), path({}) {}
   Object(Type type, const std::string &src)
     : type(type), src(src) {}
   Object(Type type, const std::filesystem::path &path);
@@ -174,13 +175,19 @@ public:
   Builder& objects(const tenno::vector<Shader::Object> &objs);
   Builder& feedback(const GLchar **feedback_varyings, int num_varyings);
 
+  // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
+ 
   std::optional<Shader> build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;
   
 private:
 
   int num_varyings = 0;
   const GLchar **feedback_varyings;
   tenno::vector<Object> objs;
+
+  tenno::vector<std::filesystem::path> watch_paths = {};
   
 };
 

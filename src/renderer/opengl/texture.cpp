@@ -264,7 +264,18 @@ Texture::Builder& Texture::Builder::properties(const Texture::Properties& prop)
   return *this;
 }
 
+Texture::Builder& Texture::Builder::watch(const std::filesystem::path& path)
+{
+  this->watch_paths.push_back(path);
+  return *this;
+}
+
 Texture Texture::Builder::build()
 {
   return Texture(this->conf);
+}
+
+tenno::vector<std::filesystem::path> Texture::Builder::get_watch_paths() const
+{
+  return this->watch_paths;
 }

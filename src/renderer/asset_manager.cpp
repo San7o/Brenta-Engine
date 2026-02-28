@@ -67,7 +67,14 @@ AssetManager::new_asset<Texture>(const AssetId& id,
   ptr.set_cache(false);
   AssetManager::textures[id] = {builder, ptr};
 
-  // TODO: hotreloading
+  auto watch_paths = builder.get_watch_paths();
+  for (auto& watch_path : watch_paths)
+  {
+    AssetManager::hotreload_entries[watch_path] = {
+      .type = AssetType::Texture,
+      .id   = id,
+    };
+  }
   
   return ptr;
 }
@@ -81,8 +88,6 @@ AssetManager::new_asset<Material>(const AssetId& id,
   ptr.set_cache(false);
   AssetManager::materials[id] = {builder, ptr};
   
-  // TODO: hotreloading
-  
   return ptr;
 }
 
@@ -94,8 +99,15 @@ AssetManager::new_asset<Font>(const AssetId& id,
   auto ptr = tenno::make_shared<Font>(builder.build());
   ptr.set_cache(false);
   AssetManager::fonts[id] = {builder, ptr};
-  
-  // TODO: hotreloading
+
+  auto watch_paths = builder.get_watch_paths();
+  for (auto& watch_path : watch_paths)
+  {
+    AssetManager::hotreload_entries[watch_path] = {
+      .type = AssetType::Font,
+      .id   = id,
+    };
+  }
   
   return ptr;
 }
@@ -108,8 +120,6 @@ AssetManager::new_asset<Scene>(const AssetId& id,
   auto ptr = tenno::make_shared<Scene>(builder.build());
   ptr.set_cache(false);
   AssetManager::scenes[id] = {builder, ptr};
-  
-  // TODO: hotreloading
   
   return ptr;
 }
@@ -350,15 +360,14 @@ void AssetManager::hotreload_update()
 
   for (auto& item : AssetManager::hotreload_pending)
   {
-    DEBUG("AssetManager: hotreloading {}", item.id);
+    DEBUG("AssetManager: hotreloading now {}", item.id);
     switch(item.type)
     {
     case AssetType::Model:    AssetManager::reload<Model>(item.id);    break;
     case AssetType::Texture:  AssetManager::reload<Texture>(item.id);  break;
-    case AssetType::Material: AssetManager::reload<Material>(item.id); break;
-    case AssetType::Scene:    AssetManager::reload<Scene>(item.id);    break;
     case AssetType::Shader:   AssetManager::reload<Shader>(item.id);   break;
     case AssetType::Font:     AssetManager::reload<Font>(item.id);     break;
+    default: break;
     }
   }
 
