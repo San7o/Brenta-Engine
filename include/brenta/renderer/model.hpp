@@ -86,12 +86,17 @@ public:
   Builder &mesh(Mesh::Builder &&mesh);
   Builder &meshes(const tenno::vector<Mesh::Builder> &meshes);
   Builder &meshes(tenno::vector<Mesh::Builder> &&meshes);
-  
+
+  // Add path to be watched for hot-reloading
+  Builder &watch(const std::filesystem::path &path);
+
   Model build();
+  tenno::vector<std::filesystem::path> get_watch_paths() const;
 
 private:
 
   Model::Config conf = {};
+  tenno::vector<std::filesystem::path> watch_paths = {};
   
 };
 

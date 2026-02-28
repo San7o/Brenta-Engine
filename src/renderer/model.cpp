@@ -216,6 +216,7 @@ Model::Builder &Model::Builder::material(tenno::shared_ptr<Material> material)
 Model::Builder &Model::Builder::path(const std::filesystem::path &path)
 {
   this->conf.model_path = path;
+  this->watch_paths.push_back(path);
   return *this;
 }
 
@@ -251,7 +252,18 @@ Model::Builder &Model::Builder::meshes(tenno::vector<Mesh::Builder> &&meshes)
   return *this;
 }
 
+Model::Builder &Model::Builder::watch(const std::filesystem::path& path)
+{
+  this->watch_paths.push_back(path);
+  return *this;
+}
+
 Model Model::Builder::build()
 {
   return Model(this->conf);
+}
+
+tenno::vector<std::filesystem::path> Model::Builder::get_watch_paths() const
+{
+  return this->watch_paths;
 }

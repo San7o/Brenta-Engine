@@ -8,7 +8,9 @@
 
 using namespace brenta;
 
-// Static members
+//
+// Static storage
+//
 
 std::unordered_map<AssetManager::AssetId,
                    AssetManager::Asset<Model>>   AssetManager::models;
@@ -23,6 +25,13 @@ std::unordered_map<AssetManager::AssetId,
 std::unordered_map<AssetManager::AssetId,
                    AssetManager::Asset<Font>>     AssetManager::fonts;
 
+bool                                 AssetManager::hotreload_active = false;
+FilesystemWatcher                    AssetManager::fswatcher;
+tenno::jthread                       AssetManager::hotreload_thread;
+tenno::mutex                         AssetManager::hotreload_pending_mutex;
+tenno::vector<AssetManager::HotReloadItem> AssetManager::hotreload_pending;
+std::unordered_map<std::filesystem::path, AssetManager::HotReloadItem>
+AssetManager::hotreload_entries;
 
 //
 // Member functions
@@ -36,6 +45,16 @@ AssetManager::new_asset<Model>(const AssetId& id,
   auto ptr = tenno::make_shared<Model>(builder.build());
   ptr.set_cache(false);
   AssetManager::models[id] = {builder, ptr};
+
+  auto watch_paths = builder.get_watch_paths();
+  for (auto& watch_path : watch_paths)
+  {
+    AssetManager::hotreload_entries[watch_path] = {
+      .type = AssetType::Model,
+      .id   = id,
+    };
+  }
+  
   return ptr;
 }
 
@@ -47,6 +66,9 @@ AssetManager::new_asset<Texture>(const AssetId& id,
   auto ptr = tenno::make_shared<Texture>(builder.build());
   ptr.set_cache(false);
   AssetManager::textures[id] = {builder, ptr};
+
+  // TODO: hotreloading
+  
   return ptr;
 }
 
@@ -58,6 +80,9 @@ AssetManager::new_asset<Material>(const AssetId& id,
   auto ptr = tenno::make_shared<Material>(builder.build());
   ptr.set_cache(false);
   AssetManager::materials[id] = {builder, ptr};
+  
+  // TODO: hotreloading
+  
   return ptr;
 }
 
@@ -69,6 +94,9 @@ AssetManager::new_asset<Font>(const AssetId& id,
   auto ptr = tenno::make_shared<Font>(builder.build());
   ptr.set_cache(false);
   AssetManager::fonts[id] = {builder, ptr};
+  
+  // TODO: hotreloading
+  
   return ptr;
 }
 
@@ -80,6 +108,9 @@ AssetManager::new_asset<Scene>(const AssetId& id,
   auto ptr = tenno::make_shared<Scene>(builder.build());
   ptr.set_cache(false);
   AssetManager::scenes[id] = {builder, ptr};
+  
+  // TODO: hotreloading
+  
   return ptr;
 }
 
@@ -96,6 +127,9 @@ AssetManager::new_asset<Shader>(const AssetId& id,
   shader.set_cache(false);
 
   AssetManager::shaders[id] = {builder, shader};
+  
+  // TODO: hotreloading
+  
   return shader;
 }
 
@@ -257,4 +291,76 @@ void AssetManager::clear()
   AssetManager::fonts.clear();
   
   return;
+}
+
+void AssetManager::hotreload_activate()
+{
+  if (AssetManager::hotreload_active) return;
+
+  AssetManager::hotreload_active = true;
+
+  AssetManager::hotreload_thread = tenno::jthread([](){
+    DEBUG("AssetManager: created hotreloading thread");
+
+    AssetManager::fswatcher.init();
+
+    for (auto& [path, _] : AssetManager::hotreload_entries)
+    {
+      AssetManager::fswatcher.add(path, {FilesystemWatcher::Event::Modify});
+      DEBUG("AssetManager: hotreloading setup {}", path.string());
+    }
+
+    while(AssetManager::hotreload_active)
+    {
+      auto maybe_event = AssetManager::fswatcher.watch();
+      if (!maybe_event) continue;
+
+      auto event = *maybe_event;
+      if (AssetManager::hotreload_entries.contains(event))
+      {
+        tenno::lock_guard<tenno::mutex> lock(AssetManager::hotreload_pending_mutex);
+        AssetManager::hotreload_pending.push_back(AssetManager::hotreload_entries[event]);
+        DEBUG("AssetManager: hotreloading detected change in {}", event.string());
+      }
+    }
+    
+    return;
+  });
+
+  DEBUG("AssetManager: hotreloading activated");
+}
+
+void AssetManager::hotreload_deactivate()
+{
+  if (!AssetManager::hotreload_active) return;
+  
+  AssetManager::hotreload_active = false;
+  
+  AssetManager::hotreload_thread.request_stop();
+  AssetManager::fswatcher.destroy();
+
+  DEBUG("AssetManager: hotreloading deactivated");
+}
+
+void AssetManager::hotreload_update()
+{
+  if (!AssetManager::hotreload_active) return;
+  
+  tenno::lock_guard<tenno::mutex> lock(AssetManager::hotreload_pending_mutex);
+
+  for (auto& item : AssetManager::hotreload_pending)
+  {
+    DEBUG("AssetManager: hotreloading {}", item.id);
+    switch(item.type)
+    {
+    case AssetType::Model:    AssetManager::reload<Model>(item.id);    break;
+    case AssetType::Texture:  AssetManager::reload<Texture>(item.id);  break;
+    case AssetType::Material: AssetManager::reload<Material>(item.id); break;
+    case AssetType::Scene:    AssetManager::reload<Scene>(item.id);    break;
+    case AssetType::Shader:   AssetManager::reload<Shader>(item.id);   break;
+    case AssetType::Font:     AssetManager::reload<Font>(item.id);     break;
+    }
+  }
+
+  AssetManager::hotreload_pending.clear();
 }

@@ -258,13 +258,18 @@ int main()
   //
   // Main loop
   //
+
+  // Setup hotreloading
+  AssetManager::hotreload_activate();
   
   while (!Window::should_close())
   {
     float delta_time = Window::get_time().get_delta();
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
-        
+
+    AssetManager::hotreload_update();
+    
     Gl::set_color(Color::grey());
     Gl::clear();
 
@@ -281,7 +286,8 @@ int main()
     Window::poll_events();
     Window::swap_buffers();
   }
-
+  
+  AssetManager::hotreload_deactivate();
   AssetManager::clear();
   return 0;
 }
