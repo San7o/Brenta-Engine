@@ -57,8 +57,16 @@ void Node::update(float delta_time)
 
 void Node::draw()
 {
-  if (this->point_lights.size() > 0)
+  for (auto& point : this->point_lights)
+  {
+    auto& pos = point->get_position();
+    pos = glm::vec3(local.get_x(), local.get_y(), local.get_z());
     Renderer::submit_point_lights(this->point_lights);
+  }
+  if (this->point_lights.size() > 0)
+  {
+    
+  }
   if (this->dir_light)
     Renderer::submit_dir_light(this->dir_light.value());
 
@@ -70,4 +78,3 @@ void Node::draw()
     child->draw();
   return;
 }
-

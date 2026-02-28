@@ -76,6 +76,8 @@ int main()
                                               .rotate(glm::angleAxis(glm::radians(-90.0f),
                                                                      glm::vec3(0.0f, 1.0f, 0.0f)))
                                               .scale(glm::vec3(1.0)))
+                                   .texture_props(Texture::Properties()
+                                                  .flipped(true))
                                    .material(material));
 
   auto scene = AssetManager::new_asset<Scene>("main_scene",

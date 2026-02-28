@@ -80,9 +80,11 @@ int main()
     tenno::make_shared<Model>(Model::Builder()
                               .path("examples/assets/models/backpack/backpack.obj")
                               .transform(Transform()
-                                         .translate(glm::vec3(15.0f, 0.0f, 0.0f))
+                                         .translate(glm::vec3(25.0f, 0.0f, 0.0f))
                                          .rotate_y(-90.0f)
                                          .scale(glm::vec3(1.0)))
+                              .texture_props(Texture::Properties()
+                                             .flipped(true))
                               .material(material)
                               .build());
 
@@ -148,6 +150,7 @@ int main()
       mouse.set_first(true);
   });
 
+  INFO("Move with W / A / S / D / Q / E / Mouse");
   
   while (!Window::should_close())
   {

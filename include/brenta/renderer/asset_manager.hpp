@@ -18,7 +18,10 @@ class AssetManager
 {
 public:
 
-  using AssetId = std::string;
+  using  AssetId = std::string;
+  
+  template<typename T>
+  struct Asset;
 
   template<typename T>
   static tenno::shared_ptr<T> new_asset(const AssetId& id,
@@ -28,23 +31,30 @@ public:
   static tenno::shared_ptr<T> get(const AssetId& id);
   
   template<typename T>
-  static tenno::shared_ptr<T> reload(const AssetId& id);
+  static bool reload(const AssetId& id);
   
   // Wipe out everything
   static void clear();
   
 private:
 
-  static std::unordered_map<AssetId, tenno::weak_ptr<Model>>    models;
-  static std::unordered_map<AssetId, tenno::weak_ptr<Texture>>  textures;
-  static std::unordered_map<AssetId, tenno::weak_ptr<Material>> materials;
-  static std::unordered_map<AssetId, tenno::weak_ptr<Scene>>    scenes;
-  static std::unordered_map<AssetId, tenno::weak_ptr<Shader>>   shaders;
-  static std::unordered_map<AssetId, tenno::weak_ptr<Font>>     fonts;
+  static std::unordered_map<AssetId, Asset<Model>>    models;
+  static std::unordered_map<AssetId, Asset<Texture>>  textures;
+  static std::unordered_map<AssetId, Asset<Material>> materials;
+  static std::unordered_map<AssetId, Asset<Scene>>    scenes;
+  static std::unordered_map<AssetId, Asset<Shader>>   shaders;
+  static std::unordered_map<AssetId, Asset<Font>>     fonts;
 
   // Private constructor for singleton
   AssetManager() = default;
   
 };
 
+template<typename T>
+struct AssetManager::Asset
+{
+  T::Builder         builder;
+  tenno::weak_ptr<T> ptr;
+};
+  
 } // namespace brenta

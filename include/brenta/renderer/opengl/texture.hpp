@@ -180,7 +180,7 @@ public:
     GLboolean          prop_has_mipmap    = Gl::True;
     Texture::Filtering prop_mipmap_min    = Texture::Filtering::LinearMipmapLinear;
     Texture::Filtering prop_mipmap_mag    = Texture::Filtering::Linear;
-    GLboolean          prop_flipped       = true;
+    GLboolean          prop_flipped       = false;
   };
 
 private:

@@ -83,6 +83,8 @@ int main()
                                          .translate(glm::vec3(15.0f, 0.0f, 0.0f))
                                          .rotate_y(-90.0f)
                                          .scale(glm::vec3(1.0)))
+                              .texture_props(Texture::Properties()
+                                             .flipped(true))
                               .material(material)
                               .build());
 

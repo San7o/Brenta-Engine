@@ -44,8 +44,7 @@ void init_robot_entity()
                    .filtering_mag(Texture::Filtering::Nearest)
                    .has_mipmap(Gl::True)
                    .mipmap_min(Texture::Filtering::LinearMipmapNearest)
-                   .mipmap_mag(Texture::Filtering::Nearest)
-                   .flipped(false))
+                   .mipmap_mag(Texture::Filtering::Nearest))
     .build();
 
   auto cube_entity = World::new_entity()

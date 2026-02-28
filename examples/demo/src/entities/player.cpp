@@ -38,6 +38,8 @@ void init_player_entity()
     .transform(Transform()
                .translate(glm::vec3(0.0f, 1.8f, -5.0f))
                .scale(glm::vec3(1.0f)))
+    .texture_props(Texture::Properties()
+                   .flipped(true))
     .build();
   
   auto player = World::new_entity()

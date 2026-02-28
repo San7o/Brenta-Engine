@@ -12,9 +12,9 @@ using namespace brenta;
 // Static variables
 //
 
-tenno::vector<Renderer::Command> Renderer::render_queue           = {};
+tenno::vector<Renderer::Command> Renderer::render_queue             = {};
 tenno::vector<tenno::shared_ptr<PointLight>> Renderer::point_lights = {};
-std::optional<tenno::shared_ptr<DirLight>> Renderer::dir_light    = {};
+std::optional<tenno::shared_ptr<DirLight>>   Renderer::dir_light    = {};
 glm::mat4 Renderer::view;
 glm::mat4 Renderer::projection;
 glm::vec3 Renderer::cam_position;

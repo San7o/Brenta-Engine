@@ -26,7 +26,7 @@ int main()
   
   // Required: id and path of an audio. The id will be used by the
   // audio subsystem to identify this particular file.
-  const auto sound_guitar_id = "guitar";
+  const auto sound_guitar_id   = "guitar";
   const auto sound_guitar_path = "examples/assets/audio/guitar.wav";
 
   // You can specify additional optional settings like stream and
