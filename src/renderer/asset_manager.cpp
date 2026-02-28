@@ -171,7 +171,6 @@ tenno::shared_ptr<Font> AssetManager::get<Font>(const AssetId& id)
   return nullptr;
 }
 
-
 template<>
 bool AssetManager::reload<Model>(const AssetId& id)
 {
@@ -180,6 +179,70 @@ bool AssetManager::reload<Model>(const AssetId& id)
   Asset<Model>& asset = AssetManager::models[id];
   tenno::shared_ptr<Model> new_model = tenno::make_shared<Model>(asset.builder.build());
   asset.ptr.swap_ptr(new_model);
+  
+  return true;
+}
+
+template<>
+bool AssetManager::reload<Texture>(const AssetId& id)
+{
+  if (!AssetManager::textures.contains(id)) return false;
+
+  Asset<Texture>& asset = AssetManager::textures[id];
+  tenno::shared_ptr<Texture> new_texture = tenno::make_shared<Texture>(asset.builder.build());
+  asset.ptr.swap_ptr(new_texture);
+  
+  return true;
+}
+
+template<>
+bool AssetManager::reload<Material>(const AssetId& id)
+{
+  if (!AssetManager::materials.contains(id)) return false;
+
+  Asset<Material>& asset = AssetManager::materials[id];
+  tenno::shared_ptr<Material> new_material = tenno::make_shared<Material>(asset.builder.build());
+  asset.ptr.swap_ptr(new_material);
+  
+  return true;
+}
+
+template<>
+bool AssetManager::reload<Font>(const AssetId& id)
+{
+  if (!AssetManager::fonts.contains(id)) return false;
+
+  Asset<Font>& asset = AssetManager::fonts[id];
+  tenno::shared_ptr<Font> new_font = tenno::make_shared<Font>(asset.builder.build());
+  asset.ptr.swap_ptr(new_font);
+  
+  return true;
+}
+
+template<>
+bool AssetManager::reload<Scene>(const AssetId& id)
+{
+  if (!AssetManager::scenes.contains(id)) return false;
+
+  Asset<Scene>& asset = AssetManager::scenes[id];
+  tenno::shared_ptr<Scene> new_scene = tenno::make_shared<Scene>(asset.builder.build());
+  asset.ptr.swap_ptr(new_scene);
+  
+  return true;
+}
+
+template<>
+bool AssetManager::reload<Shader>(const AssetId& id)
+{
+  if (!AssetManager::shaders.contains(id)) return false;
+
+  Asset<Shader>& asset = AssetManager::shaders[id];
+  auto maybe_shader = asset.builder.build();
+  if (!maybe_shader) return false;
+  
+  tenno::shared_ptr<Shader> new_shader =
+    tenno::make_shared<Shader>(tenno::move(*new_shader));
+  asset.ptr.swap_ptr(new_shader);
   
   return true;
 }
