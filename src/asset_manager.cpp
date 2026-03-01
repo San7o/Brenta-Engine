@@ -19,7 +19,7 @@ std::unordered_map<AssetManager::AssetId,
 std::unordered_map<AssetManager::AssetId,
                    AssetManager::Asset<Material>> AssetManager::materials;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Scene>>    AssetManager::scenes;
+                   AssetManager::AssetOwned<Scene>>    AssetManager::scenes;
 std::unordered_map<AssetManager::AssetId,
                    AssetManager::Asset<Shader>>   AssetManager::shaders;
 std::unordered_map<AssetManager::AssetId,
@@ -195,12 +195,7 @@ template<>
 tenno::shared_ptr<Scene> AssetManager::get<Scene>(const AssetId& id)
 {
   if (!AssetManager::scenes.contains(id)) return nullptr;
-
-  if (tenno::shared_ptr<Scene> ptr =
-      AssetManager::scenes[id].ptr.lock())
-    return ptr;
-
-  return nullptr;
+  return AssetManager::scenes[id].ptr;
 }
 
 template<>
@@ -221,7 +216,8 @@ bool AssetManager::reload<Model>(const AssetId& id)
   if (!AssetManager::models.contains(id)) return false;
 
   Asset<Model>& asset = AssetManager::models[id];
-  tenno::shared_ptr<Model> new_model = tenno::make_shared<Model>(asset.builder.build());
+  tenno::shared_ptr<Model> new_model =
+    tenno::make_shared<Model>(asset.builder.build());
   asset.ptr.swap_ptr(new_model);
   
   return true;
@@ -233,7 +229,8 @@ bool AssetManager::reload<Texture>(const AssetId& id)
   if (!AssetManager::textures.contains(id)) return false;
 
   Asset<Texture>& asset = AssetManager::textures[id];
-  tenno::shared_ptr<Texture> new_texture = tenno::make_shared<Texture>(asset.builder.build());
+  tenno::shared_ptr<Texture> new_texture =
+    tenno::make_shared<Texture>(asset.builder.build());
   asset.ptr.swap_ptr(new_texture);
   
   return true;
@@ -245,7 +242,8 @@ bool AssetManager::reload<Material>(const AssetId& id)
   if (!AssetManager::materials.contains(id)) return false;
 
   Asset<Material>& asset = AssetManager::materials[id];
-  tenno::shared_ptr<Material> new_material = tenno::make_shared<Material>(asset.builder.build());
+  tenno::shared_ptr<Material> new_material =
+    tenno::make_shared<Material>(asset.builder.build());
   asset.ptr.swap_ptr(new_material);
   
   return true;
@@ -257,7 +255,8 @@ bool AssetManager::reload<Font>(const AssetId& id)
   if (!AssetManager::fonts.contains(id)) return false;
 
   Asset<Font>& asset = AssetManager::fonts[id];
-  tenno::shared_ptr<Font> new_font = tenno::make_shared<Font>(asset.builder.build());
+  tenno::shared_ptr<Font> new_font =
+    tenno::make_shared<Font>(asset.builder.build());
   asset.ptr.swap_ptr(new_font);
   
   return true;
@@ -268,8 +267,9 @@ bool AssetManager::reload<Scene>(const AssetId& id)
 {
   if (!AssetManager::scenes.contains(id)) return false;
 
-  Asset<Scene>& asset = AssetManager::scenes[id];
-  tenno::shared_ptr<Scene> new_scene = tenno::make_shared<Scene>(asset.builder.build());
+  AssetOwned<Scene>& asset = AssetManager::scenes[id];
+  tenno::shared_ptr<Scene> new_scene =
+    tenno::make_shared<Scene>(asset.builder.build());
   asset.ptr.swap_ptr(new_scene);
   
   return true;
@@ -325,6 +325,8 @@ void AssetManager::hotreload_activate()
       auto maybe_event = AssetManager::fswatcher.watch();
       if (!maybe_event) continue;
 
+      DEBUG("AssetManager: hotreloading received event");
+      
       auto event = *maybe_event;
       if (AssetManager::hotreload_entries.contains(event))
       {

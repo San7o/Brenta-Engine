@@ -12,6 +12,9 @@
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/asset_manager.hpp>
 
+#define BRENTA_MAIN
+#include <brenta/app.hpp>
+
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
 #include <iostream>
@@ -21,7 +24,7 @@
 
 using namespace brenta;
 
-int main()
+bool App::setup()
 {
   const int screen_width = 800;
   const int screen_height = 600;
@@ -39,7 +42,8 @@ int main()
           .multisample()
           .depth_test())
     .build();
-  auto engine = Engine::managed();
+  auto engine = Engine::instance();
+  engine.initialize();
   
   auto camera =
     tenno::make_shared<Camera>(Camera::Builder()
@@ -59,7 +63,7 @@ int main()
   if (!shader)
   {
     ERROR("Error creating shader");
-    return 1;
+    return false;
   }
   
   auto material =
@@ -88,22 +92,30 @@ int main()
   model_node->add_model(model);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
 
-  while (!Window::should_close())
-  {
-    auto delta_time = Window::get_time().get_delta();
-    if (Window::is_key_pressed(Key::Escape))
-      Window::close();
+  return true;
+}
 
-    Gl::set_color(Color::grey());
-    Gl::clear();
+bool App::update(float delta_time)
+{
+  if (Window::is_key_pressed(Key::Escape))
+    Window::close();
 
-    scene->update(delta_time);
-    scene->draw();
-    
-    Window::poll_events();
-    Window::swap_buffers();
-  }
+  Gl::set_color(Color::grey());
+  Gl::clear();
 
+  auto scene = AssetManager::get<Scene>("main_scene");
+  if (!scene) return true;
+  
+  scene->update(delta_time);
+  scene->draw();
+
+  return true;
+}
+
+void App::cleanup()
+{
   AssetManager::clear();
-  return 0;
+  
+  auto engine = Engine::instance();
+  engine.terminate();
 }

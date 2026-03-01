@@ -26,6 +26,8 @@ public:
   
   template<typename T>
   struct Asset;
+  template<typename T>
+  struct AssetOwned;
   struct HotReloadItem;
 
   enum class AssetType
@@ -65,9 +67,9 @@ private:
   static std::unordered_map<AssetId, Asset<Model>>    models;
   static std::unordered_map<AssetId, Asset<Texture>>  textures;
   static std::unordered_map<AssetId, Asset<Material>> materials;
-  static std::unordered_map<AssetId, Asset<Scene>>    scenes;
   static std::unordered_map<AssetId, Asset<Shader>>   shaders;
   static std::unordered_map<AssetId, Asset<Font>>     fonts;
+  static std::unordered_map<AssetId, AssetOwned<Scene>>    scenes;
 
   // Private constructor for singleton
   AssetManager() = default;
@@ -93,6 +95,13 @@ struct AssetManager::Asset
 {
   T::Builder         builder;
   tenno::weak_ptr<T> ptr;
+};
+
+template<typename T>
+struct AssetManager::AssetOwned
+{
+  T::Builder           builder;
+  tenno::shared_ptr<T> ptr;
 };
 
 struct AssetManager::HotReloadItem

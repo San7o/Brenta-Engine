@@ -280,6 +280,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(asset_manager)
   add_example(hot_reloading)
   add_example(scripting)
+  add_example(app)
 
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES
