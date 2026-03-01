@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/asset_manager.hpp>
 
 #include <demo/components/directional_light.hpp>
 #include <demo/entities/directional_light.hpp>

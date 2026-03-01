@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/asset_manager.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/text.hpp>
 

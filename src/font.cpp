@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/asset_manager.hpp>
 #include <brenta/logger.hpp>
 
 #include "renderer/shaders/c/text_fs.c"

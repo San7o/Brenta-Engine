@@ -13,7 +13,7 @@
 #include <brenta/renderer/scene.hpp>
 #include <brenta/renderer/phong.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/asset_manager.hpp>
 #include <brenta/input.hpp>
 #include <brenta/mouse.hpp>
 #include <brenta/text.hpp>

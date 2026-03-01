@@ -10,7 +10,7 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/asset_manager.hpp>
+#include <brenta/asset_manager.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
