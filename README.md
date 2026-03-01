@@ -11,7 +11,7 @@ the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
 the engine's internals.
 
 <div align="center">
-  <img src="https://san7o.github.io/Brenta-Engine/brenta-picture.png" />
+  <img src="docs/brenta-picture.png" />
 </div>
 
 <h2 align=center>  Features </h2>
