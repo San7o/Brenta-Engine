@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['keymods_0',['KeyMods',['../classbrenta_1_1KeyMods.html',1,'brenta']]]
+  ['input_0',['Input',['../classbrenta_1_1Input.html',1,'brenta']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logger_0',['Logger',['../classbrenta_1_1Logger.html',1,'brenta']]]
+  ['keymods_0',['KeyMods',['../classbrenta_1_1KeyMods.html',1,'brenta']]]
 ];

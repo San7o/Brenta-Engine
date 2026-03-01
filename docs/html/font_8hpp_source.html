@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Brenta Engine: include/brenta/gui/font.hpp Source File</title>
+<title>Brenta Engine: include/brenta/font.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -138,20 +138,48 @@ $(document).ready(function(){initNavTree('font_8hpp_source.html',''); initResiza
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  };</div>
 </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  std::shared_ptr&lt;Shader&gt;   shader;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_class" href="classbrenta_1_1Vao.html">Vao</a>                       vao;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classbrenta_1_1Buffer.html">Buffer</a>                    vbo;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  std::map&lt;char, Character&gt; characters;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>(<span class="keyword">const</span> std::filesystem::path &amp;path, <span class="keywordtype">int</span> size);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">~Font</a>();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Font_1_1Builder.html">Builder</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  tenno::shared_ptr&lt;Shader&gt;   shader;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <a class="code hl_class" href="classbrenta_1_1Vao.html">Vao</a>                         vao;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <a class="code hl_class" href="classbrenta_1_1Buffer.html">Buffer</a>                      vbo;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  std::map&lt;char, Character&gt;   characters;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>(<span class="keyword">const</span> std::filesystem::path &amp;path, <span class="keywordtype">int</span> size);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>(<a class="code hl_class" href="classbrenta_1_1Font.html">Font</a>&amp;&amp;) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">~Font</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>} <span class="comment">// namespave brenta</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
+<div class="foldopen" id="foldopen00051" data-start="{" data-end="};">
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classbrenta_1_1Font_1_1Builder.html">   51</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Font_1_1Builder.html">Font::Builder</a></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>{</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <a class="code hl_class" href="classbrenta_1_1Font_1_1Builder.html">Builder</a>&amp; path(<span class="keyword">const</span> std::filesystem::path&amp; path);</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <a class="code hl_class" href="classbrenta_1_1Font_1_1Builder.html">Builder</a>&amp; size(<span class="keywordtype">int</span> size);</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span> </div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="comment">// Add path to be watched for hot-reloading</span></div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <a class="code hl_class" href="classbrenta_1_1Font_1_1Builder.html">Builder</a> &amp;watch(<span class="keyword">const</span> std::filesystem::path &amp;path);</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_class" href="classbrenta_1_1Font.html">Font</a> build();</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  tenno::vector&lt;std::filesystem::path&gt; get_watch_paths() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  std::filesystem::path _path;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordtype">int</span>                   _size;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  </div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  tenno::vector&lt;std::filesystem::path&gt; watch_paths = {};</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};  </div>
+</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>} <span class="comment">// namespave brenta</span></div>
 <div class="ttc" id="aclassbrenta_1_1Buffer_html"><div class="ttname"><a href="classbrenta_1_1Buffer.html">brenta::Buffer</a></div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00013">buffer.hpp:14</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Font_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Font_1_1Builder.html">brenta::Font::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="font_8hpp_source.html#l00051">font.hpp:52</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Font_1_1Character_html"><div class="ttname"><a href="classbrenta_1_1Font_1_1Character.html">brenta::Font::Character</a></div><div class="ttdef"><b>Definition</b> <a href="font_8hpp_source.html#l00028">font.hpp:29</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Font_html"><div class="ttname"><a href="classbrenta_1_1Font.html">brenta::Font</a></div><div class="ttdef"><b>Definition</b> <a href="font_8hpp_source.html#l00024">font.hpp:25</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Vao_html"><div class="ttname"><a href="classbrenta_1_1Vao.html">brenta::Vao</a></div><div class="ttdef"><b>Definition</b> <a href="vao_8hpp_source.html#l00037">vao.hpp:38</a></div></div>
@@ -160,7 +188,7 @@ $(document).ready(function(){initNavTree('font_8hpp_source.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><a class="el" href="dir_9c9ed36f3f971f92ca1e98cb741044d0.html">gui</a></li><li class="navelem"><b>font.hpp</b></li>
+    <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="dir_8be729f266d03cf130ed75096ea9284a.html">brenta</a></li><li class="navelem"><b>font.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.8 </li>
   </ul>
 </div>

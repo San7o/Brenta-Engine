@@ -1,6 +1,7 @@
 var hierarchy =
 [
     [ "brenta::Camera::Aircraft", "classbrenta_1_1Camera_1_1Aircraft.html", null ],
+    [ "brenta::AssetManager::Asset< T >", "structbrenta_1_1AssetManager_1_1Asset.html", null ],
     [ "brenta::AssetManager", "classbrenta_1_1AssetManager.html", null ],
     [ "brenta::AudioDriver", "classbrenta_1_1AudioDriver.html", [
       [ "brenta::Miniaudio", "classbrenta_1_1Miniaudio.html", null ]
@@ -12,9 +13,13 @@ var hierarchy =
     [ "brenta::Camera::Aircraft::Builder", "classbrenta_1_1Camera_1_1Aircraft_1_1Builder.html", null ],
     [ "brenta::Camera::Builder", "classbrenta_1_1Camera_1_1Builder.html", null ],
     [ "brenta::Camera::Spherical::Builder", "classbrenta_1_1Camera_1_1Spherical_1_1Builder.html", null ],
+    [ "brenta::Font::Builder", "classbrenta_1_1Font_1_1Builder.html", null ],
+    [ "brenta::Material::Builder", "classbrenta_1_1Material_1_1Builder.html", null ],
     [ "brenta::Mesh::Builder", "classbrenta_1_1Mesh_1_1Builder.html", null ],
     [ "brenta::Model::Builder", "classbrenta_1_1Model_1_1Builder.html", null ],
     [ "brenta::ParticleEmitter::Builder", "classbrenta_1_1ParticleEmitter_1_1Builder.html", null ],
+    [ "brenta::Scene::Builder", "classbrenta_1_1Scene_1_1Builder.html", null ],
+    [ "brenta::Shader::Builder", "classbrenta_1_1Shader_1_1Builder.html", null ],
     [ "brenta::Subsystem::Builder", "classbrenta_1_1Subsystem_1_1Builder.html", [
       [ "brenta::Audio::Builder", "classbrenta_1_1Audio_1_1Builder.html", null ],
       [ "brenta::Engine::Builder", "classbrenta_1_1Engine_1_1Builder.html", null ],
@@ -43,7 +48,11 @@ var hierarchy =
     [ "std::enable_shared_from_this", null, [
       [ "brenta::Node", "classbrenta_1_1Node.html", null ]
     ] ],
+    [ "brenta::FilesystemWatcher", "classbrenta_1_1FilesystemWatcher.html", null ],
     [ "brenta::Font", "classbrenta_1_1Font.html", null ],
+    [ "FsWatcherUnix", "structFsWatcherUnix.html", null ],
+    [ "FsWatcherUnixWdList", "structFsWatcherUnixWdList.html", null ],
+    [ "brenta::AssetManager::HotReloadItem", "structbrenta_1_1AssetManager_1_1HotReloadItem.html", null ],
     [ "brenta::KeyMods", "classbrenta_1_1KeyMods.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],

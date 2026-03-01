@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Mesh.html',''); initRes
 </div><!--header-->
 <div class="contents">
 
-<p>The <a class="el" href="classbrenta_1_1Mesh.html" title="The Mesh class represents a 3D model.">Mesh</a> class represents a 3D model.  
+<p>The <a class="el" href="classbrenta_1_1Mesh.html" title="The Mesh class represents a collection of 3D vertices.">Mesh</a> class represents a collection of 3D vertices.  
  <a href="classbrenta_1_1Mesh.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>&gt;</code></p>
@@ -115,40 +115,37 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a95ff9cc0fcd5e9a847831044b3d6bd9f" id="r_a95ff9cc0fcd5e9a847831044b3d6bd9f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a95ff9cc0fcd5e9a847831044b3d6bd9f">Mesh</a> (<a class="el" href="classbrenta_1_1Mesh_1_1Config.html">Config</a> &amp;&amp;builder)</td></tr>
-<tr class="separator:a95ff9cc0fcd5e9a847831044b3d6bd9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f04801e4d46e0d642fe9e3d1e05642" id="r_a58f04801e4d46e0d642fe9e3d1e05642"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a58f04801e4d46e0d642fe9e3d1e05642">Mesh</a> (const <a class="el" href="classbrenta_1_1Mesh_1_1Config.html">Config</a> &amp;conf)</td></tr>
+<tr class="separator:a58f04801e4d46e0d642fe9e3d1e05642"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4445910f2826c8c55af2e1c60d1c56b8" id="r_a4445910f2826c8c55af2e1c60d1c56b8"><td class="memItemLeft" align="right" valign="top"><a id="a4445910f2826c8c55af2e1c60d1c56b8" name="a4445910f2826c8c55af2e1c60d1c56b8"></a>
 constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b> (const <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;)=delete</td></tr>
 <tr class="separator:a4445910f2826c8c55af2e1c60d1c56b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaa6da95eb04ffa4369ac45e8d48fd33b" id="r_aaa6da95eb04ffa4369ac45e8d48fd33b"><td class="memItemLeft" align="right" valign="top"><a id="aaa6da95eb04ffa4369ac45e8d48fd33b" name="aaa6da95eb04ffa4369ac45e8d48fd33b"></a>
 constexpr <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (const <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;)=delete</td></tr>
 <tr class="separator:aaa6da95eb04ffa4369ac45e8d48fd33b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab52ba3e7db721c776500821464015fcc" id="r_ab52ba3e7db721c776500821464015fcc"><td class="memItemLeft" align="right" valign="top"><a id="ab52ba3e7db721c776500821464015fcc" name="ab52ba3e7db721c776500821464015fcc"></a>
-constexpr&#160;</td><td class="memItemRight" valign="bottom"><b>Mesh</b> (<a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="separator:ab52ba3e7db721c776500821464015fcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a03db3549526525b365128aaa774db08e" id="r_a03db3549526525b365128aaa774db08e"><td class="memItemLeft" align="right" valign="top"><a id="a03db3549526525b365128aaa774db08e" name="a03db3549526525b365128aaa774db08e"></a>
-constexpr <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>operator=</b> (<a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;) noexcept=default</td></tr>
-<tr class="separator:a03db3549526525b365128aaa774db08e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a225024ecd3162872d69895095e4fd083" id="r_a225024ecd3162872d69895095e4fd083"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a225024ecd3162872d69895095e4fd083">Mesh</a> (<a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a225024ecd3162872d69895095e4fd083"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a218ebd6b96758cd1313ffc884d8cc23f" id="r_a218ebd6b96758cd1313ffc884d8cc23f"><td class="memItemLeft" align="right" valign="top">constexpr <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a218ebd6b96758cd1313ffc884d8cc23f">operator=</a> (<a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="separator:a218ebd6b96758cd1313ffc884d8cc23f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a79b998580025a501675a517e9fc1283f" id="r_a79b998580025a501675a517e9fc1283f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a79b998580025a501675a517e9fc1283f">draw</a> () const</td></tr>
 <tr class="separator:a79b998580025a501675a517e9fc1283f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
-<tr class="memitem:a6f85a24918f1a1690ab98f7fa5001879" id="r_a6f85a24918f1a1690ab98f7fa5001879"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classbrenta_1_1Mesh_1_1Vertex.html">Vertex</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a6f85a24918f1a1690ab98f7fa5001879">vertices</a></td></tr>
-<tr class="separator:a6f85a24918f1a1690ab98f7fa5001879"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6bdf5536dd569619351dce9483e26a4" id="r_ad6bdf5536dd569619351dce9483e26a4"><td class="memItemLeft" align="right" valign="top">std::vector&lt; unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#ad6bdf5536dd569619351dce9483e26a4">indices</a></td></tr>
-<tr class="separator:ad6bdf5536dd569619351dce9483e26a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7265b272020a10030b23b79aeab605fa" id="r_a7265b272020a10030b23b79aeab605fa"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classbrenta_1_1Texture.html">Texture</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a7265b272020a10030b23b79aeab605fa">textures</a></td></tr>
-<tr class="separator:a7265b272020a10030b23b79aeab605fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07de3c7e6cb4e49ac74cf42ae0f10a8b" id="r_a07de3c7e6cb4e49ac74cf42ae0f10a8b"><td class="memItemLeft" align="right" valign="top">tenno::vector&lt; <a class="el" href="classbrenta_1_1Mesh_1_1Vertex.html">Vertex</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a07de3c7e6cb4e49ac74cf42ae0f10a8b">vertices</a></td></tr>
+<tr class="separator:a07de3c7e6cb4e49ac74cf42ae0f10a8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2dbbda02298076269e881f0998f95bb1" id="r_a2dbbda02298076269e881f0998f95bb1"><td class="memItemLeft" align="right" valign="top">tenno::vector&lt; unsigned int &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a2dbbda02298076269e881f0998f95bb1">indices</a></td></tr>
+<tr class="separator:a2dbbda02298076269e881f0998f95bb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81773ca0434886ecf5309077c929c279" id="r_a81773ca0434886ecf5309077c929c279"><td class="memItemLeft" align="right" valign="top">tenno::vector&lt; tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1Texture.html">Texture</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Mesh.html#a81773ca0434886ecf5309077c929c279">textures</a></td></tr>
+<tr class="separator:a81773ca0434886ecf5309077c929c279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>The <a class="el" href="classbrenta_1_1Mesh.html" title="The Mesh class represents a 3D model.">Mesh</a> class represents a 3D model. </p>
-<p>A mesh is a collection of vertices, indices and textures that represent a 3D model. The mesh can be drawn using the draw() method. </p>
+<div class="textblock"><p>The <a class="el" href="classbrenta_1_1Mesh.html" title="The Mesh class represents a collection of 3D vertices.">Mesh</a> class represents a collection of 3D vertices. </p>
 
-<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00031">31</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00025">25</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a95ff9cc0fcd5e9a847831044b3d6bd9f" name="a95ff9cc0fcd5e9a847831044b3d6bd9f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a95ff9cc0fcd5e9a847831044b3d6bd9f">&#9670;&#160;</a></span>Mesh()</h2>
+<a id="a58f04801e4d46e0d642fe9e3d1e05642" name="a58f04801e4d46e0d642fe9e3d1e05642"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f04801e4d46e0d642fe9e3d1e05642">&#9670;&#160;</a></span>Mesh() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -156,14 +153,42 @@ Data Fields</h2></td></tr>
         <tr>
           <td class="memname">Mesh::Mesh </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbrenta_1_1Mesh_1_1Config.html">Config</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="classbrenta_1_1Mesh_1_1Config.html">Config</a> &amp;&#160;</td>
+          <td class="paramname"><em>conf</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00013">13</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00012">12</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a225024ecd3162872d69895095e4fd083" name="a225024ecd3162872d69895095e4fd083"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a225024ecd3162872d69895095e4fd083">&#9670;&#160;</a></span>Mesh() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr brenta::Mesh::Mesh </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00045">45</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 
 </div>
 </div>
@@ -182,7 +207,7 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00024">24</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00026">26</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
 
 </div>
 </div>
@@ -202,56 +227,84 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00062">62</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8cpp_source.html#l00071">71</a> of file <a class="el" href="mesh_8cpp_source.html">mesh.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a218ebd6b96758cd1313ffc884d8cc23f" name="a218ebd6b96758cd1313ffc884d8cc23f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a218ebd6b96758cd1313ffc884d8cc23f">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr <a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp; brenta::Mesh::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classbrenta_1_1Mesh.html">Mesh</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00056">56</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="ad6bdf5536dd569619351dce9483e26a4" name="ad6bdf5536dd569619351dce9483e26a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad6bdf5536dd569619351dce9483e26a4">&#9670;&#160;</a></span>indices</h2>
+<a id="a2dbbda02298076269e881f0998f95bb1" name="a2dbbda02298076269e881f0998f95bb1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dbbda02298076269e881f0998f95bb1">&#9670;&#160;</a></span>indices</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;unsigned int&gt; brenta::Mesh::indices</td>
+          <td class="memname">tenno::vector&lt;unsigned int&gt; brenta::Mesh::indices</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00043">43</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00037">37</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a7265b272020a10030b23b79aeab605fa" name="a7265b272020a10030b23b79aeab605fa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7265b272020a10030b23b79aeab605fa">&#9670;&#160;</a></span>textures</h2>
+<a id="a81773ca0434886ecf5309077c929c279" name="a81773ca0434886ecf5309077c929c279"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81773ca0434886ecf5309077c929c279">&#9670;&#160;</a></span>textures</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;std::shared_ptr&lt;<a class="el" href="classbrenta_1_1Texture.html">Texture</a>&gt; &gt; brenta::Mesh::textures</td>
+          <td class="memname">tenno::vector&lt;tenno::shared_ptr&lt;<a class="el" href="classbrenta_1_1Texture.html">Texture</a>&gt; &gt; brenta::Mesh::textures</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00044">44</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00038">38</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 
 </div>
 </div>
-<a id="a6f85a24918f1a1690ab98f7fa5001879" name="a6f85a24918f1a1690ab98f7fa5001879"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6f85a24918f1a1690ab98f7fa5001879">&#9670;&#160;</a></span>vertices</h2>
+<a id="a07de3c7e6cb4e49ac74cf42ae0f10a8b" name="a07de3c7e6cb4e49ac74cf42ae0f10a8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07de3c7e6cb4e49ac74cf42ae0f10a8b">&#9670;&#160;</a></span>vertices</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::vector&lt;<a class="el" href="classbrenta_1_1Mesh_1_1Vertex.html">Vertex</a>&gt; brenta::Mesh::vertices</td>
+          <td class="memname">tenno::vector&lt;<a class="el" href="classbrenta_1_1Mesh_1_1Vertex.html">Vertex</a>&gt; brenta::Mesh::vertices</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00039">39</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="mesh_8hpp_source.html#l00033">33</a> of file <a class="el" href="mesh_8hpp_source.html">mesh.hpp</a>.</p>
 
 </div>
 </div>

@@ -1,7 +1,7 @@
 var annotated_dup =
 [
     [ "brenta", null, [
-      [ "AssetManager", "classbrenta_1_1AssetManager.html", null ],
+      [ "AssetManager", "classbrenta_1_1AssetManager.html", "classbrenta_1_1AssetManager" ],
       [ "Audio", "classbrenta_1_1Audio.html", "classbrenta_1_1Audio" ],
       [ "AudioDriver", "classbrenta_1_1AudioDriver.html", null ],
       [ "Buffer", "classbrenta_1_1Buffer.html", null ],
@@ -9,6 +9,7 @@ var annotated_dup =
       [ "Color", "classbrenta_1_1Color.html", null ],
       [ "DirLight", "classbrenta_1_1DirLight.html", null ],
       [ "Engine", "classbrenta_1_1Engine.html", "classbrenta_1_1Engine" ],
+      [ "FilesystemWatcher", "classbrenta_1_1FilesystemWatcher.html", null ],
       [ "Font", "classbrenta_1_1Font.html", "classbrenta_1_1Font" ],
       [ "FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
       [ "Gl", "classbrenta_1_1Gl.html", "classbrenta_1_1Gl" ],
@@ -17,7 +18,7 @@ var annotated_dup =
       [ "Input", "classbrenta_1_1Input.html", "classbrenta_1_1Input" ],
       [ "KeyMods", "classbrenta_1_1KeyMods.html", null ],
       [ "Logger", "classbrenta_1_1Logger.html", "classbrenta_1_1Logger" ],
-      [ "Material", "classbrenta_1_1Material.html", null ],
+      [ "Material", "classbrenta_1_1Material.html", "classbrenta_1_1Material" ],
       [ "Mesh", "classbrenta_1_1Mesh.html", "classbrenta_1_1Mesh" ],
       [ "Miniaudio", "classbrenta_1_1Miniaudio.html", null ],
       [ "Model", "classbrenta_1_1Model.html", "classbrenta_1_1Model" ],
@@ -28,7 +29,7 @@ var annotated_dup =
       [ "PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ],
       [ "PointLight", "classbrenta_1_1PointLight.html", null ],
       [ "Renderer", "classbrenta_1_1Renderer.html", "classbrenta_1_1Renderer" ],
-      [ "Scene", "classbrenta_1_1Scene.html", null ],
+      [ "Scene", "classbrenta_1_1Scene.html", "classbrenta_1_1Scene" ],
       [ "Shader", "classbrenta_1_1Shader.html", "classbrenta_1_1Shader" ],
       [ "Subsystem", "classbrenta_1_1Subsystem.html", "classbrenta_1_1Subsystem" ],
       [ "Text", "classbrenta_1_1Text.html", null ],
@@ -40,5 +41,7 @@ var annotated_dup =
       [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ],
       [ "WindowDriver", "classbrenta_1_1WindowDriver.html", null ]
     ] ],
+    [ "FsWatcherUnix", "structFsWatcherUnix.html", null ],
+    [ "FsWatcherUnixWdList", "structFsWatcherUnixWdList.html", null ],
     [ "ParticleSettings", "structParticleSettings.html", null ]
 ];

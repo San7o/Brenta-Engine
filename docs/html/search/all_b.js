@@ -1,5 +1,9 @@
 var searchData=
 [
-  ['name_0',['name',['../classbrenta_1_1Audio.html#af2686b2a088a5e88ed9c446336092e0b',1,'brenta::Audio::name()'],['../classbrenta_1_1Engine.html#a873db44633f8d374eb6b4225d05397cb',1,'brenta::Engine::name()'],['../classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17',1,'brenta::Gui::name()'],['../classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec',1,'brenta::Input::name()'],['../classbrenta_1_1Logger.html#a8da66dc362b2bb3643bc8c2039e345aa',1,'brenta::Logger::name()'],['../classbrenta_1_1Gl.html#a3a5e4e6bf68b8cd67b8f262485754ccb',1,'brenta::Gl::name()'],['../classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b',1,'brenta::Subsystem::name()'],['../classbrenta_1_1Window.html#a8d8581c08a9fbe1e56c0d3e19b294b48',1,'brenta::Window::name()']]],
-  ['node_1',['Node',['../classbrenta_1_1Node.html',1,'brenta']]]
+  ['manager_0',['Manager',['../classbrenta_1_1Engine_1_1Manager.html',1,'brenta::Engine']]],
+  ['material_1',['Material',['../classbrenta_1_1Material.html',1,'brenta']]],
+  ['mesh_2',['Mesh',['../classbrenta_1_1Mesh.html',1,'brenta']]],
+  ['miniaudio_3',['Miniaudio',['../classbrenta_1_1Miniaudio.html',1,'brenta']]],
+  ['model_4',['Model',['../classbrenta_1_1Model.html',1,'brenta']]],
+  ['mouse_5',['Mouse',['../classbrenta_1_1Mouse.html',1,'brenta']]]
 ];

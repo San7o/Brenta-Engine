@@ -126,7 +126,7 @@ $(document).ready(function(){initNavTree('buffer_8cpp_source.html',''); initResi
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  this-&gt;target = target;</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  glGenBuffers(1, &amp;<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  </div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  EVENT(Logger::Event::Lifetime, <span class="stringliteral">&quot;buffer: initialized&quot;</span>);</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  EVENT(Logger::Event::Lifetime, <span class="stringliteral">&quot;buffer: initialized {}&quot;</span>, this-&gt;<span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>}</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
@@ -135,9 +135,9 @@ $(document).ready(function(){initNavTree('buffer_8cpp_source.html',''); initResi
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>  <span class="keywordflow">if</span> (this-&gt;<span class="keywordtype">id</span> == 0) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  glDeleteBuffers(1, &amp;this-&gt;<span class="keywordtype">id</span>);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  this-&gt;<span class="keywordtype">id</span> = 0;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  EVENT(Logger::Event::Lifetime, <span class="stringliteral">&quot;buffer: destroyed&quot;</span>);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  EVENT(Logger::Event::Lifetime, <span class="stringliteral">&quot;buffer: destroyed {}&quot;</span>, this-&gt;<span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  this-&gt;<span class="keywordtype">id</span> = 0;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
