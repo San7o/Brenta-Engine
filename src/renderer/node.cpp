@@ -50,6 +50,10 @@ void Node::update_world_matrix()
 
 void Node::update(float delta_time)
 {
+  Script::current_node = this; // This is a big non-thread safe hack for now
+  if (this->script)
+    this->script->update(delta_time);
+  
   for (auto& child : this->children)
     child->update(delta_time);
   return;

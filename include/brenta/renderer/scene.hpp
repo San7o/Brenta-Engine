@@ -29,7 +29,9 @@ public:
   tenno::shared_ptr<Camera> get_active_camera() const;
 
   static tenno::shared_ptr<Node> create_child(tenno::shared_ptr<Node> parent);
-  
+  static void set_script(tenno::weak_ptr<Node> node, const std::filesystem::path &path);
+  static void set_script(tenno::weak_ptr<Node> node, const std::string &source);
+    
   void update(float delta_time);
   void draw();
   

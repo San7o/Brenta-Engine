@@ -7,6 +7,9 @@
 
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/light.hpp>
+#include <brenta/renderer/script.hpp>
+
+#include <tenno/memory.hpp>
 
 namespace brenta
 {
@@ -38,6 +41,7 @@ private:
   tenno::vector<tenno::shared_ptr<Model>>          models;
   tenno::vector<tenno::shared_ptr<PointLight>>     point_lights;
   std::optional<tenno::shared_ptr<DirLight>>       dir_light;
+  std::optional<Script>                            script;
 
   std::optional<tenno::weak_ptr<Node>>      parent;
   tenno::vector<tenno::shared_ptr<Node>>    children;

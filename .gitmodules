@@ -24,3 +24,6 @@
 [submodule "external/tenno-tl"]
 	path = external/tenno-tl
 	url = https://github.com/San7o/tenno-tl.git
+[submodule "external/lua"]
+	path = external/lua
+	url = https://github.com/lua/lua.git

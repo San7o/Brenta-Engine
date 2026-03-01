@@ -34,6 +34,18 @@ tenno::shared_ptr<Node> Scene::create_child(tenno::shared_ptr<Node> parent)
   return child;
 }
 
+void Scene::set_script(tenno::weak_ptr<Node> node, const std::filesystem::path &path)
+{
+  if (auto node_ptr = node.lock())
+    node_ptr->script = Script(node, path);
+}
+
+void Scene::set_script(tenno::weak_ptr<Node> node, const std::string &source)
+{
+  if (auto node_ptr = node.lock())
+    node_ptr->script = Script(node, source);
+}
+
 void Scene::update(float delta_time)
 {
   #ifdef BRENTA_USE_ECS
