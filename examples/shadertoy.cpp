@@ -227,9 +227,7 @@ int main(int argc, char** argv)
   unsigned int shader_program  = update_shader(fragment_source);
 
   // Load font
-  ImGuiIO& io = ImGui::GetIO();
-  ImFont* arial = io.Fonts->AddFontFromFileTTF("examples/assets/fonts/arial.ttf",
-                                               30.0f);
+  Gui::load_font();
   
   while(!Window::should_close())
   {
@@ -245,7 +243,7 @@ int main(int argc, char** argv)
     }
     
     Gui::new_frame(&fb, "shadertoy");
-    ImGui::PushFont(arial);
+    Gui::push_font();
     ImGui::Begin("Settings");
     
     if (ImGui::BeginTabBar("MyTabBar", ImGuiTabBarFlags_None))
@@ -304,9 +302,9 @@ int main(int argc, char** argv)
       }
       ImGui::EndTabBar();
     }
-    
-    ImGui::PopFont();
+
     ImGui::End();
+    Gui::pop_font();
 
     fb.bind();
     

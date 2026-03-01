@@ -28,8 +28,9 @@ using namespace brenta;
 void rotate_model_counterclockwise(tenno::shared_ptr<Model> model);
 void rotate_model_clockwise(tenno::shared_ptr<Model> model);
 
-void setup_gui(FrameBuffer &fb, ImFont *font,
+void setup_gui(FrameBuffer &fb,
                tenno::shared_ptr<PhongDirLight> dir_light,
+               tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light);
 
 int main()
@@ -74,7 +75,7 @@ int main()
   auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
 
   auto material = tenno::make_shared<Material>(shader_ptr);
-  material->set_float("material.shininess", 32.0f);
+  material->set_float("material.shininess", 50.0f); // 32.0f
 
   auto model =
     tenno::make_shared<Model>(Model::Builder()
@@ -98,13 +99,13 @@ int main()
   auto scene = Scene(camera);
   auto root_node = scene.get_root();
   root_node->add_model(model);
-  root_node->add_point_light(phong_point);
   root_node->set_dir_light(phong_dir);
 
+  auto point_light_node = Scene::create_child(root_node);
+  point_light_node->add_point_light(phong_point);
+
   // Gui
-  ImGuiIO& io = ImGui::GetIO();
-  ImFont* arial = io.Fonts->AddFontFromFileTTF("examples/assets/fonts/arial.ttf",
-                                               30.0f);
+  Gui::load_font();
   FrameBuffer fb(Window::get_width(), Window::get_height());  
 
   while (!Window::should_close())
@@ -116,7 +117,7 @@ int main()
     if (Window::is_key_pressed(Key::Left))
       rotate_model_clockwise(model);
 
-    setup_gui(fb, arial, phong_dir, phong_point);
+    setup_gui(fb, phong_dir, point_light_node, phong_point);
     
     Gl::set_color(Color::grey());
     Gl::clear();
@@ -148,12 +149,13 @@ void rotate_model_clockwise(tenno::shared_ptr<Model> model)
   transform.rotate_y(-ROTATION_SPEED);
 }
 
-void setup_gui(FrameBuffer &fb, ImFont *font,
+void setup_gui(FrameBuffer &fb,
                tenno::shared_ptr<PhongDirLight> dir_light,
+               tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light)
 {
   Gui::new_frame(&fb, "Lighting");
-  ImGui::PushFont(font);
+  Gui::push_font();
   ImGui::Begin("Lighting Settings");
 
   if (ImGui::CollapsingHeader("Directional Light",
@@ -185,9 +187,16 @@ void setup_gui(FrameBuffer &fb, ImFont *font,
                               ImGuiTreeNodeFlags_DefaultOpen))
   {
     ImGui::SeparatorText("Position");
+    float pos[3] = {
+      point_light_node->get_local().get_x(),
+      point_light_node->get_local().get_y(),
+      point_light_node->get_local().get_z(),
+    };
     ImGui::SliderFloat3("Position",
-                        &point_light->get_position().x,
+                        pos,
                         -20.0f, 20.0f);
+    point_light_node->get_local().set_pos({pos[0], pos[1], pos[2]});
+    
     ImGui::SeparatorText("Intensity");
     ImGui::SliderFloat("Strength##Point",
                        &point_light->get_strength(),
@@ -219,5 +228,5 @@ void setup_gui(FrameBuffer &fb, ImFont *font,
   }
 
   ImGui::End();
-  ImGui::PopFont();
+  Gui::pop_font();
 }

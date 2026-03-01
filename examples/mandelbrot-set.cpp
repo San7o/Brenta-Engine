@@ -60,6 +60,10 @@ int main()
     return 1;
   }
 
+  #ifdef BRENTA_USE_IMGUI
+  Gui::load_font();
+  #endif
+  
   FrameBuffer fb(Window::get_width(), Window::get_height());
 
   float     zoom            = 1.0f;
@@ -98,6 +102,7 @@ int main()
 
 #ifdef BRENTA_USE_IMGUI
     Gui::new_frame(&fb, "Mandlebrot");
+    Gui::push_font();
     ImGui::Begin("Fractal");
     ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);
     ImGui::SliderInt("Max iterations", &max_iterations, 1, 1000);
@@ -110,6 +115,7 @@ int main()
     ImGui::Checkbox("Animate", &animate);
     ImGui::SliderFloat("Animation speed", &animation_speed, 0.0f, 2.0f);
     ImGui::End();
+    Gui::pop_font();
 #endif
     fb.bind();
     Gl::clear();
