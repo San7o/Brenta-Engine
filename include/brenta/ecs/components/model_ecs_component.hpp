@@ -33,7 +33,7 @@ public:
     this->model = tenno::make_shared<Model>(m.build());
   }
   
-  void draw(const glm::mat4& world_matrix)
+  inline void draw(const glm::mat4& world_matrix)
   {
     Renderer::submit({
         world_matrix,

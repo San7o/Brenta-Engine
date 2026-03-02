@@ -61,6 +61,7 @@
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/model_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
+#include <brenta/node_components/particle_emitter_node_component.hpp>
 
 #ifdef BRENTA_USE_ECS
 
@@ -70,10 +71,12 @@
 #include <brenta/ecs/components/transform_ecs_component.hpp>
 #include <brenta/ecs/components/dir_light_ecs_component.hpp>
 #include <brenta/ecs/components/point_light_ecs_component.hpp>
+#include <brenta/ecs/components/particle_emitter_ecs_component.hpp>
 
 #include <brenta/ecs/systems/camera_render_system.hpp>
 #include <brenta/ecs/systems/model_render_system.hpp>
 #include <brenta/ecs/systems/dir_light_render_system.hpp>
 #include <brenta/ecs/systems/point_light_render_system.hpp>
+#include <brenta/ecs/systems/particle_emitter_system.hpp>
 
 #endif // BRENTA_USE_ECS

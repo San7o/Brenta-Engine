@@ -60,6 +60,7 @@ public:
   int     atlas_index;
 
   ParticleEmitter(Config conf);
+  ParticleEmitter(ParticleEmitter&&) = default;
   ~ParticleEmitter() = default;
 
   void update(float delta_time);

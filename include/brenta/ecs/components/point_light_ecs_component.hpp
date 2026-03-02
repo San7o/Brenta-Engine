@@ -26,7 +26,7 @@ public:
     this->light = l;
   }
 
-  void draw(const Transform& t)
+  inline void draw(const Transform& t)
   {
     auto& pos = this->light->get_position();
     pos = t.get_pos();

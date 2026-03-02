@@ -16,3 +16,4 @@ void init_point_light_entity();
 void init_robot_entity();
 void init_sphere_entity();
 void init_camera_entity(tenno::shared_ptr<brenta::Camera> c);
+void init_particle_emitter_entity(tenno::shared_ptr<brenta::Camera> c);

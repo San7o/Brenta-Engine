@@ -31,7 +31,7 @@ public:
     this->light = l;
   }
 
-  void draw()
+  inline void draw()
   {
     Renderer::submit_dir_light(this->light);
   }
