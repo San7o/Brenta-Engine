@@ -5,16 +5,17 @@
 
 #pragma once
 
-#include <brenta/renderer/model.hpp>
-#include <brenta/renderer/light.hpp>
-#include <brenta/renderer/script.hpp>
+#include <brenta/script.hpp>
+#include <brenta/node_component.hpp>
+#include <brenta/transform.hpp>
 
 #include <tenno/memory.hpp>
+#include <tenno/vector.hpp>
 
 namespace brenta
 {
 
-class Node : public std::enable_shared_from_this<Node>
+class Node
 {
 public:
 
@@ -22,25 +23,18 @@ public:
   
   Node() = default;
 
-  void add_model(tenno::shared_ptr<Model> model);
-  void add_point_light(tenno::shared_ptr<PointLight> point_light);
-  void set_dir_light(tenno::shared_ptr<DirLight> dir_light);
-  
-  void set_local(Transform local);
-  Transform &get_local();
+  void         set_local(Transform local);
+  Transform   &get_local();
 
   // Update logic (animations, movement, AI...)
   void update(float delta_time);
 
-  void update_world_matrix();
   // Render frame
   void draw();
 
 private:
 
-  tenno::vector<tenno::shared_ptr<Model>>          models;
-  tenno::vector<tenno::shared_ptr<PointLight>>     point_lights;
-  std::optional<tenno::shared_ptr<DirLight>>       dir_light;
+  tenno::vector<tenno::shared_ptr<NodeComponent>>  components;
   std::optional<Script>                            script;
 
   std::optional<tenno::weak_ptr<Node>>      parent;
@@ -48,6 +42,8 @@ private:
 
   Transform local;
   glm::mat4 world_matrix = glm::mat4(1.0f);
+
+  void update_world_matrix();
   
 };
 

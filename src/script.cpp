@@ -3,8 +3,8 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/script.hpp>
-#include <brenta/renderer/node.hpp>
+#include <brenta/script.hpp>
+#include <brenta/node.hpp>
 #include <brenta/logger.hpp>
 
 extern "C"

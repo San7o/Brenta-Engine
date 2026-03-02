@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/light.hpp>
+#include <brenta/renderer/point_light.hpp>
 
 using namespace brenta;
 
@@ -31,14 +31,3 @@ float &PointLight::get_quadratic()
 {
   return this->quadratic;
 }
-
-glm::vec3 &DirLight::get_direction()
-{
-  return this->direction;
-}
-
-float &DirLight::get_strength()
-{
-  return this->strength;
-}
-  

@@ -7,7 +7,7 @@
 
 #include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/material.hpp>
-#include <brenta/renderer/transform.hpp>
+#include <brenta/transform.hpp>
 
 #include <glad/glad.h>
 

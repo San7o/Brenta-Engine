@@ -7,14 +7,14 @@
 // Create a model from a list of vertexes
 //
 
-#include <brenta/renderer/mesh.hpp>
 #include <brenta/engine.hpp>
 #include <brenta/window.hpp>
+#include <brenta/logger.hpp>
+#include <brenta/renderer/mesh.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/renderer.hpp>
-#include <brenta/logger.hpp>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"

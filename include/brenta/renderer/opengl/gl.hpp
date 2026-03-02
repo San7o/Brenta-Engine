@@ -10,7 +10,7 @@
 #pragma once
 
 #include <brenta/subsystem.hpp>
-#include <brenta/renderer/color.hpp>
+#include <brenta/color.hpp>
 
 #include <glad/glad.h> // OpenGL driver
 

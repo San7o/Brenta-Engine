@@ -3,16 +3,19 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
-#include <brenta/logger.hpp>
-#include <brenta/window.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/scene.hpp>
 #include <brenta/renderer/phong.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
+#include <brenta/node_components/dir_light_node_component.hpp>
+#include <brenta/node_components/point_light_node_component.hpp>
+#include <brenta/node_components/model_node_component.hpp>
+#include <brenta/engine.hpp>
+#include <brenta/logger.hpp>
+#include <brenta/window.hpp>
+#include <brenta/scene.hpp>
 #include <brenta/input.hpp>
 #include <brenta/mouse.hpp>
 
@@ -94,13 +97,20 @@ int main()
   auto phong_point =
     tenno::make_shared<PhongPointLight>(PhongPointLight()
                                         .set_strength(1.8f));
+
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model);
+  auto dir_light_component = 
+    tenno::make_shared<DirLightNodeComponent>(phong_dir);
+  auto point_light_component = 
+    tenno::make_shared<PointLightNodeComponent>(phong_point);
   
   auto scene     = Scene(camera);
   auto root_node = scene.get_root();
-  
-  root_node->add_model(model);
-  root_node->add_point_light(phong_point);
-  root_node->set_dir_light(phong_dir);
+
+  Scene::add_component(root_node, model_component);
+  Scene::add_component(root_node, dir_light_component);
+  Scene::add_component(root_node, point_light_component);
 
   // Camera movement
   glm::vec3 acceleration = glm::vec3(0.0);
