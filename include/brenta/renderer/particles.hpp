@@ -80,7 +80,7 @@ struct ParticleEmitter::Config
   glm::vec3               starting_spread       = {};
   float                   starting_time_to_live = 1.0f;
   int                     num_particles         = BRENTA_MAX_PARTICLES;
-  float                   spawn_rate            = 0.01f;
+  float                   spawn_rate            = 0.99f;
   float                   scale                 = 1.0f;
   std::filesystem::path   atlas_path            = "";
   int                     atlas_width           = 8;
@@ -96,6 +96,7 @@ private:
   ParticleEmitter::Config conf = {};
 
 public:
+  
   Builder &starting_position(glm::vec3 starting_position);
   Builder &starting_velocity(glm::vec3 starting_velocity);
   Builder &starting_spread(glm::vec3 starting_spread);

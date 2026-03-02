@@ -25,8 +25,9 @@ float rand(vec2 co);
 void main()
 {
   float random = rand(vec2(deltaTime * float(gl_VertexID)));
-  if (random < spawnProbability)
+  if (random > spawnProbability)
   {
+    // New particle
     outPosition = emitterPos;
     outVelocity = emitterVel + emitterSpread *
       vec3(rand(vec2(float(gl_VertexID + 1.0))) -0.5,
@@ -38,12 +39,14 @@ void main()
 
   if (inTTL <= 0.0)
   {
+    // Delete particle
     outPosition = inPosition;
     outVelocity = vec3(0.0);
     outTTL = -1.0;
     return;
   }
 
+  // Update particle
   outTTL = inTTL - deltaTime;
 
   vec3 processed_velocity = inVelocity;

@@ -35,18 +35,18 @@ struct ParticleSettings {
 
 ParticleEmitter::ParticleEmitter(Config conf)
 {
-  this->starting_position = conf.starting_position;
-  this->starting_velocity = conf.starting_velocity;
-  this->starting_spread = conf.starting_spread;
+  this->starting_position     = conf.starting_position;
+  this->starting_velocity     = conf.starting_velocity;
+  this->starting_spread       = conf.starting_spread;
   this->starting_time_to_live = conf.starting_time_to_live;
-  this->num_particles = conf.num_particles;
-  this->spawn_rate = conf.spawn_rate;
-  this->scale = conf.scale;
-  this->atlas_width = conf.atlas_width;
-  this->atlas_height = conf.atlas_height;
-  this->atlas_index = conf.atlas_index;
-  this->current_fbo_index = 0;
-  this->cam = conf.cam;
+  this->num_particles         = conf.num_particles;
+  this->spawn_rate            = conf.spawn_rate;
+  this->scale                 = conf.scale;
+  this->atlas_width           = conf.atlas_width;
+  this->atlas_height          = conf.atlas_height;
+  this->atlas_index           = conf.atlas_index;
+  this->current_fbo_index     = 0;
+  this->cam                   = conf.cam;
 
   // Load Texture Atlas
   this->atlas =
@@ -127,14 +127,14 @@ void ParticleEmitter::update(float delta_time)
   this->shader_update->use();
 
   ParticleSettings settings = {
-    .gravity = glm::vec3(0.0f, -9.81f, 0.0f),
-    .deltaTime = delta_time,
-    .emitterVel = this->starting_velocity,
-    .emitterTTL = this->starting_time_to_live,
-    .emitterPos = this->starting_position,
+    .gravity          = glm::vec3(0.0f, -9.81f, 0.0f),
+    .deltaTime        = delta_time,
+    .emitterVel       = this->starting_velocity,
+    .emitterTTL       = this->starting_time_to_live,
+    .emitterPos       = this->starting_position,
     .spawnProbability = this->spawn_rate,
-    .emitterSpread = this->starting_spread,
-    .__padding = 0.0f,
+    .emitterSpread    = this->starting_spread,
+    .__padding        = 0.0f,
   };
 
   // ubo

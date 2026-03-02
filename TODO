@@ -1,4 +1,2 @@
-- implement signals for node scripts
-- particle playground example
-- make nodes types more modular
 - standard ECS library
+- implement signals for node scripts
