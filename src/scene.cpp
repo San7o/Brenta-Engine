@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/renderer.hpp>
-#include <brenta/renderer/scene.hpp>
+#include <brenta/scene.hpp>
 
 #ifdef BRENTA_USE_ECS
 #include <viotecs/viotecs.hpp>
@@ -32,6 +32,13 @@ tenno::shared_ptr<Node> Scene::create_child(tenno::shared_ptr<Node> parent)
     child->parent = parent;
   }
   return child;
+}
+
+void Scene::add_component(tenno::shared_ptr<Node> owner,
+                          tenno::shared_ptr<NodeComponent> component)
+{
+  component->owner = owner;
+  owner->components.push_back(component);
 }
 
 void Scene::set_script(tenno::weak_ptr<Node> node, const std::filesystem::path &path)

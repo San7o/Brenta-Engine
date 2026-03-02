@@ -6,11 +6,12 @@
 #include <brenta/engine.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
+#include <brenta/scene.hpp>
+#include <brenta/node_components/model_node_component.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/scene.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
@@ -74,11 +75,15 @@ int main()
                               .material(material)
                               .build());
 
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model);
+  
   auto scene = Scene(camera);
   auto root_node = scene.get_root();
   auto model_node = Scene::create_child(root_node);
-  model_node->add_model(model);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
+
+  Scene::add_component(model_node, model_component);
 
   Scene::set_script(model_node,
                     std::filesystem::path("./examples/assets/scripts/circle.lua"));

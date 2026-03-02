@@ -4,7 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/node.hpp>
+#include <brenta/node.hpp>
 
 #include <tenno/memory.hpp>
 
@@ -28,8 +28,12 @@ public:
   tenno::shared_ptr<Node>   get_root() const;
   tenno::shared_ptr<Camera> get_active_camera() const;
 
+  static void add_component(tenno::shared_ptr<Node> owner,
+                            tenno::shared_ptr<NodeComponent> component);
   static tenno::shared_ptr<Node> create_child(tenno::shared_ptr<Node> parent);
+  
   static void set_script(tenno::weak_ptr<Node> node, const std::filesystem::path &path);
+  
   static void set_script(tenno::weak_ptr<Node> node, const std::string &source);
     
   void update(float delta_time);

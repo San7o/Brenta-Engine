@@ -8,7 +8,7 @@
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/material.hpp>
-#include <brenta/renderer/scene.hpp>
+#include <brenta/scene.hpp>
 #include <brenta/font.hpp>
 #include <brenta/fswatcher.hpp>
 

@@ -7,7 +7,8 @@
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/material.hpp>
-#include <brenta/renderer/light.hpp>
+#include <brenta/renderer/point_light.hpp>
+#include <brenta/renderer/dir_light.hpp>
 
 #include <glm/glm.hpp>
 

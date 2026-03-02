@@ -6,17 +6,20 @@
 #include <brenta/engine.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
-#include <brenta/renderer/model.hpp>
-#include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/renderer.hpp>
-#include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/renderer/scene.hpp>
-#include <brenta/renderer/phong.hpp>
-#include <brenta/renderer/opengl/framebuffer.hpp>
+#include <brenta/scene.hpp>
 #include <brenta/asset_manager.hpp>
 #include <brenta/input.hpp>
 #include <brenta/mouse.hpp>
 #include <brenta/text.hpp>
+#include <brenta/node_components/model_node_component.hpp>
+#include <brenta/node_components/dir_light_node_component.hpp>
+#include <brenta/node_components/point_light_node_component.hpp>
+#include <brenta/renderer/model.hpp>
+#include <brenta/renderer/camera.hpp>
+#include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/phong.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
@@ -109,6 +112,13 @@ int main()
   //
   // Setup scene
   //
+
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model);
+  auto dir_light_component =
+    tenno::make_shared<DirLightNodeComponent>(phong_dir);
+  auto point_light_component =
+    tenno::make_shared<PointLightNodeComponent>(phong_point);
   
   auto scene = AssetManager::new_asset<Scene>("main_scene",
                                               Scene::Builder()
@@ -116,14 +126,14 @@ int main()
   auto root_node = scene->get_root();
   
   auto model_node = Scene::create_child(root_node);
-  model_node->add_model(model);
+  Scene::add_component(model_node, model_component);
     
   auto point_node = Scene::create_child(root_node);
-  point_node->add_point_light(phong_point);
   point_node->get_local().translate({-2.0, 2.0, 0.0});
+  Scene::add_component(point_node, point_light_component);
 
   auto dir_node = Scene::create_child(root_node);
-  dir_node->set_dir_light(phong_dir);
+  Scene::add_component(dir_node, dir_light_component);
   
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);

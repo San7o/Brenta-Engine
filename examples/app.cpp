@@ -6,11 +6,12 @@
 #include <brenta/engine.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
+#include <brenta/asset_manager.hpp>
+#include <brenta/node_components/model_node_component.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
-#include <brenta/asset_manager.hpp>
 
 #define BRENTA_MAIN
 #include <brenta/app.hpp>
@@ -84,13 +85,16 @@ bool App::setup()
                                                   .flipped(true))
                                    .material(material));
 
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model);
+  
   auto scene = AssetManager::new_asset<Scene>("main_scene",
                                               Scene::Builder()
                                               .camera(camera));
   auto root_node  = scene->get_root();
   auto model_node = Scene::create_child(root_node);
-  model_node->add_model(model);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
+  Scene::add_component(model_node, model_component);
 
   return true;
 }

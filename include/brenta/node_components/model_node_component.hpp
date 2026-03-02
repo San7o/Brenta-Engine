@@ -1,0 +1,33 @@
+// SPDX-License-Identifier: MIT
+// Author:  Giovanni Santini
+// Mail:    giovanni.santini@proton.me
+// Github:  @San7o
+
+#pragma once
+
+#include <brenta/node_component.hpp>
+#include <brenta/renderer/model.hpp>
+
+#include <tenno/memory.hpp>
+
+namespace brenta
+{
+
+class ModelNodeComponent : public NodeComponent
+{
+public:
+
+  ModelNodeComponent() = default;
+  ModelNodeComponent(tenno::shared_ptr<Model> m)
+    : model(m) {}
+  
+  void update(float delta_time) override;
+  void draw(const glm::mat4& world_matrix) override;
+
+private:
+
+  tenno::shared_ptr<Model> model;
+  
+};
+
+} // namespace brenta

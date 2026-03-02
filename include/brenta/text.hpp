@@ -6,7 +6,7 @@
 #pragma once
 
 #include <brenta/font.hpp>
-#include <brenta/renderer/color.hpp>
+#include <brenta/color.hpp>
 
 #include <string>
 

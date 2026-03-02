@@ -3,25 +3,10 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/renderer/node.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/node.hpp>
 
 using namespace brenta;
-
-void Node::add_model(tenno::shared_ptr<Model> model)
-{
-  this->models.push_back(model);
-}
-
-void Node::add_point_light(tenno::shared_ptr<PointLight> point_light)
-{
-  this->point_lights.push_back(point_light);
-}
-
-void Node::set_dir_light(tenno::shared_ptr<DirLight> dir_light)
-{
-  this->dir_light = dir_light;
-}
 
 void Node::set_local(Transform local)
 {
@@ -53,6 +38,9 @@ void Node::update(float delta_time)
   Script::current_node = this; // This is a big non-thread safe hack for now
   if (this->script)
     this->script->update(delta_time);
+
+  for (auto& component : this->components)
+    component->update(delta_time);
   
   for (auto& child : this->children)
     child->update(delta_time);
@@ -61,23 +49,9 @@ void Node::update(float delta_time)
 
 void Node::draw()
 {
-  for (auto& point : this->point_lights)
-  {
-    auto& pos = point->get_position();
-    pos = glm::vec3(local.get_x(), local.get_y(), local.get_z());
-    Renderer::submit_point_lights(this->point_lights);
-  }
-  if (this->point_lights.size() > 0)
-  {
-    
-  }
-  if (this->dir_light)
-    Renderer::submit_dir_light(this->dir_light.value());
-
-  if (this->models.size() > 0)
-    for (auto& model : this->models)
-      Renderer::submit({this->world_matrix, model});
-
+  for (auto& component : this->components)
+    component->draw(this->world_matrix);
+  
   for (auto& child : this->children)
     child->draw();
   return;
