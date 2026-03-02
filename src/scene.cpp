@@ -5,20 +5,34 @@
 
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/scene.hpp>
-
-#ifdef BRENTA_USE_ECS
-#include <viotecs/viotecs.hpp>
-using namespace viotecs;
-#endif
+#include <brenta/ecs/ecs.hpp>
 
 using namespace brenta;
+
+Scene::Scene(Camera&& camera)
+{
+  this->active_camera = tenno::make_shared<Camera>(tenno::move(camera));
+  this->root          = tenno::make_shared<Node>();
+}
+
+Scene::Scene(Camera::Builder& camera)
+{
+  this->active_camera = tenno::make_shared<Camera>(camera.build());
+  this->root          = tenno::make_shared<Node>();
+}
+
+Scene::Scene(tenno::shared_ptr<Camera> camera)
+{
+  this->active_camera = camera;
+  this->root          = tenno::make_shared<Node>();
+}
 
 tenno::shared_ptr<Node> Scene::get_root() const
 {
   return this->root;
 }
 
-tenno::shared_ptr<Camera> Scene::get_active_camera() const
+tenno::shared_ptr<Camera> Scene::get_camera() const
 {
   return this->active_camera;
 }
@@ -56,7 +70,7 @@ void Scene::set_script(tenno::weak_ptr<Node> node, const std::string &source)
 void Scene::update(float delta_time)
 {
   #ifdef BRENTA_USE_ECS
-  World::tick();
+  viotecs::World::tick();
   #endif
   this->root->update(delta_time);
 }
@@ -65,7 +79,7 @@ void Scene::draw()
 {
   this->root->update_world_matrix();
   
-  Renderer::begin_frame(this->active_camera);
+  Renderer::begin_frame(*this->active_camera);
   this->root->draw();
   Renderer::end_frame();
 }
@@ -73,6 +87,18 @@ void Scene::draw()
 Scene::Builder &Scene::Builder::camera(tenno::shared_ptr<Camera> camera)
 {
   this->_camera = camera;
+  return *this;
+}
+
+Scene::Builder &Scene::Builder::camera(Camera&& camera)
+{
+  this->_camera = tenno::make_shared<Camera>(tenno::move(camera));
+  return *this;
+}
+
+Scene::Builder &Scene::Builder::camera(Camera::Builder& camera)
+{
+  this->_camera = tenno::make_shared<Camera>(camera.build());
   return *this;
 }
 

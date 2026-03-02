@@ -18,15 +18,13 @@ class Scene
 public:
 
   class Builder;
-  
-  Scene(tenno::shared_ptr<Camera> camera)
-    : active_camera(camera)
-  {
-    this->root = tenno::make_shared<Node>();
-  }
+
+  Scene(Camera&& camera);
+  Scene(tenno::shared_ptr<Camera> camera);
+  Scene(Camera::Builder& camera);
 
   tenno::shared_ptr<Node>   get_root() const;
-  tenno::shared_ptr<Camera> get_active_camera() const;
+  tenno::shared_ptr<Camera> get_camera() const;
 
   static void add_component(tenno::shared_ptr<Node> owner,
                             tenno::shared_ptr<NodeComponent> component);
@@ -51,6 +49,8 @@ class Scene::Builder
 public:
   
   Builder &camera(tenno::shared_ptr<Camera> camera);
+  Builder &camera(Camera&& camera);
+  Builder &camera(Camera::Builder& camera);
 
   Scene build();
 

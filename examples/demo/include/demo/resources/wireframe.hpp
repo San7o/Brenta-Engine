@@ -5,15 +5,15 @@
 
 #pragma once
 
-#include <viotecs/viotecs.hpp>
+#include <brenta/ecs/ecs.hpp>
 
-using namespace viotecs;
-
-struct WireframeResource : Resource
+class WireframeResource : public viotecs::Resource
 {
-  bool enabled;
+public:
   
-  WireframeResource(bool e) : enabled(e)
-  {
-  }
+  bool enabled = false;
+
+  WireframeResource() = default;
+  WireframeResource(bool e) : enabled(e) {}
+  
 };

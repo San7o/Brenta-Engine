@@ -8,7 +8,7 @@
 #include <brenta/input.hpp>
 #include <brenta/window.hpp>
 
-#include <demo/callbacks/camera_mouse.hpp>
+#include <demo/callbacks.hpp>
 
 using namespace brenta;
 

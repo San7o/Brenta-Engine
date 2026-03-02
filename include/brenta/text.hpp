@@ -24,7 +24,7 @@ public:
                      float x, float y,
                      float scale,
                      Color color,
-                     tenno::shared_ptr<Font> font);
+                     Font& font);
 
 };
   

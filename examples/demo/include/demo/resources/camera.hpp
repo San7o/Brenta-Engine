@@ -6,15 +6,15 @@
 #pragma once
 
 #include <brenta/renderer/camera.hpp>
+#include <brenta/ecs/ecs.hpp>
 
-#include <viotecs/viotecs.hpp>
-
-using namespace viotecs;
-
-struct CameraResource : Resource
+class CameraResource : public viotecs::Resource
 {
+public:
+  
   tenno::shared_ptr<brenta::Camera> cam;
-  CameraResource(tenno::shared_ptr<brenta::Camera> c) : cam(c)
-  {
-  }
+
+  CameraResource() = default;
+  CameraResource(tenno::shared_ptr<brenta::Camera> c)
+    : cam(c) {}
 };

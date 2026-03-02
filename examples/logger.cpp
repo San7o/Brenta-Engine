@@ -28,7 +28,7 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .build();

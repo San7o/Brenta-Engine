@@ -4,48 +4,33 @@
 // Github:  @San7o
 
 #include <brenta/asset_manager.hpp>
+#include <brenta/renderer/phong.hpp>
+#include <brenta/ecs/ecs.hpp>
+#include <brenta/ecs/components/point_light_ecs_component.hpp>
+#include <brenta/ecs/components/transform_ecs_component.hpp>
 
-#include <demo/components/point_light.hpp>
-#include <demo/components/transform.hpp>
-#include <demo/entities/point_light.hpp>
-
-#include <viotecs/viotecs.hpp>
+#include <demo/entities.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#include "../../../../src/renderer/shaders/c/phong_vs.c"
-#include "../../../../src/renderer/shaders/c/phong_fs.c"
 
 using namespace viotecs;
 using namespace brenta;
 
 void init_point_light_entity()
 {
-  Transform transform = Transform()
+  auto transform = Transform()
     .translate(glm::vec3(0.0f, 10.0f, 0.0f))
     .scale(glm::vec3(0.5f));
 
-  auto shader = AssetManager::get<Shader>("default_shader");
-  if (!shader)
-  {
-    shader = AssetManager::new_asset<Shader>("default_shader",
-                                             Shader::Builder()
-                                             .objects({
-                                                 { Shader::Type::Vertex,   phong_vs },
-                                                 { Shader::Type::Fragment, phong_fs } }));
-  }
+  auto phong_point =
+    PhongPointLight()
+    .set_strength(1.8f);
+  auto phong_point_ptr =
+    tenno::make_shared<PhongPointLight>(tenno::move(phong_point));
 
-  
   auto light = World::new_entity()
-    .add_component<PointLightComponent>(glm::vec3(0.1f, 0.1f, 0.1f), // ambient
-                                        glm::vec3(0.5f, 0.5f, 0.5f), // diffuse
-                                        glm::vec3(1.0f, 1.0f, 1.0f), // specular
-                                        1.0f,      // constant, > 1
-                                        0.09f,     // linear
-                                        0.00032f,  // quadratic
-                                        1.0f,      // strength
-                                        shader)
-    .add_component<TransformComponent>(transform);
+    .add_component<PointLightEcsComponent>(phong_point_ptr)
+    .add_component<TransformEcsComponent>(transform);
 }

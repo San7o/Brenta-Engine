@@ -17,6 +17,8 @@ class DirLightNodeComponent : public NodeComponent
 {
 public:
 
+  tenno::shared_ptr<DirLight> light;
+  
   DirLightNodeComponent() = default;
   DirLightNodeComponent(tenno::shared_ptr<DirLight> l)
     : light(l) {}
@@ -24,10 +26,6 @@ public:
   void update(float delta_time) override;
   void draw(const glm::mat4& world_matrix) override;
 
-private:
-
-  tenno::shared_ptr<DirLight> light;
-  
 };
 
 } // namespace brenta

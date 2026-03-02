@@ -23,6 +23,11 @@ Camera::Camera(Config conf)
   return;
 }
 
+Camera::Camera(Builder& builder)
+{
+  *this = builder.build();
+}
+
 glm::mat4 Camera::get_view_matrix() const
 {
   try

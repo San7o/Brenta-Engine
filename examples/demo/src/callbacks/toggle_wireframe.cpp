@@ -5,11 +5,10 @@
 
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/input.hpp>
+#include <brenta/ecs/ecs.hpp>
 
-#include <demo/callbacks/toggle_wireframe.hpp>
+#include <demo/callbacks.hpp>
 #include <demo/resources/wireframe.hpp>
-
-#include <viotecs/viotecs.hpp>
 
 using namespace brenta;
 using namespace viotecs;

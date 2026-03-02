@@ -48,7 +48,7 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .with(Input::Builder())
@@ -58,81 +58,95 @@ int main()
   //
   // Load assets
   //
-  
-  auto camera =
-    tenno::make_shared<Camera>(Camera::Builder()
-                               .projection_type(Camera::ProjectionType::Perspective)
-                               .position(Camera::Spherical::Builder()
-                                         .center({0.0f, 0.0f, 0.0f})
-                                         .phi(1.25f)
-                                         .theta(1.25f)
-                                         .radius(30.0f)
-                                         .build())
-                               .fov(20.0f)
-                               .build());
 
+  auto font_builder =
+    Font::Builder()
+    .path("examples/assets/fonts/arial.ttf")
+    .size(32.0f);
   auto font = AssetManager::new_asset<Font>("default_font",
-                                            Font::Builder()
-                                            .path("examples/assets/fonts/arial.ttf")
-                                            .size(32.0f));
+                                            font_builder);
+
+  auto shader_builder =
+    Shader::Builder()
+    .objects({
+        { Shader::Type::Vertex,   phong_vs },
+        { Shader::Type::Fragment, phong_fs } });
   auto shader =
     AssetManager::new_asset<Shader>("default_shader",
-                                    Shader::Builder()
-                                    .objects({
-                                        { Shader::Type::Vertex,   phong_vs },
-                                        { Shader::Type::Fragment, phong_fs } }));
+                                    shader_builder);
   if (!shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
 
+  auto material_builder =
+    Material::Builder()
+    .shader(shader)
+    .floating("material.shininess", 32.0f);
   auto material =
     AssetManager::new_asset<Material>("shiny_material",
-                                      Material::Builder()
-                                      .shader(shader)
-                                      .floating("material.shininess", 32.0f));
+                                      material_builder);
 
+  auto model_builder =
+    Model::Builder()
+    .path("examples/assets/models/simple_cube/simple_cube.obj")
+    .transform(Transform()
+               .translate(glm::vec3(0.0f, 0.0f, 0.0f))
+               .scale(glm::vec3(1.0)))
+    .material(material);
   auto model =
     AssetManager::new_asset<Model>("simple_cube",
-                                   Model::Builder()
-                                   .path("examples/assets/models/simple_cube/simple_cube.obj")
-                                   .transform(Transform()
-                                              .translate(glm::vec3(0.0f, 0.0f, 0.0f))
-                                              .scale(glm::vec3(1.0)))
-                                   .material(material));
+                                   model_builder);
 
   auto phong_dir =
-    tenno::make_shared<PhongDirLight>(PhongDirLight()
-                                      .set_strength(0.5f));
+    PhongDirLight()
+    .set_strength(0.5f);
+  auto phong_dir_ptr =
+    tenno::make_shared<PhongDirLight>(tenno::move(phong_dir));
   auto phong_point =
-    tenno::make_shared<PhongPointLight>(PhongPointLight()
-                                        .set_strength(1.8f));
+    PhongPointLight()
+    .set_strength(1.8f);
+  auto phong_point_ptr =
+    tenno::make_shared<PhongPointLight>(tenno::move(phong_point));
 
   //
   // Setup scene
   //
 
-  auto model_component =
-    tenno::make_shared<ModelNodeComponent>(model);
-  auto dir_light_component =
-    tenno::make_shared<DirLightNodeComponent>(phong_dir);
-  auto point_light_component =
-    tenno::make_shared<PointLightNodeComponent>(phong_point);
-  
+  auto camera_builder =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Spherical::Builder()
+              .center({0.0f, 0.0f, 0.0f})
+              .phi(1.25f)
+              .theta(1.25f)
+              .radius(30.0f)
+              .build())
+    .fov(20.0f);
   auto scene = AssetManager::new_asset<Scene>("main_scene",
                                               Scene::Builder()
-                                              .camera(camera));
+                                              .camera(camera_builder));
+  auto camera = scene->get_camera();
   auto root_node = scene->get_root();
-  
+
+  // Model
   auto model_node = Scene::create_child(root_node);
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model);
   Scene::add_component(model_node, model_component);
-    
+
+  // Point light
   auto point_node = Scene::create_child(root_node);
   point_node->get_local().translate({-2.0, 2.0, 0.0});
+  auto point_light_component =
+    tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
   Scene::add_component(point_node, point_light_component);
 
+  // Directional light
   auto dir_node = Scene::create_child(root_node);
+  auto dir_light_component =
+    tenno::make_shared<DirLightNodeComponent>(phong_dir_ptr);
   Scene::add_component(dir_node, dir_light_component);
   
   Mouse mouse = {};
@@ -285,10 +299,10 @@ int main()
 
     Text::render("Move with Shift / Ctrl / Alt + Mouse",
                  25.0f, 25.0f, 1.0f,
-                 Color::yellow(), font);
+                 Color::yellow(), *font);
     Text::render("Press R to reload the model",
                  25.0f, 55.0f, 1.0f,
-                 Color::yellow(), font);
+                 Color::yellow(), *font);
     
     scene->update(delta_time);
     scene->draw();

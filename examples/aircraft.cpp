@@ -50,78 +50,81 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .with(Input::Builder())
     .build();
   auto engine = Engine::managed();
   
-  auto camera =
-    tenno::make_shared<Camera>(Camera::Builder()
-                               .projection_type(Camera::ProjectionType::Perspective)
-                               .position(Camera::Aircraft::Builder()
-                                         .pos({0.0f, 0.0f, 0.0f})
-                                         .build())
-                               .fov(30.0f)
-                               .build());
-
-  auto shader = Shader::create({
+  auto maybe_shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
-  if (!shader)
+  if (!maybe_shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
-
-  auto material = tenno::make_shared<Material>(shader_ptr);
-  material->set_float("material.shininess", 32.0f);
-
-  auto model =
-    tenno::make_shared<Model>(Model::Builder()
-                              .path("examples/assets/models/backpack/backpack.obj")
-                              .transform(Transform()
-                                         .translate(glm::vec3(25.0f, 0.0f, 0.0f))
-                                         .rotate_y(-90.0f)
-                                         .scale(glm::vec3(1.0)))
-                              .texture_props(Texture::Properties()
-                                             .flipped(true))
-                              .material(material)
-                              .build());
-
-  auto phong_dir =
-    tenno::make_shared<PhongDirLight>(PhongDirLight()
-                                      .set_strength(0.5f));
-  auto phong_point =
-    tenno::make_shared<PhongPointLight>(PhongPointLight()
-                                        .set_strength(1.8f));
-
-  auto model_component =
-    tenno::make_shared<ModelNodeComponent>(model);
-  auto dir_light_component = 
-    tenno::make_shared<DirLightNodeComponent>(phong_dir);
-  auto point_light_component = 
-    tenno::make_shared<PointLightNodeComponent>(phong_point);
+  auto shader = tenno::move(maybe_shader.value()); 
+  auto material = Material(tenno::move(shader));
+  material.set_float("material.shininess", 32.0f);
   
-  auto scene     = Scene(camera);
-  auto root_node = scene.get_root();
+  auto phong_dir =
+    PhongDirLight()
+    .set_strength(0.5f);
+  auto phong_dir_ptr = 
+    tenno::make_shared<PhongDirLight>(tenno::move(phong_dir));
+  auto phong_point =
+    PhongPointLight()
+    .set_strength(1.8f);
+  auto phong_point_ptr =
+    tenno::make_shared<PhongPointLight>(tenno::move(phong_point));
 
+  // Setup scene
+  
+  auto camera_builder =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Aircraft::Builder()
+              .pos({0.0f, 0.0f, 0.0f})
+              .build())
+    .fov(30.0f);
+  auto scene      = Scene(camera_builder);
+  auto root_node  = scene.get_root();
+
+  auto model_builder =
+    Model::Builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(25.0f, 0.0f, 0.0f))
+               .rotate_y(-90.0f)
+               .scale(glm::vec3(1.0)))
+    .texture_props(Texture::Properties()
+                   .flipped(true))
+    .material(tenno::move(material));
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model_builder);
+  auto dir_light_component = 
+    tenno::make_shared<DirLightNodeComponent>(phong_dir_ptr);
+  auto point_light_component = 
+    tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
+  
   Scene::add_component(root_node, model_component);
   Scene::add_component(root_node, dir_light_component);
   Scene::add_component(root_node, point_light_component);
 
   // Camera movement
+  
+  auto camera        = scene.get_camera();  
   glm::vec3 acceleration = glm::vec3(0.0);
   glm::vec3 speed        = glm::vec3(0.0);
 
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
   bool capture_mouse = true;
-  
+
   Input::add_mouse_callback("rotate_camera",
-                            [camera, &mouse, &capture_mouse](double x, double y)
+                            [&camera, &mouse, &capture_mouse](double x, double y)
   {
     if (!capture_mouse) return;
     
@@ -213,10 +216,10 @@ void update_camera(tenno::shared_ptr<Camera> camera,
   if (acceleration.z < -MAX_ACCELERATION)
     acceleration.z = -MAX_ACCELERATION;
   
-  speed += (acceleration - FRICTION * speed) * delta_time;
+  speed        += (acceleration - FRICTION * speed) * delta_time;
   acceleration += -acceleration * FRICTION * delta_time;
 
-  auto pos = camera->get_pos();
+  auto pos  = camera->get_pos();
   auto apos = std::get<Camera::Aircraft>(pos);
 
   apos.pos += camera->get_front() * speed.x;

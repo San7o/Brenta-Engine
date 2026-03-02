@@ -61,32 +61,32 @@ glm::quat Transform::get_rotation() const
   return this->m_rotation;
 }
 
-void Transform::set_pos(glm::vec3 new_pos)
+Transform& Transform::set_pos(glm::vec3 new_pos)
 {
   this->m_position = new_pos;
   this->dirty      = true;
-  return;
+  return *this;
 }
 
-void Transform::set_x(float x)
+Transform& Transform::set_x(float x)
 {
   this->m_position.x = x;
   this->dirty        = true;
-  return;
+  return *this;
 }
 
-void Transform::set_y(float y)
+Transform& Transform::set_y(float y)
 {
   this->m_position.y = y;
   this->dirty        = true;
-  return;
+  return *this;
 }
 
-void Transform::set_z(float z)
+Transform& Transform::set_z(float z)
 {
   this->m_position.z = z;
   this->dirty        = true;
-  return;
+  return *this;
 }
   
 Transform& Transform::translate(const glm::vec3& translation)

@@ -64,7 +64,7 @@ std::expected<void, Subsystem::Error> Gl::initialize()
     INFO("{}: enabled GL_BLEND (transparency)", Gl::subsystem_name);
   }
 
-  if (Gl::init_config.enable_cull_face)
+  if (Gl::init_config.enable_backface_culling)
   {
     glEnable(GL_CULL_FACE);
     INFO("{}: enabled GL_CULL_FACE", Gl::subsystem_name);
@@ -281,9 +281,9 @@ Gl::Builder &Gl::Builder::blending()
   return *this;
 }
 
-Gl::Builder &Gl::Builder::cull_face()
+Gl::Builder &Gl::Builder::backface_culling()
 {
-  this->conf.enable_cull_face = true;
+  this->conf.enable_backface_culling = true;
   return *this;
 }
 

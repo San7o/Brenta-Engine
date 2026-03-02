@@ -10,7 +10,7 @@
 // Some ecs examples
 //
 
-#include <viotecs/viotecs.hpp>
+#include <brenta/ecs/ecs.hpp>
 
 #include <iostream>
 
@@ -33,9 +33,7 @@ struct PoisonSystem : System<PlayerComponent, HealthComponent>
   void run(std::vector<EntityId> entities) const override
   {
     if (entities.empty())
-    {
       return;
-    }
 
     auto health = World::entity_to_component<HealthComponent>(entities.at(0));
     health->value--;

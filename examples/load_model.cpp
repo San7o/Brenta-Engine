@@ -37,7 +37,7 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .build();
@@ -48,7 +48,8 @@ int main()
   //
   
   // Load the model
-  Model our_model = Model::Builder()
+  Model our_model =
+    Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform(glm::vec3(0.0f)))
     .texture_props(Texture::Properties()

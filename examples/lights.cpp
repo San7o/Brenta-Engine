@@ -51,68 +51,68 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .with(Gui::Builder())
     .build();
   auto engine = Engine::managed();
-  
-  auto camera =
-    tenno::make_shared<Camera>(Camera::Builder()
-                               .projection_type(Camera::ProjectionType::Perspective)
-                               .position(Camera::Aircraft::Builder()
-                                         .pos({0.0f, 0.0f, 0.0f})
-                                         .build())
-                               .fov(30.0f)
-                               .build());
 
-  auto shader = Shader::create({
+  auto maybe_shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
-  if (!shader)
+  if (!maybe_shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
-
-  auto material = tenno::make_shared<Material>(shader_ptr);
-  material->set_float("material.shininess", 50.0f); // 32.0f
-
-  auto model =
-    tenno::make_shared<Model>(Model::Builder()
-                              .path("examples/assets/models/backpack/backpack.obj")
-                              .transform(Transform()
-                                         .translate(glm::vec3(15.0f, 0.0f, 0.0f))
-                                         .rotate_y(-90.0f)
-                                         .scale(glm::vec3(1.0)))
-                              .texture_props(Texture::Properties()
-                                             .flipped(true))
-                              .material(material)
-                              .build());
+  auto shader = tenno::move(maybe_shader.value());
+  auto material = Material(tenno::move(shader));
+  material.set_float("material.shininess", 50.0f); // 32.0f
 
   auto phong_dir =
-    tenno::make_shared<PhongDirLight>(PhongDirLight()
-                                      .set_strength(0.5f));
-  auto phong_point =
-    tenno::make_shared<PhongPointLight>(PhongPointLight()
-                                        .set_strength(1.8f));
+    PhongDirLight()
+    .set_strength(0.5f);
+  auto phong_dir_ptr =
+    tenno::make_shared<PhongDirLight>(tenno::move(phong_dir));
 
-  auto model_component =
-    tenno::make_shared<ModelNodeComponent>(model);
-  auto dir_light_component =
-    tenno::make_shared<DirLightNodeComponent>(phong_dir);
-  auto point_light_component =
-    tenno::make_shared<PointLightNodeComponent>(phong_point);
-  
-  auto scene = Scene(camera);
+  auto phong_point =
+    PhongPointLight()
+    .set_strength(1.8f);
+  auto phong_point_ptr =
+    tenno::make_shared<PhongPointLight>(tenno::move(phong_point));
+
+  auto camera_builder =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Aircraft::Builder()
+              .pos({0.0f, 0.0f, 0.0f})
+              .build())
+    .fov(30.0f);
+  auto scene = Scene(camera_builder);
   auto root_node = scene.get_root();
 
+  auto model_builder =
+    Model::Builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(15.0f, 0.0f, 0.0f))
+               .rotate_y(-90.0f)
+               .scale(glm::vec3(1.0)))
+    .texture_props(Texture::Properties()
+                   .flipped(true))
+    .material(tenno::move(material));
+  auto model_component =
+    tenno::make_shared<ModelNodeComponent>(model_builder);
+  auto model_ptr = model_component->model;
   Scene::add_component(root_node, model_component);
+  auto dir_light_component =
+    tenno::make_shared<DirLightNodeComponent>(phong_dir_ptr);
   Scene::add_component(root_node, dir_light_component);
 
   auto point_light_node = Scene::create_child(root_node);
+  auto point_light_component =
+    tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
   Scene::add_component(point_light_node, point_light_component);
 
   // Gui
@@ -124,12 +124,11 @@ int main()
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
     if (Window::is_key_pressed(Key::Right))
-      rotate_model_counterclockwise(model);
+      rotate_model_counterclockwise(model_ptr);
     if (Window::is_key_pressed(Key::Left))
-      rotate_model_clockwise(model);
+      rotate_model_clockwise(model_ptr);
 
-    setup_gui(fb, phong_dir, point_light_node, phong_point);
-    
+    setup_gui(fb, phong_dir_ptr, point_light_node, phong_point_ptr);
     Gl::set_color(Color::grey());
     Gl::clear();
     

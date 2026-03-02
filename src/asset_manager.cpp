@@ -55,6 +55,8 @@ AssetManager::new_asset<Model>(const AssetId& id,
     };
   }
   
+  DEBUG("AssetManager: create new model {}", id);
+  
   return ptr;
 }
 
@@ -76,6 +78,8 @@ AssetManager::new_asset<Texture>(const AssetId& id,
     };
   }
   
+  DEBUG("AssetManager: create new texture {}", id);  
+
   return ptr;
 }
 
@@ -87,6 +91,8 @@ AssetManager::new_asset<Material>(const AssetId& id,
   auto ptr = tenno::make_shared<Material>(builder.build());
   ptr.set_cache(false);
   AssetManager::materials[id] = {builder, ptr};
+
+  DEBUG("AssetManager: create new material {}", id);
   
   return ptr;
 }
@@ -109,6 +115,8 @@ AssetManager::new_asset<Font>(const AssetId& id,
     };
   }
   
+  DEBUG("AssetManager: create new font {}", id);
+  
   return ptr;
 }
 
@@ -120,6 +128,8 @@ AssetManager::new_asset<Scene>(const AssetId& id,
   auto ptr = tenno::make_shared<Scene>(builder.build());
   ptr.set_cache(false);
   AssetManager::scenes[id] = {builder, ptr};
+
+  DEBUG("AssetManager: create new scene {}", id);
   
   return ptr;
 }

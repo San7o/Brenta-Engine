@@ -17,16 +17,22 @@ class ModelNodeComponent : public NodeComponent
 {
 public:
 
+  tenno::shared_ptr<Model> model;
+
   ModelNodeComponent() = default;
   ModelNodeComponent(tenno::shared_ptr<Model> m)
     : model(m) {}
+  ModelNodeComponent(Model&& m)
+  {
+    this->model = tenno::make_shared<Model>(tenno::move(m));
+  }
+  ModelNodeComponent(Model::Builder& m)
+  {
+    this->model = tenno::make_shared<Model>(m.build());
+  }
   
   void update(float delta_time) override;
   void draw(const glm::mat4& world_matrix) override;
-
-private:
-
-  tenno::shared_ptr<Model> model;
   
 };
 

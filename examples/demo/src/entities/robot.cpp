@@ -5,12 +5,15 @@
 
 #include <brenta/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
+#include <brenta/ecs/ecs.hpp>
+#include <brenta/ecs/components/model_ecs_component.hpp>
+#include <brenta/ecs/components/transform_ecs_component.hpp>
+#include <brenta/logger.hpp>
 
-#include <demo/components/model.hpp>
-#include <demo/components/transform.hpp>
-#include <demo/entities/robot.hpp>
+#include <demo/components/sprite_animation.hpp>
+#include <demo/entities.hpp>
+#include <demo/utils.hpp>
 
-#include <viotecs/viotecs.hpp>
 #include <tenno/utility.hpp>
 
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
@@ -24,14 +27,28 @@ void init_robot_entity()
   auto shader = AssetManager::get<Shader>("default_shader");
   if (!shader)
   {
+    auto shader_builder =
+      Shader::Builder()
+      .objects({
+          { Shader::Type::Vertex,   phong_vs },
+          { Shader::Type::Fragment, phong_fs } });
     shader = AssetManager::new_asset<Shader>("default_shader",
-                                             Shader::Builder()
-                                             .objects({
-                                                 { Shader::Type::Vertex,   phong_vs },
-                                                 { Shader::Type::Fragment, phong_fs } }));
+                                             shader_builder);
   }
+  if (!shader)
+    return;
+  
+  auto robot_material_builder =
+    Material::Builder()
+    .shader(shader)
+    .floating("material.shininess", 32.0f)
+    .integer("atlasIndex", 0);
+  auto robot_material =
+    AssetManager::new_asset<Material>("robot_material",
+                                      robot_material_builder);
 
-  Model m = Model::Builder()
+  auto model_builder =
+    Model::Builder()
     .path("examples/assets/models/robot_sprite/robot_sprite.obj")
     .transform(Transform()
                .translate(glm::vec3(0.0f, 5.0f, 0.0f))
@@ -45,9 +62,10 @@ void init_robot_entity()
                    .has_mipmap(Gl::True)
                    .mipmap_min(Texture::Filtering::LinearMipmapNearest)
                    .mipmap_mag(Texture::Filtering::Nearest))
-    .build();
+    .material(robot_material);
 
   auto cube_entity = World::new_entity()
-    .add_component<TransformComponent>(m.get_transform())
-    .add_component<ModelComponent>(tenno::move(m), 32.0f, shader, true, 4, 0);
+    .add_component<TransformEcsComponent>()
+    .add_component<SpriteAnimationEcsComponent>(4, 0, 60)
+    .add_component<ModelEcsComponent>(model_builder);
 }

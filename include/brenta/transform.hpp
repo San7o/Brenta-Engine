@@ -29,11 +29,10 @@ public:
   float     get_z() const;
   glm::quat get_rotation() const;
 
-  void     set_pos(glm::vec3 new_pos);
-  void     set_x(float x);
-  void     set_y(float y);
-  void     set_z(float z);
-
+  Transform& set_pos(glm::vec3 new_pos);
+  Transform& set_x(float x);
+  Transform& set_y(float y);
+  Transform& set_z(float z);
   Transform& translate(const glm::vec3& translation);
   Transform& rotate(const glm::quat &rotation);
   Transform& rotate_x(float degrees);
