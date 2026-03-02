@@ -37,8 +37,13 @@ public:
   
   Renderer() = delete;
   ~Renderer() = delete;
+
+  // You can begin a frame withouth a camera, but eventually you will
+  // need to call set_camera if you want to see anything good
+  static void begin_frame();
+  static void begin_frame(Camera &cam);
   
-  static void begin_frame(tenno::shared_ptr<Camera> cam);
+  static void set_camera(Camera &cam);
   
   static void submit(const Renderer::Command& it);
   static void submit_point_light(tenno::shared_ptr<PointLight> point_light);

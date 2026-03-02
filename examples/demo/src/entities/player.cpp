@@ -5,45 +5,41 @@
 
 #include <brenta/asset_manager.hpp>
 #include <brenta/renderer/model.hpp>
+#include <brenta/ecs/ecs.hpp>
+#include <brenta/ecs/components/model_ecs_component.hpp>
+#include <brenta/ecs/components/transform_ecs_component.hpp>
+#include <brenta/logger.hpp>
 
-#include <demo/components/model.hpp>
 #include <demo/components/player.hpp>
-#include <demo/components/transform.hpp>
-#include <demo/entities/player.hpp>
+#include <demo/entities.hpp>
+#include <demo/utils.hpp>
 
-#include <viotecs/viotecs.hpp>
 #include <tenno/utility.hpp>
-
-#include "../../../../src/renderer/shaders/c/phong_vs.c"
-#include "../../../../src/renderer/shaders/c/phong_fs.c"
 
 using namespace viotecs;
 using namespace brenta;
 
 void init_player_entity()
 {
-  auto shader = AssetManager::get<Shader>("default_shader");
-  if (!shader)
+  auto default_material = get_default_material();
+  if (!default_material)
   {
-    shader =
-      AssetManager::new_asset<Shader>("default_shader",
-                                      Shader::Builder()
-                                      .objects({
-                                          { Shader::Type::Vertex,   phong_vs },
-                                          { Shader::Type::Fragment, phong_fs } }));
+    ERROR("Demo: error getting default material");
+    return;
   }
 
-  Model m = Model::Builder()
+  auto model_builder = 
+    Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform()
                .translate(glm::vec3(0.0f, 1.8f, -5.0f))
                .scale(glm::vec3(1.0f)))
     .texture_props(Texture::Properties()
                    .flipped(true))
-    .build();
+    .material(default_material);
   
   auto player = World::new_entity()
-    .add_component<PlayerComponent>()
-    .add_component<TransformComponent>(m.get_transform())
-    .add_component<ModelComponent>(tenno::move(m), 32.0f, shader);
+    .add_component<PlayerEcsComponent>()
+    .add_component<TransformEcsComponent>()
+    .add_component<ModelEcsComponent>(model_builder);
 }

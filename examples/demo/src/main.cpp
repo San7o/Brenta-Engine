@@ -4,16 +4,10 @@
 // Github:  @San7o
 
 #include <brenta/brenta.hpp>
-#ifdef BRENTA_USE_ECS
-#include <demo/game_ecs.hpp>
-#include <viotecs/viotecs.hpp>
-#endif
-#include <bitset>
+#include <demo/demo.hpp>
 
 using namespace brenta;
-#ifdef BRENTA_USE_ECS
 using namespace viotecs;
-#endif
 
 int main()
 {
@@ -23,9 +17,8 @@ int main()
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)
-          .file("brenta-logs")
           //.event(Logger::Event::Lifetime)
-          )
+          .file("brenta-logs"))
     .with(Window::Builder()
           .title("brenta demo")
           .width(800)
@@ -35,15 +28,13 @@ int main()
           .debug())
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .with(Audio::Builder()
           .sound("guitar", "examples/assets/audio/guitar.wav"))
     .with(Input::Builder())
-    #if BRENTA_USE_ECS
     .with(Ecs::Builder())
-    #endif
     .with(Gui::Builder())
     .build();
 
@@ -51,53 +42,63 @@ int main()
   engine.initialize();
   ///auto engine = Engine::managed();
 
+  auto camera_builder =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Spherical::Builder()
+              .center({0.0f, 2.0f, 0.0f})
+              .phi(1.25f)
+              .theta(1.25f)
+              .radius(30.0f)
+              .build())
+    .fov(45.0f);
   auto camera =
-    tenno::shared_ptr<Camera>(Camera::Builder()
-                              .projection_type(Camera::ProjectionType::Perspective)
-                              .position(Camera::Spherical::Builder()
-                                        .center({0.0f, 2.0f, 0.0f})
-                                        .phi(1.25f)
-                                        .theta(1.25f)
-                                        .radius(30.0f)
-                                        .build())
-                              .fov(45.0f)
-                              .build());
+    tenno::shared_ptr<Camera>(camera_builder);
 
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
   
-#ifdef BRENTA_USE_ECS
+  // Entities
   init_player_entity();
-  // init_cube_entity();
+  init_cube_entity();
   init_floor_entity();
   init_directional_light_entity();
   init_point_light_entity();
   init_sphere_entity();
   init_robot_entity();
+  init_camera_entity(camera);
+  // init_particle_emitter_entity(); // TODO
 
+  // Callbacks
   init_toggle_wireframe_callback();
   init_close_window_callback();
   init_camera_mouse_callback(camera, &mouse);
   init_play_guitar_callback();
 
+  // Resources
   World::add_resource<WireframeResource>(false);
   World::add_resource<CameraResource>(camera);
-  World::register_systems<RendererSystem,
-                          PointLightsSystem,
+
+  // Systems
+  World::register_systems<CameraRenderSystem,
+                          ModelRenderSystem,
+                          PointLightRenderSystem,
+                          DirLightRenderSystem,
+                          SpriteAnimationSystem,
                           DebugTextSystem,
-                          DirectionalLightSystem,
                           PhysicsSystem,
                           CollisionsSystem>();
-#endif
 
   {  // Local scope
 
+    auto font_builder =
+      Font::Builder()
+      .path("examples/assets/fonts/arial.ttf")
+      .size(40);
     auto font =
-      AssetManager::new_asset<Font>("TextFont",
-                                    Font::Builder()
-                                    .path("examples/assets/fonts/arial.ttf")
-                                    .size(40));
-    
+      AssetManager::new_asset<Font>("TextFont", font_builder);
+
+    // TODO: create emitter entity
     auto emitter = ParticleEmitter::Builder()
       .with_camera(camera)
       .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
@@ -105,7 +106,7 @@ int main()
       .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
       .starting_time_to_live(0.5f)
       .num_particles(1000)
-      .spawn_rate(0.01f)
+      .spawn_rate(0.99f)
       .scale(1.0f)
       .atlas_path("examples/assets/textures/particle_atlas.png")
       .atlas_width(8)
@@ -118,7 +119,7 @@ int main()
 #endif
 
     int frames = 0;
-  
+
     while (!Window::should_close())
     {
       Window::poll_events();
@@ -140,15 +141,16 @@ int main()
         frames = 0;
         emitter.atlas_index++;
       }
-    
-#ifdef BRENTA_USE_ECS
+
+      Renderer::begin_frame();
       World::tick();
-#endif
+      Renderer::end_frame();
 
 #ifdef BRENTA_USE_IMGUI
       fb.unbind();
       Gui::render();
 #endif
+      
       Window::swap_buffers();
     }
   }

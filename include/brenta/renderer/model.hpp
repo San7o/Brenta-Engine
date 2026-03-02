@@ -30,6 +30,7 @@ public:
 
   Model() = default;
   Model(Config &conf);
+  Model(Builder &builder);
   ~Model();
 
   Model(const Model&)            = delete;
@@ -80,6 +81,7 @@ public:
 
   Builder &transform(const Transform& transform);
   Builder &material(tenno::shared_ptr<Material> material);
+  Builder &material(Material&& material);
   Builder &path(const std::filesystem::path &path);
   Builder &texture_props(const Texture::Properties &props);
   Builder &mesh(const Mesh::Builder &mesh);

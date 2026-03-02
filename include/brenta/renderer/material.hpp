@@ -35,12 +35,14 @@ public:
   tenno::shared_ptr<Shader> shader;
 
   Material() = default;
-  Material(tenno::shared_ptr<Shader> shader) : shader(shader) {}
+  Material(tenno::shared_ptr<Shader> s) : shader(s) {}
+  Material(Shader&& s);
   Material(Material&& other) = default;
   Material &operator=(Material&& other) = default;
   
   void apply();
 
+  Material &set_int(const std::string &name, int val);
   Material &set_float(const std::string &name, float val);
   Material &set_vector(const std::string &name, glm::vec3 val);
   Material &set_texture(const std::string &name,
@@ -48,6 +50,7 @@ public:
 
 private:
 
+  std::unordered_map<std::string, int>       ints;
   std::unordered_map<std::string, float>     floats;
   std::unordered_map<std::string, glm::vec3> vectors;
   std::unordered_map<std::string,
@@ -60,6 +63,7 @@ class Material::Builder
 public:
 
   Builder& shader(tenno::shared_ptr<Shader> shader);
+  Builder& integer(const std::string &name, int val);
   Builder& floating(const std::string &name, float val);
   Builder& vector(const std::string &name, glm::vec3 val);
   Builder& texture(const std::string &name,
@@ -74,6 +78,7 @@ public:
 private:
   
   tenno::shared_ptr<Shader> _shader;
+  tenno::vector<std::pair<std::string, int>> ints;
   tenno::vector<std::pair<std::string, float>> floats;
   tenno::vector<std::pair<std::string, glm::vec3>> vectors;
   tenno::vector<std::pair<std::string,

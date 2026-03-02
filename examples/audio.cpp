@@ -21,7 +21,7 @@ using namespace brenta;
   
 int main()
 {
-  const int screen_width = 800;
+  const int screen_width  = 800;
   const int screen_height = 600;
   
   // Required: id and path of an audio. The id will be used by the
@@ -32,7 +32,7 @@ int main()
   // You can specify additional optional settings like stream and
   // volume
   const auto stream_guitar_id = "guitar_stream";
-  const auto guitar_volume = 0.8f;
+  const auto guitar_volume    = 0.8f;
   
   //
   // Setup

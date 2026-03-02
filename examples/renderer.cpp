@@ -33,33 +33,24 @@ int main()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .build();
   auto engine = Engine::managed();
-  
-  auto cam = Camera::Builder()
-    .projection_type(Camera::ProjectionType::Perspective)
-    .position(Camera::Aircraft::Builder()
-              .pos({0.0f, 0.0f, 0.0f})
-              .build())
-    .fov(45.0f)
-    .build();
 
-  auto shader = Shader::create({
+  auto maybe_shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs } });
-  if (!shader)
+  if (!maybe_shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
-  auto shader_ptr = tenno::make_shared<Shader>(tenno::move(shader.value()));
-  
-  auto material = tenno::make_shared<Material>(shader_ptr);
-
-  auto model = Model::Builder()
+  auto shader = tenno::move(maybe_shader.value());
+  auto material = Material(tenno::move(shader));
+  auto model_builder =
+    Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
     .transform(Transform()
                .translate(glm::vec3(5.0f, 0.0f, 0.0f))
@@ -67,12 +58,19 @@ int main()
                                       glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(1.0)))
     .texture_props(Texture::Properties()
-                        .flipped(true))
-    .material(material)
+                   .flipped(true))
+    .material(tenno::move(material));
+  auto model =
+    tenno::make_shared<Model>(model_builder);
+  
+  auto cam =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Aircraft::Builder()
+              .pos({0.0f, 0.0f, 0.0f})
+              .build())
+    .fov(45.0f)
     .build();
-
-  auto cam_ptr   = tenno::make_shared<Camera>(tenno::move(cam));
-  auto model_ptr = tenno::make_shared<Model>(tenno::move(model));
   
   while (!Window::should_close())
   { 
@@ -82,8 +80,8 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
     
-    Renderer::begin_frame(cam_ptr);
-    Renderer::submit({glm::mat4(1.0f), model_ptr});
+    Renderer::begin_frame(cam);
+    Renderer::submit({glm::mat4(1.0f), model});
     Renderer::end_frame();
     
     Window::poll_events();

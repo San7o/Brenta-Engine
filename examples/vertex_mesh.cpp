@@ -32,33 +32,32 @@ int main(void)
           .title("Vetex Mesh Example")
           .debug())
     .with(Gl::Builder()
-          .cull_face()
+          .backface_culling()
           .depth_test())
     .build();
   auto engine = Engine::managed();
 
   // At the start, the camera looks at the X axis
-  auto camera = Camera::Builder()
+  auto camera =
+    Camera::Builder()
     .position(Camera::Aircraft::Builder()
               .pos({0.0f, 0.0f, 0.0f})
               .build())
     .build();
 
-  auto shader = Shader::create({
+  auto maybe_shader = Shader::create({
       { Shader::Type::Vertex,   phong_vs },
       { Shader::Type::Fragment, phong_fs },
     });
-  if (!shader)
+  if (!maybe_shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
-  tenno::shared_ptr<Shader> shader_ptr =
-    tenno::make_shared<Shader>(tenno::move(shader.value()));
-
-  auto material = tenno::make_shared<Material>(shader_ptr);
-  
-  auto model = Model::Builder()
+  auto shader = tenno::move(maybe_shader.value());
+  auto material = Material(tenno::move(shader));
+  auto model_builder =
+    Model::Builder()
     .transform(Transform()
                // Move the model forward in the X axis, and rotate it
                // so it can be seen by the camera
@@ -80,12 +79,10 @@ int main(void)
                    .type(Texture::Type::Diffuse)
                    .path("examples/assets/textures/container2.png")
                    .build()))
-    .material(material)
-    .build();
+    .material(tenno::move(material));
+  auto model =
+    tenno::make_shared<Model>(model_builder);
 
-  auto camera_ptr = tenno::make_shared<Camera>(tenno::move(camera));
-  auto model_ptr  = tenno::make_shared<Model>(tenno::move(model));
-  
   while(!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
@@ -97,7 +94,7 @@ int main(void)
     // Update
 
     // Just to create some action
-    auto pos = camera_ptr->get_pos();
+    auto pos = camera.get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
     acam.yaw++;
     if (acam.yaw >= 45.0f)
@@ -105,8 +102,8 @@ int main(void)
     camera.set_pos(acam);
     
     // Draw
-    Renderer::begin_frame(camera_ptr);
-    Renderer::submit({glm::mat4(1.0f), model_ptr});
+    Renderer::begin_frame(camera);
+    Renderer::submit({glm::mat4(1.0f), model});
     Renderer::end_frame();
     
     Window::poll_events();

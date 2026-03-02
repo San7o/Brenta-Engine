@@ -5,18 +5,15 @@
 
 #pragma once
 
-#include <viotecs/viotecs.hpp>
+#include <brenta/ecs/ecs.hpp>
 
-using namespace viotecs;
-
-struct SphereColliderComponent : Component
+class SphereColliderEcsComponent : public viotecs::Component
 {
+public:
+  
   float radius;
   
-  SphereColliderComponent() : radius(1.0f)
-  {
-  }
-  SphereColliderComponent(float radius) : radius(radius)
-  {
-  }
+  SphereColliderEcsComponent() : radius(1.0f) {}
+  SphereColliderEcsComponent(float radius) : radius(radius) {}
+  
 };

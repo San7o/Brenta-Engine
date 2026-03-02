@@ -7,10 +7,17 @@
 
 using namespace brenta;
 
+Material::Material(Shader&& s)
+{
+  this->shader = tenno::make_shared<Shader>(tenno::move(s));
+}
+
 void Material::apply()
 {
   this->shader->use();
 
+  for (auto const& [name, val] : this->ints)
+    shader->set_int(name.c_str(), val);
   for (auto const& [name, val] : this->floats)
     shader->set_float(name.c_str(), val);
   for (auto const& [name, val] : this->vectors)
@@ -24,6 +31,12 @@ void Material::apply()
     shader->set_int(name.c_str(), std::get<0>(index_tex));
   }
   return;
+}
+
+Material &Material::set_int(const std::string &name, int val)
+{
+  this->ints[name] = val;
+  return *this;
 }
 
 Material &Material::set_float(const std::string &name, float val)
@@ -54,6 +67,13 @@ Material::Builder::shader(tenno::shared_ptr<Shader> shader)
 }
 
 Material::Builder&
+Material::Builder::integer(const std::string &name, int val)
+{
+  this->ints.push_back(std::make_tuple(name, val));
+  return *this;
+}
+
+Material::Builder&
 Material::Builder::floating(const std::string &name, float val)
 {
   this->floats.push_back(std::make_tuple(name, val));
@@ -80,6 +100,10 @@ Material Material::Builder::build()
 {
   Material material = Material(this->_shader);
 
+  for (auto& f : this->ints)
+  {
+    material.set_int(std::get<0>(f), std::get<1>(f));
+  }
   for (auto& f : this->floats)
   {
     material.set_float(std::get<0>(f), std::get<1>(f));

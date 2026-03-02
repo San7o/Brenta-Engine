@@ -5,31 +5,31 @@
 
 #pragma once
 
+#include <brenta/ecs/ecs.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <viotecs/viotecs.hpp>
-
-using namespace viotecs;
-
-struct PhysicsComponent : Component
+class PhysicsEcsComponent : public viotecs::Component
 {
+public:
+  
   float     mass;
   float     density;
   glm::vec3 velocity;
   glm::vec3 acceleration;
   bool      isElastic;
 
-  PhysicsComponent()
+  PhysicsEcsComponent()
       : mass(0.0f), density(0.0f), velocity(glm::vec3(0.0f)),
-        acceleration(glm::vec3(0.0f)), isElastic(false)
-  {
-  }
-  PhysicsComponent(float mass, float density, glm::vec3 velocity,
-                   glm::vec3 acceleration, bool isElastic)
+        acceleration(glm::vec3(0.0f)), isElastic(false) {}
+  PhysicsEcsComponent(float mass,
+                      float density,
+                      glm::vec3 velocity,
+                      glm::vec3 acceleration,
+                      bool isElastic)
       : mass(mass), density(density), velocity(velocity),
-        acceleration(acceleration), isElastic(isElastic)
-  {
-  }
+        acceleration(acceleration), isElastic(isElastic) {}
+  
 };

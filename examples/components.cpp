@@ -11,7 +11,7 @@
 //
 
 #include <brenta/renderer/opengl/shader.hpp>
-#include <viotecs/viotecs.hpp>
+#include <brenta/ecs/ecs.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -31,23 +31,17 @@ struct PhysicsComponent : Component
   bool      isElastic;
 
   PhysicsComponent()
-      : mass(0.0f), density(0.0f), velocity(glm::vec3(0.0f)),
-        acceleration(glm::vec3(0.0f)), isElastic(false)
-  {
-  }
+    : mass(0.0f), density(0.0f), velocity(glm::vec3(0.0f)),
+      acceleration(glm::vec3(0.0f)), isElastic(false) {}
   PhysicsComponent(float mass, float density, glm::vec3 velocity,
                    glm::vec3 acceleration, bool isElastic)
-      : mass(mass), density(density), velocity(velocity),
-        acceleration(acceleration), isElastic(isElastic)
-  {
-  }
+    : mass(mass), density(density), velocity(velocity),
+      acceleration(acceleration), isElastic(isElastic) {}
 };
 
 struct PlayerComponent : Component
 {
-  PlayerComponent()
-  {
-  }
+  PlayerComponent() = default;
 };
 
 struct TransformComponent : Component
@@ -57,13 +51,9 @@ struct TransformComponent : Component
   float     scale;
 
   TransformComponent()
-      : position(glm::vec3(0.0f)), rotation(glm::vec3(0.0f)), scale(1.0f)
-  {
-  }
+    : position(glm::vec3(0.0f)), rotation(glm::vec3(0.0f)), scale(1.0f) {}
   TransformComponent(glm::vec3 position, glm::vec3 rotation, float scale)
-      : position(position), rotation(rotation), scale(scale)
-  {
-  }
+    : position(position), rotation(rotation), scale(scale) {}
 };
 
 struct PointLightComponent : Component
@@ -79,20 +69,16 @@ struct PointLightComponent : Component
   tenno::vector<tenno::shared_ptr<brenta::Shader>> shaders;
 
   PointLightComponent()
-      : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
-        specular(glm::vec3(0.0f)), constant(1.0f), linear(0.0f),
-        quadratic(0.0f), strength(0.0f)
-  {
-  }
+    : ambient(glm::vec3(0.0f)), diffuse(glm::vec3(0.0f)),
+      specular(glm::vec3(0.0f)), constant(1.0f), linear(0.0f),
+      quadratic(0.0f), strength(0.0f) {}
   PointLightComponent(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular,
                       float constant, float linear, float quadratic,
                       float strength,
                       tenno::vector<tenno::shared_ptr<brenta::Shader>> shaders)
-      : ambient(ambient), diffuse(diffuse), specular(specular),
-        constant(constant), linear(linear), quadratic(quadratic),
-        strength(strength), shaders(shaders)
-  {
-  }
+    : ambient(ambient), diffuse(diffuse), specular(specular),
+      constant(constant), linear(linear), quadratic(quadratic),
+      strength(strength), shaders(shaders) {}
 };
 
 int main()

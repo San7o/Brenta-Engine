@@ -4,40 +4,27 @@
 // Github:  @San7o
 
 #include <brenta/asset_manager.hpp>
-
-#include <demo/components/directional_light.hpp>
-#include <demo/entities/directional_light.hpp>
-
-#include <viotecs/viotecs.hpp>
+#include <brenta/renderer/phong.hpp>
+#include <brenta/ecs/ecs.hpp>
+#include <brenta/ecs/components/dir_light_ecs_component.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-
-#include "../../../../src/renderer/shaders/c/phong_vs.c"
-#include "../../../../src/renderer/shaders/c/phong_fs.c"
 
 using namespace viotecs;
 using namespace brenta;
 
 void init_directional_light_entity()
 {
-  auto shader = AssetManager::get<Shader>("default_shader");
-  if (!shader)
-  {
-    shader =
-      AssetManager::new_asset<Shader>("default_shader",
-                                      Shader::Builder()
-                                      .objects({
-                                          { Shader::Type::Vertex,   phong_vs },
-                                          { Shader::Type::Fragment, phong_fs } }));
-  }
+  auto phong_dir =
+    PhongDirLight()
+    .set_strength(0.8f);
+  auto phong_dir_ptr =
+    tenno::make_shared<PhongDirLight>(tenno::move(phong_dir));
   
   auto light = World::new_entity()
-    .add_component<DirectionalLightComponent>(glm::vec3(0.2f, -1.0f, -0.3f), // direction
-                                              glm::vec3(0.7f, 0.7f, 0.7f),   // ambient
-                                              glm::vec3(0.5f, 0.5f, 0.5f),   // diffuse
-                                              glm::vec3(1.0f, 1.0f, 1.0f),   // specular
-                                              0.9f,                          // intensity
-                                              shader);
+    .add_component<DirLightEcsComponent>(phong_dir_ptr);
+
+  return;
 }

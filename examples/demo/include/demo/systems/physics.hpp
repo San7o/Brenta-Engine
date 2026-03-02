@@ -5,10 +5,10 @@
 
 #pragma once
 
-#include <demo/components/physics.hpp>
-#include <demo/components/transform.hpp>
+#include <brenta/ecs/ecs.hpp>
+#include <brenta/ecs/components/transform_ecs_component.hpp>
 
-#include <viotecs/viotecs.hpp>
+#include <demo/components/physics.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -17,8 +17,10 @@
 #include <vector>
 
 using namespace viotecs;
+using namespace brenta;
 
-struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
+struct PhysicsSystem : System<PhysicsEcsComponent,
+                              TransformEcsComponent>
 {
   void run(std::vector<EntityId> matches) const override
   {
@@ -28,21 +30,21 @@ struct PhysicsSystem : System<PhysicsComponent, TransformComponent>
     for (auto match : matches)
     {
       auto physics_component =
-        World::entity_to_component<PhysicsComponent>(match);
+        World::entity_to_component<PhysicsEcsComponent>(match);
 
       auto transform_component =
-        World::entity_to_component<TransformComponent>(match);
+        World::entity_to_component<TransformEcsComponent>(match);
 
+      auto dt = Window::get_time().get_delta();
       if (physics_component->acceleration != glm::vec3(0.0f))
       {
-        physics_component->velocity +=
-          physics_component->acceleration * Window::get_time().get_delta();
+        physics_component->velocity += physics_component->acceleration * dt;
       }
       if (physics_component->velocity != glm::vec3(0.0f))
       {
         transform_component->transform
           .set_pos(transform_component->transform.get_pos() +
-                   physics_component->velocity * Window::get_time().get_delta());
+                   physics_component->velocity * dt);
       }
     }
   }

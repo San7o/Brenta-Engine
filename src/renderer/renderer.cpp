@@ -23,17 +23,30 @@ glm::vec3 Renderer::cam_position;
 // Member functions
 //
 
-void Renderer::begin_frame(tenno::shared_ptr<Camera> cam)
+void Renderer::begin_frame()
 {
   Renderer::render_queue.clear();
   Renderer::point_lights.clear();
   Renderer::dir_light = {};
-  Renderer::projection =
-    cam->get_projection_matrix(Window::get_width(),
-                               Window::get_height());
-  Renderer::view = cam->get_view_matrix();
-  Renderer::cam_position = cam->get_transform().get_pos();
   return;
+}
+
+void Renderer::begin_frame(Camera& cam)
+{
+  Renderer::render_queue.clear();
+  Renderer::point_lights.clear();
+  Renderer::dir_light = {};
+  Renderer::set_camera(cam);
+  return;
+}
+
+void Renderer::set_camera(Camera& cam)
+{
+  Renderer::projection =
+    cam.get_projection_matrix(Window::get_width(),
+                              Window::get_height());
+  Renderer::view = cam.get_view_matrix();
+  Renderer::cam_position = cam.get_transform().get_pos();
 }
 
 void Renderer::submit(const Renderer::Command& it)

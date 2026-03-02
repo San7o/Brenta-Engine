@@ -6,7 +6,7 @@
 #include <brenta/window.hpp>
 #include <brenta/input.hpp>
 
-#include <demo/callbacks/close_window.hpp>
+#include <demo/callbacks.hpp>
 
 using namespace brenta;
 

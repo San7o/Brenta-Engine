@@ -39,22 +39,13 @@ bool App::setup()
           .height(screen_height))
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .build();
   auto engine = Engine::instance();
   engine.initialize();
   
-  auto camera =
-    tenno::make_shared<Camera>(Camera::Builder()
-                               .projection_type(Camera::ProjectionType::Perspective)
-                               .position(Camera::Aircraft::Builder()
-                                         .pos({0.0f, 0.0f, 0.0f})
-                                         .build())
-                               .fov(45.0f)
-                               .build());
-
   auto shader =
     AssetManager::new_asset<Shader>("default_shader",
                                     Shader::Builder()
@@ -67,30 +58,45 @@ bool App::setup()
     return false;
   }
   
+  auto material_builder =
+    Material::Builder()
+    .shader(shader);
   auto material =
     AssetManager::new_asset<Material>("backpack_material",
-                                         Material::Builder()
-                                         .shader(shader));
+                                      material_builder);
 
+  auto model_builder =
+    Model::Builder()
+    .path("examples/assets/models/backpack/backpack.obj")
+    .transform(Transform()
+               .translate(glm::vec3(5.0f, 0.0f, 0.0f))
+               .rotate(glm::angleAxis(glm::radians(-90.0f),
+                                      glm::vec3(0.0f, 1.0f, 0.0f)))
+               .scale(glm::vec3(1.0)))
+    .texture_props(Texture::Properties()
+                   .flipped(true))
+    .material(material);
   auto model =
     AssetManager::new_asset<Model>("backpack",
-                                   Model::Builder()
-                                   .path("examples/assets/models/backpack/backpack.obj")
-                                   .transform(Transform()
-                                              .translate(glm::vec3(5.0f, 0.0f, 0.0f))
-                                              .rotate(glm::angleAxis(glm::radians(-90.0f),
-                                                                     glm::vec3(0.0f, 1.0f, 0.0f)))
-                                              .scale(glm::vec3(1.0)))
-                                   .texture_props(Texture::Properties()
-                                                  .flipped(true))
-                                   .material(material));
+                                   model_builder);
 
   auto model_component =
     tenno::make_shared<ModelNodeComponent>(model);
+
   
-  auto scene = AssetManager::new_asset<Scene>("main_scene",
-                                              Scene::Builder()
-                                              .camera(camera));
+  auto camera_builder =
+    Camera::Builder()
+    .projection_type(Camera::ProjectionType::Perspective)
+    .position(Camera::Aircraft::Builder()
+              .pos({0.0f, 0.0f, 0.0f})
+              .build())
+    .fov(45.0f);
+  auto scene_builder =
+    Scene::Builder()
+    .camera(camera_builder);
+  auto scene =
+    AssetManager::new_asset<Scene>("main_scene",
+                                   scene_builder);
   auto root_node  = scene->get_root();
   auto model_node = Scene::create_child(root_node);
   model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));

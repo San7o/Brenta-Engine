@@ -13,14 +13,24 @@
 
 using namespace brenta;
 
+/*
 void Text::render(const std::string &text,
                   float x, float y, float scale,
                   Color color,
                   tenno::shared_ptr<Font> font)
 {
+  Text::render(text, x, y, scale, color, *font);
+}
+*/
+
+void Text::render(const std::string &text,
+                  float x, float y, float scale,
+                  Color color,
+                  Font& font)
+{
   
-  font->shader->use();
-  font->shader->set_float3("textColor",
+  font.shader->use();
+  font.shader->set_float3("textColor",
                            255.99f * color.r,
                            255.99f * color.g,
                            255.99f * color.b);
@@ -29,16 +39,16 @@ void Text::render(const std::string &text,
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
                static_cast<float>(Window::get_height()));
 
-  font->shader->set_mat4("projection", projection);
+  font.shader->set_mat4("projection", projection);
 
   glActiveTexture(GL_TEXTURE0);
-  font->vao.bind();
+  font.vao.bind();
 
   // iterate through all characters
   std::string::const_iterator c;
   for (c = text.begin(); c != text.end(); c++)
   {
-    Font::Character ch = font->characters[*c];
+    Font::Character ch = font.characters[*c];
 
     float xpos = x + ch.bearing.x * scale;
     float ypos = y - (ch.size.y - ch.bearing.y) * scale;
@@ -59,7 +69,7 @@ void Text::render(const std::string &text,
     glBindTexture(GL_TEXTURE_2D, ch.texture_id);
 
     // update content of VBO memory
-    glBindBuffer(GL_ARRAY_BUFFER, font->vbo.get_id());
+    glBindBuffer(GL_ARRAY_BUFFER, font.vbo.get_id());
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);

@@ -32,6 +32,11 @@ Model::Model(Config &conf)
   return;
 }
 
+Model::Model(Builder& builder)
+{
+  *this = builder.build();
+}
+
 Model::~Model()
 {
   if (this->path.string() == "") return;
@@ -210,6 +215,12 @@ Model::Builder &Model::Builder::transform(const Transform& transform)
 Model::Builder &Model::Builder::material(tenno::shared_ptr<Material> material)
 {
   this->conf.material = material;
+  return *this;
+}
+
+Model::Builder &Model::Builder::material(Material&& material)
+{
+  this->conf.material = tenno::make_shared<Material>(tenno::move(material));
   return *this;
 }
 

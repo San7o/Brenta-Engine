@@ -82,10 +82,10 @@ private:
 struct Gl::Config
 {
 public:
-  bool enable_blending    = false;
-  bool enable_cull_face   = false;
-  bool enable_multisample = false;
-  bool enable_depth_test  = false;
+  bool enable_blending           = false;
+  bool enable_backface_culling   = false;
+  bool enable_multisample        = false;
+  bool enable_depth_test         = false;
 };
   
 class Gl::Builder : public Subsystem::Builder
@@ -100,7 +100,7 @@ public:
   ~Builder() = default;
 
   Builder &blending();
-  Builder &cull_face();
+  Builder &backface_culling();
   Builder &multisample();
   Builder &depth_test();
 

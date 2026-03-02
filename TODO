@@ -1,2 +1,3 @@
 - standard ECS library
+  - particle emitter component (both for ECS and Nodegraph)
 - implement signals for node scripts

@@ -54,6 +54,7 @@ public:
 
   Camera() = default;
   Camera(Config conf);
+  Camera(Builder& builder);
 
   // Getters
 

@@ -30,7 +30,7 @@ int main()
           .vsync())
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .build();
@@ -40,8 +40,7 @@ int main()
   // Render loop
   //
 
-  auto font =
-    tenno::make_shared<Font>("examples/assets/fonts/arial.ttf", 100);
+  auto font = Font("examples/assets/fonts/arial.ttf", 100);
   
   while (!Window::should_close())
   {

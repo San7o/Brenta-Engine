@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/ecs.hpp>
+#include <brenta/ecs/ecs.hpp>
 #include <brenta/logger.hpp>
 
 using namespace brenta;

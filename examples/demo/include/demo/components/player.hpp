@@ -5,11 +5,12 @@
 
 #pragma once
 
-#include <demo/components/model.hpp>
+#include <brenta/ecs/ecs.hpp>
 
-struct PlayerComponent : Component
+class PlayerEcsComponent : public viotecs::Component
 {
-  PlayerComponent()
-  {
-  }
+public:
+  
+  PlayerEcsComponent() = default;
+  
 };

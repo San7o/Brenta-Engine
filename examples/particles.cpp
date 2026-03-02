@@ -42,7 +42,7 @@ int main()
           .debug())
     .with(Gl::Builder()
           .blending()
-          .cull_face()
+          .backface_culling()
           .multisample()
           .depth_test())
     .with(Gui::Builder())
@@ -50,17 +50,18 @@ int main()
     .build(); 
   auto engine = Engine::managed();
 
+  auto camera_builder =
+    Camera::Builder()
+    .position(Camera::Spherical::Builder()
+              .center({0.0f, 2.0f, 0.0f})
+              .theta(1.25f)
+              .phi(1.25f)
+              .radius(10.0f)
+              .build())
+    .projection_type(Camera::ProjectionType::Perspective)
+    .fov(45.0f);
   auto camera =
-    tenno::make_shared<Camera>(Camera::Builder()
-                               .position(Camera::Spherical::Builder()
-                                         .center({0.0f, 2.0f, 0.0f})
-                                         .theta(1.25f)
-                                         .phi(1.25f)
-                                         .radius(10.0f)
-                                         .build())
-                               .projection_type(Camera::ProjectionType::Perspective)
-                               .fov(45.0f)
-                               .build());
+    tenno::make_shared<Camera>(camera_builder);
 
   auto emitter = ParticleEmitter::Builder()
       .with_camera(camera)
@@ -76,7 +77,6 @@ int main()
       .atlas_height(8)
       .atlas_index(3)
       .build();
-
 
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
@@ -205,7 +205,6 @@ int main()
   {
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
-    // TODO: movement
     
     setup_gui(fb, &emitter);
     

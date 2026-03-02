@@ -21,8 +21,12 @@ struct FPSSystem : System<None>
   {
     auto font = AssetManager::get<Font>("TextFont");
     auto fps = std::to_string(Window::get_time().get_fps());
+    
     brenta::Text::render("FPS: " + fps,
-                         25.0f, 25.0f, 0.35f,
-                         Color::yellow(), font);
+                         25.0f,
+                         25.0f,
+                         0.35f,
+                         Color::yellow(),
+                         *font);
   }
 };
