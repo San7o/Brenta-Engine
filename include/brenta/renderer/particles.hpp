@@ -5,7 +5,7 @@
 
 #pragma once
 
-#define MAX_PARTICLES 1000
+#define BRENTA_MAX_PARTICLES 1000
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
@@ -67,26 +67,26 @@ public:
 
 private:
   
-  Camera *cam;
-  tenno::shared_ptr<Shader> shader_update;
-  tenno::shared_ptr<Shader> shader_render;
+  tenno::weak_ptr<Camera>     cam;
+  tenno::shared_ptr<Shader>   shader_update;
+  tenno::shared_ptr<Shader>   shader_render;
 
 };
 
 struct ParticleEmitter::Config
 {
-  glm::vec3              starting_position     = {};
-  glm::vec3              starting_velocity     = {};
-  glm::vec3              starting_spread       = {};
-  float                  starting_time_to_live = 1.0f;
-  int                    num_particles         = MAX_PARTICLES;
-  float                  spawn_rate            = 0.01f;
-  float                  scale                 = 1.0f;
-  std::filesystem::path  atlas_path            = "";
-  int                    atlas_width           = 8;
-  int                    atlas_height          = 8;
-  int                    atlas_index           = 0;
-  Camera                *cam                   = nullptr;
+  glm::vec3               starting_position     = {};
+  glm::vec3               starting_velocity     = {};
+  glm::vec3               starting_spread       = {};
+  float                   starting_time_to_live = 1.0f;
+  int                     num_particles         = BRENTA_MAX_PARTICLES;
+  float                   spawn_rate            = 0.01f;
+  float                   scale                 = 1.0f;
+  std::filesystem::path   atlas_path            = "";
+  int                     atlas_width           = 8;
+  int                     atlas_height          = 8;
+  int                     atlas_index           = 0;
+  tenno::weak_ptr<Camera> cam                   = {};
 };
   
 class ParticleEmitter::Builder
@@ -107,7 +107,7 @@ public:
   Builder &atlas_width(int atlas_width);
   Builder &atlas_height(int atlas_height);
   Builder &atlas_index(int atlas_index);
-  Builder &with_camera(Camera *cam);
+  Builder &with_camera(tenno::weak_ptr<Camera> cam);
 
   ParticleEmitter build();
 };

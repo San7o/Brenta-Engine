@@ -13,8 +13,8 @@ using namespace viotecs;
 
 struct CameraResource : Resource
 {
-  brenta::Camera *cam;
-  CameraResource(brenta::Camera *c) : cam(c)
+  tenno::shared_ptr<brenta::Camera> cam;
+  CameraResource(tenno::shared_ptr<brenta::Camera> c) : cam(c)
   {
   }
 };

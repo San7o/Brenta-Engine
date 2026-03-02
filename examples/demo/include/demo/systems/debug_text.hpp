@@ -23,7 +23,7 @@ struct DebugTextSystem : System<None>
   {
     auto            color            = Color::yellow();
     const float     offset           = 20.0f;
-    brenta::Camera *cam              = World::get_resource<CameraResource>()->cam;
+    auto            cam              = World::get_resource<CameraResource>()->cam;
     auto            camera_world_pos = cam->get_transform().get_pos();
     auto            font             = AssetManager::get<Font>("TextFont");
 

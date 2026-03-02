@@ -36,7 +36,7 @@ struct RendererSystem : System<ModelComponent, TransformComponent>
       return;
     }
 
-    brenta::Camera *cam = World::get_resource<CameraResource>()->cam;
+    auto cam = World::get_resource<CameraResource>()->cam;
 
     for (auto match : matches)
     {

@@ -8,4 +8,5 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/mouse.hpp>
 
-void init_camera_mouse_callback(brenta::Camera *cam, brenta::Mouse *mouse);
+void init_camera_mouse_callback(tenno::weak_ptr<brenta::Camera> cam,
+                                brenta::Mouse *mouse);

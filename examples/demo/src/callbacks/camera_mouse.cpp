@@ -12,7 +12,7 @@
 
 using namespace brenta;
 
-void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
+void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
 {
   auto camera_mouse_callback = [cam, mouse](double xpos, double ypos)
   {
@@ -35,7 +35,10 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
       xoffset *= sensitivity;
       yoffset *= sensitivity;
 
-      auto new_cam = cam->get_pos();
+      auto camera = cam.lock();
+      if (!camera) return;
+      
+      auto new_cam = camera->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
         scam.theta += yoffset * sensitivity;
@@ -44,7 +47,7 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
         if (scam.theta <= 0.01f) scam.theta = 0.01f;
         if (scam.theta >= 3.13f) scam.theta = 3.13f;
 
-        cam->set_pos(scam);
+        camera->set_pos(scam);
         
       } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
         return;
@@ -69,10 +72,13 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
       xoffset *= sensitivity * 0.3f;
       yoffset *= sensitivity * 0.3f;
 
-      auto new_cam = cam->get_pos();
+      auto camera = cam.lock();
+      if (!camera) return;
+
+      auto new_cam = camera->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
-        glm::vec3 world_pos = cam->get_transform().get_pos();
+        glm::vec3 world_pos = camera->get_transform().get_pos();
         // Local coordinate system
         glm::vec3 fixed_center =
           glm::vec3(scam.center.x, world_pos.y, scam.center.z);
@@ -80,12 +86,12 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
         glm::vec3 front =
           glm::normalize(world_pos - fixed_center);
         glm::vec3 right =
-          glm::normalize(glm::cross(front, cam->get_world_up()));
+          glm::normalize(glm::cross(front, camera->get_world_up()));
 
         scam.center += right * glm::vec3(xoffset);
-        scam.center -= cam->get_world_up() * glm::vec3(yoffset);
+        scam.center -= camera->get_world_up() * glm::vec3(yoffset);
 
-        cam->set_pos(scam);
+        camera->set_pos(scam);
       } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
         return;
       }
@@ -107,15 +113,18 @@ void init_camera_mouse_callback(Camera *cam, Mouse *mouse)
 
       xoffset *= mouse->get_sensitivity();
       yoffset *= mouse->get_sensitivity();
+
+      auto camera = cam.lock();
+      if (!camera) return;
       
-      auto new_cam = cam->get_pos();
+      auto new_cam = camera->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
 
         scam.radius -= yoffset;
         if (scam.radius <= 0.1f) scam.radius = 0.1f;
 
-        cam->set_pos(scam);
+        camera->set_pos(scam);
       } catch ([[maybe_unused]] const std::bad_variant_access& ex) {
         return;
       }

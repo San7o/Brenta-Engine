@@ -184,7 +184,8 @@ void ParticleEmitter::update(float delta_time)
 // Render particles
 void ParticleEmitter::render()
 {
-  if (!this->cam)
+  tenno::shared_ptr<Camera> camera = this->cam.lock();
+  if (!camera)
   {
     ERROR("ParticleEmitter::render_particles: Camera not set or null for emitter");
     return;
@@ -208,10 +209,10 @@ void ParticleEmitter::render()
   int window_width  = Window::get_width();
   int window_height = Window::get_height();
   auto projection =
-    this->cam->get_projection_matrix(window_width, window_height);
+    camera->get_projection_matrix(window_width, window_height);
 
   shader_render->use();
-  shader_render->set_mat4("view",        this->cam->get_view_matrix());
+  shader_render->set_mat4("view",        camera->get_view_matrix());
   shader_render->set_mat4("projection",  projection);
   shader_render->set_mat4("model",       glm::mat4(1.0f));
   shader_render->set_int("atlas_width",  this->atlas_width);
@@ -316,7 +317,8 @@ ParticleEmitter::Builder::atlas_index(int atlas_index)
   return *this;
 }
 
-ParticleEmitter::Builder &ParticleEmitter::Builder::with_camera(Camera *cam)
+ParticleEmitter::Builder &
+ParticleEmitter::Builder::with_camera(tenno::weak_ptr<Camera> cam)
 {
   this->conf.cam = cam;
   return *this;

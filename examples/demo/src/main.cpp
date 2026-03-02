@@ -51,16 +51,17 @@ int main()
   engine.initialize();
   ///auto engine = Engine::managed();
 
-  auto camera = Camera::Builder()
-    .projection_type(Camera::ProjectionType::Perspective)
-    .position(Camera::Spherical::Builder()
-              .center({0.0f, 2.0f, 0.0f})
-              .phi(1.25f)
-              .theta(1.25f)
-              .radius(30.0f)
-              .build())
-    .fov(45.0f)
-    .build();
+  auto camera =
+    tenno::shared_ptr<Camera>(Camera::Builder()
+                              .projection_type(Camera::ProjectionType::Perspective)
+                              .position(Camera::Spherical::Builder()
+                                        .center({0.0f, 2.0f, 0.0f})
+                                        .phi(1.25f)
+                                        .theta(1.25f)
+                                        .radius(30.0f)
+                                        .build())
+                              .fov(45.0f)
+                              .build());
 
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
@@ -76,11 +77,11 @@ int main()
 
   init_toggle_wireframe_callback();
   init_close_window_callback();
-  init_camera_mouse_callback(&camera, &mouse);
+  init_camera_mouse_callback(camera, &mouse);
   init_play_guitar_callback();
 
   World::add_resource<WireframeResource>(false);
-  World::add_resource<CameraResource>(&camera);
+  World::add_resource<CameraResource>(camera);
   World::register_systems<RendererSystem,
                           PointLightsSystem,
                           DebugTextSystem,
@@ -98,7 +99,7 @@ int main()
                                     .size(40));
     
     auto emitter = ParticleEmitter::Builder()
-      .with_camera(&camera)
+      .with_camera(camera)
       .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
       .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))

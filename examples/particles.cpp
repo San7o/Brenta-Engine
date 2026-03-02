@@ -46,19 +46,20 @@ int main()
     .build(); 
   auto engine = Engine::managed();
 
-  auto camera = Camera::Builder()
-    .position(Camera::Spherical::Builder()
-              .center({0.0f, 2.0f, 0.0f})
-              .theta(1.25f)
-              .phi(1.25f)
-              .radius(10.0f)
-              .build())
-    .projection_type(Camera::ProjectionType::Perspective)
-    .fov(45.0f)
-    .build();
+  auto camera =
+    tenno::make_shared<Camera>(Camera::Builder()
+                               .position(Camera::Spherical::Builder()
+                                         .center({0.0f, 2.0f, 0.0f})
+                                         .theta(1.25f)
+                                         .phi(1.25f)
+                                         .radius(10.0f)
+                                         .build())
+                               .projection_type(Camera::ProjectionType::Perspective)
+                               .fov(45.0f)
+                               .build());
 
   auto emitter = ParticleEmitter::Builder()
-      .with_camera(&camera)
+      .with_camera(camera)
       .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
       .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
