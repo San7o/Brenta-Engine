@@ -14,17 +14,20 @@ the engine's internals.
 
 The engine is composed of many subsystems like `Window`, `Input`,
 `Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
-objects and a scene-graph. It also supports:
+objects and many abstractions to work with 3D graphics. It also
+supports:
 
 - hot reloading
 - GPU particles
 - loading TrueType fonts, textures, audio and .obj meshes
 - central asset management
 - scene graph
+- ECS
 - lua node scripting
 - GUI using ImGui
 - signals
 - point and directional lights
+- input management with callbacks
 
 To get a detailed look at the engine, please visit the
 [website](https://san7o.github.io/Brenta-Engine/) and code
@@ -51,16 +54,5 @@ The engine also features the following sub projects:
 All instructions to build the demo game are in [BUILD](./docs/BUILD.md),
 there are also instructions on how to [build unit tests](./tests/README.md)
 and how to [build examples](./examples/README.md).
-
-<h1 align=center> Contributing </h1>
-
-Even if this is not an advanced graphics engine, it provides many
-opportunities for you to practice and improve your programming
-skills. You can look at the current issues to get an idea of where the
-engine is going and where it needs help. As the engine grows, help
-from contributors will be essential to keep the project alive.
-
-Check out [CONTRIBUTING](./docs/CONTRIBUTING.md) for information on
-how to contribute.
 
 The engine is licensed under [MIT](./LICENSE) license.
