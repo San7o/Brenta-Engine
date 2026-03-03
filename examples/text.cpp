@@ -41,6 +41,16 @@ int main()
   //
 
   auto font = Font("examples/assets/fonts/arial.ttf", 100);
+  auto font_ptr =
+    tenno::make_shared<Font>(tenno::move(font));
+  Text hello = {
+    "Hello OpenGL!",
+    25.0f,
+    25.0f,
+    1.0f,
+    Color::yellow(),
+    font_ptr
+  };
   
   while (!Window::should_close())
   {
@@ -50,9 +60,7 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    Text::render("Hello OpenGL!",
-                 25.0f, 25.0f, 1.0f,
-                 Color::yellow(), font);
+    hello.render();
 
     Window::poll_events();
     Window::swap_buffers();

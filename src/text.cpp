@@ -13,49 +13,36 @@
 
 using namespace brenta;
 
-void Text::render(const Text& text)
+void Text::render()
 {
-  Text::render(text.text,
-               text.x,
-               text.y,
-               text.scale,
-               text.color,
-               *text.font);
-}
-
-void Text::render(const std::string &text,
-                  float x,
-                  float y,
-                  float scale,
-                  Color color,
-                  Font& font)
-{
-  font.shader->use();
-  font.shader->set_float3("textColor",
-                           255.99f * color.r,
-                           255.99f * color.g,
-                           255.99f * color.b);
+  this->font->shader->use();
+  this->font->shader->set_float3("textColor",
+                                 255.99f * this->color.r,
+                                 255.99f * this->color.g,
+                                 255.99f * this->color.b);
 
   glm::mat4 projection =
     glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
                static_cast<float>(Window::get_height()));
 
-  font.shader->set_mat4("projection", projection);
+  this->font->shader->set_mat4("projection", projection);
 
   glActiveTexture(GL_TEXTURE0);
-  font.vao.bind();
+  this->font->vao.bind();
 
   // iterate through all characters
+  int _x = this->x;
+  int _y = this->y;
   std::string::const_iterator c;
-  for (c = text.begin(); c != text.end(); c++)
+  for (c = this->text.begin(); c != this->text.end(); c++)
   {
-    Font::Character ch = font.characters[*c];
+    Font::Character ch = this->font->characters[*c];
 
-    float xpos = x + ch.bearing.x * scale;
-    float ypos = y - (ch.size.y - ch.bearing.y) * scale;
+    float xpos = _x + ch.bearing.x * this->scale;
+    float ypos = _y - (ch.size.y - ch.bearing.y) * this->scale;
 
-    float w = ch.size.x * scale;
-    float h = ch.size.y * scale;
+    float w = ch.size.x * this->scale;
+    float h = ch.size.y * this->scale;
 
     // update VBO for each character
 
@@ -70,7 +57,7 @@ void Text::render(const std::string &text,
     glBindTexture(GL_TEXTURE_2D, ch.texture_id);
 
     // update content of VBO memory
-    glBindBuffer(GL_ARRAY_BUFFER, font.vbo.get_id());
+    glBindBuffer(GL_ARRAY_BUFFER, this->font->vbo.get_id());
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -78,8 +65,8 @@ void Text::render(const std::string &text,
     glDrawArrays(GL_TRIANGLES, 0, 6);
     // now advance cursors for next glyph (note that advance is number
     // of 1/64 pixels)
-    x += (ch.advance >> 6)
-         * scale; // bitshift by 6 to get value in pixels (2^6 = 64)
+    _x += (ch.advance >> 6)
+      * this->scale; // bitshift by 6 to get value in pixels (2^6 = 64)
   }
   glBindVertexArray(0);
   glBindTexture(GL_TEXTURE_2D, 0);

@@ -3,8 +3,8 @@
 I could tell you that the Brenta engine was perfectly designed, with a
 clear vision from its inception, with a beautiful and powerful API
 that makes programming truly enjoyable. Except the fact that it would
-be a lie. It does not mean that I don't find the current design and
-API beautiful and fun - I think Brenta is a powerful engine - but its
+be a lie. I do not mean that I don't find the current design and API
+beautiful and fun - I think Brenta is a powerful engine - but its
 development has been more iterative than meticulously designed. I
 rewrote huge parts of the engine many many times, to the point where I
 am not scared to do big refactoring anymore - that is just routine -

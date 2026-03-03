@@ -30,7 +30,33 @@ class Material
 {
 public:
 
-  class Builder;
+  class Builder
+  {
+  public:
+
+    Builder& shader(tenno::shared_ptr<Shader> shader);
+    Builder& integer(const std::string &name, int val);
+    Builder& floating(const std::string &name, float val);
+    Builder& vector(const std::string &name, glm::vec3 val);
+    Builder& texture(const std::string &name,
+                     tenno::shared_ptr<Texture> val, int index);
+
+    // Add path to be watched for hot-reloading
+    Builder &watch(const std::filesystem::path &path);
+  
+    Material build();
+    tenno::vector<std::filesystem::path> get_watch_paths() const;  
+  
+  private:
+  
+    tenno::shared_ptr<Shader> _shader;
+    tenno::vector<std::pair<std::string, int>> ints;
+    tenno::vector<std::pair<std::string, float>> floats;
+    tenno::vector<std::pair<std::string, glm::vec3>> vectors;
+    tenno::vector<std::pair<std::string,
+                            std::pair<int, tenno::shared_ptr<Texture>>>> textures;
+
+  };  
   
   tenno::shared_ptr<Shader> shader;
 
@@ -38,6 +64,10 @@ public:
   Material(tenno::shared_ptr<Shader> s) : shader(s) {}
   Material(Shader&& s);
   Material(Material&& other) = default;
+  Material(Material::Builder& builder)
+  {
+    *this = builder.build();
+  }
   Material &operator=(Material&& other) = default;
   
   void apply();
@@ -57,33 +87,5 @@ private:
                      std::pair<int, tenno::shared_ptr<Texture>>>  textures;
 
 };
-
-class Material::Builder
-{
-public:
-
-  Builder& shader(tenno::shared_ptr<Shader> shader);
-  Builder& integer(const std::string &name, int val);
-  Builder& floating(const std::string &name, float val);
-  Builder& vector(const std::string &name, glm::vec3 val);
-  Builder& texture(const std::string &name,
-                   tenno::shared_ptr<Texture> val, int index);
-
- // Add path to be watched for hot-reloading
-  Builder &watch(const std::filesystem::path &path);
-  
-  Material build();
-  tenno::vector<std::filesystem::path> get_watch_paths() const;  
-  
-private:
-  
-  tenno::shared_ptr<Shader> _shader;
-  tenno::vector<std::pair<std::string, int>> ints;
-  tenno::vector<std::pair<std::string, float>> floats;
-  tenno::vector<std::pair<std::string, glm::vec3>> vectors;
-  tenno::vector<std::pair<std::string,
-                          std::pair<int, tenno::shared_ptr<Texture>>>> textures;
-
-};  
 
 } // namespace brenta

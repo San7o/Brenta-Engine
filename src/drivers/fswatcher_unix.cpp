@@ -8,9 +8,8 @@
 #include <brenta/fswatcher.hpp>
 #include <sys/inotify.h>
 
-using namespace brenta;
-
-#define _FSWATCHER_BUFFER_LEN  (1024 * (sizeof(struct inotify_event) + 16))
+namespace brenta
+{
 
 struct FsWatcherUnixWdList
 {
@@ -25,6 +24,12 @@ struct FsWatcherUnix
   int fd;
   FsWatcherUnixWdList *wd_list;  
 };
+
+} // namespace brenta
+
+using namespace brenta;
+
+#define _FSWATCHER_BUFFER_LEN  (1024 * (sizeof(struct inotify_event) + 16))
 
 FilesystemWatcher::~FilesystemWatcher()
 {

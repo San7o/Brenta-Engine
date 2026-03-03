@@ -8,6 +8,9 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
+namespace brenta
+{
+
 struct FsWatcherWindowsDirList
 {
   HANDLE     hDir;
@@ -25,6 +28,10 @@ struct FsWatcherWindows
   FsWatcherWindowsDirList *dir_list;
 };
 
+} // namespace brenta
+
+using namespace brenta;
+  
 FilesystemWatcher::~FilesystemWatcher()
 {
   this->destroy();

@@ -154,7 +154,7 @@ and a `Window`. These are indeed subsystems. You can work with any
 class that implements the `Subsystem` interface by adding it to the
 `Engine` using `with(MyClass::Builder)`.
 
-We then call `Engine::manager()` which will return an object (an
+We then call `Engine::managed()` which will return an object (an
 "engine manager") that will terminate the engine and all its
 subsystems when it goes out of scope. If you don't want to use this,
 you can initialize and terminate the engine manually:
@@ -171,7 +171,7 @@ engine.terminate();
 
 Each subsystem can be configured through their builder, as we have
 already discussed. Like all other things, these usage of `Engine` is
-not mandatory, but it provides a nice way to do manage subsystems.
+not mandatory, but it provides a nice way to manage subsystems.
 
 ### Drivers
 
@@ -182,8 +182,9 @@ example, playing audio can be done with several libraries such as
 including your favourite in the list). Some functionalities may even
 be OS-dependent such as waiting for files in the filesystem (inotify
 on Linux, iocp in Windows). To support multiple implementations
-("backends"), the engine often uses a `Driver` abstraction. A driver
-specifies an interface that can be implemented by different classes.
+("backends") of the same API, the engine often uses a `Driver`
+abstraction. A driver specifies an interface that can be implemented
+by different classes.
 
 In practice, it looks like the following:
 

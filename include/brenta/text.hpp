@@ -34,18 +34,8 @@ public:
     : text(text), x(x), y(y), scale(scale), color(color), font(font)
   {}
   ~Text() = default;
-
-  //
-  // Static API
-  //
   
-  static void render(const std::string &text,
-                     float x,
-                     float y,
-                     float scale,
-                     Color color,
-                     Font& font);
-  static void render(const Text& text);
+  void render();
 
 };
   

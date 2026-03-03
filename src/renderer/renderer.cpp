@@ -128,7 +128,7 @@ void Renderer::flush()
   for (auto& command : Renderer::transparent_render_queue)
     flush_command(command);
   for (auto& text : Renderer::text_render_queue)
-    Text::render(text);
+    text.render();
   
   Renderer::render_queue.clear();
   Renderer::transparent_render_queue.clear();
