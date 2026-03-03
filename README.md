@@ -18,7 +18,17 @@ the engine's internals.
 
 The engine is composed of many subsystems like `Window`, `Input`,
 `Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
-objects and a scene-graph.
+objects and a scene-graph. It also supports:
+
+- hot reloading
+- GPU particles
+- loading TrueType fonts, textures, audio and .obj meshes
+- central asset management
+- scene graph
+- lua node scripting
+- GUI using ImGui
+- signals
+- point and directional lights
 
 To get a detailed look at the engine, please visit the
 [website](https://san7o.github.io/Brenta-Engine/) and code
@@ -33,140 +43,12 @@ The engine also features the following sub projects:
 - [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
 
-### Modular APIs
+<h1 align=center> Screenshots </h1>
 
-```c++
-auto engine = Engine::Builder()
-  .with(Logger::Builder()
-        .level(Logger::Level::debug)
-        .file("/tmp/brenta-logs"))
-  .with(Window::Builder()
-        .title("brenta demo")
-        .width(800)
-        .height(600)
-        .vsync()
-        .msaa())
-  .with(Gl::Builder()
-        .blending()
-        .cull_face()
-        .multisample()
-        .depth_test())
-  .build();
-```
-
-### Model Loading
-
-```c++
-auto model = Model::Builder()
-    .path("assets/models/backpack/backpack.obj")
-    .transform(Transform()
-               .translate(glm::vec3(1.0f, 5.0f, 2.0f))
-               .scale(glm::vec3(2.0f, 1.0f, 1.0f)))
-    .build();
-```
-
-![image](https://github.com/user-attachments/assets/e4facf89-4256-4ecb-ae0e-9340aaf7b372)
-
-
-### GPU Particles
-
-```c++
-auto emitter = ParticleEmitter::Builder()
-        .with_camera(&camera)
-        .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
-        .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-        .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
-        .starting_time_to_live(0.5f)
-        .num_particles(1000)
-        .spawn_rate(0.01f)
-        .scale(1.0f)
-        .atlas_path("assets/textures/particle_atlas.png")
-        .atlas_width(8)
-        .atlas_height(8)
-        .atlas_index(3)
-        .build();
-```
-
-![particles_short](https://github.com/user-attachments/assets/27d5ac09-00ce-4379-bf47-d16c24de9508)
-
-### Texture Animation using an Atlas
-
-![texture_atlas_short](https://github.com/user-attachments/assets/1a379fa5-741b-4087-a078-68a86a1fea98)
-
-### 3D Camera
-
-```cpp
-auto camera = Camera::Builder()
-  .projection_type(Camera::ProjectionType::Perspective)
-  .position(Camera::Spherical::Builder()
-            .center({0.0f, 2.0f, 0.0f})
-            .phi(1.25f)
-            .theta(1.25f)
-            .radius(30.0f)
-            .build())
-  .fov(45.0f)
-  .build();
-```
-
-https://github.com/user-attachments/assets/f0ea502c-dc9e-4609-8322-641eb7d65a77
-
-Also collisions, lighting, text and audio!
-
-<h1 align=center> ECS </h1>
-
-Brenta Engine features an Entity Component System architecture. The
-ECS is a design pattern that allows you to structure your code in a
-way that is more modular and scalable.
-
-### Entities
-
-Entities are objects in the game, it's just an ID. The `entity` class
-helps you manage the entity, for example by attaching a component to
-that entity, or removing the entity from the world.
-
-```c++
-Entity e = World::new_entity();
-```
-
-### Components
-
-Components are pieces of data that are attached to an entity:
-
-```c++
-struct PhysicsComponent : Component {
-    float mass;
-    float density;
-    glm::vec3 velocity;
-    glm::vec3 acceleration;
-    
-    PhysicsComponent() = default;
-};
-
-// Somewhere
-e.add_component<PhysicsComponent>(10.0f);
-```
-
-### Systems
-
-Systems are functions that operate on entities with specific components. They
-are called at each game tick by the `World`:
-
-```c++
-struct FPSSystem : System<None>
-{
-  void run(std::vector<EntityId> _) const override
-  {
-    auto font = AssetManager::get_font("TextFont");
-    auto fps = std::to_string(Window::get_time().get_fps());
-    brenta::Text::render("FPS: " + fps,
-                         25.0f, 25.0f, 0.35f,
-                         Color::yellow(), font);
-  }
-};
-
-// To register the system
-World::register_systems<FpsSystem>();
-```
+<div align="center">
+  <img src="docs/screenshot1.png" />
+  <img src="docs/screenshot2.png" />
+</div>
 
 <h1 align=center> Building </h1>
 
