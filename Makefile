@@ -24,19 +24,23 @@ shaders-brenta: $(SHADERS)
 shaders-examples:
 	python3 utils/shaders_to_c.py --out-dir $(EXAMPLES_SHADERS_OUT_DIR) $(EXAMPLES_SHADERS)	
 
-DOCS_DIR := docs
-HTML_DIR := docs/html
-DOCS := ${wildcard ${DOCS_DIR}/*.md}
-HTML := ${patsubst ${DOCS_DIR}/%.md, ${HTML_DIR}/%.html, ${DOCS}}
-HTML_INTRO := utils/website/intro.html
-HTML_OUTRO := utils/website/outro.html
-TMP_FILE := /tmp/padoc-out.html
+#
+# Website
+#
+
+DOCS_DIR        := docs
+HTML_DIR        := docs/html
+DOCS            := ${wildcard ${DOCS_DIR}/*.md}
+HTML            := ${patsubst ${DOCS_DIR}/%.md, ${HTML_DIR}/%.html, ${DOCS}}
+HTML_INTRO      := utils/website/intro.html
+HTML_OUTRO      := utils/website/outro.html
+TMP_FILE        := /tmp/padoc-out.html
 HIGHLIGHT_STYLE := tango
-PANDOC_FLAGS := --highlight-style ${HIGHLIGHT_STYLE}
+PANDOC_FLAGS    := --highlight-style ${HIGHLIGHT_STYLE}
 
-html: doxygen ${HTML}
+html: doxygen ${HTML} ## Generate website and documentation
 
-doxygen:
+doxygen: ## Generate html documentation
 	doxygen ./utils/doxygen/doxygen.conf
 	mv ${HTML_DIR}/index.html ${HTML_DIR}/doxygen.html
 	cp -r utils/docs-images ${HTML_DIR}/images

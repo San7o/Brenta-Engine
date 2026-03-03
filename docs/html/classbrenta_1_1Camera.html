@@ -132,6 +132,8 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a715423d4719d4f9a4f94ffb50ecd1438" id="r_a715423d4719d4f9a4f94ffb50ecd1438"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Camera.html#a715423d4719d4f9a4f94ffb50ecd1438">Camera</a> (<a class="el" href="structbrenta_1_1Camera_1_1Config.html">Config</a> conf)</td></tr>
 <tr class="separator:a715423d4719d4f9a4f94ffb50ecd1438"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53080b82fcc7ca99c80572941db5cd37" id="r_a53080b82fcc7ca99c80572941db5cd37"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Camera.html#a53080b82fcc7ca99c80572941db5cd37">Camera</a> (<a class="el" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;builder)</td></tr>
+<tr class="separator:a53080b82fcc7ca99c80572941db5cd37"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30049001d63f763d86aa8cf0c166a6b3" id="r_a30049001d63f763d86aa8cf0c166a6b3"><td class="memItemLeft" align="right" valign="top">std::variant&lt; <a class="el" href="classbrenta_1_1Camera_1_1Spherical.html">Spherical</a>, <a class="el" href="classbrenta_1_1Camera_1_1Aircraft.html">Aircraft</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Camera.html#a30049001d63f763d86aa8cf0c166a6b3">get_pos</a> () const</td></tr>
 <tr class="separator:a30049001d63f763d86aa8cf0c166a6b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b8d82fd142474c5fd690b00be64600b" id="r_a9b8d82fd142474c5fd690b00be64600b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbrenta_1_1Transform.html">Transform</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Camera.html#a9b8d82fd142474c5fd690b00be64600b">get_transform</a> ()</td></tr>
@@ -199,7 +201,7 @@ Projection</h2>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8hpp_source.html#l00144">144</a> of file <a class="el" href="camera_8hpp_source.html">camera.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8hpp_source.html#l00145">145</a> of file <a class="el" href="camera_8hpp_source.html">camera.hpp</a>.</p>
 
 </div>
 </div>
@@ -223,13 +225,13 @@ Projection</h2>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8hpp_source.html#l00138">138</a> of file <a class="el" href="camera_8hpp_source.html">camera.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8hpp_source.html#l00139">139</a> of file <a class="el" href="camera_8hpp_source.html">camera.hpp</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a715423d4719d4f9a4f94ffb50ecd1438" name="a715423d4719d4f9a4f94ffb50ecd1438"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a715423d4719d4f9a4f94ffb50ecd1438">&#9670;&#160;</a></span>Camera()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a715423d4719d4f9a4f94ffb50ecd1438">&#9670;&#160;</a></span>Camera() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -245,6 +247,26 @@ Projection</h2>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00013">13</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a53080b82fcc7ca99c80572941db5cd37" name="a53080b82fcc7ca99c80572941db5cd37"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53080b82fcc7ca99c80572941db5cd37">&#9670;&#160;</a></span>Camera() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Camera::Camera </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classbrenta_1_1Camera_1_1Builder.html">Builder</a> &amp;&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00026">26</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -264,7 +286,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00112">112</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00117">117</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -283,7 +305,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00117">117</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00122">122</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -302,7 +324,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00102">102</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00107">107</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -332,7 +354,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00043">43</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00048">48</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -351,7 +373,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00097">97</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00102">102</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -370,7 +392,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00127">127</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00132">132</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -389,7 +411,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00107">107</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00112">112</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -408,7 +430,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00122">122</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00127">127</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -427,7 +449,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00026">26</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00031">31</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -446,7 +468,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00157">157</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00162">162</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -466,7 +488,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00167">167</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00172">172</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -486,7 +508,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00172">172</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00177">177</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -506,7 +528,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00141">141</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00146">146</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -526,7 +548,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00136">136</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00141">141</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -546,7 +568,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00182">182</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00187">187</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -566,7 +588,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00177">177</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00182">182</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>
@@ -586,7 +608,7 @@ Projection</h2>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00162">162</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="camera_8cpp_source.html#l00167">167</a> of file <a class="el" href="camera_8cpp_source.html">camera.cpp</a>.</p>
 
 </div>
 </div>

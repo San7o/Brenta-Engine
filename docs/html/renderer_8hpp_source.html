@@ -108,80 +108,93 @@ $(document).ready(function(){initNavTree('renderer_8hpp_source.html',''); initRe
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &lt;brenta/renderer/opengl/shader.hpp&gt;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &lt;brenta/renderer/camera.hpp&gt;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &lt;brenta/renderer/material.hpp&gt;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/renderer/light.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/renderer/point_light.hpp&gt;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/renderer/dir_light.hpp&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;brenta/text.hpp&gt;</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="preprocessor">#include &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">namespace </span>brenta</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="comment">//</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="comment">// Renderer</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">// --------</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">//</span></div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// The renderer is a logical abtraction that is responsible to draw</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">// a &quot;rendering unit&quot; aka render command. It takes all the</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// information for a render call and it performs the drawing,</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// calculating view, projection and model matrixes.</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">//</span></div>
-<div class="foldopen" id="foldopen00031" data-start="{" data-end="};">
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classbrenta_1_1Renderer.html">   31</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer.html">Renderer</a></div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <a class="code hl_class" href="classbrenta_1_1Renderer.html">Renderer</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <a class="code hl_class" href="classbrenta_1_1Renderer.html">~Renderer</a>() = <span class="keyword">delete</span>;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> begin_frame(tenno::shared_ptr&lt;Camera&gt; cam);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit(<span class="keyword">const</span> <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a>&amp; it);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_point_light(tenno::shared_ptr&lt;PointLight&gt; point_light);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_point_lights(<span class="keyword">const</span> tenno::vector&lt;tenno::shared_ptr&lt;PointLight&gt;&gt;&amp; point_light);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_dir_light(tenno::shared_ptr&lt;DirLight&gt; dir_light);</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> end_frame();</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="comment">// Draw and clear state</span></div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> flush();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">static</span> glm::mat4 projection;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">static</span> glm::mat4 view;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keyword">static</span> glm::vec3 cam_position;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keyword">static</span> tenno::vector&lt;tenno::shared_ptr&lt;PointLight&gt;&gt;  point_lights;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">static</span> std::optional&lt;tenno::shared_ptr&lt;DirLight&gt;&gt;  dir_light;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keyword">static</span> tenno::vector&lt;Command&gt; render_queue;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>};</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#pragma once</span></div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">namespace </span>brenta</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="comment">//</span></div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="comment">// Renderer</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="comment">// --------</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// The renderer is a logical abtraction that is responsible to draw</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// a &quot;rendering unit&quot; aka render command. It takes all the</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">// information for a render call and it performs the drawing,</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// calculating view, projection and model matrixes.</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">//</span></div>
+<div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classbrenta_1_1Renderer.html">   33</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer.html">Renderer</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  </div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classbrenta_1_1Renderer.html">Renderer</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <a class="code hl_class" href="classbrenta_1_1Renderer.html">~Renderer</a>() = <span class="keyword">delete</span>;</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <span class="comment">// You can begin a frame withouth a camera, but eventually you will</span></div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// have to call set_camera if you want to see anything</span></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> begin_frame();</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> begin_frame(<a class="code hl_class" href="classbrenta_1_1Camera.html">Camera</a> &amp;cam);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> set_camera(<a class="code hl_class" href="classbrenta_1_1Camera.html">Camera</a> &amp;cam);</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="comment">// Transparent commands are rendered after non-transparent ones</span></div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit(<span class="keyword">const</span> <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a>&amp; it, <span class="keywordtype">bool</span> transparent = <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_point_light(tenno::shared_ptr&lt;PointLight&gt; point_light);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_point_lights(<span class="keyword">const</span> tenno::vector&lt;tenno::shared_ptr&lt;PointLight&gt;&gt;&amp; point_light);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_dir_light(tenno::shared_ptr&lt;DirLight&gt; dir_light);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> submit_text(<span class="keyword">const</span> <a class="code hl_class" href="classbrenta_1_1Text.html">Text</a>&amp; text);</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> end_frame();</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="comment">// Draw and clear state</span></div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> flush();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keyword">static</span> glm::mat4 projection;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keyword">static</span> glm::mat4 view;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  <span class="keyword">static</span> glm::vec3 cam_position;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keyword">static</span> tenno::vector&lt;tenno::shared_ptr&lt;PointLight&gt;&gt;  point_lights;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keyword">static</span> std::optional&lt;tenno::shared_ptr&lt;DirLight&gt;&gt;    dir_light;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keyword">static</span> tenno::vector&lt;Command&gt; render_queue;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">static</span> tenno::vector&lt;Command&gt; transparent_render_queue;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  <span class="keyword">static</span> tenno::vector&lt;Text&gt;    text_render_queue;</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span> </div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keyword">static</span> <span class="keywordtype">void</span> flush_command(<span class="keyword">const</span> <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a>&amp; command);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>};</div>
 </div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="foldopen" id="foldopen00063" data-start="{" data-end="};">
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="classbrenta_1_1Renderer_1_1Command.html">   63</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>{</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  glm::mat4                    world_matrix;</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  tenno::shared_ptr&lt;Model&gt;     model;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  </div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>(glm::mat4 world_matrix,</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>          tenno::shared_ptr&lt;Model&gt;    model)</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    : world_matrix(world_matrix), model(model)</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>  {}</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>};</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="foldopen" id="foldopen00075" data-start="{" data-end="};">
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno"><a class="line" href="classbrenta_1_1Renderer_1_1Command.html">   75</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Renderer::Command</a></div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>{</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  glm::mat4                    world_matrix;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  tenno::shared_ptr&lt;Model&gt;     model;</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  </div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <a class="code hl_class" href="classbrenta_1_1Renderer_1_1Command.html">Command</a>(glm::mat4 world_matrix,</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>          tenno::shared_ptr&lt;Model&gt; model)</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    : world_matrix(world_matrix), model(model) {}</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>};</div>
 </div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>} <span class="comment">// namespace brenta</span></div>
-<div class="ttc" id="aclassbrenta_1_1Renderer_1_1Command_html"><div class="ttname"><a href="classbrenta_1_1Renderer_1_1Command.html">brenta::Renderer::Command</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00063">renderer.hpp:64</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Renderer_html"><div class="ttname"><a href="classbrenta_1_1Renderer.html">brenta::Renderer</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00031">renderer.hpp:32</a></div></div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>} <span class="comment">// namespace brenta</span></div>
+<div class="ttc" id="aclassbrenta_1_1Camera_html"><div class="ttname"><a href="classbrenta_1_1Camera.html">brenta::Camera</a></div><div class="ttdoc">The Camera class.</div><div class="ttdef"><b>Definition</b> <a href="camera_8hpp_source.html#l00040">camera.hpp:41</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Renderer_1_1Command_html"><div class="ttname"><a href="classbrenta_1_1Renderer_1_1Command.html">brenta::Renderer::Command</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00075">renderer.hpp:76</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Renderer_html"><div class="ttname"><a href="classbrenta_1_1Renderer.html">brenta::Renderer</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00033">renderer.hpp:34</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Text_html"><div class="ttname"><a href="classbrenta_1_1Text.html">brenta::Text</a></div><div class="ttdef"><b>Definition</b> <a href="text_8hpp_source.html#l00016">text.hpp:17</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -1,8 +1,10 @@
 var hierarchy =
 [
     [ "brenta::Camera::Aircraft", "classbrenta_1_1Camera_1_1Aircraft.html", null ],
+    [ "brenta::App", "classbrenta_1_1App.html", null ],
     [ "brenta::AssetManager::Asset< T >", "structbrenta_1_1AssetManager_1_1Asset.html", null ],
     [ "brenta::AssetManager", "classbrenta_1_1AssetManager.html", null ],
+    [ "brenta::AssetManager::AssetOwned< T >", "structbrenta_1_1AssetManager_1_1AssetOwned.html", null ],
     [ "brenta::AudioDriver", "classbrenta_1_1AudioDriver.html", [
       [ "brenta::Miniaudio", "classbrenta_1_1Miniaudio.html", null ]
     ] ],
@@ -22,6 +24,7 @@ var hierarchy =
     [ "brenta::Shader::Builder", "classbrenta_1_1Shader_1_1Builder.html", null ],
     [ "brenta::Subsystem::Builder", "classbrenta_1_1Subsystem_1_1Builder.html", [
       [ "brenta::Audio::Builder", "classbrenta_1_1Audio_1_1Builder.html", null ],
+      [ "brenta::Ecs::Builder", "classbrenta_1_1Ecs_1_1Builder.html", null ],
       [ "brenta::Engine::Builder", "classbrenta_1_1Engine_1_1Builder.html", null ],
       [ "brenta::Gl::Builder", "classbrenta_1_1Gl_1_1Builder.html", null ],
       [ "brenta::Gui::Builder", "classbrenta_1_1Gui_1_1Builder.html", null ],
@@ -34,6 +37,14 @@ var hierarchy =
     [ "brenta::Font::Character", "classbrenta_1_1Font_1_1Character.html", null ],
     [ "brenta::Color", "classbrenta_1_1Color.html", null ],
     [ "brenta::Renderer::Command", "classbrenta_1_1Renderer_1_1Command.html", null ],
+    [ "viotecs::Component", null, [
+      [ "brenta::CameraEcsComponent", "classbrenta_1_1CameraEcsComponent.html", null ],
+      [ "brenta::DirLightEcsComponent", "classbrenta_1_1DirLightEcsComponent.html", null ],
+      [ "brenta::ModelEcsComponent", "classbrenta_1_1ModelEcsComponent.html", null ],
+      [ "brenta::ParticleEmitterEcsComponent", "classbrenta_1_1ParticleEmitterEcsComponent.html", null ],
+      [ "brenta::PointLightEcsComponent", "classbrenta_1_1PointLightEcsComponent.html", null ],
+      [ "brenta::TransformEcsComponent", "classbrenta_1_1TransformEcsComponent.html", null ]
+    ] ],
     [ "brenta::Camera::Config", "structbrenta_1_1Camera_1_1Config.html", null ],
     [ "brenta::Gl::Config", "structbrenta_1_1Gl_1_1Config.html", null ],
     [ "brenta::Logger::Config", "structbrenta_1_1Logger_1_1Config.html", null ],
@@ -45,9 +56,7 @@ var hierarchy =
     [ "brenta::DirLight", "classbrenta_1_1DirLight.html", [
       [ "brenta::PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ]
     ] ],
-    [ "std::enable_shared_from_this", null, [
-      [ "brenta::Node", "classbrenta_1_1Node.html", null ]
-    ] ],
+    [ "brenta::SignalManager::Event", "structbrenta_1_1SignalManager_1_1Event.html", null ],
     [ "brenta::FilesystemWatcher", "classbrenta_1_1FilesystemWatcher.html", null ],
     [ "brenta::Font", "classbrenta_1_1Font.html", null ],
     [ "FsWatcherUnix", "structFsWatcherUnix.html", null ],
@@ -59,6 +68,14 @@ var hierarchy =
     [ "brenta::Mesh", "classbrenta_1_1Mesh.html", null ],
     [ "brenta::Model", "classbrenta_1_1Model.html", null ],
     [ "brenta::Mouse", "classbrenta_1_1Mouse.html", null ],
+    [ "brenta::Node", "classbrenta_1_1Node.html", null ],
+    [ "brenta::NodeComponent", "classbrenta_1_1NodeComponent.html", [
+      [ "brenta::DirLightNodeComponent", "classbrenta_1_1DirLightNodeComponent.html", null ],
+      [ "brenta::ModelNodeComponent", "classbrenta_1_1ModelNodeComponent.html", null ],
+      [ "brenta::ParticleEmitterNodeComponent", "classbrenta_1_1ParticleEmitterNodeComponent.html", null ],
+      [ "brenta::PointLightNodeComponent", "classbrenta_1_1PointLightNodeComponent.html", null ],
+      [ "brenta::TextNodeComponent", "classbrenta_1_1TextNodeComponent.html", null ]
+    ] ],
     [ "brenta::Shader::Object", "classbrenta_1_1Shader_1_1Object.html", null ],
     [ "brenta::ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", null ],
     [ "ParticleSettings", "structParticleSettings.html", null ],
@@ -68,16 +85,27 @@ var hierarchy =
     [ "brenta::Texture::Properties", "classbrenta_1_1Texture_1_1Properties.html", null ],
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
     [ "brenta::Scene", "classbrenta_1_1Scene.html", null ],
+    [ "brenta::Script", "classbrenta_1_1Script.html", null ],
     [ "brenta::Shader", "classbrenta_1_1Shader.html", null ],
+    [ "brenta::SignalManager", "classbrenta_1_1SignalManager.html", null ],
     [ "brenta::Camera::Spherical", "classbrenta_1_1Camera_1_1Spherical.html", null ],
+    [ "brenta::SignalManager::Subscription", "classbrenta_1_1SignalManager_1_1Subscription.html", null ],
     [ "brenta::Subsystem", "classbrenta_1_1Subsystem.html", [
       [ "brenta::Audio", "classbrenta_1_1Audio.html", null ],
+      [ "brenta::Ecs", "classbrenta_1_1Ecs.html", null ],
       [ "brenta::Engine", "classbrenta_1_1Engine.html", null ],
       [ "brenta::Gl", "classbrenta_1_1Gl.html", null ],
       [ "brenta::Gui", "classbrenta_1_1Gui.html", null ],
       [ "brenta::Input", "classbrenta_1_1Input.html", null ],
       [ "brenta::Logger", "classbrenta_1_1Logger.html", null ],
       [ "brenta::Window", "classbrenta_1_1Window.html", null ]
+    ] ],
+    [ "viotecs::System", null, [
+      [ "brenta::CameraRenderSystem", "classbrenta_1_1CameraRenderSystem.html", null ],
+      [ "brenta::DirLightRenderSystem", "classbrenta_1_1DirLightRenderSystem.html", null ],
+      [ "brenta::ModelRenderSystem", "classbrenta_1_1ModelRenderSystem.html", null ],
+      [ "brenta::ParticleEmitterSystem", "classbrenta_1_1ParticleEmitterSystem.html", null ],
+      [ "brenta::PointLightRenderSystem", "classbrenta_1_1PointLightRenderSystem.html", null ]
     ] ],
     [ "brenta::Text", "classbrenta_1_1Text.html", null ],
     [ "brenta::Texture", "classbrenta_1_1Texture.html", null ],

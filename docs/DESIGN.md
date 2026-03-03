@@ -9,7 +9,7 @@ Here is an high-level overview of the main objects Brenta provides:
 
 ![brenta-picture](./brenta-picture.png)
 
-I wanted to write my own game engine primarely out of fascination and
+I wanted to write my own game engine primarily out of fascination and
 curiosity to understand how these big systems are designed and
 implemented. I found out that writing a game engine has a lot in
 common with writing an operating system. You are working with audio,

@@ -5,7 +5,6 @@
 
 #pragma once
 
-
 namespace brenta
 {
 

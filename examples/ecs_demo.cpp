@@ -43,11 +43,12 @@ void init_ecs_scene(void)
   }
   auto shader =
     tenno::make_shared<Shader>(tenno::move(*maybe_shader));
+  auto material_builder =
+    Material::Builder()
+    .shader(shader)
+    .floating("material.shininess", 32.0f);
   auto material =
-    tenno::make_shared<Material>(Material::Builder()
-                                 .shader(shader)
-                                 .floating("material.shininess", 32.0f)
-                                 .build());
+    tenno::make_shared<Material>(material_builder);
   auto model_builder =
     Model::Builder()
     .path("examples/assets/models/simple_cube/simple_cube.obj")

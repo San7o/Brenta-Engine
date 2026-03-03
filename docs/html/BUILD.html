@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Brenta Engine</title>
     <link rel="stylesheet" href="https://san7o.github.io/micro-style.css/micro-style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -16,21 +17,13 @@
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
     </div>
 <h1 id="building-the-engine">Building the engine</h1>
-<p>The engine is written C++ and uses <code>cmake</code> as it’s build
-system. The engine can be compiled as a static or shared library. This
-file contains a guide for all the steps to succesfully build the engine
-library, examples and tests in your machine.</p>
-<h2 id="supported-platforms">Supported Platforms</h2>
-<p>Currently the only officially supported platform is Linux. The engine
-may work on Windows or MacOS but it is not officially supported at the
-moment. If you want to make sure that it builds succesfully on other
-platforms, consider <a href="./CONTRIBUTING.html">CONTRIBUTING.html</a> to
-this project. This guide will go through the build process on a Linux
-system.</p>
+<p>Brenta-Engine is written C++23 and uses <code>cmake</code> as it’s
+build system. You can compile the engine as a static or shared library
+for both Windows and Linux.</p>
 <h2 id="dependencies">Dependencies</h2>
 <p>In order to build the engine, you will need:</p>
 <ul>
-<li><p>A <code>C++23</code> compiler</p></li>
+<li><p>A compiler for <code>C++23</code></p></li>
 <li><p><code>cmake</code> &gt;= 3.16</p></li>
 </ul>
 <p>The rest of the dependencies, like assimp and glfw, are present in
@@ -43,50 +36,58 @@ to download the dependencies.</p>
 <div class="sourceCode" id="cb1"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--recurse-submodules</span> <span class="at">-j8</span> https://github.com/San7o/Brenta-Engine.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> Brenta-Engine</span></code></pre></div>
+<p>If you already cloned the repo without
+<code>--recurse-submodules</code>, you can still pull them with:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> submodule update <span class="at">--init</span> <span class="at">--recursive</span></span></code></pre></div>
 <h2 id="build">Build</h2>
 <p>Building is done through <code>cmake</code>. To compile the dynamic
 library, simply run:</p>
-<div class="sourceCode" id="cb2"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span></code></pre></div>
-<p>For the static library:</p>
 <div class="sourceCode" id="cb3"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-DBUILD_SHARED_LIBS</span><span class="op">=</span>off</span>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span></code></pre></div>
-<p>To compile the examples:</p>
+<p>For the static library:</p>
 <div class="sourceCode" id="cb4"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-DBRENTA_BUILD_EXAMPLES</span><span class="op">=</span>on</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span> <span class="at">--target</span> <span class="op">&lt;</span>example-name<span class="op">&gt;</span></span></code></pre></div>
-<p>where <code>example-name</code> is the name of the <code>.cpp</code>
-example file without extension.</p>
-<p>To build tests:</p>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-DBUILD_SHARED_LIBS</span><span class="op">=</span>off</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span></code></pre></div>
+<p>To compile the examples:</p>
 <div class="sourceCode" id="cb5"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-DBRENTA_BUILD_TESTS</span><span class="op">=</span>on</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./buid/tests</span> <span class="at">--no-multithread</span></span></code></pre></div>
-<p>Additionally, you can decide to compile with support for <a
-href="https://github.com/ocornut/imgui">ImGUI</a> with
-<code>BRENTA_USE_IMGUI</code> and for the <a
-href="https://github.com/San7o/viotecs">ECS</a> library with
-<code>BRENTA_USE_ECS</code>.</p>
-<p>All binaries will be generated in <code>build/</code> directory.</p>
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-D</span> BRENTA_BUILD_EXAMPLES=on</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span> <span class="at">--target</span> <span class="op">&lt;</span>example-name<span class="op">&gt;</span></span></code></pre></div>
+<p>where <code>example-name</code> is the name of the <code>.cpp</code>
+example file without extension. You can also omit the
+<code>--target</code> option completely, this will build all
+examples.</p>
+<p>To build tests:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-D</span> BRENTA_BUILD_TESTS=on</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">./buid/tests</span> <span class="at">--no-multithread</span></span></code></pre></div>
+<p>By default, the engine in compiled with support for <a
+href="https://github.com/ocornut/imgui">ImGUI</a> and <a
+href="https://github.com/San7o/viotecs">ECS</a> . If you want to disable
+this (for example, if you want a smaller build and faster compile time)
+you can pass <code>BRENTA_USE_IMGUI=off</code> and
+<code>BRENTA_USE_ECS=off</code> to cmake:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-D</span> BRENTA_USE_ECS=off</span></code></pre></div>
+<p>After compilation, all binaries will be generated in
+<code>build/</code> directory.</p>
 <h2 id="building-website-documentation">Building website
 documentation</h2>
-<p>You can build the website and <code>doxigen</code> documentation
-with:</p>
-<div class="sourceCode" id="cb6"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> html</span></code></pre></div>
+<p>To build the wensite and documentation you need to have <a
+href="https://pandoc.org/">pandoc</a> and <a
+href="https://www.doxygen.nl/index.html">doxygen</a> installed. Then,
+build with:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> html</span></code></pre></div>
 <p>The index will be located in
 <code>docs / html / index.html</code>.</p>
-<h2 id="format-code">Format code</h2>
-<p>To format the code using <code>clang-format</code>:</p>
-<div class="sourceCode" id="cb7"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> format</span></code></pre></div>
 <h2 id="generating-shaders">Generating shaders</h2>
-<p>To generate the shaders bindings ru nthe following command (you
-should do this every time you modify a shader):</p>
-<div class="sourceCode" id="cb8"><pre
-class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> shaders</span></code></pre></div>
+<p>To generate shaders bindings for C/C++, run the following
+command:</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span> shaders</span></code></pre></div>
 
 <footer>
   
