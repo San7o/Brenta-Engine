@@ -1,4 +1,4 @@
-![banner](./html/images/brenta-engine-banner.png)
+![](./html/images/brenta-engine-banner.png)
 
 **Brenta Engine** is a simple 3D graphics engine written in modern
 C++/OpenGL using a hybrid scene-graph and Entity Component System
@@ -26,10 +26,6 @@ Brenta-Engine also supports:
 - point and directional lights
 - input management with callbacks
 
-To get a detailed look at the engine, please visit the
-[website](https://san7o.github.io/Brenta-Engine/) and code
-[documentation](https://san7o.github.io/Brenta-Engine/annotated.html).
-
 The engine also features the following sub projects:
 
 - [oak](https://github.com/San7o/oak): feature-rich, thread-safe, Brenta Engine's logger.
@@ -39,14 +35,14 @@ The engine also features the following sub projects:
 - [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
 
-<h1 align=center> Screenshots </h1>
+<h2 align=center> Screenshots </h2>
 
 <div align="center">
   <img src="screenshot1.jpg" />
   <img src="screenshot2.jpg" />
 </div>
 
-<h1 align=center> Building </h1>
+<h2 align=center> Building </h2>
 
 The engine can be used as a library, there are also many
 [examples](https://github.com/San7o/Brenta-Engine/tree/main/examples)

@@ -14,13 +14,12 @@ In order to build the engine, you will need:
 
 The rest of the dependencies, like assimp and glfw, are present in the
 source tree as git submodules under the `external/` directory. These
-will be automatically built by the build system if you want a static
-build.
+will be automatically built by the build system.
 
 ## Clone the repo
 
-Clone the project from GitHub with `--recurse-submodules` to download
-the dependencies.
+Clone the project from GitHub, use `--recurse-submodules` to pull the
+dependencies.
 
 ```bash
 git clone --recurse-submodules -j8 https://github.com/San7o/Brenta-Engine.git

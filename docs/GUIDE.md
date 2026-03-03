@@ -1,8 +1,8 @@
 # Guide
 
 Welcome to the Brenta-Engine guide. This document explains how the
-engine works and how to use it for your own projects. There are plenty
-of features and abstractions which may seem scary at first, but
+engine works and how to use its API for your own projects. There are
+plenty of features and abstractions which may seem scary at first, but
 hopefully you will conclude that these abstractions make sense and fit
 elegantly together. The API is designed to be clear to use at any
 abstraction level, and it makes it easy to combine objects together
@@ -105,7 +105,7 @@ are usually passed around the API either via:
 
 - a builder
 - moving the object
-- through a shared pointer
+- through a shared or weak pointer
 
 
 You will see that most of the APIs and constructors accept any or all
@@ -120,22 +120,20 @@ ModelNodeComponent(Model&& m, bool transparent = false);
 ModelNodeComponent(tenno::shared_ptr<Model> m, bool transparent = false);
 ```
 
-In general, more "high-level" object (such as the scene-graph) work
+In general, more "high-level" objects (such as the scene-graph) work
 with shared pointers, while "low-level" objects such as textures and
 meshes store their data directly without pointers. If you only work
-with this object you are not required to create shared pointers for
+with these objects you are not required to create shared pointers for
 them.
 
 ### Sybsystems and Engine
 
-Another architectural concept you will see is the `Sybsystems`. These
-are static classes that have to be initialized and terminated to be
-used, and they provide a standard api to do so. Since they are static,
-they don't use RAII to automatically manage their lifetime. To avoid
-messing with a lot of objects and lifetimes, all subsystems can be
-managed by the `Engine` class. As all the other things, these usage of
-`Engine` is not mandatory, but it provides a nice way to do manage
-subsystems.
+Another architectural concept you will see are `Sybsystems`. These are
+static classes that have to be initialized and terminated to be used
+correctly, and they provide a standard api to do so. Since they are
+static, they don't use RAII to automatically manage their lifetime. To
+avoid messing with many classes and lifetimes, all subsystems can be
+managed by the `Engine` class.
 
 Here is how it looks like:
 
@@ -172,13 +170,45 @@ engine.terminate();
 ```
 
 Each subsystem can be configured through their builder, as we have
-already discussed.
+already discussed. Like all other things, these usage of `Engine` is
+not mandatory, but it provides a nice way to do manage subsystems.
+
+### Drivers
+
+Some functionalities can be implemented with different backends. For
+example, playing audio can be done with several libraries such as
+[miniaudio](https://miniaud.io/), [SDL](https://www.libsdl.org/),
+[PortAudio](https://www.portaudio.com/) and many others (sorry for not
+including your favourite in the list). Some functionalities may even
+be OS-dependent such as waiting for files in the filesystem (inotify
+on Linux, iocp in Windows). To support multiple implementations
+("backends"), the engine often uses a `Driver` abstraction. A driver
+specifies an interface that can be implemented by different classes.
+
+In practice, it looks like the following:
+
+```cpp
+class AudioDriver
+{
+public:
+
+  virtual void play(const SongId& id) = 0;
+};
+
+class SDLAudioDriver : public AudioDriver
+{
+public:
+   
+   void play(const SongId& id) override;
+
+};
+```
 
 ## Window
 
-To draw anything on the screen you first need a window.
-
-Here is a full program that compiles and opens a window:
+To draw anything on the screen you first need a window. You can manage
+the window with the `Window` subsystem, here is a full program that
+compiles and opens a window:
 
 ```cpp
 #include <brenta/engine.hpp>
@@ -209,13 +239,18 @@ int main()
 }
 ```
 
+You can use `Window` to get and update information about its width and
+height, keeping track of time and closing it. Internally, the window
+uses a `WindowDriver` to implement its functionalities. This makes
+it possible to support multiple backends such as glfw or SDL.
+
 ## Input
 
-TODO
+Input handling can be done through callbacks using the `Input`
+subsystem.
 
-You can register callback functions for the input. Those functions are
-called when the specified `key` is pressed, or the mouse is moved,
-depending on the callback you register.
+Callback are called when the specified `key` is pressed, or when the
+mouse is moved, depending on the callback you register.
 
 ```cpp
 auto toggle_wireframe_callback = []() {
@@ -232,31 +267,59 @@ Input::add_keyboard_callback(Key::F, toggle_wireframe_callback);
 
 In this example we register a keyboard callback that toggles the
 wireframe mode when the `F` key is pressed. You can use
-`Brenta::Input::AddMousePosCallback` to register a mouse callback,
+`Input::AddMousePosCallback` to register a mouse callback,
 this ill be called with the x and y position of the mouse.
 
+```cpp
+Input::add_mouse_callback("rotate_camera",
+                            [&](double x, double y)
+{
+  // ...
+}
+```
+
 You can also remove the callbacks with
-`brenta::input::remove_keyboard_callback` and
-`brenta::input::remove_mouse_pos_callback`.
+`Input::remove_keyboard_callback` and
+`Input::remove_mouse_pos_callback`.
+
+To keep track of the state of the mouse, you can use the handy `Mouse`
+class.
+
+```cpp
+Mouse mouse = {};
+mouse.set_sensitivity(0.05f);
+mouse.set_x(x);
+mouse.set_y(y);
+```
+
+Another way to do input handling is by checking if a key is pressed
+using the `Window` subsystem:
+
+```cpp
+while(!Window::should_close())
+{
+  if (Window::is_key_pressed(Key::Escape))
+    Window::close();
+  if (Window::is_key_pressed(Key::W))
+    acceleration.x = ACCELERATION;
+  // ...
+}
+```
 
 ## Logger
 
-TODO
+Brenta uses a powerful logger that lives into its own repo,
+[oak](https://github.com/San7o/oak). Check it out for a more detailed
+look.
 
-Check out [oak](https://github.com/San7o/oak)! The engine uses oak as the
-logger, you can set the log level and the log file in the engine builder.
-You can log messages like so:
-```cpp
-oak::info("Hello, world!");
-```
-Oak has many more advanced features, I suggest you check out the repository.
+TODO
 
 ## Audio
 
 The audio subsystem is very simple: there are audio streams and audio
-files, you can play an audio file on a stream (not multiple streams)
-and stop it, so you need to have multiple streams if you want to play
-multiple audio files at the same time.
+files, you can play an audio file on a stream and stop it. Each stream
+can play only one audio at a time, so you need to have multiple
+streams if you want to play multiple sounds at the same time.
 
 You can load an audio file like so:
 
@@ -339,93 +402,90 @@ TODO
 
 ## ECS
 
-Everything in the ECS exists in the `World`, you can think of it as a
-global state of everything that is happening.  The World contains
+The ECS is a framework to organize your objects and how they
+update. It is popular because it is arguably simple and elegant, and
+(if implemented correctly) cache-friendly and parallelizable.
+
+### World
+
+Everything in the ECS exists in the `World`, you can think of it as
+the state of everything that is happening.  The World contains
 `Entities`, those are the most elemental things that exist.  You can
 add `Components` to entities, which are their properties (like Health,
 Position, Mesh). You interact with those components through `Systems`
 by making `Queries` on their components. There are also `Resources`
 that store global data. Uh that was quick, read it again if you need
-it to.  Now we will go a bit deeper on how this works.
+it to.
 
-### World
+You interact with the world via static methods of the `World`
+class. The main loop should call `World::tick()`. At each tick, all
+the systems will be called in the order they were added in the World
+(the engine does not support multithreading yet).
 
-The main loop calls `world::tick()`. At each tick, all the Systems
-will be called in the order they were added in the World.
-
-The engine provides functions to interact with the window in
-`Brenta::window`, some OpenGL helper functions in `brenta::gl`, a nice
-`brenta::logger`, input handling with `brenta::input`, manage time
-with `brenta::time`, display text with `brenta::text` and more!
-
-```c++
-#include <brenta/brenta.hpp>
-#include <viotecs/viotecs.hpp>
-
-using namespace brenta;
-using namespace viotecs;
-
-int main()
+```cpp
+while(!Window::should_Close())
 {
-  Engine::Builder()
-    .with(Logger::Builder()
-          .level(oak::level::debug)
-          .file("/tmp/brenta-logs"))
-    .with(Window::Builder()
-          .title("brenta demo")
-          .width(800)
-          .height(600)
-          .vsync()
-          .msaa())
-    .with(Input::Builder())
-    .with(Ecs::Builder())
-    .build();
-  auto engine = Engine::managed();
-  
-  // Your init functions ...
-  init_player();
-  init_renderer();
-  
-  // Register ECS systems
-  world::register_systems<None>();
+  if (Window::is_key_pressed(Key::Escape))
+      Window::close();
+        
+  Gl::set_color(Color::gray());
+  Gl::clear();
 
-  while(!Window::should_Close()) {
+  // Run all systems
+  World::tick();
 
-    Gl::set_color(Color::gray());
-    Gl::clear();
-
-    World::tick();
-
-    Window::poll_events();
-    Window::swap_buffers();
-  }
-  
-  // The engine will take care of deallocation
-  // of the submodules
-  return 0;
+  Window::poll_events();
+  Window::swap_buffers();
 }
+```
+
+### Entities
+
+Entities are "objects" that exist in the ECS world. Practically, each
+entity **is** an unique identifier that identifies the object.
+
+To create an entity:
+
+```cpp
+Entity e = World::new_entity();
+```
+
+To remove an entity from the world and its components:
+
+```cpp
+World::remove_entity(e);
 ```
 
 ### Component
 
-A Component is a piece of data (more precisely, a struct) that gets
-assigned to an Entity.
+A `Component` is a piece of data that gets assigned to an Entity, you
+can assign multiple components to an entity. This is essentially like
+using composition, where the entity is associated with a set of
+components. Unlike a regular class, all components are stored in a
+database where they can be queried and iterated upon efficiently.
 
-You can define your own component like so:
+To define a component you need to extend the `Component` class:
 
-```c++
-// This is a component
-struct ModelComponent : Component {
-  Model mod;
-  Shader::Name shader;
-
-  // You need to provide a default constructor
-  ModelComponent() {};
-
-  // Any other construtor is optional
-  ModelComponent(Model mod, Shader::Name shader)
-        : model(model), shader(shader) {}
+```cpp
+struct PhysicsComponent : Component
+{
+    float mass;
+    float density;
+    glm::vec3 velocity;
+    glm::vec3 acceleration;
+    
+    PhysicsComponent(float mass) : mass(mass) {}
 };
+```
+
+To assign a component to an entity:
+
+```cpp
+World::add_component<PhysicsComponent>(entity, 10.0f);
+
+// or
+
+e.add_component<PhysicsComponent>(10.0f);
 ```
 
 ### System
@@ -440,14 +500,15 @@ all the components you specified.
 Here is an example:
 
 ```c++
-// Specify ModelComponent and TransformComponent query
-struct RenderSystem : System<ModelComponent, TransformComponent> {
-
+struct RenderSystem : System<ModelComponent, TransformComponent>
+{
   // You need to define this function
-  void run(std::vector<EntityId> matches) const override {
+  void run(std::vector<EntityId> matches) const override
+  {
     if (matches.empty()) return;
 
-    for (auto match : matches) {
+    for (auto match : matches)
+    {
       // Get the model component
       auto model_c = World::entity_to_component<ModelComponent>(match);
       auto my_model = model_c->mod;
@@ -461,36 +522,17 @@ struct RenderSystem : System<ModelComponent, TransformComponent> {
 };
 
 // Register this system
-world::register_systems<RenderSystem>();
-```
-
-### Entity
-
-You can create Entities and assign Components to them like so:
-
-```c++
-// Create the player entity
-auto player_entity = World::new_entity();
-
-
-// Add the player component to the player entity
-World::add_component<PlayerComponent>(player_entity, player_component());
-
-// Load model and shader
-// ...
-
-// Add the model component to the player entity
-player_entity.add_component<ModelComponent>(mod, "default_shader");
+World::register_systems<RenderSystem>();
 ```
 
 ### Resources
 
-Resources hold global data accessible via `world::get_resource<name>()`.
-You can define a Resource like so:
+Resources hold global data accessible via
+`World::get_resource<name>()`.  You can define a Resource like so:
 
 ```c++
-// This is a resource
-struct WireframeResource : Resource {
+struct WireframeResource : Resource
+{
   bool enabled;
   WireframeResource(bool e) : enabled(e) {}
 };

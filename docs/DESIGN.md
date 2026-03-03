@@ -1,39 +1,66 @@
 # Design
 
+I could tell you that the Brenta engine was perfectly designed, with a
+clear vision from its inception, with a beautiful and powerful API
+that makes programming truly enjoyable. Except the fact that it would
+be a lie. It does not mean that I don't find the current design and
+API beautiful and fun - I think Brenta is a powerful engine - but its
+development has been more iterative than meticulously designed. I
+rewrote huge parts of the engine many many times, to the point where I
+am not scared to do big refactoring anymore - that is just routine -
+and I know I am deemed to repeat this process again. But through these
+many refactoring, the API reached a point where all objects work well
+together and you can reason about them through what I call the
+"architecture" or "design" of the engine. This is what I aim to
+describe in this documents.
+
 Game engines are complex pieces of software. They provide an interface
 to define logic, render graphics, and access system resources like
 audio and input, as well as providing a cross-platform abstraction to
 the developer.
 
-Here is an high-level overview of the main objects Brenta provides:
+![high-level-overview](./brenta-picture.png)
 
-![brenta-picture](./brenta-picture.png)
+I wanted to write my own graphics engine primarily because I was
+curious to understand how these big systems are designed and
+implemented, and as a programming exercise / learning experience. The
+more I learned about graphics the more I became fascinated and
+interested in the topic.
 
-I wanted to write my own game engine primarily out of fascination and
-curiosity to understand how these big systems are designed and
-implemented. I found out that writing a game engine has a lot in
-common with writing an operating system. You are working with audio,
-files, video, network and the GPU. A game engine is essentially a
-realtime system since you need to compute logic and render the frame
-in under 16ms to run at 60 FPS, hence you have to understand how the
-CPU and memory works in order to optimize it. Obviously game engines
-and an operating system diverge in many other ways, for example an
-operating system should manage virtualization and security, while a
-game engine has to manage game logic and physics. Still, I think the
-parallelism is clear: you need to interface and reason about many
-types of systems and devices, which makes this project interesting to
-me.
+When I began this project in july 2024 I was really confused with
+using OpenGL and C++, it took me a while to develop a decent mental
+model. I was at my second year of university and I did not have any
+major programming experience, but I pushed through it and hacked some
+things. I became obsessed with the project for the entire summer,
+which led to the release of Brenta v1.0.0. I did not fully understand
+what I was doing and its design is more of a hack (and the code
+clearly shows it). I moved on to other projects afterwards.
+
+I picked up the project in December 2025, I was a more experienced
+developer and I took up the challenge again. Here I fully rewrote
+every part of the engine, introducing most of the core abstractions
+that the engine uses. I found out that writing a game engine has a lot
+of overlap with writing an operating system (which is another area I
+am really interested in). You are working with audio, files, video,
+network and the GPU. A game engine is essentially a realtime system
+since you need to compute logic and render the frame in under 16ms to
+run at 60 FPS, hence you have to understand how the CPU and memory
+works in order to optimize it.
 
 ![engine-and-os](./engine-and-os.png)
 
+## Subsystems
 
-Brenta engine is divided in subsystems, each one has different
-responsibilities and provides certain abstractions. The most important
-subsystems are the Rendering, which manages things like the scene and
-render commands, and the Entity Component System (ECS) which manages
-game logic.
+One of the first architectural decision I made was the introduction of
+the `Sybsystem`. Brenta engine is divided in subsystems, each one has
+different responsibilities and provides certain abstractions. The most
+important subsystems are the Rendering, which manages things like the
+scene and render commands, and the Entity Component System (ECS) which
+manages game logic.
 
 ![brenta-subsystems](./brenta-subsystems.png)
+
+We will talk about various subsystems now.
 
 ## Renderer
 
