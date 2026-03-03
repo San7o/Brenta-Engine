@@ -10,10 +10,6 @@ Check out [GUIDE.md](./docs/GUIDE.md) for a quick introduction on how
 the engine works, and [DESIGN.md](./docs/DESIGN.md) for an overview of
 the engine's internals.
 
-<div align="center">
-  <img src="docs/brenta-picture.png" />
-</div>
-
 <h2 align=center>  Features </h2>
 
 The engine is composed of many subsystems like `Window`, `Input`,
