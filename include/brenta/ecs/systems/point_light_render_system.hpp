@@ -5,6 +5,8 @@
 
 #pragma once
 
+#ifndef BRENTA_NO_ECS
+
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/transform_ecs_component.hpp>
 #include <brenta/ecs/components/point_light_ecs_component.hpp>
@@ -33,3 +35,5 @@ public:
 };
 
 } // namespace brenta
+
+#endif // BRENTA_NO_ECS

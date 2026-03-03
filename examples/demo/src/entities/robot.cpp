@@ -67,5 +67,5 @@ void init_robot_entity()
   auto cube_entity = World::new_entity()
     .add_component<TransformEcsComponent>()
     .add_component<SpriteAnimationEcsComponent>(4, 0, 60)
-    .add_component<ModelEcsComponent>(model_builder);
+    .add_component<ModelEcsComponent>(model_builder, true);
 }

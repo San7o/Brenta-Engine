@@ -5,6 +5,8 @@
 
 #pragma once
 
+#ifndef BRENTA_NO_ECS
+
 #include <brenta/transform.hpp>
 #include <brenta/ecs/ecs.hpp>
 
@@ -24,3 +26,5 @@ public:
 };
 
 } // namespace brenta
+
+#endif // BRENTA_NO_ECS

@@ -15,5 +15,5 @@ void ModelNodeComponent::update(float delta_time)
 
 void ModelNodeComponent::draw(const glm::mat4& world_matrix)
 {
-  Renderer::submit({world_matrix, this->model});
+  Renderer::submit({world_matrix, this->model}, this->transparent);
 }

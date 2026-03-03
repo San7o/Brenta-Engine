@@ -17,16 +17,19 @@ class ModelNodeComponent : public NodeComponent
 {
 public:
 
-  tenno::shared_ptr<Model> model;
+  tenno::shared_ptr<Model>   model;
+  bool                       transparent = false;
 
   ModelNodeComponent() = default;
-  ModelNodeComponent(tenno::shared_ptr<Model> m)
-    : model(m) {}
-  ModelNodeComponent(Model&& m)
+  ModelNodeComponent(tenno::shared_ptr<Model> m, bool transparent = false)
+    : model(m), transparent(transparent) {}
+  ModelNodeComponent(Model&& m, bool transparent = false)
+    : transparent(transparent)
   {
     this->model = tenno::make_shared<Model>(tenno::move(m));
   }
-  ModelNodeComponent(Model::Builder& m)
+  ModelNodeComponent(Model::Builder& m, bool transparent = false)
+    : transparent(transparent)
   {
     this->model = tenno::make_shared<Model>(m.build());
   }

@@ -51,21 +51,21 @@
 #include <brenta/transform.hpp>
 #include <brenta/window.hpp>
 
-#ifdef BRENTA_USE_IMGUI
+#ifndef BRENTA_NO_IMGUI
 
 #include <brenta/gui.hpp>
 
-#endif // BRENTA_USE_IMGUI
+#endif // BRENTA_NO_IMGUI
 
 // Node components
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/model_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
 #include <brenta/node_components/particle_emitter_node_component.hpp>
+#include <brenta/node_components/text_node_component.hpp>
 
-#ifdef BRENTA_USE_ECS
+#ifndef BRENTA_NO_ECS
 
-#include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/model_ecs_component.hpp>
 #include <brenta/ecs/components/camera_ecs_component.hpp>
 #include <brenta/ecs/components/transform_ecs_component.hpp>
@@ -79,4 +79,4 @@
 #include <brenta/ecs/systems/point_light_render_system.hpp>
 #include <brenta/ecs/systems/particle_emitter_system.hpp>
 
-#endif // BRENTA_USE_ECS
+#endif // BRENTA_NO_ECS

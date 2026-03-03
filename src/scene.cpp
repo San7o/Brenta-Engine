@@ -69,7 +69,7 @@ void Scene::set_script(tenno::weak_ptr<Node> node, const std::string &source)
 
 void Scene::update(float delta_time)
 {
-  #ifdef BRENTA_USE_ECS
+  #ifndef BRENTA_NO_ECS
   viotecs::World::tick();
   #endif
   this->root->update(delta_time);

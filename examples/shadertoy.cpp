@@ -9,7 +9,7 @@
 // Play with shaders interactively
 //
 
-#ifdef BRENTA_USE_IMGUI
+#ifndef BRENTA_NO_IMGUI
 
 #include <brenta/brenta.hpp>
 
@@ -398,4 +398,4 @@ unsigned int update_shader(std::string fragment_source)
   return shaderProgram;
 }
 
-#endif // BRENTA_USE_IMGUI
+#endif // BRENTA_NO_IMGUI

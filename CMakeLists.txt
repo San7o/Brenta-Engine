@@ -110,7 +110,6 @@ endif()
 # ImGUI
 if (BRENTA_USE_IMGUI)
   message(STATUS "Using ImGUI")
-  list(APPEND BRENTA_DEFINES BRENTA_USE_IMGUI)
   list(APPEND BRENTA_DEPS_INCLUDES
     ${PROJECT_SOURCE_DIR}/external/imgui
     ${PROJECT_SOURCE_DIR}/external/imgui/backends
@@ -131,12 +130,15 @@ if (BRENTA_USE_IMGUI)
     list(APPEND BRENTA_DEPS_SOURCES ${IMGUI_SOURCES})
     list(APPEND BRENTA_DEPS_HEADERS "external/imgui/imgui.h")
   endif()
+else()
+    list(APPEND BRENTA_DEFINES BRENTA_NO_IMGUI)
 endif()
 
 # Viotecs
 if (BRENTA_USE_ECS)
-  list(APPEND BRENTA_DEFINES BRENTA_USE_ECS)
   register_dependency(viotecs)
+else()
+  list(APPEND BRENTA_DEFINES BRENTA_NO_ECS)
 endif()
 
 # Valfuzz

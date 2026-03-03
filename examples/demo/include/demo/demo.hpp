@@ -24,3 +24,4 @@
 #include <demo/systems/fps.hpp>
 #include <demo/systems/physics.hpp>
 #include <demo/systems/sprite_animation.hpp>
+#include <demo/systems/info_text.hpp>

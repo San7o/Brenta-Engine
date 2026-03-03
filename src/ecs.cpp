@@ -6,6 +6,8 @@
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/logger.hpp>
 
+#ifndef BRENTA_NO_ECS
+
 using namespace brenta;
 
 //
@@ -69,3 +71,5 @@ Subsystem &Ecs::Builder::build()
 {
   return Ecs::instance();
 }
+
+#endif // BRENTA_NO_ECS

@@ -13,22 +13,23 @@
 
 using namespace brenta;
 
-/*
-void Text::render(const std::string &text,
-                  float x, float y, float scale,
-                  Color color,
-                  tenno::shared_ptr<Font> font)
+void Text::render(const Text& text)
 {
-  Text::render(text, x, y, scale, color, *font);
+  Text::render(text.text,
+               text.x,
+               text.y,
+               text.scale,
+               text.color,
+               *text.font);
 }
-*/
 
 void Text::render(const std::string &text,
-                  float x, float y, float scale,
+                  float x,
+                  float y,
+                  float scale,
                   Color color,
                   Font& font)
 {
-  
   font.shader->use();
   font.shader->set_float3("textColor",
                            255.99f * color.r,

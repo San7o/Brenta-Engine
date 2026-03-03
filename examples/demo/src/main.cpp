@@ -88,6 +88,7 @@ int main()
                           SpriteAnimationSystem,
                           DebugTextSystem,
                           PhysicsSystem,
+                          InfoTextSystem,
                           CollisionsSystem>();
 
   {  // Local scope
@@ -117,7 +118,7 @@ int main()
 
       fb.unbind();
       Gui::render();
-      
+
       Window::swap_buffers();
     }
   }

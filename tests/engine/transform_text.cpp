@@ -3,17 +3,13 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/engine.hpp>
+#include <brenta/transform.hpp>
+
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
-#include <valfuzz/valfuzz.hpp>
-#include <viotecs/viotecs.hpp>
 
 using namespace brenta;
 using namespace brenta::types;
-using namespace viotecs;
-
-REGISTER_SYSTEMS();
 
 TEST(new_translation, "Create a Translation")
 {

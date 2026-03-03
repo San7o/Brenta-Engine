@@ -1,105 +1,56 @@
-![](./html/images/brenta-engine-banner.png)
+![banner](./html/images/brenta-engine-banner.png)
 
-Brenta Engine is a simple 3D engine written in modern C++/OpenGL using
-an hibrid scene-graph and Entity Component System architecture. The
-engine was created by Giovanni Santini in the summer of 2024, the name
-is inspired by the Brenta Dolimites in the Italian Alps.
+**Brenta Engine** is a simple 3D graphics engine written in modern
+C++/OpenGL using a hybrid scene-graph and Entity Component System
+architecture. The engine was created by Giovanni Santini in the summer
+of 2024, the name is inspired by the Brenta Dolimites in the Italian
+Alps.
 
-```c++
-#include <brenta/brenta.hpp>
+<h2 align=center>  Features </h2>
 
-int main()
-{
+The engine is composed of many subsystems like `Window`, `Input`,
+`Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
+objects and many abstractions to work with 3D graphics.
 
-  // Setup
-  
-  Engine::Builder()
-    .with(Logger::Builder()
-          .level(oak::level::debug))
-    .with(Window::Builder()
-          .title("load opengl test")
-          .width(screen_width)
-          .height(screen_height))
-    .build();
-  auto engine = Engine::managed();
+Brenta-Engine also supports:
 
-  // Loop
-  
-  while (!Window::should_close())
-  {
-    if (Window::is_key_pressed(Key::Escape))
-      Window::close();
-    
-    // Update logic...
-    // Draw...
-    Gl::set_color(Color::grey());
-    Gl::clear();
+- hot reloading
+- GPU particles
+- loading TrueType fonts, textures, audio and .obj meshes
+- central asset management
+- scene graph
+- ECS
+- lua node scripting
+- GUI using ImGui
+- signals
+- point and directional lights
+- input management with callbacks
 
-    Window::poll_events();
-    Window::swap_buffers();
-  }
-  return 0;
-}
-```
+To get a detailed look at the engine, please visit the
+[website](https://san7o.github.io/Brenta-Engine/) and code
+[documentation](https://san7o.github.io/Brenta-Engine/annotated.html).
 
-## Demos
+The engine also features the following sub projects:
 
-examples/shadertoy.cpp:
+- [oak](https://github.com/San7o/oak): feature-rich, thread-safe, Brenta Engine's logger.
+- [viotecs](https://github.com/San7o/viotecs): the engine's official ECS.
+- [tenno](https://github.com/San7o/tenno-tl): custom standard library
+- [valFuzz](https://github.com/San7o/valFuzz): multi-threaded testing and fuzzing library for the engine.
+- [san7o.github.io/Brenta-Engine/](https://san7o.github.io/Brenta-Engine/): html website
 
-![shadertoy-demo.gif](./html/images/shadertoy-demo.gif)
 
-examples/mandelbrot-set.cpp:
+<h1 align=center> Screenshots </h1>
 
-![mandlebrot-demo.gif](./html/images/mandelbrot-demo.gif)
+<div align="center">
+  <img src="screenshot1.jpg" />
+  <img src="screenshot2.jpg" />
+</div>
 
-examples/logger.cpp:
+<h1 align=center> Building </h1>
 
-```plaintext
-$ ./build/logger 
-[ level=info ] logger: set log file to /tmp/brenta_logs
-[ level=info ] logger: initialized
-[ level=info ] window: set context to OpenGL version: 3.3
-[ level=info ] window: set OpenGL profile to core
-[ level=info ] window: disabled MSAA
-[ level=info ] window: disabled VSync
-[ level=info ] window: mouse capture disabled
-[ level=debug ] window: set framebuffer size callback
-[ level=info ] window: initialized
-[ level=info ] gl: enabled GL_DEPTH_TEST
-[ level=info ] gl: enabled GL_BLEND (transparency)
-[ level=info ] gl: enabled GL_CULL_FACE
-[ level=info ] gl: enabled GL_MULTISAMPLE
-[ level=info ] gl: initialized
-[ level=info ] engine: initialized
-[ level=info ] Hello, World!
-[ level=info ] gl: terminated
-[ level=info ] window: terminated
-```
+The engine can be used as a library, there are also many
+[examples](https://github.com/San7o/Brenta-Engine/tree/main/examples)
+that you can build. Follow the [BUILD](./BUILD.md) document to get
+started.
 
-examples/demo/src/main.cpp:
-
-![demo.gif](./html/images/demo.gif)
-
-## The subsystems
-
-The Engine is composed of several subsystems:
-
-* **[viotecs](https://github.com/San7o/viotecs)**: Entity Component
-System
-- **[oak](https://github.com/San7o/oak)**: engine logger
-- **[valfuzz](https://github.com/San7o/valFuzz)**: testing
-framework
-- **brenta::window**: manages the window and the OpenGL context.
-- **brenta::audio**: everything audio.
-- **brenta::input**: manages the screen input using callbacks.
-- **brenta::text**: text rendering.
-- **brenta::engine**: manages the setup of the engine.
-
-Additionally, the engine provides multiple classes for various
-functionalities such as wrappers around opengl primitives, or managing
-the camera or the time. Classes often provide a `Builder` to initalize
-them nicely.
-
-## License
-
-The engine is released under the MIT license.
+The engine is licensed under [MIT](https://mit-license.org/) license.

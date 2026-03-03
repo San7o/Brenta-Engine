@@ -1,7 +1,7 @@
 ![Brenta-Engine-Banner](./utils/docs-images/brenta-engine-banner.png)
 
-**Brenta Engine** is a simple 3D engine written in modern C++/OpenGL
-using a hybrid scene-graph and Entity Component System
+**Brenta Engine** is a simple 3D graphics engine written in modern
+C++/OpenGL using a hybrid scene-graph and Entity Component System
 architecture. The engine was created by Giovanni Santini in the summer
 of 2024, the name is inspired by the Brenta Dolimites in the Italian
 Alps.
@@ -14,8 +14,9 @@ the engine's internals.
 
 The engine is composed of many subsystems like `Window`, `Input`,
 `Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
-objects and many abstractions to work with 3D graphics. It also
-supports:
+objects and many abstractions to work with 3D graphics.
+
+Brenta-Engine also supports:
 
 - hot reloading
 - GPU particles
@@ -51,8 +52,8 @@ The engine also features the following sub projects:
 
 <h1 align=center> Building </h1>
 
-All instructions to build the demo game are in [BUILD](./docs/BUILD.md),
-there are also instructions on how to [build unit tests](./tests/README.md)
-and how to [build examples](./examples/README.md).
+The engine can be used as a library, there are also many
+[examples](./examples) that you can build. Follow the
+[BUILD](./docs/BUILD.md) document to get started.
 
 The engine is licensed under [MIT](./LICENSE) license.

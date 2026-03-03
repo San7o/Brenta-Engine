@@ -5,7 +5,7 @@
 
 #pragma once
 
-#ifdef BRENTA_USE_IMGUI
+#ifndef BRENTA_NO_IMGUI
 
 #include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/subsystem.hpp>
@@ -73,4 +73,4 @@ public:
   
 } // namespace brenta
 
-#endif // BRENTA_USE_IMGUI
+#endif // BRENTA_NO_IMGUI

@@ -5,6 +5,8 @@
 
 #pragma once
 
+#ifndef BRENTA_NO_ECS
+
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/camera_ecs_component.hpp>
 
@@ -29,3 +31,5 @@ public:
 };
   
 } // namespace brenta
+
+#endif // BRENTA_NO_ECS

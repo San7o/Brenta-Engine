@@ -3,9 +3,9 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#ifdef BRENTA_USE_ECS
-
 #pragma once
+
+#ifndef BRENTA_NO_ECS
 
 #include <brenta/subsystem.hpp>
 #include <viotecs/viotecs.hpp>
@@ -52,4 +52,4 @@ public:
   
 } // namespace brenta
 
-#endif // BRENTA_USE_ECS
+#endif // BRENTA_NO_ECS

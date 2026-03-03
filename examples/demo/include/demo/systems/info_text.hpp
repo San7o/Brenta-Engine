@@ -6,24 +6,21 @@
 #pragma once
 
 #include <brenta/asset_manager.hpp>
-#include <brenta/text.hpp>
-#include <brenta/window.hpp>
+#include <brenta/renderer/renderer.hpp>
 #include <brenta/ecs/ecs.hpp>
 
 using namespace viotecs;
 
-struct FPSSystem : System<None>
+struct InfoTextSystem : System<None>
 {
   void run(std::vector<EntityId> _) const override
   {
     auto font = AssetManager::get<Font>("TextFont");
-    auto fps = std::to_string(Window::get_time().get_fps());
-    
     Renderer::submit_text({
-        "FPS: " + fps,
-        25.0f,
-        25.0f,
-        0.35f,
+        "Move with Shift / Ctrl / Alt + Mouse" ,
+        10.0f,
+        100.0f,
+        1.0f,
         Color::yellow(),
         font
       });

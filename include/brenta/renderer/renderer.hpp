@@ -9,6 +9,7 @@
 #include <brenta/renderer/material.hpp>
 #include <brenta/renderer/point_light.hpp>
 #include <brenta/renderer/dir_light.hpp>
+#include <brenta/text.hpp>
 
 #include <glm/glm.hpp>
 
@@ -39,16 +40,17 @@ public:
   ~Renderer() = delete;
 
   // You can begin a frame withouth a camera, but eventually you will
-  // need to call set_camera if you want to see anything good
+  // have to call set_camera if you want to see anything
   static void begin_frame();
   static void begin_frame(Camera &cam);
-  
   static void set_camera(Camera &cam);
-  
-  static void submit(const Renderer::Command& it);
+
+  // Transparent commands are rendered after non-transparent ones
+  static void submit(const Renderer::Command& it, bool transparent = false);
   static void submit_point_light(tenno::shared_ptr<PointLight> point_light);
   static void submit_point_lights(const tenno::vector<tenno::shared_ptr<PointLight>>& point_light);
   static void submit_dir_light(tenno::shared_ptr<DirLight> dir_light);
+  static void submit_text(const Text& text);
 
   static void end_frame();
 
@@ -61,8 +63,12 @@ private:
   static glm::mat4 view;
   static glm::vec3 cam_position;
   static tenno::vector<tenno::shared_ptr<PointLight>>  point_lights;
-  static std::optional<tenno::shared_ptr<DirLight>>  dir_light;
+  static std::optional<tenno::shared_ptr<DirLight>>    dir_light;
   static tenno::vector<Command> render_queue;
+  static tenno::vector<Command> transparent_render_queue;
+  static tenno::vector<Text>    text_render_queue;
+
+  static void flush_command(const Renderer::Command& command);
   
 };
 
@@ -75,9 +81,8 @@ public:
   
   Command() = default;
   Command(glm::mat4 world_matrix,
-          tenno::shared_ptr<Model>    model)
-    : world_matrix(world_matrix), model(model)
-  {}
+          tenno::shared_ptr<Model> model)
+    : world_matrix(world_matrix), model(model) {}
 };
 
 } // namespace brenta

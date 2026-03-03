@@ -5,6 +5,8 @@
 
 #pragma once
 
+#ifndef BRENTA_NO_ECS
+
 #include <brenta/renderer/dir_light.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/ecs/ecs.hpp>
@@ -36,3 +38,5 @@ public:
 };
   
 } // namespace brenta
+
+#endif // BRENTA_NO_ECS

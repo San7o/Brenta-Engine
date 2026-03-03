@@ -60,7 +60,7 @@ int main()
     return 1;
   }
 
-  #ifdef BRENTA_USE_IMGUI
+  #ifndef BRENTA_NO_IMGUI
   Gui::load_font();
   #endif
   
@@ -100,7 +100,7 @@ int main()
       constant.y = cos(Window::get_time().get_elapsed() * animation_speed);
     }
 
-#ifdef BRENTA_USE_IMGUI
+#ifndef BRENTA_NO_IMGUI
     Gui::new_frame(&fb, "Mandlebrot");
     Gui::push_font();
     ImGui::Begin("Fractal");
@@ -116,7 +116,8 @@ int main()
     ImGui::SliderFloat("Animation speed", &animation_speed, 0.0f, 2.0f);
     ImGui::End();
     Gui::pop_font();
-#endif
+#endif // BRENTA_NO_IMGUI
+    
     fb.bind();
     Gl::clear();
 
@@ -137,7 +138,8 @@ int main()
 
     v.unbind();
     fb.unbind();
-#ifdef BRENTA_USE_IMGUI
+    
+#ifndef BRENTA_NO_IMGUI
     Gui::render();
 #endif
 

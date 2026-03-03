@@ -14,6 +14,7 @@
 #include <brenta/node_components/model_node_component.hpp>
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
+#include <brenta/node_components/text_node_component.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
@@ -148,6 +149,31 @@ int main()
   auto dir_light_component =
     tenno::make_shared<DirLightNodeComponent>(phong_dir_ptr);
   Scene::add_component(dir_node, dir_light_component);
+
+  // Text
+  Text text1 = {
+    "Move with Shift / Ctrl / Alt + Mouse",
+    25.0f,
+    25.0f,
+    1.0f,
+    Color::yellow(),
+    font
+  };
+  Text text2 = {
+    "Press R to reload the model",
+    25.0f,
+    55.0f,
+    1.0f,
+    Color::yellow(),
+    font
+  };
+  auto text_node = Scene::create_child(root_node);
+  auto text_component1 =
+    tenno::make_shared<TextNodeComponent>(text1);
+  auto text_component2 =
+    tenno::make_shared<TextNodeComponent>(text2);
+  Scene::add_component(text_node, text_component1);
+  Scene::add_component(text_node, text_component2);
   
   Mouse mouse = {};
   mouse.set_sensitivity(0.05f);
@@ -297,13 +323,6 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    Text::render("Move with Shift / Ctrl / Alt + Mouse",
-                 25.0f, 25.0f, 1.0f,
-                 Color::yellow(), *font);
-    Text::render("Press R to reload the model",
-                 25.0f, 55.0f, 1.0f,
-                 Color::yellow(), *font);
-    
     scene->update(delta_time);
     scene->draw();
 

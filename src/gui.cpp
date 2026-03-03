@@ -8,7 +8,7 @@
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 
-#ifdef BRENTA_USE_IMGUI
+#ifndef BRENTA_NO_IMGUI
 
 using namespace brenta;
 
@@ -250,4 +250,4 @@ Subsystem &Gui::Builder::build()
   return Gui::instance();
 }
 
-#endif
+#endif // BRENTA_NO_IMGUI
