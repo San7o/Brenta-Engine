@@ -61,6 +61,8 @@ void SignalManager::update()
       callback(event.message);
     }
   }
+
+  SignalManager::pending_events.clear();
 }
   
 SignalManager::Subscription::~Subscription()
