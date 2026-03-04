@@ -139,7 +139,7 @@ int main()
 
   // Point light
   auto point_node = Scene::create_child(root_node);
-  point_node->get_local().translate({-2.0, 2.0, 0.0});
+  point_node->transform.translate({-2.0, 2.0, 0.0});
   auto point_light_component =
     tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
   Scene::add_component(point_node, point_light_component);
@@ -314,7 +314,7 @@ int main()
   
   while (!Window::should_close())
   {
-    float delta_time = Window::get_time().get_delta();
+    float delta_time = Window::get_time().delta;
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
 

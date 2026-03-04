@@ -41,7 +41,7 @@ int main()
     return 1;
   }
 
-  auto guitar_sound = Sound(guitar_sound_asset.value());
+  auto guitar_sound  = Sound(guitar_sound_asset.value());
   auto guitar_sound2 = Sound(guitar_sound_asset.value());
 
   //

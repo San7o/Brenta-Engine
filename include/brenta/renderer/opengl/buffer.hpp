@@ -59,15 +59,15 @@ public:
 
   constexpr Buffer(Buffer&& other) noexcept
   {
-    this->id = other.id;
+    this->id     = other.id;
     this->target = other.target;
-    other.id = 0;
+    other.id     = 0;
   }
   constexpr Buffer& operator=(Buffer&& other) noexcept
   {
-    this->id = other.id;
+    this->id     = other.id;
     this->target = other.target;
-    other.id = 0;
+    other.id     = 0;
     return *this;
   }
 
@@ -75,7 +75,7 @@ public:
   
   void init(Target target);
   void destroy();
-  void bind() const;
+  void bind()   const;
   void unbind() const;
 
   // Getters

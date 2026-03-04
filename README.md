@@ -1,7 +1,7 @@
 ![Brenta-Engine-Banner](./utils/docs-images/brenta-engine-banner.png)
 
 **Brenta Engine** is a simple 3D graphics engine written in modern
-C++/OpenGL using a hybrid scene-graph and Entity Component System
+C++/OpenGL using a hybrid node-graph and Entity Component System
 architecture.
 
 Check out [DESIGN.md](./docs/DESIGN.md) for an overview of
@@ -14,7 +14,7 @@ introduction to its API.
 - GPU particles
 - loading TrueType fonts, textures, audio and .obj meshes
 - central asset management
-- scene graph
+- node graph
 - ECS
 - lua node scripting
 - GUI using ImGui

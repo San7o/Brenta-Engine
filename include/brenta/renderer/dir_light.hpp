@@ -10,23 +10,19 @@
 namespace brenta
 {
 
+// Virtual directional light class
 class DirLight
 {
 public:
 
-  DirLight() = default;
-  
-  virtual ~DirLight() = default;
-  virtual void apply() = 0;
-
-  glm::vec3 &get_direction();
-  float     &get_strength();
-  
-protected:
-
   glm::vec3 direction = glm::vec3(0.2f, -1.0f, -0.3f);
   float     strength  = 1.0f;
   
+  DirLight() = default;
+  
+  virtual ~DirLight()  = default;
+  virtual void apply() = 0;
+
 };
 
 } // namespace brenta

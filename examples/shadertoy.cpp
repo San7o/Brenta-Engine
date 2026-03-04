@@ -317,7 +317,7 @@ int main(int argc, char** argv)
     GLint location = glGetUniformLocation(shader_program, "iTime");
     if (location != -1)
     {
-      glUniform1f(location, Window::get_time().get_elapsed());
+      glUniform1f(location, Window::get_time().elapsed);
     }
     // iResolution
     location = glGetUniformLocation(shader_program, "iResolution");

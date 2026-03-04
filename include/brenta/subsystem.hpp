@@ -11,13 +11,14 @@
 namespace brenta
 {
 
-/**
- * @brief Subsystem interface
- *
- * A subsistem is a static singleton that can be initialized and
- * terminated. The initialization settings should be passed via a
- * builder class.
- */
+//
+// Subsystem interface
+// -------------------
+//
+// A subsistem is a static singleton that can be initialized and
+// terminated. The initialization settings should be passed via a
+// builder class.
+//
 class Subsystem
 {
 public:
@@ -29,22 +30,19 @@ public:
   virtual ~Subsystem() = default;
   
   virtual std::expected<void, Subsystem::Error> initialize() = 0;
-  virtual std::expected<void, Subsystem::Error> terminate() = 0;
-  /**
-   * @brief Returns the name of the sybsystem
-   */
-  virtual std::string name() = 0;
-  /**
-   * @brief Returns true if the subsystem is initialized
-   */
+  virtual std::expected<void, Subsystem::Error> terminate()  = 0;
+  
+  // Returns the name of the sybsystem
+  virtual std::string name()    = 0;
+  // Returns true if the subsystem is initialized
   virtual bool is_initialized() = 0;
 };
 
-/**
- * @brief Builder interface
- *
- * Interface to build a subsystem. It does not initialize it.
- */
+//
+// Builder interface
+//
+// Interface to build a subsystem. It does not initialize it.
+//
 class Subsystem::Builder
 {
 public:

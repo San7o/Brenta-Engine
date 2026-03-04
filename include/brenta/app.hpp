@@ -8,12 +8,19 @@
 namespace brenta
 {
 
-/**
- * @brief App runner
- *
- * The user needs to define setup(), update() and cleanup(). Define
- * BRENTA_MAIN before including this header to define a main function.
- */
+//
+// App runner
+// ----------
+//
+// This class provides a simple main, and a structure to organize the
+// overall execution of an application in distinct phases. This is
+// just for convenience since the main loop of many applications look
+// the same.
+//
+// The user needs to define setup(), update(), draw() and
+// cleanup(). Define BRENTA_MAIN before including this header to
+// include a main function.
+//
 class App
 {
 public:
@@ -23,6 +30,7 @@ public:
   
   static bool setup();
   static bool update(float delta_time);
+  static bool draw();
   static void cleanup();
   
 };
@@ -39,9 +47,12 @@ int main()
     
   while(!brenta::Window::should_close())
   {
-    auto delta_time = brenta::Window::get_time().get_delta();
+    auto delta_time = brenta::Window::get_time().delta;
     
     if (!brenta::App::update(delta_time))  // user implemented
+      break;
+
+    if (!brenta::App::draw())              // user implemented
       break;
     
     brenta::Window::poll_events();

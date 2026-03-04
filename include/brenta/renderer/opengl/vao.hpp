@@ -34,6 +34,7 @@ namespace brenta
 //
 //    vbo.copy_data(vertices, sizeof(vertices), Buffer::DataUsage::StaticDraw);
 //    vao.link_buffer(vbo, 0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
+//
 class Vao
 {
 public:

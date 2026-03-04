@@ -13,6 +13,19 @@
 namespace brenta
 {
 
+//
+// Filesystem Watcher
+// ------------------
+//
+// Watch for events on files in the filesystem. Make sure you
+// initialize and destroy this object before using it.
+//
+// The API is really simple, you `add(..)` and `rm(..)` the paths
+// you want to monitor, then call `watch()` and wait for events.
+// Watch will return a path where an event occurred. If it does
+// not return anything, then this object was destroyed or an error
+// was encountered while waiting.
+//
 class FilesystemWatcher
 {
 public:

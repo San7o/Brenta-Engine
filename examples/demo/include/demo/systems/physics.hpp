@@ -33,7 +33,7 @@ struct PhysicsSystem : System<PhysicsEcsComponent,
       auto transform_component =
         World::entity_to_component<TransformEcsComponent>(match);
 
-      auto dt = Window::get_time().get_delta();
+      auto dt = Window::get_time().delta;
       if (physics_component->acceleration != glm::vec3(0.0f))
       {
         physics_component->velocity += physics_component->acceleration * dt;

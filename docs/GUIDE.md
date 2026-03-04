@@ -120,7 +120,7 @@ ModelNodeComponent(Model&& m, bool transparent = false);
 ModelNodeComponent(tenno::shared_ptr<Model> m, bool transparent = false);
 ```
 
-In general, more "high-level" objects (such as the scene-graph) work
+In general, more "high-level" objects (such as the node-graph) work
 with shared pointers, while "low-level" objects such as textures and
 meshes store their data directly without pointers. If you only work
 with these objects you are not required to create shared pointers for

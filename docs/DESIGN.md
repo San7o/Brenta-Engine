@@ -1,18 +1,5 @@
 # Design
 
-I could tell you that the Brenta engine was perfectly designed, with a
-clear vision from its inception, with a beautiful and powerful API
-that makes programming truly enjoyable. Except the fact that it would
-be a lie. I do not mean that I don't find the current design and API
-beautiful and fun - I think Brenta is a powerful engine - but its
-development has been more iterative than meticulously designed. I
-rewrote huge parts of the engine many many times, to the point where I
-am not scared to do big refactoring anymore - that is just routine -
-and I know I am deemed to repeat this process again. But through these
-many refactoring, the API reached a point where all objects work well
-together and you can reason about them through what I call the
-"architecture" or "design" of the engine. This is what I aim to
-describe in this documents.
 
 Game engines are complex pieces of software. They provide an interface
 to define logic, render graphics, and access system resources like
@@ -20,6 +7,15 @@ audio and input, as well as providing a cross-platform abstraction to
 the developer.
 
 ![high-level-overview](./brenta-picture.png)
+
+Brenta's its development has been more iterative than meticulously
+designed. I rewrote huge parts of the engine many many times, to the
+point where I am not scared to do big refactoring anymore - that is
+just routine - and I know I am deemed to repeat this process
+again. But through these many refactoring, the API reached a point
+where all objects work well together and you can reason about them
+through what I call the "architecture" or "design" of the engine. This
+is what I aim to describe in this documents.
 
 I wanted to write my own graphics engine primarily because I was
 curious to understand how these big systems are designed and
@@ -94,7 +90,7 @@ provides the abstractions necessary to integrate other methods.
 ## Scene
 
 There are many ways to define a scene. Brenta supports both the
-scene-graph architecture, commonly used in Godot, Unity and Unreal,
+node-graph architecture, commonly used in Godot, Unity and Unreal,
 and the ECS (Entity Component System) architecture like in
 [Bevy](https://github.com/bevyengine/bevy/).
 

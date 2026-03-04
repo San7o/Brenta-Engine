@@ -22,11 +22,12 @@
 namespace brenta
 {
 
-/**
- * @brief OpenGL helper functions
- *
- * This class contains helper functions to interact with OpenGL.
- */
+//
+// OpenGL helper functions
+// -----------------------
+//
+// This class contains static helper functions to interact with OpenGL.
+//
 class Gl : public Subsystem
 {
 public:
@@ -70,8 +71,8 @@ public:
 
 private:
   
-  static bool initialized;
-  static Gl::Config        init_config;
+  static bool         initialized;
+  static Gl::Config   init_config;
 
   // Private constructors / destructors for singleton  
   Gl()  = default;
@@ -96,7 +97,7 @@ private:
   
 public:
 
-  Builder() = default;
+  Builder()  = default;
   ~Builder() = default;
 
   Builder &blending();

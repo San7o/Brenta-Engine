@@ -134,7 +134,7 @@ int main()
     
     // Render to framebuffer
     fb.bind();
-    scene.update(Window::get_time().get_delta());
+    scene.update(Window::get_time().delta);
     scene.draw();
     fb.unbind();
 
@@ -173,7 +173,7 @@ void setup_gui(FrameBuffer &fb,
   {
     ImGui::SeparatorText("Direction");
 
-    glm::vec3 &dir = dir_light->get_direction();
+    glm::vec3 &dir = dir_light->direction;
     if (ImGui::SliderFloat3("Direction", &dir.x, -1.0f, 1.0f))
     {
       if (glm::length(dir) > 0.0001f)
@@ -182,7 +182,7 @@ void setup_gui(FrameBuffer &fb,
 
     ImGui::SeparatorText("Intensity");
     ImGui::SliderFloat("Strength##Dir",
-                       &dir_light->get_strength(),
+                       &dir_light->strength,
                        0.0f, 10.0f);
     ImGui::SeparatorText("Phong");
     ImGui::ColorEdit3("Ambient##Dir",
@@ -198,32 +198,32 @@ void setup_gui(FrameBuffer &fb,
   {
     ImGui::SeparatorText("Position");
     float pos[3] = {
-      point_light_node->get_local().get_x(),
-      point_light_node->get_local().get_y(),
-      point_light_node->get_local().get_z(),
+      point_light_node->transform.position.x,
+      point_light_node->transform.position.y,
+      point_light_node->transform.position.z,
     };
     ImGui::SliderFloat3("Position",
                         pos,
                         -20.0f, 20.0f);
-    point_light_node->get_local().set_pos({pos[0], pos[1], pos[2]});
+    point_light_node->transform.set_pos({pos[0], pos[1], pos[2]});
     
     ImGui::SeparatorText("Intensity");
     ImGui::SliderFloat("Strength##Point",
-                       &point_light->get_strength(),
+                       &point_light->strength,
                        0.0f, 50.0f,
                        "%.3f",
                        ImGuiSliderFlags_Logarithmic);
 
     ImGui::SeparatorText("Attenuation");
     ImGui::SliderFloat("Constant",
-                         &point_light->get_constant(),
+                         &point_light->constant,
                          0.0f, 2.0f);
     ImGui::SliderFloat("Linear",
-                       &point_light->get_linear(),
+                       &point_light->linear,
                        0.0f, 1.0f,
                        "%.5f");
     ImGui::SliderFloat("Quadratic",
-                       &point_light->get_quadratic(),
+                       &point_light->quadratic,
                        0.0f, 0.1f,
                        "%.6f",
                        ImGuiSliderFlags_Logarithmic);

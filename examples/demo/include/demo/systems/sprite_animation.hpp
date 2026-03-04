@@ -27,8 +27,7 @@ struct SpriteAnimationSystem : System<SpriteAnimationEcsComponent,
   {
     for (auto& entity : matches)
     {
-      // TODO: update the sprite index after some time
-      auto dt = Window::get_time().get_delta();
+      auto dt = Window::get_time().delta;
 
       auto e = Entity(entity);
       auto sprite_animation =

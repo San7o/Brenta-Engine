@@ -13,6 +13,13 @@
 namespace brenta
 {
 
+//
+// Ecs
+// ---
+//
+// The engine uses `viotecs` to handle all the ecs logic. This
+// subsystems is just a way to initialize the ECS.
+//
 class Ecs : public Subsystem
 {
 public:
@@ -21,11 +28,11 @@ public:
 
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, Subsystem::Error> initialize() override;
-  std::expected<void, Subsystem::Error> terminate() override;
-  std::string name() override;
+  std::string name()    override;
   bool is_initialized() override;
-
+  std::expected<void, Subsystem::Error> initialize() override;
+  std::expected<void, Subsystem::Error> terminate()  override;
+  
   // Member functions
   
   static Ecs &instance();
@@ -35,7 +42,7 @@ private:
   static bool initialized;
   
   // Private constructors / destructors for singleton
-  Ecs() = default;
+  Ecs()  = default;
   ~Ecs() = default;
 
 };
@@ -44,7 +51,7 @@ class Ecs::Builder : public Subsystem::Builder
 {
 public:
 
-  Builder() = default;
+  Builder()  = default;
   ~Builder() = default;
 
   Subsystem &build();

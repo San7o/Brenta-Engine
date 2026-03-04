@@ -15,16 +15,31 @@
 namespace brenta
 {
 
+//
+// Node
+// ----
+//
+// Nodes are the highest abstraction to repserent the scene. Each
+// node has one parent and can have many children, creating a tree
+// or a graph.
+//
+// When a node updates itself, it also updates its childrens; this
+// propagates recursively down the tree. The same happens for drawing.
+//
+// The actual usefulness of a node cames with its components, which
+// provide specialized functionalities to the node. Each node also
+// has a lua script that it runs when it updates, to provide a more
+// dynamic and simple way to write the Node's logic.
+//
 class Node
 {
 public:
 
   friend class Scene;
+
+  Transform transform;
   
   Node() = default;
-
-  void         set_local(Transform local);
-  Transform   &get_local();
 
   // Update logic (animations, movement, AI...)
   void update(float delta_time);
@@ -40,7 +55,6 @@ private:
   std::optional<tenno::weak_ptr<Node>>      parent;
   tenno::vector<tenno::shared_ptr<Node>>    children;
 
-  Transform local;
   glm::mat4 world_matrix = glm::mat4(1.0f);
 
   void update_world_matrix();

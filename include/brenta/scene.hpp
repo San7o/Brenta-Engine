@@ -13,6 +13,17 @@
 namespace brenta
 {
 
+//
+// Scene
+// -----
+//
+// The scene contains the root node of the node-graph and it is used
+// to manage the rest of the graph, like creating new nodes or adding
+// scripts.
+//
+// When the scene is updated, all the nodes are updated top to bottom,
+// same with drawing.
+//
 class Scene
 {
 public:

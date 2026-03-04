@@ -30,9 +30,9 @@ int Script::lua_get_position(lua_State* L)
   auto* node = Script::current_node;
   if (!node) goto error;
 
-  lua_pushnumber(L, node->get_local().get_x());
-  lua_pushnumber(L, node->get_local().get_y());
-  lua_pushnumber(L, node->get_local().get_z());
+  lua_pushnumber(L, node->transform.position.x);
+  lua_pushnumber(L, node->transform.position.y);
+  lua_pushnumber(L, node->transform.position.z);
     return 3; 
   
  error:
@@ -51,9 +51,9 @@ int Script::lua_set_position(lua_State* L)
   float y = (float)luaL_checknumber(L, 2);
   float z = (float)luaL_checknumber(L, 3);
 
-  node->get_local().set_x(x);
-  node->get_local().set_y(y);
-  node->get_local().set_z(z);
+  node->transform.position.x = x;
+  node->transform.position.y = y;
+  node->transform.position.z = z;
   return 0;
 }
 

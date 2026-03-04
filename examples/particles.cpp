@@ -212,7 +212,7 @@ int main()
     Gl::clear();
 
     fb.bind();
-    emitter.update(Window::get_time().get_delta());
+    emitter.update(Window::get_time().delta);
     emitter.render();
     fb.unbind();
 

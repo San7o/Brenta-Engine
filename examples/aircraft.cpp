@@ -115,11 +115,11 @@ int main()
 
   // Camera movement
   
-  auto camera        = scene.get_camera();  
+  auto camera            = scene.get_camera();  
   glm::vec3 acceleration = glm::vec3(0.0);
   glm::vec3 speed        = glm::vec3(0.0);
 
-  Mouse mouse = {};
+  Mouse mouse        = {};
   mouse.set_sensitivity(0.05f);
   bool capture_mouse = true;
 
@@ -145,10 +145,10 @@ int main()
     delta_x *= sensitivity;
     delta_y *= sensitivity;
 
-    auto pos = camera->get_pos();
+    auto pos  = camera->get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
 
-    acam.yaw += delta_x;
+    acam.yaw   += delta_x;
     acam.pitch -= delta_y;
     camera->set_pos(acam);
     return;
@@ -167,7 +167,7 @@ int main()
   
   while (!Window::should_close())
   {
-    float delta_time = Window::get_time().get_delta();
+    float delta_time = Window::get_time().delta;
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
     if (Window::is_key_pressed(Key::W))

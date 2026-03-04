@@ -22,6 +22,12 @@ namespace brenta
 
 class Node;
   
+//
+// Script
+// ------
+//
+// Scripts are an iterface for storing and running lua programs.
+//
 class Script
 {
 public:

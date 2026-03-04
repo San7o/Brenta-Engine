@@ -25,7 +25,7 @@ public:
     {
       auto e = viotecs::Entity(entity);
       auto emitter = e.get_component<ParticleEmitterEcsComponent>();
-      emitter->emitter->update(Window::get_time().get_delta());
+      emitter->emitter->update(Window::get_time().delta);
       emitter->emitter->render();
     }
   }

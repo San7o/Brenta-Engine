@@ -7,16 +7,6 @@
 
 using namespace brenta;
 
-float Time::get_elapsed()
-{
-  return this->elapsed;
-}
-
-float Time::get_delta()
-{
-  return this->delta;
-}
-
 float Time::get_fps()
 {
   return 1.0f / this->delta;
@@ -24,7 +14,7 @@ float Time::get_fps()
 
 void Time::update(float new_time)
 {
-  this->elapsed = new_time;
-  this->delta = this->elapsed - this->last_frame;
+  this->elapsed    = new_time;
+  this->delta      = this->elapsed - this->last_frame;
   this->last_frame = this->elapsed;
 }

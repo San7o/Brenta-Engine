@@ -96,8 +96,8 @@ int main()
     // Vary constant over time
     if (animate)
     {
-      constant.x = sin(Window::get_time().get_elapsed() * animation_speed);
-      constant.y = cos(Window::get_time().get_elapsed() * animation_speed);
+      constant.x = sin(Window::get_time().elapsed * animation_speed);
+      constant.y = cos(Window::get_time().elapsed * animation_speed);
     }
 
 #ifndef BRENTA_NO_IMGUI

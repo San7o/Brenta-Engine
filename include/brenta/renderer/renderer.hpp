@@ -25,10 +25,21 @@ namespace brenta
 // Renderer
 // --------
 //
-// The renderer is a logical abtraction that is responsible to draw
-// a "rendering unit" aka render command. It takes all the
-// information for a render call and it performs the drawing,
-// calculating view, projection and model matrixes.
+// The renderer is a logical abtraction that is responsible to draw a
+// "rendering unit" aka render command. When the renderer is flushed,
+// or when `end_frame()` is called, all render commands will be
+// drawn.
+//
+// Its usage usually looks like this:
+//
+//    Renderer::begin_frame(camera);
+//
+//    Renderer::submit({world_matrix, model});
+//    Renderer::submit({world_matrix2, model2});
+//    Renderer::submit_point_light(light);
+//    // ...
+//
+//    Renderer::end_frame();  // draws everything    
 //
 class Renderer
 {

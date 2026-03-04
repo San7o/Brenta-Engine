@@ -12,20 +12,13 @@ using namespace brenta;
 
 int main()
 {  
-  const int screen_width = 800;
-  const int screen_height = 600;
-
-  //
-  // Setup
-  //
-
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("logger test")
-          .width(screen_width)
-          .height(screen_height))
+          .width(800)
+          .height(600))
     .with(Gl::Builder()
           .blending()
           .backface_culling()
@@ -36,10 +29,6 @@ int main()
   
   INFO("Hello, World!");
   
-  //
-  // Render loop
-  // 
-
   while (!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))

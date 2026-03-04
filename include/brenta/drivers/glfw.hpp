@@ -13,6 +13,10 @@
 namespace brenta
 {
 
+//
+// Glfw Driver for Window
+// ----------------------
+//
 class GlfwDriver : public Window::Driver
 {
 public:
@@ -39,29 +43,28 @@ public:
   // Setters
   //
 
-  void set_mouse_capture(bool is_captured)     override;
-  void set_width_height(int width, int height) override;
-  void set_mouse_callback(void* callback)      override;
-  void set_size_callback(void* callback)       override;
-  void set_mouse_pos_callback(void* callback)  override;
-  void set_key_callback(void* callback)        override;
+  void set_mouse_capture(bool is_captured)        override;
+  void set_width_height(int width, int height)    override;
+  void set_mouse_callback(void* callback)         override;
+  void set_size_callback(void* callback)          override;
+  void set_mouse_pos_callback(void* callback)     override;
+  void set_key_callback(void* callback)           override;
+  void set_dimensions(int width, int height)      override;
 
   //
   // Utils
   //
 
-  // Swap the front and back buffers
-  // Having two buffers avoids flickering.
-  void swap_buffers()                            override;
-  void poll_events()                             override;
-  void update_dimensions()                       override;
-  void update_dimensions(int width, int height)  override;
-  void set_context_version(int major, int minor) override;
-  void use_core_profile()                        override;
-  void set_hints_apple()                         override;
-  void make_context_current()                    override;
-  void close()                                   override;
-  void create_window(int width, int height, const std::string &title) override;
+  void swap_buffers()                             override;
+  void poll_events()                              override;
+  void update_dimensions()                        override;
+  void set_context_version(int major, int minor)  override;
+  void use_core_profile()                         override;
+  void set_hints_apple()                          override;
+  void make_context_current()                     override;
+  void close()                                    override;
+  void create_window(int width, int height,
+                     const std::string &title)    override;
   
 private:
   

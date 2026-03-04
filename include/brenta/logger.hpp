@@ -24,6 +24,15 @@
 namespace brenta
 {
 
+//
+// Logging
+// -------
+//
+// The engine uses `oak` for logging. You can use its powerful API
+// to log whatever you want. The logging subsystem initialized some
+// settings and it is ment as the engine's "standard" way to
+// configure its global logger when the application starts.
+//
 class Logger : public Subsystem
 {
 public:
@@ -34,7 +43,7 @@ public:
     Callback,
   };
 
-  using Level = oak::Level;
+  using Level  = oak::Level;
   using Flags  = oak::Flags;
   
   struct Config;
@@ -42,14 +51,15 @@ public:
   
   // Subsystem interface
   static const std::string subsystem_name;
+  bool        is_initialized() override;
+  std::string name()           override;
   std::expected<void, Subsystem::Error> initialize() override;
-  std::expected<void, Subsystem::Error> terminate() override;
-  std::string name() override;
-  bool is_initialized() override;
+  std::expected<void, Subsystem::Error> terminate()  override;
+  
 
   // Member functions
   
-  static Logger &instance();
+  static Logger&     instance();
   static std::string event_name(enum Event event);
   
 private:
@@ -58,25 +68,21 @@ private:
   static bool           initialized;
 
   // Private constructors / destructors for singleton  
-  Logger() = default;
+  Logger()  = default;
   ~Logger() = default;
   
 };
 
 struct Logger::Config
 {
-  oak::Level            log_level = oak::Level::Info;
-  std::filesystem::path log_file  = "/tmp/brenta-logs.txt";
+  oak::Level              log_level = oak::Level::Info;
+  std::filesystem::path   log_file  = "/tmp/brenta-logs.txt";
   tenno::vector<Event>    events    = {};
   tenno::vector<Flags>    flags     = {};
 };
 
 class Logger::Builder : public Subsystem::Builder
 {
-private:
-
-  Logger::Config conf = {};
-  
 public:
 
   Builder()  = default;
@@ -88,6 +94,12 @@ public:
   Builder &flag(Logger::Flags flag);
   
   Subsystem &build();
+
+private:
+
+  Logger::Config conf = {};
+  
+  
 };
   
 } // namespace brenta

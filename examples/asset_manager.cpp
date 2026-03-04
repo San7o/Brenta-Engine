@@ -96,13 +96,13 @@ int main()
   
   auto root_node  = scene->get_root();
   auto model_node = Scene::create_child(root_node);
-  model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
+  model_node->transform = glm::vec3(10.0f, 0.0f, 0.0f);
 
   Scene::add_component(model_node, model_component);
 
   while (!Window::should_close())
   {
-    auto delta_time = Window::get_time().get_delta();
+    auto delta_time = Window::get_time().delta;
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
 

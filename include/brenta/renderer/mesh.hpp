@@ -19,9 +19,12 @@
 namespace brenta
 {
 
-/**
- * @brief The Mesh class represents a collection of 3D vertices
- */
+//
+// Mesh
+// ----
+//
+// The Mesh class represents a collection of 3D vertices
+//
 class Mesh
 {
 public:

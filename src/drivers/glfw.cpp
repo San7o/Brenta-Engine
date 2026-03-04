@@ -93,6 +93,13 @@ bool GlfwDriver::is_key_pressed(Key key)
   return glfwGetKey(this->window, glfw_key) == GLFW_PRESS;
 }
 
+void GlfwDriver::set_dimensions(int width, int height)
+{
+  this->width  = width;
+  this->height = height;
+  return;
+}
+
 Time GlfwDriver::get_time()
 {
   return this->time;
@@ -121,13 +128,6 @@ int GlfwDriver::get_height()
 void GlfwDriver::update_dimensions()
 {
   glfwGetWindowSize(this->window, &this->width, &this->height);
-  return;
-}
-
-void GlfwDriver::update_dimensions(int width, int height)
-{
-  this->width  = width;
-  this->height = height;
   return;
 }
 

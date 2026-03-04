@@ -19,12 +19,16 @@
 namespace brenta
 {
 
-/**
- * @brief Gui class
- *
- * This class contains the GUI functions, It's a wrapper around imgui,
- * providing functions to initialize, update and delete the gui.
- */
+//
+// Gui class
+// ---------
+//
+// This class contains some utilities for working with GUI. It's a
+// wrapper around imgui, providing common functions to initialize,
+// update and delete the gui. This is not meant to be a replacement
+// for ImGui's API, but a shortcut to some some common operations
+// that may take many keystrokes to type out.
+//
 class Gui : public Subsystem
 {
 public:
@@ -44,18 +48,18 @@ public:
   
   static void new_frame(FrameBuffer *fb, std::string name = "Game");
   static void render();
-  static void load_font(const std::filesystem::path &paht = "examples/assets/fonts/Inconsolata-Regular.ttf",
+  static void load_font(const std::filesystem::path &path = "examples/assets/fonts/Inconsolata-Regular.ttf",
                         float size = 25.0f);
   static void push_font(ImFont* f = font);
   static void pop_font();
 
 private:
   
-  static bool initialized;
+  static bool    initialized;
   static ImFont *font;
   
   // Private constructors / destructors for singleton
-  Gui() = default;
+  Gui()  = default;
   ~Gui() = default;
   
 };
@@ -64,7 +68,7 @@ class Gui::Builder : public Subsystem::Builder
 {
 public:
 
-  Builder() = default;
+  Builder()  = default;
   ~Builder() = default;
   
   brenta::Subsystem &build() override;

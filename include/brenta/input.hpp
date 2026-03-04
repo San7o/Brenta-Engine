@@ -19,13 +19,14 @@
 namespace brenta
 {
 
-/**
- * @brief Input subsystem
- *
- * This subsystem is used to add and remove callbacks for keyboard and
- * mouse events. You can define your own callbacks and register them
- * with the input subsystem.
- */
+//
+// Input subsystem
+// ----------------
+//
+// This subsystem is used to add and remove callbacks for keyboard and
+// mouse events. You can define your own callbacks and register them
+// using `add_keyboard_callback(..)` and `add_mouse_callback(..)`.
+//
 class Input : public Subsystem
 {
 public:
@@ -50,25 +51,22 @@ public:
   static void add_keyboard_callback(Key key, KeyboardCallback callback);
   static void remove_keyboard_callback(Key key);
   
-  static void
-  add_mouse_callback(MouseCallbackId name,
-                     std::function<void(double, double)> callback);
-  static void
-  remove_mouse_callback(MouseCallbackId name);
+  static void add_mouse_callback(MouseCallbackId name, MouseCallback callback);
+  static void remove_mouse_callback(MouseCallbackId name);
 
   // These functions will be called when a key or mouse event is
-  // received
+  // received. They are used to call the other registered callbacks.
   static void key_callback(Key key, KeyAction action, KeyMods mods);
   static void mouse_callback(double xpos, double ypos);
   
 protected:
-  
-  static std::unordered_map<brenta::Key, KeyboardCallback> keyboard_callbacks;
-  static std::unordered_map<MouseCallbackId, MouseCallback> mouse_callbacks;
+
   static bool initialized;
+  static std::unordered_map<brenta::Key, KeyboardCallback>  keyboard_callbacks;
+  static std::unordered_map<MouseCallbackId, MouseCallback> mouse_callbacks;
 
   // Private constructors / destructors for singleton  
-  Input() = default;
+  Input()  = default;
   ~Input() = default;
 
 };
@@ -77,7 +75,7 @@ class Input::Builder : public Subsystem::Builder
 {
 public:
 
-  Builder() = default;
+  Builder()  = default;
   ~Builder() = default;
   
   brenta::Subsystem &build() override;

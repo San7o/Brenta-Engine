@@ -142,10 +142,10 @@ void Window::update_dimensions()
     Window::backend->update_dimensions();
 }
 
-void Window::update_dimensions(int width, int height)
+void Window::set_dimensions(int width, int height)
 {
   if (Window::backend)
-    Window::backend->update_dimensions(width, height);
+    Window::backend->set_dimensions(width, height);
   return;
 }
 

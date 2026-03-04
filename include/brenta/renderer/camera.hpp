@@ -15,28 +15,25 @@
 namespace brenta
 {
 
-/**
- * @brief The Camera class
- *
- * This class represents a camera in the 3D world. It is used to
- * define the position, orientation and projection of the camera.  The
- * class provides a builder pattern to create a camera object.
- *
- * ## Camera type
- *
- * The camera can be of two types: aircraft or spherical. The aircraft
- * type is used to represent a camera that moves in the world space
- * directions (x, y, z), while the spherical type is used to represent
- * a camera that rotates around a center point (you essentially
- * control the angle and radius around the center). They use
- * respectively euler angles and spherical coordinates to represent
- * the position of the camera.
- *
- * ## Projection
- *
- * The camera can have two types of projection: perspective or
- * orthographic.
- */
+//
+// The Camera class
+// ----------------
+//
+// This class represents a camera in the 3D world. It is used to
+// define the position, orientation and projection of the camera.  The
+// class provides a builder pattern to create a camera object.
+//
+// The camera can be of two types: aircraft or spherical. The aircraft
+// type is used to represent a camera that moves in the world space
+// directions (x, y, z), while the spherical type is used to represent
+// a camera that rotates around a center point (you essentially
+// control the angle and radius around the center). They use
+// respectively euler angles and spherical coordinates to represent
+// the position of the camera.
+//
+// The camera can have two types of projection: perspective or
+// orthographic.
+//
 class Camera
 {
 public:

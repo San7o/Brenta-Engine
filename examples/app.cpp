@@ -99,7 +99,7 @@ bool App::setup()
                                    scene_builder);
   auto root_node  = scene->get_root();
   auto model_node = Scene::create_child(root_node);
-  model_node->set_local(glm::vec3(10.0f, 0.0f, 0.0f));
+  model_node->transform = glm::vec3(10.0f, 0.0f, 0.0f);
   Scene::add_component(model_node, model_component);
 
   return true;
@@ -114,9 +114,18 @@ bool App::update(float delta_time)
   Gl::clear();
 
   auto scene = AssetManager::get<Scene>("main_scene");
-  if (!scene) return true;
+  if (!scene) return false;
   
   scene->update(delta_time);
+
+  return true;
+}
+
+bool App::draw()
+{
+  auto scene = AssetManager::get<Scene>("main_scene");
+  if (!scene) return false;
+
   scene->draw();
 
   return true;

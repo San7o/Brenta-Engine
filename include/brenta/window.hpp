@@ -16,14 +16,15 @@
 namespace brenta
 {
 
-/**
- * @brief Window subsystem
- *
- * This class is used to create a window and handle all the events
- * related to the window. This class provides methods to initialize
- * the window, get the window size, check if a key is pressed, get the
- * time since the start of the program, and more.
- */
+//
+// Window subsystem
+// ----------------
+//
+// This class is used to create a window and handle all the events
+// related to the window. This class provides methods to initialize
+// the window, get the window size, check if a key is pressed, get the
+// time since the start of the program, and more.
+//
 class Window : public Subsystem
 {
 public:
@@ -70,6 +71,7 @@ public:
   static void set_size_callback(Callback callback);
   static void set_mouse_pos_callback(Callback callback);
   static void set_key_callback(Callback callback);
+  static void set_dimensions(int width, int height);
 
   //
   // Utils
@@ -80,8 +82,9 @@ public:
   static void swap_buffers();
   // Poll all pending events
   static void poll_events();
+  // Updated the window dimensions
   static void update_dimensions();
-  static void update_dimensions(int width, int height);
+  // Set the internal dimensions to [width] and [height]
   static void make_context_current();
   static void close();
 
@@ -111,44 +114,41 @@ public:
   // Getters
   //
   
-  virtual int          get_width()                = 0;
-  virtual int          get_height()               = 0;
-  virtual bool         should_close()             = 0;
-  virtual bool         is_key_pressed(Key key)    = 0;
-  virtual Time         get_time()                 = 0;
-  virtual Window::ProcHandle   get_proc_address() = 0;
-  virtual Window::WindowHandle get_window()       = 0;  
+  virtual int          get_width()                  = 0;
+  virtual int          get_height()                 = 0;
+  virtual bool         should_close()               = 0;
+  virtual bool         is_key_pressed(Key key)      = 0;
+  virtual Time         get_time()                   = 0;
+  virtual Window::ProcHandle   get_proc_address()   = 0;
+  virtual Window::WindowHandle get_window()         = 0;  
 
   //
   // Setters
   //
 
-  virtual void set_mouse_capture(bool is_captured)     = 0;
-  virtual void set_width_height(int width, int height) = 0;
-  
+  virtual void set_mouse_capture(bool is_captured)                = 0;
+  virtual void set_width_height(int width, int height)            = 0;
   virtual void set_mouse_callback(Window::Callback callback)      = 0;
   virtual void set_size_callback(Window::Callback callback)       = 0;
   virtual void set_mouse_pos_callback(Window::Callback callback)  = 0;
   virtual void set_key_callback(Window::Callback callback)        = 0;
+  virtual void set_dimensions(int width, int height)              = 0;
 
 
   //
   // Utils
   //
 
-  // Swap the front and back buffers
-  // Having two buffers avoids flickering.
-  virtual void swap_buffers()      = 0;
-  virtual void poll_events()       = 0;
-  virtual void update_dimensions() = 0;
-  virtual void update_dimensions(int width, int height)  = 0;
+  virtual void swap_buffers()                            = 0;
+  virtual void poll_events()                             = 0;
+  virtual void update_dimensions()                       = 0;
   virtual void set_context_version(int major, int minor) = 0;
-  virtual void use_core_profile()  = 0;
-  virtual void set_hints_apple()   = 0;
+  virtual void use_core_profile()                        = 0;
+  virtual void set_hints_apple()                         = 0;
   virtual void create_window(int width, int height,
-                             const std::string& title) = 0;
-  virtual void make_context_current() = 0;
-  virtual void close() = 0;
+                             const std::string& title)   = 0;
+  virtual void make_context_current()                    = 0;
+  virtual void close()                                   = 0;
 
 };
   

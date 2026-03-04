@@ -10,23 +10,10 @@
 namespace brenta
 {
 
-// Virtual light class
+// Virtual point light class
 class PointLight
 {
 public:
-
-  PointLight() = default;
-  
-  virtual ~PointLight() = default;
-  virtual void apply(int light_number) = 0;
-
-  glm::vec3 &get_position();
-  float     &get_strength();
-  float     &get_constant();
-  float     &get_linear();
-  float     &get_quadratic();
-  
-protected:
 
   glm::vec3 position = glm::vec3(0.0);
   float     strength = 1.0f;
@@ -35,6 +22,11 @@ protected:
   float linear    = 0.09f;
   float quadratic = 0.00032f;
   
+  PointLight()          = default;
+  virtual ~PointLight() = default;
+  
+  virtual void apply(int light_number) = 0;
+
 };
 
 } // namespace brenta

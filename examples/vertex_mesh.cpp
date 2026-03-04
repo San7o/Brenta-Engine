@@ -94,7 +94,7 @@ int main(void)
     // Update
 
     // Just to create some action
-    auto pos = camera.get_pos();
+    auto pos  = camera.get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
     acam.yaw++;
     if (acam.yaw >= 45.0f)

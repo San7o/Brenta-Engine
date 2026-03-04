@@ -30,7 +30,7 @@ public:
 
   inline void draw(const Transform& t)
   {
-    auto& pos = this->light->get_position();
+    auto& pos = this->light->position;
     pos = t.get_pos();
     Renderer::submit_point_light(this->light);
   }

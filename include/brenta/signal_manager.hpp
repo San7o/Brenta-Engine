@@ -14,6 +14,20 @@
 namespace brenta
 {
 
+//
+// Signals
+// -------
+//
+// A signal is a simple communication mechanism that uses the observer
+// pattern. You can subscribe to an event / signal by registering a
+// callback which will be called if that signal is emitted. Signals
+// are identified by a name (string).
+//
+// When a signal is emitted, it does not immediately call all
+// callbacks. Instead it stored a buffer of pending events which can
+// be consimed with the `update()` function. This makes sure that the
+// user of the API decides when to spend time processing the events.
+//
 class SignalManager
 {
 public:
@@ -30,11 +44,12 @@ public:
   ~SignalManager() = delete;
 
   static void emit(const Event& event);
-  
-  static Subscription subscribe(const SignalId& id, Callback callback);
-  static void unsubscribe(const Subscription &sub);
 
-  // Process all pending events
+  // A subscription keeps the connection alive using RAII
+  static Subscription subscribe(const SignalId& id, Callback callback);
+  static void         unsubscribe(const Subscription &sub);
+
+  // Consumes all pending events
   static void update();
   
 private:
@@ -51,14 +66,43 @@ struct SignalManager::Event
   SignalId id;
   Message  message;
 };
-  
+
+//
+// Subscription
+// ------------
+//
+// When you subscribe to an event, you get a subscription object. This
+// uses RAII to keep the connection alive and automatically clean
+// its resources when it goes out of scope.
+//
 class SignalManager::Subscription
 {
 public:
 
   friend class SignalManager;
   
-  Subscription() = delete;
+  Subscription()                              = delete;
+
+  Subscription(Subscription&& other)
+  {
+    this->signal_id     = other.signal_id;
+    this->connection_id = other.connection_id;
+    other.signal_id     = SignalId{};
+    other.connection_id = ConnectionId{};
+  }
+  Subscription &operator=(Subscription&& other)
+  {
+    this->signal_id     = other.signal_id;
+    this->connection_id = other.connection_id;
+    other.signal_id     = SignalId{};
+    other.connection_id = ConnectionId{};
+    return *this;
+  }
+
+  // Copy is not allowed
+  Subscription(const Subscription&)           = delete;
+  Subscription &operator=(const Subscription&) = delete;
+
   ~Subscription();
    
 private:
@@ -68,7 +112,7 @@ private:
 
   SignalId       signal_id;
   ConnectionId   connection_id;
+  
 };
-
   
 } // namespace brenta

@@ -17,11 +17,21 @@ public:
   Color() = default;
   Color(float r, float g, float b, float a = 1.0f)
     : r(r), g(g), b(b), a(a) {}
-  
+
+  static const inline Color red()
+  { return Color(1.0f, 0.0f, 0.0f, 1.0f); }
+  static const inline Color green()
+  { return Color(0.0f, 1.0f, 0.0f, 1.0f); }
+  static const inline Color blue()
+  { return Color(0.0f, 0.0f, 1.0f, 1.0f); }
   static const inline Color grey()
   { return Color(0.2f, 0.2f, 0.207f, 1.0f); }
   static const inline Color yellow()
   { return Color(1.0f, 1.0f, 0.0f, 1.0f); }
+  static const inline Color white()
+  { return Color(1.0f, 1.0f, 1.0f, 1.0f); }
+  static const inline Color black()
+  { return Color(0.0f, 0.0f, 0.0f, 1.0f); }
 
 };
 

@@ -14,12 +14,20 @@ namespace brenta
 class Transform
 {
 public:
+
+  glm::vec3 position  = glm::vec3(0);
+  glm::quat rotation  = glm::identity<glm::quat>();
+  glm::vec3 scaling   = glm::vec3(1.0f);
   
   Transform() = default;
   Transform(double x, double y, double z);
   Transform(glm::vec3 vec);
   Transform(Transform& other) = default;
   Transform(const Transform& other) = default;
+
+  //
+  // Getters
+  //
 
   // Model = Transform * Rotation * Scale
   glm::mat4 get_model_matrix();
@@ -29,6 +37,10 @@ public:
   float     get_z() const;
   glm::quat get_rotation() const;
 
+  //
+  // Setters
+  //
+  
   Transform& set_pos(glm::vec3 new_pos);
   Transform& set_x(float x);
   Transform& set_y(float y);
@@ -39,17 +51,13 @@ public:
   Transform& rotate_y(float degrees);
   Transform& rotate_z(float degrees);
   Transform& scale(const glm::vec3& scale);
+
   
 private:
-
-  glm::vec3 m_position  = glm::vec3(0);
-  glm::quat m_rotation  = glm::identity<glm::quat>();
-  glm::vec3 m_scale     = glm::vec3(1.0f);
 
   glm::mat4 model_matrix;
   bool      dirty = true;  // set this to true when something was
                            // changed
-  
 };
   
 } // namespace brenta

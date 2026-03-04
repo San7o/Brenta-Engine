@@ -15,9 +15,6 @@ using namespace brenta;
 
 int main()
 {
-  const int SCR_WIDTH = 800;
-  const int SCR_HEIGHT = 600;
-
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)
@@ -40,7 +37,7 @@ int main()
   // Render loop
   //
 
-  auto font = Font("examples/assets/fonts/arial.ttf", 100);
+  auto font     = Font("examples/assets/fonts/arial.ttf", 100);
   auto font_ptr =
     tenno::make_shared<Font>(tenno::move(font));
   Text hello = {

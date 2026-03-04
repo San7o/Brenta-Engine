@@ -20,15 +20,13 @@ class NodeComponent
 public:
 
   friend class Scene;
-  
+
+  tenno::weak_ptr<Node>     owner;
+
   virtual ~NodeComponent() = default;
   
-  virtual void update(float delta_time) = 0;
+  virtual void update(float delta_time)            = 0;
   virtual void draw(const glm::mat4& world_matrix) = 0;
-
-private:
-  
-  tenno::weak_ptr<Node>     owner;
 
 };
 

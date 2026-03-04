@@ -15,7 +15,7 @@ void PointLightNodeComponent::update(float delta_time)
 
 void PointLightNodeComponent::draw(const glm::mat4& world_matrix)
 {
-  auto& pos = this->light->get_position();
+  auto& pos = this->light->position;
   pos = glm::vec3(world_matrix[3]);
   Renderer::submit_point_light(this->light);
 }

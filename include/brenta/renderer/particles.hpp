@@ -25,14 +25,15 @@
 namespace brenta
 {
 
-/**
- * @brief Particle Emitter class
- *
- * This class is used to define a particle emitter, update and render
- * its particles. This class provides a builder pattern to create a
- * ParticleEmitter object.  The particles ban be updated and rendered
- * using the updateParticles and renderParticles methods.
- */
+//
+// Particle Emitter class
+// ----------------------
+//
+// This class is used to define a particle emitter, update and render
+// its particles. This class provides a builder pattern to create a
+// ParticleEmitter object.  The particles ban be updated and rendered
+// using the updateParticles and renderParticles methods.
+//
 class ParticleEmitter
 {
 public:

@@ -12,8 +12,8 @@ using namespace brenta;
 //
 
 const std::string Logger::subsystem_name = "logger";
-Logger::Config Logger::init_config = {};
-bool Logger::initialized = false;
+Logger::Config Logger::init_config       = {};
+bool Logger::initialized                 = false;
 
 //
 // Subsystem interface

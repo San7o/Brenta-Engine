@@ -15,17 +15,18 @@
 namespace brenta
 {
 
-/**
- * @brief Engine class
- *
- * This class is used to initialize and terminate multiple
- * subsystems. You can use the builder class to initialize the engine,
- * as with any other subsystem.
- *
- * Note: The subsystems will be initialized in the order they were
- * added, and terminated in reverse order. Make sure that they are
- * ordered correctly if a subsystem depends on another one.
- */
+//
+// Engine class
+// ------------
+//
+// This class is used to initialize and terminate multiple
+// subsystems. You can use the builder class to initialize the engine,
+// as with any other subsystem.
+//
+// Note: The subsystems will be initialized in the order they were
+// added, and terminated in reverse order. Make sure that they are
+// ordered correctly if a subsystem depends on another one.
+//
 class Engine : public Subsystem
 {
 public:

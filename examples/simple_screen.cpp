@@ -14,14 +14,11 @@ using namespace brenta;
 
 int main()
 {
-  const int SCR_WIDTH = 800;
-  const int SCR_HEIGHT = 600;
-
   Engine::Builder()
     .with(Window::Builder()
           .title("simple screen")
-          .width(SCR_WIDTH)
-          .height(SCR_HEIGHT))
+          .width(800)
+          .height(600))
     .build();
   auto engine = Engine::managed();
   

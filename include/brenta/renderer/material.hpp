@@ -24,7 +24,7 @@ namespace brenta
 // renderer uses the material to set which shader program should be
 // used, and which uniform values.
 //
-// Use apply() to set the shader and its uniforms.
+// Use `apply()` to set the shader and its uniforms.
 //
 class Material
 {
