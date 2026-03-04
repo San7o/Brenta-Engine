@@ -32,7 +32,7 @@
 // Core
 #include <brenta/app.hpp>
 #include <brenta/asset_manager.hpp>
-#include <brenta/audio.hpp>
+#include <brenta/sound.hpp>
 #include <brenta/color.hpp>
 #include <brenta/engine.hpp>
 #include <brenta/font.hpp>

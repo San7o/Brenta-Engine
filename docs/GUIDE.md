@@ -491,12 +491,12 @@ e.add_component<PhysicsComponent>(10.0f);
 
 ### System
 
-A System is a function that gets called at each Tick in the reder
-loop. It contains all the logic of the World. You will interact with
-the Entities, Components and Resources via queries. You can specify an
-entity to query by adding components to `system<...>`, the World will
-provide you with an `std::vector<entity_t>` of the entities that have
-all the components you specified.
+A System is a function that gets called at each Tick. It contains all
+the logic of the World. You will interact with the Entities,
+Components and Resources via queries. You can specify an entity to
+query by adding components to `system<...>`, the World will provide
+you with an `std::vector<entity_t>` of the entities that have all the
+components you specified.
 
 Here is an example:
 

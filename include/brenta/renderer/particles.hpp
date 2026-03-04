@@ -5,7 +5,9 @@
 
 #pragma once
 
-#define BRENTA_MAX_PARTICLES 1000
+#ifndef BRENTA_MAX_PARTICLES
+  #define BRENTA_MAX_PARTICLES 1000
+#endif
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/opengl/texture.hpp>

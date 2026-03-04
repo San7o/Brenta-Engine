@@ -13,12 +13,12 @@
 namespace brenta
 {
 
-class Glfw : public WindowDriver
+class GlfwDriver : public Window::Driver
 {
 public:
 
-  Glfw()  = default;
-  ~Glfw() = default;
+  GlfwDriver()  = default;
+  ~GlfwDriver() = default;
 
   std::expected<void, std::string> initialize(const Window::Config &conf) override;
   std::expected<void, std::string> terminate() override;
@@ -27,26 +27,24 @@ public:
   // Getters
   //
   
-  int          get_width() override;
-  int          get_height() override;
-  bool         should_close() override;
-  bool         is_key_pressed(Key key) override;
-  Time         get_time() override;
-  Window::ProcHandle   get_proc_address() override;
-  Window::WindowHandle get_window() override;  
+  int                  get_width()                override;
+  int                  get_height()               override;
+  bool                 should_close()             override;
+  bool                 is_key_pressed(Key key)    override;
+  Time                 get_time()                 override;
+  Window::ProcHandle   get_proc_address()         override;
+  Window::WindowHandle get_window()               override;  
 
   //
   // Setters
   //
 
-  void set_mouse_capture(bool is_captured) override;
+  void set_mouse_capture(bool is_captured)     override;
   void set_width_height(int width, int height) override;
-  
-  void set_mouse_callback(void* callback) override;
-  void set_size_callback(void* callback) override;
-  void set_mouse_pos_callback(void* callback) override;
-  void set_key_callback(void* callback) override;
-
+  void set_mouse_callback(void* callback)      override;
+  void set_size_callback(void* callback)       override;
+  void set_mouse_pos_callback(void* callback)  override;
+  void set_key_callback(void* callback)        override;
 
   //
   // Utils
@@ -54,17 +52,16 @@ public:
 
   // Swap the front and back buffers
   // Having two buffers avoids flickering.
-  void swap_buffers() override;
-  void poll_events() override;
-  void update_dimensions() override;
-  void update_dimensions(int width, int height) override;
+  void swap_buffers()                            override;
+  void poll_events()                             override;
+  void update_dimensions()                       override;
+  void update_dimensions(int width, int height)  override;
   void set_context_version(int major, int minor) override;
-  void use_core_profile() override;
-  void set_hints_apple() override;
+  void use_core_profile()                        override;
+  void set_hints_apple()                         override;
+  void make_context_current()                    override;
+  void close()                                   override;
   void create_window(int width, int height, const std::string &title) override;
-  void make_context_current() override;
-  void close() override;
-
   
 private:
   

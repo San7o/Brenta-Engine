@@ -11,6 +11,7 @@
 #include <brenta/scene.hpp>
 #include <brenta/font.hpp>
 #include <brenta/fswatcher.hpp>
+#include <brenta/sound.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/thread.hpp>
@@ -38,6 +39,7 @@ public:
     Scene,
     Shader,
     Font,
+    Sound,
   };
   
   template<typename T>
@@ -64,12 +66,14 @@ public:
   
 private:
 
-  static std::unordered_map<AssetId, Asset<Model>>    models;
-  static std::unordered_map<AssetId, Asset<Texture>>  textures;
-  static std::unordered_map<AssetId, Asset<Material>> materials;
-  static std::unordered_map<AssetId, Asset<Shader>>   shaders;
-  static std::unordered_map<AssetId, Asset<Font>>     fonts;
-  static std::unordered_map<AssetId, AssetOwned<Scene>>    scenes;
+  static std::unordered_map<AssetId, Asset<Model>>      models;
+  static std::unordered_map<AssetId, Asset<Texture>>    textures;
+  static std::unordered_map<AssetId, Asset<Material>>   materials;
+  static std::unordered_map<AssetId, Asset<Shader>>     shaders;
+  static std::unordered_map<AssetId, Asset<Font>>       fonts;
+  static std::unordered_map<AssetId, AssetOwned<Scene>> scenes;
+  static std::unordered_map<AssetId, AssetOwned<SoundAsset>> sound_assets;
+
 
   // Private constructor for singleton
   AssetManager() = default;
@@ -86,7 +90,8 @@ private:
   static tenno::jthread               hotreload_thread;
   static tenno::mutex                 hotreload_pending_mutex;
   static tenno::vector<HotReloadItem> hotreload_pending;
-  static std::unordered_map<std::filesystem::path, HotReloadItem> hotreload_entries;
+  static std::unordered_map<std::filesystem::path,
+                            HotReloadItem> hotreload_entries;
   
 };
 

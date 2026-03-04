@@ -13,17 +13,20 @@ using namespace brenta;
 //
 
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Model>>   AssetManager::models;
+                   AssetManager::Asset<Model>>      AssetManager::models;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Texture>>  AssetManager::textures;
+                   AssetManager::Asset<Texture>>    AssetManager::textures;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Material>> AssetManager::materials;
+                   AssetManager::Asset<Material>>   AssetManager::materials;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::AssetOwned<Scene>>    AssetManager::scenes;
+                   AssetManager::AssetOwned<Scene>> AssetManager::scenes;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Shader>>   AssetManager::shaders;
+                   AssetManager::Asset<Shader>>     AssetManager::shaders;
 std::unordered_map<AssetManager::AssetId,
-                   AssetManager::Asset<Font>>     AssetManager::fonts;
+                   AssetManager::Asset<Font>>       AssetManager::fonts;
+std::unordered_map<AssetManager::AssetId,
+                   AssetManager::AssetOwned<SoundAsset>>
+AssetManager::sound_assets;
 
 bool                                 AssetManager::hotreload_active = false;
 FilesystemWatcher                    AssetManager::fswatcher;
@@ -145,12 +148,29 @@ AssetManager::new_asset<Shader>(const AssetId& id,
   auto shader =
     tenno::make_shared<Shader>(tenno::move(maybe_shader.value()));
   shader.set_cache(false);
-
   AssetManager::shaders[id] = {builder, shader};
-  
-  // TODO: hotreloading
+
+  DEBUG("AssetManager: create new shader {}", id);
   
   return shader;
+}
+
+template<>
+tenno::shared_ptr<SoundAsset>
+AssetManager::new_asset<SoundAsset>(const AssetId& id,
+                                    SoundAsset::Builder &builder)
+{
+  auto maybe_sound_asset = builder.build();
+  if (!maybe_sound_asset)
+    return nullptr;
+  
+  auto ptr = tenno::make_shared<SoundAsset>(tenno::move(maybe_sound_asset.value()));
+  ptr.set_cache(false);
+  AssetManager::sound_assets[id] = {builder, ptr};
+
+  DEBUG("AssetManager: create new sound {}", id);
+  
+  return ptr;
 }
 
 template<>
@@ -221,6 +241,14 @@ tenno::shared_ptr<Font> AssetManager::get<Font>(const AssetId& id)
 }
 
 template<>
+tenno::shared_ptr<SoundAsset>
+AssetManager::get<SoundAsset>(const AssetId& id)
+{
+  if (!AssetManager::sound_assets.contains(id)) return nullptr;
+  return AssetManager::sound_assets[id].ptr;
+}
+
+template<>
 bool AssetManager::reload<Model>(const AssetId& id)
 {
   if (!AssetManager::models.contains(id)) return false;
@@ -229,6 +257,8 @@ bool AssetManager::reload<Model>(const AssetId& id)
   tenno::shared_ptr<Model> new_model =
     tenno::make_shared<Model>(asset.builder.build());
   asset.ptr.swap_ptr(new_model);
+
+  DEBUG("AssetManager: reloaded model {}", id);
   
   return true;
 }
@@ -243,6 +273,8 @@ bool AssetManager::reload<Texture>(const AssetId& id)
     tenno::make_shared<Texture>(asset.builder.build());
   asset.ptr.swap_ptr(new_texture);
   
+  DEBUG("AssetManager: reloaded texture {}", id);
+
   return true;
 }
 
@@ -256,6 +288,8 @@ bool AssetManager::reload<Material>(const AssetId& id)
     tenno::make_shared<Material>(asset.builder.build());
   asset.ptr.swap_ptr(new_material);
   
+  DEBUG("AssetManager: reloaded material {}", id);  
+
   return true;
 }
 
@@ -269,6 +303,8 @@ bool AssetManager::reload<Font>(const AssetId& id)
     tenno::make_shared<Font>(asset.builder.build());
   asset.ptr.swap_ptr(new_font);
   
+  DEBUG("AssetManager: reloaded font {}", id);    
+
   return true;
 }
 
@@ -281,7 +317,9 @@ bool AssetManager::reload<Scene>(const AssetId& id)
   tenno::shared_ptr<Scene> new_scene =
     tenno::make_shared<Scene>(asset.builder.build());
   asset.ptr.swap_ptr(new_scene);
-  
+
+  DEBUG("AssetManager: reloaded scene {}", id);
+    
   return true;
 }
 
@@ -297,7 +335,28 @@ bool AssetManager::reload<Shader>(const AssetId& id)
   tenno::shared_ptr<Shader> new_shader =
     tenno::make_shared<Shader>(tenno::move(*new_shader));
   asset.ptr.swap_ptr(new_shader);
+
+  DEBUG("AssetManager: reloaded shader {}", id);
   
+  return true;
+}
+
+template<>
+bool AssetManager::reload<SoundAsset>(const AssetId& id)
+{
+  if (!AssetManager::sound_assets.contains(id)) return false;
+
+  AssetOwned<SoundAsset>& asset = AssetManager::sound_assets[id];
+  auto maybe_sound_asset = asset.builder.build();
+  if (!maybe_sound_asset)
+    return false;
+  
+  tenno::shared_ptr<SoundAsset> new_sound =
+    tenno::make_shared<SoundAsset>(tenno::move(maybe_sound_asset.value()));
+  asset.ptr.swap_ptr(new_sound);
+
+  DEBUG("AssetManager: reloaded sound {}", id);
+    
   return true;
 }
 
@@ -309,6 +368,7 @@ void AssetManager::clear()
   AssetManager::scenes.clear();
   AssetManager::shaders.clear();
   AssetManager::fonts.clear();
+  AssetManager::sound_assets.clear();
   
   return;
 }

@@ -10,12 +10,6 @@ introduction to its API.
 
 <h2 align=center>  Features </h2>
 
-The engine is composed of many subsystems like `Window`, `Input`,
-`Audio`, `Engine`, `Logger`, `Ecs` as well as custom opengl RAII
-objects and many abstractions to work with 3D graphics.
-
-Brenta-Engine also supports:
-
 - hot reloading
 - GPU particles
 - loading TrueType fonts, textures, audio and .obj meshes
@@ -26,7 +20,11 @@ Brenta-Engine also supports:
 - GUI using ImGui
 - signals
 - point and directional lights
+- window creation
 - input management with callbacks
+- audio playback
+- powerful logging
+- openGL RAII abstractions
 
 The engine also features the following sub projects:
 

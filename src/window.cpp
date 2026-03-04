@@ -17,7 +17,7 @@ using namespace brenta;
 // Static variables
 //
 
-tenno::shared_ptr<WindowDriver> Window::backend         = nullptr;
+tenno::shared_ptr<Window::Driver> Window::backend     = nullptr;
 const std::string             Window::subsystem_name  = "window";
 Window::Config                Window::init_config     = {};
 bool                          Window::initialized     = false;
@@ -30,7 +30,7 @@ std::expected<void, Subsystem::Error> Window::initialize()
 {
   if (this->is_initialized()) return {};
 
-  Window::backend = tenno::make_shared<Glfw>();
+  Window::backend = tenno::make_shared<GlfwDriver>();
   auto ret = Window::backend->initialize(Window::init_config);
   if (!ret)
   {
@@ -131,7 +131,7 @@ int Window::get_height()
   return 0;
 }
 
-tenno::shared_ptr<WindowDriver> Window::get_driver()
+tenno::shared_ptr<Window::Driver> Window::get_driver()
 {
   return Window::backend;
 }
@@ -149,14 +149,14 @@ void Window::update_dimensions(int width, int height)
   return;
 }
 
-void Window::set_mouse_callback(void* callback)
+void Window::set_mouse_callback(Window::Callback callback)
 {
   if (Window::backend)
     Window::backend->set_mouse_callback(callback);
   return;
 }
 
-void Window::set_size_callback(void* callback)
+void Window::set_size_callback(Window::Callback callback)
 {
   if (Window::backend)
     Window::backend->set_size_callback(callback);
@@ -191,13 +191,13 @@ void Window::poll_events()
   return;
 }
 
-void Window::set_key_callback(void* callback)
+void Window::set_key_callback(Window::Callback callback)
 {
   if (Window::backend)
     Window::backend->set_key_callback(callback);
 }
 
-void Window::set_mouse_pos_callback(void* callback)
+void Window::set_mouse_pos_callback(Window::Callback callback)
 {
   if (Window::backend)
     Window::backend->set_mouse_pos_callback(callback);

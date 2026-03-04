@@ -12,7 +12,7 @@
 using namespace brenta;
 
 std::expected<void, std::string>
-Glfw::initialize(const Window::Config &conf)
+GlfwDriver::initialize(const Window::Config &conf)
 {
   if (glfwInit() == GLFW_FALSE)
     return std::unexpected("Glfw: failed to initialize driver");
@@ -62,7 +62,7 @@ Glfw::initialize(const Window::Config &conf)
   return {};
 }
 
-std::expected<void, std::string> Glfw::terminate()
+std::expected<void, std::string> GlfwDriver::terminate()
 {
   if (!this->window)
   {
@@ -75,63 +75,63 @@ std::expected<void, std::string> Glfw::terminate()
   return {};
 }
 
-bool Glfw::should_close()
+bool GlfwDriver::should_close()
 {
   return glfwWindowShouldClose(this->window);
 }
 
-void Glfw::set_width_height(int width, int height)
+void GlfwDriver::set_width_height(int width, int height)
 {
   this->width = width;
   this->height = height;
   return;
 }
 
-bool Glfw::is_key_pressed(Key key)
+bool GlfwDriver::is_key_pressed(Key key)
 {
   int glfw_key = this->key_to_glfw(key);
   return glfwGetKey(this->window, glfw_key) == GLFW_PRESS;
 }
 
-Time Glfw::get_time()
+Time GlfwDriver::get_time()
 {
   return this->time;
 }
 
-Window::WindowHandle Glfw::get_window()
+Window::WindowHandle GlfwDriver::get_window()
 {
   return this->window;
 }
 
-Window::ProcHandle Glfw::get_proc_address()
+Window::ProcHandle GlfwDriver::get_proc_address()
 {
   return (void*)glfwGetProcAddress;
 }
 
-int Glfw::get_width()
+int GlfwDriver::get_width()
 {
   return this->width;
 }
 
-int Glfw::get_height()
+int GlfwDriver::get_height()
 {
   return this->height;
 }
 
-void Glfw::update_dimensions()
+void GlfwDriver::update_dimensions()
 {
   glfwGetWindowSize(this->window, &this->width, &this->height);
   return;
 }
 
-void Glfw::update_dimensions(int width, int height)
+void GlfwDriver::update_dimensions(int width, int height)
 {
   this->width  = width;
   this->height = height;
   return;
 }
 
-void Glfw::mouse_callback([[maybe_unused]] GLFWwindow *window,
+void GlfwDriver::mouse_callback([[maybe_unused]] GLFWwindow *window,
                           double xpos,
                           double ypos)
 {
@@ -140,21 +140,21 @@ void Glfw::mouse_callback([[maybe_unused]] GLFWwindow *window,
 }
 
 
-void Glfw::set_mouse_callback(void* callback)
+void GlfwDriver::set_mouse_callback(void* callback)
 {
   glfwSetCursorPosCallback(this->window, (GLFWcursorposfun) callback);
   DEBUG("Glfw: set mouse callback");
   return;
 }
 
-void Glfw::set_size_callback(void* callback)
+void GlfwDriver::set_size_callback(void* callback)
 {
   glfwSetFramebufferSizeCallback(this->window, (GLFWframebuffersizefun) callback);
   DEBUG("Glfw: set framebuffer size callback");
   return;
 }
 
-void Glfw::set_mouse_capture(bool is_captured)
+void GlfwDriver::set_mouse_capture(bool is_captured)
 {
   if (is_captured)
   {
@@ -169,26 +169,26 @@ void Glfw::set_mouse_capture(bool is_captured)
   return;
 }
 
-void Glfw::close()
+void GlfwDriver::close()
 {
   glfwSetWindowShouldClose(this->window, GLFW_TRUE);
   return;
 }
 
-void Glfw::swap_buffers()
+void GlfwDriver::swap_buffers()
 {
   this->time.update(glfwGetTime());
   glfwSwapBuffers(this->window);
   return;
 }
 
-void Glfw::poll_events()
+void GlfwDriver::poll_events()
 {
   glfwPollEvents();
   return;
 }
 
-void Glfw::set_context_version(int major, int minor)
+void GlfwDriver::set_context_version(int major, int minor)
 {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, major);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, minor);
@@ -197,13 +197,13 @@ void Glfw::set_context_version(int major, int minor)
   return;
 }
 
-void Glfw::glfw_key_callback([[maybe_unused]] GLFWwindow *window,
+void GlfwDriver::glfw_key_callback([[maybe_unused]] GLFWwindow *window,
                              int glfw_key,
                              [[maybe_unused]] int scancode,
                              int glfw_action,
                              int glfw_mods)
 {
-  auto key = Glfw::glfw_to_key(glfw_key);
+  auto key = GlfwDriver::glfw_to_key(glfw_key);
 
   KeyAction action;
   switch(glfw_action)
@@ -235,21 +235,21 @@ void Glfw::glfw_key_callback([[maybe_unused]] GLFWwindow *window,
   return;
 }
 
-void Glfw::set_key_callback(void* callback)
+void GlfwDriver::set_key_callback(void* callback)
 {
   glfwSetKeyCallback(this->window, (GLFWkeyfun) callback);
   DEBUG("Glfw: set key callback");
   return;
 }
 
-void Glfw::set_mouse_pos_callback(void* callback)
+void GlfwDriver::set_mouse_pos_callback(void* callback)
 {
   glfwSetCursorPosCallback(this->window, (GLFWcursorposfun) callback);
   DEBUG("Glfw: set mouse pos");
   return;
 }
 
-void Glfw::create_window(int width, int height, const std::string &title)
+void GlfwDriver::create_window(int width, int height, const std::string &title)
 {
   this->window = glfwCreateWindow(width, height, title.c_str(),
                                   NULL, NULL);
@@ -263,13 +263,13 @@ void Glfw::create_window(int width, int height, const std::string &title)
   return;
 }
 
-void Glfw::make_context_current()
+void GlfwDriver::make_context_current()
 {
   glfwMakeContextCurrent(this->window);
   return;
 }
 
-void Glfw::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
+void GlfwDriver::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
                                      [[maybe_unused]] int width,
                                      [[maybe_unused]] int height)
 {
@@ -282,7 +282,7 @@ void Glfw::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
   return;
 }
 
-int Glfw::key_to_glfw(Key key)
+int GlfwDriver::key_to_glfw(Key key)
 {
   static const auto key_map = []() {
     std::array<int, static_cast<size_t>(Key::Menu) + 1> map;
@@ -423,7 +423,7 @@ int Glfw::key_to_glfw(Key key)
   return (index < key_map.size()) ? key_map[index] : GLFW_KEY_UNKNOWN;
 }
 
-Key Glfw::glfw_to_key(int glfw_key)
+Key GlfwDriver::glfw_to_key(int glfw_key)
 {
     static const auto reverse_map = []() {
         std::array<Key, GLFW_KEY_LAST + 1> map;
@@ -566,14 +566,14 @@ Key Glfw::glfw_to_key(int glfw_key)
     return Key::Unknown;
 }
 
-void Glfw::use_core_profile()
+void GlfwDriver::use_core_profile()
 {
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
   INFO("Glfw: set OpenGL profile to core");
   return;
 }
 
-void Glfw::set_hints_apple()
+void GlfwDriver::set_hints_apple()
 {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   return;

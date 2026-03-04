@@ -11,9 +11,6 @@ using namespace viotecs;
 
 int main()
 {
-  const int SCR_WIDTH = 1280;
-  const int SCR_HEIGHT = 720;
-
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)
@@ -21,8 +18,8 @@ int main()
           .file("brenta-logs"))
     .with(Window::Builder()
           .title("brenta demo")
-          .width(800)
-          .height(600)
+          .width(1280)
+          .height(720)
           .vsync()
           .msaa()
           .debug())
@@ -31,8 +28,7 @@ int main()
           .backface_culling()
           .multisample()
           .depth_test())
-    .with(Audio::Builder()
-          .sound("guitar", "examples/assets/audio/guitar.wav"))
+    .with(SoundManager::Builder())
     .with(Input::Builder())
     .with(Ecs::Builder())
     .with(Gui::Builder())
@@ -100,7 +96,7 @@ int main()
     auto font =
       AssetManager::new_asset<Font>("TextFont", font_builder);
 
-    FrameBuffer fb(SCR_WIDTH, SCR_HEIGHT);
+    FrameBuffer fb(1280, 720);
 
     while (!Window::should_close())
     {

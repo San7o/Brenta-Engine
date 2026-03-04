@@ -16,8 +16,6 @@
 namespace brenta
 {
 
-class WindowDriver;
-  
 /**
  * @brief Window subsystem
  *
@@ -30,36 +28,37 @@ class Window : public Subsystem
 {
 public:
 
+  class  Driver;
   struct Config;
   class  Builder;
   
   using WindowHandle = void*;
   using ProcHandle   = void*;
+  using Callback     = void*;
   
   // Subsystem interface
   static const std::string subsystem_name;
-  std::expected<void, Subsystem::Error> initialize() override;
-  std::expected<void, Subsystem::Error> terminate() override;
-  std::string name() override;
-  bool is_initialized() override;
-
+  std::string                           name()           override;
+  bool                                  is_initialized() override;
+  std::expected<void, Subsystem::Error> initialize()     override;
+  std::expected<void, Subsystem::Error> terminate()      override;
+  
   // Member functions
   
-  // Get a static instance of the window
   static brenta::Window &instance();
   
   //
   // Getters
   //
   
-  static int          get_width();
-  static int          get_height();
-  static bool         should_close();
-  static bool         is_key_pressed(Key key);
-  static Time         get_time();
-  static ProcHandle   get_proc_address();
-  static WindowHandle get_window();
-  static tenno::shared_ptr<WindowDriver> get_driver();
+  static int            get_width();
+  static int            get_height();
+  static bool           should_close();
+  static bool           is_key_pressed(Key key);
+  static Time           get_time();
+  static ProcHandle     get_proc_address();
+  static WindowHandle   get_window();
+  static tenno::shared_ptr<Window::Driver> get_driver();
 
   //
   // Setters
@@ -67,11 +66,10 @@ public:
 
   static void set_mouse_capture(bool is_captured);
   static void set_width_height(int width, int height);
-  
-  static void set_mouse_callback(void* callback);
-  static void set_size_callback(void* callback);
-  static void set_mouse_pos_callback(void* callback);
-  static void set_key_callback(void* callback);
+  static void set_mouse_callback(Callback callback);
+  static void set_size_callback(Callback callback);
+  static void set_mouse_pos_callback(Callback callback);
+  static void set_key_callback(Callback callback);
 
   //
   // Utils
@@ -88,11 +86,10 @@ public:
   static void close();
 
 protected:
-  
-  static Window::Config       init_config;
 
-  static bool                 initialized;
-  static tenno::shared_ptr<WindowDriver> backend;
+  static bool                              initialized;
+  static Window::Config                    init_config;
+  static tenno::shared_ptr<Window::Driver> backend;
 
   // Private constructors / destructors for singleton
   Window() = default;
@@ -100,40 +97,39 @@ protected:
 
 };
 
-class WindowDriver
+class Window::Driver
 {
 public:
 
-  WindowDriver() = default;
-  virtual ~WindowDriver() = default;
+  Driver()          = default;
+  virtual ~Driver() = default;
 
-  virtual std::expected<void, std::string>
-  initialize(const Window::Config &conf) = 0;
+  virtual std::expected<void, std::string> initialize(const Window::Config &conf) = 0;
   virtual std::expected<void, std::string> terminate() = 0;
   
   //
   // Getters
   //
   
-  virtual int          get_width() = 0;
-  virtual int          get_height() = 0;
-  virtual bool         should_close() = 0;
-  virtual bool         is_key_pressed(Key key) = 0;
-  virtual Time         get_time() = 0;
+  virtual int          get_width()                = 0;
+  virtual int          get_height()               = 0;
+  virtual bool         should_close()             = 0;
+  virtual bool         is_key_pressed(Key key)    = 0;
+  virtual Time         get_time()                 = 0;
   virtual Window::ProcHandle   get_proc_address() = 0;
-  virtual Window::WindowHandle get_window() = 0;  
+  virtual Window::WindowHandle get_window()       = 0;  
 
   //
   // Setters
   //
 
-  virtual void set_mouse_capture(bool is_captured) = 0;
+  virtual void set_mouse_capture(bool is_captured)     = 0;
   virtual void set_width_height(int width, int height) = 0;
   
-  virtual void set_mouse_callback(void* callback) = 0;
-  virtual void set_size_callback(void* callback) = 0;
-  virtual void set_mouse_pos_callback(void* callback) = 0;
-  virtual void set_key_callback(void* callback) = 0;
+  virtual void set_mouse_callback(Window::Callback callback)      = 0;
+  virtual void set_size_callback(Window::Callback callback)       = 0;
+  virtual void set_mouse_pos_callback(Window::Callback callback)  = 0;
+  virtual void set_key_callback(Window::Callback callback)        = 0;
 
 
   //
@@ -142,13 +138,13 @@ public:
 
   // Swap the front and back buffers
   // Having two buffers avoids flickering.
-  virtual void swap_buffers() = 0;
-  virtual void poll_events() = 0;
+  virtual void swap_buffers()      = 0;
+  virtual void poll_events()       = 0;
   virtual void update_dimensions() = 0;
-  virtual void update_dimensions(int width, int height) = 0;
+  virtual void update_dimensions(int width, int height)  = 0;
   virtual void set_context_version(int major, int minor) = 0;
-  virtual void use_core_profile() = 0;
-  virtual void set_hints_apple() = 0;
+  virtual void use_core_profile()  = 0;
+  virtual void set_hints_apple()   = 0;
   virtual void create_window(int width, int height,
                              const std::string& title) = 0;
   virtual void make_context_current() = 0;

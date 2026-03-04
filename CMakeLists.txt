@@ -264,7 +264,7 @@ if (BRENTA_BUILD_EXAMPLES)
   message(STATUS "Building examples")
   
   add_example(simple_screen)
-  add_example(audio)
+  add_example(sound)
   add_example(components)
   add_example(ecs)
   add_example(load_model)
