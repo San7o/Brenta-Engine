@@ -20,7 +20,8 @@
 #include "./shaders/c/particle_render_gs.c"
 #include "./shaders/c/particle_update_vs.c"
 
-using namespace brenta;
+namespace brenta
+{
 
 struct ParticleSettings {
   glm::vec3 gravity;
@@ -32,6 +33,10 @@ struct ParticleSettings {
   glm::vec3 emitterSpread;
   float     __padding;
 };
+
+}
+
+using namespace brenta;
 
 ParticleEmitter::ParticleEmitter(Config conf)
 {

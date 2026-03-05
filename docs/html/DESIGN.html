@@ -16,6 +16,7 @@
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
     </div>
 <h1 id="design">Design</h1>
+<p>THIS DOCUMENT IS A DRAFT AND IT IS NOT COMPLETE</p>
 <p>Game engines are complex pieces of software. They provide an
 interface to define logic, render graphics, and access system resources
 like audio and input, as well as providing a cross-platform abstraction
@@ -24,7 +25,7 @@ to the developer.</p>
 <img src="./brenta-picture.png" alt="high-level-overview" />
 <figcaption aria-hidden="true">high-level-overview</figcaption>
 </figure>
-<p>Brenta's its development has been more iterative than meticulously
+<p>Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
 point where I am not scared to do big refactoring anymore - that is just
 routine - and I know I am deemed to repeat this process again. But
@@ -70,7 +71,6 @@ Component System (ECS) which manages game logic.</p>
 <img src="./brenta-subsystems.png" alt="brenta-subsystems" />
 <figcaption aria-hidden="true">brenta-subsystems</figcaption>
 </figure>
-<p>We will talk about various subsystems now.</p>
 <h2 id="renderer">Renderer</h2>
 <p>The renderer provides a set of abstraction for working with geometry
 and lights in order to render a frame on the screen (or to a
@@ -101,7 +101,7 @@ integrate other methods.</p>
 node-graph architecture, commonly used in Godot, Unity and Unreal, and
 the ECS (Entity Component System) architecture like in <a
 href="https://github.com/bevyengine/bevy/">Bevy</a>.</p>
-<h3 id="scene-graph">Scene graph</h3>
+<h3 id="node-graph">Node graph</h3>
 <p>The scene is a tree of nodes where each node has a transform, and may
 have a model, a directional light, any number of point lights and other
 nodes (children). All transforms are relative to the transform of their

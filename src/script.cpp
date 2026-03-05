@@ -66,7 +66,7 @@ void Script::init()
 
   if (this->path)
   {
-    if (!luaL_dofile(this->state, this->path->c_str()) == LUA_OK)
+    if (!luaL_dofile(this->state, this->path->string().c_str()) == LUA_OK)
     {
       ERROR("Script: error running script {}: {}",
             path->string(), lua_tostring(this->state, -1));

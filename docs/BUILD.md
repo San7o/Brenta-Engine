@@ -2,7 +2,8 @@
 
 Brenta-Engine is written C++23 and uses `cmake` as it's build
 system. You can compile the engine as a static or shared library for
-both Windows and Linux.
+both Windows and Linux. On windows, currently compilation with MSVC is
+not supported because of an issue with missing inline assembly.
 
 ## Dependencies
 

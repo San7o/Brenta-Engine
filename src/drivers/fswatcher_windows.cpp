@@ -5,8 +5,11 @@
 
 #ifdef _WIN32
 
+#define NOMINMAX
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
+#include <brenta/fswatcher.hpp>
 
 namespace brenta
 {
@@ -47,12 +50,12 @@ bool FilesystemWatcher::init()
                                             0);
   if (!fw_windows->iocp)
   {
-    MICRO_FSWATCHER_FREE(fw_windows);
-    return NULL;
+    delete fw_windows;
+    return false;
   }
 
   this->internal = static_cast<void*>(fw_windows);
-  return;
+  return true;
 }
 
 void FilesystemWatcher::destroy()
@@ -99,9 +102,9 @@ bool FilesystemWatcher::add(const std::filesystem::path &path,
   }
 
   // Convert to wide char string
-  int len = MultiByteToWideChar(CP_UTF8, 0, path.c_str(), -1, NULL, 0);
+  int len = MultiByteToWideChar(CP_UTF8, 0, path.string().c_str(), -1, NULL, 0);
   WCHAR pathW[MAX_PATH];
-  MultiByteToWideChar(CP_UTF8, 0, path.c_str(), -1, pathW, len);
+  MultiByteToWideChar(CP_UTF8, 0, path.string().c_str(), -1, pathW, len);
   
   wchar_t full_path[MAX_PATH];
   wchar_t *file_part = NULL;
@@ -112,11 +115,9 @@ bool FilesystemWatcher::add(const std::filesystem::path &path,
                        &file_part) == 0)
     return false;
 
-  FsWatcherWindowsDirList *fw_dir =
-    MICRO_FSWATCHER_MALLOC(sizeof(FsWatcherWindowsDirList));
-  memset(fw_dir, 0, sizeof(FsWatcherWindowsDirList));
+  FsWatcherWindowsDirList *fw_dir = new FsWatcherWindowsDirList();
   fw_dir->filter = filter;
-  strcpy(fw_dir->path, path.c_str());
+  strcpy(fw_dir->path, path.string().c_str());
   
   if (file_part != NULL)
   {
@@ -133,7 +134,7 @@ bool FilesystemWatcher::add(const std::filesystem::path &path,
                             NULL);
   if (hDir == INVALID_HANDLE_VALUE)
   {
-    MICRO_FSWATCHER_FREE(fw_dir);
+    delete fw_dir;
     return false;
   }
 
@@ -145,7 +146,7 @@ bool FilesystemWatcher::add(const std::filesystem::path &path,
                              (ULONG_PTR) fw_dir,
                              0) == NULL)
   {
-    MICRO_FSWATCHER_FREE(fw_dir);
+    delete fw_dir;
     return false;
   }
 
@@ -158,7 +159,7 @@ bool FilesystemWatcher::add(const std::filesystem::path &path,
                             NULL,
                             &fw_dir->overlapped, NULL) == 0)
   {
-    MICRO_FSWATCHER_FREE(fw_dir);
+    delete fw_dir;
     return false;
   }
 
@@ -189,7 +190,7 @@ bool FilesystemWatcher::rm(const std::filesystem::path &path)
 {
   if (!this->internal) return false;
   FsWatcherWindows *fw_windows = static_cast<FsWatcherWindows*>(this->internal);
-  FsWatcherWindowsDirList **curr = &fw_win->dir_list;
+  FsWatcherWindowsDirList **curr = &fw_windows->dir_list;
 
   while (*curr)
   {
@@ -235,13 +236,13 @@ std::optional<std::filesystem::path> FilesystemWatcher::watch()
                                   &overlapped,
                                   INFINITE))
   {
-    if (key == 0) return NULL; // Global exit signal
+    if (key == 0) return {}; // Global exit signal
 
     FsWatcherWindowsDirList* fw_dir = (FsWatcherWindowsDirList*)key;
 
     if (bytes == 0)
     {
-      MICRO_FSWATCHER_FREE(fw_dir);
+      delete fw_dir;
       continue;
     }
 

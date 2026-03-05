@@ -96,7 +96,8 @@ register_dependency(glm)
 register_dependency(tinyobjloader)
 
 list(APPEND BRENTA_DEPS_INCLUDES
-  ${PROJECT_SOURCE_DIR}/external)
+  ${PROJECT_SOURCE_DIR}/external
+  ${PROJECT_SOURCE_DIR}/external/tinyobjloader)
 
 if (BRENTA_BUILD_EXAMPLES OR BRENTA_BUILD_TESTS)
   list(APPEND BRENTA_DEPS_SOURCES

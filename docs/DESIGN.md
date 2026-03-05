@@ -1,14 +1,15 @@
 # Design
 
+THIS DOCUMENT IS A DRAFT AND IT IS NOT COMPLETE
 
-Game engines are complex pieces of software. They provide an interface
+Game engines are complex pieces of software. They provide an platform
 to define logic, render graphics, and access system resources like
 audio and input, as well as providing a cross-platform abstraction to
 the developer.
 
 ![high-level-overview](./brenta-picture.png)
 
-Brenta's its development has been more iterative than meticulously
+Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
 point where I am not scared to do big refactoring anymore - that is
 just routine - and I know I am deemed to repeat this process
@@ -56,8 +57,6 @@ manages game logic.
 
 ![brenta-subsystems](./brenta-subsystems.png)
 
-We will talk about various subsystems now.
-
 ## Renderer
 
 The renderer provides a set of abstraction for working with geometry
@@ -94,10 +93,10 @@ node-graph architecture, commonly used in Godot, Unity and Unreal,
 and the ECS (Entity Component System) architecture like in
 [Bevy](https://github.com/bevyengine/bevy/).
 
-### Scene graph
+### Node graph
 
-The scene is a tree of nodes where each node has a transform, and
-may have a model, a directional light, any number of point lights and
+The scene is a tree of nodes where each node has a transform, and may
+have a model, a directional light, any number of point lights and
 other nodes (children). All transforms are relative to the transform
 of their parent; when a node is updated, all its children are updated
 too.

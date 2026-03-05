@@ -82,7 +82,7 @@ var hierarchy =
     ] ],
     [ "brenta::Shader::Object", "classbrenta_1_1Shader_1_1Object.html", null ],
     [ "brenta::ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", null ],
-    [ "ParticleSettings", "structParticleSettings.html", null ],
+    [ "brenta::ParticleSettings", "structbrenta_1_1ParticleSettings.html", null ],
     [ "brenta::PointLight", "classbrenta_1_1PointLight.html", [
       [ "brenta::PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ]
     ] ],

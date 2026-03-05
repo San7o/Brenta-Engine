@@ -39,6 +39,7 @@ var annotated_dup =
       [ "ParticleEmitterEcsComponent", "classbrenta_1_1ParticleEmitterEcsComponent.html", null ],
       [ "ParticleEmitterNodeComponent", "classbrenta_1_1ParticleEmitterNodeComponent.html", null ],
       [ "ParticleEmitterSystem", "classbrenta_1_1ParticleEmitterSystem.html", null ],
+      [ "ParticleSettings", "structbrenta_1_1ParticleSettings.html", null ],
       [ "PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ],
       [ "PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ],
       [ "PointLight", "classbrenta_1_1PointLight.html", null ],
@@ -63,6 +64,5 @@ var annotated_dup =
       [ "Ubo", "classbrenta_1_1Ubo.html", null ],
       [ "Vao", "classbrenta_1_1Vao.html", null ],
       [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ]
-    ] ],
-    [ "ParticleSettings", "structParticleSettings.html", null ]
+    ] ]
 ];

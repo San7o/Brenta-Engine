@@ -76,7 +76,8 @@ private:
 // Sound
 // -----
 //
-// This class represents a sound that is being played.
+// This class represents an instance of a sound asset that can be
+// played.
 //
 // It uses RAII to automatically allocate / deallocate its stream in
 // from the `SoundManager`.
