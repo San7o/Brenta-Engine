@@ -35,6 +35,7 @@ var annotated_dup =
       [ "Mouse", "classbrenta_1_1Mouse.html", null ],
       [ "Node", "classbrenta_1_1Node.html", null ],
       [ "NodeComponent", "classbrenta_1_1NodeComponent.html", null ],
+      [ "OpaquePass", "classbrenta_1_1OpaquePass.html", null ],
       [ "ParticleEmitter", "classbrenta_1_1ParticleEmitter.html", "classbrenta_1_1ParticleEmitter" ],
       [ "ParticleEmitterEcsComponent", "classbrenta_1_1ParticleEmitterEcsComponent.html", null ],
       [ "ParticleEmitterNodeComponent", "classbrenta_1_1ParticleEmitterNodeComponent.html", null ],
@@ -47,6 +48,8 @@ var annotated_dup =
       [ "PointLightNodeComponent", "classbrenta_1_1PointLightNodeComponent.html", null ],
       [ "PointLightRenderSystem", "classbrenta_1_1PointLightRenderSystem.html", null ],
       [ "Renderer", "classbrenta_1_1Renderer.html", "classbrenta_1_1Renderer" ],
+      [ "RenderPass", "classbrenta_1_1RenderPass.html", null ],
+      [ "RenderPipeline", "classbrenta_1_1RenderPipeline.html", null ],
       [ "Scene", "classbrenta_1_1Scene.html", "classbrenta_1_1Scene" ],
       [ "Script", "classbrenta_1_1Script.html", null ],
       [ "Shader", "classbrenta_1_1Shader.html", "classbrenta_1_1Shader" ],
@@ -61,7 +64,9 @@ var annotated_dup =
       [ "Time", "classbrenta_1_1Time.html", null ],
       [ "Transform", "classbrenta_1_1Transform.html", null ],
       [ "TransformEcsComponent", "classbrenta_1_1TransformEcsComponent.html", null ],
+      [ "TransparentPass", "classbrenta_1_1TransparentPass.html", null ],
       [ "Ubo", "classbrenta_1_1Ubo.html", null ],
+      [ "UiPass", "classbrenta_1_1UiPass.html", null ],
       [ "Vao", "classbrenta_1_1Vao.html", null ],
       [ "Window", "classbrenta_1_1Window.html", "classbrenta_1_1Window" ]
     ] ]

@@ -34,7 +34,7 @@ var hierarchy =
     [ "brenta::Camera", "classbrenta_1_1Camera.html", null ],
     [ "brenta::Font::Character", "classbrenta_1_1Font_1_1Character.html", null ],
     [ "brenta::Color", "classbrenta_1_1Color.html", null ],
-    [ "brenta::Renderer::Command", "classbrenta_1_1Renderer_1_1Command.html", null ],
+    [ "brenta::Renderer::Command", "structbrenta_1_1Renderer_1_1Command.html", null ],
     [ "viotecs::Component", null, [
       [ "brenta::CameraEcsComponent", "classbrenta_1_1CameraEcsComponent.html", null ],
       [ "brenta::DirLightEcsComponent", "classbrenta_1_1DirLightEcsComponent.html", null ],
@@ -87,7 +87,14 @@ var hierarchy =
       [ "brenta::PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ]
     ] ],
     [ "brenta::Texture::Properties", "classbrenta_1_1Texture_1_1Properties.html", null ],
+    [ "brenta::Renderer::RenderData", "structbrenta_1_1Renderer_1_1RenderData.html", null ],
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
+    [ "brenta::RenderPass", "classbrenta_1_1RenderPass.html", [
+      [ "brenta::OpaquePass", "classbrenta_1_1OpaquePass.html", null ],
+      [ "brenta::TransparentPass", "classbrenta_1_1TransparentPass.html", null ],
+      [ "brenta::UiPass", "classbrenta_1_1UiPass.html", null ]
+    ] ],
+    [ "brenta::RenderPipeline", "classbrenta_1_1RenderPipeline.html", null ],
     [ "brenta::Scene", "classbrenta_1_1Scene.html", null ],
     [ "brenta::Script", "classbrenta_1_1Script.html", null ],
     [ "brenta::Shader", "classbrenta_1_1Shader.html", null ],

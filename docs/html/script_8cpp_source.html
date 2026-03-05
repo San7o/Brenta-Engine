@@ -167,7 +167,7 @@ $(document).ready(function(){initNavTree('script_8cpp_source.html',''); initResi
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keywordflow">if</span> (this-&gt;path)</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  {</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (!luaL_dofile(this-&gt;state, this-&gt;path-&gt;c_str()) == LUA_OK)</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>    <span class="keywordflow">if</span> (!luaL_dofile(this-&gt;state, this-&gt;path-&gt;string().c_str()) == LUA_OK)</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    {</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>      ERROR(<span class="stringliteral">&quot;Script: error running script {}: {}&quot;</span>,</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>            path-&gt;string(), lua_tostring(this-&gt;state, -1));</div>
@@ -225,7 +225,7 @@ $(document).ready(function(){initNavTree('script_8cpp_source.html',''); initResi
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>    lua_pop(this-&gt;state, 1);</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>  }</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1Node_html"><div class="ttname"><a href="classbrenta_1_1Node.html">brenta::Node</a></div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00034">node.hpp:35</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Node_html"><div class="ttname"><a href="classbrenta_1_1Node.html">brenta::Node</a></div><div class="ttdef"><b>Definition</b> <a href="node_8hpp_source.html#l00038">node.hpp:39</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

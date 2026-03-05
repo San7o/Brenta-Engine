@@ -18,7 +18,8 @@
 <h1 id="building-the-engine">Building the engine</h1>
 <p>Brenta-Engine is written C++23 and uses <code>cmake</code> as it's
 build system. You can compile the engine as a static or shared library
-for both Windows and Linux.</p>
+for both Windows and Linux. On windows, currently compilation with MSVC
+is not supported because of an issue with missing inline assembly.</p>
 <h2 id="dependencies">Dependencies</h2>
 <p>In order to build the engine, you will need:</p>
 <ul>

@@ -138,21 +138,49 @@ $(document).ready(function(){initNavTree('framebuffer_8hpp_source.html',''); ini
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordtype">int</span>    width;</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keywordtype">int</span>    height;</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>() {}</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>() = <span class="keywordflow">default</span>;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, GLenum format = GL_RGBA);</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">~FrameBuffer</a>();</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordtype">void</span> bind();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keywordtype">void</span> unbind();</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keywordtype">void</span> destroy();</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">void</span> rescale(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keywordtype">void</span> set_color_format(GLenum color_format);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>};</div>
-</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>(<a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>&amp;&amp; other)</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  {</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    this-&gt;texture_id       = other.texture_id;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    this-&gt;render_buffer_id = other.render_buffer_id;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    this-&gt;color_format     = other.color_format;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    this-&gt;width            = other.width;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    this-&gt;height           = other.height;</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    this-&gt;target           = other.target;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    this-&gt;<span class="keywordtype">id</span>               = other.id;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace brenta</span></div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    other.id = 0;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &amp;operator=(<a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a>&amp;&amp; other)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    this-&gt;texture_id       = other.texture_id;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    this-&gt;render_buffer_id = other.render_buffer_id;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    this-&gt;color_format     = other.color_format;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    this-&gt;width            = other.width;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    this-&gt;height           = other.height;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    this-&gt;target           = other.target;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    this-&gt;<span class="keywordtype">id</span>               = other.id;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    other.id = 0;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  }</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  </div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <a class="code hl_class" href="classbrenta_1_1FrameBuffer.html">~FrameBuffer</a>();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="keywordtype">void</span> bind()   <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <span class="keywordtype">void</span> unbind() <span class="keyword">const override</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  <span class="keywordtype">void</span> destroy();</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>  <span class="keywordtype">void</span> rescale(<span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height);</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>  <span class="keywordtype">void</span> set_color_format(GLenum color_format);</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>  </div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>};</div>
+</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span> </div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>} <span class="comment">// namespace brenta</span></div>
 <div class="ttc" id="aclassbrenta_1_1Buffer_html"><div class="ttname"><a href="classbrenta_1_1Buffer.html">brenta::Buffer</a></div><div class="ttdef"><b>Definition</b> <a href="buffer_8hpp_source.html#l00013">buffer.hpp:14</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1FrameBuffer_html"><div class="ttname"><a href="classbrenta_1_1FrameBuffer.html">brenta::FrameBuffer</a></div><div class="ttdef"><b>Definition</b> <a href="framebuffer_8hpp_source.html#l00029">framebuffer.hpp:30</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
