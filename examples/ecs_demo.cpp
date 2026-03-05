@@ -11,6 +11,7 @@
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/pipeline.hpp>
 
 #include <brenta/ecs/components/transform_ecs_component.hpp>
 #include <brenta/ecs/components/camera_ecs_component.hpp>
@@ -99,9 +100,11 @@ int main(void)
     .with(Ecs::Builder())
     .build();
   auto engine = Engine::managed();
+
+  auto pipeline = RenderPipeline::create_default();
   
   init_ecs_scene();
-
+  
   while(!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
@@ -112,7 +115,7 @@ int main(void)
 
     Renderer::begin_frame();
     World::tick();
-    Renderer::end_frame();
+    Renderer::end_frame(pipeline);
     
     Window::poll_events();
     Window::swap_buffers();

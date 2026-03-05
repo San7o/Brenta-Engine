@@ -8,6 +8,7 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/phong.hpp>
+#include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
@@ -163,6 +164,9 @@ int main()
       mouse.set_first(true);
   });
 
+  auto pipeline = RenderPipeline::create_default();
+  
+  
   INFO("Move with W / A / S / D / Q / E / Mouse");
   
   while (!Window::should_close())
@@ -189,7 +193,7 @@ int main()
     Gl::clear();
     
     scene.update(delta_time);
-    scene.draw();
+    scene.draw(pipeline);
 
     Window::poll_events();
     Window::swap_buffers();

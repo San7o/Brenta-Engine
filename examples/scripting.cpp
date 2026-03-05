@@ -11,6 +11,7 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
 #include <tenno/memory.hpp>
@@ -83,6 +84,8 @@ int main()
   Scene::set_script(model_node,
                     std::filesystem::path("./examples/assets/scripts/circle.lua"));
 
+  auto pipeline = RenderPipeline::create_default();
+  
   while (!Window::should_close())
   {
     auto delta_time = Window::get_time().delta;
@@ -93,7 +96,7 @@ int main()
     Gl::clear();
 
     scene.update(delta_time);
-    scene.draw();
+    scene.draw(pipeline);
     
     Window::poll_events();
     Window::swap_buffers();

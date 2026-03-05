@@ -15,7 +15,11 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/phong.hpp>
+#include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
+#include <brenta/renderer/passes/opaque_pass.hpp>
+#include <brenta/renderer/passes/transparent_pass.hpp>
+#include <brenta/renderer/passes/ui_pass.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
@@ -115,6 +119,15 @@ int main()
     tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
   Scene::add_component(point_light_node, point_light_component);
 
+  auto default_fb = FrameBuffer();
+  auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                                 Window::get_height());
+    
+  auto pipeline = tenno::make_shared<RenderPipeline>();
+  pipeline->add_pass<OpaquePass>(game_fb);
+  pipeline->add_pass<TransparentPass>(game_fb);
+  pipeline->add_pass<UiPass>(game_fb);
+  
   // Gui
   Gui::load_font();
   FrameBuffer fb(Window::get_width(), Window::get_height());  
@@ -128,18 +141,18 @@ int main()
     if (Window::is_key_pressed(Key::Left))
       rotate_model_clockwise(model_ptr);
 
-    setup_gui(fb, phong_dir_ptr, point_light_node, phong_point_ptr);
+    setup_gui(*game_fb, phong_dir_ptr, point_light_node, phong_point_ptr);
     Gl::set_color(Color::grey());
     Gl::clear();
     
     // Render to framebuffer
-    fb.bind();
     scene.update(Window::get_time().delta);
-    scene.draw();
-    fb.unbind();
+    scene.draw(pipeline);
 
     // Render to screen
+    default_fb.bind();
     Gui::render();
+    default_fb.unbind();
     
     Window::poll_events();
     Window::swap_buffers();

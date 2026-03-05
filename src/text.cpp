@@ -13,7 +13,7 @@
 
 using namespace brenta;
 
-void Text::render()
+void Text::render() const
 {
   this->font->shader->use();
   this->font->shader->set_float3("textColor",

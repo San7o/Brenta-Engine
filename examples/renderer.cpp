@@ -10,6 +10,7 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/pipeline.hpp>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
@@ -71,6 +72,8 @@ int main()
               .build())
     .fov(45.0f)
     .build();
+
+  auto pipeline = RenderPipeline::create_default();
   
   while (!Window::should_close())
   { 
@@ -82,7 +85,7 @@ int main()
     
     Renderer::begin_frame(cam);
     Renderer::submit({glm::mat4(1.0f), model});
-    Renderer::end_frame();
+    Renderer::end_frame(pipeline);
     
     Window::poll_events();
     Window::swap_buffers();

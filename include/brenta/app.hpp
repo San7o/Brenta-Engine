@@ -8,6 +8,8 @@
 namespace brenta
 {
 
+#include <brenta/renderer/pipeline.hpp>
+  
 //
 // App runner
 // ----------
@@ -17,8 +19,8 @@ namespace brenta
 // just for convenience since the main loop of many applications look
 // the same.
 //
-// The user needs to define setup(), update(), draw() and
-// cleanup(). Define BRENTA_MAIN before including this header to
+// The user needs to define setup(), set_pipeline(), update(), draw()
+// and cleanup(). Define BRENTA_MAIN before including this header to
 // include a main function.
 //
 class App
@@ -29,8 +31,9 @@ public:
   ~App() = delete;
   
   static bool setup();
+  static tenno::shared_ptr<RenderPipeline> set_pipeline();
   static bool update(float delta_time);
-  static bool draw();
+  static bool draw(tenno::shared_ptr<RenderPipeline> pipeline);
   static void cleanup();
   
 };
@@ -44,19 +47,24 @@ int main()
 {
   if (!brenta::App::setup())     // user implemented
     return 1;
-    
-  while(!brenta::Window::should_close())
-  {
-    auto delta_time = brenta::Window::get_time().delta;
-    
-    if (!brenta::App::update(delta_time))  // user implemented
-      break;
 
-    if (!brenta::App::draw())              // user implemented
-      break;
+  {
+    auto pipeline = brenta::App::set_pipeline();  // user implemented
+  
+    while(!brenta::Window::should_close())
+    {
+      auto delta_time = brenta::Window::get_time().delta;
     
-    brenta::Window::poll_events();
-    brenta::Window::swap_buffers();
+      if (!brenta::App::update(delta_time))  // user implemented
+        break;
+
+      if (!brenta::App::draw(pipeline))      // user implemented
+        break;
+    
+      brenta::Window::poll_events();
+      brenta::Window::swap_buffers();
+    }
+
   }
   
   brenta::App::cleanup();   // user implemented

@@ -36,17 +36,45 @@ public:
   int    width;
   int    height;
 
-  FrameBuffer() {}
+  FrameBuffer() = default;
   FrameBuffer(int width, int height, GLenum format = GL_RGBA);
+
+  FrameBuffer(FrameBuffer&& other)
+  {
+    this->texture_id       = other.texture_id;
+    this->render_buffer_id = other.render_buffer_id;
+    this->color_format     = other.color_format;
+    this->width            = other.width;
+    this->height           = other.height;
+    this->target           = other.target;
+    this->id               = other.id;
+
+    other.id = 0;
+  }
+  FrameBuffer &operator=(FrameBuffer&& other)
+  {
+    this->texture_id       = other.texture_id;
+    this->render_buffer_id = other.render_buffer_id;
+    this->color_format     = other.color_format;
+    this->width            = other.width;
+    this->height           = other.height;
+    this->target           = other.target;
+    this->id               = other.id;
+    other.id = 0;
+    
+    return *this;
+  }
+  
   ~FrameBuffer();
   
-  void bind();
-  void unbind();
+  void bind()   const override;
+  void unbind() const override;
 
   void destroy();
 
   void rescale(int width, int height);
   void set_color_format(GLenum color_format);
+  
 };
 
 } // namespace brenta

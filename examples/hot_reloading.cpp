@@ -20,6 +20,7 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/phong.hpp>
+#include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
@@ -291,10 +292,12 @@ int main()
     }
   });
 
-  Input::add_keyboard_callback(Key::R, [](){
+  auto pipeline = RenderPipeline::create_default();
+  
+  Input::add_keyboard_callback(Key::R, [pipeline](){
 
     // Make sure we are not using the old model
-    Renderer::flush();
+    Renderer::flush(pipeline);
     
     DEBUG("Reloading model");
     if (!AssetManager::reload<Model>("simple_cube"))
@@ -324,7 +327,7 @@ int main()
     Gl::clear();
 
     scene->update(delta_time);
-    scene->draw();
+    scene->draw(pipeline);
 
     Window::poll_events();
     Window::swap_buffers();

@@ -96,24 +96,31 @@ int main()
     auto font =
       AssetManager::new_asset<Font>("TextFont", font_builder);
 
-    FrameBuffer fb(1280, 720);
-
+    auto default_fb = FrameBuffer();
+    auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                                   Window::get_height());
+    
+    auto pipeline = tenno::make_shared<RenderPipeline>();
+    pipeline->add_pass<OpaquePass>(game_fb);
+    pipeline->add_pass<TransparentPass>(game_fb);
+    pipeline->add_pass<UiPass>(game_fb);
+    
     while (!Window::should_close())
     {
       Window::poll_events();
 
-      Gui::new_frame(&fb, "demo");
-      fb.bind();
+      Gui::new_frame(game_fb.get(), "demo");
     
       Gl::set_color(Color::grey());
       Gl::clear();
 
       Renderer::begin_frame();
       World::tick();
-      Renderer::end_frame();
+      Renderer::end_frame(pipeline);
 
-      fb.unbind();
+      default_fb.bind();
       Gui::render();
+      default_fb.unbind();
 
       Window::swap_buffers();
     }

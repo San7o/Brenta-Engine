@@ -243,7 +243,7 @@ void setup_gui(FrameBuffer &fb,
   ImGui::SliderFloat("Starting time to live",
                      &emitter->starting_time_to_live, 0.0f, 15.0f);
   ImGui::SliderFloat("Spawn rate",
-                     &emitter->spawn_rate, 0.0f, 1.0f);
+                     &emitter->spawn_rate, 0.0f, 0.99f);
 
   // Quantity and Appearance
   ImGui::SliderInt("Number of particles",

@@ -24,13 +24,13 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   this->height = height;
   this->color_format = color_format;
 
-  glGenFramebuffers(1, &this->get_id());
-  if (this->get_id() == 0)
+  glGenFramebuffers(1, &this->id);
+  if (this->id == 0)
   {
     ERROR("framebuffer: error generating framebuffer");
     throw std::runtime_error("framebuffer: error generating framebuffer");
   }
-  glBindFramebuffer(GL_FRAMEBUFFER, this->get_id());
+  glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   check_error();
 
   glGenTextures(1, &this->texture_id);
@@ -77,14 +77,14 @@ FrameBuffer::~FrameBuffer()
   return;
 }
 
-void FrameBuffer::bind()
+void FrameBuffer::bind() const
 {
-  glBindFramebuffer(GL_FRAMEBUFFER, this->get_id());
+  glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   check_error();
   return;
 }
 
-void FrameBuffer::unbind()
+void FrameBuffer::unbind() const
 {
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
   check_error();
@@ -93,9 +93,9 @@ void FrameBuffer::unbind()
 
 void FrameBuffer::destroy()
 {
-  if (this->get_id() == 0) return;
+  if (this->id == 0) return;
   
-  glDeleteFramebuffers(1, &this->get_id());
+  glDeleteFramebuffers(1, &this->id);
   glDeleteTextures(1, &this->texture_id);
   this->id = 0;
 
@@ -105,7 +105,7 @@ void FrameBuffer::destroy()
 
 void FrameBuffer::rescale(int width, int height)
 {
-  glBindFramebuffer(GL_FRAMEBUFFER, this->get_id());
+  glBindFramebuffer(GL_FRAMEBUFFER, this->id);
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
   {
     ERROR("framebuffer: not complete");

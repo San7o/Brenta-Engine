@@ -11,6 +11,7 @@
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
 #define BRENTA_MAIN
@@ -121,12 +122,17 @@ bool App::update(float delta_time)
   return true;
 }
 
-bool App::draw()
+tenno::shared_ptr<RenderPipeline> App::set_pipeline()
+{
+  return RenderPipeline::create_default();
+}
+
+bool App::draw(tenno::shared_ptr<RenderPipeline> pipeline)
 {
   auto scene = AssetManager::get<Scene>("main_scene");
   if (!scene) return false;
 
-  scene->draw();
+  scene->draw(pipeline);
 
   return true;
 }

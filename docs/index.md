@@ -10,21 +10,23 @@ introduction to its API.
 
 <h2 align=center>  Features </h2>
 
-- hot reloading
-- GPU particles
-- loading TrueType fonts, textures, audio and .obj meshes
-- central asset management
-- scene graph
+- configurable rendering pipeline
+- node graph
 - ECS
 - lua node scripting
+- hot reloading
+- GPU particles
+- central asset management (fonts, textures, meshes...)
+- point and directional lights
 - GUI using ImGui
 - signals
-- point and directional lights
-- window creation
+- window management
+- audio loading and playback
 - input management with callbacks
-- audio playback
 - powerful logging
 - openGL RAII abstractions
+- custom standard library
+- lots of examples
 
 The engine also features the following sub projects:
 

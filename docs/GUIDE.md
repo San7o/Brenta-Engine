@@ -393,6 +393,10 @@ hello.render();
 
 TODO
 
+## Pipeline
+
+TODO
+
 ## ECS
 
 The ECS is a framework to organize your objects and how they

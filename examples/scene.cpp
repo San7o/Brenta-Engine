@@ -12,6 +12,7 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/pipeline.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/utility.hpp>
@@ -79,6 +80,8 @@ int main()
 
   Scene::add_component(model_node, model_component);
 
+  auto pipeline = RenderPipeline::create_default();
+  
   while (!Window::should_close())
   {
     auto delta_time = Window::get_time().delta;
@@ -89,7 +92,7 @@ int main()
     Gl::clear();
 
     scene.update(delta_time);
-    scene.draw();
+    scene.draw(pipeline);
     
     Window::poll_events();
     Window::swap_buffers();

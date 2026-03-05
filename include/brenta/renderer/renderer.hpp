@@ -13,14 +13,13 @@
 
 #include <glm/glm.hpp>
 
-#include <memory>
-#include <vector>
-
 #pragma once
 
 namespace brenta
 {
 
+class RenderPipeline;
+  
 //
 // Renderer
 // --------
@@ -45,7 +44,8 @@ class Renderer
 {
 public:
 
-  class Command;
+  struct Command;
+  struct RenderData;
   
   Renderer() = delete;
   ~Renderer() = delete;
@@ -54,8 +54,9 @@ public:
   // have to call set_camera if you want to see anything
   static void begin_frame();
   static void begin_frame(Camera &cam);
+  
   static void set_camera(Camera &cam);
-
+  
   // Transparent commands are rendered after non-transparent ones
   static void submit(const Renderer::Command& it, bool transparent = false);
   static void submit_point_light(tenno::shared_ptr<PointLight> point_light);
@@ -63,30 +64,21 @@ public:
   static void submit_dir_light(tenno::shared_ptr<DirLight> dir_light);
   static void submit_text(const Text& text);
 
-  static void end_frame();
+  static void end_frame(tenno::shared_ptr<RenderPipeline> pipeline);
 
   // Draw and clear state
-  static void flush();
+  static void flush(tenno::shared_ptr<RenderPipeline> pipeline);
+  // Clear all state
+  static void clear();
 
 private:
 
-  static glm::mat4 projection;
-  static glm::mat4 view;
-  static glm::vec3 cam_position;
-  static tenno::vector<tenno::shared_ptr<PointLight>>  point_lights;
-  static std::optional<tenno::shared_ptr<DirLight>>    dir_light;
-  static tenno::vector<Command> render_queue;
-  static tenno::vector<Command> transparent_render_queue;
-  static tenno::vector<Text>    text_render_queue;
+  static RenderData data;
 
-  static void flush_command(const Renderer::Command& command);
-  
 };
-
-class Renderer::Command
+  
+struct Renderer::Command
 {
-public:
-
   glm::mat4                    world_matrix;
   tenno::shared_ptr<Model>     model;
   
@@ -94,6 +86,20 @@ public:
   Command(glm::mat4 world_matrix,
           tenno::shared_ptr<Model> model)
     : world_matrix(world_matrix), model(model) {}
+};
+
+struct Renderer::RenderData
+{
+  glm::mat4   projection;
+  glm::mat4   view;
+  glm::vec3   cam_position;
+  
+  tenno::vector<Command>   opaque_queue;
+  tenno::vector<Command>   transparent_queue;
+  tenno::vector<Text>      ui_queue;
+  
+  tenno::vector<tenno::shared_ptr<PointLight>>    point_lights;
+  std::optional<tenno::shared_ptr<DirLight>>      dir_light;
 };
 
 } // namespace brenta

@@ -46,7 +46,7 @@ public:
   
   // Member functions
   
-  static brenta::Window &instance();
+  static Window &instance();
   
   //
   // Getters

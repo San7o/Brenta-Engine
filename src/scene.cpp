@@ -75,13 +75,13 @@ void Scene::update(float delta_time)
   this->root->update(delta_time);
 }
 
-void Scene::draw()
+void Scene::draw(tenno::shared_ptr<RenderPipeline> pipeline)
 {
   this->root->update_world_matrix();
   
   Renderer::begin_frame(*this->active_camera);
   this->root->draw();
-  Renderer::end_frame();
+  Renderer::end_frame(pipeline);
 }
 
 Scene::Builder &Scene::Builder::camera(tenno::shared_ptr<Camera> camera)

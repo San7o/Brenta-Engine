@@ -71,16 +71,17 @@ public:
     return *this;
   }
 
-  ~Buffer();
+  virtual ~Buffer();
   
   void init(Target target);
   void destroy();
-  void bind()   const;
-  void unbind() const;
+  
+  virtual void bind()   const;
+  virtual void unbind() const;
 
   // Getters
 
-  Buffer::Id    &get_id();
+  Buffer::Id     get_id() const;
   Target        &get_target();
 
   // Setters

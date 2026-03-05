@@ -13,6 +13,8 @@
 namespace brenta
 {
 
+class RenderPipeline;
+  
 //
 // Scene
 // -----
@@ -46,7 +48,7 @@ public:
   static void set_script(tenno::weak_ptr<Node> node, const std::string &source);
     
   void update(float delta_time);
-  void draw();
+  void draw(tenno::shared_ptr<RenderPipeline> pipeline);
   
 private:
 

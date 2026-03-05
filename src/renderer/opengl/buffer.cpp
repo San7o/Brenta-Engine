@@ -57,7 +57,7 @@ void Buffer::unbind() const
   return;
 }
 
-Buffer::Id &Buffer::get_id()
+Buffer::Id Buffer::get_id() const
 {
   return this->id;
 }

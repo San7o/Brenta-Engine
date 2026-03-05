@@ -15,6 +15,7 @@
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/pipeline.hpp>
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
@@ -83,6 +84,8 @@ int main(void)
   auto model =
     tenno::make_shared<Model>(model_builder);
 
+  auto pipeline = RenderPipeline::create_default();
+  
   while(!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
@@ -104,7 +107,7 @@ int main(void)
     // Draw
     Renderer::begin_frame(camera);
     Renderer::submit({glm::mat4(1.0f), model});
-    Renderer::end_frame();
+    Renderer::end_frame(pipeline);
     
     Window::poll_events();
     Window::swap_buffers();

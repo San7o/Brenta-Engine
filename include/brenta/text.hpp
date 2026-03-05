@@ -35,7 +35,7 @@ public:
   {}
   ~Text() = default;
   
-  void render();
+  void render() const;
 
 };
   
