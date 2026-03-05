@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/model_ecs_component.hpp>

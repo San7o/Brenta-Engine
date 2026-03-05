@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/signal_manager.hpp>
+#include <brenta/signal.hpp>
 #include <brenta/logger.hpp>
 
 using namespace brenta;

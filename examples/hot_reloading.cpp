@@ -7,7 +7,7 @@
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
 #include <brenta/scene.hpp>
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/input.hpp>
 #include <brenta/mouse.hpp>
 #include <brenta/text.hpp>
@@ -177,7 +177,7 @@ int main()
   Scene::add_component(text_node, text_component2);
   
   Mouse mouse = {};
-  mouse.set_sensitivity(0.05f);
+  mouse.sensitivity = 0.05f;
   
   Input::add_mouse_callback("rotate_camera",
                             [camera, &mouse](double xpos, double ypos)
@@ -185,27 +185,26 @@ int main()
     // Rotate the camera
     if (Window::is_key_pressed(Key::LeftShift))
     {
-      if (mouse.get_first())
+      if (mouse.first)
       {
-        mouse.set_x(xpos);
-        mouse.set_y(ypos);
-        mouse.set_first(false);
+        mouse.x = xpos;
+        mouse.y = ypos;
+        mouse.first = false;
       }
 
-      float xoffset = xpos - mouse.get_x();
-      float yoffset = mouse.get_y() - ypos;
-      mouse.set_x(xpos);
-      mouse.set_y(ypos);
+      float xoffset = xpos - mouse.x;
+      float yoffset = mouse.y - ypos;
+      mouse.x = xpos;
+      mouse.y = ypos;
 
-      auto sensitivity = mouse.get_sensitivity();
-      xoffset *= sensitivity;
-      yoffset *= sensitivity;
+      xoffset *= mouse.sensitivity;
+      yoffset *= mouse.sensitivity;
 
       auto new_cam = camera->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
-        scam.theta += yoffset * sensitivity;
-        scam.phi   += xoffset * sensitivity;
+        scam.theta += yoffset * mouse.sensitivity;
+        scam.phi   += xoffset * mouse.sensitivity;
 
         if (scam.theta <= 0.01f) scam.theta = 0.01f;
         if (scam.theta >= 3.13f) scam.theta = 3.13f;
@@ -219,21 +218,20 @@ int main()
     // translate the cam center
     else if (Window::is_key_pressed(Key::LeftControl))
     {
-      if (mouse.get_first())
+      if (mouse.first)
       {
-        mouse.set_x(xpos);
-        mouse.set_y(ypos);
-        mouse.set_first(false);
+        mouse.x = xpos;
+        mouse.y = ypos;
+        mouse.first = false;
       }
 
-      float xoffset = xpos - mouse.get_x();
-      float yoffset = mouse.get_y() - ypos;
-      mouse.set_x(xpos);
-      mouse.set_y(ypos);
+      float xoffset = xpos - mouse.x;
+      float yoffset = mouse.y - ypos;
+      mouse.x = xpos;
+      mouse.y = ypos;
 
-      auto sensitivity = mouse.get_sensitivity();
-      xoffset *= sensitivity * 0.3f;
-      yoffset *= sensitivity * 0.3f;
+      xoffset *= mouse.sensitivity * 0.3f;
+      yoffset *= mouse.sensitivity * 0.3f;
 
       auto new_cam = camera->get_pos();
       try {
@@ -259,20 +257,20 @@ int main()
     // zoom the camera
     else if (Window::is_key_pressed(Key::LeftAlt))
     {
-      if (mouse.get_first())
+      if (mouse.first)
       {
-        mouse.set_x(xpos);
-        mouse.set_y(ypos);
-        mouse.set_first(false);
+        mouse.x = xpos;
+        mouse.y = ypos;
+        mouse.first = false;
       }
 
-      float xoffset = xpos - mouse.get_x();
-      float yoffset = mouse.get_y() - ypos;
-      mouse.set_x(xpos);
-      mouse.set_y(ypos);
+      float xoffset = xpos - mouse.x;
+      float yoffset = mouse.y - ypos;
+      mouse.x = xpos;
+      mouse.y = ypos;
 
-      xoffset *= mouse.get_sensitivity();
-      yoffset *= mouse.get_sensitivity();
+      xoffset *= mouse.sensitivity;
+      yoffset *= mouse.sensitivity;
       
       auto new_cam = camera->get_pos();
       try {
@@ -288,7 +286,7 @@ int main()
     }
     else
     {
-      mouse.set_first(true);
+      mouse.first = true;
     }
   });
 

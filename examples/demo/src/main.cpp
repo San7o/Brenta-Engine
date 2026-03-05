@@ -52,7 +52,7 @@ int main()
     tenno::shared_ptr<Camera>(camera_builder);
 
   Mouse mouse = {};
-  mouse.set_sensitivity(0.05f);
+  mouse.sensitivity = 0.05f;
   
   // Entities
   init_player_entity();

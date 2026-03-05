@@ -19,21 +19,20 @@ void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
     // Rotate the camera
     if (Window::is_key_pressed(Key::LeftShift))
     {
-      if (mouse->get_first())
+      if (mouse->first)
       {
-        mouse->set_x(xpos);
-        mouse->set_y(ypos);
-        mouse->set_first(false);
+        mouse->x = xpos;
+        mouse->y = ypos;
+        mouse->first = false;
       }
 
-      float xoffset = xpos - mouse->get_x();
-      float yoffset = mouse->get_y() - ypos;
-      mouse->set_x(xpos);
-      mouse->set_y(ypos);
+      float xoffset = xpos - mouse->x;
+      float yoffset = mouse->y - ypos;
+      mouse->x = xpos;
+      mouse->y = ypos;
 
-      auto sensitivity = mouse->get_sensitivity();
-      xoffset *= sensitivity;
-      yoffset *= sensitivity;
+      xoffset *= mouse->sensitivity;
+      yoffset *= mouse->sensitivity;
 
       auto camera = cam.lock();
       if (!camera) return;
@@ -41,8 +40,8 @@ void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
       auto new_cam = camera->get_pos();
       try {
         Camera::Spherical scam = std::get<Camera::Spherical>(new_cam);
-        scam.theta += yoffset * sensitivity;
-        scam.phi += xoffset * sensitivity;
+        scam.theta += yoffset * mouse->sensitivity;
+        scam.phi   += xoffset * mouse->sensitivity;
 
         if (scam.theta <= 0.01f) scam.theta = 0.01f;
         if (scam.theta >= 3.13f) scam.theta = 3.13f;
@@ -56,21 +55,20 @@ void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
     // translate the cam center
     else if (Window::is_key_pressed(Key::LeftControl))
     {
-      if (mouse->get_first())
+      if (mouse->first)
       {
-        mouse->set_x(xpos);
-        mouse->set_y(ypos);
-        mouse->set_first(false);
+        mouse->x = xpos;
+        mouse->y = ypos;
+        mouse->first = false;
       }
 
-      float xoffset = xpos - mouse->get_x();
-      float yoffset = mouse->get_y() - ypos;
-      mouse->set_x(xpos);
-      mouse->set_y(ypos);
+      float xoffset = xpos - mouse->x;
+      float yoffset = mouse->y - ypos;
+      mouse->x = xpos;
+      mouse->y = ypos;
 
-      auto sensitivity = mouse->get_sensitivity();
-      xoffset *= sensitivity * 0.3f;
-      yoffset *= sensitivity * 0.3f;
+      xoffset *= mouse->sensitivity * 0.3f;
+      yoffset *= mouse->sensitivity * 0.3f;
 
       auto camera = cam.lock();
       if (!camera) return;
@@ -99,20 +97,20 @@ void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
     // zoom the camera
     else if (Window::is_key_pressed(Key::LeftAlt))
     {
-      if (mouse->get_first())
+      if (mouse->first)
       {
-        mouse->set_x(xpos);
-        mouse->set_y(ypos);
-        mouse->set_first(false);
+        mouse->x = xpos;
+        mouse->y = ypos;
+        mouse->first = false;
       }
 
-      float xoffset = xpos - mouse->get_x();
-      float yoffset = mouse->get_y() - ypos;
-      mouse->set_x(xpos);
-      mouse->set_y(ypos);
+      float xoffset = xpos - mouse->x;
+      float yoffset = mouse->y - ypos;
+      mouse->x = xpos;
+      mouse->y = ypos;
 
-      xoffset *= mouse->get_sensitivity();
-      yoffset *= mouse->get_sensitivity();
+      xoffset *= mouse->sensitivity;
+      yoffset *= mouse->sensitivity;
 
       auto camera = cam.lock();
       if (!camera) return;
@@ -131,7 +129,7 @@ void init_camera_mouse_callback(tenno::weak_ptr<Camera> cam, Mouse *mouse)
     }
     else
     {
-      mouse->set_first(true);
+      mouse->first = true;
     }
   };
   Input::add_mouse_callback("CameraCallback", camera_mouse_callback);

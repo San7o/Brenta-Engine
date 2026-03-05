@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/node_component.hpp>
+#include <brenta/node.hpp>
 #include <brenta/renderer/model.hpp>
 
 #include <tenno/memory.hpp>

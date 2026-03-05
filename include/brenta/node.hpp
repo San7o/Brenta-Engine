@@ -6,15 +6,19 @@
 #pragma once
 
 #include <brenta/script.hpp>
-#include <brenta/node_component.hpp>
+#include <brenta/node.hpp>
 #include <brenta/transform.hpp>
 
 #include <tenno/memory.hpp>
 #include <tenno/vector.hpp>
 
+#include <glm/gtc/matrix_transform.hpp>
+
 namespace brenta
 {
 
+class NodeComponent;
+  
 //
 // Node
 // ----
@@ -59,6 +63,21 @@ private:
 
   void update_world_matrix();
   
+};
+
+class NodeComponent
+{
+public:
+
+  friend class Scene;
+
+  tenno::weak_ptr<Node>     owner;
+
+  virtual ~NodeComponent() = default;
+  
+  virtual void update(float delta_time)            = 0;
+  virtual void draw(const glm::mat4& world_matrix) = 0;
+
 };
 
 } // namespace brenta

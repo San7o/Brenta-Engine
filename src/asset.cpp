@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/logger.hpp>
 
 using namespace brenta;

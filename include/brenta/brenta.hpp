@@ -37,7 +37,7 @@
 
 // Core
 #include <brenta/app.hpp>
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/sound.hpp>
 #include <brenta/color.hpp>
 #include <brenta/engine.hpp>
@@ -47,7 +47,6 @@
 #include <brenta/key.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/mouse.hpp>
-#include <brenta/node_component.hpp>
 #include <brenta/node.hpp>
 #include <brenta/scene.hpp>
 #include <brenta/script.hpp>

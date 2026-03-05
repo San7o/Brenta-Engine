@@ -8,7 +8,7 @@
 #include <brenta/renderer/particles.hpp>
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 

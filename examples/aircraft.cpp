@@ -121,7 +121,7 @@ int main()
   glm::vec3 speed        = glm::vec3(0.0);
 
   Mouse mouse        = {};
-  mouse.set_sensitivity(0.05f);
+  mouse.sensitivity  = 0.05f;
   bool capture_mouse = true;
 
   Input::add_mouse_callback("rotate_camera",
@@ -129,22 +129,21 @@ int main()
   {
     if (!capture_mouse) return;
     
-    if (mouse.get_first())
+    if (mouse.first)
     {
-      mouse.set_x(x);
-      mouse.set_y(y);
-      mouse.set_first(false);
+      mouse.x = x;
+      mouse.y = y;
+      mouse.first = false;
       return;
     }
 
-    float delta_x = x - mouse.get_x();
-    float delta_y = y - mouse.get_y();
-    mouse.set_x(x);
-    mouse.set_y(y);
+    float delta_x = x - mouse.x;
+    float delta_y = y - mouse.y;
+    mouse.x = x;
+    mouse.y = y;
 
-    auto sensitivity = mouse.get_sensitivity();
-    delta_x *= sensitivity;
-    delta_y *= sensitivity;
+    delta_x *= mouse.sensitivity;
+    delta_y *= mouse.sensitivity;
 
     auto pos  = camera->get_pos();
     auto acam = std::get<Camera::Aircraft>(pos);
@@ -161,7 +160,7 @@ int main()
     Window::set_mouse_capture(capture_mouse);
 
     if (!capture_mouse)
-      mouse.set_first(true);
+      mouse.first = true;
   });
 
   auto pipeline = RenderPipeline::create_default();

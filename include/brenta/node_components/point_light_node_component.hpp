@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/node_component.hpp>
+#include <brenta/node.hpp>
 #include <brenta/renderer/point_light.hpp>
 
 #include <tenno/memory.hpp>

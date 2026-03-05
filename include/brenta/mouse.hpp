@@ -32,24 +32,6 @@ public:
   Mouse(float x, float y, float sensitivity)
     : x(x), y(y), sensitivity(sensitivity) {}
 
-  //
-  // Getters
-  //
-  
-  bool  get_first() const;
-  float get_x() const;
-  float get_y() const;
-  float get_sensitivity() const;
-
-  //
-  // Setters
-  //
-  
-  void set_first(bool first);
-  void set_x(float last_x);
-  void set_y(float last_y);
-  void set_sensitivity(float sensitivity);
-  
 };
 
 } // namespace brenta

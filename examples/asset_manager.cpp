@@ -6,7 +6,7 @@
 #include <brenta/engine.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/node_components/model_node_component.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>

@@ -5,7 +5,7 @@
 
 #pragma once
 
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <brenta/text.hpp>
 #include <brenta/window.hpp>
 #include <brenta/ecs/ecs.hpp>

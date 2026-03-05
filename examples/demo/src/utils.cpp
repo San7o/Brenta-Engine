@@ -3,7 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/asset_manager.hpp>
+#include <brenta/asset.hpp>
 #include <demo/utils.hpp>
 
 #include "../../../../src/renderer/shaders/c/phong_vs.c"
