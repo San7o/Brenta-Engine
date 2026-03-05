@@ -26,7 +26,7 @@ void SignalManager::emit(const SignalManager::Event &event)
 {
   SignalManager::pending_events.push_back(event);
   
-  DEBUG("SignalManager: emitted signal {}", event.id);
+  EVENT(Logger::Event::Signal, "SignalManager: emitted signal {}", event.id);
 }
 
 SignalManager::Subscription
@@ -38,7 +38,8 @@ SignalManager::subscribe(const SignalManager::SignalId &id,
   
   SignalManager::registry[id].push_back(std::make_tuple(connection_id, callback));
 
-  DEBUG("SignalManager: subscribed connection {} to signal {}",
+  EVENT(Logger::Event::Signal,
+        "SignalManager: subscribed connection {} to signal {}",
         connection_id, id);
   return Subscription(id, connection_id);
 }
@@ -55,7 +56,8 @@ void SignalManager::unsubscribe(const SignalManager::Subscription &sub)
     {
       entries.erase(it);
 
-      DEBUG("SignalManager: unsibscribed connection {} from signal {}",
+      EVENT(Logger::Event::Signal,
+            "SignalManager: unsibscribed connection {} from signal {}",
             sub.connection_id, sub.signal_id);
       break;
     }

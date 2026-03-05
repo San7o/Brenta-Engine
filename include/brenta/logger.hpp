@@ -41,6 +41,7 @@ public:
   {
     Lifetime,
     Callback,
+    Signal,
   };
 
   using Level  = oak::Level;
