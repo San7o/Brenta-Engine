@@ -43,6 +43,9 @@ cmake -Bbuild
 cmake --build build -j$(nproc)
 ```
 
+For debug builds, specify `-D CMAKE_BUILD_TYPE=Debug`. This will
+generate all debug information and enable address sanitization.
+
 For the static library:
 
 ```bash

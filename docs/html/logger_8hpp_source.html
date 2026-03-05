@@ -125,86 +125,96 @@ $(document).ready(function(){initNavTree('logger_8hpp_source.html',''); initResi
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="keyword">namespace </span>brenta</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>{</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="foldopen" id="foldopen00027" data-start="{" data-end="};">
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classbrenta_1_1Logger.html">   27</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem.html">Subsystem</a></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  <span class="keyword">enum</span> Event</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>  {</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    Lifetime,</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    Callback,</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>  };</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  <span class="keyword">using </span>Level = oak::Level;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  <span class="keyword">using </span>Flags  = oak::Flags;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Config</a>;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a>;</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="comment">// Subsystem interface</span></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::string subsystem_name;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  std::expected&lt;void, Subsystem::Error&gt; initialize() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  std::expected&lt;void, Subsystem::Error&gt; terminate() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  std::string <a class="code hl_function" href="classbrenta_1_1Logger.html#a8da66dc362b2bb3643bc8c2039e345aa">name</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  <span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1Logger.html#ab6349bd0374c0f079623bf83fdb43cb3">is_initialized</a>() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="comment">// Member functions</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="comment">//</span></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="comment">// Logging</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="comment">// -------</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="comment">//</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="comment">// The engine uses `oak` for logging. You can use its powerful API</span></div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="comment">// to log whatever you want. The logging subsystem initialized some</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="comment">// settings and it is ment as the engine&#39;s &quot;standard&quot; way to</span></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="comment">// configure its global logger when the application starts.</span></div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="comment">//</span></div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="};">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classbrenta_1_1Logger.html">   36</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem.html">Subsystem</a></div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>{</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keyword">enum</span> Event</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  {</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    Lifetime,</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    Callback,</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>  };</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  <span class="keyword">using </span>Level  = oak::Level;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>  <span class="keyword">using </span>Flags  = oak::Flags;</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>  </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  <span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Config</a>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a>;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a> &amp;instance();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">static</span> std::string event_name(<span class="keyword">enum</span> Event event);</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  </div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keyword">static</span> <a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Config</a>         init_config;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span>           initialized;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  <span class="comment">// Subsystem interface</span></div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keyword">static</span> <span class="keyword">const</span> std::string subsystem_name;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">bool</span>        is_initialized() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  std::string name()           <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  std::expected&lt;void, Subsystem::Error&gt; initialize() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  std::expected&lt;void, Subsystem::Error&gt; terminate()  <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  </div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span> </div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">// Private constructors / destructors for singleton  </span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <a class="code hl_class" href="classbrenta_1_1Logger.html">~Logger</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  </div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>};</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="comment">// Member functions</span></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  </div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keyword">static</span> <a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a>&amp;     instance();</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keyword">static</span> std::string event_name(<span class="keyword">enum</span> Event event);</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>  </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  </div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>  <span class="keyword">static</span> <a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Config</a>         init_config;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  <span class="keyword">static</span> <span class="keywordtype">bool</span>           initialized;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="comment">// Private constructors / destructors for singleton  </span></div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  <a class="code hl_class" href="classbrenta_1_1Logger.html">Logger</a>()  = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>  <a class="code hl_class" href="classbrenta_1_1Logger.html">~Logger</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>  </div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>};</div>
 </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span> </div>
-<div class="foldopen" id="foldopen00066" data-start="{" data-end="};">
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="structbrenta_1_1Logger_1_1Config.html">   66</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Logger::Config</a></div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>{</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>  oak::Level            log_level = oak::Level::Info;</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>  std::filesystem::path log_file  = <span class="stringliteral">&quot;/tmp/brenta-logs.txt&quot;</span>;</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  tenno::vector&lt;Event&gt;    events    = {};</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>  tenno::vector&lt;Flags&gt;    flags     = {};</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>};</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span> </div>
+<div class="foldopen" id="foldopen00076" data-start="{" data-end="};">
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno"><a class="line" href="structbrenta_1_1Logger_1_1Config.html">   76</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Logger::Config</a></div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>{</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  oak::Level              log_level = oak::Level::Info;</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  std::filesystem::path   log_file  = <span class="stringliteral">&quot;/tmp/brenta-logs.txt&quot;</span>;</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>  tenno::vector&lt;Event&gt;    events    = {};</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  tenno::vector&lt;Flags&gt;    flags     = {};</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>};</div>
 </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="foldopen" id="foldopen00074" data-start="{" data-end="};">
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno"><a class="line" href="classbrenta_1_1Logger_1_1Builder.html">   74</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Logger::Builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem_1_1Builder.html">Subsystem::Builder</a></div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>{</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>  <a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Logger::Config</a> conf = {};</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>  </div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a>()  = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">~Builder</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span> </div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;level(Logger::Level log_level);</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;file(std::filesystem::path out_file);</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;event(Logger::Event event);</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;flag(Logger::Flags flag);</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>  <a class="code hl_class" href="classbrenta_1_1Subsystem.html">Subsystem</a> &amp;build();</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>};</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
+<div class="foldopen" id="foldopen00084" data-start="{" data-end="};">
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno"><a class="line" href="classbrenta_1_1Logger_1_1Builder.html">   84</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Logger::Builder</a> : <span class="keyword">public</span> <a class="code hl_class" href="classbrenta_1_1Subsystem_1_1Builder.html">Subsystem::Builder</a></div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>{</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span> </div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a>()  = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">~Builder</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;level(Logger::Level log_level);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;file(std::filesystem::path out_file);</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;event(Logger::Event event);</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>  <a class="code hl_class" href="classbrenta_1_1Logger_1_1Builder.html">Builder</a> &amp;flag(Logger::Flags flag);</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>  </div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>  <a class="code hl_class" href="classbrenta_1_1Subsystem.html">Subsystem</a> &amp;build();</div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span> </div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span> </div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>  <a class="code hl_struct" href="structbrenta_1_1Logger_1_1Config.html">Logger::Config</a> conf = {};</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>  </div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>  </div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>};</div>
 </div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>  </div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>} <span class="comment">// namespace brenta</span></div>
-<div class="ttc" id="aclassbrenta_1_1Logger_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Logger_1_1Builder.html">brenta::Logger::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00074">logger.hpp:75</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Logger_html"><div class="ttname"><a href="classbrenta_1_1Logger.html">brenta::Logger</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00027">logger.hpp:28</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Logger_html_a8da66dc362b2bb3643bc8c2039e345aa"><div class="ttname"><a href="classbrenta_1_1Logger.html#a8da66dc362b2bb3643bc8c2039e345aa">brenta::Logger::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00072">logger.cpp:72</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Logger_html_ab6349bd0374c0f079623bf83fdb43cb3"><div class="ttname"><a href="classbrenta_1_1Logger.html#ab6349bd0374c0f079623bf83fdb43cb3">brenta::Logger::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="logger_8cpp_source.html#l00077">logger.cpp:77</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Subsystem_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Subsystem_1_1Builder.html">brenta::Subsystem::Builder</a></div><div class="ttdoc">Builder interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00048">subsystem.hpp:49</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
-<div class="ttc" id="astructbrenta_1_1Logger_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Logger_1_1Config.html">brenta::Logger::Config</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00066">logger.hpp:67</a></div></div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>  </div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>} <span class="comment">// namespace brenta</span></div>
+<div class="ttc" id="aclassbrenta_1_1Logger_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Logger_1_1Builder.html">brenta::Logger::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00084">logger.hpp:85</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Logger_html"><div class="ttname"><a href="classbrenta_1_1Logger.html">brenta::Logger</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00036">logger.hpp:37</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Subsystem_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Subsystem_1_1Builder.html">brenta::Subsystem::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00046">subsystem.hpp:47</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00022">subsystem.hpp:23</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Logger_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Logger_1_1Config.html">brenta::Logger::Config</a></div><div class="ttdef"><b>Definition</b> <a href="logger_8hpp_source.html#l00076">logger.hpp:77</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

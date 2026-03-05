@@ -9,9 +9,8 @@
     <div class="topnav">
       <a href="./index.html">Brenta Engine</a>
       <a href="./DESIGN.html">Design</a>      
-      <a href="./BUILD.html">Build</a>
       <a href="./GUIDE.html">Guide</a>
-      <a href="./CONTRIBUTING.html">Contributing</a>
+      <a href="./BUILD.html">Build</a>
       <a href="./annotated.html">Data structures</a>
       <a href="./files.html">Files</a>
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
@@ -19,17 +18,13 @@
 <p><img src=".//images/brenta-engine-banner.png" /></p>
 <p><strong>Brenta Engine</strong> is a simple 3D graphics engine written
 in modern C++/OpenGL using a hybrid scene-graph and Entity Component
-System architecture. The engine was created by Giovanni Santini in the
-summer of 2024, the name is inspired by the Brenta Dolimites in the
-Italian Alps.</p>
+System architecture.</p>
+<p>Check out <a href="./DESIGN.html">DESIGN.html</a> for an overview of the
+engine's architecture, and <a href="./GUIDE.html">GUIDE.html</a> for an
+introduction to its API.</p>
 <h2 align="center">
 Features
 </h2>
-<p>The engine is composed of many subsystems like <code>Window</code>,
-<code>Input</code>, <code>Audio</code>, <code>Engine</code>,
-<code>Logger</code>, <code>Ecs</code> as well as custom opengl RAII
-objects and many abstractions to work with 3D graphics.</p>
-<p>Brenta-Engine also supports:</p>
 <ul>
 <li>hot reloading</li>
 <li>GPU particles</li>
@@ -41,13 +36,17 @@ objects and many abstractions to work with 3D graphics.</p>
 <li>GUI using ImGui</li>
 <li>signals</li>
 <li>point and directional lights</li>
+<li>window creation</li>
 <li>input management with callbacks</li>
+<li>audio playback</li>
+<li>powerful logging</li>
+<li>openGL RAII abstractions</li>
 </ul>
 <p>The engine also features the following sub projects:</p>
 <ul>
 <li><a href="https://github.com/San7o/oak">oak</a>: feature-rich,
-thread-safe, Brenta Engine’s logger.</li>
-<li><a href="https://github.com/San7o/viotecs">viotecs</a>: the engine’s
+thread-safe, Brenta Engine's logger.</li>
+<li><a href="https://github.com/San7o/viotecs">viotecs</a>: the engine's
 official ECS.</li>
 <li><a href="https://github.com/San7o/tenno-tl">tenno</a>: custom
 standard library</li>

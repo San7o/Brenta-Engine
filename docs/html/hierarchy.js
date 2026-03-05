@@ -5,9 +5,6 @@ var hierarchy =
     [ "brenta::AssetManager::Asset< T >", "structbrenta_1_1AssetManager_1_1Asset.html", null ],
     [ "brenta::AssetManager", "classbrenta_1_1AssetManager.html", null ],
     [ "brenta::AssetManager::AssetOwned< T >", "structbrenta_1_1AssetManager_1_1AssetOwned.html", null ],
-    [ "brenta::AudioDriver", "classbrenta_1_1AudioDriver.html", [
-      [ "brenta::Miniaudio", "classbrenta_1_1Miniaudio.html", null ]
-    ] ],
     [ "brenta::Buffer", "classbrenta_1_1Buffer.html", [
       [ "brenta::FrameBuffer", "classbrenta_1_1FrameBuffer.html", null ],
       [ "brenta::Ubo", "classbrenta_1_1Ubo.html", null ]
@@ -22,14 +19,15 @@ var hierarchy =
     [ "brenta::ParticleEmitter::Builder", "classbrenta_1_1ParticleEmitter_1_1Builder.html", null ],
     [ "brenta::Scene::Builder", "classbrenta_1_1Scene_1_1Builder.html", null ],
     [ "brenta::Shader::Builder", "classbrenta_1_1Shader_1_1Builder.html", null ],
+    [ "brenta::SoundAsset::Builder", "classbrenta_1_1SoundAsset_1_1Builder.html", null ],
     [ "brenta::Subsystem::Builder", "classbrenta_1_1Subsystem_1_1Builder.html", [
-      [ "brenta::Audio::Builder", "classbrenta_1_1Audio_1_1Builder.html", null ],
       [ "brenta::Ecs::Builder", "classbrenta_1_1Ecs_1_1Builder.html", null ],
       [ "brenta::Engine::Builder", "classbrenta_1_1Engine_1_1Builder.html", null ],
       [ "brenta::Gl::Builder", "classbrenta_1_1Gl_1_1Builder.html", null ],
       [ "brenta::Gui::Builder", "classbrenta_1_1Gui_1_1Builder.html", null ],
       [ "brenta::Input::Builder", "classbrenta_1_1Input_1_1Builder.html", null ],
       [ "brenta::Logger::Builder", "classbrenta_1_1Logger_1_1Builder.html", null ],
+      [ "brenta::SoundManager::Builder", "classbrenta_1_1SoundManager_1_1Builder.html", null ],
       [ "brenta::Window::Builder", "classbrenta_1_1Window_1_1Builder.html", null ]
     ] ],
     [ "brenta::Texture::Builder", "classbrenta_1_1Texture_1_1Builder.html", null ],
@@ -56,11 +54,17 @@ var hierarchy =
     [ "brenta::DirLight", "classbrenta_1_1DirLight.html", [
       [ "brenta::PhongDirLight", "classbrenta_1_1PhongDirLight.html", null ]
     ] ],
+    [ "brenta::SoundManager::Driver", "classbrenta_1_1SoundManager_1_1Driver.html", [
+      [ "brenta::MiniaudioDriver", "classbrenta_1_1MiniaudioDriver.html", null ]
+    ] ],
+    [ "brenta::Window::Driver", "classbrenta_1_1Window_1_1Driver.html", [
+      [ "brenta::GlfwDriver", "classbrenta_1_1GlfwDriver.html", null ]
+    ] ],
     [ "brenta::SignalManager::Event", "structbrenta_1_1SignalManager_1_1Event.html", null ],
     [ "brenta::FilesystemWatcher", "classbrenta_1_1FilesystemWatcher.html", null ],
     [ "brenta::Font", "classbrenta_1_1Font.html", null ],
-    [ "FsWatcherUnix", "structFsWatcherUnix.html", null ],
-    [ "FsWatcherUnixWdList", "structFsWatcherUnixWdList.html", null ],
+    [ "brenta::FsWatcherUnix", "structbrenta_1_1FsWatcherUnix.html", null ],
+    [ "brenta::FsWatcherUnixWdList", "structbrenta_1_1FsWatcherUnixWdList.html", null ],
     [ "brenta::AssetManager::HotReloadItem", "structbrenta_1_1AssetManager_1_1HotReloadItem.html", null ],
     [ "brenta::KeyMods", "classbrenta_1_1KeyMods.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
@@ -88,16 +92,20 @@ var hierarchy =
     [ "brenta::Script", "classbrenta_1_1Script.html", null ],
     [ "brenta::Shader", "classbrenta_1_1Shader.html", null ],
     [ "brenta::SignalManager", "classbrenta_1_1SignalManager.html", null ],
+    [ "brenta::Sound", "classbrenta_1_1Sound.html", null ],
+    [ "brenta::SoundAsset", "classbrenta_1_1SoundAsset.html", null ],
+    [ "brenta::MiniaudioDriver::SoundAssetSlot", "structbrenta_1_1MiniaudioDriver_1_1SoundAssetSlot.html", null ],
     [ "brenta::Camera::Spherical", "classbrenta_1_1Camera_1_1Spherical.html", null ],
+    [ "brenta::MiniaudioDriver::StreamSlot", "structbrenta_1_1MiniaudioDriver_1_1StreamSlot.html", null ],
     [ "brenta::SignalManager::Subscription", "classbrenta_1_1SignalManager_1_1Subscription.html", null ],
     [ "brenta::Subsystem", "classbrenta_1_1Subsystem.html", [
-      [ "brenta::Audio", "classbrenta_1_1Audio.html", null ],
       [ "brenta::Ecs", "classbrenta_1_1Ecs.html", null ],
       [ "brenta::Engine", "classbrenta_1_1Engine.html", null ],
       [ "brenta::Gl", "classbrenta_1_1Gl.html", null ],
       [ "brenta::Gui", "classbrenta_1_1Gui.html", null ],
       [ "brenta::Input", "classbrenta_1_1Input.html", null ],
       [ "brenta::Logger", "classbrenta_1_1Logger.html", null ],
+      [ "brenta::SoundManager", "classbrenta_1_1SoundManager.html", null ],
       [ "brenta::Window", "classbrenta_1_1Window.html", null ]
     ] ],
     [ "viotecs::System", null, [
@@ -112,8 +120,5 @@ var hierarchy =
     [ "brenta::Time", "classbrenta_1_1Time.html", null ],
     [ "brenta::Transform", "classbrenta_1_1Transform.html", null ],
     [ "brenta::Vao", "classbrenta_1_1Vao.html", null ],
-    [ "brenta::Mesh::Vertex", "classbrenta_1_1Mesh_1_1Vertex.html", null ],
-    [ "brenta::WindowDriver", "classbrenta_1_1WindowDriver.html", [
-      [ "brenta::Glfw", "classbrenta_1_1Glfw.html", null ]
-    ] ]
+    [ "brenta::Mesh::Vertex", "classbrenta_1_1Mesh_1_1Vertex.html", null ]
 ];

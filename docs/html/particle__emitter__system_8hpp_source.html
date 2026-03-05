@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('particle__emitter__system_8hpp_source.
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      <span class="keyword">auto</span> e = viotecs::Entity(entity);</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      <span class="keyword">auto</span> emitter = e.get_component&lt;<a class="code hl_class" href="classbrenta_1_1ParticleEmitterEcsComponent.html">ParticleEmitterEcsComponent</a>&gt;();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      emitter-&gt;emitter-&gt;update(Window::get_time().get_delta());</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      emitter-&gt;emitter-&gt;update(Window::get_time().delta);</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>      emitter-&gt;emitter-&gt;render();</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    }</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>  }</div>

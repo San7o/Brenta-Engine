@@ -125,7 +125,7 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>std::expected&lt;void, Subsystem::Error&gt; Input::initialize()</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_function" href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordflow">if</span> (this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  Input::initialized = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  INFO(<span class="stringliteral">&quot;{} initialized&quot;</span>, Input::subsystem_name);</div>
@@ -134,26 +134,22 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>std::expected&lt;void, Subsystem::Error&gt; Input::terminate()</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>{</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (!this-&gt;<a class="code hl_function" href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>  <span class="keywordflow">if</span> (!this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  Input::initialized = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>  INFO(<span class="stringliteral">&quot;{}: terminated&quot;</span>, Input::subsystem_name);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>}</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="}">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">   43</a></span>std::string <a class="code hl_function" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">Input::name</a>()</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>std::string Input::name()</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  <span class="keywordflow">return</span> Input::subsystem_name;</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
-</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">   48</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">Input::is_initialized</a>()</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keywordtype">bool</span> Input::is_initialized()</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>{</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  <span class="keywordflow">return</span> Input::initialized;</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>}</div>
-</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="comment">//</span></div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span><span class="comment">// Member functions</span></div>
@@ -245,11 +241,9 @@ $(document).ready(function(){initNavTree('input_8cpp_source.html',''); initResiz
 <div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>{</div>
 <div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>  <span class="keywordflow">return</span> Input::instance();</div>
 <div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>}</div>
-<div class="ttc" id="aclassbrenta_1_1Input_html"><div class="ttname"><a href="classbrenta_1_1Input.html">brenta::Input</a></div><div class="ttdoc">Input subsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00029">input.hpp:30</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Input_html_a0ae5fd441d95f7bd1bcfaf13a87c2fed"><div class="ttname"><a href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">brenta::Input::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00048">input.cpp:48</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Input_html_ab4b16a111710e2230f9c58ec9b7f06ec"><div class="ttname"><a href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">brenta::Input::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="input_8cpp_source.html#l00043">input.cpp:43</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Input_html"><div class="ttname"><a href="classbrenta_1_1Input.html">brenta::Input</a></div><div class="ttdef"><b>Definition</b> <a href="input_8hpp_source.html#l00030">input.hpp:31</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1KeyMods_html"><div class="ttname"><a href="classbrenta_1_1KeyMods.html">brenta::KeyMods</a></div><div class="ttdef"><b>Definition</b> <a href="key_8hpp_source.html#l00157">key.hpp:158</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00022">subsystem.hpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

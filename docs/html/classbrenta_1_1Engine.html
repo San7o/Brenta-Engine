@@ -99,18 +99,13 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Engine.html',''); initR
   <div class="headertitle"><div class="title">brenta::Engine Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classbrenta_1_1Engine.html" title="Engine class.">Engine</a> class.  
- <a href="classbrenta_1_1Engine.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="engine_8hpp_source.html">engine.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for brenta::Engine:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classbrenta_1_1Engine.png" usemap="#brenta::Engine_map" alt=""/>
   <map id="brenta::Engine_map" name="brenta::Engine_map">
-<area href="classbrenta_1_1Subsystem.html" title="Subsystem interface." alt="brenta::Subsystem" shape="rect" coords="0,0,114,24"/>
+<area href="classbrenta_1_1Subsystem.html" alt="brenta::Subsystem" shape="rect" coords="0,0,114,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -128,10 +123,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa425418480e7b7d92ab6cb8f247b6581" id="r_aa425418480e7b7d92ab6cb8f247b6581"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Engine.html#aa425418480e7b7d92ab6cb8f247b6581">terminate</a> () override</td></tr>
 <tr class="separator:aa425418480e7b7d92ab6cb8f247b6581"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a873db44633f8d374eb6b4225d05397cb" id="r_a873db44633f8d374eb6b4225d05397cb"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Engine.html#a873db44633f8d374eb6b4225d05397cb">name</a> () override</td></tr>
-<tr class="memdesc:a873db44633f8d374eb6b4225d05397cb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
 <tr class="separator:a873db44633f8d374eb6b4225d05397cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a274109934294fcd0dc8aebcae61ff493" id="r_a274109934294fcd0dc8aebcae61ff493"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Engine.html#a274109934294fcd0dc8aebcae61ff493">is_initialized</a> () override</td></tr>
-<tr class="memdesc:a274109934294fcd0dc8aebcae61ff493"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the subsystem is initialized.  <br /></td></tr>
 <tr class="separator:a274109934294fcd0dc8aebcae61ff493"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
@@ -155,11 +148,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classbrenta_1_1Engine.html" title="Engine class.">Engine</a> class. </p>
-<p>This class is used to initialize and terminate multiple subsystems. You can use the builder class to initialize the engine, as with any other subsystem.</p>
-<p>Note: The subsystems will be initialized in the order they were added, and terminated in reverse order. Make sure that they are ordered correctly if a subsystem depends on another one. </p>
-
-<p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00029">29</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00030">30</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a4e91165fd36cf9611d9047bfe09636dd" name="a4e91165fd36cf9611d9047bfe09636dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4e91165fd36cf9611d9047bfe09636dd">&#9670;&#160;</a></span>initialize()</h2>
@@ -240,9 +230,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns true if the subsystem is initialized. </p>
-
-<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">brenta::Subsystem</a>.</p>
+<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00067">67</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
@@ -298,9 +286,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the name of the sybsystem. </p>
-
-<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">brenta::Subsystem</a>.</p>
+<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="engine_8cpp_source.html#l00062">62</a> of file <a class="el" href="engine_8cpp_source.html">engine.cpp</a>.</p>
 
@@ -384,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00037">37</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="engine_8hpp_source.html#l00038">38</a> of file <a class="el" href="engine_8hpp_source.html">engine.hpp</a>.</p>
 
 </div>
 </div>

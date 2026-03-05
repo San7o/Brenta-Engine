@@ -234,7 +234,7 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span> </div>
 <div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>std::expected&lt;void, Subsystem::Error&gt; Gui::initialize()</div>
 <div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>{</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_function" href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>  <span class="keywordflow">if</span> (this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>  </div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>  IMGUI_CHECKVERSION();</div>
 <div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>  ImGui::CreateContext();</div>
@@ -258,7 +258,7 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>std::expected&lt;void, Subsystem::Error&gt; Gui::terminate()</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>{</div>
-<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">if</span> (!this-&gt;<a class="code hl_function" href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span>  <span class="keywordflow">if</span> (!this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>  </div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  ImGui_ImplOpenGL3_Shutdown();</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  ImGui_ImplGlfw_Shutdown();</div>
@@ -269,19 +269,15 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>}</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span> </div>
-<div class="foldopen" id="foldopen00171" data-start="{" data-end="}">
-<div class="line"><a id="l00171" name="l00171"></a><span class="lineno"><a class="line" href="classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17">  171</a></span>std::string <a class="code hl_function" href="classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17">Gui::name</a>()</div>
+<div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span>std::string Gui::name()</div>
 <div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>{</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>  <span class="keywordflow">return</span> Gui::subsystem_name;</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span>}</div>
-</div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span> </div>
-<div class="foldopen" id="foldopen00176" data-start="{" data-end="}">
-<div class="line"><a id="l00176" name="l00176"></a><span class="lineno"><a class="line" href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">  176</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">Gui::is_initialized</a>()</div>
+<div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span><span class="keywordtype">bool</span> Gui::is_initialized()</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>{</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span>  <span class="keywordflow">return</span> Gui::initialized;</div>
 <div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>}</div>
-</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span> </div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span><span class="comment">//</span></div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span><span class="comment">// Member functions</span></div>
@@ -324,7 +320,7 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>  ImGui::SetNextWindowSize(ImVec2(Window::get_width() * 0.8,</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                                  Window::get_width() * 0.8),</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                           ImGuiCond_FirstUseEver);</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  ImGui::Begin(<a class="code hl_function" href="classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17">name</a>.c_str());</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>  ImGui::Begin(name.c_str());</div>
 <div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>  <span class="keywordtype">float</span> window_width = ImGui::GetContentRegionAvail().x;</div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>  <span class="keywordtype">float</span> window_height = ImGui::GetContentRegionAvail().y;</div>
@@ -357,10 +353,8 @@ $(document).ready(function(){initNavTree('gui_8cpp_source.html',''); initResizab
 <div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span> </div>
 <div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span><span class="preprocessor">#endif </span><span class="comment">// BRENTA_NO_IMGUI</span></div>
 <div class="ttc" id="aclassbrenta_1_1FrameBuffer_html"><div class="ttname"><a href="classbrenta_1_1FrameBuffer.html">brenta::FrameBuffer</a></div><div class="ttdef"><b>Definition</b> <a href="framebuffer_8hpp_source.html#l00029">framebuffer.hpp:30</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gui_html"><div class="ttname"><a href="classbrenta_1_1Gui.html">brenta::Gui</a></div><div class="ttdoc">Gui class.</div><div class="ttdef"><b>Definition</b> <a href="gui_8hpp_source.html#l00028">gui.hpp:29</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gui_html_a019641e4660c3854bead7550b8003182"><div class="ttname"><a href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">brenta::Gui::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00176">gui.cpp:176</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gui_html_a64545723d31dd0164e78098fb5637a17"><div class="ttname"><a href="classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17">brenta::Gui::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="gui_8cpp_source.html#l00171">gui.cpp:171</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Gui_html"><div class="ttname"><a href="classbrenta_1_1Gui.html">brenta::Gui</a></div><div class="ttdef"><b>Definition</b> <a href="gui_8hpp_source.html#l00032">gui.hpp:33</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00022">subsystem.hpp:23</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -36,7 +36,7 @@ HTML_INTRO      := utils/website/intro.html
 HTML_OUTRO      := utils/website/outro.html
 TMP_FILE        := /tmp/padoc-out.html
 HIGHLIGHT_STYLE := tango
-PANDOC_FLAGS    := --highlight-style ${HIGHLIGHT_STYLE}
+PANDOC_FLAGS    := --highlight-style ${HIGHLIGHT_STYLE} --ascii
 
 html: doxygen ${HTML} ## Generate website and documentation
 
@@ -48,12 +48,13 @@ doxygen: ## Generate html documentation
 	cp -r docs/*.jpg ${HTML_DIR}
 
 $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
-	pandoc $< -o ${TMP_FILE} ${PANDOC_FLAGS}
+	pandoc $< -f markdown-smart -t html -o ${TMP_FILE} ${PANDOC_FLAGS}
 	cp ${HTML_INTRO} $@
 	cat ${TMP_FILE} >> $@
 	cat ${HTML_OUTRO} >> $@
 	sed -i 's/\.md/\.html/g' $@
 	sed -i 's/.\/html/.\//g' $@
+	sed -i "s/’/\'/g" $@
 
 $(HTML_DIR):
 	mkdir -p ${HTML_DIR}

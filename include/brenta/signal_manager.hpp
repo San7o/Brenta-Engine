@@ -51,6 +51,9 @@ public:
 
   // Consumes all pending events
   static void update();
+
+  // Resets everything
+  static void clear();
   
 private:
 
@@ -85,14 +88,24 @@ public:
 
   Subscription(Subscription&& other)
   {
-    this->signal_id     = other.signal_id;
+    if (this == &other) return;
+    
+    if (this->connection_id != 0)
+      SignalManager::unsubscribe(*this);
+    
+    this->signal_id     = tenno::move(other.signal_id);
     this->connection_id = other.connection_id;
     other.signal_id     = SignalId{};
     other.connection_id = ConnectionId{};
   }
   Subscription &operator=(Subscription&& other)
   {
-    this->signal_id     = other.signal_id;
+    if (this == &other) return *this;
+    
+    if (this->connection_id != 0)
+      SignalManager::unsubscribe(*this);
+    
+    this->signal_id     = tenno::move(other.signal_id);
     this->connection_id = other.connection_id;
     other.signal_id     = SignalId{};
     other.connection_id = ConnectionId{};
@@ -100,7 +113,7 @@ public:
   }
 
   // Copy is not allowed
-  Subscription(const Subscription&)           = delete;
+  Subscription(const Subscription&)            = delete;
   Subscription &operator=(const Subscription&) = delete;
 
   ~Subscription();
@@ -111,7 +124,7 @@ private:
     : signal_id(signal_id), connection_id(connection_id) {}
 
   SignalId       signal_id;
-  ConnectionId   connection_id;
+  ConnectionId   connection_id;   // 0 = uninitialized
   
 };
   

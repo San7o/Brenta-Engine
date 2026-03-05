@@ -317,35 +317,16 @@ TODO
 
 ## Audio
 
-The audio subsystem is very simple: there are audio streams and audio
-files, you can play an audio file on a stream and stop it. Each stream
-can play only one audio at a time, so you need to have multiple
-streams if you want to play multiple sounds at the same time.
-
-You can load an audio file like so:
+TODO
 
 ```cpp
-Audio::load("guitar", "assets/audio/guitar.wav");
+auto guitar_sound_asset = SoundAsset::Builder()
+  .path("examples/assets/audio/guitar.wav")
+  .build();
+auto guitar_sound = Sound(guitar_sound_asset.value());
+
+guitar_sound.play();
 ```
-
-We are identifying this audio file with the name `guitar`.
-
-You can create a stream with the name "music" like so:
-
-```cpp
-Audio::create_stream("music");
-```
-
-And finally play the `guitar` audio like so:
-
-```cpp
-Audio::play("guitar");
-```
-
-You can Pause and Resume streams with `brenta::audio::stream_pause` and
-`brenta::audio::stream_resume`, set the volume and stop it. You can find
-the API in `Brenta::Audio`.
-
 
 ## Opengl
 
@@ -367,22 +348,24 @@ GPU so the engine can handle lots and lots of particles. Here's a
 quick look on the API:
 
 ```cpp
-auto emitter = ParticleEmitter::Builder()
-       .starting_position(glm::vec3(0.0f, 0.0f, 5.0f))
-       .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
-       .starting_spread(glm::vec3(10.0f, 10.0f, 10.0f))
-       .starting_time_to_live(0.5f)
-       .num_particles(1000)
-       .spawn_rate(0.01f)
-       .scale(1.0f)
-       .atlas_path"assets/textures/particle_atlas.png")
-       .atlas_width(8)
-       .atlas_height(8)
-       .atlas_index(45)
-       .build();
+auto emitter =
+  ParticleEmitter::Builder()
+    .with_camera(camera)
+    .starting_position(glm::vec3(0.0f, 0.0f, 0.0f))
+    .starting_velocity(glm::vec3(0.0f, 5.0f, 0.0f))
+    .starting_spread(glm::vec3(3.0f, 10.0f, 3.0f))
+    .starting_time_to_live(0.5f)
+    .num_particles(1000)
+    .spawn_rate(0.99f)
+    .scale(1.0f)
+    .atlas_path("examples/assets/textures/particle_atlas.png")
+    .atlas_width(8)
+    .atlas_height(8)
+    .atlas_index(3)
+    .build();
 
-// Inside the game loop:
-emitter.update(Window::get_time().get_delta());
+// Inside the main loop
+emitter.update(delta_time);
 emitter.render();
 ```
 
@@ -390,11 +373,20 @@ emitter.render();
 
 TODO
 
-The `brenta::text` subsystem allows you to render text on the screen. You can
-set the font and font size of your text, and render it in the main loop like
-this:
 ```cpp
-Text::render_text("Hello OpenGL!", x, y, scale, glm::vec3(r, g, b));
+auto font     = Font("examples/assets/fonts/arial.ttf", 100);
+auto font_ptr =
+  tenno::make_shared<Font>(tenno::move(font));
+
+Text hello = {
+  "Hello OpenGL!",
+  25.0f,
+  25.0f,
+  1.0f,
+  Color::yellow(),
+  font_ptr
+};
+hello.render();
 ```
 
 ## Renderer
@@ -491,12 +483,11 @@ e.add_component<PhysicsComponent>(10.0f);
 
 ### System
 
-A System is a function that gets called at each Tick. It contains all
-the logic of the World. You will interact with the Entities,
-Components and Resources via queries. You can specify an entity to
-query by adding components to `system<...>`, the World will provide
-you with an `std::vector<entity_t>` of the entities that have all the
-components you specified.
+A System is a function that gets called at each Tick and implements
+the update logic of the World. You can specify entities to query by
+adding components to `system<...>`, the World will provide you with an
+`std::vector<entity_t>` of the entities that have all the components
+you specified.
 
 Here is an example:
 
@@ -546,7 +537,7 @@ Here is an high level simplified view of those objects:
 ![image](https://github.com/user-attachments/assets/d76b238d-56f1-4b57-8140-400af6ed1d23)
 
 
-## Scene graph
+## Node graph
 
 TODO
 
@@ -555,6 +546,10 @@ TODO
 TODO
 
 ### Nodes
+
+TODO
+
+## Node Components
 
 TODO
 

@@ -101,18 +101,13 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Window.html',''); initR
   <div class="headertitle"><div class="title">brenta::Window Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classbrenta_1_1Window.html" title="Window subsystem.">Window</a> subsystem.  
- <a href="classbrenta_1_1Window.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="window_8hpp_source.html">window.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for brenta::Window:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classbrenta_1_1Window.png" usemap="#brenta::Window_map" alt=""/>
   <map id="brenta::Window_map" name="brenta::Window_map">
-<area href="classbrenta_1_1Subsystem.html" title="Subsystem interface." alt="brenta::Subsystem" shape="rect" coords="0,0,114,24"/>
+<area href="classbrenta_1_1Subsystem.html" alt="brenta::Subsystem" shape="rect" coords="0,0,114,24"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -122,6 +117,8 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Window_1_1Config.html">Config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window_1_1Driver.html">Driver</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
@@ -129,22 +126,22 @@ Public Types</h2></td></tr>
 <tr class="separator:a644e32a9f239f340ac0d1923d80d4c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2788b582773953c4505b604cbcf2968f" id="r_a2788b582773953c4505b604cbcf2968f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2788b582773953c4505b604cbcf2968f">ProcHandle</a> = void *</td></tr>
 <tr class="separator:a2788b582773953c4505b604cbcf2968f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adbbb76deb2987a5ec3f7d5735d20658b" id="r_adbbb76deb2987a5ec3f7d5735d20658b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#adbbb76deb2987a5ec3f7d5735d20658b">Callback</a> = void *</td></tr>
+<tr class="separator:adbbb76deb2987a5ec3f7d5735d20658b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_types_classbrenta_1_1Subsystem"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classbrenta_1_1Subsystem')"><img src="closed.png" alt="-"/>&#160;Public Types inherited from <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></td></tr>
 <tr class="memitem:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem" id="r_adaa1969d5a9d482356bcf027ac30818a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#adaa1969d5a9d482356bcf027ac30818a">Error</a> = std::string</td></tr>
 <tr class="separator:adaa1969d5a9d482356bcf027ac30818a inherit pub_types_classbrenta_1_1Subsystem"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a8d8581c08a9fbe1e56c0d3e19b294b48" id="r_a8d8581c08a9fbe1e56c0d3e19b294b48"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a8d8581c08a9fbe1e56c0d3e19b294b48">name</a> () override</td></tr>
+<tr class="separator:a8d8581c08a9fbe1e56c0d3e19b294b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ebba078cfbe573cb0c5ce0a763fc61b" id="r_a4ebba078cfbe573cb0c5ce0a763fc61b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a4ebba078cfbe573cb0c5ce0a763fc61b">is_initialized</a> () override</td></tr>
+<tr class="separator:a4ebba078cfbe573cb0c5ce0a763fc61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441879222ddece3eb0fc3078ef02dbb3" id="r_a441879222ddece3eb0fc3078ef02dbb3"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a441879222ddece3eb0fc3078ef02dbb3">initialize</a> () override</td></tr>
 <tr class="separator:a441879222ddece3eb0fc3078ef02dbb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93b6cbc7d0e6a4d9743db0426036f1d0" id="r_a93b6cbc7d0e6a4d9743db0426036f1d0"><td class="memItemLeft" align="right" valign="top">std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a93b6cbc7d0e6a4d9743db0426036f1d0">terminate</a> () override</td></tr>
 <tr class="separator:a93b6cbc7d0e6a4d9743db0426036f1d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d8581c08a9fbe1e56c0d3e19b294b48" id="r_a8d8581c08a9fbe1e56c0d3e19b294b48"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a8d8581c08a9fbe1e56c0d3e19b294b48">name</a> () override</td></tr>
-<tr class="memdesc:a8d8581c08a9fbe1e56c0d3e19b294b48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
-<tr class="separator:a8d8581c08a9fbe1e56c0d3e19b294b48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ebba078cfbe573cb0c5ce0a763fc61b" id="r_a4ebba078cfbe573cb0c5ce0a763fc61b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a4ebba078cfbe573cb0c5ce0a763fc61b">is_initialized</a> () override</td></tr>
-<tr class="memdesc:a4ebba078cfbe573cb0c5ce0a763fc61b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the subsystem is initialized.  <br /></td></tr>
-<tr class="separator:a4ebba078cfbe573cb0c5ce0a763fc61b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -164,28 +161,28 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a3bed48584f1db01500fb1778c439b9ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abba39c4d491902b6c45957a8b818177b" id="r_abba39c4d491902b6c45957a8b818177b"><td class="memItemLeft" align="right" valign="top">static WindowHandle&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#abba39c4d491902b6c45957a8b818177b">get_window</a> ()</td></tr>
 <tr class="separator:abba39c4d491902b6c45957a8b818177b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a26513ff65c2d59024db3d34a7ca10f3b" id="r_a26513ff65c2d59024db3d34a7ca10f3b"><td class="memItemLeft" align="right" valign="top">static tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a26513ff65c2d59024db3d34a7ca10f3b">get_driver</a> ()</td></tr>
-<tr class="separator:a26513ff65c2d59024db3d34a7ca10f3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fc2682905cf08f5f306e3511190e2ec" id="r_a2fc2682905cf08f5f306e3511190e2ec"><td class="memItemLeft" align="right" valign="top">static tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1Window_1_1Driver.html">Window::Driver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2fc2682905cf08f5f306e3511190e2ec">get_driver</a> ()</td></tr>
+<tr class="separator:a2fc2682905cf08f5f306e3511190e2ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad45d2bebc7b722c9801e570a2233cab7" id="r_ad45d2bebc7b722c9801e570a2233cab7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ad45d2bebc7b722c9801e570a2233cab7">set_mouse_capture</a> (bool is_captured)</td></tr>
 <tr class="separator:ad45d2bebc7b722c9801e570a2233cab7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeba0eb85c7cf4cb1b3ec695fae6ddde6" id="r_aeba0eb85c7cf4cb1b3ec695fae6ddde6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aeba0eb85c7cf4cb1b3ec695fae6ddde6">set_width_height</a> (int width, int height)</td></tr>
 <tr class="separator:aeba0eb85c7cf4cb1b3ec695fae6ddde6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8449adc223fc8dc08b4613f71c9f0a9" id="r_af8449adc223fc8dc08b4613f71c9f0a9"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#af8449adc223fc8dc08b4613f71c9f0a9">set_mouse_callback</a> (void *callback)</td></tr>
-<tr class="separator:af8449adc223fc8dc08b4613f71c9f0a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1106215b612aef5b698ba7663b63323f" id="r_a1106215b612aef5b698ba7663b63323f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a1106215b612aef5b698ba7663b63323f">set_size_callback</a> (void *callback)</td></tr>
-<tr class="separator:a1106215b612aef5b698ba7663b63323f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a62ef54c3094f7db2cafbe5d305e39dac" id="r_a62ef54c3094f7db2cafbe5d305e39dac"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a62ef54c3094f7db2cafbe5d305e39dac">set_mouse_pos_callback</a> (void *callback)</td></tr>
-<tr class="separator:a62ef54c3094f7db2cafbe5d305e39dac"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a69b31494cefcf9b6fa54d0c5f7a2bc" id="r_a5a69b31494cefcf9b6fa54d0c5f7a2bc"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a5a69b31494cefcf9b6fa54d0c5f7a2bc">set_key_callback</a> (void *callback)</td></tr>
-<tr class="separator:a5a69b31494cefcf9b6fa54d0c5f7a2bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb48390fa1c645240c5b7fb80b8ac585" id="r_adb48390fa1c645240c5b7fb80b8ac585"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#adb48390fa1c645240c5b7fb80b8ac585">set_mouse_callback</a> (Callback callback)</td></tr>
+<tr class="separator:adb48390fa1c645240c5b7fb80b8ac585"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0e7579030dc9d5f61b94cae03a03d33c" id="r_a0e7579030dc9d5f61b94cae03a03d33c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a0e7579030dc9d5f61b94cae03a03d33c">set_size_callback</a> (Callback callback)</td></tr>
+<tr class="separator:a0e7579030dc9d5f61b94cae03a03d33c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a407be980e19fbf13f74b0b117c1221ba" id="r_a407be980e19fbf13f74b0b117c1221ba"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a407be980e19fbf13f74b0b117c1221ba">set_mouse_pos_callback</a> (Callback callback)</td></tr>
+<tr class="separator:a407be980e19fbf13f74b0b117c1221ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2fbe538e15c158d8a71634fc840f8dae" id="r_a2fbe538e15c158d8a71634fc840f8dae"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2fbe538e15c158d8a71634fc840f8dae">set_key_callback</a> (Callback callback)</td></tr>
+<tr class="separator:a2fbe538e15c158d8a71634fc840f8dae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57bcccdec91d9130f3227080d5170fcb" id="r_a57bcccdec91d9130f3227080d5170fcb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a57bcccdec91d9130f3227080d5170fcb">set_dimensions</a> (int width, int height)</td></tr>
+<tr class="separator:a57bcccdec91d9130f3227080d5170fcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0b1c49dc0ddd2b59405a44356444ed9d" id="r_a0b1c49dc0ddd2b59405a44356444ed9d"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a0b1c49dc0ddd2b59405a44356444ed9d">swap_buffers</a> ()</td></tr>
 <tr class="separator:a0b1c49dc0ddd2b59405a44356444ed9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a5504a7fabe168d445989f210613e16" id="r_a2a5504a7fabe168d445989f210613e16"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a2a5504a7fabe168d445989f210613e16">poll_events</a> ()</td></tr>
 <tr class="separator:a2a5504a7fabe168d445989f210613e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a081525331231e5d63f17ba46267a457e" id="r_a081525331231e5d63f17ba46267a457e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a081525331231e5d63f17ba46267a457e">update_dimensions</a> ()</td></tr>
 <tr class="separator:a081525331231e5d63f17ba46267a457e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8d6aac2e514ea9245b2e1a311934c9a7" id="r_a8d6aac2e514ea9245b2e1a311934c9a7"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a8d6aac2e514ea9245b2e1a311934c9a7">update_dimensions</a> (int width, int height)</td></tr>
-<tr class="separator:a8d6aac2e514ea9245b2e1a311934c9a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae0e865a4eb0ca1a167af8648dc9822fa" id="r_ae0e865a4eb0ca1a167af8648dc9822fa"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ae0e865a4eb0ca1a167af8648dc9822fa">make_context_current</a> ()</td></tr>
 <tr class="separator:ae0e865a4eb0ca1a167af8648dc9822fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a35055c04498121d39741bfcd5082705b" id="r_a35055c04498121d39741bfcd5082705b"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a35055c04498121d39741bfcd5082705b">close</a> ()</td></tr>
@@ -198,19 +195,33 @@ Static Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-attribs" name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
-<tr class="memitem:aac33033a72aaa7b3bbcf0b2cf995468b" id="r_aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structbrenta_1_1Window_1_1Config.html">Window::Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aac33033a72aaa7b3bbcf0b2cf995468b">init_config</a> = {}</td></tr>
-<tr class="separator:aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad80150edf88d1dd060bfc0891ec3a625" id="r_ad80150edf88d1dd060bfc0891ec3a625"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#ad80150edf88d1dd060bfc0891ec3a625">initialized</a> = false</td></tr>
 <tr class="separator:ad80150edf88d1dd060bfc0891ec3a625"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a28a3dab8a9145ceda82e935d3939babc" id="r_a28a3dab8a9145ceda82e935d3939babc"><td class="memItemLeft" align="right" valign="top">static tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a28a3dab8a9145ceda82e935d3939babc">backend</a> = nullptr</td></tr>
-<tr class="separator:a28a3dab8a9145ceda82e935d3939babc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac33033a72aaa7b3bbcf0b2cf995468b" id="r_aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="structbrenta_1_1Window_1_1Config.html">Window::Config</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#aac33033a72aaa7b3bbcf0b2cf995468b">init_config</a> = {}</td></tr>
+<tr class="separator:aac33033a72aaa7b3bbcf0b2cf995468b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53b6b41b0497e82b67e54d308827867a" id="r_a53b6b41b0497e82b67e54d308827867a"><td class="memItemLeft" align="right" valign="top">static tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1Window_1_1Driver.html">Window::Driver</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Window.html#a53b6b41b0497e82b67e54d308827867a">backend</a> = nullptr</td></tr>
+<tr class="separator:a53b6b41b0497e82b67e54d308827867a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classbrenta_1_1Window.html" title="Window subsystem.">Window</a> subsystem. </p>
-<p>This class is used to create a window and handle all the events related to the window. This class provides methods to initialize the window, get the window size, check if a key is pressed, get the time since the start of the program, and more. </p>
-
-<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00029">29</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00028">28</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
+<a id="adbbb76deb2987a5ec3f7d5735d20658b" name="adbbb76deb2987a5ec3f7d5735d20658b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbbb76deb2987a5ec3f7d5735d20658b">&#9670;&#160;</a></span>Callback</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using brenta::Window::Callback =  void*</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00038">38</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+
+</div>
+</div>
 <a id="a2788b582773953c4505b604cbcf2968f" name="a2788b582773953c4505b604cbcf2968f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2788b582773953c4505b604cbcf2968f">&#9670;&#160;</a></span>ProcHandle</h2>
 
@@ -271,8 +282,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a26513ff65c2d59024db3d34a7ca10f3b" name="a26513ff65c2d59024db3d34a7ca10f3b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a26513ff65c2d59024db3d34a7ca10f3b">&#9670;&#160;</a></span>get_driver()</h2>
+<a id="a2fc2682905cf08f5f306e3511190e2ec" name="a2fc2682905cf08f5f306e3511190e2ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fc2682905cf08f5f306e3511190e2ec">&#9670;&#160;</a></span>get_driver()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -281,7 +292,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt; Window::get_driver </td>
+          <td class="memname">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1Window_1_1Driver.html">Window::Driver</a> &gt; Window::get_driver </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -512,9 +523,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns true if the subsystem is initialized. </p>
-
-<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">brenta::Subsystem</a>.</p>
+<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00063">63</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
@@ -598,9 +607,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Returns the name of the sybsystem. </p>
-
-<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">brenta::Subsystem</a>.</p>
+<p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
 <p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00058">58</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
 
@@ -633,8 +640,46 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a69b31494cefcf9b6fa54d0c5f7a2bc" name="a5a69b31494cefcf9b6fa54d0c5f7a2bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a69b31494cefcf9b6fa54d0c5f7a2bc">&#9670;&#160;</a></span>set_key_callback()</h2>
+<a id="a57bcccdec91d9130f3227080d5170fcb" name="a57bcccdec91d9130f3227080d5170fcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57bcccdec91d9130f3227080d5170fcb">&#9670;&#160;</a></span>set_dimensions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Window::set_dimensions </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00145">145</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2fbe538e15c158d8a71634fc840f8dae" name="a2fbe538e15c158d8a71634fc840f8dae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2fbe538e15c158d8a71634fc840f8dae">&#9670;&#160;</a></span>set_key_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -645,7 +690,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_key_callback </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">Window::Callback&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -661,8 +706,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="af8449adc223fc8dc08b4613f71c9f0a9" name="af8449adc223fc8dc08b4613f71c9f0a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8449adc223fc8dc08b4613f71c9f0a9">&#9670;&#160;</a></span>set_mouse_callback()</h2>
+<a id="adb48390fa1c645240c5b7fb80b8ac585" name="adb48390fa1c645240c5b7fb80b8ac585"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb48390fa1c645240c5b7fb80b8ac585">&#9670;&#160;</a></span>set_mouse_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -673,7 +718,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_mouse_callback </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">Window::Callback&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -717,8 +762,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a62ef54c3094f7db2cafbe5d305e39dac" name="a62ef54c3094f7db2cafbe5d305e39dac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a62ef54c3094f7db2cafbe5d305e39dac">&#9670;&#160;</a></span>set_mouse_pos_callback()</h2>
+<a id="a407be980e19fbf13f74b0b117c1221ba" name="a407be980e19fbf13f74b0b117c1221ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a407be980e19fbf13f74b0b117c1221ba">&#9670;&#160;</a></span>set_mouse_pos_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -729,7 +774,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_mouse_pos_callback </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">Window::Callback&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -745,8 +790,8 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a1106215b612aef5b698ba7663b63323f" name="a1106215b612aef5b698ba7663b63323f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1106215b612aef5b698ba7663b63323f">&#9670;&#160;</a></span>set_size_callback()</h2>
+<a id="a0e7579030dc9d5f61b94cae03a03d33c" name="a0e7579030dc9d5f61b94cae03a03d33c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0e7579030dc9d5f61b94cae03a03d33c">&#9670;&#160;</a></span>set_size_callback()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -757,7 +802,7 @@ Static Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">void Window::set_size_callback </td>
           <td>(</td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">Window::Callback&#160;</td>
           <td class="paramname"><em>callback</em></td><td>)</td>
           <td></td>
         </tr>
@@ -895,7 +940,7 @@ Static Protected Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a081525331231e5d63f17ba46267a457e" name="a081525331231e5d63f17ba46267a457e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a081525331231e5d63f17ba46267a457e">&#9670;&#160;</a></span>update_dimensions() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a081525331231e5d63f17ba46267a457e">&#9670;&#160;</a></span>update_dimensions()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -921,47 +966,9 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a8d6aac2e514ea9245b2e1a311934c9a7" name="a8d6aac2e514ea9245b2e1a311934c9a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8d6aac2e514ea9245b2e1a311934c9a7">&#9670;&#160;</a></span>update_dimensions() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Window::update_dimensions </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>width</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>height</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="window_8cpp_source.html#l00145">145</a> of file <a class="el" href="window_8cpp_source.html">window.cpp</a>.</p>
-
-</div>
-</div>
 <h2 class="groupheader">Field Documentation</h2>
-<a id="a28a3dab8a9145ceda82e935d3939babc" name="a28a3dab8a9145ceda82e935d3939babc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a28a3dab8a9145ceda82e935d3939babc">&#9670;&#160;</a></span>backend</h2>
+<a id="a53b6b41b0497e82b67e54d308827867a" name="a53b6b41b0497e82b67e54d308827867a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53b6b41b0497e82b67e54d308827867a">&#9670;&#160;</a></span>backend</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -970,7 +977,7 @@ Static Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1WindowDriver.html">WindowDriver</a> &gt; Window::backend = nullptr</td>
+          <td class="memname">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1Window_1_1Driver.html">Window::Driver</a> &gt; Window::backend = nullptr</td>
         </tr>
       </table>
   </td>
@@ -1004,7 +1011,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00092">92</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00094">94</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
 
 </div>
 </div>
@@ -1028,7 +1035,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00094">94</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00093">93</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
 
 </div>
 </div>
@@ -1052,7 +1059,7 @@ Static Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00040">40</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="window_8hpp_source.html#l00041">41</a> of file <a class="el" href="window_8hpp_source.html">window.hpp</a>.</p>
 
 </div>
 </div>

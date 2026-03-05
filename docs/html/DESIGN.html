@@ -9,27 +9,13 @@
     <div class="topnav">
       <a href="./index.html">Brenta Engine</a>
       <a href="./DESIGN.html">Design</a>      
-      <a href="./BUILD.html">Build</a>
       <a href="./GUIDE.html">Guide</a>
-      <a href="./CONTRIBUTING.html">Contributing</a>
+      <a href="./BUILD.html">Build</a>
       <a href="./annotated.html">Data structures</a>
       <a href="./files.html">Files</a>
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
     </div>
 <h1 id="design">Design</h1>
-<p>I could tell you that the Brenta engine was perfectly designed, with
-a clear vision from its inception, with a beautiful and powerful API
-that makes programming truly enjoyable. Except the fact that it would be
-a lie. It does not mean that I don’t find the current design and API
-beautiful and fun - I think Brenta is a powerful engine - but its
-development has been more iterative than meticulously designed. I
-rewrote huge parts of the engine many many times, to the point where I
-am not scared to do big refactoring anymore - that is just routine - and
-I know I am deemed to repeat this process again. But through these many
-refactoring, the API reached a point where all objects work well
-together and you can reason about them through what I call the
-“architecture” or “design” of the engine. This is what I aim to describe
-in this documents.</p>
 <p>Game engines are complex pieces of software. They provide an
 interface to define logic, render graphics, and access system resources
 like audio and input, as well as providing a cross-platform abstraction
@@ -38,6 +24,14 @@ to the developer.</p>
 <img src="./brenta-picture.png" alt="high-level-overview" />
 <figcaption aria-hidden="true">high-level-overview</figcaption>
 </figure>
+<p>Brenta's its development has been more iterative than meticulously
+designed. I rewrote huge parts of the engine many many times, to the
+point where I am not scared to do big refactoring anymore - that is just
+routine - and I know I am deemed to repeat this process again. But
+through these many refactoring, the API reached a point where all
+objects work well together and you can reason about them through what I
+call the "architecture" or "design" of the engine. This is what I aim to
+describe in this documents.</p>
 <p>I wanted to write my own graphics engine primarily because I was
 curious to understand how these big systems are designed and
 implemented, and as a programming exercise / learning experience. The
@@ -89,11 +83,11 @@ now provide raytracing support on hardware to speed this up). Brenta
 uses rasterization, which means projecting each surface to the screen
 and calculating the color of each pixel by interpolating each one of
 them (parallelized on the GPU).</p>
-<p>This “projection” is achieved by multiplying together three matrices:
+<p>This "projection" is achieved by multiplying together three matrices:
 the <code>model</code> or <code>world</code> matrix which translates a
 vertex to its position in world space, the <code>view</code> matrix
 which shift and rotates the world based on the camera position (If the
-camera moves 5 feet to the right, it’s mathematically the same as moving
+camera moves 5 feet to the right, it&#x2019;s mathematically the same as moving
 the entire world 5 feet to the left), and <code>projection</code> matrix
 which applies perspective and field-of-view; this ultimately maps the
 vertices inside a cube called the Canonical Cube where the GPU can work
@@ -104,7 +98,7 @@ reflection model</a> but provides the abstractions necessary to
 integrate other methods.</p>
 <h2 id="scene">Scene</h2>
 <p>There are many ways to define a scene. Brenta supports both the
-scene-graph architecture, commonly used in Godot, Unity and Unreal, and
+node-graph architecture, commonly used in Godot, Unity and Unreal, and
 the ECS (Entity Component System) architecture like in <a
 href="https://github.com/bevyengine/bevy/">Bevy</a>.</p>
 <h3 id="scene-graph">Scene graph</h3>

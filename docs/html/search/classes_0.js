@@ -4,7 +4,5 @@ var searchData=
   ['app_1',['App',['../classbrenta_1_1App.html',1,'brenta']]],
   ['asset_2',['Asset',['../structbrenta_1_1AssetManager_1_1Asset.html',1,'brenta::AssetManager']]],
   ['assetmanager_3',['AssetManager',['../classbrenta_1_1AssetManager.html',1,'brenta']]],
-  ['assetowned_4',['AssetOwned',['../structbrenta_1_1AssetManager_1_1AssetOwned.html',1,'brenta::AssetManager']]],
-  ['audio_5',['Audio',['../classbrenta_1_1Audio.html',1,'brenta']]],
-  ['audiodriver_6',['AudioDriver',['../classbrenta_1_1AudioDriver.html',1,'brenta']]]
+  ['assetowned_4',['AssetOwned',['../structbrenta_1_1AssetManager_1_1AssetOwned.html',1,'brenta::AssetManager']]]
 ];

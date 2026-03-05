@@ -98,32 +98,26 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Subsystem.html',''); in
   <div class="headertitle"><div class="title">brenta::Subsystem Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div></div>
 </div><!--header-->
 <div class="contents">
-
-<p><a class="el" href="classbrenta_1_1Subsystem.html" title="Subsystem interface.">Subsystem</a> interface.  
- <a href="classbrenta_1_1Subsystem.html#details">More...</a></p>
-
-<p><code>#include &lt;<a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for brenta::Subsystem:</div>
 <div class="dyncontent">
  <div class="center">
   <img src="classbrenta_1_1Subsystem.png" usemap="#brenta::Subsystem_map" alt=""/>
   <map id="brenta::Subsystem_map" name="brenta::Subsystem_map">
-<area href="classbrenta_1_1Audio.html" title="Audio subsystem." alt="brenta::Audio" shape="rect" coords="124,56,238,80"/>
-<area href="classbrenta_1_1Ecs.html" alt="brenta::Ecs" shape="rect" coords="124,112,238,136"/>
-<area href="classbrenta_1_1Engine.html" title="Engine class." alt="brenta::Engine" shape="rect" coords="124,168,238,192"/>
-<area href="classbrenta_1_1Gl.html" title="OpenGL helper functions." alt="brenta::Gl" shape="rect" coords="124,224,238,248"/>
-<area href="classbrenta_1_1Gui.html" title="Gui class." alt="brenta::Gui" shape="rect" coords="124,280,238,304"/>
-<area href="classbrenta_1_1Input.html" title="Input subsystem." alt="brenta::Input" shape="rect" coords="124,336,238,360"/>
-<area href="classbrenta_1_1Logger.html" alt="brenta::Logger" shape="rect" coords="124,392,238,416"/>
-<area href="classbrenta_1_1Window.html" title="Window subsystem." alt="brenta::Window" shape="rect" coords="124,448,238,472"/>
+<area href="classbrenta_1_1Ecs.html" alt="brenta::Ecs" shape="rect" coords="151,56,292,80"/>
+<area href="classbrenta_1_1Engine.html" alt="brenta::Engine" shape="rect" coords="151,112,292,136"/>
+<area href="classbrenta_1_1Gl.html" alt="brenta::Gl" shape="rect" coords="151,168,292,192"/>
+<area href="classbrenta_1_1Gui.html" alt="brenta::Gui" shape="rect" coords="151,224,292,248"/>
+<area href="classbrenta_1_1Input.html" alt="brenta::Input" shape="rect" coords="151,280,292,304"/>
+<area href="classbrenta_1_1Logger.html" alt="brenta::Logger" shape="rect" coords="151,336,292,360"/>
+<area href="classbrenta_1_1SoundManager.html" alt="brenta::SoundManager" shape="rect" coords="151,392,292,416"/>
+<area href="classbrenta_1_1Window.html" alt="brenta::Window" shape="rect" coords="151,448,292,472"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem_1_1Builder.html">Builder</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classbrenta_1_1Subsystem_1_1Builder.html" title="Builder interface.">Builder</a> interface.  <a href="classbrenta_1_1Subsystem_1_1Builder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -139,18 +133,16 @@ virtual std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memIt
 <tr class="memitem:ab99cc62d50896bd10cc0ef7927585649" id="r_ab99cc62d50896bd10cc0ef7927585649"><td class="memItemLeft" align="right" valign="top"><a id="ab99cc62d50896bd10cc0ef7927585649" name="ab99cc62d50896bd10cc0ef7927585649"></a>
 virtual std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>terminate</b> ()=0</td></tr>
 <tr class="separator:ab99cc62d50896bd10cc0ef7927585649"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad2587d14fc26c87c779f4fa09b85301b" id="r_ad2587d14fc26c87c779f4fa09b85301b"><td class="memItemLeft" align="right" valign="top">virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#ad2587d14fc26c87c779f4fa09b85301b">name</a> ()=0</td></tr>
-<tr class="memdesc:ad2587d14fc26c87c779f4fa09b85301b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the name of the sybsystem.  <br /></td></tr>
+<tr class="memitem:ad2587d14fc26c87c779f4fa09b85301b" id="r_ad2587d14fc26c87c779f4fa09b85301b"><td class="memItemLeft" align="right" valign="top"><a id="ad2587d14fc26c87c779f4fa09b85301b" name="ad2587d14fc26c87c779f4fa09b85301b"></a>
+virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>name</b> ()=0</td></tr>
 <tr class="separator:ad2587d14fc26c87c779f4fa09b85301b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abb61f7d2bb019ffd906173c694a5286b" id="r_abb61f7d2bb019ffd906173c694a5286b"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Subsystem.html#abb61f7d2bb019ffd906173c694a5286b">is_initialized</a> ()=0</td></tr>
-<tr class="memdesc:abb61f7d2bb019ffd906173c694a5286b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the subsystem is initialized.  <br /></td></tr>
+<tr class="memitem:abb61f7d2bb019ffd906173c694a5286b" id="r_abb61f7d2bb019ffd906173c694a5286b"><td class="memItemLeft" align="right" valign="top"><a id="abb61f7d2bb019ffd906173c694a5286b" name="abb61f7d2bb019ffd906173c694a5286b"></a>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_initialized</b> ()=0</td></tr>
 <tr class="separator:abb61f7d2bb019ffd906173c694a5286b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p><a class="el" href="classbrenta_1_1Subsystem.html" title="Subsystem interface.">Subsystem</a> interface. </p>
-<p>A subsistem is a static singleton that can be initialized and terminated. The initialization settings should be passed via a builder class. </p>
-
-<p class="definition">Definition at line <a class="el" href="subsystem_8hpp_source.html#l00021">21</a> of file <a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>.</p>
+<div class="textblock">
+<p class="definition">Definition at line <a class="el" href="subsystem_8hpp_source.html#l00022">22</a> of file <a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>.</p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="adaa1969d5a9d482356bcf027ac30818a" name="adaa1969d5a9d482356bcf027ac30818a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adaa1969d5a9d482356bcf027ac30818a">&#9670;&#160;</a></span>Error</h2>
@@ -164,66 +156,7 @@ virtual std::expected&lt; void, Subsystem::Error &gt;&#160;</td><td class="memIt
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="subsystem_8hpp_source.html#l00025">25</a> of file <a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>.</p>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="abb61f7d2bb019ffd906173c694a5286b" name="abb61f7d2bb019ffd906173c694a5286b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb61f7d2bb019ffd906173c694a5286b">&#9670;&#160;</a></span>is_initialized()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual bool brenta::Subsystem::is_initialized </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns true if the subsystem is initialized. </p>
-
-<p>Implemented in <a class="el" href="classbrenta_1_1Audio.html#a4209513d7e827b9d5ceeeb3d5ca7af12">brenta::Audio</a>, <a class="el" href="classbrenta_1_1Ecs.html#a936a9a6f18909e0c785c1e3b81b073d5">brenta::Ecs</a>, <a class="el" href="classbrenta_1_1Engine.html#a274109934294fcd0dc8aebcae61ff493">brenta::Engine</a>, <a class="el" href="classbrenta_1_1Gui.html#a019641e4660c3854bead7550b8003182">brenta::Gui</a>, <a class="el" href="classbrenta_1_1Input.html#a0ae5fd441d95f7bd1bcfaf13a87c2fed">brenta::Input</a>, <a class="el" href="classbrenta_1_1Logger.html#ab6349bd0374c0f079623bf83fdb43cb3">brenta::Logger</a>, <a class="el" href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">brenta::Gl</a>, and <a class="el" href="classbrenta_1_1Window.html#a4ebba078cfbe573cb0c5ce0a763fc61b">brenta::Window</a>.</p>
-
-</div>
-</div>
-<a id="ad2587d14fc26c87c779f4fa09b85301b" name="ad2587d14fc26c87c779f4fa09b85301b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad2587d14fc26c87c779f4fa09b85301b">&#9670;&#160;</a></span>name()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual std::string brenta::Subsystem::name </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Returns the name of the sybsystem. </p>
-
-<p>Implemented in <a class="el" href="classbrenta_1_1Audio.html#af2686b2a088a5e88ed9c446336092e0b">brenta::Audio</a>, <a class="el" href="classbrenta_1_1Ecs.html#a38bbee3cfa09609bbdf7e4affd40e512">brenta::Ecs</a>, <a class="el" href="classbrenta_1_1Engine.html#a873db44633f8d374eb6b4225d05397cb">brenta::Engine</a>, <a class="el" href="classbrenta_1_1Gui.html#a64545723d31dd0164e78098fb5637a17">brenta::Gui</a>, <a class="el" href="classbrenta_1_1Input.html#ab4b16a111710e2230f9c58ec9b7f06ec">brenta::Input</a>, <a class="el" href="classbrenta_1_1Logger.html#a8da66dc362b2bb3643bc8c2039e345aa">brenta::Logger</a>, <a class="el" href="classbrenta_1_1Gl.html#a3a5e4e6bf68b8cd67b8f262485754ccb">brenta::Gl</a>, and <a class="el" href="classbrenta_1_1Window.html#a8d8581c08a9fbe1e56c0d3e19b294b48">brenta::Window</a>.</p>
+<p class="definition">Definition at line <a class="el" href="subsystem_8hpp_source.html#l00026">26</a> of file <a class="el" href="subsystem_8hpp_source.html">subsystem.hpp</a>.</p>
 
 </div>
 </div>

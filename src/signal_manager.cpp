@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/signal_manager.hpp>
+#include <brenta/logger.hpp>
 
 using namespace brenta;
 
@@ -24,6 +25,8 @@ SignalManager::registry;
 void SignalManager::emit(const SignalManager::Event &event)
 {
   SignalManager::pending_events.push_back(event);
+  
+  DEBUG("SignalManager: emitted signal {}", event.id);
 }
 
 SignalManager::Subscription
@@ -31,20 +34,29 @@ SignalManager::subscribe(const SignalManager::SignalId &id,
                          SignalManager::Callback callback)
 {
   static ConnectionId connection_id = 0;
-  connection_id++;
+  connection_id++; // 0 is considered invalid
   
   SignalManager::registry[id].push_back(std::make_tuple(connection_id, callback));
+
+  DEBUG("SignalManager: subscribed connection {} to signal {}",
+        connection_id, id);
   return Subscription(id, connection_id);
 }
 
 void SignalManager::unsubscribe(const SignalManager::Subscription &sub)
 {
+  if (sub.connection_id <= 0 || sub.signal_id == "")
+    return;
+  
   auto& entries = SignalManager::registry[sub.signal_id];
   for (auto it = entries.begin(); it != entries.end(); ++it)
   {
     if (std::get<0>(*it) == sub.connection_id)
     {
       entries.erase(it);
+
+      DEBUG("SignalManager: unsibscribed connection {} from signal {}",
+            sub.connection_id, sub.signal_id);
       break;
     }
   }
@@ -64,7 +76,13 @@ void SignalManager::update()
 
   SignalManager::pending_events.clear();
 }
-  
+
+void SignalManager::clear()
+{
+  SignalManager::pending_events.clear();
+  SignalManager::registry.clear();
+}
+
 SignalManager::Subscription::~Subscription()
 {
   if (this->connection_id == 0) return;

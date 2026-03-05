@@ -9,15 +9,14 @@
     <div class="topnav">
       <a href="./index.html">Brenta Engine</a>
       <a href="./DESIGN.html">Design</a>      
-      <a href="./BUILD.html">Build</a>
       <a href="./GUIDE.html">Guide</a>
-      <a href="./CONTRIBUTING.html">Contributing</a>
+      <a href="./BUILD.html">Build</a>
       <a href="./annotated.html">Data structures</a>
       <a href="./files.html">Files</a>
       <a href="https://github.com/San7o/Brenta-Engine">Github</a>
     </div>
 <h1 id="building-the-engine">Building the engine</h1>
-<p>Brenta-Engine is written C++23 and uses <code>cmake</code> as it’s
+<p>Brenta-Engine is written C++23 and uses <code>cmake</code> as it's
 build system. You can compile the engine as a static or shared library
 for both Windows and Linux.</p>
 <h2 id="dependencies">Dependencies</h2>
@@ -45,6 +44,9 @@ library, simply run:</p>
 <div class="sourceCode" id="cb3"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">--build</span> build <span class="at">-j</span><span class="va">$(</span><span class="fu">nproc</span><span class="va">)</span></span></code></pre></div>
+<p>For debug builds, specify <code>-D CMAKE_BUILD_TYPE=Debug</code>.
+This will generate all debug information and enable address
+sanitization.</p>
 <p>For the static library:</p>
 <div class="sourceCode" id="cb4"><pre
 class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cmake</span> <span class="at">-Bbuild</span> <span class="at">-DBUILD_SHARED_LIBS</span><span class="op">=</span>off</span>

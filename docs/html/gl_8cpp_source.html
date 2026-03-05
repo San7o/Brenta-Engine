@@ -138,7 +138,7 @@ $(document).ready(function(){initNavTree('gl_8cpp_source.html',''); initResizabl
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>std::expected&lt;void, Subsystem::Error&gt; Gl::initialize()</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>{</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">if</span> (this-&gt;<a class="code hl_function" href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>  <span class="keywordflow">if</span> (this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  GLADloadproc loadproc = (GLADloadproc) Window::get_proc_address();</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>  <span class="keywordflow">if</span> (!gladLoadGLLoader(loadproc))</div>
@@ -203,26 +203,22 @@ $(document).ready(function(){initNavTree('gl_8cpp_source.html',''); initResizabl
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span> </div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>std::expected&lt;void, Subsystem::Error&gt; Gl::terminate()</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>{</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordflow">if</span> (!this-&gt;<a class="code hl_function" href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">is_initialized</a>()) <span class="keywordflow">return</span> {};</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>  <span class="keywordflow">if</span> (!this-&gt;is_initialized()) <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span> </div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>  Gl::initialized = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>  INFO(<span class="stringliteral">&quot;{}: terminated&quot;</span>, Gl::subsystem_name);</div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>  <span class="keywordflow">return</span> {};</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>}</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span> </div>
-<div class="foldopen" id="foldopen00112" data-start="{" data-end="}">
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno"><a class="line" href="classbrenta_1_1Gl.html#a3a5e4e6bf68b8cd67b8f262485754ccb">  112</a></span>std::string <a class="code hl_function" href="classbrenta_1_1Gl.html#a3a5e4e6bf68b8cd67b8f262485754ccb">Gl::name</a>()</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>std::string Gl::name()</div>
 <div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>{</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>  <span class="keywordflow">return</span> Gl::subsystem_name;</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>}</div>
-</div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span> </div>
-<div class="foldopen" id="foldopen00117" data-start="{" data-end="}">
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno"><a class="line" href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">  117</a></span><span class="keywordtype">bool</span> <a class="code hl_function" href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">Gl::is_initialized</a>()</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span><span class="keywordtype">bool</span> Gl::is_initialized()</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>{</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>  <span class="keywordflow">return</span> Gl::initialized;</div>
 <div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>}</div>
-</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span> </div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span><span class="comment">//</span></div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span><span class="comment">// Member functions</span></div>
@@ -410,12 +406,10 @@ $(document).ready(function(){initNavTree('gl_8cpp_source.html',''); initResizabl
 <div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>  <span class="keywordflow">return</span> Gl::instance();</div>
 <div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>}</div>
 <div class="ttc" id="aclassbrenta_1_1Color_html"><div class="ttname"><a href="classbrenta_1_1Color.html">brenta::Color</a></div><div class="ttdef"><b>Definition</b> <a href="color_8hpp_source.html#l00011">color.hpp:12</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gl_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Gl_1_1Builder.html">brenta::Gl::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00091">gl.hpp:92</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gl_html"><div class="ttname"><a href="classbrenta_1_1Gl.html">brenta::Gl</a></div><div class="ttdoc">OpenGL helper functions.</div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00030">gl.hpp:31</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gl_html_a3a5e4e6bf68b8cd67b8f262485754ccb"><div class="ttname"><a href="classbrenta_1_1Gl.html#a3a5e4e6bf68b8cd67b8f262485754ccb">brenta::Gl::name</a></div><div class="ttdeci">std::string name() override</div><div class="ttdoc">Returns the name of the sybsystem.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00112">gl.cpp:112</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Gl_html_a4bb766a45bbc01c475e7201ab862e0e3"><div class="ttname"><a href="classbrenta_1_1Gl.html#a4bb766a45bbc01c475e7201ab862e0e3">brenta::Gl::is_initialized</a></div><div class="ttdeci">bool is_initialized() override</div><div class="ttdoc">Returns true if the subsystem is initialized.</div><div class="ttdef"><b>Definition</b> <a href="gl_8cpp_source.html#l00117">gl.cpp:117</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdoc">Subsystem interface.</div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00021">subsystem.hpp:22</a></div></div>
-<div class="ttc" id="astructbrenta_1_1Gl_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Gl_1_1Config.html">brenta::Gl::Config</a></div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00082">gl.hpp:83</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Gl_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Gl_1_1Builder.html">brenta::Gl::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00092">gl.hpp:93</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Gl_html"><div class="ttname"><a href="classbrenta_1_1Gl.html">brenta::Gl</a></div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00031">gl.hpp:32</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Subsystem_html"><div class="ttname"><a href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a></div><div class="ttdef"><b>Definition</b> <a href="subsystem_8hpp_source.html#l00022">subsystem.hpp:23</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Gl_1_1Config_html"><div class="ttname"><a href="structbrenta_1_1Gl_1_1Config.html">brenta::Gl::Config</a></div><div class="ttdef"><b>Definition</b> <a href="gl_8hpp_source.html#l00083">gl.hpp:84</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

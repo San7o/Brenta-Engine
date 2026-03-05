@@ -1,5 +1,0 @@
-var searchData=
-[
-  ['world_5fup_0',['world_up',['../classbrenta_1_1camera.html#a5e09b8dbdc270163cc15a519601a9ec6',1,'brenta::camera']]],
-  ['wrapping_1',['wrapping',['../classbrenta_1_1mesh.html#a6833190f04027bb6c7ff0396322c08fc',1,'brenta::mesh']]]
-];
