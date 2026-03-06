@@ -9,6 +9,7 @@
 #include <brenta/renderer/material.hpp>
 #include <brenta/renderer/point_light.hpp>
 #include <brenta/renderer/dir_light.hpp>
+#include <brenta/renderer/skybox.hpp>
 #include <brenta/text.hpp>
 
 #include <glm/glm.hpp>
@@ -63,6 +64,7 @@ public:
   static void submit_point_lights(const tenno::vector<tenno::shared_ptr<PointLight>>& point_light);
   static void submit_dir_light(tenno::shared_ptr<DirLight> dir_light);
   static void submit_text(const Text& text);
+  static void submit_skybox(tenno::shared_ptr<Skybox> skybox);
 
   static void end_frame(tenno::shared_ptr<RenderPipeline> pipeline);
 
@@ -100,6 +102,7 @@ struct Renderer::RenderData
   
   tenno::vector<tenno::shared_ptr<PointLight>>    point_lights;
   std::optional<tenno::shared_ptr<DirLight>>      dir_light;
+  std::optional<tenno::shared_ptr<Skybox>>        skybox;
 };
 
 } // namespace brenta

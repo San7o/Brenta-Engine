@@ -76,7 +76,7 @@ void Mesh::draw() const
     return;
   }
 
-  unsigned int diffuseNr = 1;
+  unsigned int diffuseNr  = 1;
   unsigned int specularNr = 1;
   for (unsigned int i = 0; i < this->textures.size(); i++)
   {
@@ -95,6 +95,8 @@ void Mesh::draw() const
       name   = "texture_specular";
       number = std::to_string(specularNr++);
       break;
+    case Texture::Type::None:
+      continue;
     default:
       number = "0";
       break;
@@ -136,9 +138,9 @@ Mesh::Builder &Mesh::Builder::indices(tenno::vector<unsigned int> &&indices)
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::texture(tenno::shared_ptr<Texture> &&texture)
+Mesh::Builder &Mesh::Builder::texture(tenno::shared_ptr<Texture> texture)
 {
-  this->conf.textures.push_back(tenno::move(texture));
+  this->conf.textures.push_back(texture);
   return *this;
 }
 
@@ -149,10 +151,10 @@ Mesh::Builder &Mesh::Builder::texture(Texture &&texture)
   return *this;
 }
 
-Mesh::Builder &Mesh::Builder::textures(tenno::vector<tenno::shared_ptr<Texture>> &&textures)
+Mesh::Builder &Mesh::Builder::textures(tenno::vector<tenno::shared_ptr<Texture>> textures)
 {
   for (auto t : textures)
-    this->conf.textures.push_back(tenno::move(t));
+    this->conf.textures.push_back(t);
   return *this;
 }
 

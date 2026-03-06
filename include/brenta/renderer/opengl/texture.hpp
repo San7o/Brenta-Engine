@@ -103,14 +103,38 @@ public:
   };
 
   struct Config;
-  class  Properties;
+  struct Properties;
   class  Builder;
   
+  struct Properties
+  {
+    
+    Texture::Wrapping  wrapping      = Texture::Wrapping::Repeat;
+    Texture::Filtering filtering_min = Texture::Filtering::Nearest;
+    Texture::Filtering filtering_mag = Texture::Filtering::Nearest;
+    GLboolean          has_mipmap    = Gl::True;
+    Texture::Filtering mipmap_min    = Texture::Filtering::LinearMipmapLinear;
+    Texture::Filtering mipmap_mag    = Texture::Filtering::Linear;
+    GLboolean          flipped       = false;
+
+    // Setters
+
+    Properties &set_wrapping(Texture::Wrapping wrapping);
+    Properties &set_filtering_min(Texture::Filtering filtering);
+    Properties &set_filtering_mag(Texture::Filtering filtering);
+    Properties &set_has_mipmap(GLboolean mipmap);
+    Properties &set_mipmap_min(Texture::Filtering filtering);
+    Properties &set_mipmap_mag(Texture::Filtering filtering);
+    Properties &set_flipped(GLboolean flipped);
+  
+  };
+
   // This tells the shader where to find the texture
   static void active_texture(int texture);
   static Texture::Id load(const std::filesystem::path &path, bool flip = true);
+  static void bind_id(Texture::Target target, Texture::Id id);
   static void bind_id(Texture::Target target, Texture::Id id,
-                      const Texture::Properties &properties = Texture::Properties());
+                      const Texture::Properties &properties);
 
   // Non static
     
@@ -148,44 +172,7 @@ public:
   
   void bind();
 
-  class Properties
-  {
-  public:
-
-    Properties() {};
-
-    // Getters
-
-    Texture::Wrapping  get_wrapping() const;
-    Texture::Filtering get_filtering_min() const;
-    Texture::Filtering get_filtering_mag() const;
-    GLboolean          get_has_mipmap() const;
-    Texture::Filtering get_mipmap_min() const;
-    Texture::Filtering get_mipmap_mag() const;
-    GLboolean          get_flipped() const;
-  
-    // Setters
-
-    Properties &wrapping(Texture::Wrapping wrapping);
-    Properties &filtering_min(Texture::Filtering filtering);
-    Properties &filtering_mag(Texture::Filtering filtering);
-    Properties &has_mipmap(GLboolean mipmap);
-    Properties &mipmap_min(Texture::Filtering filtering);
-    Properties &mipmap_mag(Texture::Filtering filtering);
-    Properties &flipped(GLboolean flipped);
-  
-  private:
-  
-    Texture::Wrapping  prop_wrapping      = Texture::Wrapping::Repeat;
-    Texture::Filtering prop_filtering_min = Texture::Filtering::Nearest;
-    Texture::Filtering prop_filtering_mag = Texture::Filtering::Nearest;
-    GLboolean          prop_has_mipmap    = Gl::True;
-    Texture::Filtering prop_mipmap_min    = Texture::Filtering::LinearMipmapLinear;
-    Texture::Filtering prop_mipmap_mag    = Texture::Filtering::Linear;
-    GLboolean          prop_flipped       = false;
-  };
-
-private:
+protected:
   
   Texture::Id             id = 0;
   Texture::Type           type;

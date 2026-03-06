@@ -12,10 +12,6 @@ using namespace brenta;
 
 int main()
 {
-  //
-  // Setup
-  //
-  
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)

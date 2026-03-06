@@ -285,6 +285,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(scripting)
   add_example(app)
   add_example(ecs_demo)
+  add_example(skybox)
 
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES

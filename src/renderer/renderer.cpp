@@ -73,6 +73,11 @@ void Renderer::submit_text(const Text& text)
   Renderer::data.ui_queue.push_back(text);
 }
 
+void Renderer::submit_skybox(tenno::shared_ptr<Skybox> skybox)
+{
+  Renderer::data.skybox = skybox;
+}
+
 void Renderer::end_frame(tenno::shared_ptr<RenderPipeline> pipeline)
 {
   Renderer::flush(pipeline);
@@ -85,6 +90,7 @@ void Renderer::clear()
   Renderer::data.ui_queue.clear();
   Renderer::data.point_lights.clear();
   Renderer::data.dir_light = {};
+  Renderer::data.skybox    = {};
 }
 
 void Renderer::flush(tenno::shared_ptr<RenderPipeline> pipeline)

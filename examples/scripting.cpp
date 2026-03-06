@@ -24,16 +24,13 @@ using namespace brenta;
 
 int main()
 {
-  const int screen_width = 800;
-  const int screen_height = 600;
-
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("load model test")
-          .width(screen_width)
-          .height(screen_height))
+          .width(800)
+          .height(600))
     .with(Gl::Builder()
           .blending()
           .backface_culling()
@@ -61,7 +58,7 @@ int main()
                                       glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(1.0)))
     .texture_props(Texture::Properties()
-                   .flipped(true))
+                   .set_flipped(true))
     .material(tenno::move(material));
   auto model_component =
     tenno::make_shared<ModelNodeComponent>(model_builder);

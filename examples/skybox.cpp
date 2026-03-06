@@ -38,17 +38,14 @@ void update_camera(tenno::shared_ptr<Camera> camera,
 
 int main()
 {
-  const int screen_width = 1280;
-  const int screen_height = 720;
-
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("load model test")
           .capture_mouse()
-          .width(screen_width)
-          .height(screen_height))
+          .width(1280)
+          .height(720))
     .with(Gl::Builder()
           .blending()
           .backface_culling()
@@ -58,29 +55,6 @@ int main()
     .build();
   auto engine = Engine::managed();
   
-  auto maybe_shader = Shader::create({
-      { Shader::Type::Vertex,   phong_vs },
-      { Shader::Type::Fragment, phong_fs } });
-  if (!maybe_shader)
-  {
-    ERROR("Error creating shader");
-    return 1;
-  }
-  auto shader = tenno::move(maybe_shader.value()); 
-  auto material = Material(tenno::move(shader));
-  material.set_float("material.shininess", 32.0f);
-  
-  auto phong_dir =
-    PhongDirLight()
-    .set_strength(0.5f);
-  auto phong_dir_ptr = 
-    tenno::make_shared<PhongDirLight>(tenno::move(phong_dir));
-  auto phong_point =
-    PhongPointLight()
-    .set_strength(1.8f);
-  auto phong_point_ptr =
-    tenno::make_shared<PhongPointLight>(tenno::move(phong_point));
-
   // Setup scene
   
   auto camera_builder =
@@ -93,6 +67,18 @@ int main()
   auto scene      = Scene(camera_builder);
   auto root_node  = scene.get_root();
 
+  // Model
+  auto maybe_shader = Shader::create({
+      { Shader::Type::Vertex,   phong_vs },
+      { Shader::Type::Fragment, phong_fs } });
+  if (!maybe_shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
+  auto shader = tenno::move(maybe_shader.value()); 
+  auto material = Material(tenno::move(shader));
+  material.set_float("material.shininess", 32.0f);
   auto model_builder =
     Model::Builder()
     .path("examples/assets/models/backpack/backpack.obj")
@@ -105,15 +91,19 @@ int main()
     .material(tenno::move(material));
   auto model_component =
     tenno::make_shared<ModelNodeComponent>(model_builder);
-  auto dir_light_component = 
-    tenno::make_shared<DirLightNodeComponent>(phong_dir_ptr);
-  auto point_light_component = 
-    tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
-  
   Scene::add_component(root_node, model_component);
-  Scene::add_component(root_node, dir_light_component);
-  Scene::add_component(root_node, point_light_component);
 
+  // Skybox
+  tenno::vector<std::filesystem::path> skybox_faces = {
+    "examples/assets/textures/skybox/right.jpg",
+    "examples/assets/textures/skybox/left.jpg",
+    "examples/assets/textures/skybox/top.jpg",
+    "examples/assets/textures/skybox/bottom.jpg",
+    "examples/assets/textures/skybox/front.jpg",
+    "examples/assets/textures/skybox/back.jpg",
+  };
+  scene.set_skybox(skybox_faces);
+  
   // Camera movement
   
   auto camera            = scene.get_camera();  

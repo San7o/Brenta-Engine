@@ -17,6 +17,7 @@
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/opengl/ubo.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
+#include <brenta/renderer/opengl/cubemap.hpp>
 
 // renderer
 #include <brenta/renderer/camera.hpp>
@@ -29,11 +30,13 @@
 #include <brenta/renderer/point_light.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/renderer/pipeline.hpp>
+#include <brenta/renderer/skybox.hpp>
 
 // Render passes
 #include <brenta/renderer/passes/opaque_pass.hpp>
 #include <brenta/renderer/passes/transparent_pass.hpp>
 #include <brenta/renderer/passes/ui_pass.hpp>
+#include <brenta/renderer/passes/skybox_pass.hpp>
 
 // Core
 #include <brenta/app.hpp>

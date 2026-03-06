@@ -38,56 +38,69 @@ int main()
   engine.initialize();
   ///auto engine = Engine::managed();
 
-  auto camera_builder =
-    Camera::Builder()
-    .projection_type(Camera::ProjectionType::Perspective)
-    .position(Camera::Spherical::Builder()
-              .center({0.0f, 2.0f, 0.0f})
-              .phi(1.25f)
-              .theta(1.25f)
-              .radius(30.0f)
-              .build())
-    .fov(45.0f);
-  auto camera =
-    tenno::shared_ptr<Camera>(camera_builder);
-
-  Mouse mouse = {};
-  mouse.sensitivity = 0.05f;
-  
-  // Entities
-  init_player_entity();
-  init_cube_entity();
-  init_floor_entity();
-  init_directional_light_entity();
-  init_point_light_entity();
-  init_sphere_entity();
-  init_robot_entity();
-  init_camera_entity(camera);
-  init_particle_emitter_entity(camera);
-
-  // Callbacks
-  init_toggle_wireframe_callback();
-  init_close_window_callback();
-  init_camera_mouse_callback(camera, &mouse);
-  init_play_guitar_callback();
-
-  // Resources
-  World::add_resource<WireframeResource>(false);
-  World::add_resource<CameraResource>(camera);
-
-  // Systems
-  World::register_systems<CameraRenderSystem,
-                          ModelRenderSystem,
-                          PointLightRenderSystem,
-                          DirLightRenderSystem,
-                          ParticleEmitterSystem,
-                          SpriteAnimationSystem,
-                          DebugTextSystem,
-                          PhysicsSystem,
-                          InfoTextSystem,
-                          CollisionsSystem>();
-
   {  // Local scope
+
+    auto camera_builder =
+      Camera::Builder()
+      .projection_type(Camera::ProjectionType::Perspective)
+      .position(Camera::Spherical::Builder()
+                .center({0.0f, 2.0f, 0.0f})
+                .phi(1.25f)
+                .theta(1.25f)
+                .radius(30.0f)
+                .build())
+      .fov(45.0f);
+    auto camera =
+      tenno::shared_ptr<Camera>(camera_builder);
+
+    tenno::vector<std::filesystem::path> skybox_faces = {
+      "examples/assets/textures/skybox/right.jpg",
+      "examples/assets/textures/skybox/left.jpg",
+      "examples/assets/textures/skybox/top.jpg",
+      "examples/assets/textures/skybox/bottom.jpg",
+      "examples/assets/textures/skybox/front.jpg",
+      "examples/assets/textures/skybox/back.jpg",
+    };
+    auto skybox =
+      tenno::make_shared<Skybox>(skybox_faces);
+  
+    Mouse mouse = {};
+    mouse.sensitivity = 0.05f;
+  
+    // Entities
+    init_player_entity();
+    init_cube_entity();
+    init_floor_entity();
+    init_directional_light_entity();
+    init_point_light_entity();
+    init_sphere_entity();
+    init_robot_entity();
+    init_camera_entity(camera);
+    init_particle_emitter_entity(camera);
+
+    // Callbacks
+    init_toggle_wireframe_callback();
+    init_close_window_callback();
+    init_camera_mouse_callback(camera, &mouse);
+    init_play_guitar_callback();
+
+    // Resources
+    World::add_resource<WireframeResource>(false);
+    World::add_resource<CameraResource>(camera);
+    World::add_resource<SkyboxResource>(skybox);
+
+    // Systems
+    World::register_systems<CameraRenderSystem,
+                            SkyboxSystem,
+                            ModelRenderSystem,
+                            PointLightRenderSystem,
+                            DirLightRenderSystem,
+                            ParticleEmitterSystem,
+                            SpriteAnimationSystem,
+                            DebugTextSystem,
+                            PhysicsSystem,
+                            InfoTextSystem,
+                            CollisionsSystem>();
 
     auto font_builder =
       Font::Builder()
@@ -103,6 +116,7 @@ int main()
     auto pipeline = tenno::make_shared<RenderPipeline>();
     pipeline->add_pass<OpaquePass>(game_fb);
     pipeline->add_pass<TransparentPass>(game_fb);
+    pipeline->add_pass<SkyboxPass>(game_fb);
     pipeline->add_pass<UiPass>(game_fb);
     
     while (!Window::should_close())

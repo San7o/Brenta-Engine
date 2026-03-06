@@ -59,12 +59,12 @@ ParticleEmitter::ParticleEmitter(Config conf)
     .target(Texture::Target::Texture2D)
     .path(conf.atlas_path)
     .properties(Texture::Properties()
-                .wrapping(Texture::Wrapping::Repeat)
-                .filtering_min(Texture::Filtering::Nearest)
-                .filtering_mag(Texture::Filtering::Nearest)
-                .has_mipmap(Gl::True)
-                .mipmap_min(Texture::Filtering::NearestMipmapNearest)
-                .mipmap_mag(Texture::Filtering::Nearest))
+                .set_wrapping(Texture::Wrapping::Repeat)
+                .set_filtering_min(Texture::Filtering::Nearest)
+                .set_filtering_mag(Texture::Filtering::Nearest)
+                .set_has_mipmap(Gl::True)
+                .set_mipmap_min(Texture::Filtering::NearestMipmapNearest)
+                .set_mipmap_mag(Texture::Filtering::Nearest))
     .build();
 
   // Create shaders

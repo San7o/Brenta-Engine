@@ -20,8 +20,12 @@ Texture::Texture(const Config &conf)
   this->target     = conf.target;
   this->path       = conf.path;
   this->properties = conf.properties;
-  this->id         = this->load(this->path, conf.properties.get_flipped());
+
+  if (this->path == "")
+    return;
   
+  this->id         = this->load(this->path, conf.properties.flipped);
+
   EVENT(Logger::Event::Lifetime, "texture: created {}", this->id);
   return;
 }
@@ -89,6 +93,11 @@ unsigned int Texture::load(const std::filesystem::path &path, bool flip)
   return texture;
 }
 
+void Texture::bind_id(Texture::Target target, Texture::Id id)
+{
+  Texture::bind_id(target, id, Texture::Properties{});
+}
+
 void Texture::bind_id(Texture::Target target, Texture::Id id,
                       const Texture::Properties &prop)
 {
@@ -96,18 +105,19 @@ void Texture::bind_id(Texture::Target target, Texture::Id id,
   check_error();
 
   // Wrapping
-  glTexParameteri(target, GL_TEXTURE_WRAP_S, prop.get_wrapping());
-  glTexParameteri(target, GL_TEXTURE_WRAP_T, prop.get_wrapping());
+  glTexParameteri(target, GL_TEXTURE_WRAP_S, prop.wrapping);
+  glTexParameteri(target, GL_TEXTURE_WRAP_T, prop.wrapping);
+  glTexParameteri(target, GL_TEXTURE_WRAP_R, prop.wrapping);
 
   // Filtering
-  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.get_filtering_min());
-  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.get_filtering_mag());
+  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.filtering_min);
+  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.filtering_mag);
   
   // Mipmap
-  if (!prop.get_has_mipmap()) return;
+  if (!prop.has_mipmap) return;
 
-  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.get_mipmap_min());
-  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.get_mipmap_mag());
+  glTexParameteri(target, GL_TEXTURE_MIN_FILTER, prop.mipmap_min);
+  glTexParameteri(target, GL_TEXTURE_MAG_FILTER, prop.mipmap_mag);
 
   check_error();
   return;
@@ -155,82 +165,45 @@ void Texture::read_image(const std::filesystem::path &path, bool flip)
 //
 
 
-Texture::Wrapping Texture::Properties::get_wrapping() const
+Texture::Properties &Texture::Properties::set_wrapping(Texture::Wrapping wrapping)
 {
-  return this->prop_wrapping;
-}
-
-Texture::Filtering Texture::Properties::get_filtering_min() const
-{
-  return this->prop_filtering_min;
-}
-
-Texture::Filtering Texture::Properties::get_filtering_mag() const
-{
-  return this->prop_filtering_mag;
-}
-
-GLboolean Texture::Properties::get_has_mipmap() const
-{
-  return this->prop_has_mipmap;
-}
-
-Texture::Filtering Texture::Properties::get_mipmap_min() const
-{
-  return this->prop_mipmap_min;
-}
-
-Texture::Filtering Texture::Properties::get_mipmap_mag() const
-{
-  return this->prop_mipmap_mag;
-}
-
-GLboolean Texture::Properties::get_flipped() const
-{
-  return this->prop_flipped;
-}
-
-// Setters
-
-Texture::Properties &Texture::Properties::wrapping(Texture::Wrapping wrapping)
-{
-  this->prop_wrapping = wrapping;
+  this->wrapping = wrapping;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::filtering_min(Texture::Filtering filtering)
+Texture::Properties &Texture::Properties::set_filtering_min(Texture::Filtering filtering)
 {
-  this->prop_filtering_min = filtering;
+  this->filtering_min = filtering;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::filtering_mag(Texture::Filtering filtering)
+Texture::Properties &Texture::Properties::set_filtering_mag(Texture::Filtering filtering)
 {
-  this->prop_filtering_mag = filtering;
+  this->filtering_mag = filtering;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::has_mipmap(GLboolean mipmap)
+Texture::Properties &Texture::Properties::set_has_mipmap(GLboolean mipmap)
 {
-  this->prop_has_mipmap = mipmap;
+  this->has_mipmap = mipmap;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::mipmap_min(Texture::Filtering filtering)
+Texture::Properties &Texture::Properties::set_mipmap_min(Texture::Filtering filtering)
 {
-  this->prop_mipmap_min = filtering;
+  this->mipmap_min = filtering;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::mipmap_mag(Texture::Filtering filtering)
+Texture::Properties &Texture::Properties::set_mipmap_mag(Texture::Filtering filtering)
 {
-  this->prop_mipmap_mag = filtering;
+  this->mipmap_mag = filtering;
   return *this;
 }
 
-Texture::Properties &Texture::Properties::flipped(GLboolean flipped)
+Texture::Properties &Texture::Properties::set_flipped(GLboolean flipped)
 {
-  this->prop_flipped = flipped;
+  this->flipped = flipped;
   return *this;
 }
 

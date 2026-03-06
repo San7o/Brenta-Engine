@@ -20,6 +20,7 @@ introduction to its API.
 - point and directional lights
 - GUI using ImGui
 - signals
+- skyboxes
 - window management
 - audio loading and playback
 - input management with callbacks

@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/node.hpp>
+#include <brenta/renderer/skybox.hpp>
 
 #include <tenno/memory.hpp>
 
@@ -36,6 +37,9 @@ public:
   Scene(tenno::shared_ptr<Camera> camera);
   Scene(Camera::Builder& camera);
 
+  void set_skybox(tenno::shared_ptr<Skybox> skybox);
+  void set_skybox(const tenno::vector<std::filesystem::path>& faces);
+
   tenno::shared_ptr<Node>   get_root() const;
   tenno::shared_ptr<Camera> get_camera() const;
 
@@ -54,6 +58,7 @@ private:
 
   tenno::shared_ptr<Node>   root;
   tenno::shared_ptr<Camera> active_camera;
+  std::optional<tenno::shared_ptr<Skybox>>  skybox;
   
 };
 

@@ -122,8 +122,8 @@ public:
   Builder &vertices(tenno::vector<Vertex> &&vertices);
   Builder &indices(tenno::vector<unsigned int> &&indices);
   Builder &texture(Texture &&texture);
-  Builder &texture(tenno::shared_ptr<Texture> &&texture);
-  Builder &textures(tenno::vector<tenno::shared_ptr<Texture>> &&textures);
+  Builder &texture(tenno::shared_ptr<Texture> texture);
+  Builder &textures(tenno::vector<tenno::shared_ptr<Texture>> textures);
   
   Mesh build();
 };

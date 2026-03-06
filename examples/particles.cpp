@@ -22,21 +22,14 @@ void setup_gui(FrameBuffer &fb,
 
 int main()
 {
-  const int SCR_WIDTH = 1280;
-  const int SCR_HEIGHT = 720;
-
-  //
-  // Setup
-  //
-  
   Engine::Builder()
     .with(Logger::Builder()
           .level(Logger::Level::Debug)
           .file("/tmp/brenta-logs"))
     .with(Window::Builder()
           .title("particles")
-          .width(SCR_WIDTH)
-          .height(SCR_HEIGHT)
+          .width(1280)
+          .height(720)
           .msaa()
           .vsync()
           .debug())

@@ -17,6 +17,8 @@
 
 // Resources
 #include <demo/resources/wireframe.hpp>
+#include <demo/resources/camera.hpp>
+#include <demo/resources/skybox.hpp>
 
 // Systems
 #include <demo/systems/collisions.hpp>
@@ -25,3 +27,4 @@
 #include <demo/systems/physics.hpp>
 #include <demo/systems/sprite_animation.hpp>
 #include <demo/systems/info_text.hpp>
+#include <demo/systems/skybox.hpp>

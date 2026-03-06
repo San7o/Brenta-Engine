@@ -1,0 +1,13 @@
+static const char* skybox_fs = "#version 330 core\n"
+"\n"
+"out vec4 FragColor;\n"
+"\n"
+"in vec3 TexCoords;\n"
+"\n"
+"uniform samplerCube skybox;\n"
+"\n"
+"void main()\n"
+"{\n"
+"  FragColor = texture(skybox, TexCoords);\n"
+"}\n"
+;

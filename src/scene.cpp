@@ -27,6 +27,16 @@ Scene::Scene(tenno::shared_ptr<Camera> camera)
   this->root          = tenno::make_shared<Node>();
 }
 
+void Scene::set_skybox(tenno::shared_ptr<Skybox> skybox)
+{
+  this->skybox = skybox;
+}
+
+void Scene::set_skybox(const tenno::vector<std::filesystem::path>& faces)
+{
+  this->skybox = tenno::make_shared<Skybox>(faces);
+}
+
 tenno::shared_ptr<Node> Scene::get_root() const
 {
   return this->root;
@@ -80,7 +90,12 @@ void Scene::draw(tenno::shared_ptr<RenderPipeline> pipeline)
   this->root->update_world_matrix();
   
   Renderer::begin_frame(*this->active_camera);
+
+  if (this->skybox)
+    Renderer::submit_skybox(this->skybox.value());
+  
   this->root->draw();
+
   Renderer::end_frame(pipeline);
 }
 
