@@ -162,14 +162,12 @@ int main()
 
 void rotate_model_counterclockwise(tenno::shared_ptr<Model> model)
 {
-  auto& transform = model->get_transform();
-  transform.rotate_y(ROTATION_SPEED);
+  model->transform.rotate_y(ROTATION_SPEED);
 }
 
 void rotate_model_clockwise(tenno::shared_ptr<Model> model)
 {
-  auto& transform = model->get_transform();
-  transform.rotate_y(-ROTATION_SPEED);
+  model->transform.rotate_y(-ROTATION_SPEED);
 }
 
 void setup_gui(FrameBuffer &fb,
@@ -199,11 +197,11 @@ void setup_gui(FrameBuffer &fb,
                        0.0f, 10.0f);
     ImGui::SeparatorText("Phong");
     ImGui::ColorEdit3("Ambient##Dir",
-                      &dir_light->get_ambient().x);
+                      &dir_light->ambient.x);
     ImGui::ColorEdit3("Diffuse##Dir",
-                      &dir_light->get_diffuse().x);
+                      &dir_light->diffuse.x);
     ImGui::ColorEdit3("Specular##Dir",
-                        &dir_light->get_specular().x);
+                        &dir_light->specular.x);
     }
 
   if (ImGui::CollapsingHeader("Point Light",
@@ -243,11 +241,11 @@ void setup_gui(FrameBuffer &fb,
 
     ImGui::SeparatorText("Phong");
     ImGui::ColorEdit3("Ambient##Point",
-                      &point_light->get_ambient().x);
+                      &point_light->ambient.x);
     ImGui::ColorEdit3("Diffuse##Point",
-                      &point_light->get_diffuse().x);
+                      &point_light->diffuse.x);
     ImGui::ColorEdit3("Specular##Point",
-                      &point_light->get_specular().x);
+                      &point_light->specular.x);
   }
 
   ImGui::End();

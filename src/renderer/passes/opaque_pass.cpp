@@ -26,7 +26,7 @@ void OpaquePass::execute(const Renderer::RenderData& data)
 {
   for (auto& command : data.opaque_queue)
   {
-    auto material = command.model->get_material();
+    auto material = command.model->material;
     material->apply();
 
     // Setup all lights
@@ -50,7 +50,7 @@ void OpaquePass::execute(const Renderer::RenderData& data)
                                // Node world position
                                command.world_matrix *
                                // Local transform
-                               command.model->get_transform().get_model_matrix());
+                               command.model->transform.get_model_matrix());
     material->shader->set_vec3("view_pos",    data.cam_position);
 
     // Geometry

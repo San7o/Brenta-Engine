@@ -18,14 +18,14 @@ class PhongPointLight : public PointLight
 {
 public:
 
+  glm::vec3 ambient  = glm::vec3(0.1f, 0.1f, 0.1f);
+  glm::vec3 diffuse  = glm::vec3(0.5f, 0.5f, 0.5f);
+  glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
+  
   PhongPointLight() = default;
 
   void apply(int light_number) override;
   
-  glm::vec3 &get_ambient();
-  glm::vec3 &get_diffuse();
-  glm::vec3 &get_specular();
-
   PhongPointLight &set_ambient(glm::vec3 ambient);
   PhongPointLight &set_diffuse(glm::vec3 diffuse);
   PhongPointLight &set_specular(glm::vec3 specular);
@@ -37,23 +37,19 @@ public:
   
 private:
 
-  glm::vec3 ambient  = glm::vec3(0.1f, 0.1f, 0.1f);
-  glm::vec3 diffuse  = glm::vec3(0.5f, 0.5f, 0.5f);
-  glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
-  
 };
 
 class PhongDirLight : public DirLight
 {
 public:
 
+  glm::vec3 ambient  = glm::vec3(0.7f, 0.7f, 0.7f);
+  glm::vec3 diffuse  = glm::vec3(0.7f, 0.7f, 0.7f);
+  glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
+  
   PhongDirLight() = default;
   
   void apply() override;
-
-  glm::vec3 &get_ambient();
-  glm::vec3 &get_diffuse();
-  glm::vec3 &get_specular();
 
   PhongDirLight &set_ambient(glm::vec3 ambient);
   PhongDirLight &set_diffuse(glm::vec3 diffuse);
@@ -63,10 +59,6 @@ public:
   
 private:
 
-  glm::vec3 ambient  = glm::vec3(0.7f, 0.7f, 0.7f);
-  glm::vec3 diffuse  = glm::vec3(0.7f, 0.7f, 0.7f);
-  glm::vec3 specular = glm::vec3(1.0f, 1.0f, 1.0f);
-  
 };  
   
 } // namespace brenta

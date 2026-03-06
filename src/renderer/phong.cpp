@@ -25,22 +25,6 @@ void PhongPointLight::apply(int light_number)
   Shader::set_float(prog, light_array + ".quadratic", this->quadratic);
 }
 
-glm::vec3 &PhongPointLight::get_ambient()
-{
-  return this->ambient;
-}
-
-glm::vec3 &PhongPointLight::get_diffuse()
-{
-  return this->diffuse;
-}
-
-glm::vec3 &PhongPointLight::get_specular()
-{
-  return this->specular;
-}
-
-
 PhongPointLight &PhongPointLight::set_ambient(glm::vec3 ambient)
 {
   this->ambient = ambient;
@@ -103,21 +87,6 @@ void PhongDirLight::apply()
   Shader::set_vec3(prog, "dir_light.specular",  this->specular);
 
   Shader::set_bool(prog, "use_dir_light", true);
-}
-
-glm::vec3 &PhongDirLight::get_ambient()
-{
-  return this->ambient;
-}
-
-glm::vec3 &PhongDirLight::get_diffuse()
-{
-  return this->diffuse;
-}
-
-glm::vec3 &PhongDirLight::get_specular()
-{
-  return this->specular;
 }
 
 PhongDirLight &PhongDirLight::set_ambient(glm::vec3 ambient)

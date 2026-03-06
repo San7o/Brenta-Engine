@@ -25,6 +25,9 @@ class Model
 {
 public:
 
+  Transform                     transform;
+  tenno::shared_ptr<Material>   material;
+
   struct Config;
   class  Builder;
 
@@ -39,9 +42,6 @@ public:
   Model(Model&&) noexcept            = default;
   Model& operator=(Model&&) noexcept = default;
   
-  Transform &get_transform();
-  tenno::shared_ptr<Material> get_material();
-  
   void draw() const;
 
 private:
@@ -49,8 +49,6 @@ private:
   std::filesystem::path                 path;
   std::string                           directory;
   
-  Transform                                 transform;
-  tenno::shared_ptr<Material>               material;
   tenno::vector<Mesh>                       meshes;
   tenno::vector<tenno::shared_ptr<Texture>> textures_loaded;
   

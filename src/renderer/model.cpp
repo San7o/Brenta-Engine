@@ -55,16 +55,6 @@ void Model::draw() const
   return;
 }
 
-Transform &Model::get_transform()
-{
-  return this->transform;
-}
-
-tenno::shared_ptr<Material> Model::get_material()
-{
-  return this->material;
-}
-
 void Model::load(const Texture::Properties &props)
 {
   tinyobj::ObjReaderConfig reader_config;

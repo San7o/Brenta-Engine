@@ -42,8 +42,8 @@ struct SpriteAnimationSystem : System<SpriteAnimationEcsComponent,
         auto model =
           e.get_component<ModelEcsComponent>();
 
-        model->model->get_material()->set_int("atlasIndex",
-                                              sprite_animation->atlas_index);
+        model->model->material->set_int("atlasIndex",
+                                        sprite_animation->atlas_index);
         return;
       }
       else
