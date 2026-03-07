@@ -11,5 +11,6 @@ var dir_e378ba2053768d6a9544b8026eb92071 =
     [ "phong.hpp", "phong_8hpp_source.html", null ],
     [ "pipeline.hpp", "pipeline_8hpp_source.html", null ],
     [ "point_light.hpp", "point__light_8hpp_source.html", null ],
-    [ "renderer.hpp", "renderer_8hpp_source.html", null ]
+    [ "renderer.hpp", "renderer_8hpp_source.html", null ],
+    [ "skybox.hpp", "skybox_8hpp_source.html", null ]
 ];

@@ -11,5 +11,5 @@ var searchData=
   ['pointlightecscomponent_8',['PointLightEcsComponent',['../classbrenta_1_1PointLightEcsComponent.html',1,'brenta']]],
   ['pointlightnodecomponent_9',['PointLightNodeComponent',['../classbrenta_1_1PointLightNodeComponent.html',1,'brenta']]],
   ['pointlightrendersystem_10',['PointLightRenderSystem',['../classbrenta_1_1PointLightRenderSystem.html',1,'brenta']]],
-  ['properties_11',['Properties',['../classbrenta_1_1Texture_1_1Properties.html',1,'brenta::Texture']]]
+  ['properties_11',['Properties',['../structbrenta_1_1Texture_1_1Properties.html',1,'brenta::Texture']]]
 ];

@@ -161,13 +161,13 @@ $(document).ready(function(){initNavTree('particles_8cpp_source.html',''); initR
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <a class="code hl_class" href="classbrenta_1_1Texture_1_1Builder.html">Texture::Builder</a>()</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    .target(Texture::Target::Texture2D)</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    .path(conf.atlas_path)</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    .properties(<a class="code hl_class" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>()</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                .wrapping(Texture::Wrapping::Repeat)</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                .filtering_min(Texture::Filtering::Nearest)</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                .filtering_mag(Texture::Filtering::Nearest)</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                .has_mipmap(Gl::True)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                .mipmap_min(Texture::Filtering::NearestMipmapNearest)</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                .mipmap_mag(Texture::Filtering::Nearest))</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    .properties(<a class="code hl_struct" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>()</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                .set_wrapping(Texture::Wrapping::Repeat)</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                .set_filtering_min(Texture::Filtering::Nearest)</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>                .set_filtering_mag(Texture::Filtering::Nearest)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>                .set_has_mipmap(Gl::True)</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>                .set_mipmap_min(Texture::Filtering::NearestMipmapNearest)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>                .set_mipmap_mag(Texture::Filtering::Nearest))</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    .build();</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>  <span class="comment">// Create shaders</span></div>
@@ -439,9 +439,9 @@ $(document).ready(function(){initNavTree('particles_8cpp_source.html',''); initR
 <div class="ttc" id="aclassbrenta_1_1ParticleEmitter_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1ParticleEmitter_1_1Builder.html">brenta::ParticleEmitter::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="particles_8hpp_source.html#l00096">particles.hpp:97</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1ParticleEmitter_html"><div class="ttname"><a href="classbrenta_1_1ParticleEmitter.html">brenta::ParticleEmitter</a></div><div class="ttdef"><b>Definition</b> <a href="particles_8hpp_source.html#l00037">particles.hpp:38</a></div></div>
 <div class="ttc" id="aclassbrenta_1_1Shader_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Shader_1_1Builder.html">brenta::Shader::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="shader_8hpp_source.html#l00170">shader.hpp:171</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Texture_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Texture_1_1Builder.html">brenta::Texture::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00208">texture.hpp:209</a></div></div>
-<div class="ttc" id="aclassbrenta_1_1Texture_1_1Properties_html"><div class="ttname"><a href="classbrenta_1_1Texture_1_1Properties.html">brenta::Texture::Properties</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00151">texture.hpp:152</a></div></div>
+<div class="ttc" id="aclassbrenta_1_1Texture_1_1Builder_html"><div class="ttname"><a href="classbrenta_1_1Texture_1_1Builder.html">brenta::Texture::Builder</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00195">texture.hpp:196</a></div></div>
 <div class="ttc" id="astructbrenta_1_1ParticleSettings_html"><div class="ttname"><a href="structbrenta_1_1ParticleSettings.html">brenta::ParticleSettings</a></div><div class="ttdef"><b>Definition</b> <a href="particles_8cpp_source.html#l00026">particles.cpp:26</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Texture_1_1Properties_html"><div class="ttname"><a href="structbrenta_1_1Texture_1_1Properties.html">brenta::Texture::Properties</a></div><div class="ttdef"><b>Definition</b> <a href="texture_8hpp_source.html#l00109">texture.hpp:110</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

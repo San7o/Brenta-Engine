@@ -17,14 +17,27 @@
     </div>
 <h1 id="design">Design</h1>
 <p>THIS DOCUMENT IS A DRAFT AND IT IS NOT COMPLETE</p>
-<p>Game engines are complex pieces of software. They provide an platform
-to define logic, render graphics, and access system resources like audio
-and input, as well as providing a cross-platform abstraction to the
-developer.</p>
+<p>What is a game engine?</p>
+<p>The line between a game / application and its engine is not something
+inherently fixed, people have different needs and they may think
+differently about it. This is what fundamentally drives the design of
+their engines. AAA studios may want a "big engine" that provides many
+advanced features out of the box, I would place Unreal Engine and Unity
+in this category. Some other smaller studios or individual recreational
+programmers may want a lighter platform that is easier to understand and
+to modify, think Raylib and Love2D.</p>
+<p>Regardless, game engines are usually complex pieces of software. They
+provide an platform to define logic, render graphics, and access system
+resources like audio and input, as well as providing a cross-platform
+abstraction to the developer.</p>
+<p>Brenta-Engine is more positioned towards the "big-engine" category.
+Here is an high level overview of the major classes that are used in the
+engine:</p>
 <figure>
 <img src="./brenta-picture.png" alt="high-level-overview" />
 <figcaption aria-hidden="true">high-level-overview</figcaption>
 </figure>
+<h2 id="design-proces">Design proces</h2>
 <p>Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
 point where I am not scared to do big refactoring anymore - that is just
@@ -38,7 +51,7 @@ curious to understand how these big systems are designed and
 implemented, and as a programming exercise / learning experience. The
 more I learned about graphics the more I became fascinated and
 interested in the topic.</p>
-<p>When I began this project in july 2024 I was really confused with
+<p>When I began this project in July 2024 I was really confused with
 using OpenGL and C++, it took me a while to develop a decent mental
 model. I was at my second year of university and I did not have any
 major programming experience, but I pushed through it and hacked some

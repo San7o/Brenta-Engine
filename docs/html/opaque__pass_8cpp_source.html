@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('opaque__pass_8cpp_source.html',''); in
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>{</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; command : data.opaque_queue)</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  {</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">auto</span> material = command.model-&gt;get_material();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keyword">auto</span> material = command.model-&gt;material;</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    material-&gt;apply();</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="comment">// Setup all lights</span></div>
@@ -151,14 +151,14 @@ $(document).ready(function(){initNavTree('opaque__pass_8cpp_source.html',''); in
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>                               <span class="comment">// Node world position</span></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>                               command.world_matrix *</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>                               <span class="comment">// Local transform</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                               command.model-&gt;get_transform().get_model_matrix());</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>                               command.model-&gt;transform.get_model_matrix());</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    material-&gt;shader-&gt;set_vec3(<span class="stringliteral">&quot;view_pos&quot;</span>,    data.cam_position);</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span> </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="comment">// Geometry</span></div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    command.model-&gt;draw();</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  }</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}</div>
-<div class="ttc" id="astructbrenta_1_1Renderer_1_1RenderData_html"><div class="ttname"><a href="structbrenta_1_1Renderer_1_1RenderData.html">brenta::Renderer::RenderData</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00091">renderer.hpp:92</a></div></div>
+<div class="ttc" id="astructbrenta_1_1Renderer_1_1RenderData_html"><div class="ttname"><a href="structbrenta_1_1Renderer_1_1RenderData.html">brenta::Renderer::RenderData</a></div><div class="ttdef"><b>Definition</b> <a href="renderer_8hpp_source.html#l00093">renderer.hpp:94</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

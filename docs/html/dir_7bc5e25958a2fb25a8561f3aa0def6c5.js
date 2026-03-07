@@ -10,5 +10,6 @@ var dir_7bc5e25958a2fb25a8561f3aa0def6c5 =
     [ "particles.cpp", "particles_8cpp_source.html", null ],
     [ "phong.cpp", "phong_8cpp_source.html", null ],
     [ "pipeline.cpp", "pipeline_8cpp_source.html", null ],
-    [ "renderer.cpp", "renderer_8cpp_source.html", null ]
+    [ "renderer.cpp", "renderer_8cpp_source.html", null ],
+    [ "skybox.cpp", "skybox_8cpp_source.html", null ]
 ];

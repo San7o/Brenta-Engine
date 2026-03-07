@@ -95,10 +95,21 @@ $(document).ready(function(){initNavTree('classbrenta_1_1Texture.html',''); init
 <a href="#nested-classes">Data Structures</a> &#124;
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a>  </div>
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
+<a href="#pro-attribs">Protected Attributes</a>  </div>
   <div class="headertitle"><div class="title">brenta::Texture Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for brenta::Texture:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classbrenta_1_1Texture.png" usemap="#brenta::Texture_map" alt=""/>
+  <map id="brenta::Texture_map" name="brenta::Texture_map">
+<area href="classbrenta_1_1Cubemap.html" alt="brenta::Cubemap" shape="rect" coords="0,56,107,80"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Data Structures</h2></td></tr>
@@ -106,7 +117,7 @@ Data Structures</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Texture_1_1Config.html">Config</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Properties</a></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Properties</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -169,7 +180,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a70a558944f89e72baee65b33ce4eea00"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d34e542e4ecb4e40136fabd08325b8e" id="r_a2d34e542e4ecb4e40136fabd08325b8e"><td class="memItemLeft" align="right" valign="top">Texture::Target&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a2d34e542e4ecb4e40136fabd08325b8e">get_target</a> () const</td></tr>
 <tr class="separator:a2d34e542e4ecb4e40136fabd08325b8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aedb1e289365897481ee7778a7844b6ab" id="r_aedb1e289365897481ee7778a7844b6ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aedb1e289365897481ee7778a7844b6ab">get_properties</a> ()</td></tr>
+<tr class="memitem:aedb1e289365897481ee7778a7844b6ab" id="r_aedb1e289365897481ee7778a7844b6ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aedb1e289365897481ee7778a7844b6ab">get_properties</a> ()</td></tr>
 <tr class="separator:aedb1e289365897481ee7778a7844b6ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3840dc7429982ffaddeafc8d62345b5d" id="r_a3840dc7429982ffaddeafc8d62345b5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a3840dc7429982ffaddeafc8d62345b5d">bind</a> ()</td></tr>
 <tr class="separator:a3840dc7429982ffaddeafc8d62345b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,8 +191,28 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:ae85f9cf9bce8d83505c6a48e6540990f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad4379e30ca37c7c77c96f2a3ccc40c25" id="r_ad4379e30ca37c7c77c96f2a3ccc40c25"><td class="memItemLeft" align="right" valign="top">static Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#ad4379e30ca37c7c77c96f2a3ccc40c25">load</a> (const std::filesystem::path &amp;path, bool flip=true)</td></tr>
 <tr class="separator:ad4379e30ca37c7c77c96f2a3ccc40c25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67a308d43418e22c252b36caa01625df" id="r_a67a308d43418e22c252b36caa01625df"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a67a308d43418e22c252b36caa01625df">bind_id</a> (Texture::Target target, Texture::Id id, const <a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;properties=<a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>())</td></tr>
-<tr class="separator:a67a308d43418e22c252b36caa01625df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d555e572ee7e116472d0d4a36d9bdbb" id="r_a3d555e572ee7e116472d0d4a36d9bdbb"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a3d555e572ee7e116472d0d4a36d9bdbb">bind_id</a> (Texture::Target target, Texture::Id id)</td></tr>
+<tr class="separator:a3d555e572ee7e116472d0d4a36d9bdbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafe8f46a71f8f3e0df2e12c656757f88" id="r_aafe8f46a71f8f3e0df2e12c656757f88"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#aafe8f46a71f8f3e0df2e12c656757f88">bind_id</a> (Texture::Target target, Texture::Id id, const <a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;properties)</td></tr>
+<tr class="separator:aafe8f46a71f8f3e0df2e12c656757f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-static-methods" name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:a28603864cd240b888df26f4a2a746209" id="r_a28603864cd240b888df26f4a2a746209"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a28603864cd240b888df26f4a2a746209">read_image</a> (const std::filesystem::path &amp;path, bool flip)</td></tr>
+<tr class="separator:a28603864cd240b888df26f4a2a746209"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pro-attribs" name="pro-attribs"></a>
+Protected Attributes</h2></td></tr>
+<tr class="memitem:a094642248b262b7568cab678c029e631" id="r_a094642248b262b7568cab678c029e631"><td class="memItemLeft" align="right" valign="top">Texture::Id&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a094642248b262b7568cab678c029e631">id</a> = 0</td></tr>
+<tr class="separator:a094642248b262b7568cab678c029e631"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65db3694bc36d602bb174e7ae0538fc6" id="r_a65db3694bc36d602bb174e7ae0538fc6"><td class="memItemLeft" align="right" valign="top">Texture::Type&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a65db3694bc36d602bb174e7ae0538fc6">type</a></td></tr>
+<tr class="separator:a65db3694bc36d602bb174e7ae0538fc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61611c8344bc65b1a7aa83e8abd0acb3" id="r_a61611c8344bc65b1a7aa83e8abd0acb3"><td class="memItemLeft" align="right" valign="top">Texture::Target&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a61611c8344bc65b1a7aa83e8abd0acb3">target</a></td></tr>
+<tr class="separator:a61611c8344bc65b1a7aa83e8abd0acb3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16962e17cbc2b143e99edf258e112c13" id="r_a16962e17cbc2b143e99edf258e112c13"><td class="memItemLeft" align="right" valign="top">std::filesystem::path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a16962e17cbc2b143e99edf258e112c13">path</a></td></tr>
+<tr class="separator:a16962e17cbc2b143e99edf258e112c13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a308a1f7968ab12f4d69748ae8bf4cc" id="r_a5a308a1f7968ab12f4d69748ae8bf4cc"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Texture.html#a5a308a1f7968ab12f4d69748ae8bf4cc">properties</a></td></tr>
+<tr class="separator:a5a308a1f7968ab12f4d69748ae8bf4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -292,7 +323,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00117">117</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00141">141</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
@@ -340,7 +371,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00120">120</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00144">144</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>
@@ -359,7 +390,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00029">29</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00033">33</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -388,7 +419,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00066">66</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00070">70</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -407,12 +438,50 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00116">116</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00126">126</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a67a308d43418e22c252b36caa01625df" name="a67a308d43418e22c252b36caa01625df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a67a308d43418e22c252b36caa01625df">&#9670;&#160;</a></span>bind_id()</h2>
+<a id="a3d555e572ee7e116472d0d4a36d9bdbb" name="a3d555e572ee7e116472d0d4a36d9bdbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d555e572ee7e116472d0d4a36d9bdbb">&#9670;&#160;</a></span>bind_id() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Texture::bind_id </td>
+          <td>(</td>
+          <td class="paramtype">Texture::Target&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Texture::Id&#160;</td>
+          <td class="paramname"><em>id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00096">96</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aafe8f46a71f8f3e0df2e12c656757f88" name="aafe8f46a71f8f3e0df2e12c656757f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe8f46a71f8f3e0df2e12c656757f88">&#9670;&#160;</a></span>bind_id() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -435,8 +504,8 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const <a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td>
-          <td class="paramname"><em>properties</em> = <code><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a>()</code>&#160;</td>
+          <td class="paramtype">const <a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp;&#160;</td>
+          <td class="paramname"><em>properties</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -451,7 +520,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00092">92</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00101">101</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -470,7 +539,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00040">40</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00044">44</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -489,7 +558,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00045">45</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00049">49</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -500,7 +569,7 @@ Static Public Member Functions</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp; Texture::get_properties </td>
+          <td class="memname"><a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> &amp; Texture::get_properties </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -508,7 +577,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00061">61</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00065">65</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -527,7 +596,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00055">55</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00059">59</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -546,7 +615,7 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00050">50</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00054">54</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -584,7 +653,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00073">73</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00077">77</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
 
 </div>
 </div>
@@ -612,7 +681,166 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00130">130</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00154">154</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a28603864cd240b888df26f4a2a746209" name="a28603864cd240b888df26f4a2a746209"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a28603864cd240b888df26f4a2a746209">&#9670;&#160;</a></span>read_image()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Texture::read_image </td>
+          <td>(</td>
+          <td class="paramtype">const std::filesystem::path &amp;&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>flip</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8cpp_source.html#l00132">132</a> of file <a class="el" href="texture_8cpp_source.html">texture.cpp</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Field Documentation</h2>
+<a id="a094642248b262b7568cab678c029e631" name="a094642248b262b7568cab678c029e631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a094642248b262b7568cab678c029e631">&#9670;&#160;</a></span>id</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture::Id brenta::Texture::id = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00177">177</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a16962e17cbc2b143e99edf258e112c13" name="a16962e17cbc2b143e99edf258e112c13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16962e17cbc2b143e99edf258e112c13">&#9670;&#160;</a></span>path</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::filesystem::path brenta::Texture::path</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00180">180</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a5a308a1f7968ab12f4d69748ae8bf4cc" name="a5a308a1f7968ab12f4d69748ae8bf4cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a308a1f7968ab12f4d69748ae8bf4cc">&#9670;&#160;</a></span>properties</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structbrenta_1_1Texture_1_1Properties.html">Texture::Properties</a> brenta::Texture::properties</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00181">181</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a61611c8344bc65b1a7aa83e8abd0acb3" name="a61611c8344bc65b1a7aa83e8abd0acb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61611c8344bc65b1a7aa83e8abd0acb3">&#9670;&#160;</a></span>target</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture::Target brenta::Texture::target</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00179">179</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a65db3694bc36d602bb174e7ae0538fc6" name="a65db3694bc36d602bb174e7ae0538fc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a65db3694bc36d602bb174e7ae0538fc6">&#9670;&#160;</a></span>type</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Texture::Type brenta::Texture::type</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="texture_8hpp_source.html#l00178">178</a> of file <a class="el" href="texture_8hpp_source.html">texture.hpp</a>.</p>
 
 </div>
 </div>

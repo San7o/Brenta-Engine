@@ -86,11 +86,12 @@ var hierarchy =
     [ "brenta::PointLight", "classbrenta_1_1PointLight.html", [
       [ "brenta::PhongPointLight", "classbrenta_1_1PhongPointLight.html", null ]
     ] ],
-    [ "brenta::Texture::Properties", "classbrenta_1_1Texture_1_1Properties.html", null ],
+    [ "brenta::Texture::Properties", "structbrenta_1_1Texture_1_1Properties.html", null ],
     [ "brenta::Renderer::RenderData", "structbrenta_1_1Renderer_1_1RenderData.html", null ],
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
     [ "brenta::RenderPass", "classbrenta_1_1RenderPass.html", [
       [ "brenta::OpaquePass", "classbrenta_1_1OpaquePass.html", null ],
+      [ "brenta::SkyboxPass", "classbrenta_1_1SkyboxPass.html", null ],
       [ "brenta::TransparentPass", "classbrenta_1_1TransparentPass.html", null ],
       [ "brenta::UiPass", "classbrenta_1_1UiPass.html", null ]
     ] ],
@@ -99,6 +100,7 @@ var hierarchy =
     [ "brenta::Script", "classbrenta_1_1Script.html", null ],
     [ "brenta::Shader", "classbrenta_1_1Shader.html", null ],
     [ "brenta::SignalManager", "classbrenta_1_1SignalManager.html", null ],
+    [ "brenta::Skybox", "classbrenta_1_1Skybox.html", null ],
     [ "brenta::Sound", "classbrenta_1_1Sound.html", null ],
     [ "brenta::SoundAsset", "classbrenta_1_1SoundAsset.html", null ],
     [ "brenta::MiniaudioDriver::SoundAssetSlot", "structbrenta_1_1MiniaudioDriver_1_1SoundAssetSlot.html", null ],
@@ -123,7 +125,9 @@ var hierarchy =
       [ "brenta::PointLightRenderSystem", "classbrenta_1_1PointLightRenderSystem.html", null ]
     ] ],
     [ "brenta::Text", "classbrenta_1_1Text.html", null ],
-    [ "brenta::Texture", "classbrenta_1_1Texture.html", null ],
+    [ "brenta::Texture", "classbrenta_1_1Texture.html", [
+      [ "brenta::Cubemap", "classbrenta_1_1Cubemap.html", null ]
+    ] ],
     [ "brenta::Time", "classbrenta_1_1Time.html", null ],
     [ "brenta::Transform", "classbrenta_1_1Transform.html", null ],
     [ "brenta::Vao", "classbrenta_1_1Vao.html", null ],

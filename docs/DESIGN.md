@@ -2,12 +2,29 @@
 
 THIS DOCUMENT IS A DRAFT AND IT IS NOT COMPLETE
 
-Game engines are complex pieces of software. They provide an platform
-to define logic, render graphics, and access system resources like
-audio and input, as well as providing a cross-platform abstraction to
-the developer.
+What is a game engine?
+
+The line between a game / application and its engine is not something
+inherently fixed, people have different needs and they may think
+differently about it. This is what fundamentally drives the design of
+their engines. AAA studios may want a "big engine" that provides many
+advanced features out of the box, I would place Unreal Engine and
+Unity in this category. Some other smaller studios or individual
+recreational programmers may want a lighter platform that is easier to
+understand and to modify, think Raylib and Love2D.
+
+Regardless, game engines are usually complex pieces of software. They
+provide an platform to define logic, render graphics, and access
+system resources like audio and input, as well as providing a
+cross-platform abstraction to the developer.
+
+Brenta-Engine is more positioned towards the "big-engine"
+category. Here is an high level overview of the major classes that are
+used in the engine:
 
 ![high-level-overview](./brenta-picture.png)
+
+## Design proces
 
 Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
@@ -24,7 +41,7 @@ implemented, and as a programming exercise / learning experience. The
 more I learned about graphics the more I became fascinated and
 interested in the topic.
 
-When I began this project in july 2024 I was really confused with
+When I began this project in July 2024 I was really confused with
 using OpenGL and C++, it took me a while to develop a decent mental
 model. I was at my second year of university and I did not have any
 major programming experience, but I pushed through it and hacked some
