@@ -18,9 +18,11 @@ provide a platform to define logic, render graphics, and access
 system resources like audio and input, as well as providing a
 cross-platform abstraction to the developer.
 
-Brenta-Engine is more positioned towards the "big-engine"
-category. Here is an high level overview of the major classes that are
-used in the engine:
+Brenta-Engine is more positioned towards the "big-engine" category,
+while my other game engine
+[micro-engine.h](https://san7o.github.io/micro-engine.h/) falls on the
+other side. Here is an high level overview of the major classes that
+are used in the engine:
 
 ![high-level-overview](./brenta-picture.png)
 
@@ -86,20 +88,20 @@ following:
 
 - rasterization: this is the most popular technique for real time
   rendering since we have hardware that can do it fast, and it is the
-  default technoque in the engine. Its primitive is the triangle,
-  which is formed of three vertexed in 3D space. A vertex may also
+  default technique in the engine. Its primitive is the triangle,
+  which is composed of three vertices in 3D space. A vertex may also
   store a color or a position in a texture (often called `uv`
   coordinates). Given a triangle, after projecting it to the screen,
-  the renderer (whether software or hardware accelerated) will iterate
-  over discrete pixels inside the triangle and color them based on a
-  coloring algorithm or program (fragment shader).  This "projection"
-  is achieved by multiplying together three matrices: the `model` or
-  `world` matrix which translates a vertex to its position in world
-  space, the `view` matrix which shift and rotates the world based on
-  the camera position (If the camera moves 5 feet to the right, it’s
-  mathematically the same as moving the entire world 5 feet to the
-  left), and `projection` matrix which applies perspective and
-  field-of-view; this ultimately maps the vertices inside a cube
+  the renderer (whether software or hardware accelerated) will
+  interpolate over discrete pixels inside the triangle and color them
+  based on a coloring algorithm or program (fragment shader).  This
+  "projection" is achieved by multiplying together three matrices: the
+  `model` or `world` matrix which translates a vertex to its position
+  in world space, the `view` matrix which shift and rotates the world
+  based on the camera position (If the camera moves 5 feet to the
+  right, it’s mathematically the same as moving the entire world 5
+  feet to the left), and `projection` matrix which applies perspective
+  and field-of-view; this ultimately maps the vertices inside a cube
   called the Canonical Cube where the GPU can work with.
 - ray tracing: the general idea is to shoot a ray (which is just a
   line) for each pixel (sometimes more than one ray per pixel) which

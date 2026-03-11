@@ -30,9 +30,11 @@ to modify, think Raylib and Love2D.</p>
 provide a platform to define logic, render graphics, and access system
 resources like audio and input, as well as providing a cross-platform
 abstraction to the developer.</p>
-<p>Brenta-Engine is more positioned towards the "big-engine" category.
-Here is an high level overview of the major classes that are used in the
-engine:</p>
+<p>Brenta-Engine is more positioned towards the "big-engine" category,
+while my other game engine <a
+href="https://san7o.github.io/micro-engine.h/">micro-engine.h</a> falls
+on the other side. Here is an high level overview of the major classes
+that are used in the engine:</p>
 <figure>
 <img src="./brenta-picture.png" alt="high-level-overview" />
 <figcaption aria-hidden="true">high-level-overview</figcaption>
@@ -94,13 +96,13 @@ following:</p>
 <ul>
 <li>rasterization: this is the most popular technique for real time
 rendering since we have hardware that can do it fast, and it is the
-default technoque in the engine. Its primitive is the triangle, which is
-formed of three vertexed in 3D space. A vertex may also store a color or
-a position in a texture (often called <code>uv</code> coordinates).
+default technique in the engine. Its primitive is the triangle, which is
+composed of three vertices in 3D space. A vertex may also store a color
+or a position in a texture (often called <code>uv</code> coordinates).
 Given a triangle, after projecting it to the screen, the renderer
-(whether software or hardware accelerated) will iterate over discrete
-pixels inside the triangle and color them based on a coloring algorithm
-or program (fragment shader). This "projection" is achieved by
+(whether software or hardware accelerated) will interpolate over
+discrete pixels inside the triangle and color them based on a coloring
+algorithm or program (fragment shader). This "projection" is achieved by
 multiplying together three matrices: the <code>model</code> or
 <code>world</code> matrix which translates a vertex to its position in
 world space, the <code>view</code> matrix which shift and rotates the
