@@ -21,10 +21,9 @@ cross-platform abstraction to the developer.
 Brenta-Engine is more positioned towards the "big-engine" category,
 while my other game engine
 [micro-engine.h](https://san7o.github.io/micro-engine.h/) falls on the
-other side. Here is an high level overview of the major classes that
-are used in the engine:
+other side.
 
-![high-level-overview](./brenta-picture.png)
+![game-engine-architecture](./game-engine-architecture.png)
 
 ## Design proces
 
@@ -64,6 +63,11 @@ run at 60 FPS, hence you have to understand how the CPU and memory
 works in order to optimize it.
 
 ![engine-and-os](./engine-and-os.png)
+
+Here is an high level overview of the major classes that are used in
+the engine:
+
+![high-level-overview](./brenta-picture.png)
 
 ## Subsystems
 
