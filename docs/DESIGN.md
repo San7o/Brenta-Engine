@@ -23,7 +23,13 @@ while my other game engine
 [micro-engine.h](https://san7o.github.io/micro-engine.h/) falls on the
 other side.
 
+Example "big" architecture:
+
 ![game-engine-architecture](./game-engine-architecture.png)
+
+Example "small" architecture:
+
+![raylib-architecture](./raylib-architecture.png)
 
 ## Design proces
 
