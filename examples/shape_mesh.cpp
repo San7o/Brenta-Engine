@@ -119,9 +119,9 @@ int main(void)
   auto circle =
     tenno::make_shared<Model>(circle_builder);
   
-  // Piramid
+  // Pyramid
   
-  auto piramid_builder =
+  auto pyramid_builder =
     Model::Builder()
     .transform(Transform()
                .translate(glm::vec3(5.0f, -1.0f, 0.0f))
@@ -129,11 +129,11 @@ int main(void)
                                       glm::vec3(0.0f, 1.0f, 0.0f)))
                .scale(glm::vec3(0.5f)))
     .mesh(Mesh::Builder()
-          .shape(Mesh::Shape::Piramid)
+          .shape(Mesh::Shape::Pyramid)
           .texture(texture))
     .material(material);
-  auto piramid =
-    tenno::make_shared<Model>(piramid_builder);
+  auto pyramid =
+    tenno::make_shared<Model>(pyramid_builder);
 
   // Cube
   
@@ -188,7 +188,7 @@ int main(void)
     Renderer::submit({glm::mat4(1.0f), triangle});
     Renderer::submit({glm::mat4(1.0f), square});
     Renderer::submit({glm::mat4(1.0f), circle});
-    Renderer::submit({glm::mat4(1.0f), piramid});
+    Renderer::submit({glm::mat4(1.0f), pyramid});
     Renderer::submit({glm::mat4(1.0f), cube});
     Renderer::submit({glm::mat4(1.0f), sphere});
     Renderer::end_frame(pipeline);

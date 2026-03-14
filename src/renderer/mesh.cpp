@@ -217,7 +217,7 @@ Mesh::Builder &Mesh::Builder::shape(Mesh::Shape shape)
     break;
   }
 
-  case Mesh::Shape::Piramid:
+  case Mesh::Shape::Pyramid:
     
     this->conf.vertices = {
       // Base

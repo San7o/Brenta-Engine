@@ -33,7 +33,7 @@ public:
     Triangle,
     Square,
     Circle,
-    Piramid,
+    Pyramid,
     Cube,
     Sphere,
   };
