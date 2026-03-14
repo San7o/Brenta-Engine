@@ -109,7 +109,6 @@ int main()
     auto font =
       AssetManager::new_asset<Font>("TextFont", font_builder);
 
-    auto default_fb = FrameBuffer();
     auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
                                                    Window::get_height());
     
@@ -132,9 +131,9 @@ int main()
       World::tick();
       Renderer::end_frame(pipeline);
 
-      default_fb.bind();
+      Window::framebuffer->bind();
       Gui::render();
-      default_fb.unbind();
+      Window::framebuffer->unbind();
 
       Window::swap_buffers();
     }

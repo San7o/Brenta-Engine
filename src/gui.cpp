@@ -221,7 +221,7 @@ void Gui::new_frame(FrameBuffer *fb, std::string name)
                            ImGuiCond_FirstUseEver);
   ImGui::Begin(name.c_str());
 
-  float window_width = ImGui::GetContentRegionAvail().x;
+  float window_width  = ImGui::GetContentRegionAvail().x;
   float window_height = ImGui::GetContentRegionAvail().y;
 
   fb->rescale(window_width, window_height);

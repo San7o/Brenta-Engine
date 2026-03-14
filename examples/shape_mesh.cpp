@@ -184,7 +184,7 @@ int main(void)
     Gl::clear();
 
     // Draw
-    Renderer::begin_frame(camera);
+    Renderer::begin_frame(camera, Window::get_width(), Window::get_height());
     Renderer::submit({glm::mat4(1.0f), triangle});
     Renderer::submit({glm::mat4(1.0f), square});
     Renderer::submit({glm::mat4(1.0f), circle});

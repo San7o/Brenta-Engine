@@ -116,12 +116,11 @@ int main()
     tenno::make_shared<PointLightNodeComponent>(phong_point_ptr);
   Scene::add_component(point_light_node, point_light_component);
 
-  auto default_fb = FrameBuffer();
   auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
                                                  Window::get_height());
     
   auto pipeline = tenno::make_shared<RenderPipeline>();
-  pipeline->add_pass<OpaquePass>(game_fb);
+  pipeline->add_pass<OpaquePass>(game_fb, true, true);
   pipeline->add_pass<TransparentPass>(game_fb);
   pipeline->add_pass<UiPass>(game_fb);
   
@@ -138,18 +137,22 @@ int main()
     if (Window::is_key_pressed(Key::Left))
       rotate_model_clockwise(model_ptr);
 
+    if (Window::get_width() != game_fb->width
+        || Window::get_height() != game_fb->height)
+      game_fb->rescale(Window::get_width(), Window::get_height());
+
     setup_gui(*game_fb, phong_dir_ptr, point_light_node, phong_point_ptr);
     Gl::set_color(Color::grey());
     Gl::clear();
     
     // Render to framebuffer
     scene.update(Window::get_time().delta);
-    scene.draw(pipeline);
+    scene.draw(pipeline, game_fb->width, game_fb->height);
 
     // Render to screen
-    default_fb.bind();
+    Window::framebuffer->bind();
     Gui::render();
-    default_fb.unbind();
+    Window::framebuffer->unbind();
     
     Window::poll_events();
     Window::swap_buffers();

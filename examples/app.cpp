@@ -129,7 +129,7 @@ bool App::draw(tenno::shared_ptr<RenderPipeline> pipeline)
   auto scene = AssetManager::get<Scene>("main_scene");
   if (!scene) return false;
 
-  scene->draw(pipeline);
+  scene->draw(pipeline, Window::get_width(), Window::get_height());
 
   return true;
 }

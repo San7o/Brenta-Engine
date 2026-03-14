@@ -35,7 +35,7 @@ public:
   {}
   ~Text() = default;
   
-  void render() const;
+  void render(int width, int height) const;
 
 };
   

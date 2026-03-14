@@ -16,7 +16,8 @@ class UiPass : public RenderPass
 public:
 
   UiPass() = delete;
-  UiPass(tenno::shared_ptr<FrameBuffer> fb);
+  UiPass(tenno::shared_ptr<FrameBuffer> fb,
+         bool clear = false, bool set_viewport = false);
 
   UiPass(const UiPass& other)            = delete;
   UiPass &operator=(const UiPass& other) = delete;
@@ -29,6 +30,8 @@ public:
 private:
 
   tenno::shared_ptr<FrameBuffer> fb;
+  bool clear        = false;
+  bool set_viewport = false;
   
 };
 

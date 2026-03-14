@@ -13,7 +13,7 @@
 
 using namespace brenta;
 
-void Text::render() const
+void Text::render(int width, int height) const
 {
   this->font->shader->use();
   this->font->shader->set_float3("textColor",
@@ -22,8 +22,8 @@ void Text::render() const
                                  255.99f * this->color.b);
 
   glm::mat4 projection =
-    glm::ortho(0.0f, static_cast<float>(Window::get_width()), 0.0f,
-               static_cast<float>(Window::get_height()));
+    glm::ortho(0.0f, static_cast<float>(width), 0.0f,
+               static_cast<float>(height));
 
   this->font->shader->set_mat4("projection", projection);
 

@@ -16,8 +16,9 @@ class SkyboxPass : public RenderPass
 public:
   
   SkyboxPass() = delete;
-  SkyboxPass(tenno::shared_ptr<FrameBuffer> fb)
-    : fb(fb) {}
+  SkyboxPass(tenno::shared_ptr<FrameBuffer> fb,
+             bool clear = false, bool set_viewport = false)
+    : fb(fb), clear(clear), set_viewport(set_viewport) {}
 
   void begin() override;
   void end() override;
@@ -27,6 +28,8 @@ public:
 private:
 
   tenno::shared_ptr<FrameBuffer> fb;
+  bool clear        = false;
+  bool set_viewport = false;
   
 };
 

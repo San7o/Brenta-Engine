@@ -46,7 +46,7 @@ std::expected<void, Subsystem::Error> Gl::initialize()
     return std::unexpected("Failed to initialize GLAD");
   }
 
-  int width = Window::get_width();
+  int width  = Window::get_width();
   int height = Window::get_height();
 
   glViewport(0, 0, width, height);

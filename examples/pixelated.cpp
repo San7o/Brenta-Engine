@@ -10,6 +10,10 @@
 #include <brenta/renderer/phong.hpp>
 #include <brenta/renderer/pipeline.hpp>
 #include <brenta/renderer/opengl/framebuffer.hpp>
+#include <brenta/renderer/passes/opaque_pass.hpp>
+#include <brenta/renderer/passes/transparent_pass.hpp>
+#include <brenta/renderer/passes/ui_pass.hpp>
+#include <brenta/renderer/passes/skybox_pass.hpp>
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
 #include <brenta/node_components/model_node_component.hpp>
@@ -25,6 +29,8 @@
 
 #include "../src/renderer/shaders/c/phong_vs.c"
 #include "../src/renderer/shaders/c/phong_fs.c"
+#include "../src/renderer/shaders/c/screen_vs.c"
+#include "../src/renderer/shaders/c/screen_fs.c"
 
 using namespace brenta;
 
@@ -56,14 +62,14 @@ int main()
   auto engine = Engine::managed();
   
   // Setup scene
-  
   auto camera_builder =
     Camera::Builder()
     .projection_type(Camera::ProjectionType::Perspective)
     .position(Camera::Aircraft::Builder()
               .pos({0.0f, 0.0f, 0.0f})
               .build())
-    .fov(30.0f);
+    .fov(45.0f);
+
   auto scene      = Scene(camera_builder);
   auto root_node  = scene.get_root();
 
@@ -92,7 +98,7 @@ int main()
   auto model_component =
     tenno::make_shared<ModelNodeComponent>(model_builder);
   Scene::add_component(root_node, model_component);
-
+  
   // Skybox
   tenno::vector<std::filesystem::path> skybox_faces = {
     "examples/assets/textures/skybox/right.jpg",
@@ -103,6 +109,26 @@ int main()
     "examples/assets/textures/skybox/back.jpg",
   };
   scene.set_skybox(skybox_faces);
+  
+  // Screen quad
+  auto maybe_screen_shader = Shader::create({
+      { Shader::Type::Vertex,   screen_vs },
+      { Shader::Type::Fragment, screen_fs } });
+  if (!maybe_screen_shader)
+  {
+    ERROR("Error creating shader");
+    return 1;
+  }
+  auto screen_shader = tenno::move(maybe_screen_shader.value()); 
+  auto screen_material = Material(tenno::move(screen_shader));
+  screen_material.set_int("screenTexture", 0);
+  auto screen_quad_builder =
+    Model::Builder()
+    .mesh(Mesh::Builder()
+          .shape(Mesh::Shape::Square))
+    .material(tenno::move(screen_material));
+  auto screen_quad =
+    tenno::make_shared<Model>(screen_quad_builder);
   
   // Camera movement
   
@@ -140,7 +166,7 @@ int main()
 
     acam.yaw   += delta_x;
     acam.pitch -= delta_y;
-    
+
     if (acam.pitch <= -90)
       acam.pitch = -89.9;
     if (acam.pitch >= 90.0)
@@ -150,6 +176,11 @@ int main()
     return;
   });
 
+  bool wireframe = false;
+  Input::add_keyboard_callback(Key::R, [&wireframe]() {
+    wireframe = !wireframe;
+    Gl::set_poligon_mode(wireframe);
+  });
   Input::add_keyboard_callback(Key::Space, [&capture_mouse, &mouse]()
   {
     capture_mouse = !capture_mouse;
@@ -159,11 +190,21 @@ int main()
       mouse.first = true;
   });
 
-  auto pipeline = RenderPipeline::create_default();
+  float screen_scaling = 0.2f;
+  auto screen_fb = Window::framebuffer;
+  auto game_fb   =
+    tenno::make_shared<FrameBuffer>(Window::get_width() * screen_scaling,
+                                    Window::get_height() * screen_scaling);
+  auto pipeline  = tenno::make_shared<RenderPipeline>();
+  pipeline->add_pass<OpaquePass>(game_fb, true, true);
+  pipeline->add_pass<TransparentPass>(game_fb);
+  pipeline->add_pass<SkyboxPass>(game_fb);
+  pipeline->add_pass<UiPass>(game_fb);
   
-  
-  INFO("Move with W / A / S / D / Q / E / Mouse");
-  
+  INFO("Move with W / A / S / D / Q / E / Mouse, R to toggle wireframe");
+
+  int old_width = Window::get_width();
+  int old_height = Window::get_height();
   while (!Window::should_close())
   {
     float delta_time = Window::get_time().delta;
@@ -183,13 +224,30 @@ int main()
       acceleration.y = -ACCELERATION;
 
     update_camera(camera, acceleration, speed, delta_time);
-        
+    if (Window::get_width() != old_width
+        || Window::get_height() != old_height)
+    {
+      old_width = Window::get_width();
+      old_height = Window::get_height();      
+      game_fb->rescale(Window::get_width() * screen_scaling,
+                       Window::get_height() * screen_scaling);
+    }
+    
     Gl::set_color(Color::grey());
     Gl::clear();
-    
-    scene.update(delta_time);
-    scene.draw(pipeline, Window::get_width(), Window::get_height());
 
+    scene.update(delta_time);
+    scene.draw(pipeline, game_fb->width, game_fb->height);
+    
+    screen_fb->bind();
+    glViewport(0, 0, Window::get_width(), Window::get_height());
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, game_fb->texture_id);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    screen_quad->draw();
+    screen_fb->unbind();
+    
     Window::poll_events();
     Window::swap_buffers();
   }

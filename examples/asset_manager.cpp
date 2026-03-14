@@ -110,7 +110,7 @@ int main()
     Gl::clear();
 
     scene->update(delta_time);
-    scene->draw(pipeline);
+    scene->draw(pipeline, Window::get_width(), Window::get_height());
     
     Window::poll_events();
     Window::swap_buffers();

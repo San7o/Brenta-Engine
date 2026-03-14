@@ -44,7 +44,6 @@ public:
   //
 
   void set_mouse_capture(bool is_captured)        override;
-  void set_width_height(int width, int height)    override;
   void set_mouse_callback(void* callback)         override;
   void set_size_callback(void* callback)          override;
   void set_mouse_pos_callback(void* callback)     override;

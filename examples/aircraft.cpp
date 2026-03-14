@@ -150,6 +150,12 @@ int main()
 
     acam.yaw   += delta_x;
     acam.pitch -= delta_y;
+
+    if (acam.pitch <= -90)
+      acam.pitch = -89.9;
+    if (acam.pitch >= 90.0)
+      acam.pitch = 89.9;
+    
     camera->set_pos(acam);
     return;
   });
@@ -192,7 +198,7 @@ int main()
     Gl::clear();
     
     scene.update(delta_time);
-    scene.draw(pipeline);
+    scene.draw(pipeline, Window::get_width(), Window::get_height());
 
     Window::poll_events();
     Window::swap_buffers();

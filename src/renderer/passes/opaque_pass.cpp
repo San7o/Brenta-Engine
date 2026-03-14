@@ -4,17 +4,27 @@
 // Github:  @San7o
 
 #include <brenta/renderer/passes/opaque_pass.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
 
 using namespace brenta;
 
-OpaquePass::OpaquePass(tenno::shared_ptr<FrameBuffer> fb)
+OpaquePass::OpaquePass(tenno::shared_ptr<FrameBuffer> fb,
+                       bool clear, bool set_viewport)
 {
-  this->fb = fb;
+  this->fb    = fb;
+  this->clear = clear;
+  this->set_viewport = set_viewport;
 }
 
 void OpaquePass::begin()
 {
   this->fb->bind();
+
+  if (this->set_viewport)
+    Gl::set_viewport(0, 0, this->fb->width, this->fb->height);
+  
+  if (this->clear)
+    Gl::clear();
 }
 
 void OpaquePass::end()
@@ -27,7 +37,7 @@ void OpaquePass::execute(const Renderer::RenderData& data)
   for (auto& command : data.opaque_queue)
   {
     auto material = command.model->material;
-    material->apply();
+    material->shader->use();
 
     // Setup all lights
     int lights_number = 0;

@@ -8,6 +8,7 @@
 #include <brenta/subsystem.hpp>
 #include <brenta/time.hpp>
 #include <brenta/key.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
 
@@ -36,6 +37,8 @@ public:
   using WindowHandle = void*;
   using ProcHandle   = void*;
   using Callback     = void*;
+  
+  static tenno::shared_ptr<FrameBuffer>    framebuffer;
   
   // Subsystem interface
   static const std::string subsystem_name;
@@ -66,7 +69,6 @@ public:
   //
 
   static void set_mouse_capture(bool is_captured);
-  static void set_width_height(int width, int height);
   static void set_mouse_callback(Callback callback);
   static void set_size_callback(Callback callback);
   static void set_mouse_pos_callback(Callback callback);
@@ -120,20 +122,18 @@ public:
   virtual bool         is_key_pressed(Key key)      = 0;
   virtual Time         get_time()                   = 0;
   virtual Window::ProcHandle   get_proc_address()   = 0;
-  virtual Window::WindowHandle get_window()         = 0;  
+  virtual Window::WindowHandle get_window()         = 0;
 
   //
   // Setters
   //
 
   virtual void set_mouse_capture(bool is_captured)                = 0;
-  virtual void set_width_height(int width, int height)            = 0;
   virtual void set_mouse_callback(Window::Callback callback)      = 0;
   virtual void set_size_callback(Window::Callback callback)       = 0;
   virtual void set_mouse_pos_callback(Window::Callback callback)  = 0;
   virtual void set_key_callback(Window::Callback callback)        = 0;
   virtual void set_dimensions(int width, int height)              = 0;
-
 
   //
   // Utils

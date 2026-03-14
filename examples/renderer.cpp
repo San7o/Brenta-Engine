@@ -80,7 +80,7 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
     
-    Renderer::begin_frame(cam);
+    Renderer::begin_frame(cam, Window::get_width(), Window::get_height());
     Renderer::submit({glm::mat4(1.0f), model});
     Renderer::end_frame(pipeline);
     

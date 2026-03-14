@@ -18,6 +18,7 @@ using namespace brenta;
 //
 
 tenno::shared_ptr<Window::Driver> Window::backend     = nullptr;
+tenno::shared_ptr<FrameBuffer>    Window::framebuffer = nullptr;
 const std::string             Window::subsystem_name  = "window";
 Window::Config                Window::init_config     = {};
 bool                          Window::initialized     = false;
@@ -37,6 +38,8 @@ std::expected<void, Subsystem::Error> Window::initialize()
     ERROR("{}: Failed to initialize window", Window::subsystem_name);
     return ret;
   }
+
+  Window::framebuffer = tenno::make_shared<FrameBuffer>();
   
   INFO("{}: initialized", Window::subsystem_name);
   Window::initialized = true;
@@ -80,13 +83,6 @@ bool Window::should_close()
   if (Window::backend)
     return Window::backend->should_close();
   return true;
-}
-
-void Window::set_width_height(int width, int height)
-{
-  if (Window::backend)
-    Window::backend->set_width_height(width, height);
-  return;
 }
 
 bool Window::is_key_pressed(Key key)

@@ -7,6 +7,7 @@
 
 #ifndef BRENTA_NO_ECS
 
+#include <brenta/window.hpp>
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/camera_ecs_component.hpp>
 
@@ -25,7 +26,8 @@ public:
     {
       auto camera =
         viotecs::World::entity_to_component<CameraEcsComponent>(e);
-      Renderer::set_camera(*camera->camera);
+      Renderer::set_camera(*camera->camera,
+                           Window::get_width(), Window::get_height());
     }
   }
 };

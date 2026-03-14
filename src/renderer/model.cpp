@@ -48,6 +48,9 @@ Model::~Model()
 
 void Model::draw() const
 {
+  if (this->material)
+    this->material->apply();
+  
   for (unsigned int i = 0; i < meshes.size(); i++)
   {
     meshes[i].draw();

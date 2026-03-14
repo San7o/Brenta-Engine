@@ -3,6 +3,7 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#include <brenta/window.hpp>
 #include <brenta/renderer/pipeline.hpp>
 
 #include <brenta/renderer/passes/opaque_pass.hpp>
@@ -29,10 +30,10 @@ void RenderPipeline::execute(const Renderer::RenderData& data)
 
 tenno::shared_ptr<RenderPipeline> RenderPipeline::create_default()
 {
-  auto fb       = tenno::make_shared<FrameBuffer>();
+  auto fb       = Window::framebuffer;
   auto pipeline = tenno::make_shared<RenderPipeline>();
 
-  pipeline->add_pass<OpaquePass>(fb);
+  pipeline->add_pass<OpaquePass>(fb, true);
   pipeline->add_pass<TransparentPass>(fb);
   pipeline->add_pass<SkyboxPass>(fb);
   pipeline->add_pass<UiPass>(fb);

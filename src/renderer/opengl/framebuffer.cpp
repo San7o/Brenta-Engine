@@ -20,7 +20,7 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_tex);
   glGetIntegerv(GL_RENDERBUFFER_BINDING, &old_rbo);
 
-  this->width = width;
+  this->width  = width;
   this->height = height;
   this->color_format = color_format;
 
@@ -106,19 +106,14 @@ void FrameBuffer::destroy()
 void FrameBuffer::rescale(int width, int height)
 {
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
-  if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-  {
-    ERROR("framebuffer: not complete");
-    return;
-  }
 
   this->width  = width;
   this->height = height;
   glBindTexture(GL_TEXTURE_2D, this->texture_id);
   check_error();
 
-  glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0, GL_RGBA,
-               GL_UNSIGNED_BYTE, NULL);
+  glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0,
+               this->color_format, GL_UNSIGNED_BYTE, NULL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
@@ -130,8 +125,12 @@ void FrameBuffer::rescale(int width, int height)
   glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, width, height);
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
                             GL_RENDERBUFFER, this->render_buffer_id);
+  if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+  {
+    ERROR("framebuffer: not complete");
+    return;
+  }
 
-  Window::set_width_height(width, height);
   return;
 }
 

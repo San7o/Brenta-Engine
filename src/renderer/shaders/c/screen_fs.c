@@ -1,0 +1,12 @@
+static const char* screen_fs = "#version 330 core\n"
+"\n"
+"in vec2 TexCoords;\n"
+"out vec4 FragColor;\n"
+"\n"
+"uniform sampler2D screenTexture;\n"
+"\n"
+"void main()\n"
+"{\n"
+"  FragColor = texture(screenTexture, TexCoords);\n"
+"}\n"
+;

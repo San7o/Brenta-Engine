@@ -25,20 +25,21 @@ void Renderer::begin_frame()
   return;
 }
 
-void Renderer::begin_frame(Camera& cam)
+void Renderer::begin_frame(Camera& cam, int width, int height)
 {
   Renderer::clear();
-  Renderer::set_camera(cam);
+  Renderer::set_camera(cam, width, height);
   return;
 }
 
-void Renderer::set_camera(Camera& cam)
+void Renderer::set_camera(Camera& cam, int width, int height)
 {
   Renderer::data.projection =
-    cam.get_projection_matrix(Window::get_width(),
-                              Window::get_height());
+    cam.get_projection_matrix(width, height);
   Renderer::data.view         = cam.get_view_matrix();
   Renderer::data.cam_position = cam.get_transform().get_pos();
+  Renderer::data.width  = width;
+  Renderer::data.height = height;
 }
 
 void Renderer::submit(const Renderer::Command& it, bool transparent)

@@ -80,13 +80,6 @@ bool GlfwDriver::should_close()
   return glfwWindowShouldClose(this->window);
 }
 
-void GlfwDriver::set_width_height(int width, int height)
-{
-  this->width = width;
-  this->height = height;
-  return;
-}
-
 bool GlfwDriver::is_key_pressed(Key key)
 {
   int glfw_key = this->key_to_glfw(key);
@@ -97,6 +90,8 @@ void GlfwDriver::set_dimensions(int width, int height)
 {
   this->width  = width;
   this->height = height;
+  Window::framebuffer->width  = width;
+  Window::framebuffer->height = height;
   return;
 }
 
@@ -149,7 +144,7 @@ void GlfwDriver::set_mouse_callback(void* callback)
 
 void GlfwDriver::set_size_callback(void* callback)
 {
-  glfwSetFramebufferSizeCallback(this->window, (GLFWframebuffersizefun) callback);
+  glfwSetFramebufferSizeCallback(this->window, (GLFWframebuffersizefun) callback);  
   DEBUG("Glfw: set framebuffer size callback");
   return;
 }
@@ -270,13 +265,13 @@ void GlfwDriver::make_context_current()
 }
 
 void GlfwDriver::framebuffer_size_callback([[maybe_unused]] GLFWwindow *window,
-                                     [[maybe_unused]] int width,
-                                     [[maybe_unused]] int height)
+                                           [[maybe_unused]] int width,
+                                           [[maybe_unused]] int height)
 {
   if (Gl::instance().is_initialized())
     glViewport(0, 0, width, height);
 
-  Window::get_driver()->set_width_height(width, height);
+  Window::get_driver()->set_dimensions(width, height);
 
   DEBUG("Glfw: size changed {}x{}", width, height);
   return;

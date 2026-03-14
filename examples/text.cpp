@@ -57,7 +57,7 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    hello.render();
+    hello.render(Window::get_width(), Window::get_height());
 
     Window::poll_events();
     Window::swap_buffers();

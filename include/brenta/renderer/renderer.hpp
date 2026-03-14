@@ -54,9 +54,9 @@ public:
   // You can begin a frame withouth a camera, but eventually you will
   // have to call set_camera if you want to see anything
   static void begin_frame();
-  static void begin_frame(Camera &cam);
+  static void begin_frame(Camera &cam, int width, int height);
   
-  static void set_camera(Camera &cam);
+  static void set_camera(Camera &cam, int width, int height);
   
   // Transparent commands are rendered after non-transparent ones
   static void submit(const Renderer::Command& it, bool transparent = false);
@@ -95,6 +95,8 @@ struct Renderer::RenderData
   glm::mat4   projection;
   glm::mat4   view;
   glm::vec3   cam_position;
+  int         width;
+  int         height;
   
   tenno::vector<Command>   opaque_queue;
   tenno::vector<Command>   transparent_queue;

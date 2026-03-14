@@ -4,17 +4,24 @@
 // Github:  @San7o
 
 #include <brenta/renderer/passes/skybox_pass.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
 
 using namespace brenta;
 
 void SkyboxPass::begin()
 {
-  fb->bind();
+  this->fb->bind();
+
+  if (set_viewport)
+    Gl::set_viewport(0, 0, this->fb->width, this->fb->height);
+
+  if (this->clear)
+    Gl::clear();
 }
 
 void SkyboxPass::end()
 {
-  fb->unbind();
+  this->fb->unbind();
 }
 
 void SkyboxPass::execute(const Renderer::RenderData& data)

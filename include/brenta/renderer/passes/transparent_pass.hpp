@@ -16,7 +16,8 @@ class TransparentPass : public RenderPass
 public:
 
   TransparentPass() = delete;
-  TransparentPass(tenno::shared_ptr<FrameBuffer> fb);
+  TransparentPass(tenno::shared_ptr<FrameBuffer> fb,
+                  bool clear = false, bool set_viewport = false);
 
   TransparentPass(const TransparentPass& other)            = delete;
   TransparentPass &operator=(const TransparentPass& other) = delete;
@@ -29,6 +30,8 @@ public:
 private:
 
   tenno::shared_ptr<FrameBuffer> fb;
+  bool clear        = false;
+  bool set_viewport = false;
   
 };
 

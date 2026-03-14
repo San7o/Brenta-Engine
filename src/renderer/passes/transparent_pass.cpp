@@ -4,17 +4,27 @@
 // Github:  @San7o
 
 #include <brenta/renderer/passes/transparent_pass.hpp>
+#include <brenta/renderer/opengl/gl.hpp>
 
 using namespace brenta;
 
-TransparentPass::TransparentPass(tenno::shared_ptr<FrameBuffer> fb)
+TransparentPass::TransparentPass(tenno::shared_ptr<FrameBuffer> fb,
+                                 bool clear, bool set_viewport)
 {
-  this->fb = fb;
+  this->fb    = fb;
+  this->clear = clear;
+  this->set_viewport = set_viewport;
 }
 
 void TransparentPass::begin()
 {
   this->fb->bind();
+
+  if (this->set_viewport)
+    Gl::set_viewport(0, 0, this->fb->width, this->fb->height);
+
+  if (this->clear)
+    Gl::clear();
 }
 
 void TransparentPass::end()
@@ -27,8 +37,8 @@ void TransparentPass::execute(const Renderer::RenderData& data)
   for (auto& command : data.transparent_queue)
   {
     auto material = command.model->material;
-    material->apply();
-
+    material->shader->use();
+    
     // Setup all lights
     int lights_number = 0;
     if (data.point_lights.size() > 0)
