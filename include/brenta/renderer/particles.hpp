@@ -67,7 +67,7 @@ public:
   ~ParticleEmitter() = default;
 
   void update(float delta_time);
-  void render();
+  void render(int width, int height);
 
 private:
   

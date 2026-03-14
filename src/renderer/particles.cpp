@@ -9,7 +9,6 @@
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/asset.hpp>
-#include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 
 #include <iostream>
@@ -187,7 +186,7 @@ void ParticleEmitter::update(float delta_time)
 }
 
 // Render particles
-void ParticleEmitter::render()
+void ParticleEmitter::render(int width, int height)
 {
   tenno::shared_ptr<Camera> camera = this->cam.lock();
   if (!camera)
@@ -211,10 +210,8 @@ void ParticleEmitter::render()
   Gl::check_error();
 
   // Set uniforms
-  int window_width  = Window::get_width();
-  int window_height = Window::get_height();
   auto projection =
-    camera->get_projection_matrix(window_width, window_height);
+    camera->get_projection_matrix(width, height);
 
   shader_render->use();
   shader_render->set_mat4("view",        camera->get_view_matrix());
@@ -225,7 +222,7 @@ void ParticleEmitter::render()
   shader_render->set_int("atlas_index",  this->atlas_index);
   shader_render->set_float("scale",      this->scale);
   shader_render->set_float("aspect_ratio",
-                           (float) window_width  / (float) window_height);
+                           (float) width  / (float) height);
 
   // Set Textures
   Texture::active_texture(0);

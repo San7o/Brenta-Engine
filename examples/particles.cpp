@@ -191,23 +191,27 @@ int main()
   //
   // Render loop
   //
-  
+
   while (!Window::should_close())
   {
     if (Window::is_key_pressed(Key::Escape))
       Window::close();
-    
+
     setup_gui(fb, &emitter);
     
     Gl::set_color(Color::grey());
     Gl::clear();
 
     fb.bind();
+    Gl::clear();
+    Gl::set_viewport(0, 0, fb.width, fb.height);
     emitter.update(Window::get_time().delta);
-    emitter.render();
+    emitter.render(fb.width, fb.height);
     fb.unbind();
 
+    Window::framebuffer->bind();
     Gui::render();
+    Window::framebuffer->unbind();
     
     Window::poll_events();
     Window::swap_buffers();

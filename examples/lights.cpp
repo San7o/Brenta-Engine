@@ -137,10 +137,6 @@ int main()
     if (Window::is_key_pressed(Key::Left))
       rotate_model_clockwise(model_ptr);
 
-    if (Window::get_width() != game_fb->width
-        || Window::get_height() != game_fb->height)
-      game_fb->rescale(Window::get_width(), Window::get_height());
-
     setup_gui(*game_fb, phong_dir_ptr, point_light_node, phong_point_ptr);
     Gl::set_color(Color::grey());
     Gl::clear();

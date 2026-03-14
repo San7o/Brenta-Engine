@@ -222,7 +222,7 @@ int main()
     if (Window::get_width() != old_width
         || Window::get_height() != old_height)
     {
-      old_width = Window::get_width();
+      old_width  = Window::get_width();
       old_height = Window::get_height();      
       game_fb->rescale(Window::get_width() * screen_scaling,
                        Window::get_height() * screen_scaling);

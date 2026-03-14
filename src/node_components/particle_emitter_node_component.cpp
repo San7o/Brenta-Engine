@@ -17,6 +17,9 @@ void ParticleEmitterNodeComponent::draw(const glm::mat4& world_matrix)
 {
   (void) world_matrix;
   
-  if (this->emitter)
-    this->emitter->render();
+  if (!this->emitter)
+    return;
+
+  if (auto f = this->fb.lock())
+    this->emitter->render(f->width, f->height);
 }

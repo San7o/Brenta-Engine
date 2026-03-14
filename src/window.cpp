@@ -40,6 +40,8 @@ std::expected<void, Subsystem::Error> Window::initialize()
   }
 
   Window::framebuffer = tenno::make_shared<FrameBuffer>();
+  Window::get_driver()->set_dimensions(Window::init_config.width,
+                                       Window::init_config.height);
   
   INFO("{}: initialized", Window::subsystem_name);
   Window::initialized = true;

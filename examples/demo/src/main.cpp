@@ -95,7 +95,6 @@ int main()
                             ModelRenderSystem,
                             PointLightRenderSystem,
                             DirLightRenderSystem,
-                            ParticleEmitterSystem,
                             SpriteAnimationSystem,
                             DebugTextSystem,
                             PhysicsSystem,
@@ -113,7 +112,7 @@ int main()
                                                    Window::get_height());
     
     auto pipeline = tenno::make_shared<RenderPipeline>();
-    pipeline->add_pass<OpaquePass>(game_fb);
+    pipeline->add_pass<OpaquePass>(game_fb, true);
     pipeline->add_pass<TransparentPass>(game_fb);
     pipeline->add_pass<SkyboxPass>(game_fb);
     pipeline->add_pass<UiPass>(game_fb);
@@ -130,6 +129,9 @@ int main()
       Renderer::begin_frame();
       World::tick();
       Renderer::end_frame(pipeline);
+
+      game_fb->bind();
+      World::run_system<ParticleEmitterSystem>();
 
       Window::framebuffer->bind();
       Gui::render();

@@ -56,8 +56,7 @@ GlfwDriver::initialize(const Window::Config &conf)
   this->set_size_callback((void*)framebuffer_size_callback);
   this->set_key_callback((void*)glfw_key_callback);
   this->set_mouse_callback((void*)mouse_callback);
-
-
+  
   INFO("Glfw: driver initialized")
   return {};
 }

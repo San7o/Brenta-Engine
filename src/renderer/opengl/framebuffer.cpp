@@ -105,6 +105,9 @@ void FrameBuffer::destroy()
 
 void FrameBuffer::rescale(int width, int height)
 {
+  if (this->width == width && this->height == height)
+    return;
+  
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
 
   this->width  = width;

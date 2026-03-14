@@ -7,6 +7,7 @@
 
 #include <brenta/node.hpp>
 #include <brenta/renderer/particles.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
 
@@ -18,17 +19,22 @@ class ParticleEmitterNodeComponent : public NodeComponent
 public:
 
   tenno::shared_ptr<ParticleEmitter> emitter;
+  tenno::weak_ptr<FrameBuffer>       fb;
 
   ParticleEmitterNodeComponent() = default;
-  ParticleEmitterNodeComponent(tenno::shared_ptr<ParticleEmitter> e)
-    : emitter(e) {}
-  ParticleEmitterNodeComponent(ParticleEmitter&& e)
+  ParticleEmitterNodeComponent(tenno::shared_ptr<ParticleEmitter> e,
+                               tenno::weak_ptr<FrameBuffer> fb)
+    : emitter(e), fb(fb) {}
+  ParticleEmitterNodeComponent(ParticleEmitter&& e, tenno::weak_ptr<FrameBuffer> fb)
   {
     this->emitter = tenno::make_shared<ParticleEmitter>(tenno::move(e));
+    this->fb = fb;
   }
-  ParticleEmitterNodeComponent(ParticleEmitter::Builder& builder)
+  ParticleEmitterNodeComponent(ParticleEmitter::Builder& builder,
+                               tenno::weak_ptr<FrameBuffer> fb)
   {
     this->emitter = tenno::make_shared<ParticleEmitter>(builder.build());
+    this->fb = fb;
   }
   
   void update(float delta_time) override;
