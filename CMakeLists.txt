@@ -288,6 +288,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(skybox)
   add_example(shape_mesh)
   add_example(pixelated)
+  add_example(post_processing)
   
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES
