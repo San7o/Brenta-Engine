@@ -22,6 +22,7 @@ introduction to its API.
 - signals
 - skyboxes
 - window management
+- post processing
 - audio loading and playback
 - input management with callbacks
 - powerful logging

@@ -14,6 +14,7 @@
 #include <brenta/renderer/passes/transparent_pass.hpp>
 #include <brenta/renderer/passes/ui_pass.hpp>
 #include <brenta/renderer/passes/skybox_pass.hpp>
+#include <brenta/renderer/passes/post_process_pass.hpp>
 #include <brenta/node_components/dir_light_node_component.hpp>
 #include <brenta/node_components/point_light_node_component.hpp>
 #include <brenta/node_components/model_node_component.hpp>
@@ -111,25 +112,18 @@ int main()
   scene.set_skybox(skybox_faces);
   
   // Screen quad
-  auto maybe_screen_shader = Shader::create({
+  auto maybe_pp_shader = Shader::create({
       { Shader::Type::Vertex,   screen_vs },
       { Shader::Type::Fragment, screen_fs } });
-  if (!maybe_screen_shader)
+  if (!maybe_pp_shader)
   {
     ERROR("Error creating shader");
     return 1;
   }
-  auto screen_shader = tenno::move(maybe_screen_shader.value()); 
-  auto screen_material = Material(tenno::move(screen_shader));
-  screen_material.set_int("screenTexture", 0);
-  auto screen_quad_builder =
-    Model::Builder()
-    .mesh(Mesh::Builder()
-          .shape(Mesh::Shape::Square))
-    .material(tenno::move(screen_material));
-  auto screen_quad =
-    tenno::make_shared<Model>(screen_quad_builder);
-  
+  auto pp_shader   = tenno::move(maybe_pp_shader.value()); 
+  auto pp_material = tenno::make_shared<Material>(tenno::move(pp_shader));
+  pp_material->set_int("screenTexture", 0);
+
   // Camera movement
   
   auto camera            = scene.get_camera();  
@@ -191,7 +185,6 @@ int main()
   });
 
   float screen_scaling = 0.2f;
-  auto screen_fb = Window::framebuffer;
   auto game_fb   =
     tenno::make_shared<FrameBuffer>(Window::get_width() * screen_scaling,
                                     Window::get_height() * screen_scaling);
@@ -200,6 +193,8 @@ int main()
   pipeline->add_pass<TransparentPass>(game_fb);
   pipeline->add_pass<SkyboxPass>(game_fb);
   pipeline->add_pass<UiPass>(game_fb);
+  pipeline->add_pass<PostProcessPass>(game_fb, Window::framebuffer,
+                                      pp_material, false, true);
   
   INFO("Move with W / A / S / D / Q / E / Mouse, R to toggle wireframe");
 
@@ -238,16 +233,7 @@ int main()
 
     scene.update(delta_time);
     scene.draw(pipeline, game_fb->width, game_fb->height);
-    
-    screen_fb->bind();
-    glViewport(0, 0, Window::get_width(), Window::get_height());
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, game_fb->texture_id);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    screen_quad->draw();
-    screen_fb->unbind();
-    
+
     Window::poll_events();
     Window::swap_buffers();
   }
