@@ -108,8 +108,8 @@ Inheritance diagram for brenta::SkyboxPass:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a033c36200aba0d5e321ecf7ab2ab6ddf" id="r_a033c36200aba0d5e321ecf7ab2ab6ddf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1SkyboxPass.html#a033c36200aba0d5e321ecf7ab2ab6ddf">SkyboxPass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb)</td></tr>
-<tr class="separator:a033c36200aba0d5e321ecf7ab2ab6ddf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1eef07f94f75416944e226e8152746" id="r_acd1eef07f94f75416944e226e8152746"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1SkyboxPass.html#acd1eef07f94f75416944e226e8152746">SkyboxPass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb, bool clear=false, bool set_viewport=false)</td></tr>
+<tr class="separator:acd1eef07f94f75416944e226e8152746"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a78cc2024acce30692b75d11259859c41" id="r_a78cc2024acce30692b75d11259859c41"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1SkyboxPass.html#a78cc2024acce30692b75d11259859c41">begin</a> () override</td></tr>
 <tr class="separator:a78cc2024acce30692b75d11259859c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9586709f472f3a25f4cf154354be2eb" id="r_ab9586709f472f3a25f4cf154354be2eb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1SkyboxPass.html#ab9586709f472f3a25f4cf154354be2eb">end</a> () override</td></tr>
@@ -121,8 +121,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="skybox__pass_8hpp_source.html#l00014">14</a> of file <a class="el" href="skybox__pass_8hpp_source.html">skybox_pass.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a033c36200aba0d5e321ecf7ab2ab6ddf" name="a033c36200aba0d5e321ecf7ab2ab6ddf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a033c36200aba0d5e321ecf7ab2ab6ddf">&#9670;&#160;</a></span>SkyboxPass()</h2>
+<a id="acd1eef07f94f75416944e226e8152746" name="acd1eef07f94f75416944e226e8152746"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1eef07f94f75416944e226e8152746">&#9670;&#160;</a></span>SkyboxPass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,8 +134,24 @@ Public Member Functions</h2></td></tr>
           <td class="memname">brenta::SkyboxPass::SkyboxPass </td>
           <td>(</td>
           <td class="paramtype">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt;&#160;</td>
-          <td class="paramname"><em>fb</em></td><td>)</td>
+          <td class="paramname"><em>fb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>clear</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set_viewport</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -175,7 +191,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00010">10</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00011">11</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -204,7 +220,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00015">15</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00022">22</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -234,7 +250,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00020">20</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="skybox__pass_8cpp_source.html#l00027">27</a> of file <a class="el" href="skybox__pass_8cpp_source.html">skybox_pass.cpp</a>.</p>
 
 </div>
 </div>

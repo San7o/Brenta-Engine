@@ -108,8 +108,8 @@ Inheritance diagram for brenta::OpaquePass:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aabf924836f30d6e967bc7c963125a0c2" id="r_aabf924836f30d6e967bc7c963125a0c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1OpaquePass.html#aabf924836f30d6e967bc7c963125a0c2">OpaquePass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb)</td></tr>
-<tr class="separator:aabf924836f30d6e967bc7c963125a0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5f211d408ba5f43fb78b39e9299ecf8" id="r_ab5f211d408ba5f43fb78b39e9299ecf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1OpaquePass.html#ab5f211d408ba5f43fb78b39e9299ecf8">OpaquePass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb, bool clear=false, bool set_viewport=false)</td></tr>
+<tr class="separator:ab5f211d408ba5f43fb78b39e9299ecf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a962c774ad7033fa8558859a658443915" id="r_a962c774ad7033fa8558859a658443915"><td class="memItemLeft" align="right" valign="top"><a id="a962c774ad7033fa8558859a658443915" name="a962c774ad7033fa8558859a658443915"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>OpaquePass</b> (const <a class="el" href="classbrenta_1_1OpaquePass.html">OpaquePass</a> &amp;other)=delete</td></tr>
 <tr class="separator:a962c774ad7033fa8558859a658443915"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,8 +127,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="opaque__pass_8hpp_source.html#l00014">14</a> of file <a class="el" href="opaque__pass_8hpp_source.html">opaque_pass.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aabf924836f30d6e967bc7c963125a0c2" name="aabf924836f30d6e967bc7c963125a0c2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aabf924836f30d6e967bc7c963125a0c2">&#9670;&#160;</a></span>OpaquePass()</h2>
+<a id="ab5f211d408ba5f43fb78b39e9299ecf8" name="ab5f211d408ba5f43fb78b39e9299ecf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5f211d408ba5f43fb78b39e9299ecf8">&#9670;&#160;</a></span>OpaquePass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,13 +137,29 @@ Public Member Functions</h2></td></tr>
           <td class="memname">OpaquePass::OpaquePass </td>
           <td>(</td>
           <td class="paramtype">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt;&#160;</td>
-          <td class="paramname"><em>fb</em></td><td>)</td>
+          <td class="paramname"><em>fb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>clear</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set_viewport</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00010">10</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00011">11</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -173,7 +189,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00015">15</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00019">19</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -202,7 +218,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00020">20</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00030">30</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +248,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00025">25</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="opaque__pass_8cpp_source.html#l00035">35</a> of file <a class="el" href="opaque__pass_8cpp_source.html">opaque_pass.cpp</a>.</p>
 
 </div>
 </div>

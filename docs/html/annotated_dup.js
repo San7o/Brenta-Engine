@@ -48,6 +48,7 @@ var annotated_dup =
       [ "PointLightEcsComponent", "classbrenta_1_1PointLightEcsComponent.html", null ],
       [ "PointLightNodeComponent", "classbrenta_1_1PointLightNodeComponent.html", null ],
       [ "PointLightRenderSystem", "classbrenta_1_1PointLightRenderSystem.html", null ],
+      [ "PostProcessPass", "classbrenta_1_1PostProcessPass.html", null ],
       [ "Renderer", "classbrenta_1_1Renderer.html", "classbrenta_1_1Renderer" ],
       [ "RenderPass", "classbrenta_1_1RenderPass.html", null ],
       [ "RenderPipeline", "classbrenta_1_1RenderPipeline.html", null ],

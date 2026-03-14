@@ -91,6 +91,7 @@ var hierarchy =
     [ "brenta::Renderer", "classbrenta_1_1Renderer.html", null ],
     [ "brenta::RenderPass", "classbrenta_1_1RenderPass.html", [
       [ "brenta::OpaquePass", "classbrenta_1_1OpaquePass.html", null ],
+      [ "brenta::PostProcessPass", "classbrenta_1_1PostProcessPass.html", null ],
       [ "brenta::SkyboxPass", "classbrenta_1_1SkyboxPass.html", null ],
       [ "brenta::TransparentPass", "classbrenta_1_1TransparentPass.html", null ],
       [ "brenta::UiPass", "classbrenta_1_1UiPass.html", null ]

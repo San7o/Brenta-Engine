@@ -45,7 +45,7 @@ alt="game-engine-architecture" />
 <img src="./raylib-architecture.png" alt="raylib-architecture" />
 <figcaption aria-hidden="true">raylib-architecture</figcaption>
 </figure>
-<h2 id="design-proces">Design proces</h2>
+<h2 id="design-process">Design process</h2>
 <p>Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
 point where I am not scared to do big refactoring anymore - that is just
@@ -101,7 +101,12 @@ Component System (ECS) which manages game logic.</p>
 <h2 id="renderer">Renderer</h2>
 <p>The renderer provides a set of abstraction for working with geometry
 and lights in order to render a frame on the screen (or to a
-framebuffer).</p>
+framebuffer). The engine has a static renderer class
+<code>Renderer</code>, you can submit all rendering information through
+rendering commands including models, lights and the camera. When you are
+done registering all the data, the renderer draws them to the currently
+active framebuffer using some rendering alogorithm / technique with
+eventual optimizations.</p>
 <p>The actual rendering algorithm deserves its own book. There are many
 rendering techniques available, briefly the most popular ones are the
 following:</p>

@@ -108,8 +108,8 @@ Inheritance diagram for brenta::UiPass:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa3028b5910c56874d2c9ed7178fbbe18" id="r_aa3028b5910c56874d2c9ed7178fbbe18"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1UiPass.html#aa3028b5910c56874d2c9ed7178fbbe18">UiPass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb)</td></tr>
-<tr class="separator:aa3028b5910c56874d2c9ed7178fbbe18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa89e80de6877895d608a272692f0e146" id="r_aa89e80de6877895d608a272692f0e146"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1UiPass.html#aa89e80de6877895d608a272692f0e146">UiPass</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb, bool clear=false, bool set_viewport=false)</td></tr>
+<tr class="separator:aa89e80de6877895d608a272692f0e146"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e900721997948de407412191d70be82" id="r_a4e900721997948de407412191d70be82"><td class="memItemLeft" align="right" valign="top"><a id="a4e900721997948de407412191d70be82" name="a4e900721997948de407412191d70be82"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>UiPass</b> (const <a class="el" href="classbrenta_1_1UiPass.html">UiPass</a> &amp;other)=delete</td></tr>
 <tr class="separator:a4e900721997948de407412191d70be82"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,8 +127,8 @@ Public Member Functions</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="ui__pass_8hpp_source.html#l00014">14</a> of file <a class="el" href="ui__pass_8hpp_source.html">ui_pass.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="aa3028b5910c56874d2c9ed7178fbbe18" name="aa3028b5910c56874d2c9ed7178fbbe18"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3028b5910c56874d2c9ed7178fbbe18">&#9670;&#160;</a></span>UiPass()</h2>
+<a id="aa89e80de6877895d608a272692f0e146" name="aa89e80de6877895d608a272692f0e146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa89e80de6877895d608a272692f0e146">&#9670;&#160;</a></span>UiPass()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -137,13 +137,29 @@ Public Member Functions</h2></td></tr>
           <td class="memname">UiPass::UiPass </td>
           <td>(</td>
           <td class="paramtype">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt;&#160;</td>
-          <td class="paramname"><em>fb</em></td><td>)</td>
+          <td class="paramname"><em>fb</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>clear</em> = <code>false</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>set_viewport</em> = <code>false</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00010">10</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00011">11</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -173,7 +189,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00015">15</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00019">19</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -202,7 +218,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00020">20</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00030">30</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
 
 </div>
 </div>
@@ -232,7 +248,7 @@ Public Member Functions</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1RenderPass.html">brenta::RenderPass</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00025">25</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ui__pass_8cpp_source.html#l00035">35</a> of file <a class="el" href="ui__pass_8cpp_source.html">ui_pass.cpp</a>.</p>
 
 </div>
 </div>
