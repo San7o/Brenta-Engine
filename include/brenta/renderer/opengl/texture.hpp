@@ -6,6 +6,7 @@
 #pragma once
 
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/color.hpp>
 
 #include <tenno/vector.hpp>
 
@@ -132,14 +133,18 @@ public:
   // This tells the shader where to find the texture
   static void active_texture(int texture);
   static Texture::Id load(const std::filesystem::path &path, bool flip = true);
+  static Texture::Id load_solid_color(Color color);
   static void bind_id(Texture::Target target, Texture::Id id);
   static void bind_id(Texture::Target target, Texture::Id id,
                       const Texture::Properties &properties);
 
   // Non static
-    
+
   Texture() {}
   Texture(const Config &conf);
+  
+  Texture(const Texture&)            = delete;
+  Texture &operator=(const Texture&) = delete;
   
   Texture(Texture&& other) noexcept
   {
@@ -190,6 +195,7 @@ struct Texture::Config
   Texture::Target         target     = Texture::Target::Texture2D;
   std::filesystem::path   path       = "";
   Texture::Properties     properties = {};
+  std::optional<Color>    color      = {};
 };
 
 class Texture::Builder
@@ -201,6 +207,7 @@ public:
   Builder& path(const std::filesystem::path& path);
   Builder& flipped(bool flipped);
   Builder& properties(const Texture::Properties& prop);
+  Builder& color(Color color);
 
   // Add path to be watched for hot-reloading
   Builder &watch(const std::filesystem::path &path);

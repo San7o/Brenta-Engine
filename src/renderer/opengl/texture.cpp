@@ -11,6 +11,7 @@
 #include <iostream>
 #include <stb_image.h>
 #include <string>
+#include <cmath>
 
 using namespace brenta;
 
@@ -18,15 +19,27 @@ Texture::Texture(const Config &conf)
 {
   this->type       = conf.type;
   this->target     = conf.target;
-  this->path       = conf.path;
   this->properties = conf.properties;
 
-  if (this->path == "")
-    return;
+  if (conf.color)
+  {
+    this->id = this->load_solid_color(conf.color.value());
+    EVENT(Logger::Event::Lifetime,
+          "texture: created {} from color r={},g={},b={},a={}",
+          this->id, conf.color->r, conf.color->g,
+          conf.color->b, conf.color->a);
+  }
+  else
+  {
+    this->path = conf.path;
+    if (this->path == "")
+      return;
   
-  this->id         = this->load(this->path, conf.properties.flipped);
-
-  EVENT(Logger::Event::Lifetime, "texture: created {}", this->id);
+    this->id = this->load(this->path, conf.properties.flipped);
+    EVENT(Logger::Event::Lifetime, "texture: created {} from path {}",
+          this->id, this->path.string());
+  }
+  
   return;
 }
 
@@ -72,6 +85,36 @@ void Texture::active_texture(int texture)
   glActiveTexture(GL_TEXTURE0 + texture);
   check_error();
   return;
+}
+
+unsigned int Texture::load_solid_color(Color color)
+{
+  // save state
+  GLint old_active_texture, old_texture_2d;
+  glGetIntegerv(GL_ACTIVE_TEXTURE, &old_active_texture);
+  glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_texture_2d);
+ 
+  Texture::Id texture;
+  glGenTextures(1, &texture);
+  glBindTexture(GL_TEXTURE_2D, texture);
+
+  unsigned char color_rgba[4] = {
+    (unsigned char)(color.r * 255.0f),
+    (unsigned char)(color.g * 255.0f),
+    (unsigned char)(color.b * 255.0f),
+    (unsigned char)(color.a * 255.0f)
+  };
+
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 1, 1, 0, GL_RGBA,
+               GL_UNSIGNED_BYTE, &color_rgba[0]);
+  check_error();
+
+  // restore state
+  glBindTexture(GL_TEXTURE_2D, old_texture_2d);
+  glActiveTexture(old_active_texture);
+  check_error();
+  return texture;
 }
 
 unsigned int Texture::load(const std::filesystem::path &path, bool flip)
@@ -234,6 +277,12 @@ Texture::Builder& Texture::Builder::path(const std::filesystem::path& path)
 Texture::Builder& Texture::Builder::properties(const Texture::Properties& prop)
 {
   this->conf.properties = prop;
+  return *this;
+}
+
+Texture::Builder& Texture::Builder::color(Color color)
+{
+  this->conf.color = color;
   return *this;
 }
 

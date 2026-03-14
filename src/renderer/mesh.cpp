@@ -7,6 +7,8 @@
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/logger.hpp>
 
+#include <cmath>
+
 using namespace brenta;
 
 Mesh::Mesh(const Config& conf)
@@ -155,6 +157,203 @@ Mesh::Builder &Mesh::Builder::textures(tenno::vector<tenno::shared_ptr<Texture>>
 {
   for (auto t : textures)
     this->conf.textures.push_back(t);
+  return *this;
+}
+
+#ifndef PI
+  #define PI 3.14159265358979323846f
+#endif
+
+Mesh::Builder &Mesh::Builder::shape(Mesh::Shape shape)
+{
+  switch (shape)
+  {
+  case Mesh::Shape::Triangle:
+    this->conf.vertices = {
+      { {-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f} },
+      { { 1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1.0f, 0.0f} },
+      { { 0.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.5f, 1.0f} }};
+    this->conf.indices = {0, 1 , 2};
+    break;
+  case Mesh::Shape::Square:
+    this->conf.vertices = {
+      { {-1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f} },
+      { { 1.0f, -1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1.0f, 0.0f} },
+      { { 1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {1.0f, 1.0f} },
+      { {-1.0f,  1.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.0f, 1.0f} }};
+    this->conf.indices = {0, 1 , 2, 0, 2, 3};
+    break;
+  case Mesh::Shape::Circle: {
+    const int num_vertices = 50;
+    const float delta = PI * 2 / num_vertices;
+
+    // Center vertex
+    this->conf.vertices = {{
+        {0.0f, 0.0f, 0.0f}, {1.0f, 1.0f, 1.0f}, {0.5f, 0.5f}
+      }};
+
+    for (int i = 0; i <= num_vertices; ++i)
+    {
+      float angle = delta * i;
+      float x = std::cos(angle);
+      float y = std::sin(angle);
+      float tex_x = (x + 1) * 0.5f;
+      float tex_y = (y + 1) * 0.5f;
+      this->conf.vertices.push_back({
+          {x, y, 0.0f}, {1.0f, 1.0f, 1.0f}, {tex_x, tex_y}
+        });
+    }
+
+    for (int i = 1; i <= num_vertices; ++i)
+    {
+      this->conf.indices.push_back(0);
+      this->conf.indices.push_back(i-1);
+      this->conf.indices.push_back(i);
+    }
+    this->conf.indices.push_back(0);
+    this->conf.indices.push_back(num_vertices);
+    this->conf.indices.push_back(1);
+    
+    break;
+  }
+
+  case Mesh::Shape::Piramid:
+    
+    this->conf.vertices = {
+      // Base
+      { {-1,-1,-1}, {0,-1,0}, {0,0} }, //0
+      { { 1,-1,-1}, {0,-1,0}, {1,0} }, //1
+      { { 1,-1, 1}, {0,-1,0}, {1,1} }, //2
+      { {-1,-1, 1}, {0,-1,0}, {0,1} }, //3
+      // Side 1 (0,4,1)
+      { {-1,-1,-1}, {0,0,0}, {0,0} },   //4
+      { { 0, 1, 0}, {0,0,0}, {0.5,1} }, //5
+      { { 1,-1,-1}, {0,0,0}, {1,0} },   //6
+      // Side 2 (1,4,2)
+      { { 1,-1,-1}, {0,0,0}, {0,0} },   //7
+      { { 0, 1, 0}, {0,0,0}, {0.5,1} }, //8
+      { { 1,-1, 1}, {0,0,0}, {1,0} },   //9
+      // Side 3 (2,4,3)
+      { { 1,-1, 1}, {0,0,0}, {0,0} },   //10
+      { { 0, 1, 0}, {0,0,0}, {0.5,1} }, //11
+      { {-1,-1, 1}, {0,0,0}, {1,0} },   //12
+      // Side 4 (3,4,0)
+      { {-1,-1, 1}, {0,0,0}, {0,0} },   //13
+      { { 0, 1, 0}, {0,0,0}, {0.5,1} }, //14
+      { {-1,-1,-1}, {0,0,0}, {1,0} }    //15
+    };
+
+    this->conf.indices = {
+      // Base
+      0,1,2,
+      0,2,3,
+
+      // Sides
+      4,5,6,
+      7,8,9,
+      10,11,12,
+      13,14,15
+    };
+
+    break;
+  case Mesh::Shape::Cube:
+
+    this->conf.vertices = {
+      // Front
+      { {-1,-1, 1}, {0, 0, 1}, {0, 0} },
+      { { 1,-1, 1}, {0, 0, 1}, {1, 0} },
+      { { 1, 1, 1}, {0, 0, 1}, {1, 1} },
+      { {-1, 1, 1}, {0, 0, 1}, {0, 1} },
+      // Back
+      { { 1,-1,-1}, {0, 0, -1}, {0, 0} },
+      { {-1,-1,-1}, {0, 0, -1}, {1, 0} },
+      { {-1, 1,-1}, {0, 0, -1}, {1, 1} },
+      { { 1, 1,-1}, {0, 0, -1}, {0, 1} },
+      // Left
+      { {-1,-1,-1}, {-1, 0, 0}, {0, 0} },
+      { {-1,-1, 1}, {-1, 0, 0}, {1, 0} },
+      { {-1, 1, 1}, {-1, 0, 0}, {1, 1} },
+      { {-1, 1,-1}, {-1, 0, 0}, {0, 1} },
+      // Right
+      { {1,-1, 1}, {1, 0, 0}, {0, 0} },
+      { {1,-1,-1}, {1, 0, 0}, {1, 0} },
+      { {1, 1,-1}, {1, 0, 0}, {1, 1} },
+      { {1, 1, 1}, {1, 0, 0}, {0, 1} },
+      // Top
+      { {-1,1, 1}, {0, 1, 0}, {0, 0} },
+      { { 1,1, 1}, {0, 1, 0}, {1, 0} },
+      { { 1,1,-1}, {0, 1, 0}, {1, 1} },
+      { {-1,1,-1}, {0, 1, 0}, {0, 1} },
+      // Bottom
+      { {-1,-1,-1}, {0, -1, 0}, {0, 0} },
+      { { 1,-1,-1}, {0, -1, 0}, {1, 0} },
+      { { 1,-1, 1}, {0, -1, 0}, {1, 1} },
+      { {-1,-1, 1}, {0, -1, 0}, {0, 1} }
+    };
+
+    this->conf.indices = {
+      0,1,2,    0,2,3,
+      4,5,6,    4,6,7,
+      8,9,10,   8,10,11,
+      12,13,14, 12,14,15,
+      16,17,18, 16,18,19,
+      20,21,22, 20,22,23
+    };
+
+    break;
+    
+  case Mesh::Shape::Sphere:
+  {
+    const int stacks = 20;
+    const int sectors = 20;
+
+    for (int i = 0; i <= stacks; ++i)
+    {
+      float stack_angle = PI/2 - i * PI / stacks;
+      float xy = cos(stack_angle);
+      float z = sin(stack_angle);
+
+      for (int j = 0; j <= sectors; ++j)
+      {
+        float sector_angle = j * 2 * PI / sectors;
+
+        float x = xy * cos(sector_angle);
+        float y = xy * sin(sector_angle);
+
+        float u = (float)j / sectors;
+        float v = (float)i / stacks;
+
+        this->conf.vertices.push_back({
+            glm::vec3(x,y,z),
+            glm::vec3(x,y,z),
+            glm::vec2(u,v)
+          });
+      }
+    }
+
+    for (int i = 0; i < stacks; ++i)
+    {
+      int k1 = i * (sectors + 1);
+      int k2 = k1 + sectors + 1;
+
+      for (int j = 0; j < sectors; ++j, ++k1, ++k2)
+      {
+        this->conf.indices.push_back(k1);
+        this->conf.indices.push_back(k2);
+        this->conf.indices.push_back(k1 + 1);
+
+        this->conf.indices.push_back(k1 + 1);
+        this->conf.indices.push_back(k2);
+        this->conf.indices.push_back(k2 + 1);
+      }
+    }
+
+    break;
+  }
+  default:
+    break;
+  }
+  
   return *this;
 }
 

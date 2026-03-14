@@ -31,7 +31,7 @@ Example "small" architecture:
 
 ![raylib-architecture](./raylib-architecture.png)
 
-## Design proces
+## Design process
 
 Brenta's development has been more iterative than meticulously
 designed. I rewrote huge parts of the engine many many times, to the
@@ -90,7 +90,12 @@ manages game logic.
 
 The renderer provides a set of abstraction for working with geometry
 and lights in order to render a frame on the screen (or to a
-framebuffer).
+framebuffer). The engine has a static renderer class `Renderer`, you
+can submit all rendering information through rendering commands
+including models, lights and the camera. When you are done registering
+all the data, the renderer draws them to the currently active
+framebuffer using some rendering alogorithm / technique with eventual
+optimizations.
 
 The actual rendering algorithm deserves its own book. There are many
 rendering techniques available, briefly the most popular ones are the

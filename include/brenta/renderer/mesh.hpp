@@ -29,6 +29,15 @@ class Mesh
 {
 public:
 
+  enum Shape {
+    Triangle,
+    Square,
+    Circle,
+    Piramid,
+    Cube,
+    Sphere,
+  };
+  
   class Vertex;
   class Config;
   class Builder;
@@ -124,6 +133,7 @@ public:
   Builder &texture(Texture &&texture);
   Builder &texture(tenno::shared_ptr<Texture> texture);
   Builder &textures(tenno::vector<tenno::shared_ptr<Texture>> textures);
+  Builder &shape(Mesh::Shape shape);
   
   Mesh build();
 };

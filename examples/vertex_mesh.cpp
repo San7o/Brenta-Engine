@@ -28,6 +28,7 @@ int main(void)
 {
   Engine::Builder()
     .with(Logger::Builder()
+          .event(Logger::Event::Lifetime)
           .level(Logger::Level::Debug))
     .with(Window::Builder()
           .title("Vetex Mesh Example")
@@ -73,12 +74,14 @@ int main(void)
               // at (0,0) and top right (1,1)
               { glm::vec3(-0.5f, -0.5f, 0.0), glm::vec3(1.0), glm::vec2(0.0, 0.0) },
               { glm::vec3(0.5f, -0.5f, 0.0f), glm::vec3(1.0), glm::vec2(1.0, 0.0) },
-              { glm::vec3(0.0f, 0.5f, 0.0f), glm::vec3(1.0),  glm::vec2(0.5, 1.0) },
+              { glm::vec3(0.0f, 0.5f, 0.0f),  glm::vec3(1.0), glm::vec2(0.5, 1.0) },
             })
           .indices({0, 1 , 2})
           .texture(Texture::Builder()
+                   .color(Color::yellow())
+                   .properties(Texture::Properties()
+                               .set_has_mipmap(false))
                    .type(Texture::Type::Diffuse)
-                   .path("examples/assets/textures/container2.png")
                    .build()))
     .material(tenno::move(material));
   auto model =
@@ -94,16 +97,6 @@ int main(void)
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    // Update
-
-    // Just to create some action
-    auto pos  = camera.get_pos();
-    auto acam = std::get<Camera::Aircraft>(pos);
-    acam.yaw++;
-    if (acam.yaw >= 45.0f)
-      acam.yaw = -45.0f;
-    camera.set_pos(acam);
-    
     // Draw
     Renderer::begin_frame(camera);
     Renderer::submit({glm::mat4(1.0f), model});

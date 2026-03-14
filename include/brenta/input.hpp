@@ -8,8 +8,6 @@
 #include <brenta/subsystem.hpp>
 #include <brenta/key.hpp>
 
-#include <GLFW/glfw3.h>
-
 #include <functional>
 #include <string>
 #include <unordered_map>
