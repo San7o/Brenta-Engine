@@ -289,6 +289,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(shape_mesh)
   add_example(pixelated)
   add_example(post_processing)
+  add_example(timeseries_db)
   
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES
