@@ -15,6 +15,8 @@
 
 using namespace brenta;
 
+int Texture::tot_memory = 0;
+
 Texture::Texture(const Config &conf)
 {
   this->type       = conf.type;
@@ -24,6 +26,11 @@ Texture::Texture(const Config &conf)
   if (conf.color)
   {
     this->id = this->load_solid_color(conf.color.value());
+
+    // Update memory for profiling
+    this->memory         = 4;
+    Texture::tot_memory += this->memory;
+  
     EVENT(Logger::Event::Lifetime,
           "texture: created {} from color r={},g={},b={},a={}",
           this->id, conf.color->r, conf.color->g,
@@ -34,8 +41,15 @@ Texture::Texture(const Config &conf)
     this->path = conf.path;
     if (this->path == "")
       return;
+
+    int loaded_memory = 0;
+    this->id = this->load(this->path, loaded_memory, conf.properties.flipped);
+
+    // Update memory for profiling
+    this->memory         = loaded_memory;
+    Texture::tot_memory += this->memory;
   
-    this->id = this->load(this->path, conf.properties.flipped);
+    
     EVENT(Logger::Event::Lifetime, "texture: created {} from path {}",
           this->id, this->path.string());
   }
@@ -48,6 +62,10 @@ Texture::~Texture()
   if (this->id == 0) return;
 
   glDeleteTextures(1, &this->id);
+
+  // Update memory for profiling
+  Texture::tot_memory -= this->memory;
+  this->memory = 0;
   
   EVENT(Logger::Event::Lifetime, "texture: deleted {}", this->id);
   this->id = 0;
@@ -114,10 +132,12 @@ unsigned int Texture::load_solid_color(Color color)
   glBindTexture(GL_TEXTURE_2D, old_texture_2d);
   glActiveTexture(old_active_texture);
   check_error();
+
   return texture;
 }
 
-unsigned int Texture::load(const std::filesystem::path &path, bool flip)
+unsigned int Texture::load(const std::filesystem::path &path,
+                           int &loaded_bytes, bool flipped)
 {
   // save state
   GLint old_active_texture, old_texture_2d;
@@ -127,7 +147,7 @@ unsigned int Texture::load(const std::filesystem::path &path, bool flip)
   Texture::Id texture;
   glGenTextures(1, &texture);
   glBindTexture(GL_TEXTURE_2D, texture);
-  read_image(path, flip);
+  loaded_bytes = read_image(path, flipped);
 
   // restore state
   glBindTexture(GL_TEXTURE_2D, old_texture_2d);
@@ -172,9 +192,10 @@ void Texture::bind()
   return;
 }
 
-void Texture::read_image(const std::filesystem::path &path, bool flip)
+int Texture::read_image(const std::filesystem::path &path, bool flip)
 {
   int width, height, nrChannels;
+  int tot_memory = 0;
   stbi_set_flip_vertically_on_load(flip);
   unsigned char *data = stbi_load(path.string().c_str(), &width,
                                   &height, &nrChannels, 0);
@@ -191,6 +212,10 @@ void Texture::read_image(const std::filesystem::path &path, bool flip)
     glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format,
                  GL_UNSIGNED_BYTE, data);
     glGenerateMipmap(GL_TEXTURE_2D);
+    check_error();
+  
+    // Update memory for profiling
+    tot_memory += nrChannels * width * height;
   }
   else
   {
@@ -199,8 +224,7 @@ void Texture::read_image(const std::filesystem::path &path, bool flip)
   }
   stbi_image_free(data);
 
-  check_error();
-  return;
+  return tot_memory;
 }
 
 //

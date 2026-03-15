@@ -132,7 +132,10 @@ public:
 
   // This tells the shader where to find the texture
   static void active_texture(int texture);
-  static Texture::Id load(const std::filesystem::path &path, bool flip = true);
+  // Loads texture from path, sets [loaded_memory] with the number
+  // of bytes loaded and returns the id of the loaded texture
+  static Texture::Id load(const std::filesystem::path &path,
+                          int &loaded_memory, bool flip = true);
   static Texture::Id load_solid_color(Color color);
   static void bind_id(Texture::Target target, Texture::Id id);
   static void bind_id(Texture::Target target, Texture::Id id,
@@ -140,6 +143,10 @@ public:
 
   // Non static
 
+  // Used for profiling
+  int                     memory = 0;
+  static int              tot_memory;
+  
   Texture() {}
   Texture(const Config &conf);
   
@@ -153,7 +160,10 @@ public:
     this->type       = other.type;
     this->target     = other.target;
     this->properties = other.properties;
-    other.id = 0;
+    this->memory     = other.memory;
+    
+    other.id     = 0;
+    other.memory = 0;
   }
 
   Texture& operator=(Texture&& other) noexcept
@@ -163,7 +173,10 @@ public:
     this->path       = other.path;
     this->target     = other.target;
     this->properties = other.properties;
-    other.id = 0;
+    this->memory     = other.memory;
+    
+    other.id     = 0;
+    other.memory = 0;
     return *this;
   }
 
@@ -184,8 +197,9 @@ protected:
   Texture::Target         target;
   std::filesystem::path   path;
   Texture::Properties     properties;
-  
-  static void read_image(const std::filesystem::path &path, bool flip);
+
+  // Returns the number of bytes loaded
+  static int read_image(const std::filesystem::path &path, bool flip);
   
 };
   

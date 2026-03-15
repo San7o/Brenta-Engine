@@ -135,7 +135,7 @@ int main()
       World::run_system<ParticleEmitterSystem>();
 
       Window::framebuffer->bind();
-      Gui::debug_performance();
+      Gui::debug_stats();
       Gui::render();
       Window::framebuffer->unbind();
 

@@ -19,6 +19,8 @@
 namespace brenta
 {
 
+class Gui;
+  
 //
 // The central Asset Manager
 // -------------------------
@@ -53,6 +55,8 @@ public:
   template<typename T>
   struct AssetOwned;
   struct HotReloadItem;
+
+  friend class Gui;
 
   enum class AssetType
   {
@@ -96,12 +100,12 @@ public:
   
 private:
 
-  static std::unordered_map<AssetId, Asset<Model>>      models;
-  static std::unordered_map<AssetId, Asset<Texture>>    textures;
-  static std::unordered_map<AssetId, Asset<Material>>   materials;
-  static std::unordered_map<AssetId, Asset<Shader>>     shaders;
-  static std::unordered_map<AssetId, Asset<Font>>       fonts;
-  static std::unordered_map<AssetId, AssetOwned<Scene>> scenes;
+  static std::unordered_map<AssetId, Asset<Model>>           models;
+  static std::unordered_map<AssetId, Asset<Texture>>         textures;
+  static std::unordered_map<AssetId, Asset<Material>>        materials;
+  static std::unordered_map<AssetId, Asset<Shader>>          shaders;
+  static std::unordered_map<AssetId, Asset<Font>>            fonts;
+  static std::unordered_map<AssetId, AssetOwned<Scene>>      scenes;
   static std::unordered_map<AssetId, AssetOwned<SoundAsset>> sound_assets;
 
 

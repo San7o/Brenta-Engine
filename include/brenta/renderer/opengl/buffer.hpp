@@ -50,6 +50,10 @@ public:
     DynamicRead  = GL_DYNAMIC_READ,
     DynamicCopy  = GL_DYNAMIC_COPY,
   };
+
+  // Used for profiling
+  int          memory = 0;
+  static int   tot_memory;
   
   Buffer() = default;
   Buffer(Target target);
@@ -61,13 +65,19 @@ public:
   {
     this->id     = other.id;
     this->target = other.target;
+    this->memory = other.memory;
+    
     other.id     = 0;
+    other.memory = 0;
   }
   constexpr Buffer& operator=(Buffer&& other) noexcept
   {
     this->id     = other.id;
     this->target = other.target;
+    this->memory = other.memory;
+    
     other.id     = 0;
+    other.memory = 0;
     return *this;
   }
 

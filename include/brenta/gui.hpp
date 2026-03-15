@@ -53,7 +53,7 @@ public:
                         float size = 25.0f);
   static void push_font(ImFont* f = font);
   static void pop_font();
-  static void debug_performance();
+  static void debug_stats();
 
 private:
   

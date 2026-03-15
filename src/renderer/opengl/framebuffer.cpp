@@ -12,12 +12,14 @@
 
 using namespace brenta;
 
+int FrameBuffer::tot_memory = 0;
+
 FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
 {
   // Save the current state
   GLint old_fbo, old_tex, old_rbo;
-  glGetIntegerv(GL_FRAMEBUFFER_BINDING, &old_fbo);
-  glGetIntegerv(GL_TEXTURE_BINDING_2D, &old_tex);
+  glGetIntegerv(GL_FRAMEBUFFER_BINDING,  &old_fbo);
+  glGetIntegerv(GL_TEXTURE_BINDING_2D,   &old_tex);
   glGetIntegerv(GL_RENDERBUFFER_BINDING, &old_rbo);
 
   this->width  = width;
@@ -43,7 +45,7 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   check_error();
 
   glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0, GL_RGB,
-               GL_UNSIGNED_BYTE, NULL);
+               this->channel_type, NULL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
@@ -67,6 +69,12 @@ FrameBuffer::FrameBuffer(int width, int height, GLenum color_format)
   glBindTexture(GL_TEXTURE_2D, old_tex);
   glBindRenderbuffer(GL_RENDERBUFFER, old_rbo);
 
+  // Update memory for profiling
+  int channels          = Gl::get_num_channels(this->color_format);
+  int bytes_per_channel = Gl::get_bytes_per_channel(this->channel_type);
+  this->memory = channels * bytes_per_channel * width * height;
+  FrameBuffer::tot_memory += this->memory;
+  
   EVENT(Logger::Event::Lifetime, "framebuffer: initialized");
   return;
 }
@@ -97,7 +105,11 @@ void FrameBuffer::destroy()
   
   glDeleteFramebuffers(1, &this->id);
   glDeleteTextures(1, &this->texture_id);
-  this->id = 0;
+
+  // Update memory for profiling
+  FrameBuffer::tot_memory -= this->memory;
+  this->id     = 0;
+  this->memory = 0;
 
   EVENT(Logger::Event::Lifetime, "framebuffer: destroyed");
   return;
@@ -107,6 +119,7 @@ void FrameBuffer::rescale(int width, int height)
 {
   if (this->width == width && this->height == height)
     return;
+  FrameBuffer::tot_memory -= this->memory;
   
   glBindFramebuffer(GL_FRAMEBUFFER, this->id);
 
@@ -116,7 +129,7 @@ void FrameBuffer::rescale(int width, int height)
   check_error();
 
   glTexImage2D(GL_TEXTURE_2D, 0, this->color_format, width, height, 0,
-               this->color_format, GL_UNSIGNED_BYTE, NULL);
+               this->color_format, this->channel_type, NULL);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D,
@@ -134,6 +147,12 @@ void FrameBuffer::rescale(int width, int height)
     return;
   }
 
+  // Update memory for profiling
+  int channels          = Gl::get_num_channels(this->color_format);
+  int bytes_per_channel = Gl::get_bytes_per_channel(channel_type);
+  this->memory = channels * bytes_per_channel * width * height;
+  FrameBuffer::tot_memory += this->memory;
+  
   return;
 }
 

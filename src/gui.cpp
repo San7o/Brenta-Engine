@@ -4,9 +4,11 @@
 // Github:  @San7o
 
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/gui.hpp>
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
+#include <brenta/asset.hpp>
 
 #include <cmath>
 
@@ -285,10 +287,14 @@ void Gui::render()
 
 static float gui_debug_last_time = 0;
 
-void Gui::debug_performance()
+void Gui::debug_stats()
 {
-  ImGui::Begin("Performance");
+  ImGui::Begin("Stats");
 
+  //
+  // FPS information
+  //
+  
   static TimePlotBuffer fps_data;
 
   auto time = Window::get_time();
@@ -324,6 +330,35 @@ void Gui::debug_performance()
                        fps_data.data.size(), -INFINITY, spec);
     ImPlot::EndPlot();
   }
+  
+  ImGui::Separator();
+
+  //
+  // Memory information
+  //
+  
+  ImGui::Text("Tot GlBuffer Memory: %f MB",
+              Buffer::tot_memory / 1024.0 / 1024.0);
+  ImGui::Text("Tot GlFrameByffer Memory: %f MB",
+              FrameBuffer::tot_memory / 1024.0 / 1024.0);
+  ImGui::Text("Tot GlTexture Memory: %f MB",
+              Texture::tot_memory / 1024.0 / 1024.0);
+
+  ImGui::Separator();
+
+  //
+  // Asset manager information
+  //
+  
+  ImGui::Text("Number of assets loaded with AssetManager");
+
+  ImGui::BulletText("Models: %ld",       AssetManager::models.size());
+  ImGui::BulletText("Textures: %ld",     AssetManager::textures.size());
+  ImGui::BulletText("Materials: %ld",    AssetManager::materials.size());
+  ImGui::BulletText("Shaders: %ld",      AssetManager::shaders.size());
+  ImGui::BulletText("Fonts: %ld",        AssetManager::fonts.size());
+  ImGui::BulletText("Scenes: %ld",       AssetManager::scenes.size());
+  ImGui::BulletText("Sound Assets: %ld", AssetManager::sound_assets.size());
   
   ImGui::End();
 }

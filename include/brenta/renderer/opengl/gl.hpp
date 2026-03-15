@@ -58,7 +58,9 @@ public:
   // Member functions
   
   static Gl &instance();
-  
+
+  static int  get_num_channels(GLenum color_format);
+  static int  get_bytes_per_channel(GLenum type);
   static void set_poligon_mode(GLboolean enable);
   static void set_viewport(int x, int y, int width, int height);
   static void set_color(const Color &color);

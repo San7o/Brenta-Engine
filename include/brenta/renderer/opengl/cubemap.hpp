@@ -43,6 +43,10 @@ public:
                    0, GL_RGB, width, height, 0, GL_RGB,
                    GL_UNSIGNED_BYTE, data);
       stbi_image_free(data);
+
+      this->memory    += 3 * width * height;
+      Texture::memory += this->memory;
+      
     }
   }
 

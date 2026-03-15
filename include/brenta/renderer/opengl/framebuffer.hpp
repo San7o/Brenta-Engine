@@ -33,9 +33,14 @@ public:
   GLuint texture_id;
   GLuint render_buffer_id;
   GLenum color_format;
+  GLenum channel_type = GL_UNSIGNED_BYTE;
   int    width;
   int    height;
 
+  // Used for profiling
+  int        memory = 0;
+  static int tot_memory;
+  
   FrameBuffer() = default;
   FrameBuffer(int width, int height, GLenum format = GL_RGBA);
 
@@ -48,8 +53,10 @@ public:
     this->height           = other.height;
     this->target           = other.target;
     this->id               = other.id;
+    this->memory           = other.memory;
 
-    other.id = 0;
+    other.id     = 0;
+    other.memory = 0;
   }
   FrameBuffer &operator=(FrameBuffer&& other)
   {
@@ -60,7 +67,10 @@ public:
     this->height           = other.height;
     this->target           = other.target;
     this->id               = other.id;
-    other.id = 0;
+    this->memory           = other.memory;
+    
+    other.id     = 0;
+    other.memory = 0;
     
     return *this;
   }
@@ -74,7 +84,7 @@ public:
 
   void rescale(int width, int height);
   void set_color_format(GLenum color_format);
-  
+
 };
 
 } // namespace brenta

@@ -15,13 +15,12 @@ using namespace brenta;
 // Static variables
 //
 
-const std::string Gl::subsystem_name = "gl";
-Gl::Config Gl::init_config = {};
-bool       Gl::initialized = false;
-const GLboolean Gl::True = GL_TRUE;
-const GLboolean Gl::False = GL_FALSE;
+const std::string Gl::subsystem_name  = "gl";
+Gl::Config        Gl::init_config     = {};
+bool              Gl::initialized     = false;
+const GLboolean   Gl::True            = GL_TRUE;
+const GLboolean   Gl::False           = GL_FALSE;
   
-
 // Forward declaration
 void APIENTRY glDebugOutput([[maybe_unused]] GLenum source,
                             [[maybe_unused]] GLenum type,
@@ -142,6 +141,69 @@ Gl &Gl::instance()
 {
   static Gl _gl;
   return _gl;
+}
+
+int Gl::get_num_channels(GLenum color_format)
+{
+  switch (color_format)
+  {
+  case GL_RED:
+  case GL_RED_INTEGER:
+  case GL_STENCIL_INDEX:
+  case GL_DEPTH_COMPONENT:
+    return 1;
+
+  case GL_RG:
+  case GL_RG_INTEGER:
+  case GL_DEPTH_STENCIL: // Depth + Stencil combined
+    return 2;
+
+  case GL_RGB:
+  case GL_BGR:
+  case GL_RGB_INTEGER:
+  case GL_BGR_INTEGER:
+    return 3;
+
+  case GL_RGBA:
+  case GL_BGRA:
+  case GL_RGBA_INTEGER:
+  case GL_BGRA_INTEGER:
+    return 4;
+
+  default:
+    return 0;
+  }
+}
+
+int Gl::get_bytes_per_channel(GLenum type)
+{
+  switch (type)
+  {
+  case GL_UNSIGNED_BYTE:
+  case GL_BYTE:
+    return 1;
+    
+  case GL_UNSIGNED_SHORT:
+  case GL_SHORT:
+  case GL_HALF_FLOAT: // 16-bit floating point
+    return 2;
+
+  case GL_UNSIGNED_INT:
+  case GL_INT:
+  case GL_FLOAT:
+    return 4;
+
+  case GL_DOUBLE:
+    return 8;
+
+  case GL_UNSIGNED_INT_2_10_10_10_REV:
+  case GL_UNSIGNED_INT_10F_11F_11F_REV:
+  case GL_UNSIGNED_INT_24_8:
+    return 4; // Total bytes for all channels combined
+
+  default:
+    return 0;
+  }
 }
 
 void Gl::set_viewport(int x, int y, int width, int height)

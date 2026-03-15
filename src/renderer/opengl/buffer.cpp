@@ -8,6 +8,8 @@
 
 using namespace brenta;
 
+int Buffer::tot_memory = 0;
+
 Buffer::Buffer(Buffer::Target target)
 {
   this->init(target);
@@ -34,6 +36,10 @@ void Buffer::destroy()
   if (this->id == 0) return;
 
   glDeleteBuffers(1, &this->id);
+
+  // Update memory for profiling
+  Buffer::tot_memory -= this->memory;
+  this->memory = 0;
 
   EVENT(Logger::Event::Lifetime, "buffer: destroyed {}", this->id);
   this->id = 0;
@@ -81,5 +87,10 @@ void Buffer::copy_data(const void *data, GLsizeiptr size,
                        Buffer::DataUsage usage)
 {
   glBufferData(this->target, size, data, (GLenum) usage);
+
+  // Update memory for profiling
+  Buffer::tot_memory -= this->memory;
+  this->memory        = size;
+  Buffer::tot_memory += size;
   return;
 }

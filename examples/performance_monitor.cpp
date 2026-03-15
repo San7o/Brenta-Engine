@@ -90,5 +90,5 @@ int main()
 void setup_gui(FrameBuffer &fb)
 {
   Gui::new_frame(fb, "Game");
-  Gui::debug_performance();
+  Gui::debug_stats();
 }
