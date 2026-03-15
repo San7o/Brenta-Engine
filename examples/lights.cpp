@@ -36,7 +36,7 @@ void rotate_model_counterclockwise(tenno::shared_ptr<Model> model);
 void rotate_model_clockwise(tenno::shared_ptr<Model> model);
 
 void setup_gui(FrameBuffer &fb,
-               tenno::shared_ptr<PhongDirLight> dir_light,
+               tenno::shared_ptr<PhongDirLight>   dir_light,
                tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light);
 
@@ -171,7 +171,7 @@ void setup_gui(FrameBuffer &fb,
                tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light)
 {
-  Gui::new_frame(&fb, "Lighting");
+  Gui::new_frame(fb, "Lighting");
   Gui::push_font();
   ImGui::Begin("Lighting Settings");
 

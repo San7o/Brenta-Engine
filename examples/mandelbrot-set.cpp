@@ -97,7 +97,7 @@ int main()
     }
 
 #ifndef BRENTA_NO_IMGUI
-    Gui::new_frame(&fb, "Mandlebrot");
+    Gui::new_frame(fb, "Mandlebrot");
     Gui::push_font();
     ImGui::Begin("Fractal");
     ImGui::SliderFloat("Zoom", &zoom, 0.0f, 10.0f);

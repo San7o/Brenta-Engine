@@ -26,8 +26,10 @@ public:
     {
       auto camera =
         viotecs::World::entity_to_component<CameraEcsComponent>(e);
-      Renderer::set_camera(*camera->camera,
-                           Window::get_width(), Window::get_height());
+
+      if (const auto& f = camera->fb.lock())
+          Renderer::set_camera(*camera->camera,
+                               f->width, f->height);
     }
   }
 };

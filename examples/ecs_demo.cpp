@@ -73,7 +73,8 @@ void init_ecs_scene(void)
               .build())
     .fov(45.0f);
   auto camera_e = World::new_entity();
-  camera_e.add_component<CameraEcsComponent>(camera_builder);
+  camera_e.add_component<CameraEcsComponent>(camera_builder,
+                                             Window::framebuffer);
 
   //
   // Resources

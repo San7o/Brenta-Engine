@@ -21,7 +21,7 @@ struct FPSSystem : System<None>
     
     Renderer::submit_text({
         "FPS: " + fps,
-        25.0f,
+        10.0f,
         25.0f,
         0.35f,
         Color::yellow(),

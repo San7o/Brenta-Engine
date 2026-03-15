@@ -63,7 +63,10 @@ int main()
     };
     auto skybox =
       tenno::make_shared<Skybox>(skybox_faces);
-  
+
+    auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                                   Window::get_height());
+      
     Mouse mouse = {};
     mouse.sensitivity = 0.05f;
   
@@ -75,8 +78,8 @@ int main()
     init_point_light_entity();
     init_sphere_entity();
     init_robot_entity();
-    init_camera_entity(camera);
-    init_particle_emitter_entity(camera);
+    init_camera_entity(camera, game_fb);
+    init_particle_emitter_entity(camera, game_fb);
 
     // Callbacks
     init_toggle_wireframe_callback();
@@ -88,6 +91,7 @@ int main()
     World::add_resource<WireframeResource>(false);
     World::add_resource<CameraResource>(camera);
     World::add_resource<SkyboxResource>(skybox);
+    World::add_resource<FrameBufferResource>(game_fb);
 
     // Systems
     World::register_systems<CameraRenderSystem,
@@ -108,11 +112,8 @@ int main()
     auto font =
       AssetManager::new_asset<Font>("TextFont", font_builder);
 
-    auto game_fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
-                                                   Window::get_height());
-    
     auto pipeline = tenno::make_shared<RenderPipeline>();
-    pipeline->add_pass<OpaquePass>(game_fb, true);
+    pipeline->add_pass<OpaquePass>(game_fb, true, true);
     pipeline->add_pass<TransparentPass>(game_fb);
     pipeline->add_pass<SkyboxPass>(game_fb);
     pipeline->add_pass<UiPass>(game_fb);
@@ -121,7 +122,7 @@ int main()
     {
       Window::poll_events();
 
-      Gui::new_frame(game_fb.get(), "demo");
+      Gui::new_frame(*game_fb, "demo");
     
       Gl::set_color(Color::grey());
       Gl::clear();
@@ -134,6 +135,7 @@ int main()
       World::run_system<ParticleEmitterSystem>();
 
       Window::framebuffer->bind();
+      Gui::debug_performance();
       Gui::render();
       Window::framebuffer->unbind();
 

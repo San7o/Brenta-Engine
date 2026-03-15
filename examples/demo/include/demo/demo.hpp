@@ -19,6 +19,7 @@
 #include <demo/resources/wireframe.hpp>
 #include <demo/resources/camera.hpp>
 #include <demo/resources/skybox.hpp>
+#include <demo/resources/framebuffer.hpp>
 
 // Systems
 #include <demo/systems/collisions.hpp>

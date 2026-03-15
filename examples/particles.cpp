@@ -222,7 +222,7 @@ int main()
 void setup_gui(FrameBuffer &fb,
                ParticleEmitter *emitter)
 {
-  Gui::new_frame(&fb, "particles");
+  Gui::new_frame(fb, "particles");
   Gui::push_font();
   ImGui::Begin("Particle settings");
 

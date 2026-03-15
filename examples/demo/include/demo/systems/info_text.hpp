@@ -19,8 +19,8 @@ struct InfoTextSystem : System<None>
     Renderer::submit_text({
         "Move with Shift / Ctrl / Alt + Mouse" ,
         10.0f,
-        100.0f,
-        1.0f,
+        10.0f,
+        0.7f,
         Color::yellow(),
         font
       });

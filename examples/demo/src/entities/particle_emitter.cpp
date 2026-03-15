@@ -12,7 +12,8 @@
 using namespace viotecs;
 using namespace brenta;
 
-void init_particle_emitter_entity(tenno::shared_ptr<brenta::Camera> camera)
+void init_particle_emitter_entity(tenno::shared_ptr<brenta::Camera> camera,
+                                  tenno::weak_ptr<FrameBuffer> fb)
 {
   auto emitter_builder =
     ParticleEmitter::Builder()
@@ -31,7 +32,7 @@ void init_particle_emitter_entity(tenno::shared_ptr<brenta::Camera> camera)
 
   auto emitter =
     World::new_entity()
-    .add_component<ParticleEmitterEcsComponent>(emitter_builder);
+    .add_component<ParticleEmitterEcsComponent>(emitter_builder, fb);
 
   return;
 }

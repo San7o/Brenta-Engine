@@ -35,5 +35,5 @@ void UiPass::end()
 void UiPass::execute(const Renderer::RenderData& data)
 {
   for (auto& text : data.ui_queue)
-    text.render(data.width, data.height);
+    text.render(this->fb->width, this->fb->height);
 }

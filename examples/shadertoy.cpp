@@ -242,7 +242,7 @@ int main(int argc, char** argv)
         shader_program = ret;
     }
     
-    Gui::new_frame(&fb, "shadertoy");
+    Gui::new_frame(fb, "shadertoy");
     Gui::push_font();
     ImGui::Begin("Settings");
     
@@ -307,7 +307,7 @@ int main(int argc, char** argv)
     Gui::pop_font();
 
     fb.bind();
-    
+    Gl::set_viewport(0, 0, fb.width, fb.height);
     Gl::clear();
     v.bind();
 
@@ -323,13 +323,15 @@ int main(int argc, char** argv)
     location = glGetUniformLocation(shader_program, "iResolution");
     if (location != -1)
     {
-      glUniform2f(location, Window::get_width(), Window::get_height());
+      glUniform2f(location, fb.width, fb.height);
     }
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
     v.unbind();
     fb.unbind();
+
+    
     Gui::render();
     
     Window::poll_events();
@@ -340,7 +342,6 @@ int main(int argc, char** argv)
 
 unsigned int update_shader(std::string fragment_source)
 {
-
   const char *vertexShaderSource =
     "#version 330 core\n"
     "layout (location = 0) in vec3 aPos;\n"

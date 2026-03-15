@@ -27,3 +27,6 @@
 [submodule "external/lua"]
 	path = external/lua
 	url = https://github.com/lua/lua.git
+[submodule "external/implot"]
+	path = external/implot
+	url = https://github.com/epezent/implot.git

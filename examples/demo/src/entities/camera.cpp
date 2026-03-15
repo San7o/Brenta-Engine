@@ -6,10 +6,11 @@
 #include <brenta/ecs/components/camera_ecs_component.hpp>
 #include <demo/entities.hpp>
 
-void init_camera_entity(tenno::shared_ptr<brenta::Camera> c)
+void init_camera_entity(tenno::shared_ptr<brenta::Camera> c,
+                        tenno::weak_ptr<brenta::FrameBuffer> fb)
 {
   auto camera_e = viotecs::World::new_entity();
-  camera_e.add_component<brenta::CameraEcsComponent>(c);
+  camera_e.add_component<brenta::CameraEcsComponent>(c, fb);
 
   return;
 }

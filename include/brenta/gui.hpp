@@ -10,6 +10,7 @@
 #include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/subsystem.hpp>
 
+#include <implot/implot.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
@@ -46,12 +47,13 @@ public:
   
   static Gui &instance();
   
-  static void new_frame(FrameBuffer *fb, std::string name = "Game");
+  static void new_frame(FrameBuffer &fb, std::string name = "Game");
   static void render();
   static void load_font(const std::filesystem::path &path = "examples/assets/fonts/Inconsolata-Regular.ttf",
                         float size = 25.0f);
   static void push_font(ImFont* f = font);
   static void pop_font();
+  static void debug_performance();
 
 private:
   

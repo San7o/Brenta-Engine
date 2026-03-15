@@ -8,7 +8,47 @@
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 
+#include <cmath>
+
 #ifndef BRENTA_NO_IMGUI
+
+namespace brenta
+{
+
+struct TimePlotBuffer
+{
+  int max_size;
+  int offset;
+  ImVector<ImVec2> data;
+  
+  TimePlotBuffer(int max_size = 2000)
+  {
+    this->max_size = max_size;
+    this->offset   = 0;
+    this->data.reserve(max_size);
+  }
+  
+  void add_point(float x, float y)
+  {
+    if (this->data.size() < this->max_size)
+      this->data.push_back(ImVec2(x,y));
+    else {
+      this->data[this->offset] = ImVec2(x,y);
+      this->offset =  (this->offset + 1) % this->max_size;
+    }
+  }
+  
+  void erase()
+  {
+    if (this->data.size() > 0)
+    {
+      this->data.shrink(0);
+      this->offset  = 0;
+    }
+  }
+};
+
+} // namespace brenta
 
 using namespace brenta;
 
@@ -137,6 +177,7 @@ std::expected<void, Subsystem::Error> Gui::initialize()
   
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
+  ImPlot::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
   
   // Enable Keyboard and Gamepad Controls
@@ -161,6 +202,8 @@ std::expected<void, Subsystem::Error> Gui::terminate()
   
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
+
+  ImPlot::DestroyContext();
   ImGui::DestroyContext();
 
   Gui::initialized = false;
@@ -204,7 +247,7 @@ void Gui::pop_font()
   ImGui::PopFont();
 }
 
-void Gui::new_frame(FrameBuffer *fb, std::string name)
+void Gui::new_frame(FrameBuffer &fb, std::string name)
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
@@ -224,10 +267,9 @@ void Gui::new_frame(FrameBuffer *fb, std::string name)
   float window_width  = ImGui::GetContentRegionAvail().x;
   float window_height = ImGui::GetContentRegionAvail().y;
 
-  fb->rescale(window_width, window_height);
-  Gl::set_viewport(0, 0, window_width, window_height);
+  fb.rescale(window_width, window_height);
 
-  ImGui::Image((void *) (intptr_t) fb->texture_id,
+  ImGui::Image((void *) (intptr_t) fb.texture_id,
                ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));
 
   ImGui::End();
@@ -239,6 +281,51 @@ void Gui::render()
   ImGui::Render();
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
   return;
+}
+
+static float gui_debug_last_time = 0;
+
+void Gui::debug_performance()
+{
+  ImGui::Begin("Performance");
+
+  static TimePlotBuffer fps_data;
+
+  auto time = Window::get_time();
+  const float interval  = 0.1f; // seconds
+
+  float fps  = time.get_fps();
+  
+  if (time.elapsed > gui_debug_last_time + interval)
+  {
+    gui_debug_last_time = time.elapsed;
+    fps_data.add_point(time.elapsed, fps);
+  }
+
+  const ImPlotAxisFlags flags = 0;
+  static float history        = 10.0f;
+  ImGui::SliderFloat("History", &history, 1, 60, "%.1f s");
+    
+  if (ImPlot::BeginPlot("##FPS", ImVec2(-1,ImGui::GetTextLineHeight()*10)))
+  {
+    ImPlot::SetupAxes(nullptr, nullptr, flags, flags);
+
+    // X axis limit
+    ImPlot::SetupAxisLimits(ImAxis_X1, gui_debug_last_time - history,
+                            gui_debug_last_time, ImGuiCond_Always);
+    // Y axis limit
+    ImPlot::SetupAxisLimits(ImAxis_Y1, 0, 100);
+    
+    ImPlotSpec spec;
+    spec.Offset = fps_data.offset;
+    spec.Stride = 2 * sizeof(float);
+    spec.FillAlpha = 0.5f;
+    ImPlot::PlotShaded("FPS", &fps_data.data[0].x, &fps_data.data[0].y,
+                       fps_data.data.size(), -INFINITY, spec);
+    ImPlot::EndPlot();
+  }
+  
+  ImGui::End();
 }
 
 //

@@ -113,6 +113,7 @@ if (BRENTA_USE_IMGUI)
   message(STATUS "Using ImGUI")
   list(APPEND BRENTA_DEPS_INCLUDES
     ${PROJECT_SOURCE_DIR}/external/imgui
+    ${PROJECT_SOURCE_DIR}/external/implot
     ${PROJECT_SOURCE_DIR}/external/imgui/backends
     ${PROJECT_SOURCE_DIR}/external/imgui/misc/cpp)
 
@@ -127,7 +128,10 @@ if (BRENTA_USE_IMGUI)
       "external/imgui/backends/imgui_impl_glfw.cpp"
       "external/imgui/misc/cpp/imgui_stdlib.cpp"
       "external/imgui/backends/imgui_impl_opengl3.cpp"
-      "external/imgui/misc/cpp/imgui_stdlib.h")
+      "external/imgui/misc/cpp/imgui_stdlib.h"
+      "external/implot/implot.cpp"
+      "external/implot/implot_items.cpp"
+    )
     list(APPEND BRENTA_DEPS_SOURCES ${IMGUI_SOURCES})
     list(APPEND BRENTA_DEPS_HEADERS "external/imgui/imgui.h")
   endif()
@@ -290,6 +294,7 @@ if (BRENTA_BUILD_EXAMPLES)
   add_example(pixelated)
   add_example(post_processing)
   add_example(timeseries_db)
+  add_example(performance_monitor)
   
   # Demo
   file(GLOB_RECURSE DEMO_SOURCES

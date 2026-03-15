@@ -3,8 +3,6 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
-#include <brenta/logger.hpp>
-#include <brenta/window.hpp>
 #include <brenta/text.hpp>
 
 #include <glm/glm.hpp>
