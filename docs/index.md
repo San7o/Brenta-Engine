@@ -42,7 +42,7 @@ The engine also features the following sub projects:
 <h2 align=center> Screenshots </h2>
 
 <div align="center">
-  <img src="demo-screenshot.png" />
+  <img src="demo-screenshot.jpeg" />
   <img src="screenshot1.jpg" />
   <img src="screenshot2.jpg" />
 </div>

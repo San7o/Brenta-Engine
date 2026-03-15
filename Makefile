@@ -46,6 +46,7 @@ doxygen: ## Generate html documentation
 	cp -r utils/docs-images ${HTML_DIR}/images
 	cp -r docs/*.png ${HTML_DIR}
 	cp -r docs/*.jpg ${HTML_DIR}
+	cp -r docs/*.jpeg ${HTML_DIR}	
 
 $(HTML_DIR)/%.html: ${DOCS_DIR}/%.md ${HTML_INTRO} ${HTML_OUTRO} | ${HTML_DIR}
 	pandoc $< -f markdown-smart -t html -o ${TMP_FILE} ${PANDOC_FLAGS}
