@@ -5,12 +5,17 @@
 
 #pragma once
 
-#include <brenta/renderer/mesh.hpp>
-#include <brenta/renderer/material.hpp>
+#include <tenno/memory.hpp>
+#include <tenno/vector.hpp>
+
+#include <filesystem>
 
 namespace brenta
 {
 
+class Mesh;
+class Material;  
+  
 class Skybox
 {
 public:

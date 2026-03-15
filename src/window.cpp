@@ -5,6 +5,7 @@
 
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <brenta/drivers/glfw.hpp>
 #include <glad/glad.h>

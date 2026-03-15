@@ -122,7 +122,7 @@ int main()
     {
       Window::poll_events();
 
-      Gui::new_frame(*game_fb, "demo");
+      Gui::new_frame(game_fb, "demo");
     
       Gl::set_color(Color::grey());
       Gl::clear();

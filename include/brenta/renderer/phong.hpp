@@ -7,7 +7,6 @@
 
 #include <brenta/renderer/dir_light.hpp>
 #include <brenta/renderer/point_light.hpp>
-#include <brenta/renderer/opengl/shader.hpp>
 
 #include <glad/glad.h>
 

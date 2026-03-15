@@ -6,13 +6,14 @@
 #pragma once
 
 #include <brenta/node.hpp>
-#include <brenta/renderer/point_light.hpp>
 
 #include <tenno/memory.hpp>
 
 namespace brenta
 {
 
+class PointLight;
+  
 class PointLightNodeComponent : public NodeComponent
 {
 public:

@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/renderer/material.hpp>
+#include <brenta/renderer/opengl/texture.hpp>
 
 using namespace brenta;
 

@@ -7,7 +7,6 @@
 
 #ifndef BRENTA_NO_ECS
 
-#include <brenta/transform.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/ecs/ecs.hpp>

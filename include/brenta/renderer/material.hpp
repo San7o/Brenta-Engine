@@ -6,7 +6,6 @@
 #pragma once
 
 #include <brenta/renderer/opengl/shader.hpp>
-#include <brenta/renderer/opengl/texture.hpp>
 
 #include <glm/glm.hpp>
 
@@ -15,6 +14,8 @@
 
 namespace brenta
 {
+
+class Texture;
 
 //
 // Material

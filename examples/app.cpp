@@ -8,6 +8,7 @@
 #include <brenta/window.hpp>
 #include <brenta/asset.hpp>
 #include <brenta/node_components/model_node_component.hpp>
+#include <brenta/scene.hpp>
 #include <brenta/renderer/model.hpp>
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/renderer.hpp>

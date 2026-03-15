@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/node_components/particle_emitter_node_component.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 using namespace brenta;
 

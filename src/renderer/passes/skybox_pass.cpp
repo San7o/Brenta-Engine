@@ -5,6 +5,9 @@
 
 #include <brenta/renderer/passes/skybox_pass.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/material.hpp>
+#include <brenta/renderer/skybox.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 using namespace brenta;
 

@@ -5,6 +5,11 @@
 
 #include <brenta/renderer/passes/transparent_pass.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/material.hpp>
+#include <brenta/renderer/model.hpp>
+#include <brenta/renderer/point_light.hpp>
+#include <brenta/renderer/dir_light.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 using namespace brenta;
 

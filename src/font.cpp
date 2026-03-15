@@ -5,6 +5,12 @@
 
 #include <brenta/asset.hpp>
 #include <brenta/logger.hpp>
+#include <brenta/font.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/opengl/texture.hpp>
+
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 #include "renderer/shaders/c/text_fs.c"
 #include "renderer/shaders/c/text_vs.c"

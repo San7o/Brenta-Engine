@@ -5,6 +5,8 @@
 
 #include <brenta/renderer/passes/post_process_pass.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/model.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 using namespace brenta;
 

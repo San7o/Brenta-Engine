@@ -5,14 +5,17 @@
 
 #pragma once
 
-#include <brenta/font.hpp>
 #include <brenta/color.hpp>
+
+#include <tenno/memory.hpp>
 
 #include <string>
 
 namespace brenta
 {
 
+class Font;
+  
 class Text
 {
 public:

@@ -8,7 +8,6 @@
 #include <brenta/subsystem.hpp>
 #include <brenta/time.hpp>
 #include <brenta/key.hpp>
-#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
 
@@ -17,6 +16,8 @@
 namespace brenta
 {
 
+class FrameBuffer;
+  
 //
 // Window subsystem
 // ----------------

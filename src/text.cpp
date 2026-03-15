@@ -4,6 +4,8 @@
 // Github:  @San7o
 
 #include <brenta/text.hpp>
+#include <brenta/font.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

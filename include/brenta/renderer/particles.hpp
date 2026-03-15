@@ -9,22 +9,19 @@
   #define BRENTA_MAX_PARTICLES 1000
 #endif
 
-#include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/opengl/ubo.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <glm/vec3.hpp>
 
-#include <string>
-#include <vector>
 #include <filesystem>
 
 namespace brenta
 {
 
+class Camera;
+  
 //
 // Particle Emitter class
 // ----------------------
@@ -64,6 +61,10 @@ public:
 
   ParticleEmitter(Config conf);
   ParticleEmitter(ParticleEmitter&&) = default;
+
+  ParticleEmitter(const ParticleEmitter&)            = delete;
+  ParticleEmitter &operator=(const ParticleEmitter&) = delete;
+  
   ~ParticleEmitter() = default;
 
   void update(float delta_time);

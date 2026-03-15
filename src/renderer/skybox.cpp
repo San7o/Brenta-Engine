@@ -5,6 +5,9 @@
 
 #include <brenta/renderer/skybox.hpp>
 #include <brenta/renderer/opengl/cubemap.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+#include <brenta/renderer/material.hpp>
+#include <brenta/renderer/mesh.hpp>
 
 #include "../src/renderer/shaders/c/skybox_vs.c"
 #include "../src/renderer/shaders/c/skybox_fs.c"

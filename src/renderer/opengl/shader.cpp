@@ -6,6 +6,8 @@
 #include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/logger.hpp>
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include <sstream>
 
 using namespace brenta;

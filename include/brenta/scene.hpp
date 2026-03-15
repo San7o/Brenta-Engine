@@ -3,17 +3,21 @@
 // Mail:    giovanni.santini@proton.me
 // Github:  @San7o
 
+#pragma once
+
 #include <brenta/renderer/camera.hpp>
-#include <brenta/node.hpp>
-#include <brenta/renderer/skybox.hpp>
 
 #include <tenno/memory.hpp>
 
-#pragma once
+#include <filesystem>
 
 namespace brenta
 {
 
+class Node;
+class NodeComponent;
+class Skybox;
+  
 class RenderPipeline;
   
 //

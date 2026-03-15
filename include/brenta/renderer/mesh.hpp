@@ -9,9 +9,8 @@
 #include <brenta/renderer/opengl/texture.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <glm/vec3.hpp>
+#include <glm/vec2.hpp>
 
 #include <tenno/vector.hpp>
 #include <tenno/memory.hpp>

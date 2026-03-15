@@ -16,7 +16,7 @@
 
 using namespace brenta;
 
-void setup_gui(FrameBuffer &fb);
+void setup_gui(tenno::shared_ptr<FrameBuffer> fb);
 
 int main()
 {
@@ -55,7 +55,8 @@ int main()
     tenno::make_shared<Camera>(camera_builder);
 
   Gui::load_font();
-  FrameBuffer fb(Window::get_width(), Window::get_height());  
+  auto fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                            Window::get_height());  
   
   //
   // Render loop
@@ -71,11 +72,11 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    fb.bind();
+    fb->bind();
     Gl::clear();
-    Gl::set_viewport(0, 0, fb.width, fb.height);
+    Gl::set_viewport(0, 0, fb->width, fb->height);
     // Draw is supposed to be here
-    fb.unbind();
+    fb->unbind();
 
     Window::framebuffer->bind();
     Gui::render();
@@ -87,7 +88,7 @@ int main()
   return 0;
 }
 
-void setup_gui(FrameBuffer &fb)
+void setup_gui(tenno::shared_ptr<FrameBuffer> fb)
 {
   Gui::new_frame(fb, "Game");
   Gui::debug_stats();

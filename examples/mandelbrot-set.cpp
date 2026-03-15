@@ -60,7 +60,8 @@ int main()
   Gui::load_font();
   #endif
   
-  FrameBuffer fb(Window::get_width(), Window::get_height());
+  auto fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                            Window::get_height());
 
   float     zoom            = 1.0f;
   glm::vec3 offset          = glm::vec3(-0.11f, -0.11f, 0.0f);
@@ -114,7 +115,7 @@ int main()
     Gui::pop_font();
 #endif // BRENTA_NO_IMGUI
     
-    fb.bind();
+    fb->bind();
     Gl::clear();
 
     // Render here
@@ -133,7 +134,7 @@ int main()
     Gl::check_error();
 
     v.unbind();
-    fb.unbind();
+    fb->unbind();
     
 #ifndef BRENTA_NO_IMGUI
     Gui::render();

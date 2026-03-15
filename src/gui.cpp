@@ -5,10 +5,16 @@
 
 #include <brenta/renderer/opengl/gl.hpp>
 #include <brenta/renderer/opengl/texture.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/gui.hpp>
 #include <brenta/window.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/asset.hpp>
+
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
+#include <implot/implot.h>
 
 #include <cmath>
 
@@ -249,7 +255,7 @@ void Gui::pop_font()
   ImGui::PopFont();
 }
 
-void Gui::new_frame(FrameBuffer &fb, std::string name)
+void Gui::new_frame(tenno::shared_ptr<FrameBuffer> fb, std::string name)
 {
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
@@ -269,9 +275,9 @@ void Gui::new_frame(FrameBuffer &fb, std::string name)
   float window_width  = ImGui::GetContentRegionAvail().x;
   float window_height = ImGui::GetContentRegionAvail().y;
 
-  fb.rescale(window_width, window_height);
+  fb->rescale(window_width, window_height);
 
-  ImGui::Image((void *) (intptr_t) fb.texture_id,
+  ImGui::Image((void *) (intptr_t) fb->texture_id,
                ImGui::GetContentRegionAvail(), ImVec2(0, 1), ImVec2(1, 0));
 
   ImGui::End();

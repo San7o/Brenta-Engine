@@ -8,7 +8,6 @@
 #ifndef BRENTA_NO_ECS
 
 #include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/ecs/ecs.hpp>
 
 #include <tenno/memory.hpp>
@@ -16,6 +15,8 @@
 namespace brenta
 {
 
+class FrameBuffer;
+  
 class CameraEcsComponent : public viotecs::Component
 {
 public:

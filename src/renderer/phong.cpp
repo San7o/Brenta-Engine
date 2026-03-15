@@ -4,6 +4,9 @@
 // Github:  @San7o
 
 #include <brenta/renderer/phong.hpp>
+#include <brenta/renderer/opengl/shader.hpp>
+
+#include <string>
 
 using namespace brenta;
 

@@ -6,6 +6,8 @@
 #include <brenta/renderer/renderer.hpp>
 #include <brenta/scene.hpp>
 #include <brenta/ecs/ecs.hpp>
+#include <brenta/node.hpp>
+#include <brenta/renderer/skybox.hpp>
 
 using namespace brenta;
 

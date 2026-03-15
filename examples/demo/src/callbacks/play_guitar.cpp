@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/asset.hpp>
+#include <brenta/sound.hpp>
 #include <brenta/input.hpp>
 #include <brenta/logger.hpp>
 

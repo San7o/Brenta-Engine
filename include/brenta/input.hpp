@@ -11,7 +11,6 @@
 #include <functional>
 #include <string>
 #include <unordered_map>
-#include <vector>
 #include <expected>
 
 namespace brenta

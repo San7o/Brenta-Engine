@@ -6,7 +6,6 @@
 #pragma once
 
 #include <brenta/script.hpp>
-#include <brenta/node.hpp>
 #include <brenta/transform.hpp>
 
 #include <tenno/memory.hpp>

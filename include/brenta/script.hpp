@@ -5,17 +5,14 @@
 
 #pragma once
 
-extern "C"
-{
-#include <lua/lua.h>
-}
-
 #include <tenno/utility.hpp>
 #include <tenno/memory.hpp>
 
 #include <string>
 #include <filesystem>
 #include <optional>
+
+class lua_State;
 
 namespace brenta
 {

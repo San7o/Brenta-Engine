@@ -8,7 +8,6 @@
 #ifndef BRENTA_NO_ECS
 
 #include <brenta/ecs/ecs.hpp>
-#include <brenta/ecs/components/transform_ecs_component.hpp>
 
 #include <vector>
 

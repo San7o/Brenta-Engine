@@ -6,12 +6,13 @@
 #pragma once
 
 #include <brenta/renderer/pipeline.hpp>
-#include <brenta/renderer/material.hpp>
-#include <brenta/renderer/opengl/framebuffer.hpp>
 
 namespace brenta
 {
 
+class Material;
+class FrameBuffer;
+  
 class PostProcessPass : public RenderPass
 {
 public:

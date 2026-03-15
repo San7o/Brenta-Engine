@@ -5,22 +5,22 @@
 
 #pragma once
 
-#include <brenta/renderer/opengl/shader.hpp>
 #include <brenta/renderer/opengl/vao.hpp>
 #include <brenta/renderer/opengl/buffer.hpp>
 
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
+#include <glm/vec2.hpp>
 
-#include <ft2build.h>
-#include FT_FREETYPE_H
+#include <tenno/memory.hpp>
+#include <tenno/vector.hpp>
 
+#include <filesystem>
 #include <map>
 
 namespace brenta
 {
 
+class Shader;
+  
 class Font
 {
 public:

@@ -7,7 +7,6 @@
 
 #ifndef BRENTA_NO_ECS
 
-#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/renderer/particles.hpp>
 #include <brenta/ecs/ecs.hpp>
 
@@ -16,6 +15,8 @@
 namespace brenta
 {
 
+class FrameBuffer;
+  
 class ParticleEmitterEcsComponent : public viotecs::Component
 {
 public:

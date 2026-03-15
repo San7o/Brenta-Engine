@@ -6,13 +6,14 @@
 #pragma once
 
 #include <brenta/node.hpp>
-#include <brenta/renderer/dir_light.hpp>
 
 #include <tenno/memory.hpp>
 
 namespace brenta
 {
 
+class DirLight;
+  
 class DirLightNodeComponent : public NodeComponent
 {
 public:

@@ -201,7 +201,8 @@ int main(int argc, char** argv)
   // Variables
   //
   
-  FrameBuffer fb(Window::get_width(), Window::get_height());
+  auto fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                            Window::get_height());
   
   //
   // Game loop
@@ -306,8 +307,8 @@ int main(int argc, char** argv)
     ImGui::End();
     Gui::pop_font();
 
-    fb.bind();
-    Gl::set_viewport(0, 0, fb.width, fb.height);
+    fb->bind();
+    Gl::set_viewport(0, 0, fb->width, fb->height);
     Gl::clear();
     v.bind();
 
@@ -323,13 +324,13 @@ int main(int argc, char** argv)
     location = glGetUniformLocation(shader_program, "iResolution");
     if (location != -1)
     {
-      glUniform2f(location, fb.width, fb.height);
+      glUniform2f(location, fb->width, fb->height);
     }
     
     glDrawArrays(GL_TRIANGLES, 0, 6);
     
     v.unbind();
-    fb.unbind();
+    fb->unbind();
 
     
     Gui::render();

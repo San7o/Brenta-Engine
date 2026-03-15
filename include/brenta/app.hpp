@@ -8,7 +8,7 @@
 namespace brenta
 {
 
-#include <brenta/renderer/pipeline.hpp>
+class RenderPipeline;
   
 //
 // App runner

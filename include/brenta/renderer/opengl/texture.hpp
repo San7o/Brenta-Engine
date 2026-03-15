@@ -10,7 +10,6 @@
 
 #include <tenno/vector.hpp>
 
-#include <string>
 #include <filesystem>
 
 namespace brenta

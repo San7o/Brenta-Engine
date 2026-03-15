@@ -4,6 +4,7 @@
 // Github:  @San7o
 
 #include <brenta/drivers/glfw.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/logger.hpp>
 #include <brenta/input.hpp>
 

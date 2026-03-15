@@ -7,6 +7,7 @@
 #include <brenta/logger.hpp>
 #include <brenta/window.hpp>
 #include <brenta/text.hpp>
+#include <brenta/font.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
 
 #include <tenno/memory.hpp>

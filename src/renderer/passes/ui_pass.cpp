@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/passes/ui_pass.hpp>
 #include <brenta/renderer/opengl/gl.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 
 using namespace brenta;
 

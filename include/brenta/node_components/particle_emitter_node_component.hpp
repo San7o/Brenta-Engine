@@ -7,13 +7,14 @@
 
 #include <brenta/node.hpp>
 #include <brenta/renderer/particles.hpp>
-#include <brenta/renderer/opengl/framebuffer.hpp>
 
 #include <tenno/memory.hpp>
 
 namespace brenta
 {
 
+class FrameBuffer;
+  
 class ParticleEmitterNodeComponent : public NodeComponent
 {
 public:

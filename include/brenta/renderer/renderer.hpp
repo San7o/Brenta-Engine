@@ -1,24 +1,25 @@
 // SPDX-License-Identifier: MIT
 // Author:  Giovanni Santini
 // Mail:    giovanni.santini@proton.me
-// Github:  @San7o
-
-#include <brenta/renderer/model.hpp>
-#include <brenta/renderer/opengl/shader.hpp>
-#include <brenta/renderer/camera.hpp>
-#include <brenta/renderer/material.hpp>
-#include <brenta/renderer/point_light.hpp>
-#include <brenta/renderer/dir_light.hpp>
-#include <brenta/renderer/skybox.hpp>
-#include <brenta/text.hpp>
-
-#include <glm/glm.hpp>
 
 #pragma once
+
+#include <brenta/renderer/camera.hpp>
+#include <brenta/text.hpp>
+
+#include <glm/vec3.hpp>
+#include <glm/mat4x4.hpp>
+
+#include <tenno/vector.hpp>
+#include <tenno/memory.hpp>
 
 namespace brenta
 {
 
+class Model;
+class PointLight;
+class DirLight;
+class Skybox;
 class RenderPipeline;
   
 //

@@ -5,6 +5,7 @@
 
 #include <brenta/renderer/camera.hpp>
 #include <brenta/renderer/particles.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/engine.hpp>
 #include <brenta/input.hpp>
 #include <brenta/time.hpp>
@@ -17,7 +18,7 @@
 
 using namespace brenta;
 
-void setup_gui(FrameBuffer &fb,
+void setup_gui(tenno::shared_ptr<FrameBuffer> fb,
                ParticleEmitter *emitter);
 
 int main()
@@ -186,7 +187,8 @@ int main()
   });
   
   Gui::load_font();
-  FrameBuffer fb(Window::get_width(), Window::get_height());  
+  auto fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                            Window::get_height());  
   
   //
   // Render loop
@@ -202,12 +204,12 @@ int main()
     Gl::set_color(Color::grey());
     Gl::clear();
 
-    fb.bind();
+    fb->bind();
     Gl::clear();
-    Gl::set_viewport(0, 0, fb.width, fb.height);
+    Gl::set_viewport(0, 0, fb->width, fb->height);
     emitter.update(Window::get_time().delta);
-    emitter.render(fb.width, fb.height);
-    fb.unbind();
+    emitter.render(fb->width, fb->height);
+    fb->unbind();
 
     Window::framebuffer->bind();
     Gui::render();
@@ -219,7 +221,7 @@ int main()
   return 0;
 }
 
-void setup_gui(FrameBuffer &fb,
+void setup_gui(tenno::shared_ptr<FrameBuffer> fb,
                ParticleEmitter *emitter)
 {
   Gui::new_frame(fb, "particles");

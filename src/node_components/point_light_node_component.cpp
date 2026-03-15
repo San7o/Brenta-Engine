@@ -5,6 +5,7 @@
 
 #include <brenta/node_components/point_light_node_component.hpp>
 #include <brenta/renderer/renderer.hpp>
+#include <brenta/renderer/point_light.hpp>
 
 using namespace brenta;
 

@@ -7,19 +7,21 @@
 
 #ifndef BRENTA_NO_IMGUI
 
-#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/subsystem.hpp>
 
-#include <implot/implot.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
 #include <filesystem>
 
+class ImFont;
+
 namespace brenta
 {
 
+class FrameBuffer;
+  
 //
 // Gui class
 // ---------
@@ -47,7 +49,8 @@ public:
   
   static Gui &instance();
   
-  static void new_frame(FrameBuffer &fb, std::string name = "Game");
+  static void new_frame(tenno::shared_ptr<FrameBuffer> fb,
+                        std::string name = "Game");
   static void render();
   static void load_font(const std::filesystem::path &path = "examples/assets/fonts/Inconsolata-Regular.ttf",
                         float size = 25.0f);

@@ -7,8 +7,8 @@
 
 #ifndef BRENTA_NO_ECS
 
-#include <brenta/window.hpp>
 #include <brenta/ecs/ecs.hpp>
+#include <brenta/renderer/opengl/framebuffer.hpp>
 #include <brenta/ecs/components/camera_ecs_component.hpp>
 
 #include <vector>

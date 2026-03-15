@@ -35,7 +35,7 @@ using namespace brenta;
 void rotate_model_counterclockwise(tenno::shared_ptr<Model> model);
 void rotate_model_clockwise(tenno::shared_ptr<Model> model);
 
-void setup_gui(FrameBuffer &fb,
+void setup_gui(tenno::shared_ptr<FrameBuffer>     fb,
                tenno::shared_ptr<PhongDirLight>   dir_light,
                tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light);
@@ -126,7 +126,8 @@ int main()
   
   // Gui
   Gui::load_font();
-  FrameBuffer fb(Window::get_width(), Window::get_height());  
+  auto fb = tenno::make_shared<FrameBuffer>(Window::get_width(),
+                                            Window::get_height());  
 
   while (!Window::should_close())
   { 
@@ -137,7 +138,7 @@ int main()
     if (Window::is_key_pressed(Key::Left))
       rotate_model_clockwise(model_ptr);
 
-    setup_gui(*game_fb, phong_dir_ptr, point_light_node, phong_point_ptr);
+    setup_gui(game_fb, phong_dir_ptr, point_light_node, phong_point_ptr);
     Gl::set_color(Color::grey());
     Gl::clear();
     
@@ -166,8 +167,8 @@ void rotate_model_clockwise(tenno::shared_ptr<Model> model)
   model->transform.rotate_y(-ROTATION_SPEED);
 }
 
-void setup_gui(FrameBuffer &fb,
-               tenno::shared_ptr<PhongDirLight> dir_light,
+void setup_gui(tenno::shared_ptr<FrameBuffer>     fb,
+               tenno::shared_ptr<PhongDirLight>   dir_light,
                tenno::shared_ptr<Node>            point_light_node,
                tenno::shared_ptr<PhongPointLight> point_light)
 {

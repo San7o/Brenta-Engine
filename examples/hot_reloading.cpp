@@ -9,6 +9,7 @@
 #include <brenta/scene.hpp>
 #include <brenta/asset.hpp>
 #include <brenta/input.hpp>
+#include <brenta/font.hpp>
 #include <brenta/mouse.hpp>
 #include <brenta/text.hpp>
 #include <brenta/node_components/model_node_component.hpp>

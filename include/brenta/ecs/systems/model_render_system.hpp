@@ -10,7 +10,6 @@
 #include <brenta/ecs/ecs.hpp>
 #include <brenta/ecs/components/model_ecs_component.hpp>
 #include <brenta/ecs/components/transform_ecs_component.hpp>
-#include <brenta/logger.hpp>
 
 #include <vector>
 
