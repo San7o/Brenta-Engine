@@ -26,6 +26,7 @@ var NAVTREE =
 [
   [ "Brenta Engine", "index.html", [
     [ "Node components", "md_include_2brenta_2node__components_2README.html", null ],
+    [ "Concepts", "concepts.html", "concepts" ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],
@@ -40,7 +41,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"text__node__component_8cpp_source.html"
+"structbrenta_1_1TimePlotBuffer.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

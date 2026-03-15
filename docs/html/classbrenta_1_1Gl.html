@@ -150,6 +150,10 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a7645d20604562b4dc47410455ca96367" id="r_a7645d20604562b4dc47410455ca96367"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1Gl.html">Gl</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gl.html#a7645d20604562b4dc47410455ca96367">instance</a> ()</td></tr>
 <tr class="separator:a7645d20604562b4dc47410455ca96367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1de5ca3545e7536b5ac847696fc229c" id="r_ac1de5ca3545e7536b5ac847696fc229c"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gl.html#ac1de5ca3545e7536b5ac847696fc229c">get_num_channels</a> (GLenum color_format)</td></tr>
+<tr class="separator:ac1de5ca3545e7536b5ac847696fc229c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad33275b488aae2f04ff20cc87d4f1192" id="r_ad33275b488aae2f04ff20cc87d4f1192"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gl.html#ad33275b488aae2f04ff20cc87d4f1192">get_bytes_per_channel</a> (GLenum type)</td></tr>
+<tr class="separator:ad33275b488aae2f04ff20cc87d4f1192"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a57356b09b95d5ecd7805f296e2c7df24" id="r_a57356b09b95d5ecd7805f296e2c7df24"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gl.html#a57356b09b95d5ecd7805f296e2c7df24">set_poligon_mode</a> (GLboolean enable)</td></tr>
 <tr class="separator:a57356b09b95d5ecd7805f296e2c7df24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5af32f8b54ab30e70419bd306496d8bf" id="r_a5af32f8b54ab30e70419bd306496d8bf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gl.html#a5af32f8b54ab30e70419bd306496d8bf">set_viewport</a> (int x, int y, int width, int height)</td></tr>
@@ -229,7 +233,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00177">177</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00239">239</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -256,7 +260,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00171">171</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00233">233</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -300,7 +304,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00159">159</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00221">221</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -350,7 +354,63 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00165">165</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00227">227</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ad33275b488aae2f04ff20cc87d4f1192" name="ad33275b488aae2f04ff20cc87d4f1192"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad33275b488aae2f04ff20cc87d4f1192">&#9670;&#160;</a></span>get_bytes_per_channel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Gl::get_bytes_per_channel </td>
+          <td>(</td>
+          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00178">178</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+
+</div>
+</div>
+<a id="ac1de5ca3545e7536b5ac847696fc229c" name="ac1de5ca3545e7536b5ac847696fc229c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1de5ca3545e7536b5ac847696fc229c">&#9670;&#160;</a></span>get_num_channels()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Gl::get_num_channels </td>
+          <td>(</td>
+          <td class="paramtype">GLenum&#160;</td>
+          <td class="paramname"><em>color_format</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00146">146</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -379,7 +439,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00038">38</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00037">37</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -406,7 +466,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00141">141</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00140">140</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -435,7 +495,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00117">117</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00116">116</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -464,7 +524,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00112">112</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00111">111</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -492,7 +552,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00153">153</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00215">215</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -520,7 +580,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00126">126</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00125">125</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +630,7 @@ Static Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00147">147</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00209">209</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>
@@ -599,7 +659,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00103">103</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gl_8cpp_source.html#l00102">102</a> of file <a class="el" href="gl_8cpp_source.html">gl.cpp</a>.</p>
 
 </div>
 </div>

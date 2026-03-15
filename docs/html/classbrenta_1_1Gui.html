@@ -129,8 +129,8 @@ Public Member Functions</h2></td></tr>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a87712d9a2207c129d4840238551bb6ef" id="r_a87712d9a2207c129d4840238551bb6ef"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classbrenta_1_1Gui.html">Gui</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#a87712d9a2207c129d4840238551bb6ef">instance</a> ()</td></tr>
 <tr class="separator:a87712d9a2207c129d4840238551bb6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa76eefde18ff39ae2fd51281c5531301" id="r_aa76eefde18ff39ae2fd51281c5531301"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#aa76eefde18ff39ae2fd51281c5531301">new_frame</a> (<a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> *fb, std::string name=&quot;Game&quot;)</td></tr>
-<tr class="separator:aa76eefde18ff39ae2fd51281c5531301"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ce7d5923a21ce1026f9f80a49701998" id="r_a7ce7d5923a21ce1026f9f80a49701998"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#a7ce7d5923a21ce1026f9f80a49701998">new_frame</a> (tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt; fb, std::string name=&quot;Game&quot;)</td></tr>
+<tr class="separator:a7ce7d5923a21ce1026f9f80a49701998"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d5482a8e1161cda1ac9913692d56cb6" id="r_a1d5482a8e1161cda1ac9913692d56cb6"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#a1d5482a8e1161cda1ac9913692d56cb6">render</a> ()</td></tr>
 <tr class="separator:a1d5482a8e1161cda1ac9913692d56cb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af7002bfff2090342a79171ac28dfed39" id="r_af7002bfff2090342a79171ac28dfed39"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#af7002bfff2090342a79171ac28dfed39">load_font</a> (const std::filesystem::path &amp;path=&quot;examples/assets/fonts/Inconsolata-Regular.ttf&quot;, float size=25.0f)</td></tr>
@@ -139,6 +139,8 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:a785ceb96c1448b398afab3bf17f30a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeec958429282e0ed407e25e5b97c6b4a" id="r_aeec958429282e0ed407e25e5b97c6b4a"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#aeec958429282e0ed407e25e5b97c6b4a">pop_font</a> ()</td></tr>
 <tr class="separator:aeec958429282e0ed407e25e5b97c6b4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afaa4e583296f10c14839e2297b56ca" id="r_a4afaa4e583296f10c14839e2297b56ca"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbrenta_1_1Gui.html#a4afaa4e583296f10c14839e2297b56ca">debug_stats</a> ()</td></tr>
+<tr class="separator:a4afaa4e583296f10c14839e2297b56ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -153,8 +155,35 @@ Additional Inherited Members</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="gui_8hpp_source.html#l00032">32</a> of file <a class="el" href="gui_8hpp_source.html">gui.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8hpp_source.html#l00035">35</a> of file <a class="el" href="gui_8hpp_source.html">gui.hpp</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4afaa4e583296f10c14839e2297b56ca" name="a4afaa4e583296f10c14839e2297b56ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4afaa4e583296f10c14839e2297b56ca">&#9670;&#160;</a></span>debug_stats()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Gui::debug_stats </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00296">296</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+
+</div>
+</div>
 <a id="abc03ace585248fd3748604e9ee192120" name="abc03ace585248fd3748604e9ee192120"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abc03ace585248fd3748604e9ee192120">&#9670;&#160;</a></span>initialize()</h2>
 
@@ -180,7 +209,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00134">134</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00182">182</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -207,7 +236,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00185">185</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00236">236</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -236,7 +265,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00176">176</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00227">227</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -274,7 +303,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00191">191</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00242">242</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -303,12 +332,12 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00171">171</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00222">222</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
-<a id="aa76eefde18ff39ae2fd51281c5531301" name="aa76eefde18ff39ae2fd51281c5531301"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa76eefde18ff39ae2fd51281c5531301">&#9670;&#160;</a></span>new_frame()</h2>
+<a id="a7ce7d5923a21ce1026f9f80a49701998" name="a7ce7d5923a21ce1026f9f80a49701998"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ce7d5923a21ce1026f9f80a49701998">&#9670;&#160;</a></span>new_frame()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -319,7 +348,7 @@ Additional Inherited Members</h2></td></tr>
         <tr>
           <td class="memname">void Gui::new_frame </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> *&#160;</td>
+          <td class="paramtype">tenno::shared_ptr&lt; <a class="el" href="classbrenta_1_1FrameBuffer.html">FrameBuffer</a> &gt;&#160;</td>
           <td class="paramname"><em>fb</em>, </td>
         </tr>
         <tr>
@@ -341,7 +370,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00207">207</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00258">258</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +397,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00202">202</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00253">253</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -396,7 +425,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00197">197</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00248">248</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -423,7 +452,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00237">237</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00287">287</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -452,7 +481,7 @@ Additional Inherited Members</h2></td></tr>
 
 <p>Implements <a class="el" href="classbrenta_1_1Subsystem.html">brenta::Subsystem</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00158">158</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8cpp_source.html#l00207">207</a> of file <a class="el" href="gui_8cpp_source.html">gui.cpp</a>.</p>
 
 </div>
 </div>
@@ -477,7 +506,7 @@ Additional Inherited Members</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="gui_8hpp_source.html#l00039">39</a> of file <a class="el" href="gui_8hpp_source.html">gui.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="gui_8hpp_source.html#l00042">42</a> of file <a class="el" href="gui_8hpp_source.html">gui.hpp</a>.</p>
 
 </div>
 </div>

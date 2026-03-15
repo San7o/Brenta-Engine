@@ -46,6 +46,7 @@ The engine also features the following sub projects:
 <h1 align=center> Screenshots </h1>
 
 <div align="center">
+  <img src="demo-screenshot.png" />
   <img src="docs/screenshot1.jpg" />
   <img src="docs/screenshot2.jpg" />
 </div>

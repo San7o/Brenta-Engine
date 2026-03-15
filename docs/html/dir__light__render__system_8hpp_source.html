@@ -109,34 +109,33 @@ $(document).ready(function(){initNavTree('dir__light__render__system_8hpp_source
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#ifndef BRENTA_NO_ECS</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;brenta/ecs/ecs.hpp&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;brenta/ecs/components/transform_ecs_component.hpp&gt;</span></div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">namespace </span>brenta</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="foldopen" id="foldopen00018" data-start="{" data-end="};">
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classbrenta_1_1DirLightRenderSystem.html">   18</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1DirLightRenderSystem.html">DirLightRenderSystem</a> : <span class="keyword">public</span> viotecs::System&lt;DirLightEcsComponent&gt;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  <span class="keywordtype">void</span> run(std::vector&lt;viotecs::EntityId&gt; entities)<span class="keyword"> const override</span></div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="keyword">  </span>{</div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : entities)</div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    {</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>      <span class="keyword">auto</span> dir_light =</div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>        viotecs::World::entity_to_component&lt;DirLightEcsComponent&gt;(e);</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>      dir_light-&gt;draw();</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    }</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>  }</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>};</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">namespace </span>brenta</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="foldopen" id="foldopen00017" data-start="{" data-end="};">
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="classbrenta_1_1DirLightRenderSystem.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="classbrenta_1_1DirLightRenderSystem.html">DirLightRenderSystem</a> : <span class="keyword">public</span> viotecs::System&lt;DirLightEcsComponent&gt;</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  <span class="keywordtype">void</span> run(std::vector&lt;viotecs::EntityId&gt; entities)<span class="keyword"> const override</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">  </span>{</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <span class="keywordflow">for</span> (<span class="keyword">auto</span>&amp; e : entities)</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    {</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>      <span class="keyword">auto</span> dir_light =</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>        viotecs::World::entity_to_component&lt;DirLightEcsComponent&gt;(e);</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>      dir_light-&gt;draw();</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  }</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
 </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>} <span class="comment">// namespace brenta</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#endif </span><span class="comment">// BRENTA_NO_ECS</span></div>
-<div class="ttc" id="aclassbrenta_1_1DirLightRenderSystem_html"><div class="ttname"><a href="classbrenta_1_1DirLightRenderSystem.html">brenta::DirLightRenderSystem</a></div><div class="ttdef"><b>Definition</b> <a href="dir__light__render__system_8hpp_source.html#l00018">dir_light_render_system.hpp:19</a></div></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>} <span class="comment">// namespace brenta</span></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span> </div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#endif </span><span class="comment">// BRENTA_NO_ECS</span></div>
+<div class="ttc" id="aclassbrenta_1_1DirLightRenderSystem_html"><div class="ttname"><a href="classbrenta_1_1DirLightRenderSystem.html">brenta::DirLightRenderSystem</a></div><div class="ttdef"><b>Definition</b> <a href="dir__light__render__system_8hpp_source.html#l00017">dir_light_render_system.hpp:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

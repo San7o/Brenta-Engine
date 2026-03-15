@@ -66,6 +66,9 @@ var hierarchy =
     [ "brenta::FsWatcherUnix", "structbrenta_1_1FsWatcherUnix.html", null ],
     [ "brenta::FsWatcherUnixWdList", "structbrenta_1_1FsWatcherUnixWdList.html", null ],
     [ "brenta::AssetManager::HotReloadItem", "structbrenta_1_1AssetManager_1_1HotReloadItem.html", null ],
+    [ "brenta::TimeDB::ITable", "structbrenta_1_1TimeDB_1_1ITable.html", [
+      [ "brenta::TimeDB::Table< Row >", "classbrenta_1_1TimeDB_1_1Table.html", null ]
+    ] ],
     [ "brenta::KeyMods", "classbrenta_1_1KeyMods.html", null ],
     [ "brenta::Engine::Manager", "classbrenta_1_1Engine_1_1Manager.html", null ],
     [ "brenta::Material", "classbrenta_1_1Material.html", null ],
@@ -130,6 +133,8 @@ var hierarchy =
       [ "brenta::Cubemap", "classbrenta_1_1Cubemap.html", null ]
     ] ],
     [ "brenta::Time", "classbrenta_1_1Time.html", null ],
+    [ "brenta::TimeDB", "classbrenta_1_1TimeDB.html", null ],
+    [ "brenta::TimePlotBuffer", "structbrenta_1_1TimePlotBuffer.html", null ],
     [ "brenta::Transform", "classbrenta_1_1Transform.html", null ],
     [ "brenta::Vao", "classbrenta_1_1Vao.html", null ],
     [ "brenta::Mesh::Vertex", "classbrenta_1_1Mesh_1_1Vertex.html", null ]

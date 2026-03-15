@@ -66,6 +66,8 @@ var annotated_dup =
       [ "TextNodeComponent", "classbrenta_1_1TextNodeComponent.html", null ],
       [ "Texture", "classbrenta_1_1Texture.html", "classbrenta_1_1Texture" ],
       [ "Time", "classbrenta_1_1Time.html", null ],
+      [ "TimeDB", "classbrenta_1_1TimeDB.html", "classbrenta_1_1TimeDB" ],
+      [ "TimePlotBuffer", "structbrenta_1_1TimePlotBuffer.html", null ],
       [ "Transform", "classbrenta_1_1Transform.html", null ],
       [ "TransformEcsComponent", "classbrenta_1_1TransformEcsComponent.html", null ],
       [ "TransparentPass", "classbrenta_1_1TransparentPass.html", null ],
